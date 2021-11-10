@@ -34,7 +34,7 @@ class TrainAppointment extends Model
 
      public function isBooking()
     {
-        if ($this->Bookings()->where('user_id',1)->first()){
+        if ($this->Bookings()->where('user_id',Auth::user()->id)->first()){
             return True;
         }
         return False;

@@ -192,5 +192,5 @@ footer span {
 }
 
 .box-class {
-	@apply px-2 py-1 rounded-lg mt-1 overflow-hidden border;
+	@apply px-1 sm:px-2 py-1 rounded-lg mt-1 overflow-hidden border;
 }

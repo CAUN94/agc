@@ -33747,10 +33747,17 @@ footer span {
   overflow: hidden;
   border-radius: 0.5rem;
   border-width: 1px;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
+}
+
+@media (min-width: 640px) {
+  .box-class {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 }
 
 @media (min-width: 640px) {
