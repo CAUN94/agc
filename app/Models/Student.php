@@ -119,10 +119,10 @@ class Student extends Model
         return $days." días";
     }
 
-    public function getStart_dayAttribute()
-    {
-        return \Carbon\Carbon::parse($this->attributes['start_day'])->format('H:i');
-    }
+    // public function getStart_dayAttribute()
+    // {
+    //     return \Carbon\Carbon::parse($this->attributes['start_day'])->format('H:i');
+    // }
 
     public function nextPlan()
     {

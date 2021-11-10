@@ -156,6 +156,17 @@ class User extends Authenticatable
         return $this->hasMany(TrainBook::class);
     }
 
+    public function canBook(){
+        if ($this->countBooks() >= $this->training->class){
+            return False;
+        }
+        return True;
+    }
+
+    public function countBooks(){
+        return $this->TrainBooks()->whereIN('train_appointment_id',$this->training->TrainAppointments->pluck('id')->toArray())->count();
+    }
+
     public function newPlan()
     {
         return 'new plan';

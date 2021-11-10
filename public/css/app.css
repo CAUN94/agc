@@ -33760,6 +33760,37 @@ footer span {
   }
 }
 
+.train-classs-resume {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.25rem;
+}
+
+@media (min-width: 1024px) {
+  .train-classs-resume {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
+.train-classs-resume-text {
+  grid-column: span 3 / span 3;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  --tw-text-opacity: 1;
+  color: rgba(17, 24, 39, var(--tw-text-opacity));
+}
+
+@media (min-width: 1024px) {
+  .train-classs-resume-text {
+    grid-column: span 2 / span 2;
+    margin-top: 0px;
+  }
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;

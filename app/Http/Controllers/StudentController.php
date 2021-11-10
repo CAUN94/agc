@@ -90,11 +90,14 @@ class StudentController extends Controller
         $request->merge(['user_id' => Auth::id()]);
         $attributes = $request->validate([
             'training_id' => ['required', 'exists:trainings,id'],
-            'user_id' => ['required',Rule::unique('students','user_id')->ignore($student->id)],
+            'user_id' => ['required','exists:users,id'],
         ]);
-        $student->training_id = $request->training_id;
-        $student->save();
-        FlashSession::flash('primary','Cambiado de Plan');
+        $new_student = new Student;
+        $new_student->user_id = Auth::id();
+        $new_student->training_id =  $request->training_id;
+        $new_student->start_day = $student->endMonth();
+        $new_student->save();
+        FlashSession::flash('primary','Nuevo Plan registrado');
         return redirect('/users');
     }
 

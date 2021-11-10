@@ -18,8 +18,8 @@
                     Clases:
                     @forelse(Auth::user()->TrainBooks as $trainbook)
                         <div class="flex space-justify-between">
-                        <span class="text-sm flex-grow">{{$trainbook->TrainAppointment->name}} {{$trainbook->TrainAppointment->date()}} {{$trainbook->TrainAppointment->hour}}</span>
-                        <span class="text-sm text text-primary-500 hover:text-primary-900 cursor-pointer">
+                        <span class="text-sm text-primary-500  flex-grow">{{$trainbook->TrainAppointment->name}} {{$trainbook->TrainAppointment->date()}} {{$trainbook->TrainAppointment->hour}}</span>
+                        <span class="text-sm text hover:text-primary-900 cursor-pointer">
                             <i wire:click="unbook({{$trainbook->id}})" class="far fa-times-circle"></i>
                         </span>
                         </div>
@@ -30,61 +30,61 @@
                 @if(!is_null($train))
                 <div x-show="$wire.classShow" x-cloak>
                     <dl>
-                      <div class="pl-1 py-1 lg:py-2 lg:grid lg:grid-cols-3">
+                      <div class="train-class-resume">
                         <dt class="text-sm font-medium text-gray-500">
                           Clase
                         </dt>
-                        <dd class="mt-1 text-sm text-gray-900 lg:mt-0 col-span-3 lg:col-span-2">
+                        <dd class="train-classs-resume-text">
                             <li class="list-none">{{$train->name}}</li>
                         </dd>
                       </div>
                     </dl>
                     <dl>
-                      <div class="pl-1 py-1 lg:py-2 lg:grid lg:grid-cols-3">
+                      <div class="train-class-resume">
                         <dt class="text-sm font-medium text-gray-500">
                           Coach
                         </dt>
-                        <dd class="mt-1 text-sm text-gray-900 lg:mt-0 col-span-3 lg:col-span-2">
+                        <dd class="train-classs-resume-text">
                             <li class="list-none">{{$train->trainer->name}} {{$train->trainer->lastnames}}</li>
                         </dd>
                       </div>
                     </dl>
                     <dl>
-                      <div class="pl-1 py-1 lg:py-2 lg:grid lg:grid-cols-3">
+                      <div class="train-class-resume">
                         <dt class="text-sm font-medium text-gray-500">
                           Fecha
                         </dt>
-                        <dd class="mt-1 text-sm text-gray-900 lg:mt-0 col-span-3 lg:col-span-2">
+                        <dd class="train-classs-resume-text">
                           <span>{{$train->date()}}</span>
                         </dd>
                       </div>
                     </dl>
                     <dl>
-                      <div class="pl-1 py-1 lg:py-2 lg:grid lg:grid-cols-3">
+                      <div class="train-class-resume">
                         <dt class="text-sm font-medium text-gray-500">
                           Hora
                         </dt>
-                        <dd class="mt-1 text-sm text-gray-900 lg:mt-0 col-span-3 lg:col-span-2">
+                        <dd class="train-classs-resume-text">
                           <span>{{$train->hour}} hrs</span>
                         </dd>
                       </div>
                     </dl>
                     <dl>
-                      <div class="pl-1 py-1 lg:py-2 lg:grid lg:grid-cols-3">
+                      <div class="train-class-resume">
                         <dt class="text-sm font-medium text-gray-500">
                           Duración
                         </dt>
-                        <dd class="mt-1 text-sm text-gray-900 lg:mt-0 col-span-3 lg:col-span-2">
+                        <dd class="train-classs-resume-text">
                           <span>{{$train->training->time_in_minutes}} minutos</span>
                         </dd>
                       </div>
                     </dl>
                     <dl>
-                      <div class="pl-1 py-1 lg:py-2 lg:grid lg:grid-cols-3">
+                      <div class="train-class-resume">
                         <dt class="text-sm font-medium text-gray-500">
                           Descripción
                         </dt>
-                        <dd class="mt-1 text-sm text-gray-900 lg:mt-0 col-span-3 lg:col-span-2">
+                        <dd class="train-classs-resume-text">
                           <span>{{$train->training->description}}</span>
                         </dd>
                       </div>

@@ -194,3 +194,11 @@ footer span {
 .box-class {
 	@apply px-1 sm:px-2 py-1 rounded-lg mt-1 overflow-hidden border;
 }
+
+.train-classs-resume {
+	@apply pl-1 py-1 lg:py-2 lg:grid lg:grid-cols-3;
+}
+
+.train-classs-resume-text {
+	@apply mt-1 text-sm text-gray-900 lg:mt-0 col-span-3 lg:col-span-2;
+}
