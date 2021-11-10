@@ -1,0 +1,196 @@
+[x-cloak] { display: none !important; }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+	@apply bg-you-grey font-futura;
+	@apply flex flex-col h-screen justify-between;
+}
+
+.sticky-menu {
+	@apply bg-you-grey sticky top-0 z-20;
+}
+
+.nav-menu {
+	@apply container h-full lg:h-24 flex flex-wrap lg:flex-nowrap flex-row mx-auto;
+	@apply justify-between items-center py-2;
+}
+
+nav {
+	@apply flex flex-col lg:flex-row items-center justify-end;
+}
+
+nav a{
+	@apply font-futura font-bold text-white uppercase mx-1 px-3 py-0.5;
+	@apply hover:bg-primary-100 rounded-full;
+	@apply mb-1 lg:mb-0 text-center w-1/2 lg:w-auto;
+}
+
+.drop-nav{
+	@apply absolute bg-white shadow overflow-hidden rounded w-36 mt-2 py-1 right-2 z-20;
+}
+
+.drop-nav li {
+	@apply hover:bg-primary-500;
+}
+
+.drop-link {
+	@apply flex w-full justify-end items-center hover:bg-gray-200 rounded-none;
+}
+
+.drop-span {
+	@apply text-you-grey text-xs text-right hover:text-primary-500;
+}
+
+.selected {
+	@apply bg-primary-500 text-white rounded-full;
+}
+
+.logo {
+	@apply h-16 lg:h-full mb-2 lg:mb-0;
+}
+
+header {
+	@apply bg-gradient-to-r from-you-grey to-primary-500 mt-16;
+}
+
+.header-div {
+	@apply flex flex-row h-auto lg:h-64 py-4 container mx-auto justify-between items-center;
+}
+
+.header-div img {
+	@apply object-cover h-96 w-96 py-4 rounded-full hidden lg:inline;
+}
+
+
+.header-div div {
+	@apply flex-grow p-4 text-lg lg:text-xl text-white;
+}
+
+.title {
+	@apply bg-you-grey bg-opacity-25 container;
+	@apply text-light-grey text-3xl;
+	@apply font-bold;
+	@apply py-4 px-8 lg:px-4 mx-auto mt-4;
+}
+
+.box-container {
+	@apply h-auto container;
+	@apply px-8 lg:px-4 py-4;
+	@apply mx-auto lg:mx-auto;
+	@apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5;
+	@apply justify-items-stretch ;
+}
+
+.box {
+	@apply bg-light-grey;
+	@apply mx-auto rounded-md py-2 px-4;
+	@apply w-full h-auto lg:w-full;
+	@apply flex justify-between items-center;
+	@apply cursor-pointer hover:text-primary-500;
+}
+
+.box p{
+	@apply text-lg lg:text-xl;
+}
+
+.box img{
+	@apply h-16 lg:h-20 block
+}
+
+
+.container-col {
+	@apply container mx-auto py-10 flex flex-col justify-between items-center;
+}
+
+.quote {
+	@apply italic text-base md:text-xl lg:text-2xl text-light-grey w-3/4 text-center mb-8;
+}
+
+.action-btn {
+	@apply bg-primary-500 hover:bg-primary-900;
+	@apply text-white text-base sm:text-xl font-bold;
+	@apply py-2 px-4 rounded-lg w-80 text-center;
+	@apply uppercase border-white border-2;
+}
+
+.insta {
+	@apply flex flex-row justify-center lg:justify-start items-center;
+}
+
+.circle-logo {
+	@apply h-10 lg:h-20 p-1 bg-you-grey rounded-full mr-3;
+}
+
+.small-gallery {
+	@apply container mx-auto grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-0;
+}
+
+.small-gallery img {
+	@apply px-2;
+}
+
+.contact {
+	@apply h-20 w-2/3 flex flex-col lg:flex-row items-center py-4 justify-between mx-auto;
+}
+
+.contact  a,
+.contact  span {
+	@apply text-sm lg:text-2xl text-light-grey hover:text-you-grey cursor-pointer;
+}
+
+footer {
+	@apply bg-you-grey h-auto py-4 text-center py-4;
+}
+
+footer span {
+	@apply text-white;
+}
+
+.circle-icon {
+	@apply bg-you-grey rounded-md lg:rounded-full flex flex-col mx-0.5 lg:mx-0.5 my-0.5;
+	@apply w-40 h-14 lg:w-40 lg:h-40 justify-center border-4 hover:border-primary-500;
+}
+
+.circle-icon img {
+	@apply h-1/2 w-1/2 object-fill py-1 mx-auto hidden lg:block;
+}
+
+.circle-icon span {
+	@apply text-light-grey break-all text-xs text-center mx-auto;
+}
+
+.team-cards {
+	@apply grid grid-cols-2 lg:grid-cols-4 gap-4 container mx-auto justify-center;
+}
+
+.team-card {
+	@apply rounded-3xl bg-you-grey  bg-opacity-75 opacity-0 hover:opacity-100 duration-300;
+	@apply absolute inset-0 z-10 flex flex-col justify-start py-2 px-3;
+}
+
+.team-card span {
+	@apply text-sm lg:text-base text-primary-500;
+}
+
+.team-card ul {
+	@apply mt-2 list-inside list-disc text-xs text-white;
+}
+
+.rrss-icon {
+	@apply h-10 lg:h-20 p-1 bg-you-grey rounded-full mr-3;
+}
+
+.box-white {
+	@apply bg-white shadow overflow-hidden sm:rounded-lg;
+}
+
+.box-class {
+	@apply px-2 py-1 rounded-lg mt-1 overflow-hidden border;
+}
