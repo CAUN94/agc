@@ -183,6 +183,7 @@
                                                         {{ Auth::user()->student->availableday($date) ?
                                                         "bg-green-100 hover:bg-primary-100 cursor-pointer" :
                                                         "bg-gray-100 cursor-not-allowed" }}
+                                                        {{$trainAppointment->isBooking() ? "bg-primary-100" : ""}}
                                                         ">
                                                         <p class="text-sm truncate leading-tight">{{$trainAppointment->hour}} {{$trainAppointment->name}}</p>
                                                     </div>

@@ -1,6 +1,6 @@
-<div class="flex gap-6">
-  <div class="w-2/3 flex flex-col overflow-x-auto gap-y-2">
-      <div class="box-white p-4">
+<div class="sm:flex sm:gap-6">
+  <div class="sm:w-2/3 sm:flex sm:flex-col overflow-x-auto gap-y-2">
+      <div class="box-white my-2 sm:my-0 p-4">
               <div class="flex">
                   <input wire:model.debounce.300ms="search" id="search" class="w-full rounded border-gray-500 hover:border-primary-500 focus:border-primary-500 p-2" type="search" placeholder="Buscar">
                   <button class="bg-white w-auto flex justify-end items-center text-primary-500 p-2 hover:text-primary-900">
@@ -10,18 +10,18 @@
       </div>
 
       <div class="align-middle inline-block min-w-full">
-        <div class="box-white">
-          <table class="min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-50">
+        <div class="box-white ">
+          <table class="min-w-full divide-y divide-gray-200 bg-gray-50">
+          <thead>
               <tr>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Planes
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Cantidad de Clases
+                <th scope="col" class="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Clases</span>
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Duración
+                <th scope="col" class="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Duración</span>
                 </th>
                 <th scope="col" class="relative px-6 py-3">
                   <span class="sr-only">Ver más</span>
@@ -33,10 +33,10 @@
               <tr class="hover:bg-gray-300 cursor-pointer" wire:click="showPlan({{ $training->id }})">
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="flex items-center">
-                    <div class="flex-shrink-0 h-10 w-10">
+                    <div class="hidden sm:table-cell flex-shrink-0 flex-shrink-0 h-10 w-10">
                       <img class="h-10 w-10 rounded-full" src="/img/icon.png" alt="">
                     </div>
-                    <div class="ml-4">
+                    <div class="ml-0 sm:ml-4">
                       <div class="text-sm font-medium text-gray-900">
                         {{$training->name}}
                       </div>
@@ -46,10 +46,10 @@
                     </div>
                   </div>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap">
+                <td class="hidden sm:table-cell px-6 py-4 whitespace-nowrap">
                   <div class="text-sm text-gray-900">{{$training->planClassComplete()}}</div>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap">
+                <td class="hidden sm:table-cell px-6 py-4 whitespace-nowrap">
                   <div class="text-sm text-gray-900">{{$training->time()}}</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -62,7 +62,7 @@
         </div>
       </div>
   </div>
-  <div class="w-1/3 flex flex-col overflow-x-auto gap-y-2" x-data="{ openModal: false }">
+  <div class="my-2 sm:my-0 sm:w-1/3 sm:flex sm:flex-col overflow-x-auto gap-y-2" x-data="{ openModal: false }">
     <div class="box-white p-4">
       <x-auth-validation-errors class="mb-4" :errors="$errors" />
       <h3 class="text-lg leading-6 font-medium text-gray-900">{{$plan}}</h3>
@@ -71,7 +71,7 @@
       </p>
       <div class="border-t border-gray-200 mt-2" x-show="$wire.trainShow" x-cloak>
         <dl>
-          <div class="pl-1 py-5 sm:grid sm:grid-cols-3">
+          <div class="pl-1 py-5 grid grid-cols-2 sm:grid-cols-3">
             <dt class="text-sm font-medium text-gray-500">
               Coach
             </dt>
@@ -83,7 +83,7 @@
           </div>
         </dl>
         <dl>
-          <div class="pl-1 py-5 sm:grid sm:grid-cols-3">
+          <div class="pl-1 py-5 grid grid-cols-2 sm:grid-cols-3">
             <dt class="text-sm font-medium text-gray-500">
               Clases
             </dt>
@@ -93,7 +93,7 @@
           </div>
         </dl>
         <dl>
-          <div class="pl-1 py-5 sm:grid sm:grid-cols-3">
+          <div class="pl-1 py-5 grid grid-cols-2 sm:grid-cols-3">
             <dt class="text-sm font-medium text-gray-500">
               Duración
             </dt>
@@ -103,7 +103,7 @@
           </div>
         </dl>
         <dl>
-          <div class="pl-1 py-5 sm:grid sm:grid-cols-3">
+          <div class="pl-1 py-5 grid grid-cols-2 sm:grid-cols-3">
             <dt class="text-sm font-medium text-gray-500">
               Valor
             </dt>

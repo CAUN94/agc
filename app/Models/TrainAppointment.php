@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Training;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
@@ -16,12 +17,25 @@ class TrainAppointment extends Model
     }
 
     public function trainer(){
-        return $this->hasOne(User::class, 'id','trainer_id');
+        return $this->hasOne(User::class,'id','trainer_id');
     }
 
     public function DayCheck($date){
         if ($this->date == $date){
             return $this;
+        }
+        return False;
+    }
+
+    public function Bookings()
+    {
+        return $this->hasMany(TrainBook::class);
+    }
+
+     public function isBooking()
+    {
+        if ($this->Bookings()->where('user_id',1)->first()){
+            return True;
         }
         return False;
     }

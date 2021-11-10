@@ -61,7 +61,7 @@ class Student extends Model
         }
         $actual = $this;
         while($actual->nextPlan()){
-            $actual = $this->nextPlan();
+            $actual = $actual->nextPlan();
             $end_day = \Carbon\Carbon::parse($actual->start_day)->addDays(30);
             if($end_day->dayOfWeek == 0){
                 $end_day->addDays(1);
@@ -126,17 +126,16 @@ class Student extends Model
 
     public function nextPlan()
     {
-        $start_day =  \Carbon\Carbon::parse($this->endMonth());
-        $end_day = \Carbon\Carbon::parse($this->endMonth())->addDays(30);
+        $start_day =  \Carbon\Carbon::parse($this->start_day);
+        $end_day = \Carbon\Carbon::parse($this->endMonth());
         $student = Student::where('user_id',Auth::id())
             ->where('start_day','>', $start_day)
-            ->where('start_day','<=',$end_day);
-        if ($student->count() == 1){
+            ->where('start_day','<=',$end_day)
+            ->where('settled',true);
+        if ($student->count() >= 1){
             return $student->first();
         }
-        else if ($student->count() > 2){
-            return $student->first();
-        }
+
         return False;
     }
 

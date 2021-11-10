@@ -125,7 +125,7 @@ class User extends Authenticatable
             $student = $this->hasOne(Student::class)
             ->where('start_day','<=', \Carbon\Carbon::NOW()->endOfMonth())
             ->where('start_day','>=', \Carbon\Carbon::NOW()->startOfMonth())
-            ->orderby('start_day','desc');
+            ->orderby('start_day','asc');
         }
 
         return $student;
