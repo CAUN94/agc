@@ -33760,14 +33760,14 @@ footer span {
   }
 }
 
-.train-classs-resume {
+.train-class-resume {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   padding-left: 0.25rem;
 }
 
 @media (min-width: 1024px) {
-  .train-classs-resume {
+  .train-class-resume {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     padding-top: 0.5rem;
@@ -33775,7 +33775,7 @@ footer span {
   }
 }
 
-.train-classs-resume-text {
+.train-class-resume-text {
   grid-column: span 3 / span 3;
   margin-top: 0.25rem;
   font-size: 0.875rem;
@@ -33785,7 +33785,7 @@ footer span {
 }
 
 @media (min-width: 1024px) {
-  .train-classs-resume-text {
+  .train-class-resume-text {
     grid-column: span 2 / span 2;
     margin-top: 0px;
   }

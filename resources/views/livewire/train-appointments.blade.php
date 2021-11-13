@@ -130,7 +130,7 @@
                                 </div>
                             </div>
 
-                            <div class="-mx-1 -mb-1">
+                            <div class="-mx-1 -mb-1" x-data="{ openModal: false }">
                                 <div class="flex flex-wrap">
                                     @forelse($days as $day)
                                         <div style="width: {{$width}}" class="px-2 py-2">
@@ -142,7 +142,6 @@
                                     @empty
                                     @endforelse
                                 </div>
-
                                 <div class="flex flex-wrap border-t border-l">
                                     @foreach($nodates as $date)
                                         <div
@@ -167,8 +166,9 @@
                                                 @if(Auth::user()->student->islastday($date)->isRenew())
                                                     <span class="block sm:inline-block text-xs lg:text-sm">Fin de Plan</span>
                                                 @else
-                                                    <span class="box-class block sm:inline-block border-primary-200 text-xs sm:text-sm bg-primary-100 hover:bg-green-100 cursor-pointer">Renovar Plan</span>
+                                                    <span class="box-class block sm:inline-block border-primary-200 text-xs sm:text-sm bg-primary-100 hover:bg-green-100 cursor-pointer" x-on:click="openModal = ! openModal">Renovar Plan</span>
                                                 @endif
+
                                             @endif
 
                                             @if(Auth::user()->student->isStartday($date))
@@ -193,6 +193,24 @@
 
                                     @endforeach
                                 </div>
+                                <x-landing.submit-modal
+                                      method="PUT"
+                                      action="/students/{{Auth::user()->student->id}}"
+                                      :id="Auth::user()->student->id"
+                                      >
+                                      <x-slot name="title">
+                                        <span>Renovar plan {{Auth::user()->student->training->plan()}}</span>
+                                      </x-slot>
+
+                                      Estas seguro de querer renovar?
+
+                                      <x-slot name="important">
+                                        El plan partira a fin de mes.
+                                      </x-slot>
+                                      <x-slot name="button">
+                                        Confirmar
+                                      </x-slot>
+                                </x-landing.submit-modal>
 
                             </div>
                         </div>

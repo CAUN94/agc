@@ -38,6 +38,14 @@ class Student extends Model
         return false;
     }
 
+    public function lastPlan(){
+        $actual = $this;
+        while($actual->nextPlanAll()){
+            $actual = $actual->nextPlanAll();
+        }
+        return $actual;
+    }
+
     public function lastPayPlan(){
         $actual = $this->nextPlan();
         while($actual->nextPlan()){
@@ -132,6 +140,20 @@ class Student extends Model
             ->where('start_day','>', $start_day)
             ->where('start_day','<=',$end_day)
             ->where('settled',true);
+        if ($student->count() >= 1){
+            return $student->first();
+        }
+
+        return False;
+    }
+
+    public function nextPlanAll()
+    {
+        $start_day =  \Carbon\Carbon::parse($this->start_day);
+        $end_day = \Carbon\Carbon::parse($this->endMonth());
+        $student = Student::where('user_id',Auth::id())
+            ->where('start_day','>', $start_day)
+            ->where('start_day','<=',$end_day);
         if ($student->count() >= 1){
             return $student->first();
         }

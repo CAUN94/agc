@@ -65,8 +65,8 @@ class DatabaseSeeder extends Seeder
             ]
         );
         Training::create([
-                'name' => 'Entrenamiento Grupal',
-                'class' => '15',
+                'name' => 'Personalizado',
+                'class' => '2',
                 'time_in_minutes' => '55',
                 'type' => 'group',
                 'format' => 'Online',
@@ -119,7 +119,7 @@ class DatabaseSeeder extends Seeder
                 'user_id' => 1,
                 'training_id' => 1,
                 'settled' => 1,
-                'start_day' => '2021-10-22'
+                'start_day' => '2021-11-10'
         ]);
 
         for ($i=0; $i < 220; $i++) {

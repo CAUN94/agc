@@ -3,17 +3,22 @@
     <!-- This example requires Tailwind CSS v2.0+ -->
     <div class="flex gap-4">
         <div class="w-2/3 bg-gray-50 shadow overflow-hidden sm:rounded-lg">
-          <div class="px-4 py-5 sm:px-6">
-            <h3 class="text-lg leading-6 font-medium text-primary-500">
-              {{ $user->fullName() }}
-            </h3>
-            <p class="mt-1 max-w-2xl text-sm text-gray-500">
-              Perfil personal de usuarios You Just Better
-            </p>
+          <div class="flex px-4 py-5 sm:px-6 justify-between">
+            <div class="flex flex-col">
+              <h3 class="text-lg leading-6 font-medium text-primary-500">
+                {{ $user->fullName() }}
+              </h3>
+              <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                Perfil personal de usuarios You Just Better
+              </p>
+            </div>
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg p-1">
+                <img src="/img/icon.png" class="object-contain h-12 w-full">
+            </div>
           </div>
           <div class="border-t border-gray-200">
             <dl>
-              <div class="bg-white border-t border-gray-200 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">
                   Nombre y Apellido
                 </dt>
@@ -80,7 +85,7 @@
               @if ($user->isStudent())
               <div class="bg-white border-t border-gray-200 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">
-                  Plan de Entrenamiento
+                  Plan de Entrenamiento Actual
                   <div class="text-xs {{ $user->student->isSettled() ? "text-green-500" : "text-red-500" }}">
                     @if(Auth::user()->student->isSettled())
                         Plan activado
@@ -121,31 +126,56 @@
                 </dd>
               </div>
             </dl>
-            <div class="px-4 py-3 bg-white border-t border-gray-200 text-right sm:px-6">
+            {{-- <div class="px-4 py-3 bg-white border-t border-gray-200 text-right sm:px-6">
               <a href="users/{{$user->id}}/edit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-500 hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-900">
                 Editar
               </a>
-            </div>
+            </div> --}}
           </div>
         </div>
 
 
-        <div class="w-1/3">
-            <div class="flex flex-col gap-2">
-                <div class="bg-white shadow overflow-hidden sm:rounded-lg p-4">
-                    <img src="/img/icon.png" class="object-contain h-48 w-full">
-                </div>
-                <div class="bg-white shadow overflow-hidden sm:rounded-lg p-4 flex flex-end" x-data="{ open: false }">
-                    <button type="submit" class="justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-500 hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-900 w-full"
-                    x-on:click="open = ! open"
-                    >
-                      Borrar Mi cuenta
-                    </button>
-                    <x-modal :id="$user->id"></x-modal>
-                </div>
+        <div class="w-1/3 bg-gray-50 shadow overflow-hidden sm:rounded-lg">
+            <div class="flex px-4 py-5 sm:px-6 justify-between">
+              <div class="flex flex-col">
+                <h3 class="text-lg leading-6 font-medium text-primary-500">
+                  Historial Planes de Entrenamiento
+                </h3>
+                <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                  Perfil personal de usuarios You Just Better
+                </p>
+              </div>
+              <div class="bg-white shadow overflow-hidden sm:rounded-lg p-1">
+                  <img src="/img/icon.png" class="object-contain h-12 w-full">
+              </div>
+            </div>
+            <div class="border-t border-gray-200">
+              <div class="bg-white text-sm px-4 py-5 sm:grid sm:grid-cols-1 sm:gap-4 sm:px-6">
+                @forelse(Auth::user()->allStudentPlan()->with('Training')->get() as $plan)
+                  <div class="flex justify-between items-center">
+                    <div class="flex flex-col">
+                      {{$plan->Training->plan()}}
+                      <span class="text-xs text-primary-500">
+                        {{$plan->Training->planClassComplete()}}
+                      </span>
+                      <span class="text-xs text-primary-500">
+                        Inicio: {{ $plan->start_day()}}
+                      </span>
+                    </div>
+                    @if($plan->isSettled())
+                      <span class="text-green-500">Pagado</span>
+                    @else
+                      <span class="text-red-500">No Pagado</span>
+                    @endif
+                  </div>
 
+                @empty
+                  <a href="/trainings" class="text-primary-500">Ver Planes de Entrenamiento</a>
+                @endforelse
+              </div>
             </div>
         </div>
+      </div>
 
     </div>
 

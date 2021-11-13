@@ -86,7 +86,7 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        $student = Student::where('user_id', Auth::id())->first();
+        $student = $student->lastPlan();
         $request->merge(['user_id' => Auth::id()]);
         $attributes = $request->validate([
             'training_id' => ['required', 'exists:trainings,id'],
