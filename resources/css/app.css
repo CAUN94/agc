@@ -196,9 +196,9 @@ footer span {
 }
 
 .train-class-resume {
-	@apply pl-1 py-1 lg:py-2 lg:grid lg:grid-cols-3;
+	@apply pl-1 py-1 md:py-2 md:grid md:grid-cols-3 grid-flow-col;
 }
 
 .train-class-resume-text {
-	@apply mt-1 text-sm text-gray-900 lg:mt-0 col-span-3 lg:col-span-2;
+	@apply mt-1 ml-2 text-sm text-gray-900 md:mt-0 col-span-2;
 }

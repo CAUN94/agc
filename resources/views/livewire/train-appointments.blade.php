@@ -1,7 +1,7 @@
 <div class="flex flex-col lg:flex-row gap-2">
     <div class="w-full lg:w-1/4 flex flex-col overflow-x-auto gap-y-2">
         <div class="align-middle inline-block min-w-full">
-            <div x-data="{ classShow: false }" class="box-white p-4 {{Auth::user()->student->isSettled() ? "" : "border-red-500 border-2" }}">
+            <div x-data="{ classShow: false }" class="box-white p-3 {{Auth::user()->student->isSettled() ? "" : "border-red-500 border-2" }}">
                 <div>
                 <span class="block">{{Auth::user()->student->training->plan()}}</span>
                 <div class="block text-xs {{Auth::user()->student->isSettled() ? "text-green-500" : "text-red-500" }}">
@@ -34,7 +34,7 @@
                         <dt class="text-sm font-medium text-gray-500">
                           Clase
                         </dt>
-                        <dd class="train-classs-resume-text">
+                        <dd class="train-class-resume-text">
                             <li class="list-none">{{$train->name}}</li>
                         </dd>
                       </div>
@@ -44,7 +44,7 @@
                         <dt class="text-sm font-medium text-gray-500">
                           Coach
                         </dt>
-                        <dd class="train-classs-resume-text">
+                        <dd class="train-class-resume-text">
                             <li class="list-none">{{$train->trainer->name}} {{$train->trainer->lastnames}}</li>
                         </dd>
                       </div>
@@ -54,7 +54,7 @@
                         <dt class="text-sm font-medium text-gray-500">
                           Fecha
                         </dt>
-                        <dd class="train-classs-resume-text">
+                        <dd class="train-class-resume-text">
                           <span>{{$train->date()}}</span>
                         </dd>
                       </div>
@@ -64,7 +64,7 @@
                         <dt class="text-sm font-medium text-gray-500">
                           Hora
                         </dt>
-                        <dd class="train-classs-resume-text">
+                        <dd class="train-class-resume-text">
                           <span>{{$train->hour}} hrs</span>
                         </dd>
                       </div>
@@ -74,7 +74,7 @@
                         <dt class="text-sm font-medium text-gray-500">
                           Duración
                         </dt>
-                        <dd class="train-classs-resume-text">
+                        <dd class="train-class-resume-text">
                           <span>{{$train->training->time_in_minutes}} minutos</span>
                         </dd>
                       </div>
@@ -84,7 +84,7 @@
                         <dt class="text-sm font-medium text-gray-500">
                           Descripción
                         </dt>
-                        <dd class="train-classs-resume-text">
+                        <dd class="train-class-resume-text">
                           <span>{{$train->training->description}}</span>
                         </dd>
                       </div>
