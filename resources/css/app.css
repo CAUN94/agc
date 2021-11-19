@@ -32,6 +32,19 @@ nav a{
 	@apply mb-1 lg:mb-0 text-center w-1/2 lg:w-auto;
 }
 
+.adminav {
+	@apply justify-around;
+}
+
+
+.adminav a,
+.adminav .dropdown{
+	@apply block text-sm font-futura font-normal normal-case mx-1 px-3 py-0.5;
+	@apply text-gray-900 bg-gray-200 hover:bg-gray-200 rounded-full;
+	@apply focus:outline-none hover:text-primary-500;
+	@apply mb-0 text-left w-auto justify-items-center;
+}
+
 .drop-nav{
 	@apply absolute bg-white shadow overflow-hidden rounded w-36 mt-2 py-1 right-2 z-20;
 }
@@ -200,5 +213,22 @@ footer span {
 }
 
 .train-class-resume-text {
-	@apply mt-1 ml-2 text-sm text-gray-900 md:mt-0 col-span-2;
+	@apply mt-1 ml-0 md:ml-2 text-sm text-gray-900 md:mt-0 col-span-2;
+}
+
+.menu-item {
+	@apply block py-1 md:py-3 pl-1 text-gray-600 no-underline hover:text-primary-100;
+}
+
+.menu:hover,
+.menu:hover ul li a span {
+	opacity: 1;
+}
+
+.menu-item:hover ul {
+	opacity: 1;
+}
+
+.admin-box {
+	@apply flex flex-col rounded-lg h-full shadow overflow-hidden border-b border-r border-gray-200;
 }

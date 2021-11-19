@@ -25,11 +25,7 @@ class LandingController extends Controller
 
     public function example()
     {
-        return view('example');
+        return view('admin.index');
     }
 
-    public function adminexample()
-    {
-        return view('admin.example');
-    }
 }

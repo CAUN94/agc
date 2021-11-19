@@ -54,6 +54,8 @@ const colors = require('tailwindcss/colors')
     variants: {
         extend: {
             opacity: ['disabled'],
+            width: ['hover'],
+            display: ['hover'],
         },
     },
 
