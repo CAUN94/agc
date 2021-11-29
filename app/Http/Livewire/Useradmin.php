@@ -4,20 +4,33 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Useradmin extends Component
 {
-    public $users;
-    public $user;
+    use WithPagination;
+
+    public $search = '';
 
     public function mount()
     {
-        $this->users = User::all();
+
     }
 
+    public function updatedSearch()
+    {
+        $this->resetPage();
+    }
 
     public function render()
     {
-        return view('livewire.useradmin');
+        $query = User::query();
+        $columns = ['name', 'lastnames', 'rut','gender','email','phone','birthday'];
+        foreach($columns as $column){
+            $query->orWhere($column, 'LIKE', '%' . $this->search . '%');
+        }
+        return view('livewire.useradmin',[
+            'users' => $query->paginate(20),
+        ]);
     }
 }

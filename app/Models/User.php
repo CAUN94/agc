@@ -167,6 +167,10 @@ class User extends Authenticatable
         return $this->TrainBooks()->whereIN('train_appointment_id',$this->training->TrainAppointments->pluck('id')->toArray())->count();
     }
 
+    public function age() {
+        return \Carbon\Carbon::parse($this->birthday)->diffInYears(\Carbon\Carbon::now());
+    }
+
     public function newPlan()
     {
         return 'new plan';

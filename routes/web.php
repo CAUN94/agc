@@ -17,15 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LandingController::class, 'welcome']);
 Route::get('/team', [LandingController::class, 'team']);
-Route::get('/example', [LandingController::class, 'example']);
-Route::get('/admin', [LandingController::class, 'adminexample']);
+
 Route::resource('users', 'App\Http\Controllers\UsersController')->middleware(['auth']);
 Route::resource('trainings', 'App\Http\Controllers\TrainingController');
 Route::resource('students', 'App\Http\Controllers\StudentController');
+Route::resource('adminusers', 'App\Http\Controllers\AdminUserController');
 
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';

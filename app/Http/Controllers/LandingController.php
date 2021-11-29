@@ -23,9 +23,6 @@ class LandingController extends Controller
         return view('team',compact('team'));
     }
 
-    public function example()
-    {
-        return view('admin.index');
-    }
+
 
 }

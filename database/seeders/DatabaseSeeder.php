@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
                 'rut' => '18783405-6',
                 'gender' => 'm',
                 'phone' => '76693894',
-                'birthday' => '1994-10-17',
+                'birthday' => '1991-09-27',
                 'password' => '!password'
             ]
         );
@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
                 'rut' => '18783405-1',
                 'gender' => 'm',
                 'phone' => '76693894',
-                'birthday' => '1994-10-17',
+                'birthday' => '1994-08-17',
                 'password' => '!password'
             ]
         );
