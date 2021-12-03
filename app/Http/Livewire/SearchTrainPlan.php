@@ -8,44 +8,40 @@ use Livewire\Component;
 class SearchTrainPlan extends Component
 {
     public $search = '';
-    public $plan_id = '';
     public $plan = 'Selecciona un plan.';
-    public $planClass = '';
-    public $price = '';
-    public $time = '';
-    public $description = '';
     public $trainShow = false;
     public $openModal = false;
+    public $selectedTraining = [];
     public $trainings = [];
-    public $coachs = [];
+    public $coachs = ['Panchito','Cata Coach'];
+
+    public function mount(){
+        $this->selectedTraining = Training::first();
+    }
 
     public function showPlan(Training $training)
     {
-        $this->plan_id = $training->id;
-        $this->price = $training->price();
-        $this->plan = $training->plan();
-        $this->price = $training->price();
-        $this->time = $training->time();
-        $this->planClass = $training->planClassComplete();
-        $this->description = $training->description;
-        $this->coachs = ['Cata Coach','Panchito'];
+        $this->selectedTraining= $training;
         $this->trainShow = true;
     }
 
     public function updatedSearch($newValue)
     {
         $query = Training::query();
-        $columns = ['name', 'class', 'time_in_minutes','format'];
+        $columns = ['name','time_in_minutes','class','format'];
         foreach($columns as $column){
             $query->orWhere($column, 'LIKE', '%' . $this->search . '%');
         }
-        $this->trainings = $query->get();
+        $this->trainings = $query->groupby('format','name')->orderby('name','asc')->get();
     }
 
     public function render()
     {
+        // if($this->trainShow!=''){
+        //     ddd($this->trainShow);
+        // }
         if($this->search === ''){
-            $this->trainings = Training::all();
+            $this->trainings = Training::groupby('format','name')->orderby('name','asc')->get();
         }
         return view('livewire.search-train-plan');
     }

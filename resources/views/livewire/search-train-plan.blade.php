@@ -18,43 +18,56 @@
                   Planes
                 </th>
                 <th scope="col" class="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Clases</span>
+                  Formato</span>
                 </th>
                 <th scope="col" class="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Duración</span>
                 </th>
-                <th scope="col" class="relative px-6 py-3">
-                  <span class="sr-only">Ver más</span>
+                <th scope="col" class="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Clases</span>
                 </th>
               </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
+
               @foreach($trainings as $training)
-              <tr class="hover:bg-gray-300 cursor-pointer" wire:click="showPlan({{ $training->id }})">
+              <tr class="hover:bg-gray-300 cursor-pointer">
                 <td class="px-6 py-2 sm:py-4 whitespace-nowrap">
                   <div class="flex items-center">
                     <div class="hidden sm:table-cell flex-shrink-0 flex-shrink-0 h-10 w-10">
                       <img class="h-10 w-10 rounded-full" src="/img/icon.png" alt="">
                     </div>
                     <div class="ml-0 sm:ml-4">
-                      <div class="text-sm font-medium text-gray-900">
+                      <div class="text-md font-medium text-gray-900">
                         {{$training->name}}
                       </div>
-                      <div class="text-sm text-gray-500">
+                      <div class="block sm:hidden text-sm text-gray-500">
                         Formato: {{$training->format}}
                       </div>
                     </div>
                   </div>
                 </td>
                 <td class="hidden sm:table-cell px-6 py-2 sm:py-4 whitespace-nowrap">
-                  <div class="text-sm text-gray-900">{{$training->planClassComplete()}}</div>
+                  {{$training->format}}
                 </td>
                 <td class="hidden sm:table-cell px-6 py-2 sm:py-4 whitespace-nowrap">
-                  <div class="text-sm text-gray-900">{{$training->time()}}</div>
+                  <div class="text-md font-medium text-gray-900">
+                    {{$training->time()}}
+                  </div>
                 </td>
                 <td class="px-6 py-2 sm:py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <button class="text-primary-500 hover:text-primary-900">Ver más</button>
+                  <select class="w-full h-10 pr-6 text-xs md:text-sm placeholder-gray-600 border rounded-lg appearance-none focus:shadow-outline">
+
+                  @foreach($training->selectClass() as $class)
+                    <option class="text-gray-900"
+                      wire:click="showPlan('{{ $class->id}}')"
+                      wire:submit="showPlan('{{ $class->id}}')"
+                      wire:keydown="showPlan('{{ $class->id}}')"
+                      value="{{$class->id}}">{{$class->planClassComplete()}}</option>
+                  @endforeach
+                  </select>
                 </td>
+
               </tr>
               @endforeach
           </tbody>
@@ -65,10 +78,17 @@
   <div class="order-1 sm:order-2 my-2 sm:my-0 sm:w-1/3 sm:flex sm:flex-col overflow-x-auto gap-y-2" x-data="{ openModal: false }">
     <div class="box-white p-4">
       <x-auth-validation-errors class="mb-4" :errors="$errors" />
-      <h3 class="text-lg leading-6 font-medium text-gray-900">{{$plan}}</h3>
-      <p class="mt-1 max-w-2xl text-sm text-gray-500">
-        Has click en <span class="text-primary-500">Ver más</span> para obtener mayor información.
-      </p>
+      <h3 class="text-lg leading-6 font-medium text-gray-900">
+        @if($trainShow)
+        {{$training->plan()}}
+        @else
+          Selecciona un plan.
+          <p class="mt-1 max-w-2xl text-sm text-gray-500">
+            y su cantidad de clases
+          </p>
+        @endif
+      </h3>
+
       <div class="border-t border-gray-200 mt-2" x-show="$wire.trainShow" x-cloak>
         <dl>
           <div class="pl-1 py-2 sm:py-5 grid grid-cols-3">
@@ -88,7 +108,7 @@
               Clases
             </dt>
             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              <span>{{$planClass}}</span>
+              <span class="block">{{$selectedTraining->planClassComplete()}}</span>
             </dd>
           </div>
         </dl>
@@ -98,7 +118,7 @@
               Duración
             </dt>
             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              <span>{{$time}}</span>
+              <span>{{$selectedTraining->time()}}</span>
             </dd>
           </div>
         </dl>
@@ -108,7 +128,7 @@
               Valor
             </dt>
             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              <span>{{$price}}</span>
+              <span>{{$selectedTraining->price()}}</span>
             </dd>
           </div>
         </dl>
@@ -118,7 +138,7 @@
               Descripción
             </dt>
             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              <span>{{$description}}</span>
+              <span>{{$selectedTraining->description}}</span>
             </dd>
           </div>
         </dl>
@@ -130,7 +150,7 @@
               </dt>
               <dd class="text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                   @if(Auth::user()->isStudent())
-                    @if(Auth::user()->Training->id == $plan_id)
+                    @if(Auth::user()->Training->id == $selectedTraining->id)
                       <a href="/students" class="text-primary-500">Ir a Clases de Entrenamiento</a>
                     @else
                       <button class="text-white text-lg w-full bg-primary-500 hover:bg-primary-900 text-center text-sm text-gray-900 sm:mt-0 sm:col-span-2 py-2 cursor-pointer" x-on:click="openModal = ! openModal">Cambiarme a Este Plan</button>
@@ -143,10 +163,10 @@
                 <x-landing.submit-modal
                   method="PUT"
                   action="/students/{{Auth::user()->student->id}}"
-                  :id="$plan_id"
+                  :id="$training->id"
                   >
                   <x-slot name="title">
-                    <span>Cambiarme a plan {{$plan}}</span>
+                    <span>Cambiarme a plan {{$training->plan()}}</span>
                   </x-slot>
 
                   Estas seguro de querer cambiarte?
@@ -162,13 +182,13 @@
                 <x-landing.submit-modal
                   method="POST"
                   action="/students"
-                  :id="$plan_id"
+                  :id="$training->id"
                   >
 
                   <x-slot name="options">
 
                     <x-slot name="title">
-                      <span>¿Inscribirme al Plan {{$plan}}?</span>
+                      <span>¿Inscribirme al Plan {{$training->plan()}}?</span>
                     </x-slot>
                     <x-label for="start_day" :value="__('Elige la fecha de inicio de tu plan de 30 días')" />
                     <x-input id="start_day" class="block mt-1 w-full"

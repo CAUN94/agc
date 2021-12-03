@@ -27,6 +27,14 @@ class TrainAppointment extends Model
         return False;
     }
 
+    public function isComplete()
+    {
+        if($this->Bookings->count() == $this->places){
+            return True;
+        }
+        return False;
+    }
+
     public function Bookings()
     {
         return $this->hasMany(TrainBook::class);

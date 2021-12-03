@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Helpers\Helper;
 use App\Models\TrainAppointment;
+use App\Models\TrainClass;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,12 +21,25 @@ class Training extends Model
 
     public function planClass()
     {
-        return $this->class." clase".$this->plural();
+        return $this->class;
+    }
+
+    public function selectClass()
+    {
+        return Training::where('format',$this->format)->where('name',$this->name)->get();
     }
 
     public function planClassComplete()
     {
         return $this->class." clase".$this->plural()." por mes";
+    }
+
+    public function plural()
+    {
+        if ($this->class>1){
+            return "s";
+        }
+        return "";
     }
 
     public function time()
@@ -38,19 +52,15 @@ class Training extends Model
         return Helper::moneda_chilena($this->price);
     }
 
-    public function plural()
-    {
-        if ($this->class>1){
-            return "s";
-        }
-        return "";
-    }
-
     public function daysCheck($date){
         return $this->TrainAppointments()->where('date',$date)->orderby('hour','ASC')->get();
     }
 
     public function TrainAppointments(){
         return $this->hasMany(TrainAppointment::class);
+    }
+
+    public function classSelect($value){
+        return Training::where('name',$this->name)->orderby($value,'ASC')->distinct($value)->get($value);
     }
 }

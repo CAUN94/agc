@@ -89,7 +89,11 @@
                         </dd>
                       </div>
                     </dl>
-                    <span class="text-lg  font-medium text-primary-500 hover:text-primary-900 cursor-pointer" wire:click="book">Reservar Clase</span>
+                    @if(!$train->isComplete())
+                        <span class="text-lg  font-medium text-primary-500 hover:text-primary-900 cursor-pointer" wire:click="book">Reservar Clase</span>
+                    @else
+                        <span class="text-lg  font-medium text-red-500">Clase Llena</span>
+                    @endif
                 </div>
                 @endif
             </div>
@@ -180,10 +184,17 @@
                                                     <div
                                                         wire:click="show({{$trainAppointment->id}})"
                                                         class="box-class border-primary-200 text-primary-800
-                                                        {{ Auth::user()->student->availableday($date) ?
-                                                        "bg-green-100 hover:bg-primary-100 cursor-pointer" :
-                                                        "bg-gray-100 cursor-not-allowed" }}
-                                                        {{$trainAppointment->isBooking() ? "bg-primary-100" : ""}}
+                                                        @if($trainAppointment->isBooking())
+                                                            bg-primary-100 cursor-pointer
+                                                        @elseif($trainAppointment->isComplete())
+                                                            bg-gray-100 hover:bg-gray-100 cursor-pointer
+                                                        @elseif(Auth::user()->student->availableday($date))
+                                                            bg-green-100 hover:bg-primary-100 cursor-pointer
+                                                        @elseif(!Auth::user()->student->availableday($date))
+                                                            bg-gray-100 cursor-not-allowed
+                                                        @else
+                                                            bg-primary-100 cursor-pointer
+                                                        @endif
                                                         ">
                                                         <p class="text-xs lg:text-sm lg:truncate leading-tight">{{$trainAppointment->hour}} {{$trainAppointment->name}}</p>
                                                     </div>
