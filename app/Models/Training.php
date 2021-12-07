@@ -56,8 +56,11 @@ class Training extends Model
         return $this->TrainAppointments()->where('date',$date)->orderby('hour','ASC')->get();
     }
 
-    public function TrainAppointments(){
-        return $this->hasMany(TrainAppointment::class);
+    public function trainAppointments(){
+        return $this->belongsToMany(TrainAppointment::class,
+            'train_appointments_pivot',
+            'training_id',
+            'train_appointment_id');
     }
 
     public function classSelect($value){

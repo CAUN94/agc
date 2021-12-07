@@ -1,8 +1,10 @@
-<div class="relative" x-data="{ dropdownTeam: false}" x-cloack>
+<div class="relative " x-data="{ dropdownTeam: false}" disabled x-cloack>
                         <a
-                            class="{{ Request::is('team') ? 'selected' : '' }}"
-                            @click="dropdownTeam = !dropdownTeam"
+                            class="cursor-not-allowed {{ Request::is('team') ? 'selected' : '' }}"
+                            {{-- @click="dropdownTeam = !dropdownTeam" --}}
+                            @click="dropdownTeam = dropdownTeam"
                             @keydown.escape="dropdownTeam = false"
+
                         >
                             Nosotros
                         </a>

@@ -1,6 +1,7 @@
 <div class="flex flex-col lg:flex-row gap-2">
     <div class="w-full lg:w-1/4 flex flex-col overflow-x-auto gap-y-2">
         <div class="align-middle inline-block min-w-full">
+
             <div x-data="{ classShow: false }" class="box-white p-3 {{Auth::user()->student->isSettled() ? "" : "border-red-500 border-2" }}">
                 <div>
                 <span class="block">{{Auth::user()->student->training->plan()}}</span>
@@ -75,7 +76,7 @@
                           Duración
                         </dt>
                         <dd class="train-class-resume-text">
-                          <span>{{$train->training->time_in_minutes}} minutos</span>
+                          <span>{{$train->training()->time_in_minutes}} minutos</span>
                         </dd>
                       </div>
                     </dl>
@@ -85,7 +86,7 @@
                           Descripción
                         </dt>
                         <dd class="train-class-resume-text">
-                          <span>{{$train->training->description}}</span>
+                          <span>{{$train->training()->description}}</span>
                         </dd>
                       </div>
                     </dl>

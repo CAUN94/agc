@@ -80,7 +80,7 @@
       <x-auth-validation-errors class="mb-4" :errors="$errors" />
       <h3 class="text-lg leading-6 font-medium text-gray-900">
         @if($trainShow)
-        {{$training->plan()}}
+        {{$selectedTraining->plan()}}
         @else
           Selecciona un plan.
           <p class="mt-1 max-w-2xl text-sm text-gray-500">

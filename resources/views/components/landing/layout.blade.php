@@ -37,9 +37,9 @@
                   <a class="{{ Request::is('/') ? 'selected' : '' }}" href="/">Inicio</a>
                   {{-- <a :class="{ 'block shadow-3xl': navOpen, 'hidden': !navOpen }" href="#">Blog</a> --}}
                   <x-landing.team-nav></x-landing.team-nav>
-                  <a class="{{ Request::is('book') ? 'selected' : '' }}" href="#">Reserva Hora</a>
+                  <a class="cursor-not-allowed {{ Request::is('book') ? 'selected' : '' }}" href="#">Reserva Hora</a>
                   <a class="{{ Request::is('trainings') ? 'selected' : '' }}" href="/trainings">Entrenamiento</a>
-                  <a class="{{ Request::is('school') ? 'selected' : '' }}" href="#">Cursos</a>
+                  <a class="cursor-not-allowed {{ Request::is('school') ? 'selected' : '' }}" href="#">Cursos</a>
                   <x-landing.auth-dropdown></x-landing.auth-dropdown>
                   <x-landing.guest-dropdown></x-landing.guest-dropdown>
                 </nav>

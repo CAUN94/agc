@@ -12,9 +12,20 @@ class TrainAppointment extends Model
 {
     use HasFactory;
 
-    public function training(){
-        return $this->belongsTo(Training::class);
+    public function trainings(){
+        return $this->belongsToMany(Training::class,
+            'train_appointments_pivot',
+            'train_appointment_id',
+            'training_id');
     }
+
+    public function training(){
+        return $this->belongsToMany(Training::class,
+            'train_appointments_pivot',
+            'train_appointment_id',
+            'training_id')->where('training_id',Auth::user()->student->training_id)->first();
+    }
+
 
     public function trainer(){
         return $this->hasOne(User::class,'id','trainer_id');
@@ -59,4 +70,6 @@ class TrainAppointment extends Model
     public function getHourAttribute(){
         return Carbon::parse($this->attributes['hour'])->format('H:i');
     }
+
+
 }

@@ -21,10 +21,12 @@
             <p>Psicología del Deporte</p>
             <img src="{{ asset('img/iconos/pscicologia_deportiva.png')}}">
       </div>
-      <div class="box">
-            <p>Entrenamiento</p>
-            <img src="{{ asset('img/iconos/entrenamiento.png')}}">
-      </div>
+      <a href="/trainings">
+            <div class="box">
+                  <p>Entrenamiento</p>
+                  <img src="{{ asset('img/iconos/entrenamiento.png')}}">
+            </div>
+      </a>
       <div class="box">
             <p>Psicología Clínica</p>
             <img src="{{ asset('img/iconos/psicologia_clinica.png')}}">
