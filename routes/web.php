@@ -21,7 +21,10 @@ Route::get('/team', [LandingController::class, 'team']);
 Route::resource('users', 'App\Http\Controllers\UsersController')->middleware(['auth']);
 Route::resource('trainings', 'App\Http\Controllers\TrainingController');
 Route::resource('students', 'App\Http\Controllers\StudentController');
+Route::get('/table', [TableController::class,'index']);
+
 Route::resource('adminusers', 'App\Http\Controllers\AdminUserController');
+Route::resource('adminclass', 'App\Http\Controllers\AdminTrainingController');
 
 
 require __DIR__.'/auth.php';

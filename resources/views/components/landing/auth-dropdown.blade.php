@@ -1,7 +1,7 @@
 @auth()
 <div class="relative" x-data="{ dropdownUser: false}" x-cloack>
     <a
-        class="{{ Request::is('users') ? 'selected' : '' }} text-primary-500 hover:text-white"
+        class="cursor-pointer {{ Request::is('users') ? 'selected' : '' }} text-primary-500 hover:text-white"
         @click="dropdownUser = !dropdownUser"
         @keydown.escape="dropdownUser = false"
     >

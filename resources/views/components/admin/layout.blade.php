@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>YouApp Just Better</title>
+        <title>You App Just Better</title>
         <link rel="icon" type="image/png" href="{{ asset('/img/icon.png') }}">
         <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -30,7 +30,7 @@
 
 <body class="flex h-screen bg-gray-100 font-sans">
   <div class="md:flex flex-col md:flex-row md:min-h-screen w-full">
-    <div class="flex flex-col w-full md:w-52 text-gray-700 bg-primary-500 flex-shrink-0">
+    <div class="flex flex-col w-full md:w-2/12 text-gray-700 bg-primary-500 flex-shrink-0">
       <div class="flex-shrink-0 px-8 py-4 flex flex-row items-center justify-between">
         <a href="#" class=" dark-mode:text-white focus:outline-none focus:shadow-outline">
           <img class="logo" src="{{asset('img/you-completo-blanco.png')}}">
@@ -40,7 +40,7 @@
 
       </x-landing.admin-nav>
     </div>
-    <div class="flex flex-col w-full flex-shrink-1">
+    <div class="flex flex-col w-10/12 flex-shrink-1">
       <!-- This example requires Tailwind CSS v2.0+ -->
       <x-landing.user-nav>
 

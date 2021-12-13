@@ -1,3 +1,3 @@
 <x-admin.layout>
-	<livewire:useradmin>
+	<livewire:users-table/>
 </x-admin.layout>

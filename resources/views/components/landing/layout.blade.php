@@ -37,7 +37,8 @@
                   <a class="{{ Request::is('/') ? 'selected' : '' }}" href="/">Inicio</a>
                   {{-- <a :class="{ 'block shadow-3xl': navOpen, 'hidden': !navOpen }" href="#">Blog</a> --}}
                   <x-landing.team-nav></x-landing.team-nav>
-                  <a class="cursor-not-allowed {{ Request::is('book') ? 'selected' : '' }}" href="#">Reserva Hora</a>
+                  <a class="{{ Request::is('book') ? 'selected' : '' }}"
+                  href="https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento">Reserva Hora</a>
                   <a class="{{ Request::is('trainings') ? 'selected' : '' }}" href="/trainings">Entrenamiento</a>
                   <a class="cursor-not-allowed {{ Request::is('school') ? 'selected' : '' }}" href="#">Cursos</a>
                   <x-landing.auth-dropdown></x-landing.auth-dropdown>
@@ -51,7 +52,7 @@
         </div>
 
         <footer class="bg-you-grey h-auto py-4 text-center py-4">
-            <span class="text-white">© You Just Better<script>document.write(new Date().getFullYear())</script></span>
+            <span class="text-white">© You Just Better <script>document.write(new Date().getFullYear())</script></span>
         </footer>
 
         <x-contact-fixed></x-contact-fixed>

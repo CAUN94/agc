@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Training;
 use Illuminate\Http\Request;
 
-class AdminUserController extends Controller
+class AdminTrainingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class AdminUserController extends Controller
      */
     public function index()
     {
-        return view('admin.users.index');
+        return view('admin.trainings.index');
     }
 
     /**
@@ -41,22 +41,21 @@ class AdminUserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Training  $training
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Training $training)
     {
-        $user = User::find($id);
-        return $user;
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Training  $training
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Training $training)
     {
         //
     }
@@ -65,10 +64,10 @@ class AdminUserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Training  $training
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Training $training)
     {
         //
     }
@@ -76,10 +75,10 @@ class AdminUserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Training  $training
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Training $training)
     {
         //
     }

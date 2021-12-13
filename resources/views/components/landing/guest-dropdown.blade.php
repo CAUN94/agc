@@ -1,6 +1,6 @@
 @guest()
 <div class="relative" x-data="{ dropdownUser: false}" x-cloack>
-    <a class="{{ Request::is('login') ? 'selected' : '' }} {{ Request::is('register') ? 'selected' : '' }}"
+    <a class="cursor-pointer {{ Request::is('login') ? 'selected' : '' }} {{ Request::is('register') ? 'selected' : '' }}"
         @click="dropdownUser = !dropdownUser"
         @keydown.escape="dropdownUser = false"
     >
