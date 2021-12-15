@@ -59,6 +59,7 @@
         <x-flash-message></x-flash-message>
         @if (isset($script)) {{ $script }} @endif
         @livewireScripts
+        <script> Livewire.on('openTab', link => { alert('A post was added with the id of: ' + link); }) </script>
 
 
     </body>
