@@ -21,7 +21,7 @@ class SearchTrainPlan extends Component
 
     public function showPlan(Training $training)
     {
-        $this->selectedTraining= $training;
+        $this->selectedTraining = $training;
         $this->trainShow = true;
     }
 

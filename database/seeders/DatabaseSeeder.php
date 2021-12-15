@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
         User::create([
                 'name' => 'Jon',
                 'lastnames' => 'Doe',
-                'email' => 'cristobal@ugarte.cl',
+                'email' => 'css@ugarte.cl',
                 'rut' => '18783405-6',
                 'gender' => 'm',
                 'phone' => '76693894',
