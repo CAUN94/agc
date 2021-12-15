@@ -56,8 +56,12 @@
                   </div>
                 </td>
                 <td class="px-6 py-2 sm:py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <select class="w-full h-10 pr-6 text-xs md:text-sm placeholder-gray-600 border rounded-lg appearance-none focus:shadow-outline" wire:change="showPlan($event.target.value)">
-
+                  <select class="w-full h-10 pr-6 text-xs md:text-sm placeholder-gray-600 border rounded-lg appearance-none focus:shadow-outline"
+                  wire:change="showPlan($event.target.value)"
+                  wire:click="showPlan($event.target.value)"
+                  wire:submit="showPlan($event.target.value)"
+                  wire:keydowm="showPlan($event.target.value)">
+                  {{-- <option class="text-gray-900" selected>Clases</option> --}}
                   @foreach($training->selectClass() as $class)
                     <option class="text-gray-900"
                       value="{{$class->id}}">{{$class->planClassComplete()}}</option>
