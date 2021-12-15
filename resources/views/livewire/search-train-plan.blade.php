@@ -61,7 +61,6 @@
                   wire:click="showPlan($event.target.value)"
                   wire:submit="showPlan($event.target.value)"
                   wire:keydowm="showPlan($event.target.value)">
-                  <option class="text-gray-900" selected>Clases</option>
                   @foreach($training->selectClass() as $class)
                     <option class="text-gray-900"
                       value="{{$class->id}}">{{$class->planClassComplete()}}</option>
