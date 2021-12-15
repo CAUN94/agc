@@ -13,13 +13,13 @@
         <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.x/dist/alpine.min.js" defer></script>
-
+        @livewireStyles
         <style>
             [x-cloak] {
                 display: none !important;
             }
         </style>
-        @livewireStyles
+
     </head>
     <body>
         <div class="sticky-menu">
