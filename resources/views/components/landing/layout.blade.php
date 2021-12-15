@@ -13,12 +13,13 @@
         <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-        @livewireStyles
+
         <style>
             [x-cloak] {
                 display: none !important;
             }
         </style>
+        @livewireStyles
 
     </head>
     <body>
@@ -57,10 +58,10 @@
 
         <x-contact-fixed></x-contact-fixed>
         <x-flash-message></x-flash-message>
-
+        @livewireScripts
         @if (isset($script)) {{ $script }} @endif
 
-        @livewireScripts
+
 
     </body>
 </html>
