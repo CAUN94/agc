@@ -56,7 +56,7 @@
                   </div>
                 </td>
                 <td class="px-6 py-2 sm:py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <select class="w-full h-10 pr-6 text-xs md:text-sm placeholder-gray-600 border rounded-lg appearance-none focus:shadow-outline" wire:click="showPlan($event.target.value)">
+                  <select class="w-full h-10 pr-6 text-xs md:text-sm placeholder-gray-600 border rounded-lg appearance-none focus:shadow-outline" wire:change="showPlan($event.target.value)">
 
                   @foreach($training->selectClass() as $class)
                     <option class="text-gray-900"
