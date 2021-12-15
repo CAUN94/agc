@@ -61,7 +61,7 @@
                   wire:click="showPlan($event.target.value)"
                   wire:submit="showPlan($event.target.value)"
                   wire:keydowm="showPlan($event.target.value)">
-                  {{-- <option class="text-gray-900" selected>Clases</option> --}}
+                  <option class="text-gray-900" selected>Clases</option>
                   @foreach($training->selectClass() as $class)
                     <option class="text-gray-900"
                       value="{{$class->id}}">{{$class->planClassComplete()}}</option>
@@ -164,10 +164,10 @@
                 <x-landing.submit-modal
                   method="PUT"
                   action="/students/{{Auth::user()->student->id}}"
-                  :id="$training->id"
+                  :id="$selectedTraining->id"
                   >
                   <x-slot name="title">
-                    <span>Cambiarme a plan {{$training->plan()}}</span>
+                    <span>Cambiarme a plan {{$selectedTraining->plan()}}</span>
                   </x-slot>
 
                   Estas seguro de querer cambiarte?
@@ -183,13 +183,13 @@
                 <x-landing.submit-modal
                   method="POST"
                   action="/students"
-                  :id="$training->id"
+                  :id="$selectedTraining->id"
                   >
 
                   <x-slot name="options">
 
                     <x-slot name="title">
-                      <span>¿Inscribirme al Plan {{$training->plan()}}?</span>
+                      <span>¿Inscribirme al Plan {{$selectedTraining->plan()}}?</span>
                     </x-slot>
                     <x-label for="start_day" :value="__('Elige la fecha de inicio de tu plan de 30 días')" />
                     <x-input id="start_day" class="block mt-1 w-full"
