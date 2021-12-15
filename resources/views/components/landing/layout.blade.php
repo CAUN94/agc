@@ -58,9 +58,6 @@
         <x-contact-fixed></x-contact-fixed>
         <x-flash-message></x-flash-message>
         @if (isset($script)) {{ $script }} @endif
-        {{-- @livewireScripts --}}
-        <livewire:scripts/>
-
-
+        @livewireScripts
     </body>
 </html>
