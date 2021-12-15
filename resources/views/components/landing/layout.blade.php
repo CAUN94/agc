@@ -20,6 +20,7 @@
             }
         </style>
         @livewireStyles
+        @livewireScripts
 
 
     </head>
@@ -59,7 +60,6 @@
 
         <x-contact-fixed></x-contact-fixed>
         <x-flash-message></x-flash-message>
-        @livewireScripts
         @if (isset($script)) {{ $script }} @endif
 
 
