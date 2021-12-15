@@ -20,9 +20,6 @@
             }
         </style>
         @livewireStyles
-        @livewireScripts
-
-
     </head>
     <body>
         <div class="sticky-menu">
@@ -61,7 +58,7 @@
         <x-contact-fixed></x-contact-fixed>
         <x-flash-message></x-flash-message>
         @if (isset($script)) {{ $script }} @endif
-
+        @livewireScripts
 
 
     </body>
