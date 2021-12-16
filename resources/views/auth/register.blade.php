@@ -28,7 +28,7 @@
 
             {{-- Rut --}}
             <div class="mt-4">
-                <x-label for="rut" :value="__('Rut sin punto y con guión')" x-model="rut" />
+                <x-label for="rut" :value="__('Rut sin puntos y con guión')" x-model="rut" />
                 <span x-text="rut">
                 <x-input-rut id="rut" class="block mt-1 w-full" type="text" name="rut" :value="old('rut')" required autofocus/>
             </div>
