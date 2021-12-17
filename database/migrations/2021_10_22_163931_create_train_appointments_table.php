@@ -21,8 +21,9 @@ class CreateTrainAppointmentsTable extends Migration
             $table->integer('places')->nullable();
             $table->text('description')->nullable();
             $table->boolean('status')->default(False);
-            $table->unsignedBigInteger('trainer_id');
-            $table->foreign('trainer_id')->references('id')->on('users');
+            $table->unsignedBigInteger('trainer_id')->nullable();
+            $table->foreign('trainer_id')->references('id')->on('users')
+            ->cascadeOnUpdate()->nullOnDelete();
             $table->timestamps();
         });
     }

@@ -18,11 +18,14 @@ class UsersTable extends LivewireDatatable
 {
     public $exportable = true;
     public $hideable = 'select';
+    public $model = User::class;
+
     public function builder()
     {
         return User::query()
         ->leftjoin('students', 'users.id', 'students.user_id')
         ->leftjoin('trainings', 'trainings.id', 'students.training_id');
+        // ->groupby('users.id');
     }
 
     public function columns()
@@ -44,9 +47,10 @@ class UsersTable extends LivewireDatatable
                 ->label('Email')
                 ->searchable()
                 ->editable(),
+            // Column::raw('GROUP_CONCAT(trainings.name SEPARATOR " | ") AS `Planes`'),
             BooleanColumn::name('students.id')
             ->label('Entrenamiento'),
-           Column::raw('CONCAT(trainings.name," ",trainings.format," ",trainings.class) AS Plan')
+            Column::raw('CONCAT(trainings.name," ",trainings.format," clases ",trainings.class, " ",students.start_day) AS Plan')
                 ->label('Plan de Entrenamiento')
                 ->searchable(),
             Column::callback('gender','getGender')
@@ -62,7 +66,8 @@ class UsersTable extends LivewireDatatable
             DateColumn::raw('birthday')
                 ->label('Fecha de Nacimiento')
                 ->format('d-M-Y')
-                ->searchable()
+                ->searchable(),
+            $this->deleteView()
 
         ];
     }
@@ -95,4 +100,13 @@ class UsersTable extends LivewireDatatable
         // ddd($request);
 
     }
+
+    public function deleteView($name = 'id')
+    {
+        return Column::callback($name, function ($value) {
+            $fullname = User::find($value)->fullName();
+            return view('datatables::delete', ['value' => $value , 'fullname' => $fullname]);
+        });
+    }
+
 }

@@ -66,6 +66,7 @@
       </div>
     </div>
   </div>
+  <script src="{{ asset('/vendor/ckeditor/ckeditor.js') }}"></script>
    @livewireScripts
 </body>
 
