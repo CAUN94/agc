@@ -32,6 +32,9 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+       
+
+
         User::create([
                 'name' => 'Jon',
                 'lastnames' => 'Doe',
@@ -63,6 +66,18 @@ class DatabaseSeeder extends Seeder
                 'phone' => '76693894',
                 'birthday' => '1994-10-17',
                 'password' => '!password'
+            ]
+        );
+
+        User::create([
+                'name' => 'Diego',
+                'lastnames' => 'Terán',
+                'email' => 'dhteran@miuandes.cl',
+                'rut' => '20285263-7',
+                'gender' => 'm',
+                'phone' => '75166485',
+                'birthday' => '1999-10-04',
+                'password' => 'password'
             ]
         );
 
