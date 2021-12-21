@@ -142,7 +142,7 @@
                   Historial Planes de Entrenamiento
                 </h3>
                 <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                  Perfil personal de usuarios You Just Better
+                  <a href="/students" class="text-gray-500 underline">Ir a Clases de Entrenamiento</a>
                 </p>
               </div>
               <div class="bg-white shadow overflow-hidden sm:rounded-lg p-1">
@@ -154,7 +154,7 @@
                 @forelse(Auth::user()->allStudentPlan()->with('Training')->get() as $plan)
                   <div class="flex justify-between items-center">
                     <div class="flex flex-col">
-                      {{$plan->Training->plan()}}
+                      <a href="/students"> {{$plan->Training->plan()}}</a>
                       <span class="text-xs text-primary-500">
                         {{$plan->Training->planClassComplete()}}
                       </span>

@@ -39,19 +39,19 @@
                     </div>
                     <div class="ml-0 sm:ml-4">
                       <div class="text-md font-medium text-gray-900">
-                        {{$training->name}}
+                        <span class="text-sm sm:text-base whitespace-normal">{{$training->name}}</span>
                       </div>
                       <div class="block sm:hidden text-sm text-gray-500">
-                        Formato: {{$training->format}}
+                        <span class="text-xs sm:text-sm">Formato: {{$training->format}}
                       </div>
                     </div>
                   </div>
                 </td>
-                <td class="hidden sm:table-cell px-6 py-2 sm:py-4 whitespace-nowrap">
-                  {{$training->format}}
+                <td class="hidden  sm:table-cell px-6 py-2 sm:py-4 whitespace-nowrap">
+                  <span>{{$training->format}}</span>
                 </td>
                 <td class="hidden sm:table-cell px-6 py-2 sm:py-4 whitespace-nowrap">
-                  <div class="text-md font-medium text-gray-900">
+                  <div class="text-xs sm:text-sm font-medium text-gray-900">
                     {{$training->time()}}
                   </div>
                 </td>

@@ -111,7 +111,9 @@
                                 <div>
                                     <span class="text-lg font-bold text-gray-800">{{$now->format('F')}}</span>
                                     <span class="ml-1 text-lg text-gray-600 font-normal">{{$now->format('Y')}}</span>
+
                                 </div>
+                                <span class="ml-1 text-lg text-gray-600 font-normal">Puedes reservar {{auth()->user()->training->class}} clases al mes</span>
                                 <div class="border rounded-lg px-1" style="padding-top: 2px;">
                                     <button
                                         type="button"
