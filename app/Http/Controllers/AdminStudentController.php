@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
+use App\Models\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class AdminStudentController extends Controller
 {
     public function __construct()
     {
@@ -18,7 +19,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-
+        return view('admin.students.index');
     }
 
     /**
@@ -45,33 +46,34 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Admin $admin)
+    public function show(Student $adminstudent)
     {
-        //
+
+        return $adminstudent;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit(Admin $admin)
+    public function edit(Student $adminstudent)
     {
-        //
+        return $adminstudent;
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Admin $admin)
+    public function update(Request $request, Student $student)
     {
         //
     }
@@ -79,10 +81,10 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Admin $admin)
+    public function destroy(Student $student)
     {
         //
     }

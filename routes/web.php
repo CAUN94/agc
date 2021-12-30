@@ -24,7 +24,11 @@ Route::resource('students', 'App\Http\Controllers\StudentController');
 Route::get('/table', [TableController::class,'index']);
 
 Route::resource('adminusers', 'App\Http\Controllers\AdminUserController');
+Route::resource('adminstudents', 'App\Http\Controllers\AdminStudentController');
 Route::resource('adminclass', 'App\Http\Controllers\AdminTrainingController');
+Route::resource('adminprofessionals', 'App\Http\Controllers\AdminProfessionalsController');
+Route::resource('admintrainers', 'App\Http\Controllers\AdminTrainersController');
+
 
 
 require __DIR__.'/auth.php';

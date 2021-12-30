@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class AdminUserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('intranet');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -44,10 +48,9 @@ class AdminUserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $adminuser)
     {
-        $user = User::find($id);
-        return $user;
+        return view('admin.users.show');
     }
 
     /**
@@ -56,9 +59,9 @@ class AdminUserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $adminuser)
     {
-        //
+        return $adminuser;
     }
 
     /**

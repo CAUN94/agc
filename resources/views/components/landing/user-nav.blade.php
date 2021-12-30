@@ -1,4 +1,4 @@
-<nav class="bg-light-grey ">
+<nav class="bg-gradient-to-r from-primary-500 to-light-grey">
   <div class="max-w-7xl w-full px-2 sm:px-6 lg:px-8">
     <div class="relative flex items-center  h-16">
       <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">

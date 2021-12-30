@@ -19,6 +19,11 @@ class Training extends Model
         return $this->name." ".$this->format;
     }
 
+    public function planComplete()
+    {
+        return $this->name." ".$this->format." ".$this->planClassComplete();
+    }
+
     public function planClass()
     {
         return $this->class;

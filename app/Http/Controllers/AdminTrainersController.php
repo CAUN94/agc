@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
+use App\Models\Trainers;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class AdminTrainersController extends Controller
 {
     public function __construct()
     {
@@ -18,7 +18,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-
+        //
     }
 
     /**
@@ -45,10 +45,10 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Trainers  $trainers
      * @return \Illuminate\Http\Response
      */
-    public function show(Admin $admin)
+    public function show(Trainers $trainers)
     {
         //
     }
@@ -56,10 +56,10 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Trainers  $trainers
      * @return \Illuminate\Http\Response
      */
-    public function edit(Admin $admin)
+    public function edit(Trainers $trainers)
     {
         //
     }
@@ -68,10 +68,10 @@ class AdminController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Trainers  $trainers
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Admin $admin)
+    public function update(Request $request, Trainers $trainers)
     {
         //
     }
@@ -79,10 +79,10 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Trainers  $trainers
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Admin $admin)
+    public function destroy(Trainers $trainers)
     {
         //
     }

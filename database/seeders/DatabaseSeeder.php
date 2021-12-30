@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Admin;
+use App\Models\Professional;
 use App\Models\Student;
 use App\Models\TrainAppointment;
+use App\Models\Trainer;
 use App\Models\Training;
 use App\Models\User;
 use Faker\Factory as Faker;
@@ -32,8 +35,6 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-       
-
 
         User::create([
                 'name' => 'Jon',
@@ -47,18 +48,18 @@ class DatabaseSeeder extends Seeder
             ]
         );
         User::create([
-                'name' => 'Cata',
-                'lastnames' => 'Coach',
+                'name' => 'Catalina',
+                'lastnames' => 'Hernandez',
                 'email' => $this->faker->email,
                 'rut' => '18783405-1',
-                'gender' => 'm',
+                'gender' => 'f',
                 'phone' => '76693894',
                 'birthday' => '1994-08-17',
                 'password' => '!password'
             ]
         );
         User::create([
-                'name' => 'Profe',
+                'name' => 'Francisco',
                 'lastnames' => 'Guzman',
                 'email' => $this->faker->email,
                 'rut' => '18783405-2',
@@ -71,7 +72,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
                 'name' => 'Diego',
-                'lastnames' => 'Terán',
+                'lastnames' => 'Teran',
                 'email' => 'dhteran@miuandes.cl',
                 'rut' => '20285263-7',
                 'gender' => 'm',
@@ -80,6 +81,36 @@ class DatabaseSeeder extends Seeder
                 'password' => 'password'
             ]
         );
+
+        Professional::create([
+                'user_id' => 1,
+                'description' => 'lorem ipsum dolor sit amet, consectetur'
+            ]
+        );
+
+        Professional::create([
+                'user_id' => 2,
+                'description' => 'lorem ipsum dolor sit amet, consectetur'
+            ]
+        );
+
+        Professional::create([
+                'user_id' => 3,
+                'description' => 'lorem ipsum dolor sit amet, consectetur'
+            ]
+        );
+
+        Trainer::create([
+                'user_id' => 2,
+        ]);
+
+        Trainer::create([
+                'user_id' => 3,
+        ]);
+
+        Admin::create([
+                'user_id' => 1,
+        ]);
 
         DB::table('trainings')->insert([
                 'name' => 'Entrenamiento Grupal',
@@ -278,6 +309,27 @@ Las clases serán de manera presencial en las dependencias de You just better.'
                 'settled' => 1,
                 'start_day' => '2021-12-09'
         ]);
+
+        for ($i=0; $i < 20; $i++) {
+                $u = User::factory()->create();
+                if (rand(0,1)) {
+                        Student::create([
+                                'user_id' => $u->id,
+                                'training_id' => Training::inRandomOrder()->first()->id,
+                                'settled' => rand(0,1),
+                                'start_day' => '2021-12-09'
+                        ]);
+                }
+                if (rand(0,1)) {
+                        Professional::create([
+                                'user_id' => $u->id,
+                                'description' => 'lorem ipsum dolor sit amet, consectetur'
+                        ]);
+                }
+
+        }
+
+
 
         for ($week=0 ; $week < 10; $week++) {
 

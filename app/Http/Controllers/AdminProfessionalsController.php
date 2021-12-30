@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
+use App\Models\Professional;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class AdminProfessionalsController extends Controller
 {
     public function __construct()
     {
@@ -18,7 +18,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-
+        return view('admin.professionals.index');
     }
 
     /**
@@ -45,33 +45,33 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Professional  $professional
      * @return \Illuminate\Http\Response
      */
-    public function show(Admin $admin)
+    public function show(Professional $adminprofessional)
     {
-        //
+        return $adminprofessional;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Professional  $professional
      * @return \Illuminate\Http\Response
      */
-    public function edit(Admin $admin)
+    public function edit(Professional $adminprofessional)
     {
-        //
+        return $adminprofessional;
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Professional  $professional
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Admin $admin)
+    public function update(Request $request, Professional $professional)
     {
         //
     }
@@ -79,10 +79,10 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Professional  $professional
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Admin $admin)
+    public function destroy(Professional $professional)
     {
         //
     }

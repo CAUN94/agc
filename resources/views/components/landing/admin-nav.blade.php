@@ -3,10 +3,9 @@
     <x-slot name="name"><i class="fas fa-user text-xs mr-1"></i> Usuarios</x-slot>
     <x-slot name="trigger">Usuarios</x-slot>
     <a class="py-1" href="/adminusers">Todos</a>
-    <a class="my-1 py-1" href="#">Estudiantes</a>
-    <a class="my-1 py-1" href="#">Profesionales</a>
-    <a class="my-1 py-1" href="#">Kines</a>
-    <a class="my-1 py-1" href="#">Entrenadores</a>
+    <a class="my-1 py-1" href="/adminstudents">Estudiantes</a>
+    <a class="my-1 py-1" href="/adminprofessionals">Profesionales</a>
+    <a class="my-1 py-1" href="/admintrainers">Entrenadores</a>
   </x-nav-dropdown>
 
   <a class="mt-3" href="/adminclass"><i class="fas fa-calendar-alt"></i> Clases</a>

@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\Admin;
+use App\Models\Professional;
 use App\Models\Student;
 use App\Models\TrainBook;
+use Freshwork\ChileanBundle\Rut;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Freshwork\ChileanBundle\Rut;
 
 class User extends Authenticatable
 {
@@ -146,6 +148,45 @@ class User extends Authenticatable
     public function isStudent()
     {
         if(is_null($this->Student)){
+            return False;
+        }
+        return True;
+    }
+
+    public function Professional()
+    {
+        return $this->hasOne(Professional::class);
+    }
+
+    public function isProfessional()
+    {
+        if(is_null($this->Professional)){
+            return False;
+        }
+        return True;
+    }
+
+    public function Admin()
+    {
+        return $this->hasOne(Admin::class);
+    }
+
+    public function isAdmin()
+    {
+        if(is_null($this->Admin)){
+            return False;
+        }
+        return True;
+    }
+
+    public function Trainer()
+    {
+        return $this->hasOne(Trainer::class);
+    }
+
+    public function isTrainer()
+    {
+        if(is_null($this->Trainer)){
             return False;
         }
         return True;

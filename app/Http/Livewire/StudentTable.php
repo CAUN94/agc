@@ -15,50 +15,48 @@ use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
 use Mediconesystems\LivewireDatatables\LabelColumn;
 use Mediconesystems\LivewireDatatables\NumberColumn;
 
-class UsersTable extends LivewireDatatable
+
+class StudentTable extends LivewireDatatable
 {
     public $exportable = true;
     public $hideable = 'select';
 
     public function builder()
     {
-        return User::query()->distinct('users.id');
+        return Student::query()
+            ->join('users', 'students.user_id', 'users.id')
+            ->join('trainings', 'trainings.id', 'students.training_id')
+            ->orderby('start_day','desc');
     }
 
     public function columns()
     {
         return [
 
-            Column::name('rut')->link('/adminusers/{{users.id}}', '{{rut}}')
+            Column::name('users.rut')
+                ->link('/adminstudents/{{students.id}}/edit', '{{users.rut}}')
                 ->label('Rut')
                 ->filterable(),
-            Column::name('name')
+            Column::name('users.name')
                 ->label('Nombre')
+                ->defaultSort('desc')
                 ->filterable()
                 ->editable(),
-            Column::name('lastnames')
+            Column::name('users.lastnames')
                 ->label('Apellido')
                 ->filterable()
                 ->editable(),
-            Column::name('email')
-                ->label('Email')
+            Column::raw('CONCAT(trainings.name," ",trainings.format," clases ",trainings.class) AS Plan')
+                ->label('Plan de Entrenamiento')
+                ->filterable(),
+            DateColumn::name('start_day')
+                ->label('Fecha de Inicio del Plan')
                 ->filterable()
                 ->editable(),
-            // Column::raw('GROUP_CONCAT(trainings.name SEPARATOR " | ") AS `Planes`'),
-            // BooleanColumn::name('Student.user_id')
-            // ->label('Entrenamiento')
-            // ->filterable(),
-            BooleanColumn::name('Student.user_id')
-                ->label('Estudiante')
-                ->filterable(),
-            BooleanColumn::name('Professional.user_id')
-                ->label('Profesional')
-                ->filterable(),
-            // BooleanColumn::name('Professional.id')
-            // ->label('Profesional')
-            // ->filterable(),
-
-            Column::callback(['gender'], function ($gender) {
+            BooleanColumn::name('students.settled')
+            ->label('Pagado')
+            ->filterable(),
+            Column::callback(['users.gender'], function ($gender) {
                 $genders = [
                     'm' => 'Masculino',
                     'f' => 'Femenino',
@@ -71,30 +69,11 @@ class UsersTable extends LivewireDatatable
                     'f' => 'Femenino',
                     'n' => 'No Especifica'
                 ]),
-            Column::name('phone')
+            Column::name('users.phone')
                 ->label('Celular')
                 ->filterable()
                 ->editable(),
-            Column::name('address')
-                ->label('Dirección')
-                ->filterable()
-                ->editable(),
-            DateColumn::raw('birthday')
-                ->label('Fecha de Nacimiento')
-                ->format('d-M-Y'),
-            $this->deleteView()
-
         ];
-    }
-
-    public function getGender($gender)
-    {
-        $genders = [
-            'm' => 'Masculino',
-            'f' => 'Femenino',
-            'n' => 'No Especifica'
-        ];
-        return $genders[$gender];
     }
 
     public function getTrainingProperty()
@@ -113,8 +92,8 @@ class UsersTable extends LivewireDatatable
             'lastnames' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'gender' => ['required', 'string', 'min:1' , 'max:1', 'in:m,f,n'],
-            // 'rut' => ['required', 'string', 'unique:users'],
-            'rut' => ['required', 'string', 'cl_rut'],
+            'rut' => ['required', 'string', 'unique:users,id,'.$user->id],
+            // 'rut' => ['required', 'string', 'cl_rut'],
             'phone' => ['required', 'string', 'max:255'],
             'birthday' => ['required', 'date']
         ]);
@@ -122,13 +101,4 @@ class UsersTable extends LivewireDatatable
         // ddd($request);
 
     }
-
-    public function deleteView($name = 'id')
-    {
-        return Column::callback($name, function ($value) {
-            $fullname = User::find($value)->fullName();
-            return view('datatables::delete', ['value' => $value , 'fullname' => $fullname]);
-        });
-    }
-
 }

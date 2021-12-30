@@ -1,4 +1,4 @@
-<div class="bg-light-grey rounded-t-lg p-4">
+<div class="bg-white rounded-t-lg border-1 px-4">
     <x-auth-validation-errors class="mb-4" :errors="$errors" />
     @if($beforeTableSlot)
         <div class="mt-8">
@@ -28,14 +28,14 @@
             </div>
 
             @if($this->activeFilters)
-                <span class="text-xl text-blue-400 uppercase">FILTERS ACTIVE</span>
+                <span class="text-xl text-blue-400 uppercase">Filtros Activados</span>
             @endif
 
             <div class="flex flex-wrap items-center space-x-1">
                 <x-icons.cog wire:loading class="h-9 w-9 animate-spin text-gray-400" />
 
                 @if($this->activeFilters)
-                <button wire:click="clearAllFilters" class="flex items-center space-x-2 px-3 border border-red-400 rounded-md bg-white text-red-500 text-xs leading-4 font-medium uppercase tracking-wider hover:bg-red-200 focus:outline-none"><span>{{ __('Reset') }}</span>
+                <button wire:click="clearAllFilters" class="flex items-center space-x-2 px-3 border border-red-400 rounded-md bg-white text-red-500 text-xs leading-4 font-medium uppercase tracking-wider hover:bg-red-200 focus:outline-none"><span>{{ __('Resetear') }}</span>
                     <x-icons.x-circle class="m-2" />
                 </button>
                 @endif
@@ -169,7 +169,7 @@
                                 @foreach(config('livewire-datatables.per_page_options', [ 10, 25, 50, 100 ]) as $per_page_option)
                                     <option value="{{ $per_page_option }}">{{ $per_page_option }}</option>
                                 @endforeach
-                                <option value="99999999">{{__('All')}}</option>
+                                <option value="99999999">{{__('Todos')}}</option>
                             </select>
                         </div>
 

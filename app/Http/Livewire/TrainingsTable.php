@@ -13,6 +13,9 @@ use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
 
 class TrainingsTable extends LivewireDatatable
 {
+    public $exportable = true;
+    public $hideable = 'select';
+
     public function builder()
     {
         return Training::query();
@@ -23,19 +26,15 @@ class TrainingsTable extends LivewireDatatable
         return [
             Column::name('name')
                 ->label('Nombre')
-                ->searchable()
                 ->editable(),
             Column::name('Class')
                 ->label('Cantidad')
-                ->searchable()
                 ->editable(),
             Column::name('time_in_minutes')
                 ->label('Tiempo')
-                ->searchable()
                 ->editable(),
             Column::name('format')
                 ->label('Formato')
-                ->searchable()
                 ->editable()
         ];
     }
