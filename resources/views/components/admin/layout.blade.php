@@ -28,7 +28,7 @@
 
 </head>
 
-<body class="flex h-screen bg-gray-100 font-sans">
+<body class="flex h-auto bg-gray-100 font-sans">
   <div class="md:flex flex-col md:flex-row md:min-h-screen w-full">
     <div class="flex flex-col w-full md:w-2/12 text-gray-700 bg-primary-500 flex-shrink-0">
       <div class="flex-shrink-0 px-8 py-4 flex flex-row items-center justify-between">

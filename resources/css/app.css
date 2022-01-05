@@ -232,3 +232,7 @@ footer span {
 .admin-box {
 	@apply flex flex-col rounded-lg h-full shadow overflow-hidden border-b border-r border-gray-200;
 }
+
+.cho-container button{
+	@apply bg-red-500 font-bold w-full;
+}

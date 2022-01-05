@@ -50,7 +50,7 @@ class AdminUserController extends Controller
      */
     public function show(User $adminuser)
     {
-        return view('admin.users.show');
+        return view('admin.users.show',compact('adminuser'));
     }
 
     /**

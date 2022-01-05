@@ -90,10 +90,10 @@
                     @if(Auth::user()->student->isSettled())
                         Plan activado
                     @else
-                        <a href='https://padpow.com/customer/professionals/3165/payments/new' target='_blank' class="flex flex-col">
+                        <div class="flex flex-col">
                             <span>Plan No activado</span>
                             <span>Valor: {{Auth::user()->student->training->price()}}</span>
-                        </a>
+                        </div>
                     @endif
                   </div>
                 </dt>
@@ -151,6 +151,9 @@
             </div>
             <div class="border-t border-gray-200">
               <div class="bg-white text-sm px-4 py-5 sm:grid sm:grid-cols-1 sm:gap-4 sm:px-6">
+                @if(count(Auth::user()->notSettledPlan)>0)
+                <x-pay></x-pay>
+                @endif
                 @forelse(Auth::user()->allStudentPlan()->with('Training')->get() as $plan)
                   <div class="flex justify-between items-center">
                     <div class="flex flex-col">
@@ -165,7 +168,7 @@
                     @if($plan->isSettled())
                       <span class="text-green-500">Pagado</span>
                     @else
-                      <span class="text-red-500">No Pagado</span>
+                      <span class="text-red-500">No Pagado {{$plan->Training->price()}}</span>
                     @endif
                   </div>
 

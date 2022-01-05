@@ -34245,6 +34245,13 @@ footer span {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.cho-container button{
+  width: 100%;
+  --tw-bg-opacity: 1;
+  background-color: rgba(239, 68, 68, var(--tw-bg-opacity));
+  font-weight: 700;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;

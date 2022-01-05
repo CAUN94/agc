@@ -9,9 +9,8 @@
                         @if(Auth::user()->student->isSettled())
                             Plan activado
                         @else
-                            <a href='https://padpow.com/customer/professionals/3165/payments/new' target='_blank'>
-                                Pagar plan valor: {{Auth::user()->student->training->price()}}
-                            </a>
+                            <x-pay studentId="{{Auth::user()->student->id}}" price="{{Auth::user()->student->training->price}}" planName="{{Auth::user()->student->training->plan()}}"></x-pay>
+
                         @endif
                       </div>
                 </div>
@@ -210,14 +209,12 @@
                                 <x-landing.submit-modal
                                       method="PUT"
                                       action="/students/{{Auth::user()->student->id}}"
-                                      :id="Auth::user()->student->id"
+                                      :id="Auth::user()->student->training_id"
                                       >
                                       <x-slot name="title">
                                         <span>Renovar plan {{Auth::user()->student->training->plan()}}</span>
                                       </x-slot>
-
                                       Estas seguro de querer renovar?
-
                                       <x-slot name="important">
                                         El plan partira a fin de mes.
                                       </x-slot>
