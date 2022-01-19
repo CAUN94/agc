@@ -236,3 +236,7 @@ footer span {
 .cho-container button{
 	@apply bg-red-500 font-bold w-full;
 }
+
+.avatar {
+	@apply inline object-cover rounded-full;
+}

@@ -13,7 +13,7 @@
               </p>
             </div>
             <div class="bg-white shadow overflow-hidden sm:rounded-lg p-1">
-                <img src="/img/icon.png" class="object-contain h-12 w-full">
+                <img src="{{$user->profilePic()}}" class="avatar h-12 w-12">
             </div>
           </div>
           <div class="border-t border-gray-200">
@@ -146,11 +146,11 @@
                 </p>
               </div>
               <div class="bg-white shadow overflow-hidden sm:rounded-lg p-1">
-                  <img src="/img/icon.png" class="object-contain h-12 w-full">
+                  <img src="{{$user->profilePic()}}" class="avatar h-12 w-12">
               </div>
             </div>
             <div class="border-t border-gray-200">
-              <div class="bg-white text-sm px-4 py-5 sm:grid sm:grid-cols-1 sm:gap-4 sm:px-6">
+              <div class="bg-white text-sm px-4 py-5 sm:grid sm:grid-cols-1 sm:gap-4 sm:px-6 overflow-y-scroll">
                 @if(count(Auth::user()->notSettledPlan)>0)
                 <x-pay></x-pay>
                 @endif

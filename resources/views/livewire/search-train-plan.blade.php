@@ -82,10 +82,18 @@
         @if($trainShow)
         {{$selectedTraining->plan()}}
         @else
-          Selecciona un plan.
-          <p class="mt-1 max-w-2xl text-sm text-gray-500">
-            y su cantidad de clases
-          </p>
+          <div class="flex justify-between">
+            <div>Selecciona un plan.
+              <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                y su cantidad de clases
+              </p>
+            </div>
+            <div>
+              @if (Auth::user()->isStudent())
+                <a href="/students" class="text-primary-500 text-sm">Ir a Clases de Entrenamiento</a>
+              @endif
+            </div>
+          </div>
         @endif
       </h3>
 
@@ -174,6 +182,20 @@
                   <x-slot name="important">
                     El cambio de plan quedaria para el proximo periodo de pago.
                   </x-slot>
+                  <x-slot name="options">
+                    <x-label for="months" :value="__('Por cuantos meses quiere inscribir el plan?')" />
+                    <div class="relative">
+                        <select name="months" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                            @for ($i = 1; $i <= 12; $i++)
+                                @if($i == 1)
+                                    <option value={{$i}}>{{$i}} mes</option>
+                                    @continue
+                                @endif
+                                <option value={{$i}}>{{$i}} meses</option>
+                            @endfor
+                        </select>
+                    </div>
+                  </x-slot>
                   <x-slot name="button">
                     Confirmar
                   </x-slot>
@@ -198,11 +220,25 @@
                       min="{{ \Carbon\Carbon::Now()->format('Y-m-d'); }}"
                       max="{{ \Carbon\Carbon::Now()->addDays(30)->format('Y-m-d'); }}"
                       required />
+                    <x-label for="months" :value="__('Por cuantos meses quiere inscribir su plan?')" />
+                    <div class="relative">
+                        <select name="months" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="months">
+                            @for ($i = 1; $i <= 12; $i++)
+                                @if($i == 1)
+                                    <option value={{$i}}>{{$i}} mes</option>
+                                    @continue
+                                @endif
+                                <option value={{$i}}>{{$i}} meses</option>
+                            @endfor
+                        </select>
+                    </div>
+
                   </x-slot>
                   Recibiras un mail con la información para activar tu plan al realizar el pago.
                   <x-slot name="important">
                     Información Importante
                   </x-slot>
+
                   <x-slot name="button">
                     Inscribir Plan
                   </x-slot>

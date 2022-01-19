@@ -21,7 +21,7 @@
         <div class="ml-3 relative" x-data="{ usernav: false }">
           <div>
             <button @click.away="usernav = false" @click="usernav = !usernav" type="button" class="flex text-sm rounded-full" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-              <img class="h-10 w-10 rounded-full" src="{{Auth::user()->profilePic()}}" alt="">
+              <img class="avatar h-10 w-10" src="{{Auth::user()->profilePic()}}" alt="">
             </button>
           </div>
             <ul x-show="usernav" class="drop-nav" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" x-cloak>

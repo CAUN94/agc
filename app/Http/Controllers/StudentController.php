@@ -37,7 +37,6 @@ class StudentController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(Request $request) {
-
 		$request->merge(['user_id' => Auth::id()]);
 		$attributes = $request->validate([
 			'training_id' => ['required', 'exists:trainings,id'],
@@ -45,6 +44,7 @@ class StudentController extends Controller {
 			'start_day' => ['required', 'date', 'after:yesterday', 'before:' . \Carbon\Carbon::Now()->addMonth()->endOfMonth()],
 		]);
 		$student = Student::create($attributes);
+		$student->newPlan($request, $request->months - 1);
 		FlashSession::flash('primary', 'Registrado');
 		return redirect('/users');
 	}
@@ -83,11 +83,7 @@ class StudentController extends Controller {
 			'training_id' => ['required', 'exists:trainings,id'],
 			'user_id' => ['required', 'exists:users,id'],
 		]);
-		$new_student = new Student;
-		$new_student->user_id = Auth::id();
-		$new_student->training_id = $request->training_id;
-		$new_student->start_day = $student->endMonth();
-		$new_student->save();
+		$student->newPlan($request, $request->months);
 		FlashSession::flash('primary', 'Nuevo Plan registrado');
 		return redirect('/users');
 	}

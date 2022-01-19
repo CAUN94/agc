@@ -10,6 +10,7 @@ use Freshwork\ChileanBundle\Rut;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable {
@@ -75,7 +76,8 @@ class User extends Authenticatable {
 		if (is_null($this->profile)) {
 			return "/img/icon.png";
 		}
-		return $this->profile;
+
+		return Storage::url($this->profile);
 	}
 
 	public function fullName() {

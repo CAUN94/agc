@@ -27,7 +27,6 @@
         <!-- Scripts -->
 
 </head>
-
 <body class="flex h-auto bg-gray-100 font-sans">
   <div class="md:flex flex-col md:flex-row md:min-h-screen w-full">
     <div class="flex flex-col w-full md:w-2/12 text-gray-700 bg-primary-500 flex-shrink-0">
@@ -66,8 +65,9 @@
       </div>
     </div>
   </div>
+
   <script src="{{ asset('/vendor/ckeditor/ckeditor.js') }}"></script>
-   @livewireScripts
+  @livewireScripts
 </body>
 
 </html>
