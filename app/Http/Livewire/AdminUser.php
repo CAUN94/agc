@@ -82,6 +82,8 @@ class AdminUser extends Component {
 		$user->save();
 		$this->view = '';
 		session()->flash('primary', 'Usuario Actualizado.');
+
+		return redirect()->to('/adminusers/' . $this->userid);
 	}
 
 }

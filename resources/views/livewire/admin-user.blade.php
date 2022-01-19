@@ -1,5 +1,4 @@
 <div class="m-4">
-  <x-flash-message></x-flash-message>
   <div>
     <div class="md:grid md:grid-cols-4 md:gap-6">
       <div class="md:col-span-1">
@@ -80,4 +79,5 @@
       </div>
     </div>
   </div>
+  <x-flash-message></x-flash-message>
 </div>
