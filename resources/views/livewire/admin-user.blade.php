@@ -46,7 +46,7 @@
                       Descripción
                     </label>
                     <div class="mt-1">
-                      <textarea id="description" name="description" rows="3" class="shadow-sm focus:ring-primary-500 focus:border-primary-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="Descripción" :readonly="$view" >{{$description}}</textarea>
+                      <textarea id="description" name="description" rows="3" class="shadow-sm focus:ring-primary-500 focus:border-primary-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="Descripción" {{ ($view != "edit") ? 'readonly' : '' }}>{{$description}}</textarea>
                     </div>
                     <p class="mt-2 text-sm text-gray-500">
                       Breve descripción
