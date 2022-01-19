@@ -75,16 +75,15 @@ class AdminUser extends Component {
 		$user->phone = $this->phone;
 		$user->birthday = $this->birthday;
 		$user->address = $this->address;
-		if ($this->new_profile) {
+		if ($this->new_profile != Null) {
 			$path = $this->new_profile->store('public/profiles');
-			if ($this->profile != null) {
+			if ($this->profile != Null) {
 				Storage::delete($this->profile);
 			}
 			$user->profile = $path;
 		}
 		$user->description = $this->description;
 		$user->save();
-
 		$this->view = '';
 		session()->flash('primary', 'Usuario Actualizado.');
 	}
