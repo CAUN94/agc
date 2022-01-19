@@ -76,7 +76,7 @@ class AdminUser extends Component {
 		$user->birthday = $this->birthday;
 		$user->address = $this->address;
 		if ($this->new_profile != Null) {
-			$path = $this->new_profile->store('public/profiles');
+			$path = $this->new_profile->store('profiles', 's3');
 			if ($this->profile != Null) {
 				Storage::delete($this->profile);
 			}
