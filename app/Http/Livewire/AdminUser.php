@@ -3,7 +3,6 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -77,9 +76,6 @@ class AdminUser extends Component {
 		$user->address = $this->address;
 		if ($this->new_profile != Null) {
 			$path = $this->new_profile->storePublicly('public/profiles');
-			if ($this->profile != Null) {
-				Storage::delete($this->profile);
-			}
 			$user->profile = $path;
 		}
 		$user->description = $this->description;
