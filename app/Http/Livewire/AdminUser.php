@@ -83,6 +83,7 @@ class AdminUser extends Component {
 			$user->profile = $path;
 		}
 		$user->description = $this->description;
+		ddd($user);
 		$user->save();
 
 		$this->view = '';
