@@ -88,7 +88,7 @@ class UsersController extends Controller {
 		$user->rut = $attributes['rut'];
 		$user->phone = $attributes['phone'];
 		$user->birthday = $attributes['birthday'];
-		if ($attributes['profile'] != Null) {
+		if ($request->profile != Null) {
 			$path = $attributes['profile']->storePublicly('public/profiles');
 			$user->profile = $path;
 		}

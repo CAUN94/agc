@@ -28,6 +28,9 @@ Route::resource('adminclass', 'App\Http\Controllers\AdminTrainingController');
 Route::resource('adminprofessionals', 'App\Http\Controllers\AdminProfessionalsController');
 Route::resource('admintrainers', 'App\Http\Controllers\AdminTrainersController');
 
+Route::get('change-password', 'App\Http\Controllers\ChangePasswordController@index');
+Route::post('change-password', 'App\Http\Controllers\ChangePasswordController@store')->name('change.password');
+
 Route::get('pay/{user}/{status}', 'App\Http\Controllers\PayController@payStatus');
 
 require __DIR__ . '/auth.php';
