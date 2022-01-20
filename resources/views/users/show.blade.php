@@ -126,11 +126,11 @@
                 </dd>
               </div>
             </dl>
-            {{-- <div class="px-4 py-3 bg-white border-t border-gray-200 text-right sm:px-6">
+            <div class="px-4 py-3 bg-white border-t border-gray-200 text-right sm:px-6">
               <a href="users/{{$user->id}}/edit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-500 hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-900">
                 Editar
               </a>
-            </div> --}}
+            </div>
           </div>
         </div>
 

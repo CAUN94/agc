@@ -16,14 +16,22 @@
                   <h1 class="text-primary-500">Modificar Usuario</h1>
               @endif
               <div class="grid grid-cols-6 gap-6">
-                  <x-admin.input class="col-span-6 sm:col-span-3" type="text" name="name" wire:model="name" value="{{$name}}" :readonly="$view" >Nombre</x-admin.input>
+                  <x-admin.input class="col-span-6 sm:col-span-3" type="text" name="name" value="{{$name}}" :readonly="$view" >Nombre</x-admin.input>
                   <x-admin.input class="col-span-6 sm:col-span-3" type="text" name="lastnames" value="{{$lastnames}}" :readonly="$view" >Apellidos</x-admin.input>
                   <x-admin.input class="col-span-6 sm:col-span-3" type="text" name="rut" value="{{$rut}}" :readonly="$view" >Rut</x-admin.input>
                   <x-admin.input class="col-span-6 sm:col-span-3" type="email" name="email" value="{{$email}}" :readonly="$view" >Mail</x-admin.input>
 
-                  <x-admin.input class="col-span-6 sm:col-span-2" type="text" name="phone" value="{{$phone}}" :readonly="$view" >Celular</x-admin.input>
+                  <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="phone" value="{{$phone}}" :readonly="$view" >Celular</x-admin.input>
                   <x-admin.input class="col-span-6 sm:col-span-2" type="date" name="birthday" value="{{$birthday}}" :readonly="$view" >Fecha de Nacimiento</x-admin.input>
-                  <x-admin.input class="col-span-6 sm:col-span-2" type="text" name="gender" value="{{$gender}}" :readonly="$view" >Genero</x-admin.input>
+                  {{-- <x-admin.input class="col-span-6 sm:col-span-2" type="text" name="gender" value="{{$gender}}" :readonly="$view" >Genero</x-admin.input> --}}
+                  <x-admin.input-select class="col-span-6 sm:col-span-2" name="gender" :readonly="$view">
+                    Genero
+                    <x-slot name="options">
+                        <x-admin.input-option value="m" actual="{{$gender}}">Masculino</x-admin.input-option>
+                        <x-admin.input-option value="f" actual="{{$gender}}">Femenino</x-admin.input-option>
+                        <x-admin.input-option value="n" actual="{{$gender}}">No Especifica</x-admin.input-option>
+                    </x-slot>
+                  </x-admin.input-select>
 
                   <x-admin.input class="col-span-6" type="text" name="address" value="{{$address}}" :readonly="$view" >Dirección</x-admin.input>
 
@@ -46,7 +54,7 @@
                       Descripción
                     </label>
                     <div class="mt-1">
-                      <textarea id="description" name="description" rows="3" class="shadow-sm focus:ring-primary-500 focus:border-primary-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="Descripción" {{ ($view != "edit") ? 'readonly' : '' }}>{{$description}}</textarea>
+                      <textarea id="description" name="description" rows="3" class="shadow-sm focus:ring-primary-500 focus:border-primary-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="Descripción" {{ ($view != "edit") ? 'disabled' : '' }} wire:model="description">{{$description}}</textarea>
                     </div>
                     <p class="mt-2 text-sm text-gray-500">
                       Breve descripción
