@@ -44,7 +44,7 @@
       },
       render: {
             container: '.cho-container', // Indica el nombre de la clase donde se mostrará el botón de pago
-            label: 'Pagos Pendientes', // Cambia el texto del botón de pago (opcional)
+            label: '{{$slot}}', // Cambia el texto del botón de pago (opcional)
       },
 });
 </script>

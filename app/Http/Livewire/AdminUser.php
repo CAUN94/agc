@@ -60,7 +60,7 @@ class AdminUser extends Component {
 			// 'rut' => ['required', 'string', 'unique:users'],
 			// 'rut' => ['required', 'string', 'cl_rut'],
 			'phone' => ['required', 'string', 'max:255'],
-			'birthday' => ['required', 'date'],
+			'birthday' => ['required', 'date', 'before:tomorrow', 'after:1900-01-91'],
 			// 'profile' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 			// 'description' => ['string'],
 		]);

@@ -89,8 +89,10 @@
               </p>
             </div>
             <div>
-              @if (Auth::user()->isStudent())
-                <a href="/students" class="text-primary-500 text-sm">Ir a Clases de Entrenamiento</a>
+              @if(Auth::check())
+                @if (Auth::user()->isStudent())
+                  <a href="/students" class="text-primary-500 text-sm">Ver Clases y Horarios</a>
+                @endif
               @endif
             </div>
           </div>
@@ -159,7 +161,7 @@
               <dd class="text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                   @if(Auth::user()->isStudent())
                     @if(Auth::user()->Training->id == $selectedTraining->id)
-                      <a href="/students" class="text-primary-500">Ir a Clases de Entrenamiento</a>
+                      <a href="/students" class="text-primary-500">Ver Clases y Horarios</a>
                     @else
                       <button class="text-white text-lg w-full bg-primary-500 hover:bg-primary-900 text-center text-sm text-gray-900 sm:mt-0 sm:col-span-2 py-2 cursor-pointer" x-on:click="openModal = ! openModal">Cambiarme a Este Plan</button>
                     @endif

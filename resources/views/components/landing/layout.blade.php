@@ -34,13 +34,13 @@
                     class="w-full flex-grow lg:flex"
                     :class="{ 'flex-grow shadow-3xl': navOpen, 'hidden': !navOpen }"
                 >
-                  <a class="{{ Request::is('/') ? 'selected' : '' }}" href="/">Inicio</a>
+                  <a class="nav-menu-link {{ Request::is('/') ? 'selected' : '' }}" href="/">Inicio</a>
                   {{-- <a :class="{ 'block shadow-3xl': navOpen, 'hidden': !navOpen }" href="#">Blog</a> --}}
                   <x-landing.team-nav></x-landing.team-nav>
-                  <a class="{{ Request::is('book') ? 'selected' : '' }}"
-                  href="https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento">Reserva Hora</a>
-                  <a class="{{ Request::is('trainings') ? 'selected' : '' }}" href="/trainings">Entrenamiento</a>
-                  <a class="cursor-not-allowed {{ Request::is('school') ? 'selected' : '' }}" href="#">Cursos</a>
+                  <a class="nav-menu-link {{ Request::is('book') ? 'selected' : '' }}"
+                  href="https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento">Clínica</a>
+                  <a class="nav-menu-link {{ Request::is('trainings') ? 'selected' : '' }}" href="/trainings">Entrenamiento</a>
+                  <a class="nav-menu-link cursor-not-allowed {{ Request::is('school') ? 'selected' : '' }}" href="#">Cursos</a>
                   <x-landing.auth-dropdown></x-landing.auth-dropdown>
                   <x-landing.guest-dropdown></x-landing.guest-dropdown>
                 </nav>

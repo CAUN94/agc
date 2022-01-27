@@ -14,19 +14,6 @@
                         @endif
                       </div>
                 </div>
-                <div class="pt-2">
-                    Clases:
-                    @forelse(Auth::user()->TrainBooks as $trainbook)
-                        <div class="flex space-justify-between">
-                        <span class="text-sm text-primary-500  flex-grow">{{$trainbook->TrainAppointment->name}} {{$trainbook->TrainAppointment->date()}} {{$trainbook->TrainAppointment->hour}}</span>
-                        <span class="text-sm text hover:text-primary-900 cursor-pointer">
-                            <i wire:click="unbook({{$trainbook->id}})" class="far fa-times-circle"></i>
-                        </span>
-                        </div>
-                    @empty
-                        <span class="text-xs">No hay clases reservadas</span>
-                    @endforelse
-                </div>
                 @if(!is_null($train))
                 <div x-show="$wire.classShow" x-cloak>
                     <dl>
@@ -89,15 +76,33 @@
                         </dd>
                       </div>
                     </dl>
-                    @if(!$train->isComplete())
-                        <span class="text-lg  font-medium text-primary-500 hover:text-primary-900 cursor-pointer" wire:click="book">Reservar Clase</span>
-                    @else
-                        <span class="text-lg  font-medium text-red-500">Clase Llena</span>
-                    @endif
+                    <div class="w-full flex py-2">
+                        @if(!$train->isComplete())
+                            <span class="bg-primary-500 py-1 px-2 hover:bg-primary-900 cursor-pointer w-full text-center" wire:click="book">Reservar Clase</span>
+                        @else
+                            <span class="text-lg  font-medium text-red-500">Clase Llena</span>
+                        @endif
+                    </div>
+
                 </div>
                 @endif
+                <div class="pt-2">
+                    Clases:
+                    @forelse(Auth::user()->TrainBooks as $trainbook)
+                        <div class="flex space-justify-between">
+                        <span class="text-sm text-primary-500  flex-grow">{{$trainbook->TrainAppointment->name}} {{$trainbook->TrainAppointment->date()}} {{$trainbook->TrainAppointment->hour}}</span>
+                        <span class="text-sm text hover:text-primary-900 cursor-pointer">
+                            <i wire:click="unbook({{$trainbook->id}})" class="far fa-times-circle"></i>
+                        </span>
+                        </div>
+                    @empty
+                        <span class="text-xs">No hay clases reservadas</span>
+                    @endforelse
+                </div>
             </div>
+
         </div>
+
     </div>
     <div class="w-full flex flex-col overflow-x-auto gap-1">
       <div class="align-middle inline-block min-w-full">

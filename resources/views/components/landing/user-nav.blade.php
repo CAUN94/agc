@@ -26,20 +26,25 @@
           </div>
             <ul x-show="usernav" class="drop-nav" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" x-cloak>
               <li>
-                <a href="#" class="drop-link block text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">
-                  <span class="drop-span">Your Profile</span>
+                <a href="/adminusers/{{Auth::user()->id}}" class="drop-link block text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">
+                  <span class="drop-span">Perfil</span>
                 </a>
               </li>
               <li>
-                <a href="#" class="drop-link block text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">
-                  <span class="drop-span">Settings</span>
+                <a href="/" class="drop-link block text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">
+                  <span class="drop-span">Inicio</span>
                 </a>
               </li>
+              <form method="POST" action="{{ route('logout') }}">
+              @csrf
               <li>
-                <a href="#" class="drop-link block text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">
-                  <span class="drop-span">Sign out</span>
-                </a>
+                  <a href="/logout" class="drop-link"
+                      onclick="event.preventDefault();
+                      this.closest('form').submit();">
+                      <span class="drop-span">Cerrar Sesión</span>
+                  </a>
               </li>
+              </form>
             </ul>
         </div>
       </div>

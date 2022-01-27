@@ -83,7 +83,7 @@
                 </dd>
               </div>
               @if ($user->isStudent())
-              <div class="bg-white border-t border-gray-200 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <div class="{{ $user->student->isSettled() ? "bg-white" : "bg-red-100" }} border-t border-gray-200 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">
                   Plan de Entrenamiento Actual
                   <div class="text-xs {{ $user->student->isSettled() ? "text-green-500" : "text-red-500" }}">
@@ -113,7 +113,7 @@
                       </span>
                     </div>
                   </div>
-                  <a href="/students" class="text-primary-500">Ir a Clases de Entrenamiento</a>
+                  <a href="/students" class="text-primary-500">Ver Clases y Horarios</a>
                 </dd>
               </div>
               @endif
@@ -142,7 +142,7 @@
                   Historial Planes de Entrenamiento
                 </h3>
                 <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                  <a href="/students" class="text-gray-500 underline">Ir a Clases de Entrenamiento</a>
+                  <a href="/students" class="text-gray-500 underline">Ver Clases y Horarios</a>
                 </p>
               </div>
               <div class="bg-white shadow overflow-hidden sm:rounded-lg p-1">
@@ -152,9 +152,9 @@
             <div class="border-t border-gray-200">
               <div class="bg-white text-sm px-4 py-5 sm:grid sm:grid-cols-1 sm:gap-4 sm:px-6 overflow-y-scroll">
                 @if(count(Auth::user()->notSettledPlan)>0)
-                <x-pay></x-pay>
+                <x-pay>Pagar Plan</x-pay>
                 @endif
-                @forelse(Auth::user()->allStudentPlan()->with('Training')->get() as $plan)
+                @forelse(Auth::user()->allStudentPlan()->with('Training')->paginate(8) as $plan)
                   <div class="flex justify-between items-center">
                     <div class="flex flex-col">
                       <a href="/students"> {{$plan->Training->plan()}}</a>
@@ -171,10 +171,10 @@
                       <span class="text-red-500">No Pagado {{$plan->Training->price()}}</span>
                     @endif
                   </div>
-
                 @empty
                   <a href="/trainings" class="text-primary-500">Ver Planes de Entrenamiento</a>
                 @endforelse
+                {{Auth::user()->allStudentPlan()->with('Training')->paginate(8)->links()}}
               </div>
             </div>
         </div>

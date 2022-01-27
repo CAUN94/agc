@@ -5,57 +5,51 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
-use Freshwork\ChileanBundle\Rut;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Session as FlashSession;
 
-class RegisteredUserController extends Controller
-{
-    /**
-     * Display the registration view.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
-    {
-        return view('auth.register');
-    }
+class RegisteredUserController extends Controller {
+	/**
+	 * Display the registration view.
+	 *
+	 * @return \Illuminate\View\View
+	 */
+	public function create() {
+		return view('auth.register');
+	}
 
-    /**
-     * Handle an incoming registration request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function store(Request $request)
-    {
-        $attributes = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'lastnames' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
-            'gender' => ['required', 'string', 'min:1' , 'max:1', 'in:m,f,n'],
-            // 'rut' => ['required', 'string', 'unique:users'],
-            'rut' => ['required', 'string', 'cl_rut', 'unique:users'],
-            'phone' => ['required', 'string', 'max:255'],
-            'birthday' => ['required', 'date'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+	/**
+	 * Handle an incoming registration request.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\RedirectResponse
+	 *
+	 * @throws \Illuminate\Validation\ValidationException
+	 */
+	public function store(Request $request) {
+		$attributes = $request->validate([
+			'name' => ['required', 'string', 'max:255'],
+			'lastnames' => ['required', 'string', 'max:255'],
+			'email' => ['required', 'string', 'email', 'max:255'],
+			'gender' => ['required', 'string', 'min:1', 'max:1', 'in:m,f,n'],
+			// 'rut' => ['required', 'string', 'unique:users'],
+			'rut' => ['required', 'string', 'cl_rut', 'unique:users'],
+			'phone' => ['required', 'string', 'max:255'],
+			'birthday' => ['required', 'date', 'before:tomorrow', 'after:1900-01-91'],
+			'password' => ['required', 'confirmed', Rules\Password::defaults()],
+		]);
 
-        $user = User::create($attributes);
+		$user = User::create($attributes);
 
-        event(new Registered($user));
+		event(new Registered($user));
 
-        Auth::login($user);
+		Auth::login($user);
 
-        FlashSession::flash('primary','Hola '.Auth::user()->name);
+		FlashSession::flash('primary', 'Hola ' . Auth::user()->name);
 
-        return redirect(RouteServiceProvider::HOME);
-    }
+		return redirect(RouteServiceProvider::HOME);
+	}
 }

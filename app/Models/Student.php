@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Training;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,10 @@ class Student extends Model {
 	use HasFactory;
 
 	protected $guarded = [];
+
+	public function User() {
+		return $this->belongsTo(User::class);
+	}
 
 	public function Training() {
 		return $this->belongsTo(Training::class);

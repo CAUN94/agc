@@ -1,4 +1,4 @@
-<div class="relative " x-data="{ dropdownTeam: false}" disabled x-cloack>
+<div class="relative nav-menu-link" x-data="{ dropdownTeam: false}" disabled x-cloack>
                         <a
                             class="cursor-not-allowed {{ Request::is('team') ? 'selected' : '' }}"
                             {{-- @click="dropdownTeam = !dropdownTeam" --}}

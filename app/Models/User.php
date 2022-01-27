@@ -124,7 +124,7 @@ class User extends Authenticatable {
 	}
 
 	public function allStudentPlan() {
-		return $this->hasMany(Student::class)->orderby('start_day', 'desc');
+		return $this->hasMany(Student::class)->orderby('start_day', 'asc');
 	}
 
 	public function notSettledPlan() {

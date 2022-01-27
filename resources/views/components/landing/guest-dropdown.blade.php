@@ -1,6 +1,6 @@
 @guest()
-<div class="relative" x-data="{ dropdownUser: false}" x-cloack>
-    <a class="cursor-pointer {{ Request::is('login') ? 'selected' : '' }} {{ Request::is('register') ? 'selected' : '' }}"
+<div class="relative nav-menu-link" x-data="{ dropdownUser: false}" x-cloack>
+    <a class="cursor-pointer text-primary-500 hover:text-white"
         @click="dropdownUser = !dropdownUser"
         @keydown.escape="dropdownUser = false"
     >
