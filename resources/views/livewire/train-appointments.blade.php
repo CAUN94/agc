@@ -78,7 +78,7 @@
                     </dl>
                     <div class="w-full flex py-2">
                         @if(!$train->isComplete())
-                            <span class="bg-primary-500 py-1 px-2 hover:bg-primary-900 cursor-pointer w-full text-center" wire:click="book">Reservar Clase</span>
+                            <button class="bg-primary-500 py-1 px-2 hover:bg-primary-900 cursor-pointer w-full text-center" wire:click="book">Reservar Clase</button>
                         @else
                             <span class="text-lg  font-medium text-red-500">Clase Llena</span>
                         @endif
