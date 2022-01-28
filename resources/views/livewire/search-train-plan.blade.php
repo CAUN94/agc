@@ -107,7 +107,7 @@
             </dt>
             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
               @foreach($coachs as $coach)
-                <li class="list-none">{{$coach}}</li>
+                <li class="list-none">{{$coach->user->fullName()}}</li>
               @endforeach
             </dd>
           </div>
