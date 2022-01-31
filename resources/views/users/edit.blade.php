@@ -105,7 +105,7 @@
                   Cambiar Clave
                 </a>
                 <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-500 hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-900">
-                  Editar
+                  Hacer Cambios
                 </button>
               </div>
             </div>
