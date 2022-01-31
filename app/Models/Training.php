@@ -29,7 +29,7 @@ class Training extends Model {
 	}
 
 	public function isMonthly() {
-		if ($this->period = 'monthly') {
+		if ($this->period == 'monthly') {
 			return true;
 		}
 		return false;
