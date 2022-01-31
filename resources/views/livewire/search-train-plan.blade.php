@@ -24,7 +24,7 @@
                   Duración</span>
                 </th>
                 <th scope="col" class="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Clases</span>
+                  Formato</span>
                 </th>
               </tr>
           </thead>
@@ -85,7 +85,7 @@
           <div class="flex justify-between">
             <div>Selecciona un plan.
               <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                y su cantidad de clases
+                y su formato
               </p>
             </div>
             <div>
@@ -115,7 +115,7 @@
         <dl>
           <div class="pl-1 py-2 sm:py-5 grid grid-cols-3">
             <dt class="text-sm font-medium text-gray-500">
-              Clases
+              Formato
             </dt>
             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
               <span class="block">{{$selectedTraining->planClassComplete()}}</span>
@@ -184,6 +184,8 @@
                   <x-slot name="important">
                     El cambio de plan quedaria para el proximo periodo de pago.
                   </x-slot>
+
+                  @if(!$selectedTraining->isMonthly())
                   <x-slot name="options">
                     <x-label for="months" :value="__('Por cuantos meses quiere inscribir el plan?')" />
                     <div class="relative">
@@ -198,6 +200,8 @@
                         </select>
                     </div>
                   </x-slot>
+                  @endif
+
                   <x-slot name="button">
                     Confirmar
                   </x-slot>
@@ -214,7 +218,8 @@
                     <x-slot name="title">
                       <span>¿Inscribirme al Plan {{$selectedTraining->plan()}}?</span>
                     </x-slot>
-                    <x-label for="start_day" :value="__('Elige la fecha de inicio de tu plan de 30 días')" />
+                    @php $message = "Elige la fecha de inicio de tu plan de ".$selectedTraining->days." días" @endphp
+                    <x-label for="start_day" :value="$message" />
                     <x-input id="start_day" class="block mt-1 w-full"
                       type="date"
                       name="start_day"
@@ -222,6 +227,7 @@
                       min="{{ \Carbon\Carbon::Now()->format('Y-m-d'); }}"
                       max="{{ \Carbon\Carbon::Now()->addDays(30)->format('Y-m-d'); }}"
                       required />
+                    @if(!$selectedTraining->isMonthly())
                     <x-label for="months" :value="__('Por cuantos meses quiere inscribir su plan?')" />
                     <div class="relative">
                         <select name="months" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="months">
@@ -234,6 +240,9 @@
                             @endfor
                         </select>
                     </div>
+                    @else
+
+                    @endif
 
                   </x-slot>
                   Recibiras un mail con la información para activar tu plan al realizar el pago.

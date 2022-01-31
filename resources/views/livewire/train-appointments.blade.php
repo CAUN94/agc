@@ -117,7 +117,7 @@
                                     <span class="ml-1 text-lg text-gray-600 font-normal">{{$now->format('Y')}}</span>
 
                                 </div>
-                                <span class="ml-1 text-lg text-gray-600 font-normal">Puedes reservar {{auth()->user()->training->class}} clases al mes</span>
+                                {{-- <span class="ml-1 text-lg text-gray-600 font-normal">Puedes reservar {{auth()->user()->training->class}} clases al mes</span> --}}
                                 <div class="border rounded-lg px-1" style="padding-top: 2px;">
                                     <button
                                         type="button"
@@ -223,22 +223,24 @@
                                       <x-slot name="important">
                                         El plan partira a fin de mes.
                                       </x-slot>
+                                      @if(!Auth::user()->student->training->isMonthly())
                                       <x-slot name="options">
-                                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-                                            Por cuantos meses quiere renovar su plan?
-                                        </label>
-                                        <div class="relative">
-                                            <select name="months" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-                                                @for ($i = 1; $i <= 12; $i++)
-                                                    @if($i == 1)
-                                                        <option value={{$i}}>{{$i}} mes</option>
-                                                        @continue
-                                                    @endif
-                                                    <option value={{$i}}>{{$i}} meses</option>
-                                                @endfor
-                                            </select>
-                                        </div>
+                                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                                                Por cuantos meses quiere renovar su plan?
+                                            </label>
+                                            <div class="relative">
+                                                <select name="months" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                                                    @for ($i = 1; $i <= 12; $i++)
+                                                        @if($i == 1)
+                                                            <option value={{$i}}>{{$i}} mes</option>
+                                                            @continue
+                                                        @endif
+                                                        <option value={{$i}}>{{$i}} meses</option>
+                                                    @endfor
+                                                </select>
+                                            </div>
                                       </x-slot>
+                                      @endif
                                       <x-slot name="button">
                                         Confirmar
                                       </x-slot>

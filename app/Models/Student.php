@@ -60,7 +60,7 @@ class Student extends Model {
 	}
 
 	public function islastday($date) {
-		$end_day = \Carbon\Carbon::parse($this->start_day)->addDays(30);
+		$end_day = \Carbon\Carbon::parse($this->start_day)->addDays($this->training->days);
 		if ($end_day->dayOfWeek == 0) {
 			$end_day->addDays(1);
 		}
@@ -71,7 +71,7 @@ class Student extends Model {
 		$actual = $this;
 		while ($actual->nextPlan()) {
 			$actual = $actual->nextPlan();
-			$end_day = \Carbon\Carbon::parse($actual->start_day)->addDays(30);
+			$end_day = \Carbon\Carbon::parse($actual->start_day)->addDays($this->training->days);
 			if ($end_day->dayOfWeek == 0) {
 				$end_day->addDays(1);
 			}
@@ -86,7 +86,11 @@ class Student extends Model {
 
 	public function endMonth() {
 		$endMonth = \Carbon\Carbon::parse($this->start_day);
-		return $endMonth->addDays(30);
+		// if ($this->Training->isMonthly()) {
+		// 	return $endMonth->addDays($this->training->days * $this->Training->class);
+		// }
+		return $endMonth->addDays($this->training->days);
+
 	}
 
 	public function start_day() {
@@ -108,7 +112,7 @@ class Student extends Model {
 		}
 		$days = 5;
 		if ($this->isSettled()) {
-			$days += 30;
+			$days += $this->training->days;
 		}
 		if ($start_day->diffInDays($date, false) > $days) {
 			$status = false;
@@ -117,7 +121,7 @@ class Student extends Model {
 	}
 
 	public function diffdaysPlan() {
-		$days = \Carbon\Carbon::parse($this->start_day)->addDays(30)->diffInDays();
+		$days = \Carbon\Carbon::parse($this->start_day)->addDays($this->training->days)->diffInDays();
 
 		if ($days == 1) {
 			return $days . " día";
@@ -165,6 +169,7 @@ class Student extends Model {
 	}
 
 	public function newPlan($request, $it = 1) {
+		$it = is_null($it) ? 1 : $it;
 		for ($i = 0; $i < $it; $i++) {
 			$new_student = new Student;
 			$new_student->user_id = $this->user_id;
@@ -172,5 +177,6 @@ class Student extends Model {
 			$new_student->start_day = $this->lastPlan()->endMonth();
 			$new_student->save();
 		}
+		return;
 	}
 }

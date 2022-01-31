@@ -98,11 +98,11 @@ class DatabaseSeeder extends Seeder {
 		);
 
 		Trainer::create([
-			'user_id' => 2,
+			'user_id' => 3,
 		]);
 
 		Trainer::create([
-			'user_id' => 3,
+			'user_id' => 4,
 		]);
 
 		Admin::create([
@@ -111,23 +111,40 @@ class DatabaseSeeder extends Seeder {
 
 		DB::table('trainings')->insert([
 			'name' => 'Entrenamiento Grupal',
-			'class' => 4,
+			'class' => 1,
 			'time_in_minutes' => 60,
 			'type' => 'group',
+			'days' => 30,
+			'period' => 'monthly',
 			'format' => 'Presencial',
-			'price' => 30000,
+			'price' => 49990,
 			'description' => 'Este plan consiste en clases con un mínimo de 4 personas, donde todas deben tener el mismo objetivo.
 Las clases serán de manera presencial en las dependencias de You just better.',
 		]);
 
 		DB::table('trainings')->insert([
 			'name' => 'Entrenamiento Grupal',
-			'class' => 8,
+			'class' => 3,
 			'time_in_minutes' => 60,
 			'type' => 'group',
+			'days' => 30,
+			'period' => 'monthly',
 			'format' => 'Presencial',
-			'price' => 30000,
+			'price' => 134990,
 			'description' => 'Este plan consiste en clases con un mínimo de 4 personas, donde todas deben tener el mismo objetivo. Las clases serán de manera presencial en las dependencias de You just better.',
+		]);
+
+		DB::table('trainings')->insert([
+			'name' => 'Entrenamiento Grupal',
+			'class' => 6,
+			'time_in_minutes' => 60,
+			'type' => 'group',
+			'days' => 30,
+			'period' => 'monthly',
+			'format' => 'Presencial',
+			'price' => 239990,
+			'description' => 'Este plan consiste en clases con un mínimo de 4 personas,
+                donde todas deben tener el mismo objetivo. Las clases serán de manera presencial en las dependencias de You jur.',
 		]);
 
 		DB::table('trainings')->insert([
@@ -135,8 +152,10 @@ Las clases serán de manera presencial en las dependencias de You just better.',
 			'class' => 12,
 			'time_in_minutes' => 60,
 			'type' => 'group',
+			'days' => 30,
+			'period' => 'monthly',
 			'format' => 'Presencial',
-			'price' => 30000,
+			'price' => 419990,
 			'description' => 'Este plan consiste en clases con un mínimo de 4 personas,
                 donde todas deben tener el mismo objetivo. Las clases serán de manera presencial en las dependencias de You jur.',
 		]);
@@ -310,10 +329,10 @@ Las clases serán de manera presencial en las dependencias de You just better.',
 
 		}
 
-		for ($week = 0; $week < 20; $week++) {
+		for ($week = 0; $week < 30; $week++) {
 
 			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2022-01-10')->addweeks($week),
+				'date' => \Carbon\Carbon::parse('2022-01-01')->addweeks($week),
 				'hour' => '07:30',
 				'name' => 'HIIT/CORE',
 				'places' => 100,
@@ -327,7 +346,7 @@ Las clases serán de manera presencial en las dependencias de You just better.',
 			]);
 
 			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2022-01-10')->addweeks($week),
+				'date' => \Carbon\Carbon::parse('2022-01-01')->addweeks($week),
 				'hour' => '19:30',
 				'name' => 'Funcional',
 				'places' => 100,
@@ -411,7 +430,7 @@ Las clases serán de manera presencial en las dependencias de You just better.',
 			]);
 
 			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2022-01-10')->addweeks($week),
+				'date' => \Carbon\Carbon::parse('2022-01-01')->addweeks($week),
 				'hour' => '18:30',
 				'name' => 'Entrenamiento',
 				'places' => 100,
@@ -468,7 +487,7 @@ Las clases serán de manera presencial en las dependencias de You just better.',
 			]);
 
 			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2022-01-10')->addweeks($week),
+				'date' => \Carbon\Carbon::parse('2022-01-01')->addweeks($week),
 				'hour' => '07:00',
 				'name' => 'Entrenamiento',
 				'places' => 1,

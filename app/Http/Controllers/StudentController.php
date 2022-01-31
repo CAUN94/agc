@@ -83,6 +83,7 @@ class StudentController extends Controller {
 			'training_id' => ['required', 'exists:trainings,id'],
 			'user_id' => ['required', 'exists:users,id'],
 		]);
+
 		$student->newPlan($request, $request->months);
 		FlashSession::flash('primary', 'Nuevo Plan registrado');
 		return redirect('/users');
