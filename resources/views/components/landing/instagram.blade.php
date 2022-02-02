@@ -11,8 +11,6 @@
     </div>
     @php $profile = \Dymantic\InstagramFeed\Profile::where('username','yjb')->first(); @endphp
     @php $feed = $profile->feed(1); @endphp
-    {{-- {{$feed}} --}}
-     ["url"]
      <div class="small-gallery">
         @foreach($feed as $post)
             <a href="{{ $post['permalink'] }}" target="_blank">
@@ -22,6 +20,7 @@
     </div>
     <div class="small-gallery">
         @foreach($feed as $post)
+            @if($post->isImage())
             <a href="https://www.instagram.com/p/COtZ_SqIz9T/?utm_source=ig_web_copy_link" target="_blank">
               {{-- <img src="{{ $post }}" alt=""> --}}
             </a>
