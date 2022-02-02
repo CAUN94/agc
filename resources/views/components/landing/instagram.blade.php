@@ -9,14 +9,13 @@
             </span>
         </div>
     </div>
-    @php $profile = \Dymantic\InstagramFeed\Profile::where('username','yjb')->first()->feed(4); @endphp
+    @php $profile = \Dymantic\InstagramFeed\Profile::where('username','yjb')->first()->feed(1); @endphp
     {{$profile}}
     <div class="small-gallery">
         {{-- @foreach($profile as $post)
-            {{$post}} --}}
-            {{-- <a href="https://www.instagram.com/p/COtZ_SqIz9T/?utm_source=ig_web_copy_link" target="_blank">
+            <a href="https://www.instagram.com/p/COtZ_SqIz9T/?utm_source=ig_web_copy_link" target="_blank">
               <img src="{{ $post->url }}" alt="">
-            </a> --}}
+            </a>
         {{-- @endforeach --}}
     </div>
 </section>
