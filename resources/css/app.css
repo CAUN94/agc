@@ -147,11 +147,7 @@ header {
 }
 
 .small-gallery img {
-	@apply px-2;
-}
-
-.small-gallery video {
-	@apply px-2;
+	@apply px-2 py-2;
 }
 
 .contact {
