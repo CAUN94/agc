@@ -9,7 +9,7 @@
             </span>
         </div>
     </div>
-    @php $profile = \Dymantic\InstagramFeed\Profile::where('username','yjb')->first()->feed(1); @endphp
+    @php $feed = \Dymantic\InstagramFeed\InstagramFeed::for('yjb',1); @endphp
     {{$profile}}
     <div class="small-gallery">
         {{-- @foreach($profile as $post)
