@@ -10,11 +10,10 @@
         </div>
     </div>
     @php $profile = \Dymantic\InstagramFeed\Profile::where('username','yjb')->first()->feed(4); @endphp
-    {{$profile}}
-    {{-- <div class="small-gallery">
+    <div class="small-gallery">
         @foreach($instagram_feed as $post)
         <a href="https://www.instagram.com/p/COtZ_SqIz9T/?utm_source=ig_web_copy_link" target="_blank">
-          <img src="{{ asset('img/instagram/instagram3.jpeg')}}" alt="">
+          <img src="{{ $post->url }}" alt="">
         </a>
-    </div> --}}
+    </div>
 </section>
