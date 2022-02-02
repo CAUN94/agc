@@ -10,7 +10,7 @@
         </div>
     </div>
     @php $profile = \Dymantic\InstagramFeed\Profile::where('username','yjb')->first(); @endphp
-    @php $feed = $profile?->feed(1); @endphp
+    @php $feed = $profile->feed(1); @endphp
     {{$feed}}
     <div class="small-gallery">
         {{-- @foreach($profile as $post)
