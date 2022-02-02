@@ -9,18 +9,12 @@
             </span>
         </div>
     </div>
-    <div class="small-gallery">
+    @php $profile = \Dymantic\InstagramFeed\Profile::where('username','yjb')->first()->feed(4); @endphp
+    {{$profile}}
+    {{-- <div class="small-gallery">
+        @foreach($instagram_feed as $post)
         <a href="https://www.instagram.com/p/COtZ_SqIz9T/?utm_source=ig_web_copy_link" target="_blank">
           <img src="{{ asset('img/instagram/instagram3.jpeg')}}" alt="">
         </a>
-        <a href="https://www.instagram.com/p/CPbzWB6HoaM/?utm_source=ig_web_copy_link" target="_blank">
-          <img src="{{ asset('img/instagram/instagram1.jpeg')}}" alt="">
-        </a>
-        <a href="https://www.instagram.com/p/CPV70-IHanu/?utm_source=ig_web_copy_link" target="_blank">
-          <img src="{{ asset('img/instagram/instagram2.jpeg')}}" alt="">
-        </a>
-        <a href="https://www.instagram.com/p/COQXmObgaG-/?utm_source=ig_web_copy_link" target="_blank">
-          <img src="{{ asset('img/instagram/instagram4.jpeg')}}" alt="">
-        </a>
-    </div>
+    </div> --}}
 </section>
