@@ -15,8 +15,6 @@
      ["url"]
      <div class="small-gallery">
         @foreach($feed as $post)
-        {{var_dump($post)}}
-             ["permalink"]
             <a href="{{ $post['permalink'] }}" target="_blank">
               <img src="{{ $post['url'] }}" alt="">
             </a>
