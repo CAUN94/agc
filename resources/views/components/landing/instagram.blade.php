@@ -9,9 +9,9 @@
             </span>
         </div>
     </div>
-    @php $profile = \Dymantic\InstagramFeed\Profile::for('my profile'); @endphp
-    @php $feed = $profile->feed(1); @endphp
-    {{$profile}}
+    @php $profile = \Dymantic\InstagramFeed\Profile::where('username','yjb')->first(); @endphp
+    @php $feed = $profile?->feed(1); @endphp
+    {{$feed}}
     <div class="small-gallery">
         {{-- @foreach($profile as $post)
             <a href="https://www.instagram.com/p/COtZ_SqIz9T/?utm_source=ig_web_copy_link" target="_blank">
