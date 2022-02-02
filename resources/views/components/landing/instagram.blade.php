@@ -10,7 +10,7 @@
         </div>
     </div>
     @php $profile = \Dymantic\InstagramFeed\Profile::for('my profile'); @endphp
-    @php $feed = $profile?->feed(1); @endphp
+    @php $feed = $profile->feed(1); @endphp
     {{$profile}}
     <div class="small-gallery">
         {{-- @foreach($profile as $post)
