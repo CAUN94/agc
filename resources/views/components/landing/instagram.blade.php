@@ -13,11 +13,12 @@
     @php $feed = $profile->feed(4); @endphp
      <div class="small-gallery">
         @foreach($feed as $post)
-            @if($post['type'] == 'image')
+            {{var_dump($post)}}
+            {{-- @if($post['type'] == 'image')
                 <a href="{{ $post['permalink'] }}" target="_blank">
                   <img src="{{ $post['url'] }}" alt="">
                 </a>
-            @endif
+            @endif --}}
         @endforeach
     </div>
 </section>
