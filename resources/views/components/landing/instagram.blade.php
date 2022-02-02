@@ -10,15 +10,20 @@
         </div>
     </div>
     @php $profile = \Dymantic\InstagramFeed\Profile::where('username','yjb')->first(); @endphp
-    @php $feed = $profile->feed(); @endphp
+    @php $feed = $profile->refreshFeed(); @endphp
      <div class="small-gallery">
         @foreach($feed as $post)
-            {{var_dump($post["type"])}}
-            {{-- @if($post['type'] == 'image')
+            @if($post['type'] == 'image')
                 <a href="{{ $post['permalink'] }}" target="_blank">
-                  <img src="{{ $post['url'] }}" alt="">
+                  <img src="{{ $post['url'] }}" alt="instagram picture">
                 </a>
-            @endif --}}
+            @endif
+            @if($post['type'] == 'video')
+                <a href="{{ $post['permalink'] }}" target="_blank">
+                  {{-- <img src="{{ $post['url'] }}" alt=""> --}}
+                  Hola
+                </a>
+            @endif
         @endforeach
     </div>
 </section>

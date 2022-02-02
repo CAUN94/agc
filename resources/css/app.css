@@ -150,6 +150,10 @@ header {
 	@apply px-2;
 }
 
+.small-gallery video {
+	@apply px-2;
+}
+
 .contact {
 	@apply h-20 w-2/3 flex flex-col lg:flex-row items-center py-4 justify-between mx-auto;
 }
