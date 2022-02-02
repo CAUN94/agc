@@ -13,7 +13,7 @@
     @php $feed = $profile->feed(1); @endphp
      <div class="small-gallery">
         @foreach($feed as $post)
-            @if($post->isImage())
+            @if($post['type'] == 'image')
                 <a href="{{ $post['permalink'] }}" target="_blank">
                   <img src="{{ $post['url'] }}" alt="">
                 </a>
