@@ -22,7 +22,6 @@
     </div>
     <div class="small-gallery">
         @foreach($feed as $post)
-        {{var_dump($post)}}
             <a href="https://www.instagram.com/p/COtZ_SqIz9T/?utm_source=ig_web_copy_link" target="_blank">
               {{-- <img src="{{ $post }}" alt=""> --}}
             </a>
