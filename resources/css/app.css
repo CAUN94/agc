@@ -147,7 +147,7 @@ header {
 }
 
 .small-gallery img {
-	@apply px-2 py-2;
+	@apply px-2 pb-2;
 }
 
 .contact {
