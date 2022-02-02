@@ -10,7 +10,7 @@
         </div>
     </div>
     @php $profile = \Dymantic\InstagramFeed\Profile::where('username','yjb')->first(); @endphp
-    @php $feed = $profile->feed(); @endphp
+    @php $feed = $profile->feed(4); @endphp
      <div class="small-gallery">
         @foreach($feed as $post)
             @if($post['type'] == 'image')
