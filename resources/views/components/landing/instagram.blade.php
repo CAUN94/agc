@@ -12,6 +12,16 @@
     @php $profile = \Dymantic\InstagramFeed\Profile::where('username','yjb')->first(); @endphp
     @php $feed = $profile->feed(1); @endphp
     {{-- {{$feed}} --}}
+     ["url"]
+     <div class="small-gallery">
+        @foreach($feed as $post)
+        {{var_dump($post)}}
+             ["permalink"]
+            <a href="{{ $post['permalink'] }}" target="_blank">
+              <img src="{{ $post['url'] }}" alt="">
+            </a>
+        @endforeach
+    </div>
     <div class="small-gallery">
         @foreach($feed as $post)
         {{var_dump($post)}}
