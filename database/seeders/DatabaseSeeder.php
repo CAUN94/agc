@@ -34,13 +34,13 @@ class DatabaseSeeder extends Seeder {
 		);
 
 		User::create([
-			'name' => 'Jon',
-			'lastnames' => 'Doe',
-			'email' => 'css@ugarte.cl',
-			'rut' => '18783405-6',
+			'name' => 'Matias',
+			'lastnames' => 'Rebolledo',
+			'email' => 'matias.rebolledo.n@gmail.com',
+			'rut' => '19112484-7',
 			'gender' => 'm',
-			'phone' => '76693894',
-			'birthday' => '1991-09-27',
+			'phone' => '930312079',
+			'birthday' => '1995-12-09',
 			'password' => '!password',
 		]
 		);
@@ -85,17 +85,9 @@ class DatabaseSeeder extends Seeder {
 		]
 		);
 
-		Professional::create([
+		Trainer::create([
 			'user_id' => 2,
-			'description' => 'lorem ipsum dolor sit amet, consectetur',
-		]
-		);
-
-		Professional::create([
-			'user_id' => 3,
-			'description' => 'lorem ipsum dolor sit amet, consectetur',
-		]
-		);
+		]);
 
 		Trainer::create([
 			'user_id' => 3,
@@ -118,7 +110,7 @@ class DatabaseSeeder extends Seeder {
 			'period' => 'monthly',
 			'format' => 'Presencial',
 			'price' => 49990,
-			'description' => 'Este plan consiste en clases con un mínimo de 4 personas, donde todas deben tener el mismo objetivo.
+			'description' => 'Este plan consiste en clases de entrenamiento funcional en 6 horarios durante la semana.
 Las clases serán de manera presencial en las dependencias de You just better.',
 		]);
 
@@ -131,7 +123,7 @@ Las clases serán de manera presencial en las dependencias de You just better.',
 			'period' => 'monthly',
 			'format' => 'Presencial',
 			'price' => 134990,
-			'description' => 'Este plan consiste en clases con un mínimo de 4 personas, donde todas deben tener el mismo objetivo. Las clases serán de manera presencial en las dependencias de You just better.',
+			'description' => 'Este plan consiste en clases de entrenamiento funcional en 6 horarios durante la semana. Las clases serán de manera presencial en las dependencias de You just better.',
 		]);
 
 		DB::table('trainings')->insert([
@@ -143,8 +135,7 @@ Las clases serán de manera presencial en las dependencias de You just better.',
 			'period' => 'monthly',
 			'format' => 'Presencial',
 			'price' => 239990,
-			'description' => 'Este plan consiste en clases con un mínimo de 4 personas,
-                donde todas deben tener el mismo objetivo. Las clases serán de manera presencial en las dependencias de You jur.',
+			'description' => 'Este plan consiste en clases de entrenamiento funcional en 6 horarios durante la semana. Las clases serán de manera presencial en las dependencias de You just better.',
 		]);
 
 		DB::table('trainings')->insert([
@@ -156,8 +147,7 @@ Las clases serán de manera presencial en las dependencias de You just better.',
 			'period' => 'monthly',
 			'format' => 'Presencial',
 			'price' => 419990,
-			'description' => 'Este plan consiste en clases con un mínimo de 4 personas,
-                donde todas deben tener el mismo objetivo. Las clases serán de manera presencial en las dependencias de You jur.',
+			'description' => 'Este plan consiste en clases de entrenamiento funcional en 6 horarios durante la semana. Las clases serán de manera presencial en las dependencias de You just better.',
 		]);
 
 		DB::table('trainings')->insert([

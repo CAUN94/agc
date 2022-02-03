@@ -25,6 +25,8 @@ Route::get('/table', [TableController::class, 'index']);
 Route::get('poll', 'App\Http\Controllers\PollController@example')->middleware(['auth']);
 Route::post('/encuesta', 'App\Http\Controllers\PollController@showdata')->middleware(['auth']);
 
+Route::get('/instagram', [InstagramController::class, 'index'])->middleware(['auth']);
+
 Route::resource('adminusers', 'App\Http\Controllers\AdminUserController');
 Route::resource('adminstudents', 'App\Http\Controllers\AdminStudentController');
 Route::resource('adminclass', 'App\Http\Controllers\AdminTrainingController');
