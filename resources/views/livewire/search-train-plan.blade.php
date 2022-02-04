@@ -182,7 +182,7 @@
                   ¿Estas seguro de querer cambiarte?
 
                   <x-slot name="important">
-                    El cambio de plan quedaria para el proximo periodo de pago.
+                    {{-- El cambio de plan quedaria para el proximo periodo de pago. --}}
                   </x-slot>
 
                   @if(!$selectedTraining->isMonthly())
@@ -245,7 +245,7 @@
                     @endif
 
                   </x-slot>
-                  Recibiras un mail con la información para activar tu plan al realizar el pago.
+                  Recibirás un correo con la información para activar tu plan al realizar el pago.
                   {{-- <x-slot name="important">
                     Información Importante
                   </x-slot> --}}
