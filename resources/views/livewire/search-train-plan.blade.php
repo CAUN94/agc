@@ -179,7 +179,7 @@
                     <span>Cambiarme a plan {{$selectedTraining->plan()}}</span>
                   </x-slot>
 
-                  Estas seguro de querer cambiarte?
+                  ¿Estas seguro de querer cambiarte?
 
                   <x-slot name="important">
                     El cambio de plan quedaria para el proximo periodo de pago.
@@ -187,7 +187,7 @@
 
                   @if(!$selectedTraining->isMonthly())
                   <x-slot name="options">
-                    <x-label for="months" :value="__('Por cuantos meses quiere inscribir el plan?')" />
+                    <x-label for="months" :value="__('¿Por cuantos meses quiere inscribir el plan?')" />
                     <div class="relative">
                         <select name="months" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
                             @for ($i = 1; $i <= 12; $i++)
@@ -228,7 +228,7 @@
                       max="{{ \Carbon\Carbon::Now()->addDays(30)->format('Y-m-d'); }}"
                       required />
                     @if(!$selectedTraining->isMonthly())
-                    <x-label for="months" :value="__('Por cuantos meses quiere inscribir su plan?')" />
+                    <x-label for="months" :value="__('¿Por cuantos meses quiere inscribir su plan?')" />
                     <div class="relative">
                         <select name="months" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="months">
                             @for ($i = 1; $i <= 12; $i++)
@@ -246,9 +246,9 @@
 
                   </x-slot>
                   Recibiras un mail con la información para activar tu plan al realizar el pago.
-                  <x-slot name="important">
+                  {{-- <x-slot name="important">
                     Información Importante
-                  </x-slot>
+                  </x-slot> --}}
 
                   <x-slot name="button">
                     Inscribir Plan

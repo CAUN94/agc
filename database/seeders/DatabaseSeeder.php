@@ -320,9 +320,8 @@ Las clases serán de manera presencial en las dependencias de You just better.',
 		}
 
 		for ($week = 0; $week < 30; $week++) {
-
 			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2022-01-01')->addweeks($week),
+				'date' => \Carbon\Carbon::parse('2022-01-03')->addweeks($week),
 				'hour' => '07:30',
 				'name' => 'HIIT/CORE',
 				'places' => 100,
@@ -331,41 +330,13 @@ Las clases serán de manera presencial en las dependencias de You just better.',
 			]);
 
 			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 4,
+				'training_id' => 5,
 				'train_appointment_id' => $ta->id,
 			]);
 
 			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2022-01-01')->addweeks($week),
-				'hour' => '19:30',
-				'name' => 'Funcional',
-				'places' => 100,
-				'trainer_id' => 4,
-				'description' => 'No Disponible',
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 4,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2021-12-14')->addweeks($week),
+				'date' => \Carbon\Carbon::parse('2022-01-04')->addweeks($week),
 				'hour' => '19:00',
-				'name' => 'Strong Nation',
-				'places' => 100,
-				'trainer_id' => 3,
-				'description' => 'No Disponible',
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 4,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2021-12-16')->addweeks($week),
-				'hour' => '07:30',
 				'name' => 'HIIT/CORE',
 				'places' => 100,
 				'trainer_id' => 3,
@@ -373,425 +344,42 @@ Las clases serán de manera presencial en las dependencias de You just better.',
 			]);
 
 			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 4,
+				'training_id' => 5,
 				'train_appointment_id' => $ta->id,
 			]);
 
 			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2021-12-16')->addweeks($week),
+				'date' => \Carbon\Carbon::parse('2022-01-06')->addweeks($week),
+				'hour' => '7:30',
+				'name' => 'HIIT/CORE',
+				'places' => 100,
+				'trainer_id' => 3,
+				'description' => 'No Disponible',
+			]);
+
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 5,
+				'train_appointment_id' => $ta->id,
+			]);
+
+			$ta = TrainAppointment::create([
+				'date' => \Carbon\Carbon::parse('2022-01-06')->addweeks($week),
 				'hour' => '19:00',
-				'name' => 'Strong Nation',
+				'name' => 'HIIT/CORE',
 				'places' => 100,
 				'trainer_id' => 3,
 				'description' => 'No Disponible',
 			]);
 
 			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 4,
+				'training_id' => 5,
 				'train_appointment_id' => $ta->id,
 			]);
 
 			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2021-12-18')->addweeks($week),
-				'hour' => '10:30',
-				'name' => 'Fitdance',
-				'places' => 100,
-				'trainer_id' => 3,
-				'description' => 'No Disponible',
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 4,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2021-12-15')->addweeks($week),
-				'hour' => '19:00',
-				'name' => 'Funcional',
-				'places' => 100,
-				'trainer_id' => 3,
-				'description' => 'No Disponible',
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 4,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2022-01-01')->addweeks($week),
-				'hour' => '18:30',
-				'name' => 'Entrenamiento',
-				'places' => 100,
-				'trainer_id' => 3,
-				'description' => 'No Disponible',
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 15,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 16,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2021-12-15')->addweeks($week),
-				'hour' => '19:00',
-				'name' => 'Entrenamiento',
-				'places' => 100,
-				'trainer_id' => 4,
-				'description' => 'No Disponible',
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 15,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 16,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2021-12-15')->addweeks($week),
-				'hour' => '18:00',
-				'name' => 'Entrenamiento',
-				'places' => 100,
-				'trainer_id' => 3,
-				'description' => 'No Disponible',
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 15,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 16,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2022-01-01')->addweeks($week),
-				'hour' => '07:00',
-				'name' => 'Entrenamiento',
-				'places' => 1,
-				'trainer_id' => 4,
-				'description' => 'No Disponible',
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 14,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 13,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 12,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2021-12-14')->addweeks($week),
-				'hour' => '07:00',
-				'name' => 'Entrenamiento',
-				'places' => 1,
-				'trainer_id' => 4,
-				'description' => 'No Disponible',
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 14,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 13,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 12,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2021-12-14')->addweeks($week),
-				'hour' => '18:00',
-				'name' => 'Entrenamiento',
-				'places' => 1,
-				'trainer_id' => 3,
-				'description' => 'No Disponible',
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 14,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 13,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 12,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2021-12-14')->addweeks($week),
-				'hour' => '20:00',
-				'name' => 'Entrenamiento',
-				'places' => 1,
-				'trainer_id' => 3,
-				'description' => 'No Disponible',
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 14,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 13,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 12,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2021-12-15')->addweeks($week),
-				'hour' => '07:00',
-				'name' => 'Entrenamiento',
-				'places' => 1,
-				'trainer_id' => 4,
-				'description' => 'No Disponible',
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 14,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 13,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 12,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2021-12-16')->addweeks($week),
-				'hour' => '18:00',
-				'name' => 'Entrenamiento',
-				'places' => 1,
-				'trainer_id' => 3,
-				'description' => 'No Disponible',
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 14,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 13,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 12,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2021-12-16')->addweeks($week),
+				'date' => \Carbon\Carbon::parse('2022-01-03')->addweeks($week),
 				'hour' => '19:30',
-				'name' => 'Entrenamiento',
-				'places' => 1,
-				'trainer_id' => 4,
-				'description' => 'No Disponible',
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 14,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 13,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 12,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2021-12-16')->addweeks($week),
-				'hour' => '20:00',
-				'name' => 'Entrenamiento',
-				'places' => 1,
-				'trainer_id' => 3,
-				'description' => 'No Disponible',
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 14,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 13,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 12,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2021-12-17')->addweeks($week),
-				'hour' => '07:00',
-				'name' => 'Entrenamiento',
-				'places' => 1,
-				'trainer_id' => 4,
-				'description' => 'No Disponible',
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 14,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 13,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 12,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2021-12-17')->addweeks($week),
-				'hour' => '16:00',
-				'name' => 'Entrenamiento',
-				'places' => 1,
-				'trainer_id' => 4,
-				'description' => 'No Disponible',
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 14,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 13,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 12,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2021-12-14')->addweeks($week),
-				'hour' => '08:30',
-				'name' => 'Entrenamiento',
-				'places' => 100,
-				'trainer_id' => 4,
-				'description' => 'No Disponible',
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 1,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 2,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 3,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2021-12-16')->addweeks($week),
-				'hour' => '07:00',
-				'name' => 'Entrenamiento',
-				'places' => 100,
-				'trainer_id' => 4,
-				'description' => 'No Disponible',
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 1,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 2,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 3,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2021-12-16')->addweeks($week),
-				'hour' => '08:30',
-				'name' => 'Entrenamiento',
-				'places' => 100,
-				'trainer_id' => 4,
-				'description' => 'No Disponible',
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 1,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 2,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 3,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2021-12-16')->addweeks($week),
-				'hour' => '08:30',
-				'name' => 'Entrenamiento',
+				'name' => 'Funcional',
 				'places' => 100,
 				'trainer_id' => 4,
 				'description' => 'No Disponible',
@@ -802,45 +390,207 @@ Las clases serán de manera presencial en las dependencias de You just better.',
 				'train_appointment_id' => $ta->id,
 			]);
 
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 6,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 7,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 8,
-				'train_appointment_id' => $ta->id,
-			]);
-
-			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 9,
-				'train_appointment_id' => $ta->id,
-			]);
-
 			$ta = TrainAppointment::create([
-				'date' => \Carbon\Carbon::parse('2021-12-16')->addweeks($week),
-				'hour' => '08:30',
-				'name' => 'Entrenamiento',
+				'date' => \Carbon\Carbon::parse('2022-01-05')->addweeks($week),
+				'hour' => '19:00',
+				'name' => 'Funcional',
 				'places' => 100,
 				'trainer_id' => 4,
 				'description' => 'No Disponible',
 			]);
 
 			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 10,
+				'training_id' => 5,
+				'train_appointment_id' => $ta->id,
+			]);
+
+			$ta = TrainAppointment::create([
+				'date' => \Carbon\Carbon::parse('2022-01-08')->addweeks($week),
+				'hour' => '10:30',
+				'name' => 'Funcional',
+				'places' => 100,
+				'trainer_id' => 4,
+				'description' => 'No Disponible',
+			]);
+
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 5,
+				'train_appointment_id' => $ta->id,
+			]);
+
+			$ta = TrainAppointment::create([
+				'date' => \Carbon\Carbon::parse('2022-01-03')->addweeks($week),
+				'hour' => '07:30',
+				'name' => 'Entrenamiento',
+				'places' => 10,
+				'trainer_id' => 3,
+				'description' => 'No Disponible',
+			]);
+
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 1,
 				'train_appointment_id' => $ta->id,
 			]);
 
 			DB::table('train_appointments_pivot')->insert([
-				'training_id' => 11,
+				'training_id' => 2,
 				'train_appointment_id' => $ta->id,
 			]);
 
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 3,
+				'train_appointment_id' => $ta->id,
+			]);
+
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 4,
+				'train_appointment_id' => $ta->id,
+			]);
+
+			$ta = TrainAppointment::create([
+				'date' => \Carbon\Carbon::parse('2022-01-05')->addweeks($week),
+				'hour' => '07:30',
+				'name' => 'Entrenamiento',
+				'places' => 10,
+				'trainer_id' => 3,
+				'description' => 'No Disponible',
+			]);
+
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 1,
+				'train_appointment_id' => $ta->id,
+			]);
+
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 2,
+				'train_appointment_id' => $ta->id,
+			]);
+
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 3,
+				'train_appointment_id' => $ta->id,
+			]);
+
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 4,
+				'train_appointment_id' => $ta->id,
+			]);
+
+			$ta = TrainAppointment::create([
+				'date' => \Carbon\Carbon::parse('2022-01-07')->addweeks($week),
+				'hour' => '07:30',
+				'name' => 'Entrenamiento',
+				'places' => 10,
+				'trainer_id' => 3,
+				'description' => 'No Disponible',
+			]);
+
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 1,
+				'train_appointment_id' => $ta->id,
+			]);
+
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 2,
+				'train_appointment_id' => $ta->id,
+			]);
+
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 3,
+				'train_appointment_id' => $ta->id,
+			]);
+
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 4,
+				'train_appointment_id' => $ta->id,
+			]);
+
+			$ta = TrainAppointment::create([
+				'date' => \Carbon\Carbon::parse('2022-01-03')->addweeks($week),
+				'hour' => '19:30',
+				'name' => 'Entrenamiento',
+				'places' => 10,
+				'trainer_id' => 3,
+				'description' => 'No Disponible',
+			]);
+
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 1,
+				'train_appointment_id' => $ta->id,
+			]);
+
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 2,
+				'train_appointment_id' => $ta->id,
+			]);
+
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 3,
+				'train_appointment_id' => $ta->id,
+			]);
+
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 4,
+				'train_appointment_id' => $ta->id,
+			]);
+
+			$ta = TrainAppointment::create([
+				'date' => \Carbon\Carbon::parse('2022-01-05')->addweeks($week),
+				'hour' => '19:30',
+				'name' => 'Entrenamiento',
+				'places' => 10,
+				'trainer_id' => 3,
+				'description' => 'No Disponible',
+			]);
+
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 1,
+				'train_appointment_id' => $ta->id,
+			]);
+
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 2,
+				'train_appointment_id' => $ta->id,
+			]);
+
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 3,
+				'train_appointment_id' => $ta->id,
+			]);
+
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 4,
+				'train_appointment_id' => $ta->id,
+			]);
+
+			$ta = TrainAppointment::create([
+				'date' => \Carbon\Carbon::parse('2022-01-07')->addweeks($week),
+				'hour' => '19:30',
+				'name' => 'Entrenamiento',
+				'places' => 10,
+				'trainer_id' => 3,
+				'description' => 'No Disponible',
+			]);
+
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 1,
+				'train_appointment_id' => $ta->id,
+			]);
+
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 2,
+				'train_appointment_id' => $ta->id,
+			]);
+
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 3,
+				'train_appointment_id' => $ta->id,
+			]);
+
+			DB::table('train_appointments_pivot')->insert([
+				'training_id' => 4,
+				'train_appointment_id' => $ta->id,
+			]);
 		}
 
 	}
