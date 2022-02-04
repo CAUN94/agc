@@ -28,7 +28,9 @@
                 x-data="{ navOpen: false }"
                 @keydown.escape="navOpen = false"
                 >
-                <img class="logo" src="{{asset('img/logo.png')}}">
+                    <a href="/" class="w-full h-16 lg:h-full">
+                        <img class="logo" src="{{asset('img/logo.png')}}">
+                    </a>
                 <x-landing.burger></x-landing.burger>
                 <nav
                     class="w-full flex-grow lg:flex"
