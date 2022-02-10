@@ -30,13 +30,20 @@
               {{ $title }}
             </h3>
             {{ $options ?? '' }}
-            <div class="mt-2">
-              <p class="text-sm text-gray-500">
-                {{$slot}}
-              </p>
-              <div class="overflow-y-auto text-xs text-gray-500">
+            <div>
+              @if(isset($important))
+              <div class="overflow-y-auto text-sm text-gray-500 mt-2">
                 {{ $important }}
               </div>
+              @endif
+              @if(isset($extra))
+              <div class="overflow-y-auto text-xs text-gray-500 mt-2">
+                {{ $extra }}
+              </div>
+              @endif
+              <p class="overflow-y-auto text-xs text-gray-500 mt-2">
+                {{$slot}}
+              </p>
             </div>
           </div>
         </div>

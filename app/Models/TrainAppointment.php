@@ -12,11 +12,18 @@ class TrainAppointment extends Model
 {
     use HasFactory;
 
-    public function trainings(){
+    public function allTrainings(){
         return $this->belongsToMany(Training::class,
             'train_appointments_pivot',
             'train_appointment_id',
             'training_id');
+    }
+
+    public function trainings(){
+        return $this->belongsToMany(Training::class,
+            'train_appointments_pivot',
+            'train_appointment_id',
+            'training_id')->first();
     }
 
     public function training(){

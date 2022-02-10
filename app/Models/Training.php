@@ -61,6 +61,10 @@ class Training extends Model {
 		return Helper::moneda_chilena($this->price);
 	}
 
+	public function extra() {
+		return Helper::moneda_chilena($this->extra);
+	}
+
 	public function daysCheck($date) {
 		return $this->TrainAppointments()->where('date', $date)->orderby('hour', 'ASC')->get();
 	}

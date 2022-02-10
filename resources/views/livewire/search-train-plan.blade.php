@@ -101,7 +101,7 @@
 
       <div class="border-t border-gray-200 mt-2" x-show="$wire.trainShow" x-cloak>
         <dl>
-          <div class="pl-1 py-2 sm:py-5 grid grid-cols-3">
+          <div class="pl-1 py-2 grid grid-cols-3">
             <dt class="text-sm font-medium text-gray-500">
               Coach
             </dt>
@@ -113,7 +113,7 @@
           </div>
         </dl>
         <dl>
-          <div class="pl-1 py-2 sm:py-5 grid grid-cols-3">
+          <div class="pl-1 py-2 grid grid-cols-3">
             <dt class="text-sm font-medium text-gray-500">
               Formato
             </dt>
@@ -123,7 +123,7 @@
           </div>
         </dl>
         <dl>
-          <div class="pl-1 py-2 sm:py-5 grid grid-cols-3">
+          <div class="pl-1 py-2 grid grid-cols-3">
             <dt class="text-sm font-medium text-gray-500">
               Duración
             </dt>
@@ -133,7 +133,7 @@
           </div>
         </dl>
         <dl>
-          <div class="pl-1 py-2 sm:py-5 grid grid-cols-3">
+          <div class="pl-1 py-2 grid grid-cols-3">
             <dt class="text-sm font-medium text-gray-500">
               Valor
             </dt>
@@ -143,7 +143,17 @@
           </div>
         </dl>
         <dl>
-          <div class="pl-1 py-2 sm:py-5 sm:grid sm:grid-cols-3">
+          <div class="pl-1 py-2 grid grid-cols-3">
+            <dt class="text-sm font-medium text-gray-500">
+              Pauta
+            </dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              <span>Por un valor extra de {{$selectedTraining->extra()}} puedes optar por una pauta de entrenamiento personalizada.</span>
+            </dd>
+          </div>
+        </dl>
+        <dl>
+          <div class="pl-1 py-2 sm:grid sm:grid-cols-3">
             <dt class="text-sm font-medium text-gray-500">
               Descripción
             </dt>
@@ -187,7 +197,7 @@
 
                   @if(!$selectedTraining->isMonthly())
                   <x-slot name="options">
-                    <x-label for="months" :value="__('¿Por cuantos meses quiere inscribir el plan?')" />
+                    <x-label for="months" :value="__('¿Por cuántos meses quiere inscribir el plan?')" />
                     <div class="relative">
                         <select name="months" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
                             @for ($i = 1; $i <= 12; $i++)
@@ -228,7 +238,7 @@
                       max="{{ \Carbon\Carbon::Now()->addDays(30)->format('Y-m-d'); }}"
                       required />
                     @if(!$selectedTraining->isMonthly())
-                    <x-label for="months" :value="__('¿Por cuantos meses quiere inscribir su plan?')" />
+                    <x-label for="months" :value="__('¿Por cuántos meses quiere inscribir su plan?')" />
                     <div class="relative">
                         <select name="months" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="months">
                             @for ($i = 1; $i <= 12; $i++)
@@ -247,7 +257,17 @@
                   </x-slot>
                   Recibirás un correo con la información para activar tu plan al realizar el pago.
                   <x-slot name="important">
-                    {{-- Información Importante --}}
+                    <p>Revise los términos y condiciones <a href="https://docs.google.com/document/d/1jQ0pFo1yOk14V-qzetS5AC05doqNVhRLEtlJ0FUCB-M/edit?usp=sharing" target="_blank" class="text-blue-500">Aquí</a></p>
+                    <div class="flex m-1">
+                      <div>
+                        <div class="form-check ">
+                          <input class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" name="terms" value="1" id="flexCheckDefault">
+                          <label class="form-check-label inline-block text-gray-500" for="flexCheckDefault">
+                            Acepto términos y condiciones.
+                          </label>
+                        </div>
+                      </div>
+                    </div>
                   </x-slot>
 
                   <x-slot name="button">

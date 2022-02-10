@@ -42,6 +42,7 @@ class StudentController extends Controller {
 			'training_id' => ['required', 'exists:trainings,id'],
 			'user_id' => ['required', Rule::unique('students', 'user_id')],
 			'start_day' => ['required', 'date', 'after:yesterday', 'before:' . \Carbon\Carbon::Now()->addMonth()->endOfMonth()],
+			'terms' => 'required',
 		]);
 		$student = Student::create($attributes);
 		$student->newPlan($request, $request->months - 1);

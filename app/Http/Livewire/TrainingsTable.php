@@ -35,6 +35,18 @@ class TrainingsTable extends LivewireDatatable
                 ->editable(),
             Column::name('format')
                 ->label('Formato')
+                ->editable(),
+            Column::name('type')
+                ->label('Tipo')
+                ->editable(),
+            Column::name('price')
+                ->label('Precio')
+                ->editable(),
+            Column::name('extra')
+                ->label('Extra')
+                ->editable(),
+            Column::name('period')
+                ->label('Precio')
                 ->editable()
         ];
     }

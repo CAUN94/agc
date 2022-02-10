@@ -92,7 +92,7 @@
                     @else
                         <div class="flex flex-col">
                             <span>Plan No activado</span>
-                            <span>Valor: {{Auth::user()->student->training->price()}}</span>
+                            <span>Valor: {{Auth::user()->student->trainingPrice()}}</span>
                         </div>
                     @endif
                   </div>
@@ -168,7 +168,7 @@
                     @if($plan->isSettled())
                       <span class="text-green-500">Pagado</span>
                     @else
-                      <span class="text-red-500">No Pagado {{$plan->Training->price()}}</span>
+                      <span class="text-red-500">No Pagado {{$plan->trainingPrice()}}</span>
                     @endif
                   </div>
                 @empty

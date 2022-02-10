@@ -8,8 +8,13 @@
     <a class="my-1 py-1" href="/admintrainers">Entrenadores</a>
   </x-nav-dropdown>
 
-  <a class="mt-3" href="/adminclass"><i class="fas fa-calendar-alt"></i> Clases</a>
 
+  <x-nav-dropdown>
+    <x-slot name="name"><i class="fas fa-calendar-alt"></i> Entrenamiento</x-slot>
+    <x-slot name="trigger">Clases</x-slot>
+    <a class="py-1" href="/adminclass">Programas</a>
+    <a class="my-1 py-1" href="/admintrainappointment">Calendario</a>
+  </x-nav-dropdown>
   <x-nav-dropdown>
     <x-slot name="name">Example</x-slot>
     <x-slot name="trigger">example</x-slot>

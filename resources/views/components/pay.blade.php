@@ -12,7 +12,7 @@
 		$item->title = $product->training->planComplete();
 		$item->description = $product->training->planComplete();
 		$item->quantity = 1;
-		$item->unit_price = $product->training->price;
+		$item->unit_price = $product->price();
 
 		$products[] = $item;
 	}

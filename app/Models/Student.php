@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Training;
 use App\Models\User;
+use App\Helpers\Helper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,17 @@ class Student extends Model {
 
 	public function Training() {
 		return $this->belongsTo(Training::class);
+	}
+
+	public function price() {
+		if ($this->extra){
+			return $this->training->price + $this->training->extra;
+		}
+		return $this->training->price;
+	}
+
+	public function trainingPrice() {
+		return Helper::moneda_chilena($this->price());
 	}
 
 	public function isSettled() {

@@ -30,6 +30,7 @@ Route::get('/instagram', [InstagramController::class, 'index'])->middleware(['au
 Route::resource('adminusers', 'App\Http\Controllers\AdminUserController');
 Route::resource('adminstudents', 'App\Http\Controllers\AdminStudentController');
 Route::resource('adminclass', 'App\Http\Controllers\AdminTrainingController');
+Route::resource('admintrainappointment', 'App\Http\Controllers\AdminTrainAppointmentsController');
 Route::resource('adminprofessionals', 'App\Http\Controllers\AdminProfessionalsController');
 Route::resource('admintrainers', 'App\Http\Controllers\AdminTrainersController');
 
