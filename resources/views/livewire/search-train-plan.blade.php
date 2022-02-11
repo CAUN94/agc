@@ -142,6 +142,7 @@
             </dd>
           </div>
         </dl>
+        @if($selectedTraining->extra > 0)
         <dl>
           <div class="pl-1 py-2 grid grid-cols-3">
             <dt class="text-sm font-medium text-gray-500">
@@ -152,6 +153,7 @@
             </dd>
           </div>
         </dl>
+        @endif
         <dl>
           <div class="pl-1 py-2 sm:grid sm:grid-cols-3">
             <dt class="text-sm font-medium text-gray-500">
@@ -196,26 +198,27 @@
                   </x-slot>
 
                   @if(!$selectedTraining->isMonthly())
-                  <x-slot name="options">
-                    <x-label for="months" :value="__('¿Por cuántos meses quiere inscribir el plan?')" />
-                    <div class="relative">
-                        <select name="months" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-                            @for ($i = 1; $i <= 12; $i++)
-                                @if($i == 1)
-                                    <option value={{$i}}>{{$i}} mes</option>
-                                    @continue
-                                @endif
-                                <option value={{$i}}>{{$i}} meses</option>
-                            @endfor
-                        </select>
-                    </div>
-                  </x-slot>
+                    <x-slot name="options">
+                      <x-label for="months" :value="__('¿Por cuántos meses quiere inscribir el plan?')" />
+                      <div class="relative">
+                          <select name="months" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                              @for ($i = 1; $i <= 12; $i++)
+                                  @if($i == 1)
+                                      <option value={{$i}}>{{$i}} mes</option>
+                                      @continue
+                                  @endif
+                                  <option value={{$i}}>{{$i}} meses</option>
+                              @endfor
+                          </select>
+                      </div>
+                    </x-slot>
                   @endif
 
                   <x-slot name="button">
                     Confirmar
                   </x-slot>
                 </x-landing.submit-modal>
+
               @else
                 <x-landing.submit-modal
                   method="POST"
@@ -224,7 +227,6 @@
                   >
 
                   <x-slot name="options">
-
                     <x-slot name="title">
                       <span>¿Inscribirme al Plan {{$selectedTraining->plan()}}?</span>
                     </x-slot>
@@ -250,24 +252,28 @@
                             @endfor
                         </select>
                     </div>
-                    @else
-
                     @endif
 
+
+
                   </x-slot>
+
+
                   Recibirás un correo con la información para activar tu plan al realizar el pago.
                   <x-slot name="important">
                     <p>Revise los términos y condiciones <a href="https://docs.google.com/document/d/1jQ0pFo1yOk14V-qzetS5AC05doqNVhRLEtlJ0FUCB-M/edit?usp=sharing" target="_blank" class="text-blue-500">Aquí</a></p>
                     <div class="flex m-1">
                       <div>
                         <div class="form-check ">
-                          <input class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" name="terms" value="1" id="flexCheckDefault">
-                          <label class="form-check-label inline-block text-gray-500" for="flexCheckDefault">
+                          <input class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" name="terms" value="1" id="terms">
+                          <label class="form-check-label inline-block text-gray-500" for="terms">
                             Acepto términos y condiciones.
                           </label>
                         </div>
                       </div>
                     </div>
+
+
                   </x-slot>
 
                   <x-slot name="button">

@@ -16,6 +16,13 @@ class Training extends Model {
 		return $this->name . " " . $this->format;
 	}
 
+	public function class() {
+		if($this->isMonthly()){
+			return 1000;
+		}
+		return $this->class;
+	}
+
 	public function planComplete() {
 		return $this->name . " " . $this->format . " " . $this->planClassComplete();
 	}
@@ -43,6 +50,9 @@ class Training extends Model {
 			return "Plan por " . $this->class . " mes";
 
 		}
+		if($this->type == 'guideline'){
+			return '1 vez al mes';
+		}
 		return $this->class . " clase" . $this->plural() . " por mes";
 	}
 
@@ -62,7 +72,10 @@ class Training extends Model {
 	}
 
 	public function extra() {
-		return Helper::moneda_chilena($this->extra);
+		if($this->extra > 0){
+			return Helper::moneda_chilena($this->extra);
+		}
+		return null;
 	}
 
 	public function daysCheck($date) {

@@ -25,7 +25,7 @@ class TrainingSeeder extends Seeder
 
         DB::table('trainings')->insert([
             'id' => 1,
-            'name' => 'Entrenamiento Grupal',
+            'name' => 'Grupal',
             'class' => 1,
             'time_in_minutes' => 60,
             'type' => 'group',
@@ -38,7 +38,7 @@ class TrainingSeeder extends Seeder
 
         DB::table('trainings')->insert([
             'id' => 2,
-            'name' => 'Entrenamiento Grupal',
+            'name' => 'Grupal',
             'class' => 3,
             'time_in_minutes' => 60,
             'type' => 'group',
@@ -51,7 +51,7 @@ class TrainingSeeder extends Seeder
 
         DB::table('trainings')->insert([
             'id' => 3,
-            'name' => 'Entrenamiento Grupal',
+            'name' => 'Grupal',
             'class' => 6,
             'time_in_minutes' => 60,
             'type' => 'group',
@@ -64,7 +64,7 @@ class TrainingSeeder extends Seeder
 
         DB::table('trainings')->insert([
             'id' => 4,
-            'name' => 'Entrenamiento Grupal',
+            'name' => 'Grupal',
             'class' => 12,
             'time_in_minutes' => 60,
             'type' => 'group',
@@ -76,7 +76,7 @@ class TrainingSeeder extends Seeder
         ]);
 
         // DB::table('trainings')->insert([
-        //     'name' => 'Entrenamiento Grupal',
+        //     'name' => 'Grupal',
         //     'class' => 28,
         //     'time_in_minutes' => 60,
         //     'type' => 'group',
@@ -88,7 +88,7 @@ class TrainingSeeder extends Seeder
 
         DB::table('trainings')->insert([
             'id' => 5,
-            'name' => 'Entrenamiento Duplas',
+            'name' => 'Duplas',
             'class' => 4,
             'time_in_minutes' => 60,
             'type' => 'duo',
@@ -100,7 +100,7 @@ class TrainingSeeder extends Seeder
 
         DB::table('trainings')->insert([
             'id' => 6,
-            'name' => 'Entrenamiento Duplas',
+            'name' => 'Duplas',
             'class' => 8,
             'time_in_minutes' => 60,
             'type' => 'duo',
@@ -112,7 +112,7 @@ class TrainingSeeder extends Seeder
 
         DB::table('trainings')->insert([
             'id' => 7,
-            'name' => 'Entrenamiento Duplas',
+            'name' => 'Duplas',
             'class' => 4,
             'time_in_minutes' => 60,
             'type' => 'duo',
@@ -124,7 +124,7 @@ class TrainingSeeder extends Seeder
 
         DB::table('trainings')->insert([
             'id' => 8,
-            'name' => 'Entrenamiento Duplas',
+            'name' => 'Duplas',
             'class' => 8,
             'time_in_minutes' => 60,
             'type' => 'duo',
@@ -136,7 +136,7 @@ class TrainingSeeder extends Seeder
 
         DB::table('trainings')->insert([
             'id' => 9,
-            'name' => 'Entrenamiento Duplas',
+            'name' => 'Duplas',
             'class' => 12,
             'time_in_minutes' => 60,
             'type' => 'duo',
@@ -148,7 +148,7 @@ class TrainingSeeder extends Seeder
 
         DB::table('trainings')->insert([
             'id' => 10,
-            'name' => 'Entrenamiento Personalizado',
+            'name' => 'Personalizado',
             'class' => 4,
             'time_in_minutes' => 60,
             'type' => 'alone',
@@ -160,7 +160,7 @@ class TrainingSeeder extends Seeder
 
         DB::table('trainings')->insert([
             'id' => 11,
-            'name' => 'Entrenamiento Personalizado',
+            'name' => 'Personalizado',
             'class' => 8,
             'time_in_minutes' => 60,
             'type' => 'alone',
@@ -172,7 +172,7 @@ class TrainingSeeder extends Seeder
 
         DB::table('trainings')->insert([
             'id' => 12,
-            'name' => 'Entrenamiento Personalizado',
+            'name' => 'Personalizado',
             'class' => 4,
             'time_in_minutes' => 60,
             'type' => 'alone',
@@ -184,7 +184,7 @@ class TrainingSeeder extends Seeder
 
         DB::table('trainings')->insert([
             'id' => 13,
-            'name' => 'Entrenamiento Personalizado',
+            'name' => 'Personalizado',
             'class' => 8,
             'time_in_minutes' => 60,
             'type' => 'alone',
@@ -196,7 +196,7 @@ class TrainingSeeder extends Seeder
 
         DB::table('trainings')->insert([
             'id' => 14,
-            'name' => 'Entrenamiento Personalizado',
+            'name' => 'Personalizado',
             'class' => 12,
             'time_in_minutes' => 60,
             'type' => 'alone',
@@ -230,6 +230,19 @@ class TrainingSeeder extends Seeder
                 estas clases de preparación física son ideales para ti.',
         ]);
 
+        DB::table('trainings')->insert([
+            'id' => 17,
+            'name' => 'Pauta de Entrenamiento',
+            'class' => 1,
+            'time_in_minutes' => 60,
+            'type' => 'guideline',
+            'days' => 30,
+            'format' => 'Online',
+            'price' => 35000,
+            'extra' => 0,
+            'description' => 'Este plan consiste en una pauta de entrenamiento personalizada.',
+        ]);
+
         // for ($i = 0; $i < 20; $i++) {
         //     $u = User::factory()->create();
         //     if (rand(0, 1)) {
@@ -255,7 +268,7 @@ class TrainingSeeder extends Seeder
                 'hour' => '07:30',
                 'name' => 'Entrenamiento',
                 'places' => 10,
-                'trainer_id' => 3,
+                'trainer_id' => 4,
                 'description' => 'No Disponible',
             ]);
 
@@ -284,7 +297,7 @@ class TrainingSeeder extends Seeder
                 'hour' => '07:30',
                 'name' => 'Entrenamiento',
                 'places' => 10,
-                'trainer_id' => 3,
+                'trainer_id' => 4,
                 'description' => 'No Disponible',
             ]);
 
@@ -313,7 +326,7 @@ class TrainingSeeder extends Seeder
                 'hour' => '07:30',
                 'name' => 'Entrenamiento',
                 'places' => 10,
-                'trainer_id' => 3,
+                'trainer_id' => 4,
                 'description' => 'No Disponible',
             ]);
 
@@ -342,7 +355,7 @@ class TrainingSeeder extends Seeder
                 'hour' => '19:30',
                 'name' => 'Entrenamiento',
                 'places' => 10,
-                'trainer_id' => 3,
+                'trainer_id' => 4,
                 'description' => 'No Disponible',
             ]);
 
@@ -371,7 +384,7 @@ class TrainingSeeder extends Seeder
                 'hour' => '19:30',
                 'name' => 'Entrenamiento',
                 'places' => 10,
-                'trainer_id' => 3,
+                'trainer_id' => 4,
                 'description' => 'No Disponible',
             ]);
 
@@ -400,7 +413,7 @@ class TrainingSeeder extends Seeder
                 'hour' => '19:30',
                 'name' => 'Entrenamiento',
                 'places' => 10,
-                'trainer_id' => 3,
+                'trainer_id' => 4,
                 'description' => 'No Disponible',
             ]);
 
@@ -429,7 +442,7 @@ class TrainingSeeder extends Seeder
                 'hour' => '18:30',
                 'name' => 'Entrenamiento',
                 'places' => 10,
-                'trainer_id' => 3,
+                'trainer_id' => 4,
                 'description' => 'No Disponible',
             ]);
 
@@ -448,7 +461,7 @@ class TrainingSeeder extends Seeder
                 'hour' => '19:00',
                 'name' => 'Entrenamiento',
                 'places' => 10,
-                'trainer_id' => 3,
+                'trainer_id' => 4,
                 'description' => 'No Disponible',
             ]);
 
@@ -465,16 +478,158 @@ class TrainingSeeder extends Seeder
             $ta = TrainAppointment::create([
                 'date' => \Carbon\Carbon::parse('2022-01-03')->addweeks($week),
                 'hour' => '9:00',
-                'name' => 'Entrenamiento',
+                'name' => 'Marcia y Pia',
                 'places' => 2,
-                'trainer_id' => 2,
+                'trainer_id' => 4,
                 'description' => 'No Disponible',
             ]);
 
             DB::table('train_appointments_pivot')->insert([
-                'training_id' => 7,
+                'training_id' => 8,
                 'train_appointment_id' => $ta->id,
             ]);
+
+            $ta = TrainAppointment::create([
+                'date' => \Carbon\Carbon::parse('2022-01-05')->addweeks($week),
+                'hour' => '9:00',
+                'name' => 'Marcia y Pia',
+                'places' => 2,
+                'trainer_id' => 4,
+                'description' => 'No Disponible',
+            ]);
+
+            DB::table('train_appointments_pivot')->insert([
+                'training_id' => 8,
+                'train_appointment_id' => $ta->id,
+            ]);
+
+            $ta = TrainAppointment::create([
+                'date' => \Carbon\Carbon::parse('2022-01-03')->addweeks($week),
+                'hour' => '7:00',
+                'name' => 'Sebastian Wilson',
+                'places' => 1,
+                'trainer_id' => 4,
+                'description' => 'No Disponible',
+            ]);
+
+            DB::table('train_appointments_pivot')->insert([
+                'training_id' => 14,
+                'train_appointment_id' => $ta->id,
+            ]);
+
+            $ta = TrainAppointment::create([
+                'date' => \Carbon\Carbon::parse('2022-01-05')->addweeks($week),
+                'hour' => '7:00',
+                'name' => 'Sebastian Wilson',
+                'places' => 1,
+                'trainer_id' => 4,
+                'description' => 'No Disponible',
+            ]);
+
+            DB::table('train_appointments_pivot')->insert([
+                'training_id' => 14,
+                'train_appointment_id' => $ta->id,
+            ]);
+
+            $ta = TrainAppointment::create([
+                'date' => \Carbon\Carbon::parse('2022-01-07')->addweeks($week),
+                'hour' => '16:00',
+                'name' => 'Sebastian Wilson',
+                'places' => 1,
+                'trainer_id' => 4,
+                'description' => 'No Disponible',
+            ]);
+
+            DB::table('train_appointments_pivot')->insert([
+                'training_id' => 14,
+                'train_appointment_id' => $ta->id,
+            ]);
+
+            $ta = TrainAppointment::create([
+                'date' => \Carbon\Carbon::parse('2022-01-06')->addweeks($week),
+                'hour' => '16:00',
+                'name' => 'Carlos Celis',
+                'places' => 1,
+                'trainer_id' => 4,
+                'description' => 'No Disponible',
+            ]);
+
+            DB::table('train_appointments_pivot')->insert([
+                'training_id' => 12,
+                'train_appointment_id' => $ta->id,
+            ]);
+
+             $ta = TrainAppointment::create([
+                'date' => \Carbon\Carbon::parse('2022-01-04')->addweeks($week),
+                'hour' => '16:00',
+                'name' => 'Nicolas tobar',
+                'places' => 1,
+                'trainer_id' => 3,
+                'description' => 'No Disponible',
+            ]);
+
+            DB::table('train_appointments_pivot')->insert([
+                'training_id' => 13,
+                'train_appointment_id' => $ta->id,
+            ]);
+
+            $ta = TrainAppointment::create([
+                'date' => \Carbon\Carbon::parse('2022-01-06')->addweeks($week),
+                'hour' => '16:00',
+                'name' => 'Nicolas tobar',
+                'places' => 1,
+                'trainer_id' => 3,
+                'description' => 'No Disponible',
+            ]);
+
+            DB::table('train_appointments_pivot')->insert([
+                'training_id' => 13,
+                'train_appointment_id' => $ta->id,
+            ]);
+
+            $ta = TrainAppointment::create([
+                'date' => \Carbon\Carbon::parse('2022-01-05')->addweeks($week),
+                'hour' => '11:00',
+                'name' => 'Juan Pablo Sallato',
+                'places' => 1,
+                'trainer_id' => 3,
+                'description' => 'No Disponible',
+            ]);
+
+            DB::table('train_appointments_pivot')->insert([
+                'training_id' => 12,
+                'train_appointment_id' => $ta->id,
+            ]);
+
+            $ta = TrainAppointment::create([
+                'date' => \Carbon\Carbon::parse('2022-01-04')->addweeks($week),
+                'hour' => '20:00',
+                'name' => 'Yohanna Valdivia',
+                'places' => 1,
+                'trainer_id' => 3,
+                'description' => 'No Disponible',
+            ]);
+
+            DB::table('train_appointments_pivot')->insert([
+                'training_id' => 13,
+                'train_appointment_id' => $ta->id,
+            ]);
+
+            $ta = TrainAppointment::create([
+                'date' => \Carbon\Carbon::parse('2022-01-06')->addweeks($week),
+                'hour' => '20:00',
+                'name' => 'Yohanna Valdivia',
+                'places' => 1,
+                'trainer_id' => 3,
+                'description' => 'No Disponible',
+            ]);
+
+            DB::table('train_appointments_pivot')->insert([
+                'training_id' => 13,
+                'train_appointment_id' => $ta->id,
+            ]);
+
+
         }
     }
 }

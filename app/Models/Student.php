@@ -186,6 +186,8 @@ class Student extends Model {
 			$new_student = new Student;
 			$new_student->user_id = $this->user_id;
 			$new_student->training_id = $request->training_id;
+			$new_student->extra = $request->extra;
+			$new_student->terms = $request->terms;
 			$new_student->start_day = $this->lastPlan()->endMonth();
 			$new_student->save();
 		}

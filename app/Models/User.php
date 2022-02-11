@@ -183,7 +183,7 @@ class User extends Authenticatable {
 	}
 
 	public function canBook() {
-		if ($this->countBooks() >= $this->training->class) {
+		if ($this->countBooks() >= $this->training->class()) {
 			return False;
 		}
 		return True;

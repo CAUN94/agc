@@ -14,7 +14,7 @@ class AddExtraColumnToStudents extends Migration
     public function up()
     {
         Schema::table('students', function (Blueprint $table) {
-            $table->boolean('extra')->after('terms')->default(0);
+            $table->boolean('extra')->after('terms')->nullable()->default(0);
         });
     }
 

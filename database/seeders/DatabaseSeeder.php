@@ -100,5 +100,20 @@ class DatabaseSeeder extends Seeder {
 		Admin::create([
 			'user_id' => 1,
 		]);
+
+		DB::table('dymantic_instagram_basic_profiles')->insert([
+            'id' => 1,
+            'username' => 'yjb',
+        ]);
+
+        DB::table('dymantic_instagram_feed_tokens')->insert([
+            'id' => 1,
+            'profile_id' => 1,
+            'access_code' => 'IGQVJYX2ZAOaWFidHN0aVJQd1dnYUFTTng3TGVlTWtjSmpwaWdQa1kyY09xYU84ejRqak4teHBjempOU3djN3FMeFVhanJHc1NZAY0Rra3RUajVuU2RBNVNRUkNVUWNQM2FNSjRwU3BB',
+            'username' => 'you.justbetter',
+            'user_id' => '5089264587798125',
+            'user_fullname' => 'not available',
+            'user_profile_picture' => 'not available'
+        ]);
 	}
 }

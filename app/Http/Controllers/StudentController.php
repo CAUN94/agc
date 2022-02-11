@@ -79,10 +79,11 @@ class StudentController extends Controller {
 	 */
 	public function update(Request $request, Student $student) {
 		$student = $student->lastPlan();
-		$request->merge(['user_id' => Auth::id()]);
+		$request->merge(['user_id' => Auth::id(),'terms' => 1]);
 		$attributes = $request->validate([
 			'training_id' => ['required', 'exists:trainings,id'],
 			'user_id' => ['required', 'exists:users,id'],
+			'extra' => 'sometimes'
 		]);
 
 		$student->newPlan($request, $request->months);

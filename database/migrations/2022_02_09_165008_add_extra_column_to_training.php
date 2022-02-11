@@ -14,7 +14,7 @@ class AddExtraColumnToTraining extends Migration
     public function up()
     {
         Schema::table('trainings', function (Blueprint $table) {
-            $table->integer('extra')->after('period')->default('35000');
+            $table->integer('extra')->after('period')->default('25000');
         });
     }
 
