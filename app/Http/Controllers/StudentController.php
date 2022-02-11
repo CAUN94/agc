@@ -44,8 +44,10 @@ class StudentController extends Controller {
 			'user_id' => ['required', Rule::unique('students', 'user_id')],
 			'start_day' => ['required', 'date', 'after:yesterday', 'before:' . \Carbon\Carbon::Now()->addMonth()->endOfMonth()],
 			'terms' => 'required',
+			'extra' => 'sometimes'
 		]);
-		$student = Student::create($attributes);
+		// ddd($attributes);
+		$student = Student::create($attributes );
 		$student->newPlan($request, $request->months - 1);
 		FlashSession::flash('primary', 'Registrado');
 		return redirect('/users');
