@@ -37,6 +37,7 @@ class StudentController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(Request $request) {
+
 		$request->merge(['user_id' => Auth::id()]);
 		$attributes = $request->validate([
 			'training_id' => ['required', 'exists:trainings,id'],
