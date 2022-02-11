@@ -22,6 +22,8 @@ Route::resource('trainings', 'App\Http\Controllers\TrainingController');
 Route::resource('students', 'App\Http\Controllers\StudentController');
 Route::get('/table', [TableController::class, 'index']);
 
+Route::get('/mailcontact', 'App\Http\Controllers\MailContactController@show')->middleware(['auth']);
+Route::post('/mailcontact', 'App\Http\Controllers\MailContactController@store')->middleware(['auth']);
 Route::get('poll', 'App\Http\Controllers\PollController@example')->middleware(['auth']);
 Route::post('/encuesta', 'App\Http\Controllers\PollController@showdata')->middleware(['auth']);
 
