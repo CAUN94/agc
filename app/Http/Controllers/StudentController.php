@@ -47,7 +47,7 @@ class StudentController extends Controller {
 			'extra' => 'sometimes'
 		]);
 		// ddd($attributes);
-		$student = Student::create($attributes );
+		$student = Student::create($attributes);
 		$student->newPlan($request, $request->months - 1);
 		FlashSession::flash('primary', 'Registrado');
 		return redirect('/users');
