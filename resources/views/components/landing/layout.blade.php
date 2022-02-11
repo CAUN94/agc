@@ -57,6 +57,7 @@
             <span class="text-white">© You Just Better <script>document.write(new Date().getFullYear())</script></span>
         </footer>
 
+        <x-train-fixed></x-train-fixed>
         <x-contact-fixed></x-contact-fixed>
         <x-flash-message></x-flash-message>
         @if (isset($script)) {{ $script }} @endif
