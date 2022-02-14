@@ -72,10 +72,7 @@ class Training extends Model {
 	}
 
 	public function extra() {
-		if($this->extra > 0){
-			return Helper::moneda_chilena($this->extra);
-		}
-		return null;
+		return Helper::moneda_chilena($this->extra);
 	}
 
 	public function daysCheck($date) {

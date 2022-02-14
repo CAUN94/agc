@@ -99,7 +99,7 @@
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 flex justify-between items-center">
                   <div>
-                    {{ $user->training->plan() }}
+                    {{ $user->student->trainingPlan() }}
                     <span class="text-sm text-primary-500">
                       {{$user->Training->planClassComplete()}}
                     </span>
@@ -157,7 +157,7 @@
                 @forelse(Auth::user()->allStudentPlan()->with('Training')->paginate(8) as $plan)
                   <div class="flex justify-between items-center">
                     <div class="flex flex-col">
-                      <a href="/students"> {{$plan->Training->plan()}}</a>
+                      <a href="/students"> {{$plan->trainingPlan()}}</a>
                       <span class="text-xs text-primary-500">
                         {{$plan->Training->planClassComplete()}}
                       </span>

@@ -22,15 +22,24 @@ class Student extends Model {
 		return $this->belongsTo(Training::class);
 	}
 
+	public function trainingPlan(){
+		return $this->training->plan() ." ". ($this->extra > 0 ? '+ pauta' : '');
+	}
+
+
+
 	public function price() {
-		if ($this->extra){
+		if ($this->extra > 0){
 			return $this->training->price + $this->training->extra;
 		}
 		return $this->training->price;
 	}
 
 	public function trainingPrice() {
-		return Helper::moneda_chilena($this->price());
+		if ($this->extra){
+			return Helper::moneda_chilena($this->training->price) ." + ". Helper::moneda_chilena($this->training->extra);
+		}
+		return Helper::moneda_chilena($this->training->price);
 	}
 
 	public function isSettled() {
