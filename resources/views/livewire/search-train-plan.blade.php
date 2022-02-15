@@ -283,7 +283,7 @@
 
                   Recibirás un correo con la información para activar tu plan al realizar el pago.
                   <x-slot name="important">
-                    <p>Revise los términos y condiciones <a href="https://docs.google.com/document/d/1jQ0pFo1yOk14V-qzetS5AC05doqNVhRLEtlJ0FUCB-M/edit?usp=sharing" target="_blank" class="text-blue-500">Aquí</a></p>
+                    <p>Revise los términos y condiciones <a href={{url("/pdf/TE%CC%81RMINOS%20Y%20CONDICIONES%20DEL%20SERVICIO%20DE%20ENTRENAMIENTO.pdf")}} target="_blank" class="text-blue-500">Aquí</a></p>
                     <div class="flex m-1">
                       <div>
                         <div class="form-check ">

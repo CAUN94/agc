@@ -10,7 +10,7 @@ Revisa tu perfil
 
 Te invitamos a que veas nuestros planes de entrenamiento.
 
-@component('mail::button', ['url' => url('/users')])
+@component('mail::button', ['url' => url('/trainings')])
 Planes de Entrenamiento
 @endcomponent
 

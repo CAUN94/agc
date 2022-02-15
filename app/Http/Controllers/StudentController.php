@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AdminNewStudent;
+use App\Mail\NewStudent;
 use App\Models\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -49,6 +52,11 @@ class StudentController extends Controller {
 		// ddd($attributes);
 		$student = Student::create($attributes);
 		$student->newPlan($request, $request->months - 1);
+
+		$user = User::find($student->user_id);
+		\Mail::to($user->email)->send(new NewStudent($user));
+		\Mail::to('desarrollo@justbetter.cl')->bcc('clinica@justbetter.cl')->send(new AdminNewStudent($user));
+
 		FlashSession::flash('primary', 'Registrado');
 		return redirect('/users');
 	}
