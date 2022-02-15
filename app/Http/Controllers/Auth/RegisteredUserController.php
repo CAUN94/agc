@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\AdminNewUser;
+use App\Mail\WelcomeNewUser;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -49,6 +51,9 @@ class RegisteredUserController extends Controller {
 		Auth::login($user);
 
 		FlashSession::flash('primary', 'Hola ' . Auth::user()->name);
+
+		\Mail::to($user->email)->send(new WelcomeNewUser($user));
+		\Mail::to('desarrollo@justbetter.cl')->bcc('clinica@justbetter.cl')->send(new AdminNewUser($user));
 
 		return redirect(RouteServiceProvider::HOME);
 	}

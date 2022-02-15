@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Admin;
+use App\Models\Alliance;
 use App\Models\Professional;
 use App\Models\Student;
 use App\Models\TrainBook;
@@ -107,6 +108,15 @@ class User extends Authenticatable {
 		return $gender[$this->gender];
 	}
 
+	public function genderLetter() {
+		$genderLetter = [
+			'm' => 'o',
+			'f' => 'a',
+			'n' => '@',
+		];
+		return $genderLetter[$this->gender];
+	}
+
 	public function Student() {
 		$student = $this->hasOne(Student::class)
 			->where('start_day', '<=', \Carbon\Carbon::NOW())
@@ -137,6 +147,29 @@ class User extends Authenticatable {
 		}
 		return False;
 	}
+
+	public function alliance(){
+        return $this->belongsToMany(Alliance::class,
+            'users_alliances_pivot',
+            'user_id',
+            'alliance_id')->first();
+    }
+
+    public function hasAlliance(){
+    	if (!is_null($this->alliance())){
+    		return True;
+    	}
+        return False;
+    }
+
+    public function allianceDesc(){
+    	if($this->hasAlliance()){
+    		return (100-($this->alliance()->desc))/100;
+    	}
+    	return 1;
+
+    }
+
 
 	public function isStudent() {
 		if (is_null($this->Student)) {
