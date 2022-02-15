@@ -284,7 +284,7 @@
                   Recibirás un correo con la información para activar tu plan al realizar el pago.
                   <x-slot name="important">
 
-                    <p>Revise los términos y condiciones <a href="{{ asset("/pdf/TE%CC%81RMINOS%20Y%20CONDICIONES%20DEL%20SERVICIO%20DE%20ENTRENAMIENTO.pdf") }}" target="_blank" class="text-blue-500">Aquí</a></p>
+                    <p>Revise los términos y condiciones <a href="{{ asset("/pdf/tyc.pdf") }}" target="_blank" class="text-blue-500">Aquí</a></p>
                     <div class="flex m-1">
                       <div>
                         <div class="form-check ">
