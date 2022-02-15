@@ -21,6 +21,7 @@ Route::resource('users', 'App\Http\Controllers\UsersController')->middleware(['a
 Route::resource('trainings', 'App\Http\Controllers\TrainingController');
 Route::resource('students', 'App\Http\Controllers\StudentController');
 Route::get('/table', [TableController::class, 'index']);
+Route::get('/tyc', [DownloadController::class, 'downloadTyC']);
 
 Route::get('/mailcontact', 'App\Http\Controllers\MailContactController@show')->middleware(['auth']);
 Route::post('/mailcontact', 'App\Http\Controllers\MailContactController@store')->middleware(['auth']);
