@@ -8,7 +8,7 @@ Te invitamos a que actualices tu información.
 Revisa tu perfil
 @endcomponent
 
-Te invitamos a que veas nuestros planes de entrenamiento.
+Además te invitamos a que veas nuestros planes de entrenamiento.
 
 @component('mail::button', ['url' => url('/trainings')])
 Planes de Entrenamiento

@@ -43,6 +43,11 @@ class AdminUser extends Component {
 		return view('livewire.admin-user');
 	}
 
+	public function deleteUser() {
+		User::find($this->userid)->delete();
+		return redirect()->to('/adminusers');
+	}
+
 	public function activateEdit() {
 		$this->view = 'edit';
 	}

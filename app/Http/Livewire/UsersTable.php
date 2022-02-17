@@ -114,7 +114,8 @@ class UsersTable extends LivewireDatatable {
 	}
 
 	public function delete($value) {
-		ddd($this);
+		$user = User::find($value);
+		$user->delete();
 	}
 
 	public function deleteView($name = 'id') {
