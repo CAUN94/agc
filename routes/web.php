@@ -40,6 +40,7 @@ Route::get('/padpow', 'App\Http\Controllers\RedirectController@pay');
 Route::get('/rsf', 'App\Http\Controllers\RedirectController@rsf');
 Route::get('/registro', 'App\Http\Controllers\RedirectController@registro');
 Route::get('/comunicaciones', 'App\Http\Controllers\RedirectController@comunicaciones');
+Route::get('/pendientes', 'App\Http\Controllers\RedirectController@pendientes');
 Route::get('/solicitud-desarrollo', 'App\Http\Controllers\RedirectController@development');
 Route::get('/solicitud-comunicaciones', 'App\Http\Controllers\RedirectController@communications');
 Route::get('/solicitud-administracion', 'App\Http\Controllers\RedirectController@administration');

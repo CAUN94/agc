@@ -175,4 +175,9 @@ class RedirectController extends Controller {
 		return Redirect::away($url);
 	}
 
+	public function pendientes() {
+		$url = "https://docs.google.com/document/d/1NT569Gz2aEPYaKyKakyAvBIXgKpLYS8NZ7ezMgUKUJo/edit";
+		return Redirect::away($url);
+	}
+
 }
