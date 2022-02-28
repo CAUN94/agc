@@ -66,7 +66,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
             return in_array($user->email, [
                 'cristobal@ugarte.cl',
                 'cristobal.ugarte@edu.uai.cl',
-                'cristobalugarte6@edu.uai.cl'
+                'cristobalugarte6@gmail.com'
             ]);
         });
     }
