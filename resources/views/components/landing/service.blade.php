@@ -2,7 +2,7 @@
     <h2 class="title">Servicios</h2>
     <div class="box-container">
       <div class="box">
-            <p>Kinesología</p>
+            <p>Kinesiología</p>
             <img src="{{ asset('img/iconos/kinesiologia.png')}}">
       </div>
       <div class="box">
