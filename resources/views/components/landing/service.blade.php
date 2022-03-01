@@ -35,10 +35,10 @@
             <p>Traumatología</p>
             <img src="{{ asset('img/iconos/traumatologia.png')}}">
       </div>
-      <div class="box">
+      {{-- <div class="box">
             <p>Medicina General</p>
             <img src="{{ asset('img/iconos/medicina-general.png')}}">
-      </div>
+      </div> --}}
       <div class="box">
             <p>Biomecánica</p>
             <img src="{{ asset('img/iconos/biomecanica.png')}}">
