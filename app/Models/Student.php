@@ -30,16 +30,36 @@ class Student extends Model {
 
 	public function price() {
 		if ($this->extra > 0){
-			return ($this->training->price + $this->training->extra)*$this->user->alliancedesc();
+			$price = ($this->training->price + $this->training->extra)*$this->user->alliancedesc();
 		}
-		return ($this->training->price)*$this->user->alliancedesc();
+		$price = ($this->training->price)*$this->user->alliancedesc();
+
+		if($this->training->type === 'duo'){
+			return $price/2;
+		}
+		return $price;
+	}
+
+	public function priceExtra() {
+		$price = ($this->training->extra)*$this->user->alliancedesc();
+
+		return $price;
+	}
+
+	public function priceJustPlan() {
+		$price = ($this->training->price)*$this->user->alliancedesc();
+
+		if($this->training->type === 'duo'){
+			return $price/2;
+		}
+		return $price;
 	}
 
 	public function trainingPrice() {
 		if ($this->extra){
-			return Helper::moneda_chilena($this->training->price*$this->user->alliancedesc()) ." + ". Helper::moneda_chilena($this->training->extra*$this->user->alliancedesc());
+			return Helper::moneda_chilena($this->priceJustPlan()) ." + ". Helper::moneda_chilena($this->priceExtra());
 		}
-		return Helper::moneda_chilena($this->training->price*$this->user->alliancedesc());
+		return Helper::moneda_chilena($this->price());
 	}
 
 	public function isSettled() {
