@@ -101,6 +101,16 @@
 
       <div class="border-t border-gray-200 mt-2" x-show="$wire.trainShow" x-cloak>
         <dl>
+          <div class="pl-1 py-2 sm:grid sm:grid-cols-3">
+            <dt class="text-sm font-medium text-gray-500">
+              Descripción
+            </dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              <span>{{$selectedTraining->description}}</span>
+            </dd>
+          </div>
+        </dl>
+        <dl>
           <div class="pl-1 py-2 grid grid-cols-3">
             <dt class="text-sm font-medium text-gray-500">
               Coach
@@ -154,16 +164,7 @@
           </div>
         </dl>
         @endif
-        <dl>
-          <div class="pl-1 py-2 sm:grid sm:grid-cols-3">
-            <dt class="text-sm font-medium text-gray-500">
-              Descripción
-            </dt>
-            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              <span>{{$selectedTraining->description}}</span>
-            </dd>
-          </div>
-        </dl>
+
         @auth()
           <dl>
             <div class="pl-1 py-5 sm:grid sm:grid-cols-3 items-center">
