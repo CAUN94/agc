@@ -152,7 +152,7 @@
             </dd>
           </div>
         </dl>
-        @if($selectedTraining->extra > 0)
+        {{-- @if($selectedTraining->extra > 0)
         <dl>
           <div class="pl-1 py-2 grid grid-cols-3">
             <dt class="text-sm font-medium text-gray-500">
@@ -163,7 +163,7 @@
             </dd>
           </div>
         </dl>
-        @endif
+        @endif --}}
 
         @auth()
           <dl>

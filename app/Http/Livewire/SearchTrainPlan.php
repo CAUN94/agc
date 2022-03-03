@@ -35,11 +35,8 @@ class SearchTrainPlan extends Component {
 	}
 
 	public function render() {
-		// if($this->trainShow!=''){
-		//     ddd($this->trainShow);
-		// }
 		if ($this->search === '') {
-			$this->trainings = Training::groupby('format', 'name')->orderby('name', 'asc')->get();
+			$this->trainings = Training::where('is_published',true)->groupby('format', 'name')->orderby('name', 'asc')->get();
 		}
 		return view('livewire.search-train-plan');
 	}

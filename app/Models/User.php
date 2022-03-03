@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\TrainAppointment;
 use App\Models\Admin;
 use App\Models\Alliance;
 use App\Models\Professional;
@@ -215,7 +216,13 @@ class User extends Authenticatable {
 		return $this->hasMany(TrainBook::class);
 	}
 
-	public function canBook() {
+	public function canBook($train_id) {
+		if(in_array($this->training->id, [1,2,3,4])){
+			if($this->countWeekBooks($train_id) >= 3){
+				return false;
+			}
+			return true;
+		}
 		if ($this->countBooks() >= $this->training->class()) {
 			return False;
 		}
@@ -224,6 +231,22 @@ class User extends Authenticatable {
 
 	public function countBooks() {
 		return $this->TrainBooks()->whereIN('train_appointment_id', $this->training->TrainAppointments->pluck('id')->toArray())->count();
+	}
+
+	public function countWeekBooks($train_id) {
+		$date = TrainAppointment::find($train_id)->date;
+		$startOfWeek = \Carbon\Carbon::parse($date)->startOfWeek()->format('Y-m-d');
+		$endOfWeek = \Carbon\Carbon::parse($date)->endOfWeek()->format('Y-m-d');
+		$train_ids = $this->training->TrainAppointments
+			->where('date','>=', $startOfWeek)
+			->where('date','<=', $endOfWeek)
+			->pluck('id')
+			->toArray();
+
+		return $this->TrainBooks()
+			->whereIN('train_appointment_id', $train_ids)
+			->count();
+
 	}
 
 	public function age() {

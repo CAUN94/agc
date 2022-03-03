@@ -22,6 +22,7 @@
                         </div> --}}
                     </div>
                     @if(!is_null($train))
+
                     <div x-show="$wire.classShow" x-cloak>
                         <dl>
                           <div class="train-class-resume">
@@ -30,16 +31,6 @@
                             </dt>
                             <dd class="train-class-resume-text">
                                 <li class="list-none">{{$train->trainings()->name}}</li>
-                            </dd>
-                          </div>
-                        </dl>
-                        <dl>
-                          <div class="train-class-resume">
-                            <dt class="text-sm font-medium text-gray-500">
-                              Clase
-                            </dt>
-                            <dd class="train-class-resume-text">
-                                <li class="list-none">{{$train->name}}</li>
                             </dd>
                           </div>
                         </dl>
@@ -56,26 +47,6 @@
                         <dl>
                           <div class="train-class-resume">
                             <dt class="text-sm font-medium text-gray-500">
-                              Fecha
-                            </dt>
-                            <dd class="train-class-resume-text">
-                              <span>{{$train->date()}}</span>
-                            </dd>
-                          </div>
-                        </dl>
-                        <dl>
-                          <div class="train-class-resume">
-                            <dt class="text-sm font-medium text-gray-500">
-                              Hora
-                            </dt>
-                            <dd class="train-class-resume-text">
-                              <span>{{$train->hour}} hrs</span>
-                            </dd>
-                          </div>
-                        </dl>
-                        <dl>
-                          <div class="train-class-resume">
-                            <dt class="text-sm font-medium text-gray-500">
                               Duración
                             </dt>
                             <dd class="train-class-resume-text">
@@ -85,35 +56,56 @@
                         </dl>
                         <dl>
                           <div class="train-class-resume">
-                            <dt class="text-sm font-medium text-gray-500">
-                              Descripción
+                            <dt class="text-sm font-medium text-gray-500 my-auto">
+                              Nombre Clase
                             </dt>
                             <dd class="train-class-resume-text">
-                              <span>{{$train->trainings()->description}}</span>
+                              <x-admin.input class="col-span-6 sm:col-span-3" type="text" name="name" value="{{$train->name}}" readonly="edit"></x-admin.input>
+
                             </dd>
                           </div>
                         </dl>
-                        <div class="w-full flex py-2">
-                            @if($train->isComplete())
-                                <span class="text-lg  font-medium text-red-500">Clase Llena</span>
+                        <dl>
+                          <div class="train-class-resume">
+                            <dt class="text-sm font-medium text-gray-500 my-auto">
+                              Fecha
+                            </dt>
+                            <dd class="train-class-resume-text">
+                              <x-admin.input class="col-span-6 sm:col-span-3" type="date" name="date" value="{{$train->date}}" readonly="edit"></x-admin.input>
+
+                            </dd>
+                          </div>
+                        </dl>
+                        <dl>
+                          <div class="train-class-resume">
+                            <dt class="text-sm font-medium text-gray-500 my-auto">
+                              Hora
+                            </dt>
+                            <dd class="train-class-resume-text">
+                              <x-admin.input class="col-span-6 sm:col-span-3" type="time" name="hour" value="{{$train->hour}}" readonly="edit"></x-admin.input>
+
+                            </dd>
+                          </div>
+                        </dl>
+                        <div class="grid justify-items-end">
+                            <p class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-500 hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 cursor-pointer" wire:click='trainAppointmentEdit()'>
+                                Modificar Clase
+                            </p>
+                        </div>
+                        <hr class="my-2">
+                        <div class="grid">
+                            @if($train->status)
+                                @php $color = 'green'; @endphp
+                            @else
+                                @php $color = 'primary'; @endphp
                             @endif
+                            <p class="inline-block text-center justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-{{$color}}-500 hover:bg-{{$color}}-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-{{$color}}-500 cursor-pointer" wire:click='trainAppointmentStatus()'>
+                               Cambiar status de clase.
+                            </p>
                         </div>
 
                     </div>
                     @endif
-                {{--     <div class="pt-2">
-                        Clases:
-                        @forelse(Auth::user()->TrainBooks as $trainbook)
-                            <div class="flex space-justify-between">
-                            <span class="text-sm text-primary-500  flex-grow">{{$trainbook->TrainAppointment->name}} {{$trainbook->TrainAppointment->date()}} {{$trainbook->TrainAppointment->hour}}</span>
-                            <span class="text-sm text hover:text-primary-900 cursor-pointer">
-                                <i wire:click="unbook({{$trainbook->id}})" class="far fa-times-circle"></i>
-                            </span>
-                            </div>
-                        @empty
-                            <span class="text-xs">No hay clases reservadas</span>
-                        @endforelse
-                    </div> --}}
                 </div>
 
             </div>
@@ -188,7 +180,12 @@
                                                     @foreach(App\Models\TrainAppointment::where('date',$date)->whereIN('id',$plans)->orderby('hour', 'ASC')->get() as $trainAppointment)
                                                         <div
                                                             wire:click="show({{$trainAppointment->id}})"
-                                                            class="box-class border-primary-200 text-primary-800 bg-primary-100 cursor-pointer
+                                                            @if($trainAppointment->status)
+                                                                @php $color = 'green'; @endphp
+                                                            @else
+                                                                @php $color = 'primary'; @endphp
+                                                            @endif
+                                                            class="box-class border-{{$color}}-200 text-{{$color}}-800 bg-{{$color}}-100 cursor-pointer
                                                             ">
                                                             <p class="text-xs lg:text-sm lg:truncate leading-tight">{{$trainAppointment->hour}} {{$trainAppointment->name}}</p>
                                                         </div>

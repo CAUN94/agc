@@ -25,6 +25,10 @@ class AdminTrainAppointments extends Component
     public $train = null;
     public $selectedPlans = [];
     public $plans = [];
+    public $date;
+    public $name;
+    public $hour;
+    public $message;
 
     public function mount()
     {
@@ -50,9 +54,31 @@ class AdminTrainAppointments extends Component
         $this->now->addMonth();
     }
 
+    public function trainAppointmentEdit(){
+        $this->validate([
+            'name' => ['required'],
+            'date' => ['required'],
+            'hour' => ['required'],
+        ]);
+        $trainAppointment = TrainAppointment::find($this->train->id);
+        $trainAppointment->name = $this->name;
+        $trainAppointment->date = $this->date;
+        $trainAppointment->hour = $this->hour;
+        $trainAppointment->save();
+    }
+
+    public function trainAppointmentStatus(){
+        $trainAppointment = TrainAppointment::find($this->train->id);
+        $trainAppointment->status = !$trainAppointment->status;
+        $trainAppointment->save();
+    }
+
     public function show($id){
         $this->train = TrainAppointment::find($id);
         $this->classShow = true ;
+        $this->name = $this->train->name;
+        $this->date = $this->train->date;
+        $this->hour = $this->train->hour;
     }
 
     public function render()
