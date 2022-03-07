@@ -65,13 +65,13 @@
       </div>
     </div>
   </div>
-
   <script src="{{ asset('/vendor/ckeditor/ckeditor.js') }}"></script>
+  @livewireScripts
+
   <script>
     window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
     ga('create', 'UA-199543835-2', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
   </script>
-  @livewireScripts
 </body>
 
 </html>
