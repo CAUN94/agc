@@ -68,9 +68,14 @@
   <script src="{{ asset('/vendor/ckeditor/ckeditor.js') }}"></script>
   @livewireScripts
 
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GFXLHYT7L3"></script>
   <script>
-    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
-    ga('create', 'UA-199543835-2', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-GFXLHYT7L3');
   </script>
 </body>
 
