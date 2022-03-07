@@ -61,6 +61,10 @@
         <x-contact-fixed></x-contact-fixed>
         <x-flash-message></x-flash-message>
         @if (isset($script)) {{ $script }} @endif
+        <script>
+            window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+            ga('create', 'UA-199543835-2', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
+        </script>
         <livewire:scripts />
     </body>
 </html>
