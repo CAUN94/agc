@@ -37,13 +37,13 @@ class Student extends Model {
 		if($this->training->type === 'duo'){
 			return $price/2;
 		}
-		return $price;
+		return ceil($price);
 	}
 
 	public function priceExtra() {
 		$price = ($this->training->extra)*$this->user->alliancedesc()*$this->percentage;
 
-		return $price;
+		return ceil($price);
 	}
 
 	public function priceJustPlan() {
@@ -52,7 +52,7 @@ class Student extends Model {
 		if($this->training->type === 'duo'){
 			return $price/2;
 		}
-		return $price;
+		return ceil($price);
 	}
 
 	public function trainingPrice() {
