@@ -24,9 +24,9 @@
             </a>
         </li>
         @endif
-        @if (Auth::user()->isAdmin())
+        @if (Auth::user()->hasIntranet())
         <li>
-            <a href="/adminusers" class="drop-link block text-sm text-gray-700">
+            <a href="/adminpage" class="drop-link block text-sm text-gray-700">
                 <span class="drop-span">Admin</span>
             </a>
         </li>

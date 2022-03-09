@@ -12,7 +12,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Session as FlashSession;
 
-class AdminTrainAppointments extends Component
+class TrainerTrainAppointment extends Component
 {
     public $days = ['Lun','Mar','Mie','Jue','Vie','Sab'];
     public $now = '';
@@ -30,27 +30,26 @@ class AdminTrainAppointments extends Component
     public $name;
     public $hour;
     public $message;
+    public $startOfMonth;
+    public $endOfMonth;
 
-    public function mount()
-    {
+    public function mount(){
         $this->now = Carbon::Now();
-        // $this->selectedPlans = Training::where('id','>',0)->pluck('id')->toArray();
-        // $this->plans = DB::table('train_appointments_pivot')->distinct('train_appointment_id')->pluck('train_appointment_id')->toArray();
+        if (Carbon::now()->format('d') <= 21 ){
+            $this->startOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m')-1,21)->startOfDay();
+            $this->endOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m'),20)->endOfDay();
+        } else {
+            $this->startOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m'),21)->startOfDay();
+            $this->endOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m')+1,20)->endOfDay();
+        }
     }
 
     public function updateSelectedPlans(){
-        $this->selectedTrainer = [];
-        $this->plans = DB::table('train_appointments_pivot')
+        $this->plans = DB::table('train_appointments')
+            ->join('train_appointments_pivot', 'train_appointments.id', '=', 'train_appointments_pivot.train_appointment_id')
+            ->where('trainer_id',Auth::user()->id)
             ->whereIN('training_id',$this->selectedPlans)
             ->pluck('train_appointment_id')
-            ->toArray();
-    }
-
-    public function updateSelectedTrainer(){
-        $this->selectedPlans = [];
-        $this->plans = DB::table('train_appointments')
-            ->whereIN('trainer_id',$this->selectedTrainer)
-            ->pluck('id')
             ->toArray();
     }
 
@@ -120,6 +119,6 @@ class AdminTrainAppointments extends Component
             }
         }
 
-        return view('livewire.admin-train-appointments');
+        return view('livewire.trainer-train-appointment');
     }
 }

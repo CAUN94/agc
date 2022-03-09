@@ -212,6 +212,13 @@ class User extends Authenticatable {
 		return True;
 	}
 
+	public function hasIntranet(){
+		if($this->isAdmin() or $this->isProfessional() or $this->isTrainer()){
+			return true;
+		}
+		return false;
+	}
+
 	public function TrainBooks() {
 		return $this->hasMany(TrainBook::class);
 	}

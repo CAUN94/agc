@@ -29,6 +29,9 @@ Route::post('/encuesta', 'App\Http\Controllers\PollController@showdata')->middle
 
 Route::get('/instagram', [InstagramController::class, 'index'])->middleware(['auth']);
 
+Route::get('/adminpage', [AdminPageController::class, 'index'])->middleware(['intranet']);
+
+// Admins
 Route::resource('adminusers', 'App\Http\Controllers\AdminUserController');
 Route::resource('adminstudents', 'App\Http\Controllers\AdminStudentController');
 Route::resource('adminclass', 'App\Http\Controllers\AdminTrainingController');
@@ -36,6 +39,12 @@ Route::resource('admintrainappointment', 'App\Http\Controllers\AdminTrainAppoint
 Route::resource('adminprofessionals', 'App\Http\Controllers\AdminProfessionalsController');
 Route::resource('admintrainers', 'App\Http\Controllers\AdminTrainersController');
 
+
+// TrainerAdmins
+Route::resource('trainertrainappointment', 'App\Http\Controllers\TrainerTrainController');
+
+
+// Short Links
 Route::get('/padpow', 'App\Http\Controllers\RedirectController@pay');
 Route::get('/rsf', 'App\Http\Controllers\RedirectController@rsf');
 Route::get('/registro', 'App\Http\Controllers\RedirectController@registro');

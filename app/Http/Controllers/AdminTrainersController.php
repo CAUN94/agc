@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Trainer;
 use App\Models\Trainers;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,7 @@ class AdminTrainersController extends Controller
      */
     public function index()
     {
-        //
+        return Trainer::all();
     }
 
     /**

@@ -1,26 +1,41 @@
 <div>
     <div class="w-full overflow-x-auto gap-y-2 box-white p-3">
-        <form wire:change="updateSelectedTrainer">
-        <div class="grid grid-cols-3 gap-1">
-            @foreach(App\Models\Trainer::where('id','>',0)->get() as $trainer)
-                <div class="flex">
-                    <input class="form-check-input appearance-none h-3 w-3 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="{{ $trainer->user->id }}" value={{ $trainer->user->id }} wire:model="selectedTrainer.{{ $trainer->user->id }}">
-                    <label class="form-check-label inline-block text-gray-800 text-sm break-words" for="{{ $trainer->user->id }}">
-                        {{ $trainer->user->fullname() }}
-                    </label>
-              </div>
-            @endforeach
+        <div class="mb-2">
+            Periodo del {{$startOfMonth->format('d-m')}} al {{$endOfMonth->format('d-m')}}
         </div>
-        </form>
+        <ul class="grid grid-cols-4 gap-1">
+            <li>
+                <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                    <span class="flex-1 ml-3 whitespace-nowrap">Clases Realizadas</span>
+                    <span class="inline-flex items-center justify-center px-2 py-1 ml-3 text-sm font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{Auth::user()->trainer->trainAppointmentsMonthCheck()->get()->count()}}</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                    <span class="flex-1 ml-3 whitespace-nowrap">Clases del Mes</span>
+                    <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{Auth::user()->trainer->trainAppointmentsMonth()->get()->count()}}</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                    <i class="fa fa-money" aria-hidden="true"></i>
+                    <span class="flex-1 ml-3 whitespace-nowrap">Remuneración</span>
+                    <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">Aquí va la plata</span>
+                </a>
+            </li>
+        </ul>
     </div>
     <div class="w-full overflow-x-auto gap-y-2 box-white mt-2 p-3">
         <form wire:change="updateSelectedPlans">
         <div class="grid grid-cols-5 gap-1">
-            @foreach(App\Models\Training::where('id','>',0)->orderby('name','desc')->get() as $training)
-              <div class="flex">
+            @foreach(Auth::user()->trainer->trainings()->get() as $training)
+                @php $training = App\Models\Training::find($training->id) @endphp
+                <div class="flex">
                 <input class="form-check-input appearance-none h-3 w-3 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="{{ $training->id }}" value={{ $training->id }} wire:model="selectedPlans.{{ $training->id }}">
                 <label class="form-check-label inline-block text-gray-800 text-sm break-words" for="{{ $training->id }}">{{ $training->planComplete() }}</label>
-              </div>
+                </div>
             @endforeach
         </div>
         </form>
