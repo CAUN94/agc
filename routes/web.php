@@ -59,6 +59,7 @@ Route::get('/entrenamiento', 'App\Http\Controllers\RedirectController@trainning'
 Route::get('/aranceles', 'App\Http\Controllers\RedirectController@arancel');
 Route::get('/pago', 'App\Http\Controllers\RedirectController@pay');
 Route::get('/rrhh', 'App\Http\Controllers\RedirectController@rrhh');
+Route::get('/clinica', 'App\Http\Controllers\RedirectController@clinica');
 Route::get('/techosalud', 'App\Http\Controllers\RedirectController@techo');
 Route::get('/box/dcontrerasb', 'App\Http\Controllers\RedirectController@contreras');
 Route::get('/box/rbarchiesiv', 'App\Http\Controllers\RedirectController@barchiesi');

@@ -180,4 +180,10 @@ class RedirectController extends Controller {
 		return Redirect::away($url);
 	}
 
+	public function clinica() {
+		$url = "https://sites.google.com/justbetter.cl/recepcinyoujustbetter/temas-clinicos";
+		return Redirect::away($url);
+	}
+
+
 }
