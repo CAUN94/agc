@@ -24,7 +24,7 @@
                   Duración</span>
                 </th>
                 <th scope="col" class="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Formato</span>
+                  Clases por mes</span>
                 </th>
               </tr>
           </thead>
@@ -83,9 +83,9 @@
         {{$selectedTraining->plan()}}
         @else
           <div class="flex justify-between">
-            <div>Selecciona un plan.
+            <div>Selecciona un plan
               <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                y su formato
+                y sus clases por mes
               </p>
             </div>
             <div>
