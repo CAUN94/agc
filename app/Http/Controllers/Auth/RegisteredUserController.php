@@ -53,7 +53,7 @@ class RegisteredUserController extends Controller {
 		FlashSession::flash('primary', 'Hola ' . Auth::user()->name);
 
 		\Mail::to($user->email)->send(new WelcomeNewUser($user));
-		\Mail::to('desarrollo@justbetter.cl')->bcc('clinica@justbetter.cl')->send(new AdminNewUser($user));
+		\Mail::to('desarrollo@justbetter.cl')->bcc('clinica@justbetter.cl')->bcc('you@justbetter.cl')->send(new AdminNewUser($user));
 
 		return redirect(RouteServiceProvider::HOME);
 	}

@@ -2,6 +2,7 @@
 # Nuevo Usuario Registrado {{$user->fullname()}}
 
 - Nombre: {{$user->fullname()}}
+- Ruu: {{$user->rut}}
 - Genero: {{$user->gender()}}
 - Mail: {{$user->email}}
 - Celular: {{$user->phone}}

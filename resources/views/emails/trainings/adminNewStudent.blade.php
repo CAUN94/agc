@@ -2,6 +2,7 @@
 # Nuevo Usuario Registrado en Entrenamiento {{$user->fullname()}}
 
 - Nombre: {{$user->fullname()}}
+- Rut: {{$user->rut}}
 - Genero: {{$user->gender()}}
 - Mail: {{$user->email}}
 - Celular: {{$user->phone}}
