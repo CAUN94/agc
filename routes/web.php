@@ -38,10 +38,14 @@ Route::resource('adminclass', 'App\Http\Controllers\AdminTrainingController');
 Route::resource('admintrainappointment', 'App\Http\Controllers\AdminTrainAppointmentsController');
 Route::resource('adminprofessionals', 'App\Http\Controllers\AdminProfessionalsController');
 Route::resource('admintrainers', 'App\Http\Controllers\AdminTrainersController');
+Route::resource('adminbookappointment', 'App\Http\Controllers\AdminBookAppointmentsController');
+
+
 
 
 // TrainerAdmins
 Route::resource('trainertrainappointment', 'App\Http\Controllers\TrainerTrainController');
+Route::resource('trainerbookappointment', 'App\Http\Controllers\AdminBookAppointmentsController');
 
 // Scrap
 Route::get('/scraping-userml', 'App\Http\Controllers\ScrapingController@userMl')->name('scraping-userml');

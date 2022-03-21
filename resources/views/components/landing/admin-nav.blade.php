@@ -15,6 +15,7 @@
       <x-slot name="trigger">Clases</x-slot>
       <a class="py-1" href="/adminclass">Programas</a>
       <a class="my-1 py-1" href="/admintrainappointment">Calendario</a>
+      <a class="my-1 py-1" href="/adminbookappointment">Clases Reservadas</a>
     </x-nav-dropdown>
 
     <x-nav-dropdown>
@@ -30,7 +31,12 @@
   @endif
 
   @if(Auth::user()->isTrainer())
-    <a class="mt-3" href="/trainertrainappointment"><i class="fas fa-calendar-alt"></i> Entrenamiento</a>
+    <x-nav-dropdown>
+      <x-slot name="name">Entrenamiento</x-slot>
+      <x-slot name="trigger">training</x-slot>
+      <a class="py-1" href="/trainertrainappointment"><i class="fas fa-calendar-alt"></i> Entrenamiento</a>
+      <a class="my-1 py-1" href="/trainerbookappointment">Clases Reservadas</a>
+    </x-nav-dropdown>
   @endif
 
 </nav>
