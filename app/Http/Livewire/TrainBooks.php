@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\TrainAppointment;
 use App\Models\TrainBook;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -21,8 +22,7 @@ class TrainBooks extends LivewireDatatable
     public function builder() {
         return TrainBook::query()
             ->join('users', 'train_books.user_id', 'users.id')
-            ->join('train_appointments', 'train_books.train_appointment_id', 'train_appointments.id')
-            ->where('date', '>', Carbon::yesterday());
+            ->join('train_appointments', 'train_books.train_appointment_id', 'train_appointments.id');
     }
 
     public function columns()
@@ -43,6 +43,9 @@ class TrainBooks extends LivewireDatatable
             Column::name('train_appointments.hour')
                 ->label('Hora')
                 ->filterable(),
+            Column::callback(['train_appointments.id'], function ($id) {
+                return TrainAppointment::find($id)->trainings()->planComplete();
+            })->filterable(),
             Column::name('users.phone')
                 ->label('Telefono')
                 ->filterable(),
