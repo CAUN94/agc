@@ -29,19 +29,26 @@ class TrainBooks extends LivewireDatatable
     {
         return [
             Column::name('users.name')
-                ->label('Nombre'),
+                ->label('Nombre')
+                ->filterable(),
             Column::name('users.lastnames')
-                ->label('Apellido'),
+                ->label('Apellido')
+                ->filterable(),
             Column::name('train_appointments.name')
-                ->label('Clase'),
-            Column::name('train_appointments.date')
-                ->label('Día'),
+                ->label('Clase')
+                ->filterable(),
+            DateColumn::name('train_appointments.date')
+                ->label('Día')
+                ->filterable(),
             Column::name('train_appointments.hour')
-                ->label('Hora'),
+                ->label('Hora')
+                ->filterable(),
             Column::name('users.phone')
-                ->label('Telefono'),
+                ->label('Telefono')
+                ->filterable(),
             Column::name('users.email')
-                ->label('Mail'),
+                ->label('Mail')
+                ->filterable(),
         ];
     }
 }
