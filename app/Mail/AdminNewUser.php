@@ -31,6 +31,6 @@ class AdminNewUser extends Mailable
      */
     public function build()
     {
-        return $this->subject('Nuevo Regisro AGC')->markdown('emails.trainings.adminNewUser');
+        return $this->subject('Nuevo Registro AGC')->markdown('emails.trainings.adminNewUser');
     }
 }

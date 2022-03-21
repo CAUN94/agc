@@ -43,6 +43,9 @@ Route::resource('admintrainers', 'App\Http\Controllers\AdminTrainersController')
 // TrainerAdmins
 Route::resource('trainertrainappointment', 'App\Http\Controllers\TrainerTrainController');
 
+// Scrap
+Route::get('/scraping-userml', 'App\Http\Controllers\ScrapingController@userMl')->name('scraping-userml');
+
 
 // Short Links
 Route::get('/padpow', 'App\Http\Controllers\RedirectController@pay');
