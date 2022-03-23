@@ -10,7 +10,12 @@ class UserMl extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function setrutAttribute($value) {
-        $this->attributes['rut'] = Rut::parse(Rut::parse($value)->normalize())->format(Rut::FORMAT_WITH_DASH);
+        if(Rut::parse($value)->quiet()->validate()){
+            $this->attributes['rut'] = Rut::parse(Rut::parse($value)->normalize())->format(Rut::FORMAT_WITH_DASH);
+        }
+        $this->attributes['rut'] = $value;
     }
 }

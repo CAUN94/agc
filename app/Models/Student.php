@@ -69,6 +69,13 @@ class Student extends Model {
 		return False;
 	}
 
+	public function isFreePlan() {
+		if ($this->training->price == 0) {
+			return True;
+		}
+		return False;
+	}
+
 	public function isStartday($date) {
 		$end_day = \Carbon\Carbon::parse($this->start_day);
 		if ($end_day->dayOfWeek == 0) {
@@ -99,6 +106,11 @@ class Student extends Model {
 		}
 		return $actual;
 	}
+
+	// public function lastday() {
+	// 	$lastPlan =
+	// 	return \Carbon\Carbon::parse($this->start_day)->addDays($this->training->days);
+	// }
 
 	public function islastday($date) {
 		$end_day = \Carbon\Carbon::parse($this->start_day)->addDays($this->training->days);

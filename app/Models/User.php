@@ -142,6 +142,18 @@ class User extends Authenticatable {
 		return $this->allStudentPlan()->where('settled', '0');
 	}
 
+	public function notSettledSumPlan() {
+		$plans = $this->notSettledPlan()->pluck('training_id')->toArray();
+		return Training::whereIN('id',$plans)->sum('price');
+	}
+
+	public function notSettledSumPlanIsHigh() {
+		if($this->notSettledSumPlan()>0){
+			return True;
+		}
+		return False;
+	}
+
 	public function Training() {
 		if ($this->isStudent()) {
 			return $this->Student()->first()->Training();

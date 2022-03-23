@@ -176,6 +176,8 @@
                                             @if (Auth::user()->student->islastday($date))
                                                 @if(Auth::user()->student->islastday($date)->isRenew())
                                                     <span class="block sm:inline-block text-xs lg:text-sm">Fin de Plan</span>
+                                                @elseif(Auth::user()->student->isFreePlan())
+                                                    <a href="/trainings" class="box-class block sm:inline-block border-primary-200 text-xs sm:text-sm bg-primary-100 hover:bg-green-100 cursor-pointer">Fin plan de prueba</a>
                                                 @else
                                                     <span class="box-class block sm:inline-block border-primary-200 text-xs sm:text-sm bg-primary-100 hover:bg-green-100 cursor-pointer" x-on:click="openModal = ! openModal">Renovar Plan</span>
                                                 @endif

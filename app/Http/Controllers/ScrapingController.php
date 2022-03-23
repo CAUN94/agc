@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\UserMl;
 use Carbon\Carbon;
 use Goutte\Client;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpClient\HttpClient;
 
 class ScrapingController extends Controller
@@ -12,28 +13,73 @@ class ScrapingController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        set_time_limit(0);
     }
 
-    public function create_client($url, $filer = False){
+    public function create_client($url, $filter = False){
         $client = new Client();
         $crawler = $client->request('GET', 'https://youjustbetter.softwaremedilink.com/reportesdinamicos');
         $form = $crawler->selectButton('Ingresar')->form();
         $form->setValues(['rut' => 'admin', 'password' => 'Pascual4900']);
         $crawler = $client->submit($form);
-        $first = strval(Carbon::create(null, null, null)->subMonth()->subMonth()->format('Y-m-d'));
-        $last = strval(Carbon::create(null, null, null)->addMonth()->addMonth()->format('Y-m-d'));
-        $url = $url;
+        if($filter){
+            $first = strval(Carbon::create(null, null, null)->subMonth()->subMonth()->format('Y-m-d'));
+            $last = strval(Carbon::create(null, null, null)->addMonth()->format('Y-m-d'));
+            $url = $url."%5Bfecha_inicio%5D%5Bstatus%5D=activated&filters%5Bfecha_inicio%5D%5Bvalue%5D=".$first."&filters%5Bfecha_fin%5D%5Bstatus%5D=activated&filters%5Bfecha_fin%5D%5Bvalue%5D=".$last."";
+        }
         $crawler = $client->request('GET', $url);
         $array = $crawler->text();
-        return $array;
         $array = substr($array,2,-2);
         $split = explode('},{', $array);
         return $split;
     }
 
     public function userMl(){
-        return self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/pacientes_nuevos");
+        $split = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/pacientes_nuevos");
+        foreach($split as $string){
+            $jsonobj = "{".$string."}";
+            $value = json_decode($jsonobj,true);
+            $userMl = UserMl::updateOrCreate(
+                ['RUT' => $value['RUT/DNI']],
+                [
+                    'Nombre' => $value['Nombre paciente'],
+                    'Apellidos' => $value['Apellidos paciente'],
+                    'Fecha_Ingreso' => $value['Fecha Afiliación'],
+                    'Ultima_Cita' => $value['Última Cita'],
+                    'RUT' => $value['RUT/DNI'],
+                    'Nacimiento' => $value['Fecha nacimiento'],
+                    'Celular' => $value['Celular'],
+                    'Ciudad' => $value['Ciudad'],
+                    'Comuna' => $value['Comuna'],
+                    'Direccion' => $value['Dirección'],
+                    'Email' => $value['E-Mail'],
+                    'Observaciones' => $value['Observaciones'],
+                    'Sexo' => $value['Sexo'],
+                    'Convenio' => $value['Convenio']
+                ]
+            );
+        }
 
+        return redirect('/adminusers');
+    }
+
+    public function actionMl(){
+        return self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/listado_acciones?filters%5Bsucursal%5D%5Bstatus%5D=activated&filters%5Bsucursal%5D%5Bvalue%5D=1&filters",true);
+        // return $array;
+    }
+
+    public function appointmentMl(){
+        return self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/citas?filters%5Bsucursal%5D%5Bstatus%5D=activated&filters%5Bsucursal%5D%5Bvalue%5D=1&filters",true);
+        // return $array;
+    }
+
+    public function treatmentsMl(){
+        return self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/resumen_tratamientos_saldos");
+        // return $array;
+    }
+
+    public function paymentsMl(){
+        return self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/pagos_pacientes");
         // return $array;
     }
 }

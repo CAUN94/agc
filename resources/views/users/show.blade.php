@@ -161,7 +161,7 @@
             </div>
             <div class="border-t border-gray-200">
               <div class="bg-white text-sm px-4 py-5 sm:grid sm:grid-cols-1 sm:gap-4 sm:px-6 overflow-y-scroll">
-                @if(count(Auth::user()->notSettledPlan)>0)
+                @if(count(Auth::user()->notSettledPlan)>0 and Auth::user()->notSettledSumPlanIsHigh())
                 <x-pay>Pagar Plan</x-pay>
                 @endif
                 @forelse(Auth::user()->allStudentPlan()->with('Training')->paginate(8) as $plan)

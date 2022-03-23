@@ -198,7 +198,7 @@
                     El cambio de plan quedaria para el proximo periodo de pago.
                   </x-slot>
 
-                  @if(!$selectedTraining->isMonthly())
+                  @if(!$selectedTraining->isMonthly() and $selectedTraining->price > 0)
                     <x-slot name="options">
                       <x-label for="months" :value="__('¿Por cuántos meses quiere inscribir el plan?')" />
                       <div class="relative">
@@ -253,7 +253,7 @@
                       min="{{ \Carbon\Carbon::Now()->format('Y-m-d'); }}"
                       max="{{ \Carbon\Carbon::Now()->addDays(30)->format('Y-m-d'); }}"
                       required />
-                    @if(!$selectedTraining->isMonthly())
+                    @if(!$selectedTraining->isMonthly() and $selectedTraining->price > 0)
                     <x-label for="months" :value="__('¿Por cuántos meses quiere inscribir su plan?')" />
                     <div class="relative">
                         <select name="months" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="months">

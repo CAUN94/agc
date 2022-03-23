@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\AdminNewStudent;
 use App\Mail\NewStudent;
 use App\Models\Student;
+use App\Models\Training;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,7 +41,6 @@ class StudentController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(Request $request) {
-
 		$request->merge(['user_id' => Auth::id()]);
 		$attributes = $request->validate([
 			'training_id' => ['required', 'exists:trainings,id'],
@@ -89,6 +89,10 @@ class StudentController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update(Request $request, Student $student) {
+		if (Training::find($request->training_id)->price == 0){
+			FlashSession::flash('primary', 'No se puede contratar este plan');
+			return redirect('/trainings');
+		}
 		$student = $student->lastPlan();
 		$request->merge(['user_id' => Auth::id(),'terms' => 1]);
 		$attributes = $request->validate([
