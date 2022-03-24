@@ -59,7 +59,7 @@
         </x-poll.box-title>
 
         <x-poll.checkbox-answer>
-            Kinesiólogía,Entrenamiento Personalizado,Entrenamiento Grupal,Recovery,Medicina Deportiva,Nutrición,Biomecánica,Nutriología,Psicología Deportiva,Psicología Clínica,Traumatología,Medicina General,Life Style Medicine,services-interest
+            Kinesiólogía,Entrenamiento Personalizado,Entrenamiento Grupal,Recovery,Medicina Deportiva,Nutrición,Biomecánica,Nutriología,Psicología Deportiva,Psicología Clínica,Traumatología,Medicina General,Life Style Medicine,servicesinterest
         </x-poll.checkbox--answer>
     </x-poll.box>
 

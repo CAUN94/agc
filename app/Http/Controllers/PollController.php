@@ -36,14 +36,14 @@ class PollController extends Controller {
 	}
 
 	public function ganate_una_sesion_store(Request $request) {
-		return $request->all();
 		$input = request()->validate([
             'mail' => ['required', 'email'],
-            'gustos' => ['required']
+			'services-radio' => ['required'],
+			'services' => ['required'],
+			'satisfaction' => ['required'],
+			'servicesinterest' => ['required'],
         ]);
 		GanateSesion::create($input);
-
-
 		FlashSession::flash('primary','Muchas gracias por tu respuesta');
 
 		return redirect('/');

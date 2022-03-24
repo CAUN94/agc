@@ -11,7 +11,7 @@
                 class="checked:bg-[#f2715a] form-check-input sm:mx-1"
                 type="radio"
                 value="{{ $data[$i] }}"
-                name="{{ end($data) }}[]"
+                name="{{ end($data) }}"
                 id="{{ $data[$i] }}"
                 {{ in_array($data[$i], old(end($data), [])) ? 'checked' : '' }}>
             <label class="sm:mx-1" for="{{ $data[$i] }}">

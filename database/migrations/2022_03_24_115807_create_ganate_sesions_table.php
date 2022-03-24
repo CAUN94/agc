@@ -15,6 +15,12 @@ class CreateGanateSesionsTable extends Migration
     {
         Schema::create('ganate_sesions', function (Blueprint $table) {
             $table->id();
+            $table->string('mail');
+            $table->boolean('services-radio');
+            $table->text('services');
+            $table->string('satisfaction');
+            $table->text('servicesinterest');
+            $table->string('comment')->nullable();
             $table->timestamps();
         });
     }
