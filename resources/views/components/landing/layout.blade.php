@@ -27,10 +27,14 @@
           gtag('js', new Date());
 
           gtag('config', 'G-GFXLHYT7L3');
+          gtag('config', 'AW-10872889051');
         </script>
+        <script> gtag('event', 'conversion', {'send_to': 'AW-10872889051/Jlg6CIvr9KsDENu9zMAo'}); </script>
+        <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
 
     </head>
     <body>
+        <amp-analytics type="gtag" data-credentials="include"> <script type="application/json"> { "vars": { "gtag_id": "AW-10872889051", "config": { "AW-10872889051": { "groups": "default" } } }, "triggers": { } } </script> </amp-analytics>
         <div class="sticky-menu">
             <div
                 class="nav-menu"
