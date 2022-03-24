@@ -36,6 +36,7 @@ class PollController extends Controller {
 	}
 
 	public function ganate_una_sesion_store(Request $request) {
+		return $request->all();
 		$input = request()->validate([
             'mail' => ['required', 'email'],
             'gustos' => ['required']
