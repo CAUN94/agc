@@ -29,8 +29,14 @@ class UserMl extends Model
 
     public function setrutAttribute($value) {
         if(Rut::parse($value)->quiet()->validate()){
-            $this->attributes['rut'] = Rut::parse(Rut::parse($value)->normalize())->format(Rut::FORMAT_WITH_DASH);
+            $this->attributes['RUT'] = Rut::parse(Rut::parse($value)->normalize())->format(Rut::FORMAT_WITH_DASH);
+        } else{
+            $this->attributes['RUT'] = $value;
         }
-        $this->attributes['rut'] = $value;
+
+    }
+
+    public function setCelularAttribute($value) {
+        $this->attributes['Celular'] = "+569".substr(preg_replace('/[^0-9]+/', '', $value),-8);
     }
 }

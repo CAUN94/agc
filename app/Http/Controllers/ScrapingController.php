@@ -37,10 +37,11 @@ class ScrapingController extends Controller
 
         $split = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/pacientes_nuevos");
         // return $split;
+        $count = 0;
         foreach($split as $string){
             $jsonobj = "{".$string."}";
             $value = json_decode($jsonobj,true);
-            $userMl = UserMl::createOrCreate(
+            $userMl = UserMl::updateOrCreate(
                 ['RUT' => $value['RUT/DNI'],'Email' => $value['E-Mail']],
                 [
                     'Nombre' => $value['Nombre paciente'],
@@ -59,8 +60,12 @@ class ScrapingController extends Controller
                     'Convenio' => $value['Convenio']
                 ]
             );
+            $count++;
+            if($count == 100){
+                break;
+            }
         }
-        return redirect('/adminusers');
+        return redirect('/userml');
     }
 
     public function actionMl(){
