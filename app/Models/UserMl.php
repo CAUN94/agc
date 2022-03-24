@@ -10,7 +10,22 @@ class UserMl extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'Nombre',
+        'Apellidos',
+        'Fecha_Ingreso',
+        'Ultima_Cita',
+        'RUT',
+        'Nacimiento',
+        'Celular',
+        'Ciudad',
+        'Comuna',
+        'Direccion',
+        'Email',
+        'Observaciones',
+        'Sexo',
+        'Convenio'
+    ];
 
     public function setrutAttribute($value) {
         if(Rut::parse($value)->quiet()->validate()){

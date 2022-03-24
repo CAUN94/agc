@@ -24,8 +24,12 @@ Route::get('/table', [TableController::class, 'index']);
 
 Route::get('/mailcontact', 'App\Http\Controllers\MailContactController@show')->middleware(['auth']);
 Route::post('/mailcontact', 'App\Http\Controllers\MailContactController@store')->middleware(['auth']);
-Route::get('poll', 'App\Http\Controllers\PollController@example')->middleware(['auth']);
-Route::post('/encuesta', 'App\Http\Controllers\PollController@showdata')->middleware(['auth']);
+
+// Polls
+Route::get('/encuesta_satisfaccion', 'App\Http\Controllers\PollController@encuesta_satisfaccion_index');
+Route::post('/encuesta_satisfaccion', 'App\Http\Controllers\PollController@encuesta_satisfaccion_store');
+Route::get('/ganate_una_sesion', 'App\Http\Controllers\PollController@ganate_una_sesion_index');
+Route::post('/ganate_una_sesion', 'App\Http\Controllers\PollController@ganate_una_sesion_store');
 
 Route::get('/instagram', [InstagramController::class, 'index'])->middleware(['auth']);
 
@@ -39,6 +43,7 @@ Route::resource('admintrainappointment', 'App\Http\Controllers\AdminTrainAppoint
 Route::resource('adminprofessionals', 'App\Http\Controllers\AdminProfessionalsController');
 Route::resource('admintrainers', 'App\Http\Controllers\AdminTrainersController');
 Route::resource('adminbookappointment', 'App\Http\Controllers\AdminBookAppointmentsController');
+Route::get('/userml', [UserMlController::class, 'index'])->middleware(['intranet']);
 
 
 

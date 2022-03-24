@@ -11,11 +11,19 @@
     </x-nav-dropdown>
 
     <x-nav-dropdown>
-      <x-slot name="name"><i class="fas fa-calendar-alt"></i> Entrenamiento</x-slot>
+      <x-slot name="name"><i class="fas fa-calendar-alt mr-1"></i> Entrenamiento</x-slot>
       <x-slot name="trigger">Clases</x-slot>
       <a class="py-1" href="/adminclass">Programas</a>
       <a class="my-1 py-1" href="/admintrainappointment">Calendario</a>
       <a class="my-1 py-1" href="/adminbookappointment">Clases Reservadas</a>
+    </x-nav-dropdown>
+
+    <x-nav-dropdown>
+      <x-slot name="name"><i class="fas fa-notes-medical mr-1"></i>Medilink</x-slot>
+      <x-slot name="trigger">medelink</x-slot>
+      <a class="py-1" href="/userml">Usuarios</a>
+      {{-- <a class="my-1 py-1" href="#">Link #2</a> --}}
+      {{-- <a class="my-1 py-1" href="#">Link #3</a> --}}
     </x-nav-dropdown>
 
     <x-nav-dropdown>

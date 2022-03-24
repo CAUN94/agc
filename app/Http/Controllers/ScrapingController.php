@@ -13,7 +13,6 @@ class ScrapingController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        set_time_limit(0);
     }
 
     public function create_client($url, $filter = False){
@@ -35,12 +34,14 @@ class ScrapingController extends Controller
     }
 
     public function userMl(){
+
         $split = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/pacientes_nuevos");
+        // return $split;
         foreach($split as $string){
             $jsonobj = "{".$string."}";
             $value = json_decode($jsonobj,true);
-            $userMl = UserMl::updateOrCreate(
-                ['RUT' => $value['RUT/DNI']],
+            $userMl = UserMl::createOrCreate(
+                ['RUT' => $value['RUT/DNI'],'Email' => $value['E-Mail']],
                 [
                     'Nombre' => $value['Nombre paciente'],
                     'Apellidos' => $value['Apellidos paciente'],
@@ -59,7 +60,6 @@ class ScrapingController extends Controller
                 ]
             );
         }
-
         return redirect('/adminusers');
     }
 

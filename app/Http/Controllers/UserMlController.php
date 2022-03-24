@@ -14,7 +14,7 @@ class UserMlController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.usersml.index');
     }
 
     /**

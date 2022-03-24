@@ -67,5 +67,8 @@ class Kernel extends HttpKernel
         // Own Middleware
         'student' => \App\Http\Middleware\StudentRole::class,
         'intranet' => \App\Http\Middleware\IntranetRole::class,
+        'admin' => \App\Http\Middleware\AdminRole::class,
+        'professional' => \App\Http\Middleware\ProfessionalRole::class,
+        'trainer' => \App\Http\Middleware\TrainerRole::class,
     ];
 }
