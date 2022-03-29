@@ -1,5 +1,4 @@
 <x-landing.layout>
-
         <x-landing.header>
             <x-slot name="img">
                 <img src="{{asset('img/bg-first.jpg')}}">
