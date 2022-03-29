@@ -1,6 +1,6 @@
 <x-landing.layout>
     <div class="w-10/12 mx-auto text-white mt-10">
-        <h2 class="text-lg mb-2 flex items-center"><img class="mr-10 rounded-full" src="{{$user->avatar}}"> {{$user->username}}</h2>
+        <h2 class="text-lg mb-2 flex items-center"><img class="mr-10 rounded-full w-28" src="{{$user->avatar}}"> {{$user->username}}</h2>
 
             <h3 class="text-lg mb-2">Actividades</h3>
             <table class="table-auto w-full">
