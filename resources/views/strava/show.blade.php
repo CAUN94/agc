@@ -16,7 +16,7 @@
                     </tr>
                 </thead>
                 <tbody class="mt-3">
-                @foreach(Strava::activities($token,1,100) as $activity)
+                @foreach(Strava::activities($token,1,1000) as $activity)
                     {{-- @php $activity = json_encode($activity) @endphp
                     {{json_encode($activity) }} --}}
                     <tr>
