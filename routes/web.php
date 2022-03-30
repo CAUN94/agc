@@ -105,7 +105,6 @@ Route::get('pay/{user}/{status}', 'App\Http\Controllers\PayController@payStatus'
 // Strava
 Route::get('/strava', \App\Http\Controllers\StravaController::class .'@index');
 Route::get('/strava/show/{id}', \App\Http\Controllers\StravaController::class .'@show');
-Route::get('/strava/activities/{id}', \App\Http\Controllers\StravaController::class .'@activities');
 Route::get('/strava/auth', \App\Http\Controllers\StravaController::class .'@auth');
 Route::get('/strava/unauth', \App\Http\Controllers\StravaController::class .'@unauth');
 Route::get('/strava/callback', \App\Http\Controllers\StravaController::class .'@authCallback');
