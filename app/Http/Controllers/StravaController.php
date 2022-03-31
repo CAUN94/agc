@@ -36,7 +36,11 @@ class StravaController extends Controller
     public function show($id)
     {
 
-        $user = StravaUser::find($id);
+        $user = StravaUser::where('id', $id)->first();
+
+        if(is_null($user)){
+            return redirect('/strava/auth');
+        }
 
         if(Carbon::now() > $user->token_expires){
             // Token has expired, generate new tokens using the currently stored user refresh token
