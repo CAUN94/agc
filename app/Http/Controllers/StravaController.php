@@ -35,11 +35,24 @@ class StravaController extends Controller
 
     public function show($id)
     {
+
         $user = StravaUser::find($id);
+
+        if(Carbon::now() > $user->token_expires){
+            // Token has expired, generate new tokens using the currently stored user refresh token
+            $refresh = Strava::refreshToken($user->refresh_token);
+            StravaUser::where('id', $id)->update([
+              'access_token' => $refresh->access_token,
+              'refresh_token' => $refresh->refresh_token,
+              'token_expires' => Carbon::createFromTimestamp($refresh->expires_at)
+            ]);
+        }
+
         $token = $user->access_token;
         $activities = Strava::activities($token,1,200);
         $charges = $this->charges($activities);
         // return $charges;
+        // return view('strava.show',compact('user','activities'));
         return view('strava.show',compact('user','activities','charges'));
     }
 
@@ -140,85 +153,50 @@ class StravaController extends Controller
         $activities_run = array_filter($activities, function($activities){
             return $activities->type == 'Run';
         });
-        // return $activities_run;
-        $week1 = array_filter($activities_run, function($activities_run){
-            $weekStartDate = \Carbon\Carbon::now()->startofweek();
-            $weekEndDate = \Carbon\Carbon::now()->endofweek();
-            $weekStartDate = \Carbon\Carbon::parse("2021-10-22");
-            $weekEndDate = \Carbon\Carbon::parse("2021-10-22")->subdays(7);
+        $last_start_date = reset($activities_run)->start_date;
 
-            return \Carbon\Carbon::parse($activities_run->start_date)->between($weekStartDate,$weekEndDate);
-        });
+        $weeks = [];
+        for($i = 0; $i < 4; $i++){
+            $week = array_filter($activities_run, function($activities_run) use($i,$last_start_date){
+                // $weekStartDate = \Carbon\Carbon::now()->startofweek();
+                // $weekEndDate = \Carbon\Carbon::now()->endofweek();
+                $weekStartDate = \Carbon\Carbon::parse($last_start_date)->startofweek();
+                $weekEndDate = \Carbon\Carbon::parse($last_start_date)->endofweek();
 
-        $week2 = array_filter($activities_run, function($activities_run){
-            $weekStartDate = \Carbon\Carbon::now()->subweek()->startofweek();
-            $weekEndDate = \Carbon\Carbon::now()->subweek()->endofweek();
-            $weekStartDate = \Carbon\Carbon::parse("2021-10-22")->subdays(7);
-            $weekEndDate = \Carbon\Carbon::parse("2021-10-22")->subdays(14);
+                if($i > 0){
+                    $weekStartDate->subweeks($i);
+                    $weekEndDate->subweeks($i);
+                }
 
-            return \Carbon\Carbon::parse($activities_run->start_date)->between($weekStartDate,$weekEndDate);
-        });
-
-        $week3 = array_filter($activities_run, function($activities_run){
-            $weekStartDate = \Carbon\Carbon::now()->subweek(2)->startofweek();
-            $weekEndDate = \Carbon\Carbon::now()->subweek(2)->endofweek();
-            $weekStartDate = \Carbon\Carbon::parse("2021-10-22")->subdays(14);
-            $weekEndDate = \Carbon\Carbon::parse("2021-10-22")->subdays(21);
-
-            return \Carbon\Carbon::parse($activities_run->start_date)->between($weekStartDate,$weekEndDate);
-        });
-
-        $week4 = array_filter($activities_run, function($activities_run){
-            $weekStartDate = \Carbon\Carbon::now()->subweek(3)->startofweek();
-            $weekEndDate = \Carbon\Carbon::now()->subweek(3)->endofweek();
-            $weekStartDate = \Carbon\Carbon::parse("2021-10-22")->subdays(21);
-            $weekEndDate = \Carbon\Carbon::parse("2021-10-22")->subdays(28);
-
-            return \Carbon\Carbon::parse($activities_run->start_date)->between($weekStartDate,$weekEndDate);
-        });
-
-        $sumweek_time1 = array_sum(array_map(function($week1) {
-          return $week1->moving_time;
-        }, $week1))/60;
-        // return $sumweek_time1;
-
-        $sumweek_time2 = array_sum(array_map(function($week2) {
-          return $week2->moving_time;
-        }, $week2))/60;
-        // return $sumweek_time2;
-
-        $sumweek_time3 = array_sum(array_map(function($week3) {
-          return $week3->moving_time;
-        }, $week3))/60;
-        // return $sumweek_time3;
-
-        $sumweek_time4 = array_sum(array_map(function($week4) {
-          return $week4->moving_time;
-        }, $week4))/60;
-        // return $sumweek_time4;
-
-
-        $sumweek_distance1 = array_sum(array_map(function($week1) {
-          return $week1->distance;
-        }, $week1))/1000;
-        // return $sumweek_distance1;
-
-        $sumweek_distance2 = array_sum(array_map(function($week2) {
-          return $week2->distance;
-        }, $week2))/1000;
-        // return $week2;
-
-        $sumweek_distance3 = array_sum(array_map(function($week3) {
-          return $week3->distance;
-        }, $week3))/1000;
-        // return $sumweek_distance3;
-
-        $sumweek_distance4 = array_sum(array_map(function($week4) {
-          return $week4->distance;
-        }, $week4))/1000;
+                return \Carbon\Carbon::parse($activities_run->start_date)->between($weekStartDate,$weekEndDate);
+            });
+            $weeks[] = $week;
+        }
+        // return $weeks;
+        $sumweek_time = [];
+        foreach($weeks as $week){
+            $sumweek_time[] = array_sum(array_map(function($week) {
+              return $week->moving_time;
+            }, $week))/60;
+        }
+        // return ($sumweek_time);
+        $sumweek_distance = [];
+        foreach($weeks as $week){
+            $sumweek_distance[] = array_sum(array_map(function($week) {
+              return $week->distance;
+            }, $week))/60;
+        }
+        // return $sumweek_distance;
+        $last_weeks = array_slice($sumweek_distance, -3, 3, true);
+        // return $last_weeks;
+        // return $sumweek_distance;
+        $sumweek_distance_avg = array_sum($last_weeks)/count($last_weeks);
+        if($sumweek_distance_avg == 0){
+            return -1;
+        }
+        return $sumweek_distance[0]/$sumweek_distance_avg;
         // return $sumweek_distance4;
         // return [$sumweek_distance1,$sumweek_distance2,$sumweek_distance3,$sumweek_distance4];
-        $array_week = [$sumweek_distance2*3,$sumweek_distance3*3,$sumweek_distance4*3];
-        return ($sumweek_distance1*3)/(array_sum($array_week)/count($array_week));
+        // $array_week = [$sumweek_distance2*3,$sumweek_distance3*3,$sumweek_distance4*3];
     }
 }
