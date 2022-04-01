@@ -11,15 +11,11 @@
         <br><br>
         *Todas las respuestas son de carácter confidencial y con el único propósito de conocer y mejorar el grado de satisfacción de nuestros usuarios.
     @endslot
-    <x-poll.box>
-        <x-poll.box-title>Correo electrónico</x-poll.box-title>
 
-        <x-poll.field name="mail" type="email" :value="old('mail')">
+    <x-poll.rut></x-poll.rut>
 
-        </x-poll.field>
-    </x-poll.box>
 
-    <center style="color:#fff"> Aquí falta la imagen </center>
+    <img class="mx-auto mt-4" src="{{ asset('img/services.png')}}">
 
     <x-poll.box>
         <x-poll.box-title>

@@ -13,7 +13,7 @@
                 value="{{ $data[$i] }}"
                 name="{{ end($data) }}"
                 id="{{ $data[$i] }}"
-                {{ in_array($data[$i], old(end($data), [])) ? 'checked' : '' }}>
+                {{ $data[$i] == old(end($data)) ? 'checked' : '' }}>
             <label class="sm:mx-1" for="{{ $data[$i] }}">
                 {{ $data[$i] }}
             </label>
