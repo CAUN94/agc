@@ -14,8 +14,8 @@
         <x-landing.call>
         </x-landing.call>
 
-        <x-landing.instagram>
-        </x-landing.instagram>
+   {{--      <x-landing.instagram>
+        </x-landing.instagram> --}}
 
         <x-landing.contact>
         </x-landing.contact>
