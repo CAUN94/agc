@@ -150,6 +150,13 @@ class RedirectController extends Controller {
 		return Redirect::away($url);
 	}
 
+	public function aceresuelap() {
+		$url = "https://meet.jit.si/aceresuelap";
+		return Redirect::away($url);
+	}
+
+
+
 	public function rrhh() {
 		$url = "https://docs.google.com/forms/d/e/1FAIpQLSfp5FjEXouwK0_Tm6hkHaLMvrzqU6OsXmNhIYHUQ3-vdlbJSA/viewform?usp=sf_link";
 		return Redirect::away($url);
@@ -184,6 +191,5 @@ class RedirectController extends Controller {
 		$url = "https://sites.google.com/justbetter.cl/recepcinyoujustbetter/temas-clinicos";
 		return Redirect::away($url);
 	}
-
 
 }

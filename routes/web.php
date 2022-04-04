@@ -95,6 +95,7 @@ Route::get('/box/alopezm', 'App\Http\Controllers\RedirectController@lopez');
 Route::get('/box/fguzmanh', 'App\Http\Controllers\RedirectController@fguzman');
 Route::get('/box/chernandezc', 'App\Http\Controllers\RedirectController@hernandez');
 Route::get('/box/svitalim', 'App\Http\Controllers\RedirectController@vitali');
+Route::get('/box/aceresuelap', 'App\Http\Controllers\RedirectController@aceresuelap');
 Route::get('/box/meetyou', 'App\Http\Controllers\RedirectController@meetyou');
 
 Route::get('change-password', 'App\Http\Controllers\ChangePasswordController@index');
