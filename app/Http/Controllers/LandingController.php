@@ -23,6 +23,11 @@ class LandingController extends Controller
         return view('team',compact('team'));
     }
 
+    public function tables()
+    {
+        return view('tables');
+    }
+
 
 
 }

@@ -50,14 +50,15 @@ class StravaController extends Controller
               'refresh_token' => $refresh->refresh_token,
               'token_expires' => Carbon::createFromTimestamp($refresh->expires_at)
             ]);
+            $user = StravaUser::where('id', $id)->first();
         }
 
         $token = $user->access_token;
         $activities = Strava::activities($token,1,200);
-        $charges = $this->charges($activities);
-        // return $charges;
-        // return view('strava.show',compact('user','activities'));
-        return view('strava.show',compact('user','activities','charges'));
+        $chargesAndProgress = $this->chargesAndProgress($activities);
+        $charges = $chargesAndProgress[0];
+        $progress = $chargesAndProgress[1];
+        return view('strava.show',compact('user','activities','charges','progress'));
     }
 
     /**
@@ -153,7 +154,7 @@ class StravaController extends Controller
         return implode(', ', $timeParts);
     }
 
-    public function charges($activities){
+    public function chargesAndProgress($activities){
         $activities_run = array_filter($activities, function($activities){
             return $activities->type == 'Run';
         });
@@ -196,11 +197,18 @@ class StravaController extends Controller
         // return $sumweek_distance;
         $sumweek_distance_avg = array_sum($last_weeks)/count($last_weeks);
         if($sumweek_distance_avg == 0){
-            return -1;
+            $charges = -1;
+        } else {
+            $charges = $sumweek_distance[0]/$sumweek_distance_avg;
         }
-        return $sumweek_distance[0]/$sumweek_distance_avg;
-        // return $sumweek_distance4;
-        // return [$sumweek_distance1,$sumweek_distance2,$sumweek_distance3,$sumweek_distance4];
-        // $array_week = [$sumweek_distance2*3,$sumweek_distance3*3,$sumweek_distance4*3];
+
+        if($sumweek_distance[1] == 0){
+            $progress = -1;
+        } else {
+            $progress = $sumweek_distance[0]/$sumweek_distance[1];
+        }
+
+        return [$charges,$progress];
+
     }
 }

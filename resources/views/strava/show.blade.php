@@ -1,7 +1,8 @@
 <x-landing.layout>
     <div class="w-10/12 mx-auto text-white mt-10">
         <h2 class="text-lg mb-2 flex items-center"><img class="mr-10 rounded-full w-28" src="{{$user->avatar}}"> {{$user->username}}</h2>
-        <p class="my-3">Carga: Carrera {{round($charges,4)}}</p>
+        <p class="my-3">Carga Carrera: {{round($charges,4)}}</p>
+        <p class="my-3">Progresón Carga: {{round($progress,4)}}</p>
 
             <h3 class="text-lg mb-2">Actividades</h3>
             <table class="table-auto w-full">

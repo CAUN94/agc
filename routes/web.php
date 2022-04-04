@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LandingController::class, 'welcome']);
 Route::get('/team', [LandingController::class, 'team']);
+Route::get('/tables', [LandingController::class, 'tables']);
 
 Route::resource('users', 'App\Http\Controllers\UsersController')->middleware(['auth']);
 Route::resource('trainings', 'App\Http\Controllers\TrainingController');
