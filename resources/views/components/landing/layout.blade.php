@@ -50,8 +50,9 @@
                     :class="{ 'flex-grow shadow-3xl': navOpen, 'hidden': !navOpen }"
                 >
                   <a class="nav-menu-link {{ Request::is('/') ? 'selected' : '' }}" href="/">Inicio</a>
-                  {{-- <a :class="{ 'block shadow-3xl': navOpen, 'hidden': !navOpen }" href="#">Blog</a> --}}
-                  <x-landing.team-nav></x-landing.team-nav>
+                  <a class="nav-menu-link" href="https://blog.justbetter.cl/">Blog</a>
+{{--                   <a :class="{ 'block shadow-3xl': navOpen, 'hidden': !navOpen }" href="https://blog.justbetter.cl/">Blog</a> --}}
+{{--                   <x-landing.team-nav></x-landing.team-nav> --}}
                   <a class="nav-menu-link {{ Request::is('book') ? 'selected' : '' }}"
                   href="https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento">Clínica</a>
                   <a class="nav-menu-link {{ Request::is('trainings') ? 'selected' : '' }}" href="/trainings">Entrenamiento</a>

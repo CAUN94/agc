@@ -1,3 +1,5 @@
+{{-- <x-landing.modal></x-landing.modal> --}}
+
 <section class="bg-fixed pt-2" style="background-image: url({{ asset('img/bg-gym.jpg')}}); background-size: cover;">
     <h2 class="title">Servicios</h2>
     <div class="box-container">

@@ -20,7 +20,7 @@
         @if (Auth::user()->isStudent())
         <li>
             <a href="/students" class="drop-link block text-sm text-gray-700">
-                <span class="drop-span">Clases Entrenamiento</span>
+                <span class="drop-span">Reserva de Clases</span>
             </a>
         </li>
         @endif
