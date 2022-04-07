@@ -13,7 +13,7 @@ class RedirectController extends Controller {
 	}
 
 	public function development() {
-		$url = "https://docs.google.com/forms/d/e/1FAIpQLSd59ziGnReCKq0pNSzsjodtHgyui_hWrk7oZHKxsPavQUuPRQ/viewform";
+		$url = "https://docs.google.com/forms/d/e/1FAIpQLScN3X3iTNlXW1XuTBOGGTECeGM7fXK43RHAg3oQS_lA9akLqQ/viewform?usp=sf_link";
 		return Redirect::away($url);
 
 	}
