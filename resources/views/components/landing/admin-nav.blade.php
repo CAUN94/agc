@@ -36,6 +36,14 @@
 
     <a class="mt-3" href="#">Scrapping</a>
 
+    <x-nav-dropdown>
+      <x-slot name="name"><i class="fas fa-notes-medical mr-1"></i>Encuesta</x-slot>
+      <x-slot name="trigger">encuesta</x-slot>
+      <a class="py-1" href="/admin/encuesta_satisfaccion">Encuesta de Satisfacción</a>
+      {{-- <a class="my-1 py-1" href="#">Link #2</a> --}}
+      {{-- <a class="my-1 py-1" href="#">Link #3</a> --}}
+    </x-nav-dropdown>
+
   @endif
 
   @if(Auth::user()->isTrainer())

@@ -32,6 +32,8 @@ Route::post('/encuesta_satisfaccion', 'App\Http\Controllers\PollController@encue
 Route::get('/ganate_una_sesion', 'App\Http\Controllers\PollController@ganate_una_sesion_index');
 Route::post('/ganate_una_sesion', 'App\Http\Controllers\PollController@ganate_una_sesion_store');
 
+Route::get('/admin/encuesta_satisfaccion', 'App\Http\Controllers\AdminPollController@encuesta_satisfaccion_index');
+
 Route::get('/instagram', [InstagramController::class, 'index'])->middleware(['auth']);
 
 Route::get('/adminpage', [AdminPageController::class, 'index'])->middleware(['intranet']);
@@ -105,10 +107,11 @@ Route::get('pay/{user}/{status}', 'App\Http\Controllers\PayController@payStatus'
 
 
 // Strava
-Route::get('/strava', \App\Http\Controllers\StravaController::class .'@index');
-Route::get('/strava/show/{id}', \App\Http\Controllers\StravaController::class .'@show');
-Route::get('/strava/auth', \App\Http\Controllers\StravaController::class .'@auth');
-Route::get('/strava/unauth', \App\Http\Controllers\StravaController::class .'@unauth');
-Route::get('/strava/callback', \App\Http\Controllers\StravaController::class .'@authCallback');
+Route::get('/strava', \App\Http\Controllers\StravaController::class .'@index')->middleware(['intranet']);
+Route::get('/strava/show', \App\Http\Controllers\StravaController::class .'@show')->middleware(['auth']);
+Route::get('/strava/adminshow/{id}', \App\Http\Controllers\StravaController::class .'@adminshow')->middleware(['intranet']);
+Route::get('/strava/auth', \App\Http\Controllers\StravaController::class .'@auth')->middleware(['auth']);
+Route::get('/strava/unauth', \App\Http\Controllers\StravaController::class .'@unauth')->middleware(['auth']);
+Route::get('/strava/callback', \App\Http\Controllers\StravaController::class .'@authCallback')->middleware(['auth']);
 
 require __DIR__ . '/auth.php';

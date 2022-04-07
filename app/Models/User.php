@@ -8,6 +8,7 @@ use App\Models\Alliance;
 use App\Models\Professional;
 use App\Models\Student;
 use App\Models\TrainBook;
+use App\Models\StravaUser;
 use Freshwork\ChileanBundle\Rut;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -170,6 +171,17 @@ class User extends Authenticatable {
 
     public function hasAlliance(){
     	if (!is_null($this->alliance())){
+    		return True;
+    	}
+        return False;
+    }
+
+    public function strava(){
+        return $this->hasOne(StravaUser::class);
+    }
+
+    public function hasStrava(){
+    	if (!is_null($this->strava())){
     		return True;
     	}
         return False;

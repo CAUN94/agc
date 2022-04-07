@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Strava;
+use Illuminate\Support\Facades\Auth;
 
 class StravaController extends Controller
 {
@@ -33,7 +34,38 @@ class StravaController extends Controller
         // return view('dashboard', ['users' => $users, 'strava_get_activities_time' => Cache::store('file')->get('strava_get_activities_time', 'unknown'), 'strava_next_activities_time' => Cache::store('file')->get('strava_next_activities_time', 'unknown')]);
     }
 
-    public function show($id)
+    public function show()
+    {
+        if(!Auth::user()->hasStrava()){
+            return redirect('/');
+        }
+
+        $user = Auth::user()->strava;
+
+        if(is_null($user)){
+            return redirect('/strava/auth');
+        }
+
+        if(Carbon::now() > $user->token_expires){
+            // Token has expired, generate new tokens using the currently stored user refresh token
+            $refresh = Strava::refreshToken($user->refresh_token);
+            Auth::user()->strava->update([
+              'access_token' => $refresh->access_token,
+              'refresh_token' => $refresh->refresh_token,
+              'token_expires' => Carbon::createFromTimestamp($refresh->expires_at)
+            ]);
+            $user = Auth::user()->strava->first();
+        }
+
+        $token = $user->access_token;
+        $activities = Strava::activities($token,1,200);
+        $chargesAndProgress = $this->chargesAndProgress($activities);
+        $charges = $chargesAndProgress[0];
+        $progress = $chargesAndProgress[1];
+        return view('strava.show',compact('user','activities','charges','progress'));
+    }
+
+    public function adminshow($id)
     {
 
         $user = StravaUser::where('id', $id)->first();
@@ -58,7 +90,7 @@ class StravaController extends Controller
         $chargesAndProgress = $this->chargesAndProgress($activities);
         $charges = $chargesAndProgress[0];
         $progress = $chargesAndProgress[1];
-        return view('strava.show',compact('user','activities','charges','progress'));
+        return view('strava.adminshow',compact('user','activities','charges','progress'));
     }
 
     /**
