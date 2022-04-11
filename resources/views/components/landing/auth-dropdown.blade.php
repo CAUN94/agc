@@ -32,8 +32,8 @@
         </li>
         @endif
         <li>
-            <a href="#" class="drop-link">
-                <span class="drop-span">Ajustes</span>
+            <a href="/strava/show" class="drop-link">
+                <span class="drop-span">Strava</span>
             </a>
         </li>
         <form method="POST" action="{{ route('logout') }}">

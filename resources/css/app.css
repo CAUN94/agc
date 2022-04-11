@@ -46,7 +46,7 @@ nav {
 }
 
 .drop-nav{
-	@apply absolute bg-white shadow overflow-hidden rounded w-36 mt-2 py-1 right-2 z-20;
+	@apply absolute bg-white shadow overflow-hidden rounded w-40 mt-2 py-1 right-2 z-20;
 }
 
 .drop-nav li {

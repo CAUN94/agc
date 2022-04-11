@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\StravaActivity;
 use App\Models\StravaUser;
-use Illuminate\Http\Request;
+use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Strava;
-use Illuminate\Support\Facades\Auth;
 
 class StravaController extends Controller
 {
@@ -36,9 +37,9 @@ class StravaController extends Controller
 
     public function show()
     {
-        if(!Auth::user()->hasStrava()){
-            return redirect('/');
-        }
+        // if(!Auth::user()->hasStrava()){
+        //     return redirect('/');
+        // }
 
         $user = Auth::user()->strava;
 
@@ -62,6 +63,7 @@ class StravaController extends Controller
         $chargesAndProgress = $this->chargesAndProgress($activities);
         $charges = $chargesAndProgress[0];
         $progress = $chargesAndProgress[1];
+        $user = User::find($user->user_id);
         return view('strava.show',compact('user','activities','charges','progress'));
     }
 
@@ -101,7 +103,7 @@ class StravaController extends Controller
     public function auth()
     {
         if (!env('ALLOW_STRAVA_AUTH', false)) {
-            return redirect("/strava");
+            return redirect("/strava/show");
         }
         return Strava::authenticate($scope='read_all,profile:read_all,activity:read_all');
     }
@@ -139,13 +141,14 @@ class StravaController extends Controller
 
         // Create or update user
         $user = StravaUser::firstOrCreate(['strava_id' => $token->athlete->id]);
+        $user->user_id = Auth::user()->id;
         $user->username = $token->athlete->username;
         $user->access_token = $token->access_token;
         $user->refresh_token = $token->refresh_token;
         $user->token_expires = Carbon::createFromTimestamp($token->expires_at);
         $user->avatar = $token->athlete->profile;
         $user->save();
-        return redirect('/strava');
+        return redirect('/strava/show');
     }
 
     protected function secondsToTime($inputSeconds) {

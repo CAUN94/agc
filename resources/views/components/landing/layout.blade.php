@@ -21,20 +21,13 @@
         </style>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-GFXLHYT7L3"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'G-GFXLHYT7L3');
-          gtag('config', 'AW-10872889051');
-        </script>
-        <script> gtag('event', 'conversion', {'send_to': 'AW-10872889051/Jlg6CIvr9KsDENu9zMAo'}); </script>
+        <!-- Global site tag (gtag.js) - Google Ads: 10872889051 --> <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10872889051"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-10872889051'); </script>
         <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
-
+        @if (Auth::check())
+            <script> gtag('event', 'conversion', {'send_to': 'AW-10872889051/Jlg6CIvr9KsDENu9zMAo'}); </script>
+        @endif
     </head>
     <body>
-        <amp-analytics type="gtag" data-credentials="include"> <script type="application/json"> { "vars": { "gtag_id": "AW-10872889051", "config": { "AW-10872889051": { "groups": "default" } } }, "triggers": { } } </script> </amp-analytics>
         <div class="sticky-menu">
             <div
                 class="nav-menu"
