@@ -26,13 +26,12 @@ class Student extends Model {
 		return $this->training->plan() ." ". ($this->extra > 0 ? '+ pauta' : '');
 	}
 
-
-
 	public function price() {
 		if ($this->extra > 0){
 			$price = ($this->training->price + $this->training->extra)*$this->user->alliancedesc()*$this->percentage;
+		} else {
+			$price = ($this->training->price)*$this->user->alliancedesc()*$this->percentage;
 		}
-		$price = ($this->training->price)*$this->user->alliancedesc()*$this->percentage;
 
 		if($this->training->type === 'duo'){
 			return $price/2;
