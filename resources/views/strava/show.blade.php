@@ -23,7 +23,7 @@
 
         </div>
 
-            <h3 class="text-lg mb-2">Actividades</h3>
+            <h3 class="mb-2 text-2xl mt-4">Actividades</h3>
             <table class="table-fixed w-full">
                 <thead>
                     <tr class="text-left">
