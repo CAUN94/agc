@@ -28,6 +28,9 @@ class LandingController extends Controller
         return view('tables');
     }
 
+    public function example(){
+        return view('example');
+    }
 
 
 }
