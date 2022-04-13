@@ -87,11 +87,17 @@ class StravaController extends Controller
             $user = StravaUser::where('id', $id)->first();
         }
 
+
+
         $token = $user->access_token;
         $activities = Strava::activities($token,1,200);
+
         $chargesAndProgress = $this->chargesAndProgress($activities);
         $charges = $chargesAndProgress[0];
         $progress = $chargesAndProgress[1];
+        $activities_run = array_filter($activities, function($activities){
+            return $activities->type == 'Run';
+        });
         return view('strava.adminshow',compact('user','activities','charges','progress'));
     }
 
