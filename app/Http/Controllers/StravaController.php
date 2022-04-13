@@ -64,6 +64,9 @@ class StravaController extends Controller
         $charges = $chargesAndProgress[0];
         $progress = $chargesAndProgress[1];
         $user = User::find($user->user_id);
+        $activities = array_filter($activities, function($activities){
+            return $activities->type == 'Run';
+        });
         return view('strava.show',compact('user','activities','charges','progress'));
     }
 
@@ -95,9 +98,7 @@ class StravaController extends Controller
         $chargesAndProgress = $this->chargesAndProgress($activities);
         $charges = $chargesAndProgress[0];
         $progress = $chargesAndProgress[1];
-        $activities = array_filter($activities, function($activities){
-            return $activities->type == 'Run';
-        });
+
         return view('strava.adminshow',compact('user','activities','charges','progress'));
     }
 
