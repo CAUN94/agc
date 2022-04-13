@@ -68,6 +68,34 @@ class ScrapingController extends Controller
         return redirect('/userml');
     }
 
+    public function professionals(){
+        $professionals = self::create_client("https://youjustbetter.softwaremedilink.com/dentistas/autocomplete");
+        return view('professionalsml.index',compact('professionals'));
+    }
+
+    public function professional($id){
+        $client = new Client();
+        $crawler = $client->request('GET', 'https://youjustbetter.softwaremedilink.com/reportesdinamicos');
+        $form = $crawler->selectButton('Ingresar')->form();
+        $form->setValues(['rut' => 'admin', 'password' => 'Pascual4900']);
+        $crawler = $client->submit($form);
+        $now = Carbon::now();
+        $weekStartDate = $now->startOfWeek()->format('Y-m-d');
+        $url = "https://youjustbetter.softwaremedilink.com/agendas/semanalJSON/".$weekStartDate."/?id_profesional=".$id;
+
+        $crawler = $client->request('GET', $url);
+        $professional = $crawler->text();
+        $professional = json_decode($professional,true);
+        $professionals = self::create_client("https://youjustbetter.softwaremedilink.com/dentistas/autocomplete");
+        foreach($professionals as $names){
+            $value = json_decode("{".$names."}",true);
+            if($value['id'] == $id){
+                break;
+            }
+        }
+        return view('professionalsml.show',compact('professional','value'));
+    }
+
     public function actionMl(){
         return self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/listado_acciones?filters%5Bsucursal%5D%5Bstatus%5D=activated&filters%5Bsucursal%5D%5Bvalue%5D=1&filters",true);
         // return $array;
