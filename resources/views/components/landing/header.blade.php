@@ -1,4 +1,13 @@
-@php
+<header class="mb-20">
+    <div class="header-div">
+        {{$img}}
+        <div>
+            {{$slot}}
+        </div>
+    </div>
+</header>
+
+{{-- @php
     $imgs = json_encode(explode('|', $img));
     $texts = json_encode(explode('|', $text));
 @endphp
@@ -37,3 +46,4 @@ imgs: {{$imgs}}">
         </div>
     </div>
 </div>
+ --}}
