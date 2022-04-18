@@ -1,10 +1,13 @@
 <x-landing.layout>
         <x-landing.header>
             <x-slot name="img">
-                <img src="{{asset('img/bg-first.jpg')}}">
+                bg-first.jpg|bg-gym.jpg
             </x-slot>
+            <x-slot name="text">
+                You, Just Better es un centro integral de salud y medicina deportiva que promueve los estilos de vida saludables, entregando un servicio de atención personalizada y adaptando la integridad de nuestros servicios al proceso de autorealización.|
+                El área de entrenamiento de You busca desde su base el presentar el ejercicio físico de manera amigable y cercana, donde la invitación está puesta hacia aumentar el movimiento de la persona, preocupándonos de manera individualizada por el bienestar del alumno.<br>Llegamos a nuestro a alumnos en formato presencial, online e híbrido. Por motivos de la contingencia mundial COVID-19, la modalidad presencial será posible sólo si las medidas sanitarias propuestas por el MINSAL lo permiten.
 
-            You, Just Better es un centro integral de salud y medicina deportiva que promueve los estilos de vida saludables, entregando un servicio de atención personalizada y adaptando la integridad de nuestros servicios al proceso de autorealización.
+            </x-slot>
 
         </x-landing.header>
 

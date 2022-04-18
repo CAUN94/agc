@@ -170,7 +170,7 @@
             <x-slot name="subtitle">
                   ¿Que és la consulta Psicología Clínica?
             </x-slot>
-            Falta descripción.
+            En el área de psicología clínica se prioriza la salud mental de las personas. En las primeras sesiones se entrevista al consultante con el fin de conocerlo e identificar su motivo de consulta. En las siguientes sesiones se trabajan estrategias y técnicas para conseguir una mejora en su bienestar personal.
             <x-slot name="button">
                   Cerrar
             </x-slot>
