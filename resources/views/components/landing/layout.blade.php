@@ -12,6 +12,7 @@
         <link rel="icon" type="image/png" href="{{ asset('/img/icon.png') }}">
         <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/gh/alpine-collective/alpine-magic-helpers@1.2.x/dist/index.min.js" defer></script>
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.x/dist/alpine.min.js" defer></script>
         <livewire:styles />
         <style>

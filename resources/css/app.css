@@ -118,6 +118,10 @@ header {
 	@apply h-16 lg:h-20 block
 }
 
+.button-2{
+	@apply hover:bg-gray-100 px-4 bg-you-grey rounded-full w-1/4 text-center hover:text-gray-800;
+}
+
 
 .container-col {
 	@apply container mx-auto py-10 flex flex-col justify-between items-center;

@@ -33715,6 +33715,29 @@ header {
   }
 }
 
+.button-2{
+  width: 25%;
+  border-radius: 9999px;
+  --tw-bg-opacity: 1;
+  background-color: rgba(44, 44, 44, var(--tw-bg-opacity));
+}
+
+.button-2:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
+}
+
+.button-2 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  text-align: center;
+}
+
+.button-2:hover {
+  --tw-text-opacity: 1;
+  color: rgba(31, 41, 55, var(--tw-text-opacity));
+}
+
 .container-col {
   width: 100%;
 }
