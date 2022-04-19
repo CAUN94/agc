@@ -200,6 +200,9 @@ class StravaController extends Controller
         $activities_run = array_filter($activities, function($activities){
             return $activities->type == 'Run';
         });
+        if(count($activities_run) == 0){
+            return -1;
+        }
         $last_start_date = reset($activities_run)->start_date;
 
         $weeks = [];
