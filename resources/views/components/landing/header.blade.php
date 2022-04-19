@@ -1,8 +1,9 @@
 <header class="mb-20">
     <div class="header-div">
-        {{$img}}
+        <img src={{asset("img/bg-first.jpg")}}>
+{{--         {{$img}} --}}
         <div>
-            {{$slot}}
+            {{$text}}
         </div>
     </div>
 </header>
