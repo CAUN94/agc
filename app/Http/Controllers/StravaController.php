@@ -211,8 +211,8 @@ class StravaController extends Controller
             $week = array_filter($activities_run, function($activities_run) use($i,$last_start_date){
                 // $weekStartDate = \Carbon\Carbon::now()->startofweek();
                 // $weekEndDate = \Carbon\Carbon::now()->endofweek();
-                $weekStartDate = \Carbon\Carbon::parse($last_start_date);
-                $weekEndDate = \Carbon\Carbon::parse($last_start_date)->subdays(7);
+                $weekStartDate = \Carbon\Carbon::now();
+                $weekEndDate = \Carbon\Carbon::now()->subdays(7);
 
                 if($i > 0){
                     $weekStartDate->subweeks($i);
