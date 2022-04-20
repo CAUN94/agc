@@ -119,7 +119,7 @@ class User extends Authenticatable {
 		return $genderLetter[$this->gender];
 	}
 
-	public function Student2() {
+	public function Student() {
 		$student = $this->hasMany(Student::class)
 			->where('start_day', '<=', \Carbon\Carbon::NOW()->startofday())
 			->orderby('start_day', 'desc')
@@ -132,22 +132,6 @@ class User extends Authenticatable {
 			return $student;
 		}
 		return null;
-	}
-
-	public function Student() {
-		$student = $this->hasOne(Student::class)
-			->where('start_day', '<=', \Carbon\Carbon::NOW())
-			->where('start_day', '>=', \Carbon\Carbon::NOW()->subdays(31))
-			->orderby('start_day', 'desc');
-
-		if ($student->count() == 0) {
-			$student = $this->hasOne(Student::class)
-				->where('start_day', '<=', \Carbon\Carbon::NOW()->addDays(31))
-				->where('start_day', '>=', \Carbon\Carbon::NOW())
-				->orderby('start_day', 'asc');
-		}
-
-		return $student;
 	}
 
 	public function allStudentPlan() {
