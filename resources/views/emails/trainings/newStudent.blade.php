@@ -1,8 +1,8 @@
 @component('mail::message')
 # Inscripción {{$user->fullName()}} en Entrenamiento
 
-Estamos muy felices de tu inscripción en el plan {{$user->student->trainingPlan()}}.
-Este iniciará el {{$user->student->start_day}}.
+Estamos muy felices de tu inscripción en el plan {{$user->student()->trainingPlan()}}.
+Este iniciará el {{$user->student()->start_day}}.
 
 En tu perfil encontraras habilitada la opción de pago.
 @component('mail::button', ['url' => url('/users')])

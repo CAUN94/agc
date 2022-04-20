@@ -39,7 +39,7 @@ class TrainAppointments extends Component
 
     public function show($id){
         $this->train = TrainAppointment::find($id);
-        if (Auth::user()->student->availableday($this->train->date)){
+        if (Auth::user()->student()->availableday($this->train->date)){
             $this->classShow = true ;
         }
         else {

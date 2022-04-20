@@ -2,14 +2,14 @@
     <div class="w-full lg:w-1/4 flex flex-col overflow-x-auto gap-y-2">
         <div class="align-middle inline-block min-w-full">
 
-            <div x-data="{ classShow: false }" class="box-white p-3 {{Auth::user()->student->isSettled() ? "" : "border-red-500 border-2" }}">
+            <div x-data="{ classShow: false }" class="box-white p-3 {{Auth::user()->student()->isSettled() ? "" : "border-red-500 border-2" }}">
                 <div>
-                <span class="block">{{Auth::user()->student->training->plan()}}</span>
-                <div class="block text-xs {{Auth::user()->student->isSettled() ? "text-green-500" : "text-red-500" }}">
-                        @if(Auth::user()->student->isSettled())
+                <span class="block">{{Auth::user()->student()->training->plan()}}</span>
+                <div class="block text-xs {{Auth::user()->student()->isSettled() ? "text-green-500" : "text-red-500" }}">
+                        @if(Auth::user()->student()->isSettled())
                             Plan activado
                         @else
-                            <x-pay studentId="{{Auth::user()->student->id}}" price="{{Auth::user()->student->training->price}}" planName="{{Auth::user()->student->training->plan()}}"></x-pay>
+                            <x-pay studentId="{{Auth::user()->student()->id}}" price="{{Auth::user()->student()->training->price}}" planName="{{Auth::user()->student()->training->plan()}}"></x-pay>
 
                         @endif
                       </div>
@@ -162,8 +162,8 @@
                                     @endforeach
                                     @foreach($dates as $date)
                                         <div style="width: {{$width}}; height: {{$height}}" class="px-1 lg:px-4 pt-2 border-r border-b relative
-                                        {{Auth::user()->student->islastday($date) ? "bg-gray-100" : "" }}
-                                        {{Auth::user()->student->isStartday($date) ? "bg-gray-100" : "" }}
+                                        {{Auth::user()->student()->islastday($date) ? "bg-gray-100" : "" }}
+                                        {{Auth::user()->student()->isStartday($date) ? "bg-gray-100" : "" }}
                                         ">
                                             <div
                                                 class="inline-flex w-6 h-6 items-center justify-center text-center leading-none rounded-full transition ease-in-out duration-100 text-xs lg:text-sm
@@ -173,10 +173,10 @@
                                                 ">
                                                 {{$date->format('d')}}
                                             </div>
-                                            @if (Auth::user()->student->islastday($date))
-                                                @if(Auth::user()->student->islastday($date)->isRenew())
+                                            @if (Auth::user()->student()->islastday($date))
+                                                @if(Auth::user()->student()->islastday($date)->isRenew())
                                                     <span class="block sm:inline-block text-xs lg:text-sm">Fin de Plan</span>
-                                                @elseif(Auth::user()->student->isFreePlan())
+                                                @elseif(Auth::user()->student()->isFreePlan())
                                                     <a href="/trainings" class="box-class block sm:inline-block border-primary-200 text-xs sm:text-sm bg-primary-100 hover:bg-green-100 cursor-pointer">Fin plan de prueba</a>
                                                 @else
                                                     <span class="box-class block sm:inline-block border-primary-200 text-xs sm:text-sm bg-primary-100 hover:bg-green-100 cursor-pointer" x-on:click="openModal = ! openModal">Renovar Plan</span>
@@ -184,12 +184,12 @@
 
                                             @endif
 
-                                            @if(Auth::user()->student->isStartday($date))
+                                            @if(Auth::user()->student()->isStartday($date))
                                                 <span class="block sm:inline-block text-xs lg:text-sm">Inicio Plan</span>
                                             @endif
 
                                             <div style="height: {{$heightbox}};" class="overflow-y-auto mt-1">
-                                                @foreach(Auth::user()->student->training->daysCheck($date) as $trainAppointment)
+                                                @foreach(Auth::user()->student()->training->daysCheck($date) as $trainAppointment)
                                                     <div
                                                         wire:click="show({{$trainAppointment->id}})"
                                                         class="box-class border-primary-200 text-primary-800
@@ -197,9 +197,9 @@
                                                             bg-primary-100 cursor-pointer
                                                         @elseif($trainAppointment->isComplete())
                                                             bg-gray-100 hover:bg-gray-100 cursor-pointer
-                                                        @elseif(Auth::user()->student->availableday($date))
+                                                        @elseif(Auth::user()->student()->availableday($date))
                                                             bg-green-100 hover:bg-primary-100 cursor-pointer
-                                                        @elseif(!Auth::user()->student->availableday($date))
+                                                        @elseif(!Auth::user()->student()->availableday($date))
                                                             bg-gray-100 cursor-not-allowed
                                                         @else
                                                             bg-primary-100 cursor-pointer
@@ -215,17 +215,17 @@
                                 </div>
                                 <x-landing.submit-modal
                                       method="PUT"
-                                      action="/students/{{Auth::user()->student->id}}"
-                                      :id="Auth::user()->student->training_id"
+                                      action="/students/{{Auth::user()->student()->id}}"
+                                      :id="Auth::user()->student()->training_id"
                                       >
                                       <x-slot name="title">
-                                        <span>Renovar plan {{Auth::user()->student->training->plan()}}</span>
+                                        <span>Renovar plan {{Auth::user()->student()->training->plan()}}</span>
                                       </x-slot>
                                       Estas seguro de querer renovar?
                                       <x-slot name="important">
                                         El plan partira a fin de mes.
                                       </x-slot>
-                                      @if(!Auth::user()->student->training->isMonthly())
+                                      @if(!Auth::user()->student()->training->isMonthly())
                                       <x-slot name="options">
                                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
                                                 Por cuantos meses quiere renovar su plan?

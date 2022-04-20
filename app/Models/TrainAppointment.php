@@ -30,7 +30,7 @@ class TrainAppointment extends Model
         return $this->belongsToMany(Training::class,
             'train_appointments_pivot',
             'train_appointment_id',
-            'training_id')->where('training_id',Auth::user()->student->training_id)->first();
+            'training_id')->where('training_id',Auth::user()->student()->training_id)->first();
     }
 
 

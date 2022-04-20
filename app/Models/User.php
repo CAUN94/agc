@@ -131,6 +131,7 @@ class User extends Authenticatable {
 		if ($start_day->diff($now)->days < $training->days){
 			return $student;
 		}
+
 		return null;
 	}
 
@@ -196,10 +197,10 @@ class User extends Authenticatable {
 
 
 	public function isStudent() {
-		if (is_null($this->Student())) {
-			return False;
+		if ($this->Student()) {
+			return True;
 		}
-		return True;
+		return False;
 	}
 
 	public function Professional() {

@@ -208,7 +208,7 @@
                                                     {{$date->format('d')}}
                                                 </div>
                                                 <div style="height: {{$heightbox}};" class="overflow-y-auto mt-1">
-                                                    {{-- @foreach(Auth::user()->student->training->daysCheck($date) as $trainAppointment) --}}
+                                                    {{-- @foreach(Auth::user()->student()->training->daysCheck($date) as $trainAppointment) --}}
                                                     @foreach(App\Models\TrainAppointment::where('date',$date)->whereIN('id',$plans)->orderby('hour', 'ASC')->get() as $trainAppointment)
                                                         <div
                                                             wire:click="show({{$trainAppointment->id}})"

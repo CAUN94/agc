@@ -197,7 +197,7 @@
               @if(Auth::user()->isStudent())
                 <x-landing.submit-modal
                   method="PUT"
-                  action="/students/{{Auth::user()->student->id}}"
+                  action="/students/{{Auth::user()->student()->id}}"
                   :id="$selectedTraining->id"
                   >
                   <x-slot name="title">

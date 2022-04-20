@@ -93,33 +93,33 @@
               </div>
               @endif
               @if ($user->isStudent())
-              <div class="{{ $user->student->isSettled() ? "bg-white" : "bg-red-100" }} border-t border-gray-200 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <div class="{{ $user->student()->isSettled() ? "bg-white" : "bg-red-100" }} border-t border-gray-200 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">
                   Plan de Entrenamiento Actual
-                  <div class="text-xs {{ $user->student->isSettled() ? "text-green-500" : "text-red-500" }}">
-                    @if(Auth::user()->student->isSettled())
+                  <div class="text-xs {{ $user->student()->isSettled() ? "text-green-500" : "text-red-500" }}">
+                    @if(Auth::user()->student()->isSettled())
                         Plan activado
                     @else
                         <div class="flex flex-col">
                             <span>Plan No activado</span>
-                            <span>Valor: {{Auth::user()->student->trainingPrice()}}</span>
+                            <span>Valor: {{Auth::user()->student()->trainingPrice()}}</span>
                         </div>
                     @endif
                   </div>
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 flex justify-between items-center">
                   <div>
-                    {{ $user->student->trainingPlan() }}
+                    {{ $user->student()->trainingPlan() }}
                     <span class="text-sm text-primary-500">
                       {{$user->Training->planClassComplete()}}
                     </span>
                     <div class="text-sm text-gray-500">
-                      Inicio: {{ $user->student->start_day()}}
+                      Inicio: {{ $user->student()->start_day()}}
                     </div>
                     <div class="text-sm text-gray-500">
-                      Vence: {{ $user->student->endMonth()->format('d M Y')}}
+                      Vence: {{ $user->student()->endMonth()->format('d M Y')}}
                       <span class="text-sm text-primary-500">
-                        ({{ $user->student->diffdaysplan() }})
+                        ({{ $user->student()->diffdaysplan() }})
                       </span>
                     </div>
                   </div>

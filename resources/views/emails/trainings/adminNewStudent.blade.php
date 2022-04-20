@@ -8,9 +8,9 @@
 - Celular: {{$user->phone}}
 - Fecha de Nacimiento: {{$user->birthday}}
 
-{{$user->student->trainingPlan()}}
-- Fecha de Inicio: {{$user->student->start_day}}
-- Precio: {{$user->student->trainingPrice()}}
+{{$user->student()->trainingPlan()}}
+- Fecha de Inicio: {{$user->student()->start_day}}
+- Precio: {{$user->student()->trainingPrice()}}
 
 Saludos,<br>
 Team You
