@@ -11,7 +11,7 @@
                     <div class="flex flex-row items-center p-5">
                         <div class="flex-1 text-right md:text-center">
                             <p class="font-bold uppercase text-sm">Ratio Carga Actual vs Previa</p>
-                            <p class="font-bold text-md mt-2">{{ $charges >= 0 ? round($charges,4): "Falta Información" }}
+                            <p class="font-bold text-md mt-2">{{ round($charges,4) > 0 ? round($charges,4) : "Falta Información" }}
                             </p>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                     <div class="flex flex-row items-center p-5">
                         <div class="flex-1 text-right md:text-center">
                             <p class="font-bold uppercase text-sm">Progresión Semanal Carga</p>
-                            <p class="font-bold text-md mt-2">{{ $progress >= 0 ? round($progress,2)."%": "Falta Información" }}
+                            <p class="font-bold text-md mt-2">{{ round($progress,2) > 0 ? round($progress,2)."%" : "Falta Información" }}
                         </div>
                     </div>
                     <div class="bg-primary-900 rounded-b-lg px-5 py-1 flex flex-col">
