@@ -119,6 +119,21 @@ class User extends Authenticatable {
 		return $genderLetter[$this->gender];
 	}
 
+	public function Student2() {
+		$student = $this->hasMany(Student::class)
+			->where('start_day', '<=', \Carbon\Carbon::NOW()->startofday())
+			->orderby('start_day', 'desc')
+			->limit(1)->first();
+
+		$training = Training::find($student->training_id);
+		$start_day = \Carbon\Carbon::parse($student->start_day);
+		$now = \Carbon\Carbon::now();
+		if ($start_day->diff($now)->days < $training->days){
+			return $student;
+		}
+		return null;
+	}
+
 	public function Student() {
 		$student = $this->hasOne(Student::class)
 			->where('start_day', '<=', \Carbon\Carbon::NOW())
