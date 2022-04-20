@@ -3,27 +3,46 @@
         <div class="flex flex-col gap-y-2 md:gap-y-0 md:grid md:grid-cols-3 md:justify-between items-center">
             <h2 class="text-2xl mb-2 flex items-center"><img class="mr-10 rounded-full w-28" src="{{$user->strava->avatar}}"> {{$user->fullname()}}</h2>
 
-            <div class="w-2/3 bg-gradient-to-b from-primary-100 to-primary-100 border-b-4 border-primary-500 rounded-lg shadow-xl p-5">
-                <div class="flex flex-row items-center">
-                    <div class="flex-1 text-right md:text-center">
-                        <p class="font-bold uppercase text-md">Carga Carrera</p>
-                        <p class="font-bold text-md">{{round($charges,4)}}</p>
+            <div class="flex flex-col">
+{{--                  <h1 class="text-primary-500 text-lg mb-2">
+                    Ratio Carga Actual vs Previa
+                </h1> --}}
+                <div class="w-auto mx-1 bg-primary-100 border-primary-500 rounded-lg shadow-xl flex flex-col">
+                    <div class="flex flex-row items-center p-5">
+                        <div class="flex-1 text-right md:text-center">
+                            <p class="font-bold uppercase text-sm">Ratio Carga Actual vs Previa</p>
+                            <p class="font-bold text-md mt-2">{{ $charges >= 0 ? round($charges,4): "Falta Información" }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="bg-primary-900 rounded-b-lg px-5 py-1 flex flex-col">
+                        <span>Rango Sugerido: 0.8 - 1.3</span>
+                        <span class="text-xs">Para más información consulte a un profesional</span>
                     </div>
                 </div>
             </div>
 
-            <div class="w-2/3 bg-gradient-to-b from-primary-100 to-primary-100 border-b-4 border-primary-500 rounded-lg shadow-xl p-5">
-                <div class="flex flex-row items-center">
-                    <div class="flex-1 text-right md:text-center">
-                        <p class="font-bold uppercase text-md">Progresión Carga</p>
-                        <p class="font-bold text-md">{{round($progress,4)}}</p>
+            <div class="flex flex-col">
+ {{--                <h1 class="text-primary-500 text-lg mb-2">
+                    Ratio Carga Actual vs Previa
+                </h1> --}}
+                <div class="w-auto mx-1 bg-primary-100 border-primary-500 rounded-lg shadow-xl flex flex-col">
+                    <div class="flex flex-row items-center p-5">
+                        <div class="flex-1 text-right md:text-center">
+                            <p class="font-bold uppercase text-sm">Progresión Semanal Carga</p>
+                            <p class="font-bold text-md mt-2">{{ $progress >= 0 ? round($progress,2)."%": "Falta Información" }}
+                        </div>
+                    </div>
+                    <div class="bg-primary-900 rounded-b-lg px-5 py-1 flex flex-col">
+                        <span>Rango Sugerido: Menor o igual al 10%</span>
+                        <span class="text-xs">Para más información consulte a un profesional</span>
                     </div>
                 </div>
             </div>
 
         </div>
 
-            <h3 class="mb-2 text-2xl mt-4">Actividades</h3>
+            <h3 class="mb-2 text-2xl mt-4">Actividades de Running</h3>
             <table class="table-fixed w-full">
                 <thead>
                     <tr class="text-left">

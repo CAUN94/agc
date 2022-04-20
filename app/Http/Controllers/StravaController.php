@@ -93,6 +93,7 @@ class StravaController extends Controller
 
 
         $token = $user->access_token;
+
         $activities = Strava::activities($token,1,200);
 
         $chargesAndProgress = $this->chargesAndProgress($activities);
