@@ -125,6 +125,10 @@ class User extends Authenticatable {
 			->orderby('start_day', 'desc')
 			->limit(1)->first();
 
+		if(is_null($student)){
+			return null;
+		}
+
 		$training = Training::find($student->training_id);
 		$start_day = \Carbon\Carbon::parse($student->start_day);
 		$now = \Carbon\Carbon::now();
