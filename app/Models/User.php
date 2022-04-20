@@ -196,7 +196,7 @@ class User extends Authenticatable {
 
 
 	public function isStudent() {
-		if (is_null($this->Student)) {
+		if (is_null($this->Student())) {
 			return False;
 		}
 		return True;
