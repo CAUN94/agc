@@ -14,31 +14,23 @@
         <h1>Agenda de {{$value["nombre"]}} {{$value["apellidos"]}}</h1><br>
         <p>
             @foreach($professional as $key => $day)
-                @php $date = Carbon\Carbon::createFromFormat('Y-m-d', $key) @endphp
-                @php $now= Carbon\Carbon::now()->format('Y-m-d') @endphp
-                @if($date < $now)
-                    @continue
-                @endif
-                @php $count = 0 @endphp
-                @foreach($day as $hour)
-                    @if($hour['id'] == "")
-                        @php $count = $count + 1 @endphp
+                @if(Carbon\Carbon::parse($key)->endofday()>=Carbon\Carbon::now())
+                    @php $days_w_hours = array_filter($day,function($var){ if( $var["id"] == ""){return $var;}}) @endphp
+                    @if(count($day)>0 and count($days_w_hours))
+                        @foreach($days_w_hours as $hour)
+                            @if($loop->first)
+                                {{$days_dias[Carbon\Carbon::parse($hour['fecha'])->format('l')]}}:
+                            @endif
+                            @if(Carbon\Carbon::now()->format('H:i') <=
+                            Carbon\Carbon::parse($hour['inicio'])->format('H:i'))
+                                {{Carbon\Carbon::parse($hour['inicio'])->format('H:i')}}
+                            @endif
+                            @if($loop->last)
+                                <br>
+                            @endif
+                        @endforeach
                     @endif
-                @endforeach
-                @if($count == 0)
-                    @continue
                 @endif
-                {{$days_dias[$date->format('l')]}}:
-                @foreach($day as $hour)
-                    @php
-                    $hour = json_encode($hour,true);
-                    $hour = json_decode($hour,true);
-                    @endphp
-                    @if($hour['id'] == "")
-                        {{substr_replace($hour['inicio'] ,"", -3)}}
-                    @endif
-                @endforeach
-                <br>
             @endforeach
         </p>
     </div>

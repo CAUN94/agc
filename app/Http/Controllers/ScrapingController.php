@@ -93,6 +93,7 @@ class ScrapingController extends Controller
                 break;
             }
         }
+        // return $professional;
         return view('professionalsml.show',compact('professional','value'));
     }
 
