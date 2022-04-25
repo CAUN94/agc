@@ -121,7 +121,7 @@ class User extends Authenticatable {
 
 	public function Student() {
 		$student = $this->hasMany(Student::class)
-			->where('start_day', '<=', \Carbon\Carbon::NOW()->startofday())
+			->where('start_day', '<=', \Carbon\Carbon::NOW()->addDays(30)->startofday())
 			->orderby('start_day', 'desc')
 			->limit(1)->first();
 

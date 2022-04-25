@@ -43,7 +43,7 @@
     <div class="flex flex-col lg:flex-row gap-2 mt-2">
         <div class="w-full lg:w-1/3 flex flex-col overflow-x-auto gap-y-2">
             <div class="align-middle inline-block min-w-full">
-                <div x-data="{ classShow: false }" class="box-white p-3">
+                <div x-data="{ classShow: false, createShow: true }" class="box-white p-3">
                     <div class="flex justify-between">
                         <span class="block">Selecciona un plan.</span>
 
@@ -139,9 +139,83 @@
                     </div>
                     @endif
                 </div>
-
             </div>
+                <div class="box-white mt-1 p-3">
+                    <div class="flex justify-between">
+                        <span class="block cursor-pointer" wire:click="openCreate">Crear Clases.</span>
 
+                        <div class="modal-close cursor-pointer z-50" wire:click="closeCreate">
+                            <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                              <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="mt-3" x-show="$wire.createShow" x-cloak>
+                        <div>
+                          <div class="block">
+                            <select class="w-full bg-gray-200 border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="newAppointment" id="newAppointment" wire:model="newAppointment">
+                                <option selected value="0">Elegir Plan</option>
+                                @foreach($trainings_g as $training)
+                                    <option value="{{$training->id}}">{{$training->name}} {{$training->format}}</option>
+                                @endforeach
+                                @foreach($trainings_s as $training)
+                                    <option value="{{$training->id}}">{{$training->planComplete()}}</option>
+                                @endforeach
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                              <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                            </div>
+                          </div>
+                          <dl>
+                          <div class="train-class-resume">
+                            <dt class="text-sm font-medium text-gray-500 my-auto">
+                              Nombre Clase
+                            </dt>
+                            <dd class="train-class-resume-text">
+                              <x-admin.input class="col-span-6 sm:col-span-3" type="text" name="newname" readonly="edit"></x-admin.input>
+                            </dd>
+                          </div>
+                        </dl>
+                        <dl>
+                          <div class="train-class-resume">
+                            <dt class="text-sm font-medium text-gray-500 my-auto">
+                              Fecha
+                            </dt>
+                            <dd class="train-class-resume-text">
+                              <x-admin.input class="col-span-6 sm:col-span-3" type="date" name="newdate" readonly="edit"></x-admin.input>
+
+                            </dd>
+                          </div>
+                        </dl>
+                        <dl>
+                          <div class="train-class-resume">
+                            <dt class="text-sm font-medium text-gray-500 my-auto">
+                              Hora
+                            </dt>
+                            <dd class="train-class-resume-text">
+                              <x-admin.input class="col-span-6 sm:col-span-3" type="time" name="newhour" readonly="edit"></x-admin.input>
+
+                            </dd>
+                          </div>
+                        </dl>
+                        <dl>
+                          <div class="train-class-resume">
+                            <dt class="text-sm font-medium text-gray-500 my-auto">
+                              Cupos
+                            </dt>
+                            <dd class="train-class-resume-text">
+                              <x-admin.input class="col-span-6 sm:col-span-3" type="number" name="places" readonly="edit"></x-admin.input>
+                            </dd>
+                          </div>
+                        </dl>
+                        <div class="grid justify-items-end">
+                            <p class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-500 hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 cursor-pointer" wire:click='trainAppointmentCreate()'>
+                                Crear Clase
+                            </p>
+                        </div>
+                        </div>
+                    </div>
+                </div>
         </div>
         <div class="w-full flex flex-col overflow-x-auto gap-1">
           <div class="align-middle inline-block min-w-full">
@@ -240,4 +314,5 @@
         </div>
         <x-flash-message></x-flash-message>
     </div>
+
 </div>
