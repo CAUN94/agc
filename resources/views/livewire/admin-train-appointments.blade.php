@@ -127,6 +127,7 @@
                     </div>
                     @endif
                 </div>
+
                 <div class="box-white mt-3 p-3">
 
                     <div class="flex justify-between">
