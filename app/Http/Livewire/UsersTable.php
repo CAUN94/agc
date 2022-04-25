@@ -37,18 +37,19 @@ class UsersTable extends LivewireDatatable {
 				->filterable()
 				->editable(),
 			// Column::raw('GROUP_CONCAT(trainings.name SEPARATOR " | ") AS `Planes`'),
+
 			// BooleanColumn::name('Student.user_id')
 			// ->label('Entrenamiento')
 			// ->filterable(),
-			BooleanColumn::name('Student.user_id')
-				->label('Estudiante')
-				->filterable(),
+			// BooleanColumn::name('Student.user_id')
+			// 	->label('Estudiante')
+			// 	->filterable(),
 			BooleanColumn::name('Professional.user_id')
 				->label('Profesional')
 				->filterable(),
-			// BooleanColumn::name('Professional.id')
-			// ->label('Profesional')
-			// ->filterable(),
+			BooleanColumn::name('Professional.id')
+			->label('Profesional')
+			->filterable(),
 
 			Column::callback(['gender'], function ($gender) {
 				$genders = [
