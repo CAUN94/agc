@@ -3,13 +3,15 @@
 namespace App\Http\Livewire;
 
 use App\Models\TrainAppointment;
+use App\Models\TrainAppointmentPivot;
 use App\Models\TrainBook;
+use App\Models\Trainer;
 use App\Models\Training;
-use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
-use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Livewire\Component;
 use Session as FlashSession;
 
 class TrainerTrainAppointment extends Component
@@ -32,6 +34,14 @@ class TrainerTrainAppointment extends Component
     public $message;
     public $startOfMonth;
     public $endOfMonth;
+    public $trainings_g;
+    public $trainings_s;
+    public $newAppointment;
+    public $coach;
+    public $newname;
+    public $newdate;
+    public $newhour;
+    public $places;
 
     public function mount(){
         $this->now = Carbon::Now();
@@ -42,6 +52,14 @@ class TrainerTrainAppointment extends Component
             $this->startOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m'),21)->startOfDay();
             $this->endOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m')+1,20)->endOfDay();
         }
+        $this->selectedPlans = Training::where('id','>','0')->get('id')->toArray();
+
+        $this->plans = DB::table('train_appointments')
+            ->join('train_appointments_pivot', 'train_appointments.id', '=', 'train_appointments_pivot.train_appointment_id')
+            ->where('trainer_id',Auth::user()->id)
+            ->whereIN('training_id',$this->selectedPlans)
+            ->pluck('train_appointment_id')
+            ->toArray();
     }
 
     public function updateSelectedPlans(){
@@ -79,7 +97,6 @@ class TrainerTrainAppointment extends Component
     public function trainAppointmentCreate(){
         $validate = $this->validate([
             'newAppointment' => ['required','min:1'],
-            'coach' => ['required','min:1'],
             'newname' => ['required'],
             'newdate' => ['required'],
             'newhour' => ['required'],
@@ -87,7 +104,7 @@ class TrainerTrainAppointment extends Component
         ]);
 
         $trainAppointment = new TrainAppointment;
-        $trainAppointment->trainer_id = $this->coach;
+        $trainAppointment->trainer_id = Auth::user()->id;
         $trainAppointment->name = $this->newname;
         $trainAppointment->date = $this->newdate;
         $trainAppointment->hour = $this->newhour;
@@ -111,11 +128,24 @@ class TrainerTrainAppointment extends Component
             $tap->train_appointment_id = $trainAppointment->id;
             $tap->save();
         }
-        $this->selectedPlans = [];
+        $this->selectedPlans = Training::where('id','>','0')->get('id')->toArray();
+
         $this->plans = DB::table('train_appointments')
-            ->whereIN('trainer_id',$this->selectedTrainer)
-            ->pluck('id')
+            ->join('train_appointments_pivot', 'train_appointments.id', '=', 'train_appointments_pivot.train_appointment_id')
+            ->where('trainer_id',Auth::user()->id)
+            ->whereIN('training_id',$this->selectedPlans)
+            ->pluck('train_appointment_id')
             ->toArray();
+    }
+
+    public function trainAppointmentDelete($id){
+        TrainAppointment::find($id)->delete();
+        TrainAppointmentPivot::where('train_appointment_id',$id)->delete();
+        $this->classShow = false ;
+        $this->train = null;
+        $this->name = null;
+        $this->date = null;
+        $this->hour = null;
     }
 
     public function trainAppointmentStatus(){

@@ -22,7 +22,7 @@
                 <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                     <i class="fa fa-money" aria-hidden="true"></i>
                     <span class="flex-1 ml-3 whitespace-nowrap">Remuneración</span>
-                    <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">Aquí va la plata</span>
+                    <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{Auth::user()->trainer->trainerRemuneration()}}</span>
                 </a>
             </li>
         </ul>
@@ -41,9 +41,9 @@
         </form>
     </div>
     <div class="flex flex-col lg:flex-row gap-2 mt-2">
-        <div class="w-full lg:w-1/3 flex flex-col overflow-x-auto gap-y-2">
+        <div  x-data="{ classShow: false, createShow: true }" class="w-full lg:w-1/3 flex flex-col overflow-x-auto gap-y-2">
             <div class="align-middle inline-block min-w-full">
-                <div x-data="{ classShow: false, createShow: true }" class="box-white p-3">
+                <div class="box-white p-3">
                     <div class="flex justify-between">
                         <span class="block">Selecciona un plan.</span>
 
@@ -62,7 +62,7 @@
                               Programa
                             </dt>
                             <dd class="train-class-resume-text">
-                                <li class="list-none">{{$train->trainings()->plan()}}</li>
+                                <li class="list-none">{{$train->trainings()->planComplete()}}</li>
                             </dd>
                           </div>
                         </dl>
@@ -119,9 +119,12 @@
                             </dd>
                           </div>
                         </dl>
-                        <div class="grid justify-items-end">
-                            <p class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-500 hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 cursor-pointer" wire:click='trainAppointmentEdit()'>
-                                Modificar Clase
+                        <div class="grid grid-cols-2 gap-1 justify-items-end">
+                            <p class="inline-flex w-full justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-500 hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 cursor-pointer" wire:click="trainAppointmentDelete({{$train->id}})">
+                                Borrar
+                            </p>
+                            <p class="inline-flex w-full justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-500 hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 cursor-pointer" wire:click='trainAppointmentEdit()'>
+                                Modificar
                             </p>
                         </div>
                         <hr class="my-2">

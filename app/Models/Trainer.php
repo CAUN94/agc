@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\DB;
+use App\Helpers\Helper;
 use App\Models\TrainAppointment;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class Trainer extends Model
 {
@@ -38,7 +39,6 @@ class Trainer extends Model
         return $this->trainAppointmentsMonth()->where('status',true);
     }
 
-
     public function month(){
         if (Carbon::now()->format('d') <= 21 ){
             $startOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')-1,21)->startOfDay();
@@ -48,5 +48,21 @@ class Trainer extends Model
             $endOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')+1,20)->endOfDay();
         }
         return [$startOfMonth,$endOfMonth];
+    }
+
+    public function trainerRemuneration(){
+        $sum = 0;
+        foreach ($this->trainAppointmentsMonthCheck()->get() as $key => $checkAppointment) {
+            // return TrainAppointment::find($checkAppointment->id)->trainings();
+            $training = TrainAppointment::find($checkAppointment->id)->trainings();
+            if ($training->type == 'group' and $training->format == 'Presencial') {
+                $sum = $sum + 12000;
+            } elseif ($training->type == 'group' and $training->format == 'Online') {
+                $sum = $sum + 10000;
+            } else {
+                $sum = $sum + ceil(($training->price/$training->class)*($this->coff/100));
+            }
+        }
+        return Helper::moneda_chilena($sum);
     }
 }
