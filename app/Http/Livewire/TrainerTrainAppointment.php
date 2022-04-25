@@ -76,6 +76,48 @@ class TrainerTrainAppointment extends Component
         $trainAppointment->save();
     }
 
+    public function trainAppointmentCreate(){
+        $validate = $this->validate([
+            'newAppointment' => ['required','min:1'],
+            'coach' => ['required','min:1'],
+            'newname' => ['required'],
+            'newdate' => ['required'],
+            'newhour' => ['required'],
+            'places' => ['required','min:1'],
+        ]);
+
+        $trainAppointment = new TrainAppointment;
+        $trainAppointment->trainer_id = $this->coach;
+        $trainAppointment->name = $this->newname;
+        $trainAppointment->date = $this->newdate;
+        $trainAppointment->hour = $this->newhour;
+        $trainAppointment->places = $this->places;
+        $trainAppointment->description = 'No Disponible';
+        $trainAppointment->save();
+        $training = Training::find($this->newAppointment);
+        if($training->type == 'group'){
+
+            $trainings = Training::where('name',$training->name)->where('format',$training->format)->get();
+            foreach($trainings as $training){
+                $tap = new TrainAppointmentPivot;
+                $tap->training_id = $training->id;
+                $tap->train_appointment_id = $trainAppointment->id;
+                $tap->save();
+            }
+        }
+        else {
+            $tap = new TrainAppointmentPivot;
+            $tap->training_id = $training->id;
+            $tap->train_appointment_id = $trainAppointment->id;
+            $tap->save();
+        }
+        $this->selectedPlans = [];
+        $this->plans = DB::table('train_appointments')
+            ->whereIN('trainer_id',$this->selectedTrainer)
+            ->pluck('id')
+            ->toArray();
+    }
+
     public function trainAppointmentStatus(){
         $trainAppointment = TrainAppointment::find($this->train->id);
         $trainAppointment->status = !$trainAppointment->status;
@@ -88,6 +130,14 @@ class TrainerTrainAppointment extends Component
         $this->name = null;
         $this->date = null;
         $this->hour = null;
+    }
+
+    public function openCreate(){
+        $this->createShow = true ;
+    }
+
+    public function closeCreate(){
+        $this->createShow = false;
     }
 
     public function show($id){
@@ -118,6 +168,9 @@ class TrainerTrainAppointment extends Component
                 $this->dates[] = $date;
             }
         }
+
+        $this->trainings_g = Training::where('type','group')->groupby('format', 'name')->orderby('name', 'asc')->get();
+        $this->trainings_s = Training::where('type','!=','group')->orderby('name', 'asc')->get();
 
         return view('livewire.trainer-train-appointment');
     }
