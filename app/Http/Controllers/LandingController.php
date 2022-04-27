@@ -32,5 +32,10 @@ class LandingController extends Controller
         return view('example');
     }
 
+    public function renew()
+    {
+        return view('users.renew');
+    }
+
 
 }

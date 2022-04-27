@@ -118,25 +118,28 @@ class User extends Authenticatable {
 		];
 		return $genderLetter[$this->gender];
 	}
+	public function student() {
+		return $this->students->first();
+	}
 
-	public function Student() {
-		$student = $this->hasMany(Student::class)
-			->where('start_day', '<=', \Carbon\Carbon::NOW()->addDays(30)->startofday())
-			->orderby('start_day', 'desc')
-			->limit(1)->first();
+	public function students() {
+		$students = User::select("students.id","students.start_day","trainings.days")
+                ->join('students','users.id', '=' ,'students.user_id')
+                ->join('trainings','students.training_id', '=', 'trainings.id')
+                ->where('users.id','=',$this->id)
+                ->get();
 
-		if(is_null($student)){
-			return null;
-		}
 
-		$training = Training::find($student->training_id);
-		$start_day = \Carbon\Carbon::parse($student->start_day);
-		$now = \Carbon\Carbon::now();
-		if ($start_day->diff($now)->days < $training->days){
-			return $student;
-		}
+        foreach ($students as $key => $student) {
+			$start_day = \Carbon\Carbon::parse($student->start_day);
+			$end_day = \Carbon\Carbon::parse($student->start_day)->addDays($student->days);
+			$now = \Carbon\Carbon::now();
+			if($now>=$start_day and $now <= $end_day){
+				return $this->hasMany(Student::class)->where('students.id','=',$student->id);
+			}
+        }
+        return $this->hasMany(Student::class)->orderby('id','asc');
 
-		return null;
 	}
 
 	public function allStudentPlan() {

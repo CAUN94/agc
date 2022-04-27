@@ -21,6 +21,11 @@ class StudentRole
         if (Auth::check() &&  Auth::user()->isStudent()) {
              return $next($request);
         }
+
+        if(!Auth::check()){
+            return redirect('/login');
+        }
+
         FlashSession::flash('primary','No cuentas con los permisos');
         return redirect('/');
     }

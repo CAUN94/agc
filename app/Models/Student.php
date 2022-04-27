@@ -110,6 +110,13 @@ class Student extends Model {
 	// 	$lastPlan =
 	// 	return \Carbon\Carbon::parse($this->start_day)->addDays($this->training->days);
 	// }
+	public function lastday(){
+		return \Carbon\Carbon::parse($this->start_day)->addDays($this->training->days);
+	}
+
+	public function lastdayformat(){
+		return $this->lastday()->format('Y-m-d');
+	}
 
 	public function islastday($date) {
 		$end_day = \Carbon\Carbon::parse($this->start_day)->addDays($this->training->days);
@@ -186,31 +193,48 @@ class Student extends Model {
 	//     return \Carbon\Carbon::parse($this->attributes['start_day'])->format('H:i');
 	// }
 
-	public function nextPlan() {
-		$start_day = \Carbon\Carbon::parse($this->start_day);
-		$end_day = \Carbon\Carbon::parse($this->endMonth());
-		$student = Student::where('user_id', Auth::id())
-			->where('start_day', '>', $start_day)
-			->where('start_day', '<=', $end_day)
-			->where('settled', true);
-		if ($student->count() >= 1) {
-			return $student->first();
-		}
+	// public function nextPlan() {
+	// 	$start_day = \Carbon\Carbon::parse($this->start_day);
+	// 	$end_day = \Carbon\Carbon::parse($this->endMonth());
+	// 	$student = Student::where('user_id', Auth::id())
+	// 		->where('start_day', '>', $start_day)
+	// 		->where('start_day', '<=', $end_day)
+	// 		->where('settled', true);
+	// 	return $student;
+	// 	if ($student->count() >= 1) {
+	// 		return $student->first();
+	// 	}
 
-		return False;
+	// 	return False;
+	// }
+
+	public function nextPlan(){
+		$students = User::select("students.*")
+                ->join('students','users.id', '=' ,'students.user_id')
+                ->join('trainings','students.training_id', '=', 'trainings.id')
+                ->where('users.id','=',$this->user_id)
+                ->where('start_day','>=',$this->endMonth())
+                ->where('settled', true)
+                ->orderby('start_day','asc')
+                ->first();
+        if(is_null($students)){
+        	return False;
+        }
+        return Student::find($students->id);
 	}
 
-	public function nextPlanAll() {
-		$start_day = \Carbon\Carbon::parse($this->start_day);
-		$end_day = \Carbon\Carbon::parse($this->endMonth());
-		$student = Student::where('user_id', Auth::id())
-			->where('start_day', '>', $start_day)
-			->where('start_day', '<=', $end_day);
-		if ($student->count() >= 1) {
-			return $student->first();
-		}
-
-		return False;
+	public function nextPlanAll(){
+		$students = User::select("students.*")
+                ->join('students','users.id', '=' ,'students.user_id')
+                ->join('trainings','students.training_id', '=', 'trainings.id')
+                ->where('users.id','=',$this->user_id)
+                ->where('start_day','>=',$this->endMonth())
+                ->orderby('start_day','asc')
+                ->first();
+        if(is_null($students)){
+        	return False;
+        }
+        return Student::find($students->id);
 	}
 
 	public function isRenew() {

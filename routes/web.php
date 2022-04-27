@@ -18,8 +18,12 @@ Route::get('/', [LandingController::class, 'welcome']);
 Route::get('/team', [LandingController::class, 'team']);
 Route::get('/tables', [LandingController::class, 'tables']);
 Route::get('/example', [LandingController::class, 'example']);
+Route::get('/renew', [LandingController::class, 'renew'])->middleware(['auth']);
+
+
 
 Route::resource('users', 'App\Http\Controllers\UsersController')->middleware(['auth']);
+
 Route::resource('trainings', 'App\Http\Controllers\TrainingController');
 Route::resource('students', 'App\Http\Controllers\StudentController');
 Route::get('/table', [TableController::class, 'index']);

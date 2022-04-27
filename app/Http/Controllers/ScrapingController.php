@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActionMl;
+use App\Models\AppointmentMl;
 use App\Models\UserMl;
 use Carbon\Carbon;
 use Goutte\Client;
@@ -22,8 +24,8 @@ class ScrapingController extends Controller
         $form->setValues(['rut' => 'admin', 'password' => 'Pascual4900']);
         $crawler = $client->submit($form);
         if($filter){
-            $first = strval(Carbon::create(null, null, null)->subMonth()->subMonth()->format('Y-m-d'));
-            $last = strval(Carbon::create(null, null, null)->addMonth()->format('Y-m-d'));
+            $first = strval(Carbon::now()->subMonth()->format('Y-m-d'));
+            $last = strval(Carbon::now()->addmonth()->format('Y-m-d'));
             $url = $url."%5Bfecha_inicio%5D%5Bstatus%5D=activated&filters%5Bfecha_inicio%5D%5Bvalue%5D=".$first."&filters%5Bfecha_fin%5D%5Bstatus%5D=activated&filters%5Bfecha_fin%5D%5Bvalue%5D=".$last."";
         }
         $crawler = $client->request('GET', $url);
@@ -98,13 +100,65 @@ class ScrapingController extends Controller
     }
 
     public function actionMl(){
-        return self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/listado_acciones?filters%5Bsucursal%5D%5Bstatus%5D=activated&filters%5Bsucursal%5D%5Bvalue%5D=1&filters",true);
-        // return $array;
+        $actions = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/listado_acciones?filters%5Bsucursal%5D%5Bstatus%5D=activated&filters%5Bsucursal%5D%5Bvalue%5D=1&filters",true);
+        foreach($actions as $action){
+            $value = json_decode("{".$action."}",true);
+
+            $actionMl = ActionMl::updateOrCreate(
+                [
+                    'Prestacion_Nr' => $value['Id. Prestacion'],
+                    'Tratamiento_Nr' => $value['# Tratamiento'],
+                    'Fecha_Realizacion' => $value['Fecha Realizacion']
+                ],
+                [
+                    'Sucursal' => $value['Sucursal'],
+                    'Nombre' => $value['Nombre paciente'],
+                    'Apellido' => $value['Apellidos paciente'],
+                    'Categoria_Nr' => $value['Id. Categoria'],
+                    'Categoria_Nombre' => $value['Nombre Categoria'],
+                    'Tratamiento_Nr' => $value['# Tratamiento'],
+                    'Profesional' => $value['Realizado por'],
+                    'Estado' => $value['Estado de la consulta'],
+                    'Convenio' => $value['Nombre Convenio'],
+                    'Prestacion_Nr' => $value['Id. Prestacion'],
+                    'Prestacion_Nombre' => $value['Nombre Prestacion'],
+                    'Fecha_Realizacion' => $value['Fecha Realizacion'],
+                    'Precio_Prestacion' => $value['Precio Prestación'],
+                    'Abono' => $value['Abonado'],
+                    'Total' => $value['Total a pagar Profesional'],
+                ]
+            );
+        }
+        return ActionMl::all();
     }
 
     public function appointmentMl(){
-        return self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/citas?filters%5Bsucursal%5D%5Bstatus%5D=activated&filters%5Bsucursal%5D%5Bvalue%5D=1&filters",true);
-        // return $array;
+        $appointments = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/citas?filters%5Bsucursal%5D%5Bstatus%5D=activated&filters%5Bsucursal%5D%5Bvalue%5D=1&filters",true);
+        foreach($appointments as $appointment){
+            $value = json_decode("{".$appointment."}",true);
+            $actionMl = AppointmentMl::updateOrCreate(
+                [
+                    'Tratamiento_Nr' => $value['Atencion'],
+                    'Rut_Paciente' => $value['Rut Paciente'],
+                ],
+                [
+                    'Estado' => $value['Estado'],
+                    'Fecha' => $value['Fecha'],
+                    'Hora_inicio' => $value['Hora inicio'],
+                    'Hora_termino' => $value['Hora termino'],
+                    'Tratamiento_Nr' => $value['Atencion'],
+                    'Profesional' => $value['Profesional/Recurso'],
+                    'Rut_Paciente' => $value['Rut Paciente'],
+                    'Nombre_paciente' => $value['Nombre paciente'],
+                    'Apellidos_paciente' => $value['Apellidos paciente'],
+                    'Mail' => $value['E-mail'],
+                    'Celular' => $value['Celular'],
+                    'Convenio' => $value['Convenio'],
+                    'Sucursal' => $value['Sucursal'],
+                ]
+            );
+        }
+        return AppointmentMl::all();
     }
 
     public function treatmentsMl(){

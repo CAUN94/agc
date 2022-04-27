@@ -123,7 +123,9 @@
                       </span>
                     </div>
                   </div>
-                  <a href="/students" class="text-primary-500">Ver Clases y Horarios</a>
+                  @if($user->isStudent())
+                    <a href="/students" class="text-primary-500">Ver Clases y Horarios</a>
+                  @endif
                 </dd>
               </div>
               @endif
@@ -152,7 +154,9 @@
                   Historial Planes de Entrenamiento
                 </h3>
                 <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                  <a href="/students" class="text-gray-500 underline">Ver Clases y Horarios</a>
+                  @if($user->isStudent())
+                    <a href="/students" class="text-gray-500 underline">Ver Clases y Horarios</a>
+                  @endif
                 </p>
               </div>
               <div class="bg-white shadow overflow-hidden sm:rounded-lg p-1">
