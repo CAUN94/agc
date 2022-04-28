@@ -43,12 +43,14 @@ class CheckRenewEmail extends Command
         $users = [];
         foreach(User::all() as $user){
             if($user->isStudent()){
-                $now = \Carbon\Carbon::now()->format('Y-m-d');
-                $now_m5 = \Carbon\Carbon::now()->subdays(5)->format('Y-m-d');
-                $now_p5 = \Carbon\Carbon::now()->adddays(5)->format('Y-m-d');
-                $end = \Carbon\Carbon::parse($user->student()->endMonth())->format('Y-m-d');
-                if($now == $end or $now_m5 == $end or $now_p5 == $end){
-                    $users[] = $user;
+                if(!$user->student()->nextPlan()){
+                    $now = \Carbon\Carbon::now()->format('Y-m-d');
+                    $now_m5 = \Carbon\Carbon::now()->subdays(5)->format('Y-m-d');
+                    $now_p5 = \Carbon\Carbon::now()->adddays(5)->format('Y-m-d');
+                    $end = \Carbon\Carbon::parse($user->student()->endMonth())->format('Y-m-d');
+                    if($now == $end or $now_m5 == $end or $now_p5 == $end){
+                        $users[] = $user;
+                    }
                 }
             }
 
