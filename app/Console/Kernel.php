@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('ln:CheckRenew')->daily()->at('12:00');
+        $schedule->command('ln:CheckRenew')->daily()->at('16:30');
     }
 
     /**
