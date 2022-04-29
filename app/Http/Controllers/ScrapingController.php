@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ActionMl;
 use App\Models\AppointmentMl;
+use App\Models\TreatmentMl;
 use App\Models\UserMl;
 use Carbon\Carbon;
 use Goutte\Client;
@@ -162,8 +163,31 @@ class ScrapingController extends Controller
     }
 
     public function treatmentsMl(){
-        return self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/resumen_tratamientos_saldos");
-        // return $array;
+        $treatments = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/resumen_tratamientos_saldos");
+        foreach($treatments as $treatment){
+            $value = json_decode("{".$treatment."}",true);
+            $treatmentMl = TreatmentMl::updateOrCreate(
+                [
+                    'Ficha' => $value['Atencion'],
+                    'Atencion' => $value['Atencion'],
+                ],
+                [
+                    'Ficha' => $value['# Ficha'],
+                    'Nombre' => $value['Nombre paciente'],
+                    'Apellidos' => $value['Apellidos paciente'],
+                    'Atencion' => $value['Atencion'],
+                    'Profesional' => $value['Profesional'],
+                    'TotalAtencion' => $value['Total Atencion'],
+                    'TotalLaboratorios' => $value['Total Laboratorios'],
+                    'TotalRealizado' => $value['Total Realizado'],
+                    'TotalAbonado' => $value['Total Abonado'],
+                    'Avance' => $value['Saldo por avance'],
+                    'Global' => $value['Saldo Global'],
+                    'Proxima_cita' => $value['Proxima cita']
+                ]
+            );
+        }
+        return TreatmentMl::all();
     }
 
     public function paymentsMl(){

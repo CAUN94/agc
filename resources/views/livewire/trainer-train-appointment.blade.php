@@ -27,7 +27,7 @@
             </li>
         </ul>
     </div>
-    <div class="w-full overflow-x-auto gap-y-2 box-white mt-2 p-3">
+    <div>
         <form wire:change="updateSelectedPlans">
         <div class="grid grid-cols-5 gap-1">
             @foreach(Auth::user()->trainer->trainings()->get() as $training)
