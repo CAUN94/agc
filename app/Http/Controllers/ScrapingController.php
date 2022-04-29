@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ActionMl;
 use App\Models\AppointmentMl;
+use App\Models\PaymentMl;
 use App\Models\TreatmentMl;
 use App\Models\UserMl;
 use Carbon\Carbon;
@@ -25,7 +26,7 @@ class ScrapingController extends Controller
         $form->setValues(['rut' => 'admin', 'password' => 'Pascual4900']);
         $crawler = $client->submit($form);
         if($filter){
-            $first = strval(Carbon::now()->subMonth()->format('Y-m-d'));
+            $first = strval(Carbon::now()->subYear()->subYear()->subMonth()->format('Y-m-d'));
             $last = strval(Carbon::now()->addmonth()->format('Y-m-d'));
             $url = $url."%5Bfecha_inicio%5D%5Bstatus%5D=activated&filters%5Bfecha_inicio%5D%5Bvalue%5D=".$first."&filters%5Bfecha_fin%5D%5Bstatus%5D=activated&filters%5Bfecha_fin%5D%5Bvalue%5D=".$last."";
         }
@@ -130,7 +131,7 @@ class ScrapingController extends Controller
                 ]
             );
         }
-        return ActionMl::all();
+        return redirect('/medilink/actions');
     }
 
     public function appointmentMl(){
@@ -159,7 +160,7 @@ class ScrapingController extends Controller
                 ]
             );
         }
-        return AppointmentMl::all();
+        return redirect('/medilink/appointments');
     }
 
     public function treatmentsMl(){
@@ -187,11 +188,41 @@ class ScrapingController extends Controller
                 ]
             );
         }
-        return TreatmentMl::all();
+        return redirect('/medilink/treatments');
     }
 
     public function paymentsMl(){
-        return self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/pagos_pacientes");
-        // return $array;
+        $payments = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/pagos_pacientes");
+        foreach($payments as $payment){
+            $value = json_decode("{".$payment."}",true);
+            $paymentMl = PaymentMl::updateOrCreate(
+                [
+                    'Atencion' => $value['Atencion'],
+                ],
+                [
+                  'Atencion' => $value['Atencion'],
+                  'Profesional' => $value['Profesional atencion'],
+                  'Especialidad' => $value['Especialidad Profesional atencion'],
+                  'Pago_Nr' => $value['# Pago'],
+                  'Fecha' => $value['Fecha de recepción'],
+                  'Rut' => $value['Rut paciente'],
+                  'Nombre' => $value['Nombre'],
+                  'Apellidos' => $value['Apellidos'],
+                  'Tipo_Paciente' => $value['Tipo Paciente'],
+                  'Convenio' => $value['Convenio'],
+                  'Convenio_Secundario' => $value['Convenio Secundario'],
+                  'Boleta_Nr' => $value['# Boleta'],
+                  'Total' => $value['Total pago'],
+                  'Asociado' => $value['Total asociado a atencion'],
+                  'Medio' => $value['Medio de pago'],
+                  'Banco' => $value['Banco'],
+                  'RutBanco' => $value['Rut'],
+                  'Cheque' => $value['# Ref Cheque'],
+                  'Vencimiento' => $value['Vencimiento'],
+                  'Generado' => $value['Generado'],
+                ]
+            );
+        }
+        return redirect('/medilink/payments');
     }
 }

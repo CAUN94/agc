@@ -14,7 +14,7 @@ class AddAllToTreatments extends Migration
     public function up()
     {
         Schema::table('treatment_mls', function (Blueprint $table) {
-            $table->integer('Ficha')->nullable($value = true)->after('id');;
+            $table->integer('Ficha')->nullable($value = true)->after('id');
             $table->string('Nombre')->after('Ficha');
             $table->string('Apellidos')->after('Nombre');
             $table->string('Atencion')->after('Apellidos');

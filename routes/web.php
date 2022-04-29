@@ -69,7 +69,11 @@ Route::get('/scraping-paymentsml', 'App\Http\Controllers\ScrapingController@paym
 Route::get('/professionals', 'App\Http\Controllers\ScrapingController@professionals')->middleware(['intranet']);
 Route::get('/professionals/{id}', 'App\Http\Controllers\ScrapingController@professional')->middleware(['intranet']);
 
-
+// Medilink
+Route::get('/medilink/payments','App\Http\Controllers\MedilinkController@payments');
+Route::get('/medilink/actions','App\Http\Controllers\MedilinkController@actions');
+Route::get('/medilink/appointments','App\Http\Controllers\MedilinkController@appointments');
+Route::get('/medilink/treatments','App\Http\Controllers\MedilinkController@treatments');
 
 // Short Links
 Route::get('/padpow', 'App\Http\Controllers\RedirectController@pay');
