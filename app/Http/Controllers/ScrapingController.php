@@ -26,7 +26,7 @@ class ScrapingController extends Controller
         $form->setValues(['rut' => 'admin', 'password' => 'Pascual4900']);
         $crawler = $client->submit($form);
         if($filter){
-            $first = strval(Carbon::now()->subYear()->subYear()->subMonth()->format('Y-m-d'));
+            $first = strval(Carbon::now()->subYear()->subYear()->format('Y-m-d'));
             $last = strval(Carbon::now()->addmonth()->format('Y-m-d'));
             $url = $url."%5Bfecha_inicio%5D%5Bstatus%5D=activated&filters%5Bfecha_inicio%5D%5Bvalue%5D=".$first."&filters%5Bfecha_fin%5D%5Bstatus%5D=activated&filters%5Bfecha_fin%5D%5Bvalue%5D=".$last."";
         }
@@ -39,12 +39,18 @@ class ScrapingController extends Controller
 
     public function userMl(){
 
+        $first = strval(Carbon::now()->subMonth()->subMonth()->format('Y-m-d'));
         $split = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/pacientes_nuevos");
         // return $split;
         $count = 0;
         foreach($split as $string){
             $jsonobj = "{".$string."}";
             $value = json_decode($jsonobj,true);
+            $limit = Carbon::now()->subMonth()->subMonth();
+            $now = Carbon::parse($value['Fecha Afiliación']);
+            if($now>$limit){
+                continue;
+            }
             $userMl = UserMl::updateOrCreate(
                 ['RUT' => $value['RUT/DNI'],'Email' => $value['E-Mail']],
                 [
@@ -105,6 +111,11 @@ class ScrapingController extends Controller
         $actions = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/listado_acciones?filters%5Bsucursal%5D%5Bstatus%5D=activated&filters%5Bsucursal%5D%5Bvalue%5D=1&filters",true);
         foreach($actions as $action){
             $value = json_decode("{".$action."}",true);
+            // $limit = Carbon::now()->subMonth()->subMonth();
+            // $now = Carbon::parse($value['Fecha Realizacion']);
+            // if($now>$limit){
+            //     continue;
+            // }
 
             $actionMl = ActionMl::updateOrCreate(
                 [
@@ -138,6 +149,11 @@ class ScrapingController extends Controller
         $appointments = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/citas?filters%5Bsucursal%5D%5Bstatus%5D=activated&filters%5Bsucursal%5D%5Bvalue%5D=1&filters",true);
         foreach($appointments as $appointment){
             $value = json_decode("{".$appointment."}",true);
+            // $limit = Carbon::now()->subMonth()->subMonth();
+            // $now = Carbon::parse($value['Fecha']);
+            // if($now>$limit){
+            //     continue;
+            // }
             $actionMl = AppointmentMl::updateOrCreate(
                 [
                     'Tratamiento_Nr' => $value['Atencion'],

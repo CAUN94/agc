@@ -14,10 +14,10 @@ class AddAllToPayments extends Migration
     public function up()
     {
         Schema::table('payment_mls', function (Blueprint $table) {
-            $table->integer('Atencion')->after('id');
+            $table->biginteger('Atencion')->after('id');
             $table->string('Profesional')->nullable($value = true)->after('Atencion');
             $table->string('Especialidad')->after('Profesional');
-            $table->integer('Pago_Nr')->after('Especialidad');
+            $table->biginteger('Pago_Nr')->after('Especialidad');
             $table->date('Fecha')->after('Pago_Nr');
             $table->string('Rut')->after('Fecha');
             $table->string('Nombre')->after('Rut');
@@ -25,9 +25,9 @@ class AddAllToPayments extends Migration
             $table->string('Tipo_Paciente')->nullable($value = true)->after('Apellidos');
             $table->string('Convenio')->nullable($value = true)->after('Tipo_Paciente');
             $table->string('Convenio_Secundario')->nullable($value = true)->after('Convenio');
-            $table->integer('Boleta_Nr')->nullable($value = true)->after('Convenio_Secundario');
-            $table->integer('Total')->after('Boleta_Nr');
-            $table->integer('Asociado')->after('Total');
+            $table->biginteger('Boleta_Nr')->nullable($value = true)->after('Convenio_Secundario');
+            $table->biginteger('Total')->after('Boleta_Nr');
+            $table->biginteger('Asociado')->after('Total');
             $table->string('Medio')->after('Asociado');
             $table->string('Banco')->nullable($value = true)->after('Medio');
             $table->string('RutBanco')->nullable($value = true)->after('Banco');

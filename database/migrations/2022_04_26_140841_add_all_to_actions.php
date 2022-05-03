@@ -19,11 +19,11 @@ class AddAllToActions extends Migration
             $table->string('Apellido')->after('Nombre');
             $table->integer('Categoria_Nr')->after('Apellido');
             $table->string('Categoria_Nombre')->after('Categoria_Nr');
-            $table->integer('Tratamiento_Nr')->after('Categoria_Nombre');
+            $table->biginteger('Tratamiento_Nr')->after('Categoria_Nombre');
             $table->string('Profesional')->nullable($value = true)->after('Tratamiento_Nr');
             $table->string('Estado')->nullable($value = true)->after('Profesional');
             $table->string('Convenio')->after('Estado');
-            $table->integer('Prestacion_Nr')->after('Convenio');
+            $table->biginteger('Prestacion_Nr')->after('Convenio');
             $table->string('Prestacion_Nombre')->after('Prestacion_Nr');
             $table->dateTime('Fecha_Realizacion')->after('Prestacion_Nombre');
             $table->integer('Precio_Prestacion')->after('Fecha_Realizacion');

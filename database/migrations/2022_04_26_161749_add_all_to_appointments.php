@@ -18,7 +18,7 @@ class AddAllToAppointments extends Migration
             $table->dateTime('Fecha')->after('Estado');
             $table->time('Hora_inicio')->after('Fecha');
             $table->time('Hora_termino')->after('Hora_inicio');
-            $table->integer('Tratamiento_Nr')->after('Hora_termino');
+            $table->biginteger('Tratamiento_Nr')->after('Hora_termino');
             $table->string('Profesional')->after('Tratamiento_Nr');
             $table->string('Rut_Paciente')->after('Profesional');
             $table->string('Nombre_paciente')->after('Rut_Paciente');
@@ -42,7 +42,7 @@ class AddAllToAppointments extends Migration
             $table->dropColumn('Fecha');
             $table->dropColumn('Hora_inicio');
             $table->dropColumn('Hora_termino');
-            $table->dropColumn('Fecha_Generación');
+            $table->dropColumn('Fecha');
             $table->dropColumn('Tratamiento_Nr');
             $table->dropColumn('Profesional');
             $table->dropColumn('Rut_Paciente');

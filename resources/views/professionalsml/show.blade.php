@@ -21,8 +21,11 @@
                             @if($loop->first)
                                 {{$days_dias[Carbon\Carbon::parse($hour['fecha'])->format('l')]}}:
                             @endif
-                            @if(Carbon\Carbon::now()->format('H:i') <=
-                            Carbon\Carbon::parse($hour['inicio'])->format('H:i'))
+                            @if(
+                            Carbon\Carbon::now()->subhour()->format('H:i') >= Carbon\Carbon::parse($hour['inicio'])->format('H:i')
+                            and Carbon\Carbon::parse($hour['fecha'])->format('l') == Carbon\Carbon::now()->format('l')
+                            )
+                            @else
                                 {{Carbon\Carbon::parse($hour['inicio'])->format('H:i')}}
                             @endif
                             @if($loop->last)
