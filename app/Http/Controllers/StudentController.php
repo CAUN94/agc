@@ -55,7 +55,7 @@ class StudentController extends Controller {
 
 		$user = User::find($student->user_id);
 		\Mail::to($user->email)->send(new NewStudent($user));
-		\Mail::to('desarrollo@justbetter.cl')->bcc('clinica@justbetter.cl')->send(new AdminNewStudent($user));
+		\Mail::to('desarrollo@justbetter.cl')->bcc('clinica@justbetter.cl')->bcc('you@justbetter.cl')->send(new AdminNewStudent($user));
 
 		FlashSession::flash('primary', 'Registrado');
 		return redirect('/users');
