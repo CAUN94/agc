@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Console\Commands;
 
+use Illuminate\Console\Command;
 use App\Models\ActionMl;
 use App\Models\AppointmentMl;
 use App\Models\PaymentMl;
@@ -12,11 +13,46 @@ use Goutte\Client;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpClient\HttpClient;
 
-class ScrapingController extends Controller
+class UpdateMedilink extends Command
 {
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'ln:UpdateMedilink';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Update Medilink';
+
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
-        $this->middleware('auth');
+        parent::__construct();
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @return int
+     */
+    public function handle()
+    {
+        $this->actionMl();
+        $this->info('----');
+        $this->appointmentMl();
+        $this->info('----');
+        $this->treatmentsMl();
+        $this->info('----');
+        $this->paymentsMl();
     }
 
     public function create_client($url, $filter = False){
@@ -37,78 +73,10 @@ class ScrapingController extends Controller
         return $split;
     }
 
-    public function userMl(){
-
-        $first = strval(Carbon::now()->subMonth()->subMonth()->format('Y-m-d'));
-        $split = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/pacientes_nuevos");
-        // return $split;
-        $count = 0;
-        foreach($split as $string){
-            $jsonobj = "{".$string."}";
-            $value = json_decode($jsonobj,true);
-            $limit = Carbon::now()->subMonth()->subMonth();
-            $now = Carbon::parse($value['Fecha Afiliación']);
-            if($now>$limit){
-                continue;
-            }
-            $userMl = UserMl::updateOrCreate(
-                ['RUT' => $value['RUT/DNI'],'Email' => $value['E-Mail']],
-                [
-                    'Nombre' => $value['Nombre paciente'],
-                    'Apellidos' => $value['Apellidos paciente'],
-                    'Fecha_Ingreso' => $value['Fecha Afiliación'],
-                    'Ultima_Cita' => $value['Última Cita'],
-                    'RUT' => $value['RUT/DNI'],
-                    'Nacimiento' => $value['Fecha nacimiento'],
-                    'Celular' => $value['Celular'],
-                    'Ciudad' => $value['Ciudad'],
-                    'Comuna' => $value['Comuna'],
-                    'Direccion' => $value['Dirección'],
-                    'Email' => $value['E-Mail'],
-                    'Observaciones' => $value['Observaciones'],
-                    'Sexo' => $value['Sexo'],
-                    'Convenio' => $value['Convenio']
-                ]
-            );
-            $count++;
-            if($count == 100){
-                break;
-            }
-        }
-        return redirect('/userml');
-    }
-
-    public function professionals(){
-        $professionals = self::create_client("https://youjustbetter.softwaremedilink.com/dentistas/autocomplete");
-        return view('professionalsml.index',compact('professionals'));
-    }
-
-    public function professional($id){
-        $client = new Client();
-        $crawler = $client->request('GET', 'https://youjustbetter.softwaremedilink.com/reportesdinamicos');
-        $form = $crawler->selectButton('Ingresar')->form();
-        $form->setValues(['rut' => 'admin', 'password' => 'Pascual4900']);
-        $crawler = $client->submit($form);
-        $now = Carbon::now();
-        $weekStartDate = $now->startOfWeek()->format('Y-m-d');
-        $url = "https://youjustbetter.softwaremedilink.com/agendas/semanalJSON/".$weekStartDate."/?id_profesional=".$id;
-
-        $crawler = $client->request('GET', $url);
-        $professional = $crawler->text();
-        $professional = json_decode($professional,true);
-        $professionals = self::create_client("https://youjustbetter.softwaremedilink.com/dentistas/autocomplete");
-        foreach($professionals as $names){
-            $value = json_decode("{".$names."}",true);
-            if($value['id'] == $id){
-                break;
-            }
-        }
-        // return $professional;
-        return view('professionalsml.show',compact('professional','value'));
-    }
-
     public function actionMl(){
-        $actions = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/listado_acciones?filters%5Bsucursal%5D%5Bstatus%5D=activated&filters%5Bsucursal%5D%5Bvalue%5D=1&filters",true);
+        $time1 = time();
+        $this->info("Actions: ".ActionMl::all()->count());
+        $actions = $this->create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/listado_acciones?filters%5Bsucursal%5D%5Bstatus%5D=activated&filters%5Bsucursal%5D%5Bvalue%5D=1&filters",true);
         foreach($actions as $action){
             $value = json_decode("{".$action."}",true);
             $limit = Carbon::now()->subMonth();
@@ -142,11 +110,15 @@ class ScrapingController extends Controller
                 ]
             );
         }
-        return redirect('/medilink/actions');
+        $time2 = time();
+        $this->info("Actions: ".ActionMl::all()->count()." tiempo " .$time2-$time1." seg");
+        $this->info('Actions Updated!');
     }
 
     public function appointmentMl(){
-        $appointments = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/citas?filters%5Bsucursal%5D%5Bstatus%5D=activated&filters%5Bsucursal%5D%5Bvalue%5D=1&filters",true);
+        $time1 = time();
+        $this->info("Appointment: ".AppointmentMl::all()->count());
+        $appointments = $this->create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/citas?filters%5Bsucursal%5D%5Bstatus%5D=activated&filters%5Bsucursal%5D%5Bvalue%5D=1&filters",true);
         foreach($appointments as $appointment){
             $value = json_decode("{".$appointment."}",true);
             $limit = Carbon::now()->subMonth()->subMonth();
@@ -176,10 +148,14 @@ class ScrapingController extends Controller
                 ]
             );
         }
-        return redirect('/medilink/appointments');
+        $time2 = time();
+        $this->info("Appointment: ".AppointmentMl::all()->count()." tiempo " .$time2-$time1." seg");
+        $this->info('Appointment Updated!');
     }
 
     public function treatmentsMl(){
+        $time1 = time();
+        $this->info("Treatments: ".TreatmentMl::all()->count());
         $treatments = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/resumen_tratamientos_saldos");
         $treatments = array_slice($treatments, -300);
         $max_treatment = TreatmentMl::max('Atencion');
@@ -209,10 +185,14 @@ class ScrapingController extends Controller
                 ]
             );
         }
-        return redirect('/medilink/treatments');
+        $time2 = time();
+        $this->info("Treatments: ".TreatmentMl::all()->count()." tiempo " .$time2-$time1." seg");
+        $this->info('Treatments Updated!');
     }
 
     public function paymentsMl(){
+        $time1 = time();
+        $this->info("Payments: ".PaymentMl::all()->count());
         $first = strval(Carbon::now()->subMonth()->format('Y-m-d'));
         $payments = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/pagos_pacientes?filters[fecha_inicio][status]=activated&filters[fecha_inicio][value]=".$first);
         $max_payment = PaymentMl::max('Atencion');
@@ -249,6 +229,8 @@ class ScrapingController extends Controller
                 ]
             );
         }
-        return redirect('/medilink/payments');
+        $time2 = time();
+        $this->info("Payments: ".PaymentMl::all()->count()." tiempo " .$time2-$time1." seg");
+        $this->info('Payments Updated!');
     }
 }
