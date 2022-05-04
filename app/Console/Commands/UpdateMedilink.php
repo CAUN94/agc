@@ -111,7 +111,8 @@ class UpdateMedilink extends Command
             );
         }
         $time2 = time();
-        $this->info("Actions: ".ActionMl::all()->count()." tiempo " .$time2-$time1." seg");
+        // $this->info("Actions: ".ActionMl::all()->count()." tiempo " .$time2-$time1." seg");
+        $this->info("Actions: ".ActionMl::all()->count());
         $this->info('Actions Updated!');
     }
 
@@ -149,7 +150,8 @@ class UpdateMedilink extends Command
             );
         }
         $time2 = time();
-        $this->info("Appointment: ".AppointmentMl::all()->count()." tiempo " .$time2-$time1." seg");
+        // $this->info("Appointment: ".AppointmentMl::all()->count()." tiempo " .$time2-$time1." seg");
+        $this->info("Appointment: ".AppointmentMl::all()->count());
         $this->info('Appointment Updated!');
     }
 
@@ -186,7 +188,8 @@ class UpdateMedilink extends Command
             );
         }
         $time2 = time();
-        $this->info("Treatments: ".TreatmentMl::all()->count()." tiempo " .$time2-$time1." seg");
+        // $this->info("Treatments: ".TreatmentMl::all()->count()." tiempo " .$time2-$time1." seg");
+        $this->info("Treatments: ".TreatmentMl::all()->count());
         $this->info('Treatments Updated!');
     }
 
@@ -230,7 +233,8 @@ class UpdateMedilink extends Command
             );
         }
         $time2 = time();
-        $this->info("Payments: ".PaymentMl::all()->count()." tiempo " .$time2-$time1." seg");
+        // $this->info("Payments: ".PaymentMl::all()->count()." tiempo " .$time2-$time1." seg");
+        $this->info("Payments: ".PaymentMl::all()->count());
         $this->info('Payments Updated!');
     }
 }
