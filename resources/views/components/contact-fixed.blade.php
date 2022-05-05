@@ -2,5 +2,5 @@
   Hola
 </div> --}}
 <div class="fixed bottom-5 text-4xl right-4 rounded-full h-16 w-16 flex items-center justify-center bg-green-500 text-white">
-    <a href="https://web.whatsapp.com/send?phone=56933809726&text=Hola!" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a onclick="return gtag_report_conversion('https://web.whatsapp.com/send?phone=56933809726&text=Hola!');" href="https://web.whatsapp.com/send?phone=56933809726&text=Hola!" target="_blank"><i class="fab fa-whatsapp"></i></a>
 </div>

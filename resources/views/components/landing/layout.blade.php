@@ -24,6 +24,8 @@
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-GFXLHYT7L3"></script>
         <!-- Global site tag (gtag.js) - Google Ads: 10872889051 --> <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10872889051"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-10872889051'); </script>
         <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
+        <!-- Event snippet for Botón de Whatsapp conversion page In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. --> <script> function gtag_report_conversion(url) { var callback = function () { if (typeof(url) != 'undefined') { window.location = url; } }; gtag('event', 'conversion', { 'send_to': 'AW-10872889051/4MEKCPbSm7cDENu9zMAo', 'event_callback': callback }); return false; } </script>
         @if (Auth::check())
             <script> gtag('event', 'conversion', {'send_to': 'AW-10872889051/Jlg6CIvr9KsDENu9zMAo'}); </script>
         @endif
@@ -48,7 +50,7 @@
 {{--                   <a :class="{ 'block shadow-3xl': navOpen, 'hidden': !navOpen }" href="https://blog.justbetter.cl/">Blog</a> --}}
 {{--                   <x-landing.team-nav></x-landing.team-nav> --}}
                   <a class="nav-menu-link {{ Request::is('book') ? 'selected' : '' }}"
-                  href="https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento">Clínica</a>
+                  onclick="return gtag_report_conversion('https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento');" href="https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento">Clínica</a>
                   <a class="nav-menu-link {{ Request::is('trainings') ? 'selected' : '' }}" href="/trainings">Entrenamiento</a>
                   <a class="nav-menu-link {{ Request::is('school') ? 'selected' : '' }}" href="https://you-just-better-programs.teachable.com/courses" target="_blank">Cursos</a>
                   <x-landing.auth-dropdown></x-landing.auth-dropdown>
