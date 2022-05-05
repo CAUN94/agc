@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\AppointmentMl;
+use App\Models\PaymentMl;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,5 +15,17 @@ class ActionMl extends Model
 
     public function setnameAttribute($value) {
         $this->attributes['name'] = ucfirst(strtolower(trim($value)));
+    }
+
+    public function appointments(){
+        return $this->hasMany(AppointmentMl::class,'Tratamiento_Nr','Tratamiento_Nr');
+    }
+
+    public function payments(){
+        return $this->hasMany(PaymentMl::class,'Atencion','Tratamiento_Nr');
+    }
+
+    public function treatments(){
+        return $this->hasMany(TreatmentMl::class,'Atencion','Tratamiento_Nr');
     }
 }

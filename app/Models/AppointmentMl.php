@@ -40,4 +40,16 @@ class AppointmentMl extends Model
     public function setCelularAttribute($value) {
         $this->attributes['Celular'] = "+569".substr(preg_replace('/[^0-9]+/', '', $value),-8);
     }
+
+    public function actions(){
+        return $this->hasMany(ActionMl::class,'Atencion','Tratamiento_Nr');
+    }
+
+    public function payments(){
+        return $this->hasMany(PaymentMl::class,'Atencion','Tratamiento_Nr');
+    }
+
+    public function treatments(){
+        return $this->hasMany(TreatmentMl::class,'Atencion','Tratamiento_Nr');
+    }
 }
