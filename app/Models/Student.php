@@ -62,7 +62,7 @@ class Student extends Model {
 	}
 
 	public function isSettled() {
-		if ($this->settled == 1) {
+		if ($this->settled == 1 or $this->training->price == 0) {
 			return True;
 		}
 		return False;

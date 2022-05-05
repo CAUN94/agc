@@ -121,6 +121,13 @@ class TrainerTrainAppointment extends Component
                 $tap->train_appointment_id = $trainAppointment->id;
                 $tap->save();
             }
+            if($training->name == 'Grupal'){
+                $training = Training::where('name','like','%Grupal Clase de Prueba%')->first();
+                $tap = new TrainAppointmentPivot;
+                $tap->training_id = $training->id;
+                $tap->train_appointment_id = $trainAppointment->id;
+                $tap->save();
+            }
         }
         else {
             $tap = new TrainAppointmentPivot;
@@ -199,7 +206,7 @@ class TrainerTrainAppointment extends Component
             }
         }
 
-        $this->trainings_g = Training::where('type','group')->groupby('format', 'name')->orderby('name', 'asc')->get();
+        $this->trainings_g = Training::where('type','group')->where('name','not like','%Grupal Clase de Prueba%')->groupby('format', 'name')->orderby('name', 'asc')->get();
         $this->trainings_s = Training::where('type','!=','group')->orderby('name', 'asc')->get();
 
         return view('livewire.trainer-train-appointment');
