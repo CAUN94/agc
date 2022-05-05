@@ -11,16 +11,20 @@ use App\Models\UserMl;
 
 class MedilinkController extends Controller
 {
+    public function __construct() {
+        $this->middleware('intranet');
+    }
+
     public function payments(){
-        return PaymentMl::all();
+        return view('admin.medilink.payments');
     }
     public function actions(){
-        return ActionML::all();
+        return view('admin.medilink.actions');
     }
     public function appointments(){
-        return AppointmentML::all();
+        return view('admin.medilink.appointments');
     }
     public function treatments(){
-        return TreatmentML::all();
+        return view('admin.medilink.treatments');
     }
 }

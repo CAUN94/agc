@@ -22,6 +22,10 @@
       <x-slot name="name"><i class="fas fa-notes-medical mr-1"></i>Medilink</x-slot>
       <x-slot name="trigger">medelink</x-slot>
       <a class="py-1" href="/userml">Usuarios</a>
+      <a class="my-1 py-1" href="/medilink/payments">Payments</a>
+      <a class="my-1 py-1" href="/medilink/actions">Actions</a>
+      <a class="my-1 py-1" href="/medilink/appointments">Appointments</a>
+      <a class="my-1 py-1" href="/medilink/treatments">Treatments</a>
       {{-- <a class="my-1 py-1" href="#">Link #2</a> --}}
       {{-- <a class="my-1 py-1" href="#">Link #3</a> --}}
     </x-nav-dropdown>
@@ -48,9 +52,9 @@
 
   @if(Auth::user()->isTrainer())
     <x-nav-dropdown>
-      <x-slot name="name">Entrenamiento</x-slot>
+      <x-slot name="name"><i class="fas fa-calendar-alt"></i> Entrenamiento</x-slot>
       <x-slot name="trigger">training</x-slot>
-      <a class="py-1" href="/trainertrainappointment"><i class="fas fa-calendar-alt"></i> Entrenamiento</a>
+      <a class="py-1" href="/trainertrainappointment">Entrenamiento</a>
       <a class="my-1 py-1" href="/trainerbookappointment">Clases Reservadas</a>
     </x-nav-dropdown>
   @endif
