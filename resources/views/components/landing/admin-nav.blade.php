@@ -26,19 +26,17 @@
       <a class="my-1 py-1" href="/medilink/actions">Actions</a>
       <a class="my-1 py-1" href="/medilink/appointments">Appointments</a>
       <a class="my-1 py-1" href="/medilink/treatments">Treatments</a>
-      {{-- <a class="my-1 py-1" href="#">Link #2</a> --}}
-      {{-- <a class="my-1 py-1" href="#">Link #3</a> --}}
     </x-nav-dropdown>
 
-    <x-nav-dropdown>
+    <a class="mt-3" href="/scraping-update">Actualizar Medilink</a>
+
+{{--     <x-nav-dropdown>
       <x-slot name="name">Example</x-slot>
       <x-slot name="trigger">example</x-slot>
       <a class="py-1" href="#">Link #1</a>
       <a class="my-1 py-1" href="#">Link #2</a>
       <a class="my-1 py-1" href="#">Link #3</a>
-    </x-nav-dropdown>
-
-    <a class="mt-3" href="#">Scrapping</a>
+    </x-nav-dropdown> --}}
 
     <x-nav-dropdown>
       <x-slot name="name">Encuestas</x-slot>

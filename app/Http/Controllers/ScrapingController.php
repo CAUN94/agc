@@ -42,7 +42,6 @@ class ScrapingController extends Controller
         $first = strval(Carbon::now()->subMonth()->subMonth()->format('Y-m-d'));
         $split = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/pacientes_nuevos");
         // return $split;
-        $count = 0;
         foreach($split as $string){
             $jsonobj = "{".$string."}";
             $value = json_decode($jsonobj,true);
@@ -70,12 +69,8 @@ class ScrapingController extends Controller
                     'Convenio' => $value['Convenio']
                 ]
             );
-            $count++;
-            if($count == 100){
-                break;
-            }
         }
-        return redirect('/userml');
+        return redirect()->back();
     }
 
     public function professionals(){
@@ -142,7 +137,7 @@ class ScrapingController extends Controller
                 ]
             );
         }
-        return redirect('/medilink/actions');
+        return redirect()->back();
     }
 
     public function appointmentMl(){
@@ -176,7 +171,7 @@ class ScrapingController extends Controller
                 ]
             );
         }
-        return redirect('/medilink/appointments');
+        return redirect()->back();
     }
 
     public function treatmentsMl(){
@@ -209,7 +204,7 @@ class ScrapingController extends Controller
                 ]
             );
         }
-        return redirect('/medilink/treatments');
+        return redirect()->back();
     }
 
     public function paymentsMl(){
@@ -249,6 +244,6 @@ class ScrapingController extends Controller
                 ]
             );
         }
-        return redirect('/medilink/payments');
+        return redirect()->back();
     }
 }

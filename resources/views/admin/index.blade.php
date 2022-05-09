@@ -4,4 +4,8 @@
 	        Hola {{Auth::user()->fullname()}}
 	    </h1>
 	</div>
+	<div class="box-white m-2 p-2">
+		<livewire:admin-index-panel/>
+	</div>
+
 </x-admin.layout>
