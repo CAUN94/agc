@@ -2,14 +2,15 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Models\ActionMl;
 use App\Models\AppointmentMl;
+use App\Models\CommandSchedule;
 use App\Models\PaymentMl;
 use App\Models\TreatmentMl;
 use App\Models\UserMl;
 use Carbon\Carbon;
 use Goutte\Client;
+use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpClient\HttpClient;
 
@@ -46,6 +47,9 @@ class UpdateMedilink extends Command
      */
     public function handle()
     {
+        $command = new CommandSchedule;
+        $command->command = 'UpdateMedilink';
+        $command->save();
         $this->actionMl();
         $this->info('----');
         $this->appointmentMl();

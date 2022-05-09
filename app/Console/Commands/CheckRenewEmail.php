@@ -2,9 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\RenewPlan;
+use App\Models\CommandSchedule;
 use App\Models\User;
 use Illuminate\Console\Command;
-use App\Mail\RenewPlan;
 use Illuminate\Support\Facades\Mail;
 
 class CheckRenewEmail extends Command
@@ -40,6 +41,9 @@ class CheckRenewEmail extends Command
      */
     public function handle()
     {
+        $command = new CommandSchedule;
+        $command->command = 'CheckRenewEmail';
+        $command->save();
         $users = [];
         foreach(User::all() as $user){
             if($user->isStudent()){
