@@ -62,7 +62,6 @@ Route::resource('trainerbookappointment', 'App\Http\Controllers\AdminBookAppoint
 
 // Scrap
 
-Route::get('/scraping-update', 'App\Http\Controllers\ScrapingController@updateAll')->name('scraping-update');
 Route::get('/scraping-userml', 'App\Http\Controllers\ScrapingController@userMl')->name('scraping-userml');
 Route::get('/scraping-actionml', 'App\Http\Controllers\ScrapingController@actionMl')->name('scraping-actionml');
 Route::get('/scraping-appointmentml', 'App\Http\Controllers\ScrapingController@appointmentMl')->name('scraping-appointmentml');

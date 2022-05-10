@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Livewire\Component;
 use Illuminate\Support\Facades\Cache;
+use Session as FlashSession;
 
 class AdminIndexPanel extends Component
 {
@@ -30,13 +31,6 @@ class AdminIndexPanel extends Component
     public $plans;
 
     public function mount(){
-        $this->usersApp = User::count();
-        $this->studentsApp = Student::count();
-        $this->usersMl = UserMl::count();
-        $this->actionsMl = ActionMl::count();
-        $this->appointmenstMl = AppointmentMl::count();
-        $this->paymentsMl = PaymentMl::count();
-        $this->treatmentsMl = TreatmentMl::count();
         $this->now = Carbon::Now();
         if (Carbon::now()->format('d') <= 21 ){
             $this->startOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m')-1,21)->startOfDay();
@@ -45,11 +39,30 @@ class AdminIndexPanel extends Component
             $this->startOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m'),21)->startOfDay();
             $this->endOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m')+1,20)->endOfDay();
         }
-        $this->plans = Training::count();
+
     }
+
+    public function incrementMonth(){
+        $this->startOfMonth = $this->startOfMonth->addMonth();
+        $this->endOfMonth = $this->endOfMonth->addMonth();
+    }
+
+    public function subMonth(){
+        $this->startOfMonth = $this->startOfMonth->subMonth();
+        $this->endOfMonth = $this->endOfMonth->subMonth();
+    }
+
 
     public function render()
     {
+        $this->usersApp = User::whereBetween('created_at',[$this->startOfMonth,$this->endOfMonth])->count();
+        $this->studentsApp = Student::whereBetween('created_at',[$this->startOfMonth,$this->endOfMonth])->count();
+        $this->usersMl = UserMl::whereBetween('Fecha_Ingreso',[$this->startOfMonth,$this->endOfMonth])->count();
+        $this->actionsMl = ActionMl::whereBetween('Fecha_Realizacion',[$this->startOfMonth,$this->endOfMonth])->count();
+        $this->appointmenstMl = AppointmentMl::whereBetween('Fecha',[$this->startOfMonth,$this->endOfMonth])->count();
+        $this->paymentsMl = PaymentMl::whereBetween('Fecha',[$this->startOfMonth,$this->endOfMonth])->count();
+        $this->treatmentsMl = TreatmentMl::whereBetween('created_at',[$this->startOfMonth,$this->endOfMonth])->count();
+        $this->plans = Training::all()->count();
         return view('livewire.admin-index-panel');
     }
 }

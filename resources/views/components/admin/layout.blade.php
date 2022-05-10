@@ -76,8 +76,7 @@
   </div>
   <script src="{{ asset('/vendor/ckeditor/ckeditor.js') }}"></script>
   @livewireScripts
-
-
+  <x-flash-message></x-flash-message>
 
 </body>
 

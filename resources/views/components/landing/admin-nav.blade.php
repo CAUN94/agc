@@ -28,8 +28,6 @@
       <a class="my-1 py-1" href="/medilink/treatments">Treatments</a>
     </x-nav-dropdown>
 
-    <a class="mt-3" href="/scraping-update">Actualizar Medilink</a>
-
 {{--     <x-nav-dropdown>
       <x-slot name="name">Example</x-slot>
       <x-slot name="trigger">example</x-slot>
