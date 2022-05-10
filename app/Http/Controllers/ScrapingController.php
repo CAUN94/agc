@@ -140,6 +140,11 @@ class ScrapingController extends Controller
                 ]
             );
         }
+        // foreach(ActionMl::where('Precio_Prestacion','=','0')->get() as $action){
+        //     $action->Precio_Prestacion = ActionMl::where('Prestacion_Nombre','like',$action->Prestacion_Nombre)->where('Precio_Prestacion','<>','0')->first()->Precio_Prestacion;
+        //     $action->save();
+        // }
+
         FlashSession::flash('primary', 'Actions Actualizada');
         return redirect()->back();
     }
@@ -175,6 +180,7 @@ class ScrapingController extends Controller
                 ]
             );
         }
+
         FlashSession::flash('primary', 'Appointments Actualizada');
         return redirect()->back();
     }

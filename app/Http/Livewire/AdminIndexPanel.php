@@ -30,6 +30,8 @@ class AdminIndexPanel extends Component
     public $startOfMonth;
     public $endOfMonth;
     public $plans;
+    public $newStartOfMonth;
+    public $newEndOfMonth;
 
     public function mount(){
         $this->now = Carbon::Now();
@@ -39,6 +41,15 @@ class AdminIndexPanel extends Component
         } else {
             $this->startOfMonth = Carbon::createFromDate($this->now->copy()->format('Y'),$this->now->copy()->format('m'),21)->startOfDay();
             $this->endOfMonth = Carbon::createFromDate($this->now->copy()->format('Y'),$this->now->copy()->format('m')+1,20)->endOfDay();
+        }
+    }
+
+    public function submit(){
+        if($this->newStartOfMonth > $this->newEndOfMonth ){
+            FlashSession::flash('primary', 'Fecha mal ingresada');
+        } else {
+            $this->startOfMonth = Carbon::createFromDate($this->newStartOfMonth);
+            $this->endOfMonth = Carbon::createFromDate($this->newEndOfMonth);
         }
     }
 
