@@ -250,7 +250,7 @@ class ScrapingController extends Controller
                 ]
             );
         }
-        FlashSession::flash('primary', 'Treatments Actualizada');
+        FlashSession::flash('primary', 'PaymentMl Actualizada');
         return redirect()->back();
     }
 }

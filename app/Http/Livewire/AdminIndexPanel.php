@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Helpers\Helper;
 use App\Models\ActionMl;
 use App\Models\AppointmentMl;
 use App\Models\PaymentMl;
@@ -12,8 +13,8 @@ use App\Models\User;
 use App\Models\UserMl;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
-use Livewire\Component;
 use Illuminate\Support\Facades\Cache;
+use Livewire\Component;
 use Session as FlashSession;
 
 class AdminIndexPanel extends Component
@@ -33,13 +34,12 @@ class AdminIndexPanel extends Component
     public function mount(){
         $this->now = Carbon::Now();
         if (Carbon::now()->format('d') <= 21 ){
-            $this->startOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m')-1,21)->startOfDay();
-            $this->endOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m'),20)->endOfDay();
+            $this->startOfMonth = Carbon::createFromDate($this->now->copy()->format('Y'),$this->now->copy()->format('m')-1,21)->startOfDay();
+            $this->endOfMonth = Carbon::createFromDate($this->now->copy()->format('Y'),$this->now->copy()->format('m'),20)->endOfDay();
         } else {
-            $this->startOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m'),21)->startOfDay();
-            $this->endOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m')+1,20)->endOfDay();
+            $this->startOfMonth = Carbon::createFromDate($this->now->copy()->format('Y'),$this->now->copy()->format('m'),21)->startOfDay();
+            $this->endOfMonth = Carbon::createFromDate($this->now->copy()->format('Y'),$this->now->copy()->format('m')+1,20)->endOfDay();
         }
-
     }
 
     public function incrementMonth(){
@@ -63,6 +63,9 @@ class AdminIndexPanel extends Component
         $this->paymentsMl = PaymentMl::whereBetween('Fecha',[$this->startOfMonth,$this->endOfMonth])->count();
         $this->treatmentsMl = TreatmentMl::whereBetween('created_at',[$this->startOfMonth,$this->endOfMonth])->count();
         $this->plans = Training::all()->count();
+        $actions = ActionMl::whereBetween('Fecha_Realizacion',[$this->startOfMonth,$this->endOfMonth]);
+        $this->prestacion = Helper::moneda_chilena($actions->sum('Precio_Prestacion'));
+        $this->abono = Helper::moneda_chilena($actions->sum('Abono'));
         return view('livewire.admin-index-panel');
     }
 }
