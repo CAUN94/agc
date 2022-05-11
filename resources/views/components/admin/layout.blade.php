@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-        <script src="https://unpkg.com/flowbite@1.4.5/dist/datepicker.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
         @livewireStyles
         <style>
             [x-cloak] {
@@ -76,7 +76,9 @@
     </div>
   </div>
   <script src="{{ asset('/vendor/ckeditor/ckeditor.js') }}"></script>
+  <script src="/vendor/livewire-charts/app.js"></script>
   @livewireScripts
+
   <x-flash-message></x-flash-message>
 
 </body>

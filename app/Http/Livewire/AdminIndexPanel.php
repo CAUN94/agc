@@ -15,6 +15,10 @@ use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
+use Asantibanez\LivewireCharts\Facades\LivewireCharts;
+use Asantibanez\LivewireCharts\Models\RadarChartModel;
+use Asantibanez\LivewireCharts\Models\TreeMapChartModel;
+use Illuminate\Support\Facades\DB;
 use Session as FlashSession;
 
 class AdminIndexPanel extends Component
@@ -32,6 +36,7 @@ class AdminIndexPanel extends Component
     public $plans;
     public $newStartOfMonth;
     public $newEndOfMonth;
+    public $showDataLabels = false;
 
     public function mount(){
         $this->now = Carbon::Now();
@@ -77,6 +82,27 @@ class AdminIndexPanel extends Component
         $actions = ActionMl::whereBetween('Fecha_Realizacion',[$this->startOfMonth,$this->endOfMonth]);
         $this->prestacion = Helper::moneda_chilena($actions->sum('Precio_Prestacion'));
         $this->abono = Helper::moneda_chilena($actions->sum('Abono'));
-        return view('livewire.admin-index-panel');
+        $this->atenciones = $actions->distinct('Tratamiento_Nr')->where('Profesional','<>','Internos You')->count('Tratamiento_Nr');
+
+        $actions = DB::select( DB::raw("Select month(Fecha_Realizacion) as m,year(Fecha_Realizacion) as y,sum(Precio_Prestacion) as PP,sum(Abono) as a from action_mls group by 1,2 order by 2,1") );
+        $actions = collect($actions);
+        // ddd($actions);
+        $areaChartModel = $actions
+            ->reduce(function ($areaChartModel, $data) use ($actions) {
+                $index = $actions->search($data);
+                $pp = $data->PP;
+                return $areaChartModel->addPoint($index, $pp, ['id' => $data->y." ".$data->m]);
+            }, LivewireCharts::areaChartModel()
+                //->setTitle('Expenses Peaks')
+                ->setColor('#f2715a')
+                ->withOnPointClickEvent('onAreaPointClick')
+                ->setDataLabelsEnabled($this->showDataLabels)
+                ->setXAxisVisible(true)
+                ->sparklined()
+            );
+
+
+        return view('livewire.admin-index-panel')->with([
+                'areaChartModel' => $areaChartModel]);
     }
 }

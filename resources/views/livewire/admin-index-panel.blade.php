@@ -1,4 +1,4 @@
-<div>
+<div class="box-white m-2 p-2">
     <div class="m-2 text-lg flex items-center justify-between">
         Periodo<br>
         {{Carbon\Carbon::parse($this->startOfMonth)->format('d F Y')}} a {{Carbon\Carbon::parse($this->endOfMonth)->format('d F Y')}}
@@ -55,6 +55,12 @@
         </li>
         <li>
             <p class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                <span class="flex-1 ml-3 whitespace-nowrap">Atenciones</span>
+                <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$atenciones}}</span>
+            </p>
+        </li>
+        <li>
+            <p class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                 <span class="flex-1 ml-3 whitespace-nowrap">Usuarios Ml</span>
                 <a href="/scraping-userml" class="whitespace-nowrap text-sm text-blue-500">Recargar</a>
                 <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$usersMl}}</span>
@@ -106,6 +112,11 @@
                 <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$abono}}</span>
             </p>
         </li>
-
     </ul>
+
+</div>
+<div class="box-white m-2 p-2">
+    <div class="h-80">
+        <livewire:livewire-area-chart  :area-chart-model="$areaChartModel"/>
+    </div>
 </div>

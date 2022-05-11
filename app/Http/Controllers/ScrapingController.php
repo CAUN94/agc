@@ -140,10 +140,10 @@ class ScrapingController extends Controller
                 ]
             );
         }
-        // foreach(ActionMl::where('Precio_Prestacion','=','0')->get() as $action){
-        //     $action->Precio_Prestacion = ActionMl::where('Prestacion_Nombre','like',$action->Prestacion_Nombre)->where('Precio_Prestacion','<>','0')->first()->Precio_Prestacion;
-        //     $action->save();
-        // }
+        foreach(ActionMl::where('Precio_Prestacion','=','0')->where('Profesional','<>','Internos You')->get() as $action){
+            $action->Precio_Prestacion = ActionMl::where('Prestacion_Nombre','like',$action->Prestacion_Nombre)->orderby('Precio_Prestacion','desc')->first()->Precio_Prestacion;
+            $action->save();
+        }
 
         FlashSession::flash('primary', 'Actions Actualizada');
         return redirect()->back();
