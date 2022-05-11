@@ -114,6 +114,10 @@ class UpdateMedilink extends Command
                 ]
             );
         }
+        foreach(ActionMl::where('Precio_Prestacion','=','0')->where('Profesional','<>','Internos You')->get() as $action){
+            $action->Precio_Prestacion = ActionMl::where('Prestacion_Nombre','like',$action->Prestacion_Nombre)->orderby('Precio_Prestacion','desc')->first()->Precio_Prestacion;
+            $action->save();
+        }
         $time2 = time();
         // $this->info("Actions: ".ActionMl::all()->count()." tiempo " .$time2-$time1." seg");
         $this->info("Actions: ".ActionMl::all()->count());
