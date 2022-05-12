@@ -60,7 +60,6 @@ class UserStravaPanel extends Component
         $activities_run = array_filter($activities, function($activities){
             return $activities->type == 'Run';
         });
-        $activities_run = $activities;
         if(count($activities_run) == 0){
             return -1;
         }
