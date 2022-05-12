@@ -3,7 +3,7 @@
             <h2 class="text-2xl mb-2 flex items-center"><img class="mr-10 rounded-full w-28" src="{{$user->strava->avatar}}"> {{$user->fullname()}}</h2>
 
             <div class="flex flex-col">
-                <div class="w-auto mx-1 bg-primary-100 border-primary-500 rounded-lg shadow-xl flex flex-col">
+                <div class="w-auto mx-1 bg-{{$chargeColor}}-300 border-{{$chargeColor}}-300 rounded-lg shadow-xl flex flex-col">
                     <div class="flex flex-row items-center p-5">
                         <div class="flex-1 text-right md:text-center">
                             <p class="font-bold uppercase text-sm">Ratio Carga Actual vs Previa</p>
@@ -11,7 +11,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="flex flex-col bg-primary-900 rounded-b-lg px-5 py-1">
+                    <div class="flex flex-col bg-{{$chargeColor}}-500 rounded-b-lg px-5 py-1">
                         <div class="flex justify-between items-center">
                             <div class="flex flex-col">
                                 <span>Rango Sugerido: 0.8 - 1.3</span>
@@ -27,14 +27,14 @@
             </div>
 
             <div class="flex flex-col">
-                <div class="w-auto mx-1 bg-primary-100 border-primary-500 rounded-lg shadow-xl flex flex-col">
+                <div class="w-auto mx-1 bg-{{$progresColor}}-300 border-{{$progresColor}}-300 rounded-lg shadow-xl flex flex-col">
                     <div class="flex flex-row items-center p-5">
                         <div class="flex-1 text-right md:text-center">
                             <p class="font-bold uppercase text-sm">Progresión Semanal Carga</p>
                             <p class="font-bold text-md mt-2">{{ round($progress,2) > 0 ? round($progress,2)."%" : "Falta Información" }}
                         </div>
                     </div>
-                    <div class="flex flex-col bg-primary-900 rounded-b-lg px-5 py-1">
+                    <div class="flex flex-col bg-{{$progresColor}}-500 rounded-b-lg px-5 py-1">
                         <div class="flex justify-between items-center">
                             <div class="flex flex-col">
                                 <span>Rango Sugerido: Menor o igual al 10%</span>

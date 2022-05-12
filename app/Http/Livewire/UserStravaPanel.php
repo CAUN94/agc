@@ -42,6 +42,16 @@ class UserStravaPanel extends Component
             return $activities->type == 'Run';
         });
         $this->activities_run_used = $chargesAndProgress[2];
+        if( (0.8 <= $this->charges) && ($this->charges <= 1.3)){
+            $this->chargeColor = 'green';
+        } else {
+            $this->chargeColor = 'yellow';
+        }
+        if($this->progress <= 10){
+            $this->progresColor = 'green';
+        } else {
+            $this->progresColor = 'yellow';
+        }
 
         return view('livewire.user-strava-panel');
     }
