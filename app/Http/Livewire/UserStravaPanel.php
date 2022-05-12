@@ -1,0 +1,156 @@
+<?php
+
+namespace App\Http\Livewire;
+
+use Livewire\Component;
+use App\Models\StravaActivity;
+use App\Models\StravaUser;
+use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
+use Strava;
+
+class UserStravaPanel extends Component
+{
+
+    public function render()
+    {
+        $this->user = Auth::user()->strava;
+
+        if(Carbon::now() > $this->user->token_expires){
+            // Token has expired, generate new tokens using the currently stored user refresh token
+            $refresh = Strava::refreshToken($this->user->refresh_token);
+            Auth::user()->strava->update([
+              'access_token' => $refresh->access_token,
+              'refresh_token' => $refresh->refresh_token,
+              'token_expires' => Carbon::createFromTimestamp($refresh->expires_at)
+            ]);
+            $this->user = Auth::user()->strava->first();
+        }
+
+        $token = $this->user->access_token;
+
+        $this->activities = Strava::activities($token,1,200);
+        $chargesAndProgress = $this->chargesAndProgress($this->activities);
+        $this->charges = $chargesAndProgress[0];
+        $this->progress = $chargesAndProgress[1];
+        $this->user = User::find($this->user->user_id);
+        $this->activities = array_filter($this->activities, function($activities){
+            return $activities->type == 'Run';
+        });
+        $this->activities_run_used = $chargesAndProgress[2];
+
+        return view('livewire.user-strava-panel');
+    }
+
+    public function chargesAndProgress($activities){
+        $activities_run = array_filter($activities, function($activities){
+            return $activities->type == 'Run';
+        });
+        $activities_run = $activities;
+        if(count($activities_run) == 0){
+            return -1;
+        }
+        $last_start_date = reset($activities_run)->start_date;
+
+        $weeks = [];
+        $activities_run_used = array_filter($activities_run, function($activities_run){
+            $weekStartDate = \Carbon\Carbon::now();
+            $weekEndDate = \Carbon\Carbon::now()->subdays(7*4);
+            if(\Carbon\Carbon::parse($activities_run->start_date)->between($weekStartDate,$weekEndDate)){
+                return $activities_run;
+            }
+        });
+        // ddd($activities_run_used);
+        for($i = 0; $i < 4; $i++){
+            $week = array_filter($activities_run, function($activities_run) use($i,$last_start_date){
+                // $weekStartDate = \Carbon\Carbon::now()->startofweek();
+                // $weekEndDate = \Carbon\Carbon::now()->endofweek();
+                $weekStartDate = \Carbon\Carbon::now();
+                $weekEndDate = \Carbon\Carbon::now()->subdays(7);
+
+                if($i > 0){
+                    $weekStartDate->subweeks($i);
+                    $weekEndDate->subweeks($i);
+                }
+
+                return \Carbon\Carbon::parse($activities_run->start_date)->between($weekStartDate,$weekEndDate);
+            });
+            $weeks[] = $week;
+        }
+        // return $weeks;
+        $sumweek_time = [];
+        foreach($weeks as $week){
+            $sumweek_time[] = array_sum(array_map(function($week) {
+              return $week->moving_time;
+            }, $week))/60;
+        }
+        // return ($sumweek_time);
+        $sumweek_distance = [];
+        foreach($weeks as $week){
+            $sumweek_distance[] = array_sum(array_map(function($week) {
+              return $week->distance;
+            }, $week))/60;
+        }
+        // return $sumweek_distance;
+        $last_weeks = array_slice($sumweek_distance, -3, 3, true);
+        // return $last_weeks;
+        // return $sumweek_distance;
+        $sumweek_distance_avg = array_sum($last_weeks)/count($last_weeks);
+        if($sumweek_distance_avg == 0){
+            $charges = -1;
+        } else {
+            $charges = $sumweek_distance[0]/$sumweek_distance_avg;
+        }
+
+        if($sumweek_distance[1] == 0){
+            $progress = -1;
+        } else {
+            $progress = $sumweek_distance[0]/$sumweek_distance[1];
+        }
+
+        return [$charges,$progress,$activities_run_used];
+
+    }
+
+    protected function secondsToTime($inputSeconds) {
+        $secondsInAMinute = 60;
+        $secondsInAnHour = 60 * $secondsInAMinute;
+        $secondsInADay = 24 * $secondsInAnHour;
+
+        // Extract days
+        $days = floor($inputSeconds / $secondsInADay);
+
+        // Extract hours
+        $hourSeconds = $inputSeconds % $secondsInADay;
+        $hours = floor($hourSeconds / $secondsInAnHour);
+
+        // Extract minutes
+        $minuteSeconds = $hourSeconds % $secondsInAnHour;
+        $minutes = floor($minuteSeconds / $secondsInAMinute);
+
+        // Extract the remaining seconds
+        $remainingSeconds = $minuteSeconds % $secondsInAMinute;
+        $seconds = ceil($remainingSeconds);
+
+        // Format and return
+        $timeParts = [];
+        $sections = [
+            'day' => (int)$days,
+            'hour' => (int)$hours,
+            'minute' => (int)$minutes,
+            'second' => (int)$seconds,
+        ];
+
+        foreach ($sections as $name => $value){
+            if ($value > 0){
+                $timeParts[] = $value. ' '.$name.($value == 1 ? '' : 's');
+            }
+        }
+
+        return implode(', ', $timeParts);
+    }
+}
