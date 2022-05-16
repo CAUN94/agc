@@ -115,8 +115,3 @@
     </ul>
 
 </div>
-<div class="box-white m-2 p-2">
-    <div class="h-80">
-        <livewire:livewire-area-chart  :area-chart-model="$areaChartModel"/>
-    </div>
-</div>

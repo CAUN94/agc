@@ -2,7 +2,7 @@
     <div class="contact">
         <a
         target="_blank"
-        href="https://web.whatsapp.com/send?phone=56933809726&text=Hola!">
+        href="https://api.whatsapp.com/send?phone=56933809726&text=Hola!">
             <i class="fab fa-whatsapp"></i>
             +569 33809726
         </a>

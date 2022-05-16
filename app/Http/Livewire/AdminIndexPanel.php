@@ -86,23 +86,7 @@ class AdminIndexPanel extends Component
 
         $actions = DB::select( DB::raw("Select month(Fecha_Realizacion) as m,year(Fecha_Realizacion) as y,sum(Precio_Prestacion) as PP,sum(Abono) as a from action_mls group by 1,2 order by 2,1") );
         $actions = collect($actions);
-        // ddd($actions);
-        $areaChartModel = $actions
-            ->reduce(function ($areaChartModel, $data) use ($actions) {
-                $index = $actions->search($data);
-                $pp = $data->PP;
-                return $areaChartModel->addPoint($index, $pp, ['id' => $data->y." ".$data->m]);
-            }, LivewireCharts::areaChartModel()
-                //->setTitle('Expenses Peaks')
-                ->setColor('#f2715a')
-                ->withOnPointClickEvent('onAreaPointClick')
-                ->setDataLabelsEnabled($this->showDataLabels)
-                ->setXAxisVisible(true)
-                ->sparklined()
-            );
 
-
-        return view('livewire.admin-index-panel')->with([
-                'areaChartModel' => $areaChartModel]);
+        return view('livewire.admin-index-panel');
     }
 }
