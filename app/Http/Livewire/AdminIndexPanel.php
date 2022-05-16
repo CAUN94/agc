@@ -27,6 +27,8 @@ class AdminIndexPanel extends Component
     public $studentsApp;
     public $usersMl;
     public $actionsMl;
+    public $all_actions;
+    public $sub_actions;
     public $appointmenstMl;
     public $paymentsMl;
     public $treatmentsMl;
@@ -84,9 +86,39 @@ class AdminIndexPanel extends Component
         $this->abono = Helper::moneda_chilena($actions->sum('Abono'));
         $this->atenciones = $actions->distinct('Tratamiento_Nr')->where('Profesional','<>','Internos You')->count('Tratamiento_Nr');
 
-        $actions = DB::select( DB::raw("Select month(Fecha_Realizacion) as m,year(Fecha_Realizacion) as y,sum(Precio_Prestacion) as PP,sum(Abono) as a from action_mls group by 1,2 order by 2,1") );
-        $actions = collect($actions);
+        // $actions = DB::select( DB::raw("Select month(Fecha_Realizacion) as m,year(Fecha_Realizacion) as y,sum(Precio_Prestacion) as PP,sum(Abono) as a from action_mls group by 1,2 order by 2,1") );
+        // $actions = collect($actions);
 
-        return view('livewire.admin-index-panel');
+        $this->all_actions = ActionMl::all();
+        $sub_actions = ActionMl::whereBetween('Fecha_Realizacion',[$this->startOfMonth,$this->endOfMonth])->groupBy('Profesional')->get();
+        // ddd($this->sub_actions);
+        $columnChartModel = ActionMl::whereBetween('Fecha_Realizacion',[$this->startOfMonth,$this->endOfMonth])->groupBy('Profesional')->get()
+            ->reduce(function ($columnChartModel, $data) {
+                $type = $data->Profesional;
+                $value = ActionMl::whereBetween('Fecha_Realizacion',[$this->startOfMonth,$this->endOfMonth])
+                    ->where('Profesional',$data->Profesional)->count();
+                return $columnChartModel->addColumn($type, $value, 'red');
+            }, LivewireCharts::columnChartModel()
+                ->setTitle('Horas de Cada Profesional')
+                // ->setAnimated($this->firstRun)
+                ->withOnColumnClickEventName('onColumnClick')
+                ->setLegendVisibility(false)
+                ->setDataLabelsEnabled(true)
+                //->setOpacity(0.25)
+                // ->setColors(['#b01a1b', '#d41b2c', '#ec3c3b', '#f66665'])
+                ->setColumnWidth(90)
+                ->withGrid()
+            );
+
+        return view('livewire.admin-index-panel')->with([
+                'columnChartModel' => $columnChartModel,
+                // 'pieChartModel' => $pieChartModel,
+                // 'lineChartModel' => $lineChartModel,
+                // 'areaChartModel' => $areaChartModel,
+                // 'multiLineChartModel' => $multiLineChartModel,
+                // 'multiColumnChartModel' => $multiColumnChartModel,
+                // 'radarChartModel' => $radarChartModel,
+                // 'treeChartModel' => $treeChartModel,
+            ]);
     }
 }
