@@ -89,7 +89,7 @@ class AdminIndexPanel extends Component
         // $actions = DB::select( DB::raw("Select month(Fecha_Realizacion) as m,year(Fecha_Realizacion) as y,sum(Precio_Prestacion) as PP,sum(Abono) as a from action_mls group by 1,2 order by 2,1") );
         // $actions = collect($actions);
 
-        $columnChartModel = $actions->groupBy('Profesional')->get()
+        $columnChartModel = $actions->groupBy('Profesional')->orderby('Profesional')->get()
             ->reduce(function ($columnChartModel, $data) {
                 $type = $data->Profesional;
                 $actions = ActionMl::whereBetween('Fecha_Realizacion',[$this->startOfMonth,$this->endOfMonth]);
