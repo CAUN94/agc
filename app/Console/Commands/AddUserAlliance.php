@@ -47,9 +47,10 @@ class AddUserAlliance extends Command
             if($userMl->Nacimiento == null){
                 $userMl->Nacimiento = '1000-10-10';
             }
+            $userMl->RUT = strtolower($userMl->RUT);
             $user = User::firstOrCreate(
                 [
-                    'rut' => $userMl->RUT,
+                    'rut' => $userMl->RUT ,
                 ],
                 [
                     'name' => $userMl->Nombre,

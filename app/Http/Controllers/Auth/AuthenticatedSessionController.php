@@ -32,7 +32,10 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-
+        if (Auth::check() && Auth::user()->password_change_at == null) {
+            Session::flash('primary','Debes modificar tu clave '.Auth::user()->name);
+           return redirect('/change-password');
+        }
         Session::flash('primary','Hola '.Auth::user()->name);
         return redirect()->intended(RouteServiceProvider::HOME);
     }

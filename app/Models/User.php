@@ -33,6 +33,7 @@ class User extends Authenticatable {
 		'phone',
 		'password',
 		'birthday',
+		'password_change_at'
 	];
 
 	/**
@@ -60,7 +61,7 @@ class User extends Authenticatable {
 
 	public function setrutAttribute($value) {
 		if(Rut::parse($value)->quiet()->validate()){
-			$this->attributes['rut'] = Rut::parse(Rut::parse($value)->normalize())->format(Rut::FORMAT_WITH_DASH);
+			$this->attributes['rut'] = strtolower(Rut::parse(Rut::parse($value)->normalize())->format(Rut::FORMAT_WITH_DASH));
         } else{
             $this->attributes['RUT'] = $value;
         }
