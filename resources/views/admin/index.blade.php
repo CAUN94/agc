@@ -4,8 +4,10 @@
 	        Hola {{Auth::user()->fullname()}}
 	    </h1>
 	</div>
-	<div>
-		<livewire:admin-index-panel/>
-	</div>
+	@if(Auth::user()->isAdmin())
+		<div>
+			<livewire:admin-index-panel/>
+		</div>
+	@endif
 
 </x-admin.layout>

@@ -3,13 +3,16 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
+use App\Models\Alliance;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\DB;
 
 class AdminUser extends Component {
 
 	use WithFileUploads;
 
+	public $user;
 	public $name;
 	public $lastnames;
 	public $rut;
@@ -23,6 +26,10 @@ class AdminUser extends Component {
 	public $userid;
 	public $view;
 	public $new_profile;
+	public $alliance;
+	public $desc;
+	public $allAlliance;
+	public $newalliance;
 
 	public function mount($user) {
 		$this->name = $user->name;
@@ -37,10 +44,37 @@ class AdminUser extends Component {
 		$this->description = $user->description;
 		$this->view = '';
 		$this->userid = $user->id;
+		if($user->hasAlliance()){
+			$this->alliance = $user->alliance()->name;
+			$this->desc = $user->alliance()->desc;
+		}
+		else {
+			$this->alliance = null;
+			$this->desc = null;
+		}
+		$this->allAlliance = Alliance::where('id','>','1')->orderby('name','asc')->get();
+
 	}
 
-	public function render() {
-		return view('livewire.admin-user');
+	public function storeAlliance() {
+		$validatedData = $this->validate([
+			'newalliance' => ['required']
+		]);
+
+		$pivot = DB::table('users_alliances_pivot')->updateOrInsert(
+			['user_id' => $this->userid],
+            ['alliance_id' => $validatedData['newalliance']
+        ]);
+
+		if($this->user->hasAlliance()){
+			$this->alliance = $this->user->alliance()->name;
+			$this->desc = $this->user->alliance()->desc;
+		}
+		else {
+			$this->alliance = null;
+			$this->desc = null;
+		}
+		session()->flash('primary', 'Alianza Cargada');
 	}
 
 	public function deleteUser() {
@@ -89,6 +123,10 @@ class AdminUser extends Component {
 		session()->flash('primary', 'Usuario Actualizado.');
 
 		return redirect()->to('/adminusers/' . $this->userid);
+	}
+
+	public function render() {
+		return view('livewire.admin-user');
 	}
 
 }

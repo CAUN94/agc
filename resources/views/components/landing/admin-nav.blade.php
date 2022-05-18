@@ -50,7 +50,7 @@
     <x-nav-dropdown>
       <x-slot name="name"><i class="fas fa-calendar-alt"></i> Entrenamiento</x-slot>
       <x-slot name="trigger">training</x-slot>
-      <a class="py-1" href="/trainertrainappointment">Entrenamiento</a>
+      <a class="py-1" href="/trainertrainappointment">Calendario</a>
       <a class="my-1 py-1" href="/trainerbookappointment">Clases Reservadas</a>
     </x-nav-dropdown>
   @endif
