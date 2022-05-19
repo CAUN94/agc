@@ -18,6 +18,8 @@
       <a class="my-1 py-1" href="/adminbookappointment">Clases Reservadas</a>
     </x-nav-dropdown>
 
+    <a class="mt-3 py-1" href="/adminalliance">Alianzas</a>
+
     <x-nav-dropdown>
       <x-slot name="name"><i class="fas fa-notes-medical mr-1"></i>Medilink</x-slot>
       <x-slot name="trigger">medelink</x-slot>

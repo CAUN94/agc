@@ -56,6 +56,10 @@ class AdminUser extends Component {
 
 	}
 
+	public function deleteAlliance() {
+		DB::table('users_alliances_pivot')->where('user_id', $this->userid)->delete();
+	}
+
 	public function storeAlliance() {
 		$validatedData = $this->validate([
 			'newalliance' => ['required']

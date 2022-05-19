@@ -131,6 +131,7 @@
                 <div class="box-white mt-3 p-3">
 
                     <div class="flex justify-between">
+                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
                         <span class="block cursor-pointer" wire:click="openCreate">Crear Clases.</span>
 
                         <div class="modal-close cursor-pointer z-50" wire:click="closeCreate">

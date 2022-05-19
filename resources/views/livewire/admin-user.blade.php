@@ -99,7 +99,7 @@
                 <x-admin.input class="col-span-6 sm:col-span-3" type="number" name="desc"  :readonly="''" >Dscto</x-admin.input>
                 @endif
                 <x-admin.input-select class="col-span-6 sm:col-span-6" name="newalliance" readonly="edit">
-                  Alianzas
+                  {{  $this->user->hasAlliance() ? "Cambiiar Alianza" : "Asignar Alianza" }}
                   <x-slot name="options">
                     <option hidden>Seleccionar</option>
                     @foreach($this->allAlliance as $alliance)
@@ -110,6 +110,9 @@
               </div>
             </div>
             <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                <p class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-500 hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 cursor-pointer wire:click="deleteAlliance()">
+                Borrar Alianza
+              </p>
               <p class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-500 hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 cursor-pointer"
               wire:click="storeAlliance()">
                 Cargar Alianza
@@ -120,7 +123,23 @@
     <div class="mt-5 md:mt-0 md:col-span-2">
         <div class="shadow sm:rounded-md sm:overflow-hidden">
           <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
-          </div>
+              <h2>Panel Entrenadores</h2>
+              <div class="grid grid-cols-6 gap-6">
+                @if($this->user->isTrainer())
+                <x-admin.input class="col-span-6 sm:col-span-3" type="text" name="alliance"  :readonly="''" >Alianza</x-admin.input>
+                <x-admin.input class="col-span-6 sm:col-span-3" type="number" name="desc"  :readonly="''" >Dscto</x-admin.input>
+                @endif
+                <x-admin.input-select class="col-span-6 sm:col-span-6" name="newalliance" readonly="edit">
+                  {{  $this->user->hasAlliance() ? "Cambiiar Alianza" : "Asignar Alianza" }}
+                  <x-slot name="options">
+                    <option hidden>Seleccionar</option>
+                    @foreach($this->allAlliance as $alliance)
+                      <x-admin.input-option value="{{$alliance->id}}">{{$alliance->name}}</x-admin.input-option>
+                    @endforeach
+                  </x-slot>
+                </x-admin.input-select>
+              </div>
+            </div>
           <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <p class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-500 hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 cursor-pointer" @click="showModal = true">
               Borrar Usuario
