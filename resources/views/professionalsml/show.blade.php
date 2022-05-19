@@ -11,7 +11,7 @@
         );
     @endphp
     <div class="bg-white p-4 w-1/3 mx-auto mt-10">
-        <h1>Agenda de {{$value["nombre"]}} {{$value["apellidos"]}} semana del {{Carbon\Carbon::parse(array_key_first($professional))->format('Y-m-d')}}</h1><br>
+        <h1>Agenda de {{$value["nombre"]}} {{$value["apellidos"]}}</h1><br>
         <p>
             @foreach($professional as $key => $day)
                 @if(Carbon\Carbon::parse($key)->endofday()>=Carbon\Carbon::now())
@@ -19,7 +19,7 @@
                     @if(count($day)>0 and count($days_w_hours))
                         @foreach($days_w_hours as $hour)
                             @if($loop->first)
-                                {{$days_dias[Carbon\Carbon::parse($hour['fecha'])->format('l')]}}:
+                                {{$days_dias[Carbon\Carbon::parse($hour['fecha'])->format('l')]}}  {{Carbon\Carbon::parse($hour['fecha'])->format('d')}}:
                             @endif
                             @if(
                             Carbon\Carbon::now()->subhour()->format('H:i') >= Carbon\Carbon::parse($hour['inicio'])->format('H:i')

@@ -94,6 +94,12 @@ class ScrapingController extends Controller
         $crawler = $client->request('GET', $url);
         $professional = $crawler->text();
         $professional = json_decode($professional,true);
+
+        $nextWeekStartDate = $now->addWeek()->startOfWeek()->format('Y-m-d');
+        $url = "https://youjustbetter.softwaremedilink.com/agendas/semanalJSON/".$nextWeekStartDate."/?id_profesional=".$id;
+        $crawler = $client->request('GET', $url);
+        $professional2 = $crawler->text();
+        $professional = array_merge($professional,json_decode($professional2,true));
         $professionals = self::create_client("https://youjustbetter.softwaremedilink.com/dentistas/autocomplete");
         foreach($professionals as $names){
             $value = json_decode("{".$names."}",true);
