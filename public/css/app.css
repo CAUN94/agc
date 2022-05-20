@@ -33664,6 +33664,89 @@ header {
   justify-items: stretch;
 }
 
+.box-container2 {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .box-container2 {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .box-container2 {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .box-container2 {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .box-container2 {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .box-container2 {
+    max-width: 1536px;
+  }
+}
+
+.box-container2 {
+  height: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .box-container2 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+.box-container2 {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 1024px) {
+  .box-container2 {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.box-container2 {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .box-container2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .box-container2 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.box-container2 {
+  justify-items: stretch;
+}
+
 .box {
   --tw-bg-opacity: 1;
   background-color: rgba(234, 235, 235, var(--tw-bg-opacity));

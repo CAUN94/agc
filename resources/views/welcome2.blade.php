@@ -9,6 +9,9 @@
         <x-landing2.service>
         </x-landing2.service>
 
+        <x-landing2.why-us>
+        </x-landing2.why-us>
+
         <x-landing2.instagram>
         </x-landing2.instagram>
 

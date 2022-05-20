@@ -1,6 +1,6 @@
 <div>
     <div class="my-10">
-        <h1 class="text-white font-medium text-center text-6xl uppercase font-roboto">You Just <span class="text-primary-500">Better</span></h1>
+        <h1 class="font-futura text-white font-medium text-center text-6xl uppercase">You Just <span class="text-primary-500">Better</span></h1>
     </div>
 {{--     <div class="bg-primary-500" style="border-top-left-radius: 20%;border-top-right-radius: 20%;"> --}}
     <div class="bg-gradient-to-r from-you-grey to-primary-500">

@@ -106,6 +106,14 @@ header {
 	@apply justify-items-stretch ;
 }
 
+.box-container2 {
+	@apply h-auto container;
+	@apply px-8 lg:px-4 py-4;
+	@apply mx-auto lg:mx-auto;
+	@apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5;
+	@apply justify-items-stretch ;
+}
+
 .box {
 	@apply bg-light-grey;
 	@apply mx-auto rounded-md py-2 px-4;
