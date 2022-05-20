@@ -78,7 +78,6 @@
                             </dt>
                             <dd class="train-class-resume-text">
                               <x-admin.input class="col-span-6 sm:col-span-3" type="text" name="name" value="{{$train->name}}" readonly="edit"></x-admin.input>
-
                             </dd>
                           </div>
                         </dl>

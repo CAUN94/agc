@@ -17,7 +17,8 @@ use App\Http\Middleware\UpdatePassword;
 Route::middleware([UpdatePassword::class])->group(function () {
 
 
-    Route::get('/', [LandingController::class, 'welcome'])->middleware('updated');
+    Route::get('/', [LandingController::class, 'welcome']);
+    Route::get('/landing', [LandingController::class, 'welcome2']);
     Route::get('/team', [LandingController::class, 'team']);
     Route::get('/tables', [LandingController::class, 'tables']);
     Route::get('/example', [LandingController::class, 'example']);
