@@ -33522,6 +33522,17 @@ header {
   }
 }
 
+.img-slider {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.img-slider img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .title {
   width: 100%;
 }
@@ -34021,19 +34032,12 @@ header {
   margin-left: auto;
   margin-right: auto;
   display: flex;
-  height: 5rem;
-  width: 66.666667%;
+  width: 33.333333%;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
-@media (min-width: 1024px) {
-  .contact {
-    flex-direction: row;
-  }
+  padding-bottom: 1.5rem;
 }
 
 .contact  a, .contact  span {
