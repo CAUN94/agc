@@ -45,6 +45,8 @@ class RegisteredUserController extends Controller {
 		]);
 
 		$user = User::create($attributes);
+		$user->password_change_at = $user->created_at;
+		$user->save();
 
 		event(new Registered($user));
 
