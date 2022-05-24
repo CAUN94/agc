@@ -53,7 +53,7 @@ class UserStravaPanel extends Component
             $this->progresColor = 'yellow';
         }
 
-        ddd($chargesAndProgress[3]);
+        // ddd($chargesAndProgress[3]);
 
         return view('livewire.user-strava-panel');
     }
