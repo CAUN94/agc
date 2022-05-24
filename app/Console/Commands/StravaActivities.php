@@ -53,8 +53,9 @@ class StravaActivities extends Command
                 ]);
             }
             $token = $user->access_token;
+            $this->info($user->user_id);
             foreach(Strava::activities($token,1,200) as $activitie){
-                $this->info($user->user_id);
+
                 SA::updateOrCreate(
                     [ 'strava_id' => $activitie->id ],
                     [
