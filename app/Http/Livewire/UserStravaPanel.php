@@ -65,7 +65,7 @@ class UserStravaPanel extends Component
             return -1;
         }
         $last_start_date = reset($activities_run)->start_date;
-        ddd($activities_run[array_key_last($activities_run)]);
+        // ddd($activities_run[array_key_last($activities_run)]);
         $first_start_date = $activities_run[array_key_last($activities_run)]->start_date;
         $now = \Carbon\Carbon::now();
         $first_start_date = \Carbon\Carbon::parse($first_start_date);
