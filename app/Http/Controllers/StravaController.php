@@ -131,4 +131,71 @@ class StravaController extends Controller
         $user->save();
         return redirect('/strava/show');
     }
+        public function chargesAndProgress($activities){
+        $activities_run = array_filter($activities, function($activities){
+            return $activities->type == 'Run';
+        });
+        if(count($activities_run) == 0){
+            return -1;
+        }
+        $last_start_date = reset($activities_run)->start_date;
+        // ddd($activities_run[array_key_last($activities_run)]);
+        $first_start_date = $activities_run[array_key_last($activities_run)]->start_date;
+        $now = \Carbon\Carbon::now();
+        $first_start_date = \Carbon\Carbon::parse($first_start_date);
+        $diff = $first_start_date->diffInDays($now);
+
+        $activities_run_used = array_filter($activities_run, function($activities_run) use($diff){
+            $weekStartDate = \Carbon\Carbon::now();
+            $weekEndDate = \Carbon\Carbon::now()->subdays(($diff == 7*4) ? $diff : 7*4);
+            if(\Carbon\Carbon::parse($activities_run->start_date)->between($weekStartDate,$weekEndDate)){
+                return $activities_run;
+            }
+        });
+
+        $weeks = [];
+        for($i = 0; $i < intdiv($diff,7); $i++){
+            $week = array_filter($activities_run, function($activities_run) use($i,$last_start_date){
+                $weekStartDate = \Carbon\Carbon::now();
+                $weekEndDate = \Carbon\Carbon::now()->subdays(7);
+
+                if($i > 0){
+                    $weekStartDate->subweeks($i);
+                    $weekEndDate->subweeks($i);
+                }
+
+                return \Carbon\Carbon::parse($activities_run->start_date)->between($weekStartDate,$weekEndDate);
+            });
+            $weeks[\Carbon\Carbon::now()->subweeks($i)->format('Y-m-d H:i')] = $week;
+        }
+        $sumweek_time = [];
+        foreach($weeks as $week){
+            $sumweek_time[] = array_sum(array_map(function($week) {
+              return $week->moving_time;
+            }, $week))/60;
+        }
+        $sumweek_distance = [];
+        foreach($weeks as $week){
+            $sumweek_distance[] = array_sum(array_map(function($week) {
+              return $week->distance;
+            }, $week));
+        }
+        $last_weeks = array_slice($sumweek_distance, -3, 3, true);
+        // return $last_weeks;
+        // return $sumweek_distance;
+        $sumweek_distance_avg = array_sum($last_weeks)/count($last_weeks);
+        if($sumweek_distance_avg == 0){
+            $charges = -1;
+        } else {
+            $charges = $sumweek_distance[0]/$sumweek_distance_avg;
+        }
+
+        if($sumweek_distance[1] == 0){
+            $progress = -1;
+        } else {
+            $progress = $sumweek_distance[0]/$sumweek_distance[1];
+        }
+        return [$charges,$progress,$activities_run_used,$weeks];
+    }
+
 }
