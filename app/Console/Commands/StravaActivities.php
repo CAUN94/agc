@@ -46,11 +46,12 @@ class StravaActivities extends Command
             $user = $stravauser;
             if(Carbon::now()->subHours(4) > $user->token_expires){
                 $refresh = Strava::refreshToken($user->refresh_token);
-                $user->update([
+                User::find($stravauser->user_id)->strava->update([
                   'access_token' => $refresh->access_token,
                   'refresh_token' => $refresh->refresh_token,
                   'token_expires' => Carbon::createFromTimestamp($refresh->expires_at)
                 ]);
+                $user = User::find($stravauser->user_id);
             }
             $token = $user->access_token;
             $this->info(Carbon::now()->subHours(4));
