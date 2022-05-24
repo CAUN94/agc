@@ -53,6 +53,7 @@ class StravaActivities extends Command
                 ]);
             }
             $token = $user->access_token;
+            $this->info(Carbon::now());
             $this->info($user->user_id);
             foreach(Strava::activities($token,1,200) as $activitie){
 
