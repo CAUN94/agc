@@ -52,9 +52,8 @@ class UserStravaPanel extends Component
         } else {
             $this->progresColor = 'yellow';
         }
-
-        // ddd($chargesAndProgress[3]);
-
+        $this->allData = $chargesAndProgress[3];
+        // ddd($this->allData);
         return view('livewire.user-strava-panel');
     }
 
@@ -71,7 +70,6 @@ class UserStravaPanel extends Component
         $first_start_date = \Carbon\Carbon::parse($first_start_date);
         $diff = $first_start_date->diffInDays($now);
 
-        $weeks = [];
         $activities_run_used = array_filter($activities_run, function($activities_run) use($diff){
             $weekStartDate = \Carbon\Carbon::now();
             $weekEndDate = \Carbon\Carbon::now()->subdays(($diff == 7*4) ? $diff : 7*4);
@@ -80,6 +78,7 @@ class UserStravaPanel extends Component
             }
         });
 
+        $weeks = [];
         for($i = 0; $i < intdiv($diff,7); $i++){
             $week = array_filter($activities_run, function($activities_run) use($i,$last_start_date){
                 $weekStartDate = \Carbon\Carbon::now();
@@ -92,7 +91,7 @@ class UserStravaPanel extends Component
 
                 return \Carbon\Carbon::parse($activities_run->start_date)->between($weekStartDate,$weekEndDate);
             });
-            $weeks[\Carbon\Carbon::now()->subweeks($i)->format('m-d-Y')] = $week;
+            $weeks[\Carbon\Carbon::now()->subweeks($i)->format('Y-m-d H:i')] = $week;
         }
         $sumweek_time = [];
         foreach($weeks as $week){
@@ -104,7 +103,7 @@ class UserStravaPanel extends Component
         foreach($weeks as $week){
             $sumweek_distance[] = array_sum(array_map(function($week) {
               return $week->distance;
-            }, $week))/60;
+            }, $week));
         }
         $last_weeks = array_slice($sumweek_distance, -3, 3, true);
         // return $last_weeks;
