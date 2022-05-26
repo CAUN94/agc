@@ -126,6 +126,8 @@ Route::middleware([UpdatePassword::class])->group(function () {
     // Strava
     Route::get('/strava', \App\Http\Controllers\StravaController::class .'@index')->middleware(['intranet']);
     Route::get('/strava/show', \App\Http\Controllers\StravaController::class .'@show')->middleware(['auth']);
+    Route::get('/strava/show', \App\Http\Controllers\StravaController::class .'@show')->middleware(['auth']);
+    Route::get('/strava/showjson/{id}', \App\Http\Controllers\StravaController::class .'@showjson');
     Route::get('/strava/adminshow/{id}', \App\Http\Controllers\StravaController::class .'@adminshow')->middleware(['intranet']);
     Route::get('/strava/auth', \App\Http\Controllers\StravaController::class .'@auth')->middleware(['auth']);
     Route::get('/strava/unauth', \App\Http\Controllers\StravaController::class .'@unauth')->middleware(['auth']);

@@ -22,7 +22,7 @@
                             <i class="fas fa-info-circle" x-on:click="charges = ! charges"></i>
                         </div>
                         <span class="text-sm mt-2" x-show="charges" x-transition x-cloak>
-                            Este indicador contrasta la carga de los últimos 7 días con las 3 semanas previas
+                            Este indicador contrasta la carga de los últimos 7 días con los 21 días previos.
                         </span>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                             <i class="fas fa-info-circle" x-on:click="progress = ! progress"></i>
                         </div>
                         <span class="text-sm mt-2" x-show="progress" x-transition x-cloak>
-                            Este indicador contrasta la carga de los últimos 7 días con las 3 semanas previas
+                            Este indicador contrasta la carga de los últimos 7 días con los 7 días previos.
                         </span>
                     </div>
                 </div>

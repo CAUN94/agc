@@ -44,6 +44,32 @@ class StravaController extends Controller
         return view('strava.show');
     }
 
+    public function showjson($id){
+        $user = StravaUser::where('id', $id)->first();
+
+        if(is_null($user)){
+            return redirect('/strava/auth');
+        }
+
+        if(Carbon::now() > $user->token_expires){
+            // Token has expired, generate new tokens using the currently stored user refresh token
+            $refresh = Strava::refreshToken($user->refresh_token);
+            StravaUser::where('id', $id)->update([
+              'access_token' => $refresh->access_token,
+              'refresh_token' => $refresh->refresh_token,
+              'token_expires' => Carbon::createFromTimestamp($refresh->expires_at)
+            ]);
+            $user = StravaUser::where('id', $id)->first();
+        }
+
+        $token = $user->access_token;
+
+        $activities = Strava::activities($token,1,200);
+
+        $chargesAndProgress = $this->chargesAndProgress($activities);
+        return $chargesAndProgress[3];
+    }
+
         /**
      * Authenticate user with Strava
      *
@@ -131,7 +157,8 @@ class StravaController extends Controller
         $user->save();
         return redirect('/strava/show');
     }
-        public function chargesAndProgress($activities){
+
+    public function chargesAndProgress($activities){
         $activities_run = array_filter($activities, function($activities){
             return $activities->type == 'Run';
         });
@@ -181,6 +208,7 @@ class StravaController extends Controller
             }, $week));
         }
         $last_weeks = array_slice($sumweek_distance, -3, 3, true);
+
         // return $last_weeks;
         // return $sumweek_distance;
         $sumweek_distance_avg = array_sum($last_weeks)/count($last_weeks);
@@ -196,6 +224,7 @@ class StravaController extends Controller
             $progress = $sumweek_distance[0]/$sumweek_distance[1];
         }
         return [$charges,$progress,$activities_run_used,$weeks];
+
     }
 
 }

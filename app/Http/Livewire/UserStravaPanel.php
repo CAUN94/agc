@@ -53,7 +53,6 @@ class UserStravaPanel extends Component
             $this->progresColor = 'yellow';
         }
         $this->allData = $chargesAndProgress[3];
-        // ddd($this->allData);
         return view('livewire.user-strava-panel');
     }
 
@@ -106,7 +105,9 @@ class UserStravaPanel extends Component
               return $week->distance;
             }, $week));
         }
+        ddd($sumweek_distance);
         $last_weeks = array_slice($sumweek_distance, -3, 3, true);
+
         // return $last_weeks;
         // return $sumweek_distance;
         $sumweek_distance_avg = array_sum($last_weeks)/count($last_weeks);
