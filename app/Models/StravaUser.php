@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\StravaActivities;
 
 class StravaUser extends Model
 {
@@ -17,6 +18,10 @@ class StravaUser extends Model
 
     public function activities()
     {
-        return $this->hasMany(StravaActivity::class, 'strava_user_id', 'strava_id');
+        return $this->hasMany(StravaActivities::class, 'strava_id', 'strava_id');
+    }
+
+    public function strava(){
+        return $this->hasOne(StravaUser::class);
     }
 }

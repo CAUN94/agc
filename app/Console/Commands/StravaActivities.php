@@ -54,7 +54,7 @@ class StravaActivities extends Command
                 $user = User::find($stravauser->user_id);
             }
             $token = $user->access_token;
-            $this->info(Carbon::now()->subHours(4));
+            $this->info(Carbon::now());
             $this->info($user->user_id);
             foreach(Strava::activities($token,1,200) as $activitie){
 
