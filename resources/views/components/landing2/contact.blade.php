@@ -6,6 +6,7 @@
     <h2 class="text-center text-white pt-5 text-3xl">¿Dónde nos encontramos?</h2>
     <div class="contact">
         <a
+        class="text-center"
         target="_blank"
         href="https://www.google.com/maps/dir//San+Pascual+736+Las+Condes+Regi%C3%B3n+Metropolitana/@-33.4178579,-70.5775512,16z/data=!4m5!4m4!1m0!1m2!1m1!1s0x9662cf1e8273f745:0x65dbdf4e0b964b33">
             <i class="fas fa-map-marker-alt"></i>

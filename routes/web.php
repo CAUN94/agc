@@ -15,7 +15,7 @@ use App\Http\Middleware\UpdatePassword;
 |
  */
 Route::middleware([UpdatePassword::class])->group(function () {
-
+    Route::get('/mercadopagosearch', [MercadoPagoController::class, 'index']);
 
     Route::get('/', [LandingController::class, 'welcome']);
     Route::get('/landing', [LandingController::class, 'welcome2']);

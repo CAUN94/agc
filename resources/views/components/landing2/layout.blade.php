@@ -30,8 +30,8 @@
             <script> gtag('event', 'conversion', {'send_to': 'AW-10872889051/Jlg6CIvr9KsDENu9zMAo'}); </script>
         @endif
     </head>
-    <body>
-        <div class="sticky-menu">
+    <body class="h-full">
+        <div class="sticky-menu z-50 top-0 ">
             <div
                 class="nav-menu"
                 x-data="{ navOpen: false }"

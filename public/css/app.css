@@ -34032,7 +34032,7 @@ header {
   margin-left: auto;
   margin-right: auto;
   display: flex;
-  width: 33.333333%;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
@@ -34040,7 +34040,7 @@ header {
   padding-bottom: 1.5rem;
 }
 
-.contact  a, .contact  span {
+.contact  a {
   cursor: pointer;
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -34048,13 +34048,33 @@ header {
   color: rgba(234, 235, 235, var(--tw-text-opacity));
 }
 
-.contact  a:hover, .contact  span:hover {
+.contact  a:hover {
   --tw-text-opacity: 1;
   color: rgba(44, 44, 44, var(--tw-text-opacity));
 }
 
 @media (min-width: 1024px) {
-  .contact  a, .contact  span {
+  .contact  a {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+}
+
+.contact  span {
+  cursor: pointer;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  --tw-text-opacity: 1;
+  color: rgba(234, 235, 235, var(--tw-text-opacity));
+}
+
+.contact  span:hover {
+  --tw-text-opacity: 1;
+  color: rgba(44, 44, 44, var(--tw-text-opacity));
+}
+
+@media (min-width: 1024px) {
+  .contact  span {
     font-size: 1.5rem;
     line-height: 2rem;
   }

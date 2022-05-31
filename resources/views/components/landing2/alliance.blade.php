@@ -29,7 +29,7 @@
     }
     ",
     x-init="$interval(addOne, timer)" x-cloack>
-    <div class="relative bg-primary-500">
+    <div class="relative">
         <template x-for="(img,index) in imgs">
             <div class="flex flex-col mx-auto py-4"
             x-show="activeSlide === index+1" x-transition>
