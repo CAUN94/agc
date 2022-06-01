@@ -3,7 +3,7 @@
 @endphp
 
 <section id="contact" class="bg-primary-500">
-    <h2 class="text-center text-white pt-5 text-3xl">¿Dónde nos encontramos?</h2>
+    <h2 class="text-center text-white pt-5 lg:text-3xl text-2xl">¿Dónde nos encontramos?</h2>
     <div class="contact">
         <a
         class="text-center"
@@ -36,7 +36,7 @@
     x-init="$interval(addOne, timer2)" x-cloack>
     <div class="relative">
         <section class="absolute bottom-0 right-0">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3330.2065919308297!2d-70.57973988482027!3d-33.41785788078324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662cf1e8273f745%3A0x65dbdf4e0b964b33!2sSan%20Pascual%20736%2C%20Las%20Condes%2C%20Regi%C3%B3n%20Metropolitana!5e0!3m2!1ses-419!2scl!4v1633367044424!5m2!1ses-419!2scl" width="260" height="140" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3330.2065919308297!2d-70.57973988482027!3d-33.41785788078324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662cf1e8273f745%3A0x65dbdf4e0b964b33!2sSan%20Pascual%20736%2C%20Las%20Condes%2C%20Regi%C3%B3n%20Metropolitana!5e0!3m2!1ses-419!2scl!4v1633367044424!5m2!1ses-419!2scl" class="w-32 lg:w-64 h-20 lg:h-36 " style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </section>
         <template x-for="(img,index) in imgs">
             <div class="img-slider"

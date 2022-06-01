@@ -1,5 +1,5 @@
 <section class="bg-you-grey">
-	<div class="grid grid-cols-3 gap-4 my-10 container mx-auto">
+	<div class="grid gap-4 my-10 container mx-auto lg:grid-cols-3 px-3 lg:px-0">
 	  <div class="flex flex-col mx-10">
 	  	<h2 class="font-futura text-white text-3xl place-items-start text-center">
 	  		¿Por qué elegir YOU?
