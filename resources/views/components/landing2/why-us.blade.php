@@ -8,26 +8,26 @@
 	  </div>
 	  <div>
 	  	<h2 class="font-futura text-primary-500 text-2xl">Gran Experiencia</h2>
-	  	<p class="text-xl text-white">
+	  	<p class="text-white text-base lg:text-lg">
 	  		Miles de pacientes / deportistas se atienden al año, quienes nos preparan para tratar a quién más nos importa: TÚ.
 	  	</p>
 	  </div>
 	  <div>
 	  	<h2 class="font-futura text-primary-500 text-2xl">Respuestas correctas</h2>
-	  	<p class="text-xl text-white">
+	  	<p class="text-white text-base lg:text-lg">
 	  		Contamos con nuestros profesionales que entreguen un acertado diagnostico y el plan perfecto para tu primera vez en YOU.
 	  	</p>
 	  </div>
 	  <div></div>
 	  <div>
 	  	<h2 class="font-futura text-primary-500 text-2xl">Tú estás primero</h2>
-	  	<p class="text-xl text-white">
+	  	<p class="text-white text-base lg:text-lg">
 	  		Los tratamientos en YOU son experiencias personalizadas en tí. Tu eres tratado como la persona escencial.
 	  	</p>
 	  </div>
 	  <div>
 	  	<h2 class="font-futura text-primary-500 text-2xl">Innovación con impacto</h2>
-	  	<p class="text-xl text-white">
+	  	<p class="text-white text-base lg:text-lg">
 	  		Para todos nuestros cuidados de pacientes, enseñanza y desarrollo son hechos con los estudios más recientes del ámbito kinesiologico.
 	  	</p>
 	  </div>
