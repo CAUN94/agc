@@ -17,6 +17,11 @@ class LandingController extends Controller
         return view('welcome2');
     }
 
+    public function about()
+    {
+        return view('about');
+    }
+
     public function team()
     {
         $team = [

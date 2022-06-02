@@ -19,6 +19,7 @@ Route::middleware([UpdatePassword::class])->group(function () {
 
     Route::get('/', [LandingController::class, 'welcome']);
     Route::get('/landing', [LandingController::class, 'welcome2']);
+    Route::get('/about', [LandingController::class, 'about']);
     Route::get('/team', [LandingController::class, 'team']);
     Route::get('/tables', [LandingController::class, 'tables']);
     Route::get('/example', [LandingController::class, 'example']);
@@ -126,8 +127,8 @@ Route::middleware([UpdatePassword::class])->group(function () {
     // Strava
     Route::get('/strava', \App\Http\Controllers\StravaController::class .'@index')->middleware(['intranet']);
     Route::get('/strava/show', \App\Http\Controllers\StravaController::class .'@show')->middleware(['auth']);
-    Route::get('/strava/show', \App\Http\Controllers\StravaController::class .'@show')->middleware(['auth']);
     Route::get('/strava/showjson/{id}', \App\Http\Controllers\StravaController::class .'@showjson');
+    Route::get('/strava/showjsoniver/{id}', \App\Http\Controllers\StravaController::class .'@showjsoniver');
     Route::get('/strava/adminshow/{id}', \App\Http\Controllers\StravaController::class .'@adminshow')->middleware(['intranet']);
     Route::get('/strava/auth', \App\Http\Controllers\StravaController::class .'@auth')->middleware(['auth']);
     Route::get('/strava/unauth', \App\Http\Controllers\StravaController::class .'@unauth')->middleware(['auth']);

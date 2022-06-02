@@ -70,6 +70,42 @@ class StravaController extends Controller
         return $chargesAndProgress[3];
     }
 
+    public function showjsoniver($id){
+        $user = StravaUser::where('id', $id)->first();
+
+        if(is_null($user)){
+            return redirect('/strava/auth');
+        }
+
+        if(Carbon::now() > $user->token_expires){
+            // Token has expired, generate new tokens using the currently stored user refresh token
+            $refresh = Strava::refreshToken($user->refresh_token);
+            StravaUser::where('id', $id)->update([
+              'access_token' => $refresh->access_token,
+              'refresh_token' => $refresh->refresh_token,
+              'token_expires' => Carbon::createFromTimestamp($refresh->expires_at)
+            ]);
+            $user = StravaUser::where('id', $id)->first();
+        }
+
+        $token = $user->access_token;
+
+        $activities = Strava::activities($token,1,200);
+
+        $chargesAndProgress = $this->chargesAndProgress($activities);
+
+        $jsoniver = [];
+        foreach($chargesAndProgress[3] as $key => $charges){
+            if(count($charges)<= 0){
+                continue;
+            }
+            foreach($charges as $value){
+                $jsoniver[$key] = $value->distance;
+            }
+        }
+        return $jsoniver;
+    }
+
         /**
      * Authenticate user with Strava
      *
