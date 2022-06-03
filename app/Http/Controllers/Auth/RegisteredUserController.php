@@ -40,7 +40,6 @@ class RegisteredUserController extends Controller {
 		    $request->replace($requestData);
         }
 
-	    $values = $this->validate($request, $rules);
 		$attributes = $request->validate([
 			'name' => ['required', 'string', 'max:255'],
 			'lastnames' => ['required', 'string', 'max:255'],
