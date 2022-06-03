@@ -4,7 +4,7 @@
 	  	<h2 class="font-futura text-white text-3xl place-items-start text-center">
 	  		¿Por qué elegir YOU?
 	  	</h2>
-	  	<a href="#" class="w-full inline-flex justify-center border border-transparent shadow-sm py-2 bg-primary-500 text-base font-medium text-white hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm rounded-3xl mt-5">Aprende más de YOU</a>
+	  	<a href="/about" class="w-full inline-flex justify-center border border-transparent shadow-sm py-2 bg-primary-500 text-base font-medium text-white hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm rounded-3xl mt-5">Aprende más de YOU</a>
 	  </div>
 	  <div>
 	  	<h2 class="font-futura text-primary-500 text-2xl">Gran Experiencia</h2>
