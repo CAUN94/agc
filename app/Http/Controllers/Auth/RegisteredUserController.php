@@ -33,7 +33,8 @@ class RegisteredUserController extends Controller {
 	 * @throws \Illuminate\Validation\ValidationException
 	 */
 	public function store(Request $request) {
-		if(Rut::parse($value)->quiet()->validate()){
+		$requestData = $request->all();
+		if(Rut::parse($requestData['rut'])->quiet()->validate()){
 			$requestData = $request->all();
 		    $requestData['rut'] = strtolower(Rut::parse(Rut::parse($requestData['rut'])->normalize())->format(Rut::FORMAT_WITH_DASH));
 		    $request->replace($requestData);
