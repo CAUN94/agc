@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules;
 use Session as FlashSession;
+use Freshwork\ChileanBundle\Rut;
 
 class RegisteredUserController extends Controller {
 	/**
@@ -32,6 +33,13 @@ class RegisteredUserController extends Controller {
 	 * @throws \Illuminate\Validation\ValidationException
 	 */
 	public function store(Request $request) {
+		if(Rut::parse($value)->quiet()->validate()){
+			$requestData = $request->all();
+		    $requestData['rut'] = strtolower(Rut::parse(Rut::parse($requestData['rut'])->normalize())->format(Rut::FORMAT_WITH_DASH));
+		    $request->replace($requestData);
+        }
+
+	    $values = $this->validate($request, $rules);
 		$attributes = $request->validate([
 			'name' => ['required', 'string', 'max:255'],
 			'lastnames' => ['required', 'string', 'max:255'],
