@@ -49,7 +49,16 @@
             </div>
         </div>
         <div class="bg-primary-500">
-            dea
+            <div class="grid grid-cols-4 mx-auto w-full container gap-4 mb-8 py-8">
+                <div class="col-span-1">
+                    <h2 class="text-2xl text-white">
+                        Primera Visita en tu visita a Kinesiología:<br>¿Qué esperar?
+                    </h2>
+                </div>
+                <div class="col-span-3">
+                    <p class="text-xl text-white">La evaluación inicial de la visita a kinesiología, toma hasta una hora. Está evaluación comprende desde la historia de tu condición física, deportiva y psicológica, una examinación exhaustiva de tu cuerpo completo, tratamientos y consejos para alcanzar tu máximo potencial. Para poder diagnosticar con la mayor precisión posible, puedes ser preguntado de quedar en ropa interior para ver el área afectada y las articulaciones arriba y abajo de esta. Sólo después de una completa evaluación y dedicando el tiempo para preguntas, el kinesiologo decidirá que es mejor para tu tratamiento.<br><br>Sí nuevos agendamientos son requeridos, estos también serán parte de la sesión de kinesiología, junto con un programa de tratamiento personalizado y planificado. El tiempo de está sesión también será para dedicar a enseñarte como evitar este patología recurrente. La revisión de tus nuevos agendamientos en kinesiología evaluaremos tu progreso, cómo también el tratamiento original aplicado.</p>
+                </div>
+            </div>
         </div>
         <x-landing2.call>
         </x-landing2.call>
