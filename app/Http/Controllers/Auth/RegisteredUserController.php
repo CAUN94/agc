@@ -38,6 +38,11 @@ class RegisteredUserController extends Controller {
 			$requestData = $request->all();
 		    $requestData['rut'] = strtolower(Rut::parse(Rut::parse($requestData['rut'])->normalize())->format(Rut::FORMAT_WITH_DASH));
 		    $request->replace($requestData);
+
+		    if(User::where('rut',$requestData['rut']) != null){
+		    	FlashSession::flash('primary', 'Usuario ya registrado');
+		    	return redirect('/login')
+		    }
         }
 
 		$attributes = $request->validate([
