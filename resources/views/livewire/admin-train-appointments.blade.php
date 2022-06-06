@@ -1,4 +1,4 @@
-<div>
+<div x-data="{ pay: false }">
     <div class="w-full overflow-x-auto gap-y-2 box-white p-3">
         <div class="mb-2 w-full flex justify-between">
             Periodo del {{$startOfMonth->format('d-m')}} al {{$endOfMonth->format('d-m')}}
@@ -7,7 +7,8 @@
             @elseif($startOfMonth == $expiredstartOfMonth)
                 (Mes Vencido)
             @endif
-            <div class="border rounded-lg px-1" style="padding-top: 2px;">
+            <button x-on:click="pay = ! pay">Ver más</button>
+            <div class="border rounded-lg px-1" style="padding-top: 2px;" >
                 <button
                     type="button"
                     class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 items-center"
@@ -29,36 +30,38 @@
                 </button>
             </div>
         </div>
-        @foreach(App\Models\Trainer::all() as $trainer)
-            <ul class="grid grid-cols-4 gap-1">
-                <li>
-                    <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                        {{$trainer->user->fullname()}}
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                        <span class="flex-1 ml-3 whitespace-nowrap">Clases Realizadas</span>
-                        <span class="inline-flex items-center justify-center px-2 py-1 ml-3 text-sm font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$trainer->trainAppointmentsMonthCheck([$startOfMonth,$endOfMonth])->get()->count()}}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                        <span class="flex-1 ml-3 whitespace-nowrap">Clases del Mes</span>
-                        <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$trainer->trainAppointmentsMonth([$startOfMonth,$endOfMonth])->get()->count()}}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                        <i class="fa fa-money" aria-hidden="true"></i>
-                        <span class="flex-1 ml-3 whitespace-nowrap">Remuneración</span>
-                        <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$trainer->trainerRemuneration([$startOfMonth,$endOfMonth])}}</span>
-                    </a>
-                </li>
-            </ul>
-        @endforeach
+        <div x-show="pay">
+            @foreach(App\Models\Trainer::all() as $trainer)
+                <ul class="grid grid-cols-4 gap-1">
+                    <li>
+                        <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                            {{$trainer->user->fullname()}}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Clases Realizadas</span>
+                            <span class="inline-flex items-center justify-center px-2 py-1 ml-3 text-sm font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$trainer->trainAppointmentsMonthCheck([$startOfMonth,$endOfMonth])->get()->count()}}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Clases del Mes</span>
+                            <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$trainer->trainAppointmentsMonth([$startOfMonth,$endOfMonth])->get()->count()}}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                            <i class="fa fa-money" aria-hidden="true"></i>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Remuneración</span>
+                            <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$trainer->trainerRemuneration([$startOfMonth,$endOfMonth])}}</span>
+                        </a>
+                    </li>
+                </ul>
+            @endforeach
+        </div>
     </div>
     <div class="w-full overflow-x-auto gap-y-2 box-white p-3 mt-2">
         <form wire:change="updateSelectedTrainer">
