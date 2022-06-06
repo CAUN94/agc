@@ -31,12 +31,12 @@ class Trainer extends Model
             ->select('trainings.id','trainings.*');
     }
 
-    public function trainAppointmentsMonth(){
-        return $this->trainAppointments()->whereBetween('date',$this->month());
+    public function trainAppointmentsMonth($months){
+        return $this->trainAppointments($months)->whereBetween('date',$months);
     }
 
-    public function trainAppointmentsMonthCheck(){
-        return $this->trainAppointmentsMonth()->where('status',true);
+    public function trainAppointmentsMonthCheck($months){
+        return $this->trainAppointmentsMonth($months)->where('status',true);
     }
 
     public function month(){
@@ -50,9 +50,9 @@ class Trainer extends Model
         return [$startOfMonth,$endOfMonth];
     }
 
-    public function trainerRemuneration(){
+    public function trainerRemuneration($months){
         $sum = 0;
-        foreach ($this->trainAppointmentsMonthCheck()->get() as $key => $checkAppointment) {
+        foreach ($this->trainAppointmentsMonthCheck($months)->get() as $key => $checkAppointment) {
             // return TrainAppointment::find($checkAppointment->id)->trainings();
             $training = TrainAppointment::find($checkAppointment->id)->trainings();
             if ($training->type == 'group' and $training->format == 'Presencial') {

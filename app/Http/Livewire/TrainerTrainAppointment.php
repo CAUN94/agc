@@ -47,9 +47,13 @@ class TrainerTrainAppointment extends Component
         $this->now = Carbon::Now();
         if (Carbon::now()->format('d') <= 21 ){
             $this->startOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m')-1,21)->startOfDay();
+            $this->actualstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')-1,21)->startOfDay();
+            $this->expiredstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')-1,21)->startOfDay()->subMonth();
             $this->endOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m'),20)->endOfDay();
         } else {
             $this->startOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m'),21)->startOfDay();
+            $this->actualstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m'),21)->startOfDay();
+            $this->expiredstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m'),21)->startOfDay()->subMonth();
             $this->endOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m')+1,20)->endOfDay();
         }
         $this->selectedPlans = Training::where('id','>','0')->get('id')->toArray();
@@ -69,6 +73,16 @@ class TrainerTrainAppointment extends Component
             ->whereIN('training_id',$this->selectedPlans)
             ->pluck('train_appointment_id')
             ->toArray();
+    }
+
+    public function subPeriod(){
+        $this->startOfMonth->subMonth();
+        $this->endOfMonth->subMonth();
+    }
+
+    public function addPeriod(){
+        $this->startOfMonth->addMonth();
+        $this->endOfMonth->addMonth();
     }
 
     public function subMonth()
