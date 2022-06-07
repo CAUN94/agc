@@ -78,6 +78,8 @@ class UserStravaPanel extends Component
             }
         });
 
+        ddd($activities_run_used);
+
         $weeks = [];
         for($i = 0; $i < intdiv($diff,7); $i++){
             $week = array_filter($activities_run, function($activities_run) use($i,$last_start_date){
