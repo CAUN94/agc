@@ -15,14 +15,16 @@
             <div class="box"  x-on:click="openKine = ! openKine">
                   <div>
                         <h2>Kinesiología</h2>
-                        <span class="text-sm text-primary-500">Ver Más</span>
+                        <span class="block text-sm text-primary-900">Rehabilitar, Reintegro, Evaluación</span>
+                        <span class="block text-sm text-primary-500">Ver Más</span>
                   </div>
                   <img src="{{ asset('img/iconos/kinesiologia.png')}}">
             </div>
             <div class="box"  x-on:click="openTraun = ! openTraun">
                   <div>
                         <h2>Traumatología</h2>
-                        <span class="text-sm text-primary-500">Ver Más</span>
+                        <span class="block text-sm text-primary-900">Evaluación, Examen Físico, Diagnóstico</span>
+                        <span class="block text-sm text-primary-500">Ver Más</span>
                   </div>
                   <img src="{{ asset('img/iconos/traumatologia.png')}}">
             </div>
@@ -36,7 +38,8 @@
             <div class="box"  x-on:click="openNutri= ! openNutri">
                   <div>
                         <h2>Nutrición</h2>
-                        <span class="text-sm text-primary-500">Ver Más</span>
+                        <span class="block text-sm text-primary-900">Hábitos alimenticios, Balance</span>
+                        <span class="block text-sm text-primary-500">Ver Más</span>
                   </div>
                   <img src="{{ asset('img/iconos/nutricion.png')}}">
             </div>
@@ -61,7 +64,8 @@
                   <div class="box">
                         <div>
                               <h2>Entrenamiento</h2>
-                              <span class="text-sm text-primary-500">Ver Más</span>
+                              <span class="block text-sm text-primary-900">Deporte, Personalizado</span>
+                              <span class="block text-sm text-primary-500">Ver Más</span>
                         </div>
                         <img src="{{ asset('img/iconos/entrenamiento.png')}}">
                   </div>
@@ -70,7 +74,8 @@
             <div class="box"  x-on:click="openBio = ! openBio">
                   <div>
                         <h2>Biomecánica</h2>
-                        <span class="text-sm text-primary-500">Ver Más</span>
+                        <span class="block text-sm text-primary-900">Análisis de Movimiento y Carrera</span>
+                        <span class="block text-sm text-primary-500">Ver Más</span>
                   </div>
                   <img src="{{ asset('img/iconos/biomecanica.png')}}">
             </div>
@@ -78,7 +83,8 @@
             <div class="box"  x-on:click="openPsyc = ! openPsyc">
                   <div>
                         <h2>Psicología Clínica</h2>
-                        <span class="text-sm text-primary-500">Ver Más</span>
+                        <span class="block text-sm text-primary-900">Bienestar Personal, Herramientas</span>
+                        <span class="block text-sm text-primary-500">Ver Más</span>
                   </div>
                   <img src="{{ asset('img/iconos/psicologia_clinica.png')}}">
             </div>
@@ -237,7 +243,7 @@
             <x-slot name="subtitle">
                   ¿Que és la consulta Psicología Clínica?
             </x-slot>
-            En las primeras sesiones se entrevista al consultante con el fin de conocerlo e identificar el origden del motivo de consulta. En las siguientes sesiones se trabajan estrategias y técnicas para conseguir una mejora en su bienestar personal, entregando herramientas para enfrentarse y abordar el motivo de consulta inicial.
+            En las primeras sesiones se entrevista al consultante con el fin de conocerlo e identificar el origen del motivo de consulta. En las siguientes sesiones se trabajan estrategias y técnicas para conseguir una mejora en su bienestar personal, entregando herramientas para enfrentarse y abordar el motivo de consulta inicial.
             <x-slot name="price">
                   Desde $35,000* p/consulta
             </x-slot>
@@ -259,7 +265,7 @@
             <x-slot name="subtitle">
                   ¿Que és la consulta de Biomecánica?
             </x-slot>
-            Área que, de la mano de la tecnología, realiza un anlásis cuantitativo del movimiento. Tiene su base teórica en ciencias como anatomía, física, mecánica e ingeniería entre otras. Podrás encontrar análsis de carrera, de marcha y de fuerza entre otros exámenes, además la rehabilitación de patrón de carrera.
+            Área que, de la mano de la tecnología, realiza un análisis cuantitativo del movimiento. Tiene su base teórica en ciencias como anatomía, física, mecánica e ingeniería entre otras. Podrás encontrar análisis de carrera, de marcha y de fuerza entre otros exámenes, además la rehabilitación de patrón de carrera.
             <x-slot name="price">
                   Desde $64,000* p/consulta
             </x-slot>
