@@ -125,7 +125,7 @@
                     @foreach($activities_run_used as $activity)
                         <tr>
                             <td>{{$activity->name}}</td>
-                            <td>{{round($activity->distance/1000,2)}}</td>
+                            <td>{{round($activity->distance/1000)}}</td>
                             <td>{{gmdate("H:i:s",$activity->moving_time)}}</td>
                             <td class="hidden sm:table-cell">{{gmdate("H:i:s",$activity->elapsed_time)}}</td>
                             <td class="hidden sm:table-cell">{{$activity->total_elevation_gain}}</td>
