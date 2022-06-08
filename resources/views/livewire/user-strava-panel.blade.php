@@ -33,7 +33,7 @@
                     <div class="flex flex-row items-center p-5">
                         <div class="flex-1 text-right md:text-center">
                             <p class="font-bold uppercase text-sm">Progresión Semanal Carga</p>
-                            <p class="font-bold text-md mt-2">{{ round($progress,2) > 0 ? round($progress,2)."%" : "Falta Información" }}
+                            <p class="font-bold text-md mt-2">{{ $progress > 0 ? $progress."%" : "Falta Información" }}
                         </div>
                     </div>
                     <div class="flex flex-col bg-{{$progresColor}}-500 rounded-b-lg px-5 py-1">
