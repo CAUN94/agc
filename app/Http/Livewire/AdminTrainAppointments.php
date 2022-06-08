@@ -79,6 +79,16 @@ class AdminTrainAppointments extends Component
             ->toArray();
     }
 
+    public function subPeriod(){
+        $this->startOfMonth->subMonth();
+        $this->endOfMonth->subMonth();
+    }
+
+    public function addPeriod(){
+        $this->startOfMonth->addMonth();
+        $this->endOfMonth->addMonth();
+    }
+
     public function subMonth()
     {
         $this->now->subMonth();
