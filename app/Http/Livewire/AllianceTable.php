@@ -29,6 +29,20 @@ class AllianceTable extends LivewireDatatable
             ->label('Dscto')
             ->filterable()
             ->editable(),
+            $this->deleteView(),
         ];
     }
+
+    public function delete($value) {
+        $user = Alliance::find($value);
+        $user->delete();
+    }
+
+    public function deleteView($name = 'id') {
+        return Column::callback($name, function ($value) {
+            $fullname = Alliance::find($value)->name;
+            return view('datatables::delete', ['value' => $value, 'fullname' => $fullname]);
+        });
+    }
+
 }

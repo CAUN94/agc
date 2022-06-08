@@ -256,7 +256,7 @@ class User extends Authenticatable {
 	}
 
 	public function TrainBooks() {
-		return $this->hasMany(TrainBook::class);
+		return $this->hasMany(TrainBook::class)->where('train_appointment_id','!=','null');
 	}
 
 	public function canBook($train_id) {

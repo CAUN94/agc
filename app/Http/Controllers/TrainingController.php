@@ -25,7 +25,7 @@ class TrainingController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -58,7 +58,7 @@ class TrainingController extends Controller
      */
     public function edit(Training $training)
     {
-        //
+        return $training;
     }
 
     /**

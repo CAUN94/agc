@@ -56,6 +56,7 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::resource('adminprofessionals', 'App\Http\Controllers\AdminProfessionalsController');
     Route::resource('admintrainers', 'App\Http\Controllers\AdminTrainersController');
     Route::get('/adminalliance', [AdminAllianceController::class, 'index']);
+    Route::post('/adminalliance/create', [AdminAllianceController::class, 'store']);
     Route::resource('adminbookappointment', 'App\Http\Controllers\AdminBookAppointmentsController');
     Route::get('/userml', [UserMlController::class, 'index'])->middleware(['intranet']);
 

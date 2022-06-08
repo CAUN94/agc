@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Training;
 use Illuminate\Http\Request;
+use Session as FlashSession;
 
 class AdminTrainingController extends Controller
 {
@@ -28,7 +29,7 @@ class AdminTrainingController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.trainings.create');
     }
 
     /**
@@ -39,7 +40,37 @@ class AdminTrainingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string'],
+            'class' => ['required', 'numeric'],
+            'days' => ['required', 'numeric'],
+            'period' => ['required', 'string'],
+            'extra' => ['required', 'numeric'],
+            'time_in_minutes' => ['required', 'numeric'],
+            'type' => ['required', 'string'],
+            'format' => ['required', 'string'],
+            'price' => ['required', 'numeric'],
+            'description' => ['required', 'string'],
+            'is_published' => ['required', 'numeric'],
+        ]);
+        $training = new Training;
+
+        $training->name = $request->name;
+        $training->class = $request->class;
+        $training->days = $request->days;
+        $training->period = $request->period;
+        $training->extra = $request->extra;
+        $training->time_in_minutes = $request->time_in_minutes;
+        $training->type = $request->type;
+        $training->format = $request->format;
+        $training->price = $request->price;
+        $training->description = $request->description;
+        $training->is_published = $request->is_published;
+
+        $training->save();
+
+        FlashSession::flash('primary', 'Creado');
+        return redirect('/adminclass/'.$training->id.'/edit');
     }
 
     /**
@@ -59,9 +90,10 @@ class AdminTrainingController extends Controller
      * @param  \App\Models\Training  $training
      * @return \Illuminate\Http\Response
      */
-    public function edit(Training $training)
+    public function edit($id)
     {
-        //
+        $training = Training::find($id);
+        return view('admin.trainings.edit',compact('training'));
     }
 
     /**
@@ -71,9 +103,39 @@ class AdminTrainingController extends Controller
      * @param  \App\Models\Training  $training
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Training $training)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string'],
+            'class' => ['required', 'numeric'],
+            'days' => ['required', 'numeric'],
+            'period' => ['required', 'string'],
+            'extra' => ['required', 'numeric'],
+            'time_in_minutes' => ['required', 'numeric'],
+            'type' => ['required', 'string'],
+            'format' => ['required', 'string'],
+            'price' => ['required', 'numeric'],
+            'description' => ['required', 'string'],
+            'is_published' => ['required', 'numeric'],
+        ]);
+        $training = Training::find($id);
+
+        $training->name = $request->name;
+        $training->class = $request->class;
+        $training->days = $request->days;
+        $training->period = $request->period;
+        $training->extra = $request->extra;
+        $training->time_in_minutes = $request->time_in_minutes;
+        $training->type = $request->type;
+        $training->format = $request->format;
+        $training->price = $request->price;
+        $training->description = $request->description;
+        $training->is_published = $request->is_published;
+
+        $training->save();
+        FlashSession::flash('primary', 'Actualizado');
+        return redirect('/adminclass/'.$id.'/edit');
+
     }
 
     /**

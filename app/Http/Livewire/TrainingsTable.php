@@ -24,30 +24,37 @@ class TrainingsTable extends LivewireDatatable
     public function columns()
     {
         return [
-            Column::name('name')
+            Column::name('name')->link('/adminclass/{{trainings.id}}/edit', '{{name}}')
                 ->label('Nombre')
-                ->editable(),
+                ->filterable(),
             Column::name('Class')
                 ->label('Cantidad')
-                ->editable(),
+                ->editable()
+                ->filterable(),
             Column::name('time_in_minutes')
                 ->label('Tiempo')
-                ->editable(),
+                ->editable()
+                ->filterable(),
             Column::name('format')
                 ->label('Formato')
-                ->editable(),
+                ->editable()
+                ->filterable(),
             Column::name('type')
                 ->label('Tipo')
-                ->editable(),
+                ->editable()
+                ->filterable(),
             Column::name('price')
                 ->label('Precio')
-                ->editable(),
+                ->editable()
+                ->filterable(),
             Column::name('extra')
                 ->label('Extra')
-                ->editable(),
+                ->editable()
+                ->filterable(),
             Column::name('period')
                 ->label('Precio')
                 ->editable()
+                ->filterable()
         ];
     }
 }
