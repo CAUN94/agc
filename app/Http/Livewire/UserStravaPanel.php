@@ -106,7 +106,7 @@ class UserStravaPanel extends Component
               return $week->distance;
             }, $week));
         }
-        ddd($sumweek_distance);
+        // ddd($sumweek_distance);
         $last_weeks = array_slice($sumweek_distance, 1, 3, true);
 
         // ddd($last_weeks);
