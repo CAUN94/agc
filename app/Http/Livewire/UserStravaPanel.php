@@ -105,7 +105,7 @@ class UserStravaPanel extends Component
               return $week->distance;
             }, $week));
         }
-        ddd($sumweek_distance);
+        // ddd($sumweek_distance);
         $last_weeks = array_slice($sumweek_distance, 1, 3, true);
 
         // ddd($last_weeks);
@@ -120,7 +120,7 @@ class UserStravaPanel extends Component
         if($sumweek_distance[1] == 0){
             $progress = -1;
         } else {
-            $progress = 1- $sumweek_distance[0]/$sumweek_distance[1];
+            $progress = 1 - $sumweek_distance[0]/$sumweek_distance[1];
         }
         return [$charges,$progress,$activities_run_used,$weeks];
 
