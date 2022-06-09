@@ -159,9 +159,7 @@ class StravaController extends Controller
         $chargesAndProgress = $this->chargesAndProgress($activities);
         $charges = $chargesAndProgress[0];
         $progress = $chargesAndProgress[1];
-        $activities = array_filter($activities, function($activities){
-            return $activities->type == 'Run';
-        });
+        $activities = $chargesAndProgress[2];
 
         return view('strava.adminshow',compact('user','activities','charges','progress'));
     }
