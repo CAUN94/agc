@@ -93,7 +93,7 @@ class UserStravaPanel extends Component
             });
             $weeks[\Carbon\Carbon::now()->subweeks($i)->format('Y-m-d H:i')] = $week;
         }
-        ddd($weeks);
+        // ddd($weeks);
         $sumweek_time = [];
         foreach($weeks as $week){
             $sumweek_time[] = array_sum(array_map(function($week) {
