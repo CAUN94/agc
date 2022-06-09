@@ -159,6 +159,9 @@ class StravaController extends Controller
         $chargesAndProgress = $this->chargesAndProgress($activities);
         $charges = $chargesAndProgress[0];
         $progress = $chargesAndProgress[1];
+        $activities = array_filter($activities, function($activities){
+            return $activities->type == 'Run';
+        });
 
         return view('strava.adminshow',compact('user','activities','charges','progress'));
     }
@@ -243,9 +246,10 @@ class StravaController extends Controller
               return $week->distance;
             }, $week));
         }
-        $last_weeks = array_slice($sumweek_distance, -3, 3, true);
+        // ddd($sumweek_distance);
+        $last_weeks = array_slice($sumweek_distance, 1, 3, true);
 
-        // return $last_weeks;
+        // ddd($last_weeks);
         // return $sumweek_distance;
         $sumweek_distance_avg = array_sum($last_weeks)/count($last_weeks);
         if($sumweek_distance_avg == 0){
@@ -257,7 +261,7 @@ class StravaController extends Controller
         if($sumweek_distance[1] == 0){
             $progress = -1;
         } else {
-            $progress = $sumweek_distance[0]/$sumweek_distance[1];
+            $progress = ($sumweek_distance[0]/$sumweek_distance[1]-1)*100;
         }
         return [$charges,$progress,$activities_run_used,$weeks];
 
