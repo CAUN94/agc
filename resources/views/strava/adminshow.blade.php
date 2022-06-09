@@ -24,11 +24,11 @@
                     <tr>
                         <td>{{$activity->name}}</td>
                         <td>{{$activity->distance}}</td>
-                        <td>{{$activity->moving_time}}</td>
-                        <td>{{$activity->elapsed_time}}</td>
-                        <td>{{$activity->total_elevation_gain}}</td>
-                        <td>{{$activity->type}}</td>
-                        <td>{{$activity->start_date}}</td>
+                        <td>{{gmdate("H:i:s",$activity->moving_time)}}</td>
+                        <td class="hidden sm:table-cell">{{gmdate("H:i:s",$activity->elapsed_time)}}</td>
+                        <td class="hidden sm:table-cell">{{$activity->total_elevation_gain}}</td>
+                        <td class="hidden sm:table-cell">{{$activity->type}}</td>
+                        <td class="hidden sm:table-cell">{{date_format(date_create($activity->start_date), 'Y-m-d')}}</td>
                     </tr>
                 @endforeach
             </table>
