@@ -20,7 +20,7 @@ class UserStravaPanel extends Component
     {
         $this->user = Auth::user()->strava;
 
-        if(Carbon::now() > $this->user->token_expires){
+        if(Carbon::yesterday() > $this->user->token_expires){
             // Token has expired, generate new tokens using the currently stored user refresh token
             $refresh = Strava::refreshToken($this->user->refresh_token);
             Auth::user()->strava->update([
@@ -66,13 +66,13 @@ class UserStravaPanel extends Component
         $last_start_date = reset($activities_run)->start_date;
         // ddd($activities_run[array_key_last($activities_run)]);
         $first_start_date = $activities_run[array_key_last($activities_run)]->start_date;
-        $now = \Carbon\Carbon::now();
+        $yesterday = \Carbon\Carbon::yesterday();
         $first_start_date = \Carbon\Carbon::parse($first_start_date);
-        $diff = $first_start_date->diffInDays($now);
+        $diff = $first_start_date->diffInDays($yesterday);
 
         $activities_run_used = array_filter($activities_run, function($activities_run) use($diff){
-            $weekStartDate = \Carbon\Carbon::now();
-            $weekEndDate = \Carbon\Carbon::now()->subdays(($diff == 7*4) ? $diff : 7*4);
+            $weekStartDate = \Carbon\Carbon::yesterday();
+            $weekEndDate = \Carbon\Carbon::yesterday()->subdays(($diff == 7*4) ? $diff : 7*4);
             if(\Carbon\Carbon::parse($activities_run->start_date)->between($weekStartDate,$weekEndDate)){
                 return $activities_run;
             }
@@ -81,8 +81,8 @@ class UserStravaPanel extends Component
         $weeks = [];
         for($i = 0; $i < intdiv($diff,7); $i++){
             $week = array_filter($activities_run, function($activities_run) use($i,$last_start_date){
-                $weekStartDate = \Carbon\Carbon::now();
-                $weekEndDate = \Carbon\Carbon::now()->subdays(7);
+                $weekStartDate = \Carbon\Carbon::yesterday();
+                $weekEndDate = \Carbon\Carbon::yesterday()->subdays(7);
 
                 if($i > 0){
                     $weekStartDate->subweeks($i);
@@ -91,9 +91,9 @@ class UserStravaPanel extends Component
 
                 return \Carbon\Carbon::parse($activities_run->start_date)->between($weekStartDate,$weekEndDate);
             });
-            $weeks[\Carbon\Carbon::now()->subweeks($i)->format('Y-m-d H:i')] = $week;
+            $weeks[\Carbon\Carbon::yesterday()->subweeks($i)->format('Y-m-d H:i')] = $week;
         }
-        ddd($weeks);
+        // ddd($weeks);
         $sumweek_time = [];
         foreach($weeks as $week){
             $sumweek_time[] = array_sum(array_map(function($week) {
