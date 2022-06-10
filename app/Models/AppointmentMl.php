@@ -42,7 +42,7 @@ class AppointmentMl extends Model
     }
 
     public function actions(){
-        return $this->hasMany(ActionMl::class,'Atencion','Tratamiento_Nr');
+        return $this->hasMany(ActionMl::class,'Tratamiento_Nr','Atencion');
     }
 
     public function payments(){

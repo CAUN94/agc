@@ -36,7 +36,7 @@ class GetActivities extends Command
         parent::__construct();
     }
 
-    /**
+    /**php
      * Execute the console command.
      *
      * @return int

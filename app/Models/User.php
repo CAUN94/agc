@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\TrainAppointment;
 use App\Models\Admin;
 use App\Models\Alliance;
+use App\Models\AppointmentMl;
 use App\Models\Professional;
-use App\Models\Student;
-use App\Models\TrainBook;
 use App\Models\StravaUser;
+use App\Models\Student;
+use App\Models\TrainAppointment;
+use App\Models\TrainBook;
 use Freshwork\ChileanBundle\Rut;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -298,5 +299,17 @@ class User extends Authenticatable {
 
 	public function newPlan() {
 		return 'new plan';
+	}
+
+	public function appointments(){
+		return AppointmentMl::where('Rut_Paciente',$this->rut);
+	}
+
+	public function getAppointments(){
+		return $this->Appointments()->get();
+	}
+
+	public function payments(){
+		return 1;
 	}
 }

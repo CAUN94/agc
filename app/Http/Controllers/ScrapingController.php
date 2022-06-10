@@ -48,10 +48,10 @@ class ScrapingController extends Controller
             if(is_null($value['Fecha Afiliación'])){
                 continue;
             }
-            $now = Carbon::parse($value['Fecha Afiliación']);
-            if($now<$limit){
-                continue;
-            }
+            // $now = Carbon::parse($value['Fecha Afiliación']);
+            // if($now<$limit){
+            //     continue;
+            // }
             $userMl = UserMl::updateOrCreate(
                 ['RUT' => $value['RUT/DNI'],'Email' => $value['E-Mail']],
                 [
