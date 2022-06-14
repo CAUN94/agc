@@ -33191,6 +33191,8 @@ body {
   z-index: 20;
   --tw-bg-opacity: 1;
   background-color: rgba(44, 44, 44, var(--tw-bg-opacity));
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .nav-menu {
@@ -33246,8 +33248,6 @@ body {
 .nav-menu {
   align-items: center;
   justify-content: space-between;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
 }
 
 nav {
@@ -33255,6 +33255,8 @@ nav {
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 @media (min-width: 1024px) {
@@ -33285,7 +33287,7 @@ nav {
 
 .nav-menu-link {
   margin-bottom: 0.25rem;
-  width: 50%;
+  width: 66.666667%;
   text-align: center;
 }
 
@@ -33353,15 +33355,18 @@ nav {
   right: 0.5rem;
   z-index: 20;
   margin-top: 0.5rem;
-  width: 10rem;
+  width: 14rem;
   overflow: hidden;
   border-radius: 0.25rem;
+  border-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgba(242, 113, 90, var(--tw-border-opacity));
   --tw-bg-opacity: 1;
   background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   --tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
 .drop-nav li:hover {
@@ -33373,7 +33378,7 @@ nav {
   display: flex;
   width: 100%;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   border-radius: 0px;
 }
 
@@ -33387,8 +33392,8 @@ nav {
   margin-right: 0.25rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
-  padding-top: 0.125rem;
-  padding-bottom: 0.125rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
   font-family: Futura, Trebuchet MS, Aria, sans-serif;
   font-weight: 700;
   text-transform: uppercase;
@@ -33398,8 +33403,8 @@ nav {
 
 .drop-span {
   text-align: right;
-  font-size: 0.75rem;
-  line-height: 1rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
   --tw-text-opacity: 1;
   color: rgba(44, 44, 44, var(--tw-text-opacity));
 }

@@ -12,83 +12,112 @@
       <section class="bg-fixed pt-2" style="background-image: url({{ asset('img/bg-gym.jpg')}}); background-size: cover;">
           <h2 class="title">Servicios</h2>
           <div class="box-container2">
-            <div class="box"  x-on:click="openKine = ! openKine">
-                  <div>
-                        <h2>Kinesiología</h2>
-                        <span class="block text-sm text-primary-900">Rehabilitar, Reintegro, Evaluación</span>
-                        <span class="block text-sm text-primary-500">Ver Más</span>
+            <div class="bg-light-grey mx-auto rounded-md py-2 px-4 w-full h-auto lg:w-full cursor-pointer hover:text-primary-900 border-2 border-primary-500 hover:border-primary-900"  x-on:click="openKine = ! openKine">
+                  <h2 class="block">Kinesiología</h2>
+                  <div class="mt-4 flex justify-between items-center">
+                        <div class="w-4/5">
+                              <span class="block text-base text-primary-500">Buscamos rehabilitar y/o prevenir patologías muscoesqueleticas. La sesión consiste en una evaluación y tratamiento personalizado.</span>
+
+                        </div>
+                        <div class="ml-2 flex flex-col justify-between items-center">
+                              <img class="h-16 lg:h-20 block bg-white rounded-full border-2 border-primary-500 hover:border-primary-900" src="{{ asset('img/iconos/kinesiologia.png')}}">
+                              <span class="block text-sm text-primary-500 items-center bg-you-grey mt-2 py-1 px-2 rounded-xl">Ver Más</span>
+                        </div>
                   </div>
-                  <img src="{{ asset('img/iconos/kinesiologia.png')}}">
             </div>
-            <div class="box"  x-on:click="openTraun = ! openTraun">
-                  <div>
-                        <h2>Traumatología</h2>
-                        <span class="block text-sm text-primary-900">Evaluación, Examen Físico, Diagnóstico</span>
-                        <span class="block text-sm text-primary-500">Ver Más</span>
+            <div class="bg-light-grey mx-auto rounded-md py-2 px-4 w-full h-auto lg:w-full cursor-pointer hover:text-primary-900 border-2 border-primary-500 hover:border-primary-900"  x-on:click="openTraun = ! openTraun">
+                  <h2>Traumatología</h2>
+                  <div class="mt-4 flex justify-between items-center">
+                        <div class="w-4/5">
+                              <span class="block text-base text-primary-500">Evaluación médica, que consiste en una entrevista, examen físico e imágenes. Se realiza un diágnostico con su tratamiento respectivo.</span>
+                        </div>
+
+                        <div class="ml-2 flex flex-col justify-between items-center">
+                              <img class="h-16 lg:h-20 block bg-white rounded-full border-2 border-primary-500 hover:border-primary-900" src="{{ asset('img/iconos/traumatologia.png')}}">
+                              <span class="block text-sm text-primary-500 items-center bg-you-grey mt-2 py-1 px-2 rounded-xl">Ver Más</span>
+                        </div>
                   </div>
-                  <img src="{{ asset('img/iconos/traumatologia.png')}}">
             </div>
-{{--             <div class="box"  x-on:click="openMed = ! openMed">
+{{--             <div class="bg-light-grey mx-auto rounded-md py-2 px-4 w-full h-auto lg:w-full flex justify-between items-center cursor-pointer hover:text-primary-500"  x-on:click="openMed = ! openMed">
                   <div>
                         <h2>Medicina Deportiva</h2>
                         <span class="text-sm text-primary-500">Ver Más</span>
                   </div>
-                  <img src="{{ asset('img/iconos/medicina_deportiva.png')}}">
+                  <img class="h-16 lg:h-20 block" src="{{ asset('img/iconos/medicina_deportiva.png')}}">
             </div> --}}
-            <div class="box"  x-on:click="openNutri= ! openNutri">
-                  <div>
-                        <h2>Nutrición</h2>
-                        <span class="block text-sm text-primary-900">Hábitos alimenticios, Balance</span>
-                        <span class="block text-sm text-primary-500">Ver Más</span>
+            <div class="bg-light-grey mx-auto rounded-md py-2 px-4 w-full h-auto lg:w-full cursor-pointer hover:text-primary-900 border-2 border-primary-500 hover:border-primary-900"  x-on:click="openNutri= ! openNutri">
+                  <h2>Nutrición</h2>
+                  <div class="mt-4 flex justify-between items-center">
+                        <div class="w-4/5">
+                              <span class="block text-base text-primary-500">Buscamos educar para reconocer las necesidades en función de los hábitos y aplicarlos según tus objetivos personales y deportivos.</span>
+                        </div>
+                        <div class="ml-2 flex flex-col justify-between items-center">
+                              <img class="h-16 lg:h-20 block bg-white rounded-full border-2 border-primary-500 hover:border-primary-900" src="{{ asset('img/iconos/nutricion.png')}}">
+                              <span class="block text-sm text-primary-500 items-center bg-you-grey mt-2 py-1 px-2 rounded-xl">Ver Más</span>
+                        </div>
                   </div>
-                  <img src="{{ asset('img/iconos/nutricion.png')}}">
             </div>
 
-{{--             <div class="box"  x-on:click="openLifeStyle = ! openLifeStyle">
+{{--             <div class="bg-light-grey mx-auto rounded-md py-2 px-4 w-full h-auto lg:w-full flex justify-between items-center cursor-pointer hover:text-primary-500"  x-on:click="openLifeStyle = ! openLifeStyle">
                   <div>
                         <h2>LifeStyle Medicine</h2>
                         <span class="text-sm text-primary-500">Ver Más</span>
                   </div>
-                  <img src="{{ asset('img/iconos/life-style-medicine.png')}}">
+                  <img class="h-16 lg:h-20 block" src="{{ asset('img/iconos/life-style-medicine.png')}}">
             </div> --}}
 
-  {{--           <div class="box"  x-on:click="openPsyd = ! openPsyd">
+  {{--           <div class="bg-light-grey mx-auto rounded-md py-2 px-4 w-full h-auto lg:w-full flex justify-between items-center cursor-pointer hover:text-primary-500"  x-on:click="openPsyd = ! openPsyd">
                   <div>
                         <h2>Psicología del Deporte</h2>
                         <span class="text-sm text-primary-500">Ver Más</span>
                   </div>
-                  <img src="{{ asset('img/iconos/pscicologia_deportiva.png')}}">
+                  <img class="h-16 lg:h-20 block" src="{{ asset('img/iconos/pscicologia_deportiva.png')}}">
             </div> --}}
 
             <a href="/trainings">
-                  <div class="box">
-                        <div>
-                              <h2>Entrenamiento</h2>
-                              <span class="block text-sm text-primary-900">Deporte, Personalizado</span>
-                              <span class="block text-sm text-primary-500">Ver Más</span>
+                  <div class="bg-light-grey mx-auto rounded-md py-2 px-4 w-full h-auto lg:w-full cursor-pointer hover:text-primary-900 border-2 border-primary-500 hover:border-primary-900">
+                        <h2>Entrenamiento</h2>
+                        <div class="mt-4 flex justify-between items-center">
+                              <div class="w-4/5">
+                                    <span class="block text-base text-primary-500">Disponemos de clases grupales y personalizados en horarios AM y PM. Son entrenamientos llenos de energía trabajando full body.</span>
+
+                              </div>
+                              <div class="ml-2 flex flex-col justify-between items-center">
+                                    <img class="h-16 lg:h-20 block bg-white rounded-full border-2 border-primary-500 hover:border-primary-900 p-2" src="{{ asset('img/iconos/entrenamiento.png')}}">
+                                    <span class="block text-sm text-primary-500 items-center bg-you-grey mt-2 py-1 px-2 rounded-xl">Ver Más</span>
+                              </div>
                         </div>
-                        <img src="{{ asset('img/iconos/entrenamiento.png')}}">
                   </div>
             </a>
 
-            <div class="box"  x-on:click="openBio = ! openBio">
-                  <div>
-                        <h2>Biomecánica</h2>
-                        <span class="block text-sm text-primary-900">Análisis de Movimiento y Carrera</span>
-                        <span class="block text-sm text-primary-500">Ver Más</span>
+            <div class="bg-light-grey mx-auto rounded-md py-2 px-4 w-full h-auto lg:w-full cursor-pointer hover:text-primary-900 border-2 border-primary-500 hover:border-primary-900"  x-on:click="openBio = ! openBio">
+                  <h2>Biomecánica</h2>
+                  <div class="mt-4 flex justify-between items-center">
+                        <div class="w-4/5">
+                              <span class="block text-base text-primary-500">Consiste en realizar análisis cuantitativos del movimiento, de la mano de la tecnología. Análisis de carrera, marcha y de fuerza son algunas de estas.</span>
+
+                        </div>
+                        <div class="ml-2 flex flex-col justify-between items-center">
+                              <img class="h-16 lg:h-20 block bg-white rounded-full border-2 border-primary-500 hover:border-primary-900 p-2" src="{{ asset('img/iconos/biomecanica.png')}}">
+                              <span class="block text-sm text-primary-500 items-center bg-you-grey mt-2 py-1 px-2 rounded-xl">Ver Más</span>
+                        </div>
                   </div>
-                  <img src="{{ asset('img/iconos/biomecanica.png')}}">
+
             </div>
 
-            <div class="box"  x-on:click="openPsyc = ! openPsyc">
-                  <div>
-                        <h2>Psicología Clínica</h2>
-                        <span class="block text-sm text-primary-900">Bienestar Personal, Herramientas</span>
-                        <span class="block text-sm text-primary-500">Ver Más</span>
+            <div class="bg-light-grey mx-auto rounded-md py-2 px-4 w-full h-auto lg:w-full cursor-pointer hover:text-primary-900 border-2 border-primary-500 hover:border-primary-900"  x-on:click="openPsyc = ! openPsyc">
+                  <h2>Psicología Clínica</h2>
+                  <div class="mt-4 flex justify-between items-center">
+                        <div class="w-4/5">
+                              <span class="block text-base text-primary-500">Buscamos conocer e identificar el origen del motivo de la consulta. Luego trabajamos en técnicas y estrategias para conseguir una mejora en tu bienestar.</span>
+                        </div>
+                        <div class="ml-2 flex flex-col justify-between items-center">
+                             <img class="h-16 lg:h-20 block bg-white rounded-full border-2 border-primary-500 hover:border-primary-900" src="{{ asset('img/iconos/psicologia_clinica.png')}}">
+                             <span class="block text-sm text-primary-500 items-center bg-you-grey mt-2 py-1 px-2 rounded-xl">Ver Más</span>
+                        </div>
                   </div>
-                  <img src="{{ asset('img/iconos/psicologia_clinica.png')}}">
             </div>
-            {{-- <div class="box"  x-on:click="exampleOpen = ! exampleOpen">
+            {{-- <div class="bg-light-grey mx-auto rounded-md py-2 px-4 w-full h-auto lg:w-full flex justify-between items-center cursor-pointer hover:text-primary-500"  x-on:click="exampleOpen = ! exampleOpen">
                   <div>
                   <h2>Med      icina General</h2>
                   <span class="text-sm text-primary-500">Ver Más</span>

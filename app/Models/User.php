@@ -306,10 +306,14 @@ class User extends Authenticatable {
 	}
 
 	public function getAppointments(){
-		return $this->Appointments()->get();
+		return $this->appointments()->get();
 	}
 
 	public function payments(){
-		return 1;
+		return PaymentMl::where('Rut',$this->rut);
+	}
+
+	public function getPayments(){
+		return $this->payments()->get();
 	}
 }

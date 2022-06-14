@@ -1,15 +1,15 @@
 <x-landing2.layout>
         <header class="bg-fixed h-80 -mt-1 grid place-items-center" style="background-image: url({{ asset('img/caroussel/img3.jpg')}}); background-size: cover;">
-            <div class="bg-light-grey py-2 px-3" style="background: rgba(234, 235, 235, 0.50)">
-                <h1 class="font-bold text-xl mx-2">
-                    You, Just Better es un centro integral de salud y medicina deportiva que promueve los estilos de vida saludables
+            <div class="bg-light-grey py-2 px-10 mx-8" style="background: rgba(234, 235, 235, 0.50)">
+                <h1 class="font-bold text-2xl">
+                    Nuestra kinesiología consiste en rehabilitar y/o prevenir patologías musculoesqueléticas. Nos enfocamos en una evaluación, diagnóstico y tratamiento personalizado.
                 </h1>
             </div>
         </header>
         <h2 class="text-2xl text-light-grey font-futura font-bold text-center mt-10 lg:-mb-12 uppercase">Kinesiología</h2>
         <x-landing2.call>
         </x-landing2.call>
-        <div class="grid grid-cols-0 lg:grid-cols-3 px-2 lg:px-0 mx-auto w-full container gap-4 mb-8">
+        <div class="grid grid-cols-0 lg:grid-cols-3 px-2 lg:px-0 mx-auto w-full container gap-4 mb-8 text-justify gap-x-6 gap-y-4">
             <div>
                 <h2 class="text-2xl text-primary-500 mb-5">Terapía de masajes Hands-On</h2>
                 <h3 class="text-primary-500 text-xl">Incluye</h3>
@@ -48,13 +48,14 @@
                 </p>
             </div>
         </div>
-        <div class="bg-primary-500">
-            <div class="grid mx-auto w-full py-4 lg:py-0 container gap-4 mb-8 lg:grid-cols-3 px-2 lg:px-0">
+        <div class="bg-primary-500 py-4">
+            <div class="grid mx-auto w-full lg:py-0 container gap-4 mb-8 grid-cols-5 px-2 lg:px-0">
                 <div class="col-span-1">
-                    <h2 class="text-2xl text-white">
-                        Primera Visita en tu visita a Kinesiología:<br>¿Qué esperar?
+                    <h2 class="text-3xl text-white">
+                        Primera Visita a Kinesiología:<br>¿Qué esperar?
                     </h2>
                 </div>
+                <div class="col-span-1"></div>
                 <div class="col-span-3">
                     <p class="text-base lg:text-lg text-white">La evaluación inicial de la visita a kinesiología, toma hasta una hora. Está evaluación comprende desde la historia de tu condición física, deportiva y psicológica, una examinación exhaustiva de tu cuerpo completo, tratamientos y consejos para alcanzar tu máximo potencial. Para poder diagnosticar con la mayor precisión posible, puedes ser preguntado de quedar en ropa interior para ver el área afectada y las articulaciones arriba y abajo de esta. Sólo después de una completa evaluación y dedicando el tiempo para preguntas, el kinesiologo decidirá que es mejor para tu tratamiento.<br><br>Sí nuevos agendamientos son requeridos, estos también serán parte de la sesión de kinesiología, junto con un programa de tratamiento personalizado y planificado. El tiempo de está sesión también será para dedicar a enseñarte como evitar este patología recurrente. La revisión de tus nuevos agendamientos en kinesiología evaluaremos tu progreso, cómo también el tratamiento original aplicado.</p>
                 </div>

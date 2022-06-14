@@ -45,14 +45,16 @@
                     class="w-full flex-grow lg:flex"
                     :class="{ 'flex-grow shadow-3xl': navOpen, 'hidden': !navOpen }"
                 >
-                  <a class="nav-menu-link {{ Request::is('/') ? 'selected' : '' }}" href="/">Inicio</a>
                   <a class="nav-menu-link" href="https://blog.justbetter.cl/">Blog</a>
-{{--                   <a :class="{ 'block shadow-3xl': navOpen, 'hidden': !navOpen }" href="https://blog.justbetter.cl/">Blog</a> --}}
-{{--                   <x-landing.team-nav></x-landing.team-nav> --}}
-                  <a class="nav-menu-link {{ Request::is('book') ? 'selected' : '' }}"
+                  <a class="nav-menu-link" href="#">Kinesiología</a>
+                  <a class="nav-menu-link" href="#">Servicios</a>
+                  <a class="nav-menu-link" href="#">Equipo</a>
+                  <a class="nav-menu-link" href="#">Embajadores</a>
+                  <a class="nav-menu-link" href="#">Testimonios</a>
+            {{--       <a class="nav-menu-link {{ Request::is('book') ? 'selected' : '' }}"
                   onclick="return gtag_report_conversion('https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento');" href="https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento">Clínica</a>
                   <a class="nav-menu-link {{ Request::is('trainings') ? 'selected' : '' }}" href="/trainings">Entrenamiento</a>
-                  <a class="nav-menu-link {{ Request::is('school') ? 'selected' : '' }}" href="https://you-just-better-programs.teachable.com/courses" target="_blank">Cursos</a>
+                  <a class="nav-menu-link {{ Request::is('school') ? 'selected' : '' }}" href="https://you-just-better-programs.teachable.com/courses" target="_blank">Cursos</a> --}}
                   <x-landing.auth-dropdown></x-landing.auth-dropdown>
                   <x-landing.guest-dropdown></x-landing.guest-dropdown>
                 </nav>

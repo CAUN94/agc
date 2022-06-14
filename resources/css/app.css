@@ -18,22 +18,22 @@ body {
 }
 
 .sticky-menu {
-	@apply bg-you-grey sticky top-0 z-20;
+	@apply bg-you-grey sticky top-0 z-20 py-2;
 }
 
 .nav-menu {
 	@apply container h-full lg:h-24 flex flex-wrap lg:flex-nowrap flex-row mx-auto;
-	@apply justify-between items-center py-2;
+	@apply justify-between items-center;
 }
 
 nav {
-	@apply flex flex-col lg:flex-row items-center justify-end;
+	@apply flex flex-col lg:flex-row items-center justify-end text-xl;
 }
 
 .nav-menu-link {
 	@apply font-futura font-bold text-white uppercase mx-1 px-3 py-0.5;
 	@apply hover:bg-primary-100 rounded-full;
-	@apply mb-1 lg:mb-0 text-center w-1/2 lg:w-auto;
+	@apply mb-1 lg:mb-0 text-center w-2/3 lg:w-auto;
 }
 
 .adminav {
@@ -50,7 +50,7 @@ nav {
 }
 
 .drop-nav{
-	@apply absolute bg-white shadow overflow-hidden rounded w-40 mt-2 py-1 right-2 z-20;
+	@apply absolute bg-white shadow overflow-hidden rounded w-56 mt-2 py-1 right-2 z-20 border-2 border-primary-500
 }
 
 .drop-nav li {
@@ -58,12 +58,12 @@ nav {
 }
 
 .drop-link {
-	@apply flex w-full justify-end items-center hover:bg-gray-200 rounded-none;
-	@apply font-futura font-bold text-white uppercase mx-1 px-3 py-0.5;
+	@apply flex w-full justify-start items-center hover:bg-gray-200 rounded-none;
+	@apply font-futura font-bold text-white uppercase mx-1 px-3 py-1;
 }
 
 .drop-span {
-	@apply text-you-grey text-xs text-right hover:text-primary-500;
+	@apply text-you-grey text-base text-right hover:text-primary-500;
 }
 
 .selected {
