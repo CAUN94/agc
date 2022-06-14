@@ -42,7 +42,7 @@
                     </a>
                 <x-landing.burger></x-landing.burger>
                 <nav
-                    class="w-full flex-grow lg:flex"
+                    class="w-full flex-grow lg:flex mt-2 sm:mt-0"
                     :class="{ 'flex-grow shadow-3xl': navOpen, 'hidden': !navOpen }"
                 >
                   <a class="nav-menu-link" href="https://blog.justbetter.cl/">Blog</a>

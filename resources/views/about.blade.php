@@ -1,7 +1,7 @@
 <x-landing2.layout>
         <header class="bg-fixed h-80 -mt-1 grid place-items-center" style="background-image: url({{ asset('img/caroussel/img3.jpg')}}); background-size: cover;">
-            <div class="bg-light-grey py-2 px-10 mx-8" style="background: rgba(234, 235, 235, 0.50)">
-                <h1 class="font-bold text-2xl">
+            <div class="bg-light-grey py-2 px-10 mx-0 sm:mx-8" style="background: rgba(234, 235, 235, 0.50)">
+                <h1 class="font-bold sm:text-2xl text-base">
                     Nuestra kinesiología consiste en rehabilitar y/o prevenir patologías musculoesqueléticas. Nos enfocamos en una evaluación, diagnóstico y tratamiento personalizado.
                 </h1>
             </div>
@@ -49,9 +49,9 @@
             </div>
         </div>
         <div class="bg-primary-500 py-4">
-            <div class="grid mx-auto w-full lg:py-0 container gap-4 mb-8 grid-cols-5 px-2 lg:px-0">
+            <div class="grid mx-auto w-full lg:py-0 container gap-4 mb-8 grid-cols-0 sm:grid-cols-5 px-2 lg:px-0">
                 <div class="col-span-1">
-                    <h2 class="text-3xl text-white">
+                    <h2 class="text-2xl sm:text-3xl text-white">
                         Primera Visita a Kinesiología:<br>¿Qué esperar?
                     </h2>
                 </div>
