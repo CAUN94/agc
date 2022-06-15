@@ -33191,8 +33191,6 @@ body {
   z-index: 20;
   --tw-bg-opacity: 1;
   background-color: rgba(44, 44, 44, var(--tw-bg-opacity));
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
 }
 
 .nav-menu {
@@ -33255,7 +33253,7 @@ nav {
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   line-height: 1.75rem;
 }
 

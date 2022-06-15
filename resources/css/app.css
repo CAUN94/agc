@@ -18,7 +18,7 @@ body {
 }
 
 .sticky-menu {
-	@apply bg-you-grey sticky top-0 z-20 py-2;
+	@apply bg-you-grey sticky top-0 z-20;
 }
 
 .nav-menu {
@@ -27,7 +27,7 @@ body {
 }
 
 nav {
-	@apply flex flex-col lg:flex-row items-center justify-end text-xl;
+	@apply flex flex-col lg:flex-row items-center justify-end text-lg;
 }
 
 .nav-menu-link {

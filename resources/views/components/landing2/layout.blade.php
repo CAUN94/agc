@@ -30,7 +30,7 @@
             <script> gtag('event', 'conversion', {'send_to': 'AW-10872889051/Jlg6CIvr9KsDENu9zMAo'}); </script>
         @endif
     </head>
-    <body class="h-full">
+    <body class="h-full px-2">
         <div class="sticky-menu z-50 top-0 ">
             <div
                 class="nav-menu"
