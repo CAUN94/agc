@@ -32,10 +32,10 @@
 
         <x-landing2.alliance>
             <x-slot name="img">
-                Cesar.png|cotetia.png|gringa.png|javierra.png|Paus.png
+                cesar.png|gringa.png|javierra.png|Paus.png
             </x-slot>
             <x-slot name="texts">
-                Cesar Diaz|Maria Jose Schonhaut|Andi Mcrostie|Javiera Errázuriz|Paula Cofre Safier
+                Cesar Diaz|Andi Mcrostie|Javiera Errázuriz|Paula Cofre Safier
             </x-slot>
             <x-slot name="team">
                 Atleta y Entrenador|Atleta Master|Corredora|Record Chileno 400m con Ballas|Montañista, Ciclista y Runner
