@@ -55,8 +55,8 @@
                   onclick="return gtag_report_conversion('https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento');" href="https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento">Clínica</a>
                   <a class="nav-menu-link {{ Request::is('trainings') ? 'selected' : '' }}" href="/trainings">Entrenamiento</a>
                   <a class="nav-menu-link {{ Request::is('school') ? 'selected' : '' }}" href="https://you-just-better-programs.teachable.com/courses" target="_blank">Cursos</a> --}}
-                  <x-landing.auth-dropdown></x-landing.auth-dropdown>
-                  <x-landing.guest-dropdown></x-landing.guest-dropdown>
+                  <x-landing2.auth-dropdown></x-landing2.auth-dropdown>
+                  <x-landing2.guest-dropdown></x-landing2.guest-dropdown>
                 </nav>
             </div>
         </div>
