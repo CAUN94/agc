@@ -38,7 +38,7 @@
                 Cesar Diaz|Andi Mcrostie|Javiera Errázuriz|Paula Cofre Safier
             </x-slot>
             <x-slot name="team">
-                Atleta y Entrenador|Atleta Master|Corredora|Record Chileno 400m con Ballas|Montañista, Ciclista y Runner
+                Atleta y Entrenador|Corredora|Record Chileno 400m con Ballas|Montañista, Ciclista y Runner
             </x-slot>
         </x-landing2.alliance>
 
