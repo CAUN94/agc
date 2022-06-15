@@ -19,9 +19,27 @@
         </x-landing2.contact>
 
         <x-landing2.team>
+            <x-slot name="img">
+                alonso.jpg|cesar.jpg|daniella.jpg|francisco.jpg|camila.JPG|jaime.JPG|melissa.jpg
+            </x-slot>
+            <x-slot name="texts">
+                Alonso Niklischeck|Cesar Moya|Daniella Vivallo|Francisco Guzman|Camila Valentini|Jaime Pantoja|Melissa Ross
+            </x-slot>
+            <x-slot name="team">
+                Kinesiologo|Kinesiologo|Kinesiologa|Entrenador|Kinesiologa|Kinesiologo|Nutricionista
+            </x-slot>
         </x-landing2.team>
 
         <x-landing2.alliance>
+            <x-slot name="img">
+                Cesar.png|cotetia.png|gringa.png|javierra.png|Paus.png
+            </x-slot>
+            <x-slot name="texts">
+                Cesar Diaz|Maria Jose Schonhaut|Andi Mcrostie|Javiera Errázuriz|Paula Cofre Safier
+            </x-slot>
+            <x-slot name="team">
+                Atleta y Entrenador|Atleta Master|Corredora|Record Chileno 400m con Ballas|Montañista, Ciclista y Runner
+            </x-slot>
         </x-landing2.alliance>
 
         <x-landing2.reviews>

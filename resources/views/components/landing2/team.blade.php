@@ -1,9 +1,14 @@
-
+@php
+    $imgs = json_encode(explode('|', $img));
+    $texts = json_encode(explode('|', $texts));
+    $team = json_encode(explode('|', $team));
+@endphp
 
 <div x-data="{
     activeSlide: 1,
-    imgs: ['alonso.jpg','daniella.jpg','cesar.jpg','mariajesus.jpg'],
-    texts: ['alonso','daniella','cesar','mariajesus'],
+    imgs: {{$imgs}},
+    texts: {{$texts}},
+    team: {{$team}},
     timer: 10000,
     autoaddOne: function() {
             if(this.activeSlide === this.imgs.length){
@@ -49,7 +54,7 @@
                     </button>
                 </div>
                 <div class="text-white text-center text-3xl" x-text="texts[index]" x-transition></div>
-                <div class="text-white text-center text-lg">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</div>
+                <div class="text-white text-center text-lg" x-text="team[index]" x-transition></div>
 
             </div>
 

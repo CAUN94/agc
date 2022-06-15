@@ -1,9 +1,14 @@
-
+@php
+    $imgs = json_encode(explode('|', $img));
+    $texts = json_encode(explode('|', $texts));
+    $team = json_encode(explode('|', $team));
+@endphp
 
 <div x-data="{
     activeSlide: 1,
-    imgs: ['alonso.jpg','daniella.jpg','cesar.jpg','mariajesus.jpg'],
-    texts: ['alonso','daniella','cesar','mariajesus'],
+    imgs: {{$imgs}},
+    texts: {{$texts}},
+    team: {{$team}},
     timer: 10000,
     autoaddOne: function() {
             if(this.activeSlide === this.imgs.length){
@@ -33,7 +38,7 @@
         <template x-for="(img,index) in imgs">
             <div class="flex flex-col mx-auto py-4"
             x-show="activeSlide === index+1" x-transition>
-                <img class="object-cover mx-auto h-64" :src="'img/equipo/' + img">
+                <img class="object-cover mx-auto h-64 w-96" style="object-position: center -30px;"  :src="'img/alianzas/' + img">
                 <div class="flex mx-auto">
                     <button type="button" class="flex relative z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none" data-carousel-prev  @click="subOne">
                         <span class="inline-flex text-you-grey justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
@@ -49,7 +54,7 @@
                     </button>
                 </div>
                 <div class="text-white text-center text-3xl" x-text="texts[index]" x-transition></div>
-                <div class="text-white text-center text-lg">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</div>
+                <div class="text-white text-center text-lg" x-text="team[index]" x-transition></div>
 
             </div>
 
