@@ -33,7 +33,7 @@
         @endif
         <li>
             <a href="/strava/show" class="drop-link">
-                <span class="drop-span">Estadísticas Deportivas</span>
+                <span class="drop-span">Estadísticas Strava</span>
             </a>
         </li>
         <li>
