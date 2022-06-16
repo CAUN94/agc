@@ -33595,6 +33595,60 @@ header {
   }
 }
 
+.title-no-bg {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .title-no-bg {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .title-no-bg {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .title-no-bg {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .title-no-bg {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .title-no-bg {
+    max-width: 1536px;
+  }
+}
+
+.title-no-bg {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .title-no-bg {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
 .box-container {
   width: 100%;
 }

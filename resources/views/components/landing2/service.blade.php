@@ -1,5 +1,6 @@
 {{-- <x-landing2.modal></x-landing2.modal> --}}
-<div x-data="{
+<div
+      x-data="{
       openKine: false,
       openMed: false,
       openNutri: false,
@@ -16,7 +17,7 @@
                   <h2 class="block">Kinesiología</h2>
                   <div class="mt-4 flex justify-between items-center">
                         <div class="w-4/5">
-                              <span class="block text-base text-primary-500 text-justify mr-1">Buscamos rehabilitar y/o prevenir patologías muscoesqueleticas. La sesión consiste en una evaluación y tratamiento personalizado.</span>
+                              <span class="block text-base text-justify mr-1">Buscamos rehabilitar y/o prevenir patologías muscoesqueleticas. La sesión consiste en una evaluación y tratamiento personalizado.</span>
 
                         </div>
                         <div class="ml-2 flex flex-col justify-between items-center">
@@ -29,7 +30,7 @@
                   <h2>Traumatología</h2>
                   <div class="mt-4 flex justify-between items-center">
                         <div class="w-4/5">
-                              <span class="block text-base text-primary-500 text-justify mr-1">Evaluación médica, que consiste en una entrevista, examen físico e imágenes. Se realiza un diágnostico con su tratamiento respectivo.</span>
+                              <span class="block text-base text-justify mr-1">Evaluación médica, que consiste en una entrevista, examen físico e imágenes. Se realiza un diágnostico con su tratamiento respectivo.</span>
                         </div>
 
                         <div class="ml-2 flex flex-col justify-between items-center">
@@ -49,7 +50,7 @@
                   <h2>Nutrición</h2>
                   <div class="mt-4 flex justify-between items-center">
                         <div class="w-4/5">
-                              <span class="block text-base text-primary-500 text-justify mr-1">Buscamos educar para reconocer las necesidades en función de los hábitos y aplicarlos según tus objetivos personales y deportivos.</span>
+                              <span class="block text-base text-justify mr-1">Buscamos educar para reconocer las necesidades en función de los hábitos y aplicarlos según tus objetivos personales y deportivos.</span>
                         </div>
                         <div class="ml-2 flex flex-col justify-between items-center">
                               <img class="h-16 lg:h-20 block bg-white rounded-full border-2 border-primary-500 hover:border-primary-900" src="{{ asset('img/iconos/nutricion.png')}}">
@@ -79,7 +80,7 @@
                         <h2>Entrenamiento</h2>
                         <div class="mt-4 flex justify-between items-center">
                               <div class="w-4/5">
-                                    <span class="block text-base text-primary-500 text-justify mr-1">Disponemos de clases grupales y personalizados en horarios AM y PM. Son entrenamientos llenos de energía trabajando full body.</span>
+                                    <span class="block text-base text-justify mr-1">Disponemos de clases grupales y personalizados en horarios AM y PM. Son entrenamientos llenos de energía trabajando full body.</span>
 
                               </div>
                               <div class="ml-2 flex flex-col justify-between items-center">
@@ -94,7 +95,7 @@
                   <h2>Biomecánica</h2>
                   <div class="mt-4 flex justify-between items-center">
                         <div class="w-4/5">
-                              <span class="block text-base text-primary-500 text-justify mr-1">Consiste en realizar análisis cuantitativos del movimiento, de la mano de la tecnología. Análisis de carrera, marcha y de fuerza son algunas de estas.</span>
+                              <span class="block text-base text-justify mr-1">Consiste en realizar análisis cuantitativos del movimiento, de la mano de la tecnología. Análisis de carrera, marcha y de fuerza son algunas de estas.</span>
 
                         </div>
                         <div class="ml-2 flex flex-col justify-between items-center">
@@ -109,7 +110,7 @@
                   <h2>Psicología Clínica</h2>
                   <div class="mt-4 flex justify-between items-center">
                         <div class="w-4/5">
-                              <span class="block text-base text-primary-500 text-justify mr-1">Buscamos conocer e identificar el origen del motivo de la consulta. Luego trabajamos en técnicas y estrategias para conseguir una mejora en tu bienestar.</span>
+                              <span class="block text-base text-justify mr-1">Buscamos conocer e identificar el origen del motivo de la consulta. Luego trabajamos en técnicas y estrategias para conseguir una mejora en tu bienestar.</span>
                         </div>
                         <div class="ml-2 flex flex-col justify-between items-center">
                              <img class="h-16 lg:h-20 block bg-white rounded-full border-2 border-primary-500 hover:border-primary-900" src="{{ asset('img/iconos/psicologia_clinica.png')}}">

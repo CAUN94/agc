@@ -34,7 +34,8 @@
     }
     ",
     x-init="$interval(addOne, timer)" x-cloack>
-    <div class="relative bg-primary-500">
+    <div class="relative bg-primary-500 py-10">
+        <h2 class="text-3xl text-center font-bold text-white">¿Quiénes somos?</h2>
         <template x-for="(img,index) in imgs">
             <div class="flex flex-col mx-auto py-4"
             x-show="activeSlide === index+1" x-transition>

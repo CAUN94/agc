@@ -3,7 +3,7 @@
 @endphp
 
 <section id="contact" class="bg-primary-500">
-    <h2 class="text-center text-white pt-5 lg:text-3xl text-2xl">¿Dónde nos encontramos?</h2>
+    <h2 class="text-center text-light-grey pt-5 lg:text-3xl text-2xl">¿Dónde nos encontramos?</h2>
     <div class="contact">
         <a
         class="text-center"

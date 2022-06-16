@@ -34,7 +34,8 @@
     }
     ",
     x-init="$interval(addOne, timer)" x-cloack>
-    <div class="relative">
+    <div class="relative py-10">
+        <h2 class="text-3xl text-center font-bold text-white">Embajadores</h2>
         <template x-for="(img,index) in imgs">
             <div class="flex flex-col mx-auto py-4"
             x-show="activeSlide === index+1" x-transition>

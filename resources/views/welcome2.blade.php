@@ -6,8 +6,10 @@
         <x-landing2.call>
         </x-landing2.call>
 
+        <div id="servicios"></div>
         <x-landing2.service>
         </x-landing2.service>
+
 
         <x-landing2.why-us>
         </x-landing2.why-us>
@@ -18,6 +20,7 @@
             </x-slot>
         </x-landing2.contact>
 
+        <div id="equipo"></div>
         <x-landing2.team>
             <x-slot name="img">
                 alonso.jpg|cesar.jpg|daniella.jpg|francisco.jpg|camila.JPG|jaime.JPG|melissa.jpg
@@ -30,6 +33,7 @@
             </x-slot>
         </x-landing2.team>
 
+        <div id="embajadores"></div>
         <x-landing2.alliance>
             <x-slot name="img">
                 cesar.png|gringa.png|javierra.png|Paus.png
@@ -42,6 +46,7 @@
             </x-slot>
         </x-landing2.alliance>
 
+        <div id="testimonios"></div>
         <x-landing2.reviews>
         </x-landing2.reviews>
 
