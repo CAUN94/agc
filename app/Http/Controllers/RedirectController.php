@@ -192,4 +192,11 @@ class RedirectController extends Controller {
 		return Redirect::away($url);
 	}
 
+	public function krunners() {
+		$url = "https://docs.google.com/forms/d/e/1FAIpQLSd_SX3KxGY6kSpkZ3y-mlpxlQGMx6aeLTFERCW0eqL60ct6yw/viewform?usp=sf_link";
+		return Redirect::away($url);
+	}
+
+
+
 }
