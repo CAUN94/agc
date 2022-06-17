@@ -22,6 +22,11 @@ class LandingController extends Controller
         return view('about');
     }
 
+    public function terms()
+    {
+        return redirect('/pdf/tyc.pdf');
+    }
+
     public function team()
     {
         $team = [
