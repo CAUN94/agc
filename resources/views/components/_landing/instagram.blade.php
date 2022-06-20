@@ -1,6 +1,3 @@
-<div class="bg-you-grey text-center py-12">
-    <p class="font-futura text-white text-2xl">Siguenos en nuestras <span class="text-primary-500">RRSS</span></p>
-</div>
 <section class="bg-light-grey h-auto py-4">
     <div class="container mx-auto pb-5">
         <div class="insta">

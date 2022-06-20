@@ -1,4 +1,4 @@
-<x-landing2.layout>
+<x-landing.layout>
         <header class="bg-fixed h-80 -mt-1 grid place-items-center" style="background-image: url({{ asset('img/caroussel/img3.jpg')}}); background-size: cover;">
             <div class="bg-light-grey py-2 px-10 mx-0 sm:mx-8" style="background: rgba(234, 235, 235, 0.50)">
                 <h1 class="font-bold sm:text-2xl text-base">
@@ -7,8 +7,8 @@
             </div>
         </header>
         <h2 class="text-2xl text-light-grey font-futura font-bold text-center mt-10 lg:-mb-12 uppercase">Kinesiología</h2>
-        <x-landing2.call>
-        </x-landing2.call>
+        <x-landing.call>
+        </x-landing.call>
         <div class="grid grid-cols-0 lg:grid-cols-3 px-2 lg:px-0 mx-auto w-full container gap-4 mb-8 text-justify gap-x-16 gap-y-4">
             <div>
                 <h2 class="text-2xl text-primary-500 mb-5">Terapía de masajes Hands-On</h2>
@@ -61,7 +61,7 @@
                 </div>
             </div>
         </div>
-        <x-landing2.call>
-        </x-landing2.call>
+        <x-landing.call>
+        </x-landing.call>
 
-</x-landing2.layout>
+</x-landing.layout>

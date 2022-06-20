@@ -30,8 +30,8 @@
             <script> gtag('event', 'conversion', {'send_to': 'AW-10872889051/Jlg6CIvr9KsDENu9zMAo'}); </script>
         @endif
     </head>
-    <body>
-        <div class="sticky-menu">
+    <body class="h-full px-2">
+        <div class="sticky-menu z-50 top-0 ">
             <div
                 class="nav-menu"
                 x-data="{ navOpen: false }"
@@ -42,17 +42,19 @@
                     </a>
                 <x-landing.burger></x-landing.burger>
                 <nav
-                    class="w-full flex-grow lg:flex"
+                    class="w-full flex-grow lg:flex mt-2 sm:mt-0"
                     :class="{ 'flex-grow shadow-3xl': navOpen, 'hidden': !navOpen }"
                 >
-                  <a class="nav-menu-link {{ Request::is('/') ? 'selected' : '' }}" href="/">Inicio</a>
                   <a class="nav-menu-link" href="https://blog.justbetter.cl/">Blog</a>
-{{--                   <a :class="{ 'block shadow-3xl': navOpen, 'hidden': !navOpen }" href="https://blog.justbetter.cl/">Blog</a> --}}
-{{--                   <x-landing.team-nav></x-landing.team-nav> --}}
-                  <a class="nav-menu-link {{ Request::is('book') ? 'selected' : '' }}"
+                  <a class="nav-menu-link" href="/kinesiología">Kinesiología</a>
+                  <a class="nav-menu-link" href="/#servicios">Servicios</a>
+                  <a class="nav-menu-link" href="/#equipo">Equipo</a>
+                  <a class="nav-menu-link" href="/#embajadores">Embajadores</a>
+                  <a class="nav-menu-link" href="/#testimonios">Testimonios</a>
+            {{--       <a class="nav-menu-link {{ Request::is('book') ? 'selected' : '' }}"
                   onclick="return gtag_report_conversion('https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento');" href="https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento">Clínica</a>
                   <a class="nav-menu-link {{ Request::is('trainings') ? 'selected' : '' }}" href="/trainings">Entrenamiento</a>
-                  <a class="nav-menu-link {{ Request::is('school') ? 'selected' : '' }}" href="https://you-just-better-programs.teachable.com/courses" target="_blank">Cursos</a>
+                  <a class="nav-menu-link {{ Request::is('school') ? 'selected' : '' }}" href="https://you-just-better-programs.teachable.com/courses" target="_blank">Cursos</a> --}}
                   <x-landing.auth-dropdown></x-landing.auth-dropdown>
                   <x-landing.guest-dropdown></x-landing.guest-dropdown>
                 </nav>

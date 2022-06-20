@@ -1,70 +1,14 @@
-{{-- <header class="mb-20">
-    <div class="header-div">
-        <img src={{asset("img/".$img)}}>
-        <div>
-            {{$text}}
+<div>
+    <div class="my-10">
+        <h1 class="font-futura text-white font-bold text-center uppercase text-2xl lg:text-6xl">You Just <span class="text-primary-500">Better</span></h1>
+    </div>
+{{--     <div class="bg-primary-500" style="border-top-left-radius: 20%;border-top-right-radius: 20%;"> --}}
+    <div class="bg-gradient-to-r from-you-grey to-primary-500">
+        <div class="mx-auto grid grid-cols-1 justify-items-stretch container gap-y-10 pb-10 py-10 text-white lg:text-2xl text-sm lg:px-20 px-5">
+            <p class="text-left">
+                Somos un centro integral de salud y medicina deportiva que promueve los estilos de vida saludables de la mano con especialistas del deporte y la medicina de estilos de vida.<br>
+                Entregamos un servicio de atención personalizada, basado en evidencia científica que busca fomentar tu proceso de autorrealización.
+            </p>
         </div>
     </div>
-</header> --}}
-
-@php
-    $imgs = json_encode(explode('|', $img));
-    $texts = json_encode(explode('|', $text));
-    $urls = json_encode(explode('|', $url));
-@endphp
-<div x-data="{
-    activeSlide: 1,
-    imgs: {{$imgs}},
-    texts: {{$texts}},
-    urls: {{$urls}},
-    timer: 5000,
-    addOne: function() {
-            if(this.activeSlide === this.imgs.length){
-                this.activeSlide = 1
-            } else {
-                this.activeSlide++
-            }
-        }
-    }",
-    x-init="$interval(addOne, timer)" x-cloack>
-    <header class="mb-20">
-        <template x-for="(img,index) in imgs">
-            <div class="header-div"
-            x-show="activeSlide === index+1">
-                <img :src="'img/' + img">
-                <div class="flex flex-col justify-between">
-                    <div x-text="texts[index]"></div>
-                    <a
-                    x-show="urls[index] != 0"
-                    class="mx-auto button-2" :href="urls[index]">Ver Más</a>
-                </div>
-            </div>
-        </template>
-    </header>
-
-   {{-- <div class="flex w-1/4 mx-auto justify-around">
-        <div class="flex items-center">
-            <button
-              @keyup.left ="activeSlide = activeSlide === 1 ? imgs.length : activeSlide - 1"
-              class="bg-primary-100 text-primary-500 hover:text-orange-500 font-bold hover:shadow-lg rounded-full w-12 h-12 -ml-6"
-              x-on:click="activeSlide = activeSlide === 1 ? imgs.length : activeSlide - 1">
-              &#8592;
-             </button>
-        </div>
-        <div class="flex items-center">
-            <button
-             @keyup.right = "activeSlide = activeSlide === imgs.length ? 1 : activeSlide + 1"
-              class="bg-primary-100 text-primary-500 hover:text-orange-500 font-bold hover:shadow rounded-full w-12 h-12 -mr-6"
-              x-on:click="activeSlide = activeSlide === imgs.length ? 1 : activeSlide + 1">
-              &#8594;
-            </button>
-        </div>
-        <div class="absolute w-full flex items-center justify-center px-4">
-          <template x-for="(img,index) in imgs" >
-            <button
-              x-on:click="activeSlide = index"
-            ></button>
-          </template>
-        </div>
-    </div> --}}
 </div>
