@@ -9,7 +9,7 @@
         <h2 class="text-2xl text-light-grey font-futura font-bold text-center mt-10 lg:-mb-12 uppercase">Kinesiología</h2>
         <x-landing2.call>
         </x-landing2.call>
-        <div class="grid grid-cols-0 lg:grid-cols-3 px-2 lg:px-0 mx-auto w-full container gap-4 mb-8 text-justify gap-x-6 gap-y-4">
+        <div class="grid grid-cols-0 lg:grid-cols-3 px-2 lg:px-0 mx-auto w-full container gap-4 mb-8 text-justify gap-x-16 gap-y-4">
             <div>
                 <h2 class="text-2xl text-primary-500 mb-5">Terapía de masajes Hands-On</h2>
                 <h3 class="text-primary-500 text-xl">Incluye</h3>
