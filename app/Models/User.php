@@ -10,6 +10,7 @@ use App\Models\StravaUser;
 use App\Models\Student;
 use App\Models\TrainAppointment;
 use App\Models\TrainBook;
+use Carbon\Carbon;
 use Freshwork\ChileanBundle\Rut;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -303,6 +304,13 @@ class User extends Authenticatable {
 
 	public function appointments(){
 		return AppointmentMl::where('Rut_Paciente',$this->rut);
+	}
+
+	public function nextAppointments(){
+		return $this->appointments()
+			->whereIN('Estado',['Confirmado por teléfono','Agenda Online','No confirmado'])
+			->where('Fecha','>=',Carbon::tomorrow()->format('Y-m-d'))
+			->orderby('Fecha','desc');
 	}
 
 	public function getAppointments(){
