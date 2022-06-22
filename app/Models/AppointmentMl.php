@@ -50,6 +50,6 @@ class AppointmentMl extends Model
     }
 
     public function treatments(){
-        return $this->hasMany(TreatmentMl::class,'Tratamiento_Nr','Atencion');
+        return TreatmentMl::where('Atencion',$this->Tratamiento_Nr)->first();
     }
 }
