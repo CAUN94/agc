@@ -2,6 +2,8 @@
     $imgs = json_encode(explode('|', $img));
     $texts = json_encode(explode('|', $texts));
     $team = json_encode(explode('|', $team));
+    $description = json_encode(explode('|', $description));
+    $insta = json_encode(explode('|', $insta));
 @endphp
 
 <div x-data="{
@@ -9,6 +11,8 @@
     imgs: {{$imgs}},
     texts: {{$texts}},
     team: {{$team}},
+    description: {{$description}},
+    insta: {{$insta}},
     timer: 10000,
     autoaddOne: function() {
             if(this.activeSlide === this.imgs.length){
@@ -54,8 +58,9 @@
                         </span>
                     </button>
                 </div>
-                <div class="text-white text-center text-3xl" x-text="texts[index]" x-transition></div>
+                <div class="text-white text-center text-3xl"><a x-text="texts[index]" x-bind:href="insta[index]" x-bind:target="'_blank'" x-transition></a></div>
                 <div class="text-white text-center text-lg" x-text="team[index]" x-transition></div>
+                {{-- <div class="text-white text-center text-sm" x-text="description[index]" x-transition></div> --}}
 
             </div>
 

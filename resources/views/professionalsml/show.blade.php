@@ -23,7 +23,7 @@
                             @endif
                             @if(
                             Carbon\Carbon::now()->subhour()->format('H:i') >= Carbon\Carbon::parse($hour['inicio'])->format('H:i')
-                            and Carbon\Carbon::parse($hour['fecha'])->format('l') == Carbon\Carbon::now()->format('l')
+                            and Carbon\Carbon::parse($hour['fecha'])->format('d') == Carbon\Carbon::now()->format('d')
                             )
                             @else
                                 {{Carbon\Carbon::parse($hour['inicio'])->format('H:i')}}

@@ -1,12 +1,12 @@
 <x-landing.layout>
         <header class="bg-fixed h-80 -mt-1 grid place-items-center" style="background-image: url({{ asset('img/caroussel/img3.jpg')}}); background-size: cover;">
-            <div class="bg-light-grey py-2 px-10 mx-0 sm:mx-8" style="background: rgba(234, 235, 235, 0.50)">
-                <h1 class="font-bold sm:text-2xl text-base">
+            <div class="bg-light-grey py-2 px-10 mx-0 sm:mx-8" style="background: rgba(0, 0, 0, 0.50)">
+                <h1 class="font-bold sm:text-2xl text-base text-white">
                     Nuestra kinesiología consiste en rehabilitar y/o prevenir patologías musculoesqueléticas. Nos enfocamos en una evaluación, diagnóstico y tratamiento personalizado.
                 </h1>
             </div>
         </header>
-        <h2 class="text-2xl text-light-grey font-futura font-bold text-center mt-10 lg:-mb-12 uppercase">Kinesiología</h2>
+        <h2 class="text-4xl text-light-grey font-futura font-bold text-center mt-10 lg:-mb-16 uppercase">Kinesiología</h2>
         <x-landing.call>
         </x-landing.call>
         <div class="grid grid-cols-0 lg:grid-cols-3 px-2 lg:px-0 mx-auto w-full container gap-4 mb-8 text-justify gap-x-16 gap-y-4">

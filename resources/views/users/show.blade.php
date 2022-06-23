@@ -147,50 +147,99 @@
         </div>
 
 
-        <div class="w-full sm:w-1/3 bg-gray-50 shadow overflow-hidden sm:rounded-lg">
-            <div class="flex px-4 py-5 sm:px-6 justify-between">
-              <div class="flex flex-col">
-                <h3 class="text-lg leading-6 font-medium text-primary-500">
-                  Historial Planes de Entrenamiento
-                </h3>
-                <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                  @if($user->isStudent())
-                    <a href="/students" class="text-gray-500 underline">Ver Clases y Horarios</a>
-                  @endif
-                </p>
+        <div class="w-full sm:w-1/3 flex flex-col gap-y-4">
+            <div class="h-auto bg-gray-50 shadow overflow-hidden sm:rounded-lg ">
+              <div class="flex px-4 py-5 sm:px-6 justify-between">
+                <div class="flex flex-col">
+                  <h3 class="text-lg leading-6 font-medium text-primary-500">
+                    Clínica You
+                  </h3>
+                  <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                      <span class="text-gray-500">Proximas horas</span>
+                  </p>
+                </div>
+                <div class="bg-white shadow overflow-hidden sm:rounded-lg p-1">
+                    <img src="{{$user->profilePic()}}" class="avatar h-12 w-12">
+                </div>
               </div>
-              <div class="bg-white shadow overflow-hidden sm:rounded-lg p-1">
-                  <img src="{{$user->profilePic()}}" class="avatar h-12 w-12">
-              </div>
-            </div>
-            <div class="border-t border-gray-200">
-              <div class="bg-white text-sm px-4 py-5 sm:grid sm:grid-cols-1 sm:gap-4 sm:px-6 overflow-y-scroll">
-                @if(count(Auth::user()->notSettledPlan)>0 and Auth::user()->notSettledSumPlanIsHigh())
-                <x-pay>Pagar Plan</x-pay>
-                @endif
-                @forelse(Auth::user()->allStudentPlan()->with('Training')->paginate(8) as $plan)
-                  <div class="flex justify-between items-center">
-                    <div class="flex flex-col">
-                      <a href="/students"> {{$plan->trainingPlan()}}</a>
-                      <span class="text-xs text-primary-500">
-                        {{$plan->Training->planClassComplete()}}
-                      </span>
-                      <span class="text-xs text-primary-500">
-                        Inicio: {{ $plan->start_day()}}
-                      </span>
+              <div class="border-t border-gray-200">
+                <div class="bg-white text-sm px-4 py-5 sm:grid sm:grid-cols-1 sm:gap-4 sm:px-6 overflow-y-scroll">
+                  @forelse(Auth::user()->nextAppointments()->paginate(3) as $appointment)
+                    <div class="flex justify-between items-center">
+                      <div class="flex flex-col">
+                        @php
+                        $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+                        $fecha = \Carbon\Carbon::parse($appointment->Hora_inicio);
+                        $mes = $meses[($fecha->format('n')) - 1];
+                        $date = $fecha->format('d') . ' de ' . $mes;
+                        @endphp
+                        {{$date}} en San Pascual 736
+                        {{-- <span class="text-xs text-primary-500">
+
+                        </span> --}}
+                        <span class="text-xs text-primary-500">
+                          Profesional: {{ $appointment->Profesional}}
+                        </span>
+                      </div>
+  {{--                     @if(True)
+                        <span class="text-green-500">Pagado</span>
+                      @else
+                        <span class="text-red-500">No Pagado</span>
+                      @endif --}}
                     </div>
-                    @if($plan->isSettled())
-                      <span class="text-green-500">Pagado</span>
-                    @else
-                      <span class="text-red-500">No Pagado {{$plan->trainingPrice()}}</span>
-                    @endif
-                  </div>
-                @empty
-                  <a href="/trainings" class="text-primary-500">Ver Planes de Entrenamiento</a>
-                @endforelse
-                {{Auth::user()->allStudentPlan()->with('Training')->paginate(8)->links()}}
+                  @empty
+                    <a href="https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento" class="text-primary-500">No hay proximas horas</a>
+                  @endforelse
+                  {{Auth::user()->nextAppointments()->paginate(3)->links()}}
+                </div>
               </div>
             </div>
+            <div class="h-auto bg-gray-50 shadow overflow-hidden sm:rounded-lg ">
+              <div class="flex px-4 py-5 sm:px-6 justify-between">
+                <div class="flex flex-col">
+                  <h3 class="text-lg leading-6 font-medium text-primary-500">
+                    Historial Planes de Entrenamiento
+                  </h3>
+                  <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                    @if($user->isStudent())
+                      <a href="/students" class="text-gray-500 underline">Ver Clases y Horarios</a>
+                    @endif
+                  </p>
+                </div>
+                <div class="bg-white shadow overflow-hidden sm:rounded-lg p-1">
+                    <img src="{{$user->profilePic()}}" class="avatar h-12 w-12">
+                </div>
+              </div>
+              <div class="border-t border-gray-200">
+                <div class="bg-white text-sm px-4 py-5 sm:grid sm:grid-cols-1 sm:gap-4 sm:px-6 overflow-y-scroll">
+                  @if(count(Auth::user()->notSettledPlan)>0 and Auth::user()->notSettledSumPlanIsHigh())
+                  <x-pay>Pagar Plan</x-pay>
+                  @endif
+                  @forelse(Auth::user()->allStudentPlan()->with('Training')->paginate(3) as $plan)
+                    <div class="flex justify-between items-center">
+                      <div class="flex flex-col">
+                        <a href="/students"> {{$plan->trainingPlan()}}</a>
+                        <span class="text-xs text-primary-500">
+                          {{$plan->Training->planClassComplete()}}
+                        </span>
+                        <span class="text-xs text-primary-500">
+                          Inicio: {{ $plan->start_day()}}
+                        </span>
+                      </div>
+                      @if($plan->isSettled())
+                        <span class="text-green-500">Pagado</span>
+                      @else
+                        <span class="text-red-500">No Pagado {{$plan->trainingPrice()}}</span>
+                      @endif
+                    </div>
+                  @empty
+                    <a href="/trainings" class="text-primary-500">Ver Planes de Entrenamiento</a>
+                  @endforelse
+                  {{Auth::user()->allStudentPlan()->with('Training')->paginate(8)->links()}}
+                </div>
+              </div>
+            </div>
+
         </div>
       </div>
 
