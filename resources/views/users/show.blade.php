@@ -169,11 +169,14 @@
                       <div class="flex flex-col">
                         @php
                         $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-                        $fecha = \Carbon\Carbon::parse($appointment->Hora_inicio);
+                        $fecha = \Carbon\Carbon::parse($appointment->Fecha);
+
+                        $hora = \Carbon\Carbon::parse($appointment->Hora_inicio)->format('H:i');
                         $mes = $meses[($fecha->format('n')) - 1];
-                        $date = $fecha->format('d') . ' de ' . $mes;
+                        $date = $fecha->format('d') . ' de ' . $mes . ' a las ' . $hora;
                         @endphp
-                        {{$date}} en San Pascual 736
+                        {{$date}}
+                        {{-- en San Pascual 736 --}}
                         {{-- <span class="text-xs text-primary-500">
 
                         </span> --}}
