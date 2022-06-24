@@ -197,9 +197,9 @@ class ScrapingController extends Controller
         $max_treatment = TreatmentMl::max('Atencion');
         foreach($treatments as $treatment){
             $value = json_decode("{".$treatment."}",true);
-            if(1200>=$value['Atencion']){
-                continue;
-            }
+            // if(1200>=$value['Atencion']){
+            //     continue;
+            // }
             $treatmentMl = TreatmentMl::updateOrCreate(
                 [
                     'Ficha' => $value['# Ficha'],
