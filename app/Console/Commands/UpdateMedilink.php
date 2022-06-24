@@ -166,7 +166,9 @@ class UpdateMedilink extends Command
     public function treatmentsMl(){
         $time1 = time();
         $this->info("Treatments: ".TreatmentMl::all()->count());
+        $this->info("--");
         $treatments = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/resumen_tratamientos_saldos");
+        $this->info("--");
         $treatments = array_slice($treatments, -400);
         $max_treatment = TreatmentMl::max('Atencion');
         foreach($treatments as $treatment){
