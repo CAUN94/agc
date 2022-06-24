@@ -54,8 +54,8 @@ class UpdateMedilink extends Command
         $this->info('----');
         $this->appointmentMl();
         $this->info('----');
-        $this->treatmentsMl();
-        $this->info('----');
+        // $this->treatmentsMl();
+        // $this->info('----');
         $this->paymentsMl();
     }
 
@@ -171,9 +171,9 @@ class UpdateMedilink extends Command
         $max_treatment = TreatmentMl::max('Atencion');
         foreach($treatments as $treatment){
             $value = json_decode("{".$treatment."}",true);
-            // if(12000>=$value['Atencion']){
-            //     continue;
-            // }
+            if($max_treatment-800>=$value['Atencion']){
+                continue;
+            }
             $treatmentMl = TreatmentMl::updateOrCreate(
                 [
                     'Atencion' => $value['Atencion'],
