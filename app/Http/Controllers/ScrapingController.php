@@ -202,7 +202,7 @@ class ScrapingController extends Controller
             // }
             $treatmentMl = TreatmentMl::updateOrCreate(
                 [
-                    'Ficha' => $value['# Ficha'],
+                    'Atencion' => $value['Atencion'],
                 ],
                 [
                     'Ficha' => $value['# Ficha'],
