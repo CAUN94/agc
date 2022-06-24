@@ -54,8 +54,8 @@ class UpdateMedilink extends Command
         $this->info('----');
         $this->appointmentMl();
         $this->info('----');
-        // $this->treatmentsMl();
-        // $this->info('----');
+        $this->treatmentsMl();
+        $this->info('----');
         $this->paymentsMl();
     }
 
