@@ -33264,10 +33264,10 @@ nav {
 }
 
 .nav-menu-link {
-  margin-left: 0.25rem;
-  margin-right: 0.25rem;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
+  margin-left: 0.125rem;
+  margin-right: 0.125rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   padding-top: 0.125rem;
   padding-bottom: 0.125rem;
   font-family: Futura, Trebuchet MS, Aria, sans-serif;
@@ -33428,7 +33428,7 @@ nav {
 @media (min-width: 1024px) {
   .logo {
     margin-bottom: 0px;
-    height: 100%;
+    height: 5rem;
   }
 }
 

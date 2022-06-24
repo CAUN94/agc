@@ -37,7 +37,7 @@
                 x-data="{ navOpen: false }"
                 @keydown.escape="navOpen = false"
                 >
-                    <a href="/" class="sm:w-full h-16 lg:h-full">
+                    <a href="/" class="sm:w-full h-16 lg:h-20 flex items-center">
                         <img class="logo" src="{{asset('img/logo.png')}}">
                     </a>
                 <x-landing.burger></x-landing.burger>
@@ -49,12 +49,10 @@
                   <a class="nav-menu-link" href="/kinesiología">Kinesiología</a>
                   <a class="nav-menu-link" href="/#servicios">Servicios</a>
                   <a class="nav-menu-link" href="/#equipo">Equipo</a>
-                  <a class="nav-menu-link" href="/#embajadores">Embajadores</a>
+                  {{-- <a class="nav-menu-link" href="/#embajadores">Embajadores</a> --}}
                   <a class="nav-menu-link" href="/#testimonios">Testimonios</a>
-            {{--       <a class="nav-menu-link {{ Request::is('book') ? 'selected' : '' }}"
-                  onclick="return gtag_report_conversion('https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento');" href="https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento">Clínica</a>
                   <a class="nav-menu-link {{ Request::is('trainings') ? 'selected' : '' }}" href="/trainings">Entrenamiento</a>
-                  <a class="nav-menu-link {{ Request::is('school') ? 'selected' : '' }}" href="https://you-just-better-programs.teachable.com/courses" target="_blank">Cursos</a> --}}
+                  <a class="nav-menu-link {{ Request::is('school') ? 'selected' : '' }}" href="https://you-just-better-programs.teachable.com/courses" target="_blank">Cursos</a>
                   <x-landing.auth-dropdown></x-landing.auth-dropdown>
                   <x-landing.guest-dropdown></x-landing.guest-dropdown>
                 </nav>
