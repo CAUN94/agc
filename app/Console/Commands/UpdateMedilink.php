@@ -167,16 +167,15 @@ class UpdateMedilink extends Command
         $time1 = time();
         $this->info("Treatments: ".TreatmentMl::all()->count());
         $treatments = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/resumen_tratamientos_saldos");
-        $treatments = array_slice($treatments, -300);
+        $treatments = array_slice($treatments, -400);
         $max_treatment = TreatmentMl::max('Atencion');
         foreach($treatments as $treatment){
             $value = json_decode("{".$treatment."}",true);
-            if($max_treatment<=$value['Atencion']){
+            if(12000>=$value['Atencion']){
                 continue;
             }
             $treatmentMl = TreatmentMl::updateOrCreate(
                 [
-                    'Ficha' => $value['Atencion'],
                     'Atencion' => $value['Atencion'],
                 ],
                 [

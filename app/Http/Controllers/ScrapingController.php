@@ -193,17 +193,16 @@ class ScrapingController extends Controller
 
     public function treatmentsMl(){
         $treatments = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/resumen_tratamientos_saldos");
-        $treatments = array_slice($treatments, -500);
+        $treatments = array_slice($treatments, -400);
         $max_treatment = TreatmentMl::max('Atencion');
         foreach($treatments as $treatment){
             $value = json_decode("{".$treatment."}",true);
-            if($max_treatment<=$value['Atencion']){
+            if(1200>=$value['Atencion']){
                 continue;
             }
             $treatmentMl = TreatmentMl::updateOrCreate(
                 [
                     'Ficha' => $value['# Ficha'],
-                    'Atencion' => $value['Atencion'],
                 ],
                 [
                     'Ficha' => $value['# Ficha'],
