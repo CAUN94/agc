@@ -54,10 +54,13 @@
                     </div>
                 </div>
             </div>
+
+        </div>
+        <div class="grid grid-cols-2">
             <div>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
-                <div class="container">
+                <div class="container block ">
                   <canvas id="examChart"></canvas>
                 </div>
                 <script>
@@ -82,6 +85,39 @@
                               y: {{round(array_sum(array_map(function($week) {return $week->distance;}, $week))/1000,2)}}
                             } {{(!$loop->last) ? ',' : ''}}
                             @endforeach
+                            ,
+                          ],
+                          backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 99, 132, 0.2)'
+                          ],
+                          borderColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 99, 132, 0.2)'
+                          ],
+                          borderWidth: 1
+                        },{
+                          label: 'Distancias Semanales 2',
+                          data: [
+                            @foreach($this->allData as $key => $week)
+                            {
+                              t: '{{$key}}',
+                              y: 10
+                            } {{(!$loop->last) ? ',' : ''}}
+                            @endforeach
+                            ,
                           ],
                           backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
@@ -108,6 +144,9 @@
                       }
                     });
                 </script>
+            </div>
+            <div>
+                Hola
             </div>
         </div>
         <div class="grid grid-cols-4 mt-10">
