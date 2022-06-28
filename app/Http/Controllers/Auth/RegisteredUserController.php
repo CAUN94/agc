@@ -41,6 +41,7 @@ class RegisteredUserController extends Controller {
 
 		    if(User::where('rut',$requestData['rut'])->first() != null){
 		    	FlashSession::flash('primary', 'Usuario ya registrado');
+		    	FlashSession::flash('message', 'Usuario ya registrado');
 		    	return redirect('/login');
 		    }
         }
