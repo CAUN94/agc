@@ -208,7 +208,7 @@ class UpdateMedilink extends Command
         $max_payment = PaymentMl::max('Atencion');
         foreach($payments as $payment){
             $value = json_decode("{".$payment."}",true);
-            if($max_payment<=$value['Atencion']){
+            if($max_payment-100>=$value['Atencion']){
                 continue;
             }
             $paymentMl = PaymentMl::updateOrCreate(
