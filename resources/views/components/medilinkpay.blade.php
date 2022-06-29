@@ -14,7 +14,7 @@
 
 	$item = new MercadoPago\Item();
 	$item->id = $treatment->id;
-	$item->title = "Hora con" .$treatment->Profesional;
+	$item->title = "Hora con " .$treatment->Profesional;
 	$item->description = "Pago Atencion" . $treatment->Atencion;
 	$item->quantity = 1;
 	$item->unit_price = $treatment->TotalAtencion;
