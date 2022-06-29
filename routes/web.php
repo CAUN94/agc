@@ -125,6 +125,7 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::post('change-password', 'App\Http\Controllers\ChangePasswordController@store')->name('change.password')->withoutMiddleware([UpdatePassword::class]);
 
     Route::get('pay/{user}/{status}', 'App\Http\Controllers\PayController@payStatus');
+    Route::get('pay/{user}/{treatmentMl}/{status}', 'App\Http\Controllers\PayController@payMedilinkStatus');
 
 
     // Strava

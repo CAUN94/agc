@@ -203,7 +203,7 @@ class UpdateMedilink extends Command
     public function paymentsMl(){
         $time1 = time();
         $this->info("Payments: ".PaymentMl::all()->count());
-        $first = strval(Carbon::now()->subMonth()->format('Y-m-d'));
+        $first = strval(Carbon::now()->subMonth()->subMonth()->subMonth()->format('Y-m-d'));
         $payments = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/pagos_pacientes?filters[fecha_inicio][status]=activated&filters[fecha_inicio][value]=".$first);
         $max_payment = PaymentMl::max('Atencion');
         foreach($payments as $payment){

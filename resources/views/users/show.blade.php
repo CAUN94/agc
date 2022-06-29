@@ -184,11 +184,11 @@
                           Profesional: {{ $appointment->Profesional}}
                         </span>
                       </div>
-  {{--                     @if(True)
+                      @if($appointment->treatments()->isPay())
                         <span class="text-green-500">Pagado</span>
                       @else
-                        <span class="text-red-500">No Pagado</span>
-                      @endif --}}
+                        <x-medilinkpay id="{{$appointment->treatments()->id}}">Pagar Plan</x-medilinkpay>
+                      @endif
                     </div>
                   @empty
                     <a href="https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento" class="text-primary-500">No hay proximas horas</a>

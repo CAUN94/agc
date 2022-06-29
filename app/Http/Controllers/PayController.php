@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\TreatmentMl;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -24,6 +25,23 @@ class PayController extends Controller {
 				$student->payment_id = '1245191589';
 				$student->save();
 			}
+			FlashSession::flash('primary', 'Pago Realizado');
+		} elseif ($status == 'failure') {
+			$student->status = 'denied';
+			FlashSession::flash('primary', 'Pago Fallido');
+		} elseif ($status == 'pending') {
+			FlashSession::flash('primary', 'Pago Pendiente');
+		}
+		return redirect('/users');
+	}
+
+	public function payMedilinkStatus(User $user, TreatmentMl $treatmentMl, $status, Request $request) {
+		if ($status == 'success') {
+			$response = Http::get("https://api.mercadopago.com/v1/payments/$request->payment_id" . "?access_token=" . config('services.mercadopago.token'));
+			$treatmentMl->TotalAbonado = $treatmentMl->TotalAtencion;
+			$treatmentMl->medilink = True;
+			$treatmentMl->save();
+
 			FlashSession::flash('primary', 'Pago Realizado');
 		} elseif ($status == 'failure') {
 			$student->status = 'denied';

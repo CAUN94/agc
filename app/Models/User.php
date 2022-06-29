@@ -310,7 +310,7 @@ class User extends Authenticatable {
 		return $this->appointments()
 			->whereIN('Estado',['Confirmado por teléfono','Agenda Online','No confirmado'])
 			->where('Fecha','>=',Carbon::tomorrow()->format('Y-m-d'))
-			->orderby('Fecha','desc')->orderby('Hora_inicio','asc');
+			->orderby('Fecha','asc')->orderby('Hora_inicio','asc');
 	}
 
 	public function getAppointments(){
