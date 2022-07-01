@@ -53,8 +53,56 @@ class UserStravaPanel extends Component
             $this->progresColor = 'yellow';
         }
         $this->allData = $chargesAndProgress[3];
-        // ddd($this->allData);
-        return view('livewire.user-strava-panel');
+        $this->dataCharges = $this->dataArray($this->allData)[0];
+        $this->dataProgress = $this->dataArray($this->allData)[1];
+
+        return view('livewire.user-strava-panel2');
+    }
+
+    public function dataArray($allData) {
+        $newallData = array_slice(array_reverse($allData),3,count($allData),true);
+        $allCharges = [];
+        $allProgress = [];
+        $i = 0;
+        foreach(array_reverse($newallData) as $key => $value){
+            $sumweek_distance = [];
+
+            foreach(array_slice(array_reverse($allData),0+$i,4,true) as $week){
+                $sumweek_distance[] = array_sum(array_map(function($week) {
+                  return $week->distance;
+                }, $week));
+            }
+
+            $last_weeks = array_slice($sumweek_distance, 0, 2, true);
+            $sumweek_distance_avg = array_sum($last_weeks)/count($last_weeks);
+            if($sumweek_distance_avg == 0){
+                $charges = -1;
+            } else {
+                $charges = $sumweek_distance[0]/$sumweek_distance_avg;
+            }
+            $allCharges[$key] = $charges;
+
+            if($sumweek_distance[3] == 0){
+                $progress = -1;
+            } else {
+                $progress = ($sumweek_distance[3]/$sumweek_distance[2]-1)*100;
+            }
+
+            if($i+1 == 1){
+                $progress = 0;
+            }
+
+            $allProgress[$key] = $progress;
+            $i++;
+        }
+        $k = array_keys($allProgress);
+        $v = array_values($allProgress);
+
+        $rv = array_reverse($v);
+
+        $allProgress = array_combine($k, $rv);
+
+        return [$allCharges,$allProgress];
     }
 
     public function chargesAndProgress($activities){
@@ -65,7 +113,7 @@ class UserStravaPanel extends Component
             return -1;
         }
         $last_start_date = reset($activities_run)->start_date;
-        // ddd($activities_run[array_key_last($activities_run)]);
+
         $first_start_date = $activities_run[array_key_last($activities_run)]->start_date;
         $now = \Carbon\Carbon::now();
         $first_start_date = \Carbon\Carbon::parse($first_start_date);
@@ -94,7 +142,7 @@ class UserStravaPanel extends Component
             });
             $weeks[\Carbon\Carbon::now()->subweeks($i)->format('Y-m-d H:i')] = $week;
         }
-        // ddd($weeks);
+
         $sumweek_time = [];
         foreach($weeks as $week){
             $sumweek_time[] = array_sum(array_map(function($week) {
@@ -107,11 +155,9 @@ class UserStravaPanel extends Component
               return $week->distance;
             }, $week));
         }
-        // ddd($sumweek_distance);
+
         $last_weeks = array_slice($sumweek_distance, 1, 3, true);
 
-        // ddd($last_weeks);
-        // return $sumweek_distance;
         $sumweek_distance_avg = array_sum($last_weeks)/count($last_weeks);
         if($sumweek_distance_avg == 0){
             $charges = -1;

@@ -2,7 +2,7 @@
 <div class="container mx-auto mt-4">
     <!-- This example requires Tailwind CSS v2.0+ -->
     <div class="flex-col sm:flex-row flex gap-4">
-        <div class="w-full sm:w-2/3 bg-gray-50 shadow overflow-hidden sm:rounded-lg">
+        <div class="w-full order-2 sm:order-1 sm:w-2/3 bg-gray-50 shadow overflow-hidden sm:rounded-lg">
           <div class="flex px-4 py-5 sm:px-6 justify-between">
             <div class="flex flex-col">
               <h3 class="text-lg leading-6 font-medium text-primary-500">
@@ -147,7 +147,7 @@
         </div>
 
 
-        <div class="w-full sm:w-1/3 flex flex-col gap-y-4">
+        <div class="w-full order-1 sm:order-2 sm:w-1/3 flex flex-col gap-y-4">
             <div class="h-auto bg-gray-50 shadow overflow-hidden sm:rounded-lg ">
               <div class="flex px-4 py-5 sm:px-6 justify-between">
                 <div class="flex flex-col">

@@ -74,7 +74,7 @@
                       data: {
                         labels: {!! json_encode(array_keys($this->allData)) !!},
                         datasets: [{
-                          label: 'Distancias Semanales',
+                          label: 'Historial de Indicadores de Carga',
                           data: [
                             @foreach($this->allData as $key => $week)
                             {

@@ -56,7 +56,7 @@
             </div>
 
         </div>
-        <div class="grid grid-cols-2">
+        <div class="grid grid-cols-2 gap-x-2">
             <div>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
@@ -75,78 +75,63 @@
                         }
                       },
                       data: {
-                        labels: {!! json_encode(array_keys($this->allData)) !!},
+                        labels: {!! json_encode(array_keys(array_slice($this->allData,count($this->allData)-4,count($this->allData),true))) !!},
                         datasets: [{
-                          label: 'Distancias Semanales',
+                          label: 'Indicadores de Carga',
                           data: [
-                            @foreach($this->allData as $key => $week)
+                            @foreach($this->dataCharges as $key => $value)
                             {
-                              t: '{{$key}}',
-                              y: {{round(array_sum(array_map(function($week) {return $week->distance;}, $week))/1000,2)}}
+                                t: '{{$key}}',
+                                y: {{round($value,4)}}
                             } {{(!$loop->last) ? ',' : ''}}
                             @endforeach
                             ,
                           ],
-                          backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)'
-                          ],
-                          borderColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)'
-                          ],
-                          borderWidth: 1
-                        },{
-                          label: 'Distancias Semanales 2',
-                          data: [
-                            @foreach($this->allData as $key => $week)
-                            {
-                              t: '{{$key}}',
-                              y: 10
-                            } {{(!$loop->last) ? ',' : ''}}
-                            @endforeach
-                            ,
-                          ],
-                          backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)'
-                          ],
-                          borderColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)'
-                          ],
-                          borderWidth: 1
+                          backgroundColor: 'rgba(242, 113, 90, 0.1)',
+                          borderColor: 'rgba(242, 113, 90, 1)',
+                          borderWidth: 2
                         }]
                       }
                     });
                 </script>
             </div>
             <div>
-                Hola
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+                <div class="container block ">
+                  <canvas id="examChart2"></canvas>
+                </div>
+                <script>
+                    var ctx = document.getElementById("examChart2").getContext("2d");
+                    var myChart = new Chart(ctx, {
+                      type: 'line',
+                      options: {
+                        scales: {
+                          xAxes: [{
+                            type: 'time',
+                          }]
+                        }
+                      },
+                      data: {
+                        labels: {!! json_encode(array_keys(array_slice($this->allData,count($this->allData)-4,count($this->allData),true))) !!},
+                        datasets: [{
+                          label: 'Indicadores de Progresión',
+                          data: [
+                            @foreach($this->dataProgress as $key => $value)
+                            {
+                                t: '{{$key}}',
+                                y: {{round($value,4)}}
+                            } {{(!$loop->last) ? ',' : ''}}
+                            @endforeach
+                            ,
+                          ],
+                          backgroundColor: 'rgba(242, 113, 90, 0.1)',
+                          borderColor: 'rgba(242, 113, 90, 1)',
+                          borderWidth: 2
+                        }]
+                      }
+                    });
+                </script>
             </div>
         </div>
         <div class="grid grid-cols-4 mt-10">
