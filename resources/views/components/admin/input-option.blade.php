@@ -1,1 +1,1 @@
-<option value="{{$value}}" {{  $actual == $value ? "selected" : "" }}>{{$slot}}</option>
+<option value="{{$value}}" {{  $actual ?? '' == $value ? "selected" : "" }}>{{$slot}}</option>
