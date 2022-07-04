@@ -5,22 +5,14 @@
     <div class="flex flex-col gap-y-2 md:gap-y-0 md:grid md:grid-cols-4 md:justify-between items-start" x-data="{ charges: false,progress: false }">
         <div class="flex flex-col items-center">
             <img class="rounded-full w-28" src="{{$user->strava->avatar}}">
-        </div>
-        <div class="flex flex-col">
             <h2 class="text-2xl">{{$user->fullname()}}</h2>
-            <h3 class="text-xl">Edad: {{$user->age()}}</h3>
-            <h3 class="text-lg">Deportes:</h3>
-            <ul class="list-disc list-inside">
-            @foreach(Auth::user()->sports() as $key => $sports)
-                <li>{{$key}}</li>
-            @endforeach
-            </ul>
         </div>
         <div class="flex flex-col">
             <div class="w-auto mx-1 bg-{{$chargeColor}}-300 border-{{$chargeColor}}-300 rounded-lg shadow-xl flex flex-col">
                 <div class="flex flex-row items-center p-5">
                     <div class="flex-1 text-right md:text-center">
-                        <p class="font-bold uppercase text-sm">Ratio Carga Actual vs Previa {{ round($charges,4) > 0 ? round($charges,4) : "Falta Información" }}
+                        <p class="font-bold uppercase text-sm">Ratio Carga Actual vs Previa</p>
+                        <p class="font-bold text-md mt-2">{{ round($charges,4) > 0 ? round($charges,4) : "Falta Información" }}
                         </p>
                     </div>
                 </div>
@@ -46,7 +38,8 @@
             <div class="w-auto mx-1 bg-{{$progresColor}}-300 border-{{$progresColor}}-300 rounded-lg shadow-xl flex flex-col">
                 <div class="flex flex-row items-center p-5">
                     <div class="flex-1 text-right md:text-center">
-                        <p class="font-bold uppercase text-sm">Progresión Semanal Carga {{ round($progress,2)."%" }}
+                        <p class="font-bold uppercase text-sm">Progresión Semanal Carga</p>
+                        <p class="font-bold text-md mt-2">{{ round($progress,2)."%" }}
                     </div>
                 </div>
                 <div class="flex flex-col bg-{{$progresColor}}-500 rounded-b-lg px-5 py-1">
@@ -64,18 +57,10 @@
                 </div>
             </div>
         </div>
-
-    </div>
-
-    <div class="container-col">
-        <a href="https://www.strava.com/clubs/youjustbetter?utm_source=com.whatsapp&utm_medium=referral" target="_blank" class="bg-primary-500 hover:bg-primary-900 text-white text-base sm:text-xl font-bold rounded-lg text-center uppercase border-white border-2 py-4 w-4/5 lg:w-2/5 my-0.5">Únete a nuestro equipo de Strava</a>
-    </div>
-
-    <div class="grid grid-cols-2 gap-x-2">
         <div>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
-            <div class="container block ">
+            <div class="container">
               <canvas id="examChart"></canvas>
             </div>
             <script>
@@ -90,59 +75,38 @@
                     }
                   },
                   data: {
-                    labels: {!! json_encode(array_keys(array_slice($this->allData,count($this->allData)-4,count($this->allData),true))) !!},
+                    labels: {!! json_encode(array_keys($this->allData)) !!},
                     datasets: [{
-                      label: 'Indicadores de Carga',
+                      label: 'Historial de Indicadores de Carga',
                       data: [
-                        @foreach($this->dataCharges as $key => $value)
+                        @foreach($this->allData as $key => $week)
                         {
-                            t: '{{$key}}',
-                            y: {{round($value,4)}}
+                          t: '{{$key}}',
+                          y: {{round(array_sum(array_map(function($week) {return $week->distance;}, $week))/1000,2)}}
                         } {{(!$loop->last) ? ',' : ''}}
                         @endforeach
-                        ,
                       ],
-                      backgroundColor: 'rgba(242, 113, 90, 0.1)',
-                      borderColor: 'rgba(242, 113, 90, 1)',
-                      borderWidth: 2
-                    }]
-                  }
-                });
-            </script>
-        </div>
-        <div>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
-            <div class="container block ">
-              <canvas id="examChart2"></canvas>
-            </div>
-            <script>
-                var ctx = document.getElementById("examChart2").getContext("2d");
-                var myChart = new Chart(ctx, {
-                  type: 'line',
-                  options: {
-                    scales: {
-                      xAxes: [{
-                        type: 'time',
-                      }]
-                    }
-                  },
-                  data: {
-                    labels: {!! json_encode(array_keys(array_slice($this->allData,count($this->allData)-4,count($this->allData),true))) !!},
-                    datasets: [{
-                      label: 'Indicadores de Progresión',
-                      data: [
-                        @foreach($this->dataProgress as $key => $value)
-                        {
-                            t: '{{$key}}',
-                            y: {{round($value,4)}}
-                        } {{(!$loop->last) ? ',' : ''}}
-                        @endforeach
-                        ,
+                      backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 99, 132, 0.2)'
                       ],
-                      backgroundColor: 'rgba(242, 113, 90, 0.1)',
-                      borderColor: 'rgba(242, 113, 90, 1)',
-                      borderWidth: 2
+                      borderColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 99, 132, 0.2)'
+                      ],
+                      borderWidth: 1
                     }]
                   }
                 });
@@ -176,7 +140,7 @@
                     @elseif($loop->index == 3)
                         @php $actualKey = '22 a 29 días atrás'  @endphp
                     @elseif($loop->index == 4)
-                        @php $actualKey = 'Fuera de Rango'  @endphp
+                        @break
                     @endif
                     @foreach($week as $activity)
                         <tr>

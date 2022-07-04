@@ -56,7 +56,7 @@ class UserStravaPanel extends Component
         $this->dataCharges = $this->dataArray($this->allData)[0];
         $this->dataProgress = $this->dataArray($this->allData)[1];
 
-        return view('livewire.user-strava-panel2');
+        return view('livewire.user-strava-panel');
     }
 
     public function dataArray($allData) {

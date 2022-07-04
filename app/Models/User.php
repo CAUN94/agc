@@ -17,6 +17,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
+use Strava;
 
 class User extends Authenticatable {
 	use HasApiTokens, HasFactory, Notifiable;
@@ -324,4 +325,19 @@ class User extends Authenticatable {
 	public function getPayments(){
 		return $this->payments()->get();
 	}
+
+	public function activitiesStrava(){
+        $user = $this->strava->first();
+        $token = $user->access_token;
+        return Strava::activities($token,1,200);
+    }
+
+    public function sports(){
+    	$activities = $this->activitiesStrava();
+    	$sports = [];
+    	foreach ($activities as $key => $value) {
+    		$sports[] = $value->type;
+    	}
+    	return array_count_values($sports);
+    }
 }
