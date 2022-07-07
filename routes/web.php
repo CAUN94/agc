@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\UpdatePassword;
-use Spatie\GoogleCalendar\Event;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,17 +15,8 @@ use Spatie\GoogleCalendar\Event;
 |
  */
 
-// Route::get('/calendar', function(){
-//     $event = new Event;
-
-//     $event->name = 'por fin funciona LPM';
-//     $event->startDateTime = \Carbon\Carbon::now();
-//     $event->endDateTime = \Carbon\Carbon::now()->addHour();
-//     // $event->addAttendee(['email' => 'anotherEmail@gmail.com']);
-//     $event->save();
-//     return Event::get();
-// });
-
+Route::get('/calendar', [CalendarController::class, 'google']);
+Route::get('/icalendar', [CalendarController::class, 'icalendar']);
 
 Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/mercadopagosearch', [MercadoPagoController::class, 'index']);
