@@ -197,6 +197,11 @@ class RedirectController extends Controller {
 		return Redirect::away($url);
 	}
 
+	public function encuesta-haas(){
+		$url = "https://forms.gle/DFM9JJwcBGyaLPyq7";
+		return Redirect::away($url);
+	}
+
 
 
 }

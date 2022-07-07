@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\UpdatePassword;
+use Spatie\GoogleCalendar\Event;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,19 @@ use App\Http\Middleware\UpdatePassword;
 | contains the "web" middleware group. Now create something great!
 |
  */
+
+// Route::get('/calendar', function(){
+//     $event = new Event;
+
+//     $event->name = 'por fin funciona LPM';
+//     $event->startDateTime = \Carbon\Carbon::now();
+//     $event->endDateTime = \Carbon\Carbon::now()->addHour();
+//     // $event->addAttendee(['email' => 'anotherEmail@gmail.com']);
+//     $event->save();
+//     return Event::get();
+// });
+
+
 Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/mercadopagosearch', [MercadoPagoController::class, 'index']);
 
@@ -90,6 +104,7 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/registro', 'App\Http\Controllers\RedirectController@registro');
     Route::get('/comunicaciones', 'App\Http\Controllers\RedirectController@comunicaciones');
     Route::get('/pendientes', 'App\Http\Controllers\RedirectController@pendientes');
+    Route::get('/encuesta-haas', 'App\Http\Controllers\RedirectController@encuesta-haas');
     Route::get('/solicitud-desarrollo', 'App\Http\Controllers\RedirectController@development');
     Route::get('/solicitud-comunicaciones', 'App\Http\Controllers\RedirectController@communications');
     Route::get('/solicitud-administracion', 'App\Http\Controllers\RedirectController@administration');
