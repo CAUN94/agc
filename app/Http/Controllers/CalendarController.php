@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Spatie\GoogleCalendar\Even;
+use Spatie\GoogleCalendar\Event as GCalendar;
 // use Spatie\IcalendarGenerator\Components\Calendar;
 // use Spatie\IcalendarGenerator\Components\Event as IEvent;
 // use Spatie\IcalendarGenerator\Properties\TextProperty;
@@ -11,14 +11,14 @@ use Spatie\GoogleCalendar\Even;
 class CalendarController extends Controller
 {
     public function google(){
-        $event = new Event::subscribe(subscriber);;
+        $event = new Event;
 
         $event->name = 'por fin funciona LPM';
         $event->startDateTime = \Carbon\Carbon::now();
         $event->endDateTime = \Carbon\Carbon::now()->addHour();
         // $event->addAttendee(['email' => 'anotherEmail@gmail.com']);
         $event->save();
-        return Event::subscribe(subscriber);::get();
+        return Event::get();
     }
 
     // public function icalendar(){
