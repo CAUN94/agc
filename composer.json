@@ -22,7 +22,6 @@
         "livewire/livewire": "^2.6",
         "mediconesystems/livewire-datatables": "0.8.0",
         "mercadopago/dx-php": "^2.4",
-        "spatie/icalendar-generator": "^2.3",
         "spatie/laravel-backup": "^6.16",
         "spatie/laravel-google-calendar": "^3.5",
         "wildbit/swiftmailer-postmark": "^3.3"
