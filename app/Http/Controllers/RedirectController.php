@@ -197,7 +197,7 @@ class RedirectController extends Controller {
 		return Redirect::away($url);
 	}
 
-	public function encuesta-haas(){
+	public function encuestahaas(){
 		$url = "https://forms.gle/DFM9JJwcBGyaLPyq7";
 		return Redirect::away($url);
 	}

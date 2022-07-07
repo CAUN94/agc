@@ -104,7 +104,7 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/registro', 'App\Http\Controllers\RedirectController@registro');
     Route::get('/comunicaciones', 'App\Http\Controllers\RedirectController@comunicaciones');
     Route::get('/pendientes', 'App\Http\Controllers\RedirectController@pendientes');
-    Route::get('/encuesta-haas', 'App\Http\Controllers\RedirectController@encuesta-haas');
+    Route::get('/encuesta-haas', 'App\Http\Controllers\RedirectController@encuestahaas');
     Route::get('/solicitud-desarrollo', 'App\Http\Controllers\RedirectController@development');
     Route::get('/solicitud-comunicaciones', 'App\Http\Controllers\RedirectController@communications');
     Route::get('/solicitud-administracion', 'App\Http\Controllers\RedirectController@administration');
