@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Spatie\GoogleCalendar\Event as GCalendar;
+use Spatie\GoogleCalendar\Event;
 // use Spatie\IcalendarGenerator\Components\Calendar;
 // use Spatie\IcalendarGenerator\Components\Event as IEvent;
 // use Spatie\IcalendarGenerator\Properties\TextProperty;
