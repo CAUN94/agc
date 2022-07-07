@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Spatie\GoogleCalendar\Event as GCalendar;
-use Spatie\IcalendarGenerator\Components\Calendar;
-use Spatie\IcalendarGenerator\Components\Event as IEvent;
-use Spatie\IcalendarGenerator\Properties\TextProperty;
+// use Spatie\IcalendarGenerator\Components\Calendar;
+// use Spatie\IcalendarGenerator\Components\Event as IEvent;
+// use Spatie\IcalendarGenerator\Properties\TextProperty;
 
 class CalendarController extends Controller
 {
@@ -21,7 +21,7 @@ class CalendarController extends Controller
         return GCalendar::get();
     }
 
-    public function icalendar(){
+    // public function icalendar(){
         // $calendar = Calendar::create('Laracon online')
         // ->event(IEvent::create('Creating calender feeds')
         //     ->organizer('cristobalugarte6@gmail.com', 'Cris')
@@ -43,10 +43,10 @@ class CalendarController extends Controller
 
         // return true;
 
-        $calendar = Calendar::create('Laracon Online');
+        // $calendar = Calendar::create('Laracon Online');
 
-        return response($calendar->get())
-            ->header('Content-Type', 'text/calendar; charset=utf-8');
+        // return response($calendar->get())
+        //     ->header('Content-Type', 'text/calendar; charset=utf-8');
 
-        }
+        // }
 }

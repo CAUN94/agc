@@ -10,6 +10,7 @@
         "codetoad/strava": "^1.0",
         "doctrine/dbal": "^3.3",
         "dymantic/laravel-instagram-feed": "^2.6",
+        "eluceo/ical": "^0.16.1",
         "fabpot/goutte": "^4.0",
         "freshwork/chilean-bundle": "^2.1",
         "fruitcake/laravel-cors": "^2.0",
