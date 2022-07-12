@@ -82,7 +82,7 @@ class UserStravaPanel extends Component
             }
             $allCharges[$key] = $charges;
 
-            if($sumweek_distance[3] == 0){
+            if($sumweek_distance[2] == 0){
                 $progress = -1;
             } else {
                 $progress = ($sumweek_distance[3]/$sumweek_distance[2]-1)*100;
