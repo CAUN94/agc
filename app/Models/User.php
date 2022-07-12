@@ -332,6 +332,10 @@ class User extends Authenticatable {
         return Strava::activities($token,1,200);
     }
 
+    // public function balance(){
+    // 	$this->
+    // }
+
     public function sports(){
     	$activities = $this->activitiesStrava();
     	$sports = [];

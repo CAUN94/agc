@@ -52,4 +52,14 @@ class AppointmentMl extends Model
     public function treatments(){
         return TreatmentMl::where('Atencion',$this->Tratamiento_Nr)->first();
     }
+
+    public static function balance($date){
+        return \DB::table('treatment_mls')
+            ->Join('appointment_mls', 'treatment_mls.Atencion', '=' ,'appointment_mls.Tratamiento_Nr')
+            ->leftJoin('action_mls', 'action_mls.Tratamiento_Nr', '=' ,'appointment_mls.Tratamiento_Nr')
+            ->leftJoin('payment_mls', 'appointment_mls.Tratamiento_Nr', '=' ,'payment_mls.Atencion')
+            ->where('appointment_mls.Fecha', '=' ,$date)
+            ->select('treatment_mls.*')
+            ->get();
+    }
 }
