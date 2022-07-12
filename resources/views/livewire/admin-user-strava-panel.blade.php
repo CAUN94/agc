@@ -11,9 +11,9 @@
             <h3 class="text-xl">Edad: {{$user->age()}}</h3>
             <h3 class="text-lg">Deportes:</h3>
             <ul class="list-disc list-inside">
-            @foreach(Auth::user()->sports() as $key => $sports)
+            {{-- @foreach(Auth::user()->sports() as $key => $sports)
                 <li>{{$key}}</li>
-            @endforeach
+            @endforeach --}}
             </ul>
         </div>
         <div class="flex flex-col">
