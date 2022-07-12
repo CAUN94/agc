@@ -337,18 +337,6 @@ class User extends Authenticatable {
     // }
     //
 
-    public static function user_sports($id){
-    	$user = User::find($id);
-    	$activities = $user->strava->first()->access_token->access_token;
-    	$token = $user->access_token;
-    	Strava::activities($token,1,200);
-    	$sports = [];
-    	foreach ($activities as $key => $value) {
-    		$sports[] = $value->type;
-    	}
-    	return array_count_values($sports);
-    }
-
     public function sports(){
     	$activities = $this->activitiesStrava();
     	$sports = [];

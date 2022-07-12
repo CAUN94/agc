@@ -1,6 +1,6 @@
 <div class="w-10/12 mx-auto text-white mt-10">
     <div class="my-10">
-        <h1 class="font-futura text-white font-bold text-center uppercase text-2xl lg:text-6xl">You Just <span class="text-primary-500">Better</span></h1>
+        <h1 class="font-futura text-white font-bold text-center uppercase text-2xl lg:text-6xl">You Just <span class="text-primary-500">Better {{$userid}}</span></h1>
     </div>
     <div class="flex flex-col gap-y-2 md:gap-y-0 md:grid md:grid-cols-4 md:justify-between items-start" x-data="{ charges: false,progress: false }">
         <div class="flex flex-col items-center">
@@ -11,9 +11,9 @@
             <h3 class="text-xl">Edad: {{$user->age()}}</h3>
             <h3 class="text-lg">Deportes:</h3>
             <ul class="list-disc list-inside">
-            {{-- @foreach(Auth::user()->sports() as $key => $sports)
+            @foreach(Auth::user()->sports() as $key => $sports)
                 <li>{{$key}}</li>
-            @endforeach --}}
+            @endforeach
             </ul>
         </div>
         <div class="flex flex-col">
