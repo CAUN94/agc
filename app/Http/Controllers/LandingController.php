@@ -12,11 +12,6 @@ class LandingController extends Controller
         return view('welcome');
     }
 
-    public function welcome2()
-    {
-        return view('welcome2');
-    }
-
     public function about()
     {
         return view('about');

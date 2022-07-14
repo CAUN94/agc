@@ -14,7 +14,7 @@
     >
         <li>
             <a href="/users" class="drop-link block text-sm text-gray-700">
-                <span class="drop-span">Perfil</span>
+                <span class="drop-span">Menu</span>
             </a>
         </li>
         @if (Auth::user()->isStudent())

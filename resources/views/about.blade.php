@@ -6,7 +6,7 @@
                 </h1>
             </div>
         </header>
-        <h2 class="text-4xl text-light-grey font-futura font-bold text-center mt-10 lg:-mb-16 uppercase">Kinesiología</h2>
+        <h1 class="text-4xl text-light-grey font-futura font-bold text-center mt-10 lg:-mb-16 uppercase">Kinesiología</h1>
         <x-landing.call>
         </x-landing.call>
         <div class="grid grid-cols-0 lg:grid-cols-3 px-2 lg:px-0 mx-auto w-full container gap-4 mb-8 text-justify gap-x-16 gap-y-4">
