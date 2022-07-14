@@ -66,7 +66,7 @@ class CalendarController extends Controller
         $service = new Calendar($client);
         try{
 
-        $calendarId = 'primary';
+        $calendarId = 'c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com';
         $optParams = array(
             'maxResults' => 10,
             'orderBy' => 'startTime',
@@ -124,37 +124,9 @@ class CalendarController extends Controller
       ),
     ));
 
-    $calendarId = 'primary';
+    $calendarId = 'c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com';
     $event = $service->events->insert($calendarId, $event);
     printf('Event created: %s\n', $event->htmlLink);
     }
 
-    // public function icalendar(){
-        // $calendar = Calendar::create('Laracon online')
-        // ->event(IEvent::create('Creating calender feeds')
-        //     ->organizer('cristobalugarte6@gmail.com', 'Cris')
-        //     ->attendee('cristobal.ugarte@edu.uai.cl')
-        // );
-        // $calendar->appendProperty(TextProperty::create('METHOD', 'REQUEST'));
-
-        // header("text/calendar");
-        // $filename = 'invite.ics';
-        // file_put_contents($filename, "\xEF\xBB\xBF".  $calendar->get());
-
-        // \Mail::send(["text"=>"mail"], array(), function($message) use($filename)
-        // {
-        //     $message->from('cristobalugarte6@gmail.com', 'Jon Doe');
-        //     $message->to('cristobalugarte6@gmail.com')->subject('Registration information');
-
-        //     $message->attach($filename, array('mime' => "text/calendar"));
-        // });
-
-        // return true;
-
-        // $calendar = Calendar::create('Laracon Online');
-
-        // return response($calendar->get())
-        //     ->header('Content-Type', 'text/calendar; charset=utf-8');
-
-        // }
 }
