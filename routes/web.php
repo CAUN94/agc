@@ -33,6 +33,10 @@ Route::middleware([UpdatePassword::class])->group(function () {
 
 
     Route::resource('users', 'App\Http\Controllers\UsersController')->middleware(['auth']);
+    Route::get('/calendar', [LandingController::class, 'calendar'])->middleware(['auth']);
+    Route::get('/healthy', [LandingController::class, 'healthy'])->middleware(['auth']);
+    Route::get('/nutrition', [LandingController::class, 'nutrition'])->middleware(['auth']);
+
 
     Route::resource('trainings', 'App\Http\Controllers\TrainingController');
     Route::resource('students', 'App\Http\Controllers\StudentController');

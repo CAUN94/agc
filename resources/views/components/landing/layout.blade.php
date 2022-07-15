@@ -30,7 +30,7 @@
             <script> gtag('event', 'conversion', {'send_to': 'AW-10872889051/Jlg6CIvr9KsDENu9zMAo'}); </script>
         @endif
     </head>
-    <body class="h-full px-2">
+    <body class="flex flex-col h-screen">
         <div class="sticky-menu z-50 top-0 ">
             <div
                 class="nav-menu"
@@ -63,7 +63,7 @@
             {{ $slot }}
         </div>
 
-        <footer class="bg-you-grey h-auto py-4 text-center py-4">
+        <footer class="bg-you-grey h-auto py-4 text-center py-4 bottom-0">
             <span class="text-white">© You Just Better <script>document.write(new Date().getFullYear())</script></span>
         </footer>
 

@@ -34,6 +34,23 @@ class LandingController extends Controller
         return view('team',compact('team'));
     }
 
+    public function calendar(){
+        $user = Auth::user();
+        return view('users.calendar',compact('user'));
+    }
+
+    public function healthy(){
+        $user = Auth::user();
+        return view('users.healthy',compact('user'));
+    }
+
+    public function nutrition(){
+        $user = Auth::user();
+        return view('users.nutrition',compact('user'));
+    }
+
+
+
     public function tables()
     {
         return view('tables');

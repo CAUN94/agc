@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Admin;
 use App\Models\Alliance;
 use App\Models\AppointmentMl;
+use App\Models\Nutrition;
 use App\Models\Professional;
 use App\Models\StravaUser;
 use App\Models\Student;
@@ -151,7 +152,7 @@ class User extends Authenticatable {
 	}
 
 	public function allStudentPlan() {
-		return $this->hasMany(Student::class)->orderby('start_day', 'asc');
+		return $this->hasMany(Student::class)->orderby('start_day', 'desc');
 	}
 
 	public function notSettledPlan() {
@@ -345,4 +346,15 @@ class User extends Authenticatable {
     	}
     	return array_count_values($sports);
     }
+
+    public function nutrition(){
+		return Nutrition::where('rut',$this->rut);
+	}
+
+	public function hasNutrition(){
+		if ($this->nutrition()->count()>0){
+			return True;
+		}
+		return False;
+	}
 }
