@@ -1,0 +1,33 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class AddCalendarColumnToAppointmentMl extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('appointment_mls', function (Blueprint $table) {
+            $table->boolean('professional_calendar')->after('Sucursal')->default(0);
+            $table->boolean('user_calendar')->after('professional_calendar')->default(0);
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('appointment_mls', function (Blueprint $table) {
+            $table->dropColumn('professional_calendar');
+        });
+    }
+}

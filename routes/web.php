@@ -15,8 +15,9 @@ use App\Http\Middleware\UpdatePassword;
 |
  */
 
-Route::get('/calendar', [CalendarController::class, 'google']);
-Route::get('/icalendar', [CalendarController::class, 'icalendar']);
+Route::get('/gcalendar', [CalendarController::class, 'index']);
+Route::get('/gcalendar_massive', [CalendarController::class, 'superstore']);
+Route::get('/google', [CalendarController::class, 'google']);
 
 Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/mercadopagosearch', [MercadoPagoController::class, 'index']);
@@ -36,6 +37,7 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/calendar', [LandingController::class, 'calendar'])->middleware(['auth']);
     Route::get('/healthy', [LandingController::class, 'healthy'])->middleware(['auth']);
     Route::get('/nutrition', [LandingController::class, 'nutrition'])->middleware(['auth']);
+    Route::get('/calendar/store/{id}', [CalendarController::class, 'store'])->middleware(['auth']);
 
 
     Route::resource('trainings', 'App\Http\Controllers\TrainingController');

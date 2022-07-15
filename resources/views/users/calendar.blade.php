@@ -40,11 +40,17 @@
                       <span>Hora: {{$horai}} {{$horaf}}</span>
                       <span>Profesional: {{ $appointment->Profesional}}</span>
                       @if($appointment->treatments()->isPay())
-                      <span class="text-green-500">Pagado</span>
-                    @else
-                      <x-medilinkpay id="{{$appointment->treatments()->id}}"></x-medilinkpay>
-                    @endif
+                      < span class="text-green-500">Pagado</span>
+                      @else
+                        <x-medilinkpay id="{{$appointment->treatments()->id}}"></x-medilinkpay>
+                      @endif
                     </div>
+                    @if(!$appointment->professional_calendar)
+                    <a href="/calendar/store/{{$appointment->id}}" class="flex items-center">Agregar a Calendario <img class="ml-2 h-8 w-8" src="{{ asset('/img/calendar.png') }}"></a>
+                    @else
+                      Agenado en Calendario
+                    @endif
+
                   </div>
                 </div>
               </div>

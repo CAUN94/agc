@@ -53,6 +53,11 @@ class AppointmentMl extends Model
         return TreatmentMl::where('Atencion',$this->Tratamiento_Nr)->first();
     }
 
+    public static function nextProfessional($professional){
+        $professional = 'Alonso Niklitschek Sanhueza';
+        return AppointmentMl::where('Fecha','>=',\Carbon\Carbon::tomorrow()->format('Y-m-d'))->where('Profesional',$professional)->where('professional_calendar',0)->orderby('Fecha','asc')->limit(1);
+    }
+
     public static function balance($date){
         return \DB::table('treatment_mls')
             ->Join('appointment_mls', 'treatment_mls.Atencion', '=' ,'appointment_mls.Tratamiento_Nr')
