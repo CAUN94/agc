@@ -202,6 +202,11 @@ class RedirectController extends Controller {
 		return Redirect::away($url);
 	}
 
+	public function strava(){
+		$url = "https://www.strava.com/clubs/1043089";
+		return Redirect::away($url);
+	}
+
 
 
 }

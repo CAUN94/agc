@@ -30,6 +30,14 @@
       <a class="my-1 py-1" href="/medilink/treatments">Treatments</a>
     </x-nav-dropdown>
 
+    <x-nav-dropdown>
+      <x-slot name="name"><i class="fas fa-notes-medical mr-1"></i>Haas</x-slot>
+      <x-slot name="trigger">haas</x-slot>
+      <a class="py-1" href="/admin/nutrition">Nutrición</a>
+      <a class="my-1 py-1" href="#">Kinesiologia</a>
+      <a class="my-1 py-1" href="#">Deporte</a>
+    </x-nav-dropdown>
+
 {{--     <x-nav-dropdown>
       <x-slot name="name">Example</x-slot>
       <x-slot name="trigger">example</x-slot>
