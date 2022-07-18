@@ -6,11 +6,11 @@
     <a class="text-lg {{ Request::is('calendar') ? 'bg-primary-100 text-you-grey hover:text-white' : 'hover:text-you-grey hover:bg-primary-100 text-primary-500' }} px-4 py-4 border-b" href="/calendar">
       Tu Agenda
     </a>
-    <a class="text-lg {{ Request::is('nutrition') ? 'bg-primary-100 text-you-grey hover:text-white' : 'hover:text-you-grey hover:bg-primary-100 text-primary-500' }} px-4 py-4 border-b" href="/nutrition">
+{{--     <a class="text-lg {{ Request::is('nutrition') ? 'bg-primary-100 text-you-grey hover:text-white' : 'hover:text-you-grey hover:bg-primary-100 text-primary-500' }} px-4 py-4 border-b" href="/nutrition">
       Nutrición
     </a>
     <a class="text-lg {{ Request::is('healthy') ? 'bg-primary-100 text-you-grey hover:text-white' : 'hover:text-you-grey hover:bg-primary-100 text-primary-500' }} px-4 py-4" href="/healthy">
       Analisis de Salud
-    </a>
+    </a> --}}
   </div>
 </div>
