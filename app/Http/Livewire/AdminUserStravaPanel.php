@@ -33,7 +33,7 @@ class AdminUserStravaPanel extends Component
               'refresh_token' => $refresh->refresh_token,
               'token_expires' => Carbon::createFromTimestamp($refresh->expires_at)
             ]);
-            $this->user = User::find($this->userid)->strava->first();
+            $this->user = User::find($this->userid)->strava
         // }
 
         $token = $this->user->access_token;
