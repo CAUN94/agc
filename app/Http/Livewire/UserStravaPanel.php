@@ -28,7 +28,7 @@ class UserStravaPanel extends Component
               'refresh_token' => $refresh->refresh_token,
               'token_expires' => Carbon::createFromTimestamp($refresh->expires_at)
             ]);
-            $this->user = Auth::user()->strava->first();
+            $this->user = Auth::user()->strava;
         // }
 
         $token = $this->user->access_token;
