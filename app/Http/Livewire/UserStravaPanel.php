@@ -20,7 +20,7 @@ class UserStravaPanel extends Component
     {
         $this->user = Auth::user()->strava;
 
-        if(Carbon::now() > $this->user->token_expires){
+        // if(Carbon::now() > $this->user->token_expires){
             // Token has expired, generate new tokens using the currently stored user refresh token
             $refresh = Strava::refreshToken($this->user->refresh_token);
             Auth::user()->strava->update([
@@ -29,10 +29,9 @@ class UserStravaPanel extends Component
               'token_expires' => Carbon::createFromTimestamp($refresh->expires_at)
             ]);
             $this->user = Auth::user()->strava->first();
-        }
+        // }
 
         $token = $this->user->access_token;
-
         $this->activities = Strava::activities($token,1,200);
         $chargesAndProgress = $this->chargesAndProgress($this->activities);
         $this->charges = $chargesAndProgress[0];
