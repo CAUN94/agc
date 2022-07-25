@@ -207,6 +207,11 @@ class RedirectController extends Controller {
 		return Redirect::away($url);
 	}
 
+	public function viarunning(){
+		$url = "https://docs.google.com/forms/d/e/1FAIpQLSelhtRWSR60BQpR_MasmD_Nbast35NVZmLiafB4m_ZBrDo2-A/viewform?usp=sf_link";
+		return Redirect::away($url);
+	}
+
 
 
 }
