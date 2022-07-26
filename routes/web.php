@@ -116,7 +116,7 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/techosalud', 'App\Http\Controllers\RedirectController@techo');
     Route::get('/krunners', 'App\Http\Controllers\RedirectController@krunners');
     Route::get('/viarunning', 'App\Http\Controllers\RedirectController@viarunning');
-
+    Route::get('/academia', 'App\Http\Controllers\RedirectController@academia');
 
     Route::get('/box/dcontrerasb', 'App\Http\Controllers\RedirectController@contreras');
     Route::get('/box/rbarchiesiv', 'App\Http\Controllers\RedirectController@barchiesi');

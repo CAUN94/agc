@@ -212,6 +212,9 @@ class RedirectController extends Controller {
 		return Redirect::away($url);
 	}
 
-
+	public function academia(){
+		$url = "https://you-just-better-programs.teachable.com/courses";
+		return Redirect::away($url);
+	}
 
 }
