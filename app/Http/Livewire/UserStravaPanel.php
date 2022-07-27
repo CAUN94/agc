@@ -75,14 +75,14 @@ class UserStravaPanel extends Component
             $last_weeks = array_slice($sumweek_distance, 0, 2, true);
             $sumweek_distance_avg = array_sum($last_weeks)/count($last_weeks);
             if($sumweek_distance_avg == 0){
-                $charges = -1;
+                $charges = 0;
             } else {
                 $charges = $sumweek_distance[0]/$sumweek_distance_avg;
             }
             $allCharges[$key] = $charges;
 
             if($sumweek_distance[2] == 0){
-                $progress = -1;
+                $progress = 0;
             } else {
                 $progress = ($sumweek_distance[3]/$sumweek_distance[2]-1)*100;
             }
@@ -159,13 +159,13 @@ class UserStravaPanel extends Component
 
         $sumweek_distance_avg = array_sum($last_weeks)/count($last_weeks);
         if($sumweek_distance_avg == 0){
-            $charges = -1;
+            $charges = 0;
         } else {
             $charges = $sumweek_distance[0]/$sumweek_distance_avg;
         }
 
         if($sumweek_distance[1] == 0){
-            $progress = -1;
+            $progress = 0;
         } else {
             $progress = ($sumweek_distance[0]/$sumweek_distance[1]-1)*100;
         }
