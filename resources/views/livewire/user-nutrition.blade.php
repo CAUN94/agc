@@ -2,7 +2,7 @@
       <div class="bg-gray-50 shadow overflow-hidden sm:rounded-lg">
         <div class="flex px-4 py-5 sm:px-6 justify-between">
           <div class="flex justify-between w-full">
-            <h3 class="text-2xl leading-2 font-medium text-primary-500">
+            <h3 class="text-base sm:text-2xl leading-2 font-medium text-primary-500">
               Nuestros servicios para el analisis de salud
             </h3>
           </div>
@@ -20,13 +20,13 @@
               </select>
             </div>
             <div class="items-center">
-                <a href="{{asset('pdf/tyc.pdf')}}" download>Descargar PDF <img src="{{$user->profilePic()}}" class="avatar h-12 w-12 ml-4"></a>
+                <a href="{{asset('pdf/tyc.pdf')}}" download>Descargar PDF <img src="{{$user->profilePic()}}" class="avatar h-10 w-10 sm:h-12 sm:w-12 ml-4"></a>
             </div>
           </div>
           <div class="border-t border-gray-200">
             <div class="bg-white text-sm px-4 py-5 grid sm:gap-4 sm:px-6">
                 <span class="text-lg">Básicos</span>
-                <div class="grid grid-cols-3 gap-x-4">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-x-4">
                     <div class="border p-3 flex">
                         <span class="text-base mr-4">Peso:</span>
                         <span class="text-base">{{$nutrition->peso}}</span>
@@ -43,7 +43,7 @@
             </div>
             <div class="bg-white text-sm px-4 py-5 grid sm:gap-4 sm:px-6">
                 <span class="text-lg text-center">Antrometría</span>
-                <div class="grid grid-cols-2 gap-x-8 gap-y-4 mx-20">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 mx-10 sm:mx-20">
                     <div class="w-auto">
                         <p class="py-2">Masa Adiposa</p>
                         <div class="grid grid-cols-2">
@@ -94,7 +94,7 @@
                 </section>
                 <div class="bg-white text-sm px-4 py-5 grid sm:gap-4 sm:px-6">
                     <span class="text-lg text-center">Pliegues</span>
-                    <div class="grid grid-cols-4 gap-4">
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
                         <div class="border p-3 flex">
                             <span class="text-base mr-4">Triceps:</span>
                             <span class="text-base">{{$nutrition->tricep}}</span>
