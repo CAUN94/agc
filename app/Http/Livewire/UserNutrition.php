@@ -22,6 +22,7 @@ class UserNutrition extends Component
         $this->nutrition = Nutrition::find($this->nutritionID);
     }
 
+    public function createNutrinion(){}
 
     public function render()
     {
