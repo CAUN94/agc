@@ -202,6 +202,19 @@ class RedirectController extends Controller {
 		return Redirect::away($url);
 	}
 
+	public function strava(){
+		$url = "https://www.strava.com/clubs/1043089";
+		return Redirect::away($url);
+	}
 
+	public function viarunning(){
+		$url = "https://docs.google.com/forms/d/e/1FAIpQLSelhtRWSR60BQpR_MasmD_Nbast35NVZmLiafB4m_ZBrDo2-A/viewform?usp=sf_link";
+		return Redirect::away($url);
+	}
+
+	public function academia(){
+		$url = "https://you-just-better-programs.teachable.com/courses";
+		return Redirect::away($url);
+	}
 
 }

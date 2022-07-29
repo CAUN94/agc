@@ -60,19 +60,20 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/adminpage', [AdminPageController::class, 'index'])->middleware(['intranet']);
 
     // Admins
-    Route::resource('adminusers', 'App\Http\Controllers\AdminUserController');
-    Route::resource('adminstudents', 'App\Http\Controllers\AdminStudentController');
-    Route::resource('adminclass', 'App\Http\Controllers\AdminTrainingController');
-    Route::resource('admintrainappointment', 'App\Http\Controllers\AdminTrainAppointmentsController');
-    Route::resource('adminprofessionals', 'App\Http\Controllers\AdminProfessionalsController');
-    Route::resource('admintrainers', 'App\Http\Controllers\AdminTrainersController');
-    Route::get('/adminalliance', [AdminAllianceController::class, 'index']);
-    Route::post('/adminalliance/create', [AdminAllianceController::class, 'store']);
-    Route::resource('adminbookappointment', 'App\Http\Controllers\AdminBookAppointmentsController');
+    Route::resource('adminusers', 'App\Http\Controllers\AdminUserController')->middleware(['intranet']);
+    Route::resource('adminstudents', 'App\Http\Controllers\AdminStudentController')->middleware(['intranet']);
+    Route::resource('adminclass', 'App\Http\Controllers\AdminTrainingController')->middleware(['intranet']);
+    Route::resource('admintrainappointment', 'App\Http\Controllers\AdminTrainAppointmentsController')->middleware(['intranet']);
+    Route::resource('adminprofessionals', 'App\Http\Controllers\AdminProfessionalsController')->middleware(['intranet']);
+    Route::resource('admintrainers', 'App\Http\Controllers\AdminTrainersController')->middleware(['intranet']);
+    Route::get('/adminalliance', [AdminAllianceController::class, 'index'])->middleware(['intranet']);
+    Route::post('/adminalliance/create', [AdminAllianceController::class, 'store'])->middleware(['intranet']);
+    Route::resource('adminbookappointment', 'App\Http\Controllers\AdminBookAppointmentsController')->middleware(['intranet']);
     Route::get('/userml', [UserMlController::class, 'index'])->middleware(['intranet']);
 
+    // Admin Haas
 
-
+    Route::get('/admin/nutrition', [AdminHaasController::class, 'nutrition'])->middleware(['intranet']);
 
     // TrainerAdmins
     Route::resource('trainertrainappointment', 'App\Http\Controllers\TrainerTrainController');
@@ -111,8 +112,12 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/pago', 'App\Http\Controllers\RedirectController@pay');
     Route::get('/rrhh', 'App\Http\Controllers\RedirectController@rrhh');
     Route::get('/clinica', 'App\Http\Controllers\RedirectController@clinica');
+    Route::get('/club-strava', 'App\Http\Controllers\RedirectController@strava');
     Route::get('/techosalud', 'App\Http\Controllers\RedirectController@techo');
     Route::get('/krunners', 'App\Http\Controllers\RedirectController@krunners');
+    Route::get('/viarunning', 'App\Http\Controllers\RedirectController@viarunning');
+    Route::get('/academia', 'App\Http\Controllers\RedirectController@academia');
+
     Route::get('/box/dcontrerasb', 'App\Http\Controllers\RedirectController@contreras');
     Route::get('/box/rbarchiesiv', 'App\Http\Controllers\RedirectController@barchiesi');
     Route::get('/box/icristis', 'App\Http\Controllers\RedirectController@cristi');

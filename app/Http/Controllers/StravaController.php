@@ -51,7 +51,7 @@ class StravaController extends Controller
             return redirect('/strava/auth');
         }
 
-        if(Carbon::now() > $user->token_expires){
+        // if(Carbon::now() > $user->token_expires){
             // Token has expired, generate new tokens using the currently stored user refresh token
             $refresh = Strava::refreshToken($user->refresh_token);
             StravaUser::where('id', $id)->update([
@@ -60,7 +60,7 @@ class StravaController extends Controller
               'token_expires' => Carbon::createFromTimestamp($refresh->expires_at)
             ]);
             $user = StravaUser::where('id', $id)->first();
-        }
+        // }
 
         $token = $user->access_token;
 
@@ -139,7 +139,7 @@ class StravaController extends Controller
             return redirect('/strava/auth');
         }
 
-        if(Carbon::now() > $user->token_expires){
+        // if(Carbon::now() > $user->token_expires){
             // Token has expired, generate new tokens using the currently stored user refresh token
             $refresh = Strava::refreshToken($user->refresh_token);
             StravaUser::where('id', $id)->update([
@@ -148,7 +148,7 @@ class StravaController extends Controller
               'token_expires' => Carbon::createFromTimestamp($refresh->expires_at)
             ]);
             $user = StravaUser::where('id', $id)->first();
-        }
+        // }
 
 
 

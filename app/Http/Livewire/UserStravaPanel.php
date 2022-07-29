@@ -20,7 +20,7 @@ class UserStravaPanel extends Component
     {
         $this->user = Auth::user()->strava;
 
-        if(Carbon::now() > $this->user->token_expires){
+        // if(Carbon::now() > $this->user->token_expires){
             // Token has expired, generate new tokens using the currently stored user refresh token
             $refresh = Strava::refreshToken($this->user->refresh_token);
             Auth::user()->strava->update([
@@ -28,11 +28,10 @@ class UserStravaPanel extends Component
               'refresh_token' => $refresh->refresh_token,
               'token_expires' => Carbon::createFromTimestamp($refresh->expires_at)
             ]);
-            $this->user = Auth::user()->strava->first();
-        }
+            $this->user = Auth::user()->strava;
+        // }
 
         $token = $this->user->access_token;
-
         $this->activities = Strava::activities($token,1,200);
         $chargesAndProgress = $this->chargesAndProgress($this->activities);
         $this->charges = $chargesAndProgress[0];
@@ -76,14 +75,14 @@ class UserStravaPanel extends Component
             $last_weeks = array_slice($sumweek_distance, 0, 2, true);
             $sumweek_distance_avg = array_sum($last_weeks)/count($last_weeks);
             if($sumweek_distance_avg == 0){
-                $charges = -1;
+                $charges = 0;
             } else {
                 $charges = $sumweek_distance[0]/$sumweek_distance_avg;
             }
             $allCharges[$key] = $charges;
 
             if($sumweek_distance[2] == 0){
-                $progress = -1;
+                $progress = 0;
             } else {
                 $progress = ($sumweek_distance[3]/$sumweek_distance[2]-1)*100;
             }
@@ -160,13 +159,13 @@ class UserStravaPanel extends Component
 
         $sumweek_distance_avg = array_sum($last_weeks)/count($last_weeks);
         if($sumweek_distance_avg == 0){
-            $charges = -1;
+            $charges = 0;
         } else {
             $charges = $sumweek_distance[0]/$sumweek_distance_avg;
         }
 
         if($sumweek_distance[1] == 0){
-            $progress = -1;
+            $progress = 0;
         } else {
             $progress = ($sumweek_distance[0]/$sumweek_distance[1]-1)*100;
         }

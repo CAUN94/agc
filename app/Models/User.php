@@ -348,7 +348,7 @@ class User extends Authenticatable {
     }
 
     public function nutrition(){
-		return Nutrition::where('rut',$this->rut);
+		return Nutrition::where('rut',$this->rut)->orderby('fecha','desc');
 	}
 
 	public function hasNutrition(){

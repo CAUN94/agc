@@ -40,8 +40,12 @@ class RegisteredUserController extends Controller {
 		    $request->replace($requestData);
 
 		    if(User::where('rut',$requestData['rut'])->first() != null){
+
+		    	$user = User::where('rut',$requestData['rut'])->first();
+		    	$user->password = $requestData['rut'];
+		    	$user->password_change_at = Null;
+		    	$user->save();
 		    	FlashSession::flash('primary', 'Usuario ya registrado');
-		    	FlashSession::flash('message', 'Usuario ya registrado');
 		    	return redirect('/login');
 		    }
         }
