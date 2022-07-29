@@ -1,7 +1,5 @@
 <x-landing.layout>
-        <x-landing.header>
 
-        </x-landing.header>
 
         <x-landing.call>
         </x-landing.call>
