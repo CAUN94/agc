@@ -13,18 +13,19 @@ class AdminStudent extends Component {
 	public $view;
 
 	public function mount($student) {
-		$this->name = $student->user->name;
-		$this->lastnames = $student->user->lastnames;
-		$this->rut = $student->user->rut;
-		$this->gender = $student->user->gender();
-		$this->email = $student->user->email;
-		$this->phone = $student->user->phone;
-		$this->birthday = $student->user->birthday;
-		$this->address = $student->user->address;
-		$this->profile = $student->user->profilepic();
-		$this->description = $student->user->description;
+		$this->user = $student;
+		$this->name = $student->name;
+		$this->lastnames = $student->lastnames;
+		$this->rut = $student->rut;
+		$this->gender = $student->gender();
+		$this->email = $student->email;
+		$this->phone = $student->phone;
+		$this->birthday = $student->birthday;
+		$this->address = $student->address;
+		$this->profile = $student->profilepic();
+		$this->description = $student->description;
 		$this->view = '';
-		$this->userid = $student->user->id;
+		$this->userid = $student->id;
 		$this->view = '';
 	}
 
