@@ -47,7 +47,7 @@
                       <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
                         <div x-data="{ openModal: false }">
-                            <span class="block text-center items-center bg-primary-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-primary-900 active:bg-primary-900 focus:outline-none focus:border-primary-900 focus:ring ring-primary-100 disabled:opacity-25 transition ease-in-out duration-150" x-on:click="openModal = ! openModal">Renovar Plan</span>
+                            <span class="block text-center items-center py-2 my-2 bg-primary-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-primary-900 active:bg-primary-900 focus:outline-none focus:border-primary-900 focus:ring ring-primary-100 disabled:opacity-25 transition ease-in-out duration-150" x-on:click="openModal = ! openModal">Renovar Plan</span>
                             <x-landing.submit-modal
                               method="PUT"
                               action="/adminstudents/{{$this->user->student()->id}}"
@@ -85,10 +85,24 @@
                         </div>
                         </dt>
                         <dd class="text-sm font-medium text-gray-500">
-                          Nuevo Plan
+                          <div class="col-span-6 sm:col-span-6"></label>  <input type="text" name="user" class="mt-1 focus:ring-primary-500 focus:border-primary-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" wire:model="searchTerm" placeholder="Buscar Plan de Entrenamiento">
+                          </div>
+                          @if($this->trainings && $this->trainings->count() > 0)<ul class="border border-gray-200 rounded overflow-hidden shadow-md col-span-6">
+                            @foreach($this->trainings as $training)
+                            <li wire:click="selectPlan({{$training->id}})" class="px-4 py-2 bg-white  hover:bg-primary-100 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out">
+                              {{$training->planComplete()}}
+                            </li>
+                            @endforeach</ul>
+                          @endif
+
+
                         </dd>
-                        <dd class="text-sm font-medium text-gray-500">
-                          Cargar
+                        <dd class="text-sm font-medium text-gray-500 items-center mt-3">
+                          @if($this->training)
+                            <span class="hover:text-primary-500" wire:click="addPlan({{$this->training->id}})" >Cargar: {{$this->training->planComplete()}}</span>
+                          @else
+                            Cargar:
+                          @endif
                         </dd>
                       </div>
 
