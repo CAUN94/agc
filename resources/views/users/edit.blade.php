@@ -45,6 +45,11 @@
                   Genero
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 flex">
+  {{--                 <select class="col-span-6 sm:col-span-2" name="gender">
+                    <option value="m" actual="{{$user->gender}}">Masculino</option>
+                    <option value="f" actual="{{$user->gender}}">Femenino</option>
+                    <option value="n" actual="{{$user->gender}}">No Especifica</option>
+                  </select> --}}
                   <x-admin.input-select class="col-span-6 sm:col-span-2" name="gender" readonly="edit">
                     <x-slot name="options">
                         <x-admin.input-option value="m" actual="{{$user->gender}}">Masculino</x-admin.input-option>
