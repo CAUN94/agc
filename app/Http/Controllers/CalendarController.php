@@ -17,7 +17,6 @@ class CalendarController extends Controller
         $client = $this->getClient();
         $service = new Calendar($client);
         try{
-
             $calendarId = 'c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com';
             $optParams = array(
                 'maxResults' => 1000,
@@ -58,7 +57,7 @@ class CalendarController extends Controller
             $event = new Google_Service_Calendar_Event(array(
               'summary' => 'Atención con en You Just Better',
               'location' => 'San Pascual 736',
-              'description' => 'Atención con '.$appointment->Profesional,
+              'description' => 'Atención con '.$appointment->Profesional .'\n Estado: ',
               'start' => array(
                 'dateTime' => $start,
                 'timeZone' => 'America/Santiago',
@@ -93,16 +92,15 @@ class CalendarController extends Controller
 
     public function superStore(){
         $appointments = AppointmentMl::nextProfessional('Hola')->get();
-        $client = $this->getClient();
-        $service = new Calendar($client);
-
         foreach ($appointments as $key => $appointment) {
+            $client = $this->getClient();
+            $service = new Calendar($client);
             $start = \Carbon\Carbon::parse($appointment->Fecha)->format('Y-m-d')."T".$appointment->Hora_inicio;
             $end = \Carbon\Carbon::parse($appointment->Fecha)->format('Y-m-d')."T".$appointment->Hora_termino;
             $event = new Google_Service_Calendar_Event(array(
               'summary' => 'Atención a '.$appointment->Nombre_paciente,
               'location' => 'San Pascual 736',
-              'description' => $appointment->Nombre_paciente." ".$appointment->Apellidos_paciente,
+              'description' => $appointment->Nombre_paciente." ".$appointment->Apellidos_paciente."\n Estado: ".$appointment->Estado."\n Con: ".$appointment->Profesional,
               'start' => array(
                 'dateTime' => $start,
                 'timeZone' => 'America/Santiago',
@@ -115,10 +113,10 @@ class CalendarController extends Controller
               ),
               'attendees' => array(
                 array('email' => 'cristobalugarte6@gmail.com'),
-                array('email' => 'alonso7@gmail.com'),
+                // array('email' => 'alonso7@gmail.com'),
                 array('email' => 'cugarte@guiasyscoutschile.cl'),
-                array('email' => 'iver@justbetter.cl'),
-                array('email' => 'pablo@justbetter.cl'),
+                // array('email' => 'iver@justbetter.cl'),
+                // array('email' => 'pablo@justbetter.cl'),
               ),
               'reminders' => array(
                 'useDefault' => False,
@@ -128,10 +126,25 @@ class CalendarController extends Controller
                 ),
               ),
             ));
-
             $calendarId = 'c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com';
             $event = $service->events->insert($calendarId, $event);
-            $appointment->professional_calendar = 1;
+            $appointment->professional_calendar = $event->id;
+            // $service = new Calendar($client);
+            // $service->events->delete($calendarId, $event->id);
+            $appointment->save();
+        }
+        return $appointments;
+    }
+
+    public function superdelete(){
+        $appointments = AppointmentMl::calendarAppointments()->get();
+        $client = $this->getClient();
+        $calendarId = 'c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com';
+        foreach ($appointments as $key => $appointment) {
+            // Falta un if para borrar solo las que no cumplen con las condiciones
+            $service = new Calendar($client);
+            $service->events->delete($calendarId, $appointment->professional_calendar);
+            $appointment->professional_calendar = 0;
             $appointment->save();
         }
         return $appointments;
@@ -184,42 +197,5 @@ class CalendarController extends Controller
         }
         return $client;
     }
-
-    public function google(){
-        $client = $this->getClient();
-        $service = new Calendar($client);
-
-
-    $event = new Google_Service_Calendar_Event(array(
-      'summary' => 'Google I/O 2015',
-      'location' => '800 Howard St., San Francisco, CA 94103',
-      'description' => 'A chance to hear more about Google\'s developer products.',
-      'start' => array(
-        'dateTime' => '2022-07-20T18:00:00-06:00',
-        'timeZone' => 'America/Los_Angeles',
-      ),
-      'end' => array(
-        'dateTime' => '2022-07-20T18:00:00-07:00',
-        'timeZone' => 'America/Los_Angeles',
-      ),
-      'attendees' => array(
-        array('email' => 'cristobalugarte@gmail.com'),
-        array('email' => 'iver.cristi@gmail.com'),
-      ),
-      'reminders' => array(
-        'useDefault' => FALSE,
-        'overrides' => array(
-          array('method' => 'email', 'minutes' => 24 * 60),
-          array('method' => 'popup', 'minutes' => 10),
-        ),
-      ),
-    ));
-
-    $calendarId = 'c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com';
-    $event = $service->events->insert($calendarId, $event);
-    printf('Event created: %s\n', $event->htmlLink);
-    }
-
-
 
 }
