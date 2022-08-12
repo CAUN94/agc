@@ -236,7 +236,7 @@
               @empty
                 <a href="/trainings" class="text-primary-500">Ver Planes de Entrenamiento</a>
               @endforelse
-              {{Auth::user()->allStudentPlan()->with('Training')->paginate(8)->links()}}
+              {{Auth::user()->allStudentPlan()->with('Training')->paginate(3)->links()}}
             </div>
           </div>
         </div>

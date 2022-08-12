@@ -26,7 +26,7 @@ class StudentTable extends LivewireDatatable {
 		return [
 
 			Column::name('users.rut')
-				->link('/adminstudents/{{students.id}}', '{{users.rut}}')
+				->link('/adminstudents/{{users.rut}}', '{{users.rut}}')
 				->label('Rut')
 				->filterable(),
 			Column::name('users.name')

@@ -44,6 +44,69 @@
                           {{$phone}}
                         </dd>
                       </div>
+                      <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                        <div x-data="{ openModal: false }">
+                            <span class="block text-center items-center py-2 my-2 bg-primary-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-primary-900 active:bg-primary-900 focus:outline-none focus:border-primary-900 focus:ring ring-primary-100 disabled:opacity-25 transition ease-in-out duration-150" x-on:click="openModal = ! openModal">Renovar Plan</span>
+                            <x-landing.submit-modal
+                              method="PUT"
+                              action="/adminstudents/{{$this->user->student()->id}}"
+                              :id="$this->user->student()->training_id"
+                              >
+                              <x-slot name="title">
+                                <span>Renovar plan {{$this->user->student()->training->plan()}}</span>
+                              </x-slot>
+                              Estas seguro de querer renovar?
+                              <x-slot name="important">
+                                El plan partira a fin de mes.
+                              </x-slot>
+                              @if(!$this->user->student()->training->isMonthly())
+                              <x-slot name="options">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                                        Por cuantos meses quiere renovar su plan?
+                                    </label>
+                                    <div class="relative">
+                                        <select name="months" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                                            @for ($i = 1; $i <= 12; $i++)
+                                                @if($i == 1)
+                                                    <option value={{$i}}>{{$i}} mes</option>
+                                                    @continue
+                                                @endif
+                                                <option value={{$i}}>{{$i}} meses</option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                              </x-slot>
+                              @endif
+                              <x-slot name="button">
+                                Confirmar
+                              </x-slot>
+                            </x-landing.submit-modal>
+                        </div>
+                        </dt>
+                        <dd class="text-sm font-medium text-gray-500">
+                          <div class="col-span-6 sm:col-span-6"></label>  <input type="text" name="user" class="mt-1 focus:ring-primary-500 focus:border-primary-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" wire:model="searchTerm" placeholder="Buscar Plan de Entrenamiento">
+                          </div>
+                          @if($this->trainings && $this->trainings->count() > 0)<ul class="border border-gray-200 rounded overflow-hidden shadow-md col-span-6">
+                            @foreach($this->trainings as $training)
+                            <li wire:click="selectPlan({{$training->id}})" class="px-4 py-2 bg-white  hover:bg-primary-100 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out">
+                              {{$training->planComplete()}}
+                            </li>
+                            @endforeach</ul>
+                          @endif
+
+
+                        </dd>
+                        <dd class="text-sm font-medium text-gray-500 items-center mt-3">
+                          @if($this->training)
+                            <span class="hover:text-primary-500" wire:click="addPlan({{$this->training->id}})" >Cargar: {{$this->training->planComplete()}}</span>
+                          @else
+                            Cargar:
+                          @endif
+                        </dd>
+                      </div>
+
+
 
                     </dl>
                   </div>
