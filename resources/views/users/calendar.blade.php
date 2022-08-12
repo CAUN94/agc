@@ -76,7 +76,7 @@
               <h3 class="text-base sm:text-lg leading-6 font-medium text-primary-500">
                 Planes de Entrenamiento
               </h3>
-              @if(count(Auth::user()->notSettledPlan)>0 and Auth::user()->notSettledSumPlanIsHigh()){{--  --}}
+              @if(count(Auth::user()->notSettledPlan)>0 and Auth::user()->notSettledSumPlanIsHigh())
                 <x-pay>Pagar Plan</x-pay>
               @endif
               {{Auth::user()->allStudentPlan()->with('Training')->paginate(2)->links()}}

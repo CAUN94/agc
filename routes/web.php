@@ -19,6 +19,8 @@ Route::get('/gcalendar', [CalendarController::class, 'index']);
 Route::get('/gcalendar_massive', [CalendarController::class, 'superstore']);
 Route::get('/google', [CalendarController::class, 'google']);
 
+Route::get('/nubox', [ AdminNuboxController::class, 'nubox']);
+
 Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/mercadopagosearch', [MercadoPagoController::class, 'index']);
 

@@ -4,7 +4,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>You Just Better</title>
+        <title>You Just Better - Kinesiología y Centro de Salud</title>
+
+        <meta name="Description" content="Somos un centro integral de salud, donde mezclamos kinesiología y medicina deportiva que promueve hábitos y estilos de vida saludables, ligados al deporte. Reembolsable por Isapre">
+
+
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">

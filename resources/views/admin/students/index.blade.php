@@ -4,7 +4,7 @@
 	        Tabla Estudiantes
 	    </h1>
 	</div>
-	<div>
+	<div class="grid grid-cols-1">
 		<livewire:student-table/>
 	</div>
 
