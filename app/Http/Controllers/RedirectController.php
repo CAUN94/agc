@@ -70,11 +70,6 @@ class RedirectController extends Controller {
 		return Redirect::away($url);
 	}
 
-	public function barchiesi() {
-		$url = "https://meet.jit.si/rbarchiesiv";
-		return Redirect::away($url);
-	}
-
 	public function cristi() {
 		$url = "https://meet.jit.si/icristis";
 		return Redirect::away($url);
@@ -82,16 +77,6 @@ class RedirectController extends Controller {
 
 	public function guzman() {
 		$url = "https://meet.jit.si/jmguzmanh";
-		return Redirect::away($url);
-	}
-
-	public function maldonado() {
-		$url = "https://meet.jit.si/amaldonados";
-		return Redirect::away($url);
-	}
-
-	public function martinez() {
-		$url = "https://meet.jit.si/mjmartinezm";
 		return Redirect::away($url);
 	}
 
@@ -110,11 +95,6 @@ class RedirectController extends Controller {
 		return Redirect::away($url);
 	}
 
-	public function valenzuela() {
-		$url = "https://meet.jit.si/cvalenzuelar";
-		return Redirect::away($url);
-	}
-
 	public function vivallo() {
 		$url = "https://meet.jit.si/dvivallov";
 		return Redirect::away($url);
@@ -130,11 +110,6 @@ class RedirectController extends Controller {
 		return Redirect::away($url);
 	}
 
-	public function lopez() {
-		$url = "https://meet.jit.si/alopezm";
-		return Redirect::away($url);
-	}
-
 	public function fguzman() {
 		$url = "https://meet.jit.si/fguzmanh";
 		return Redirect::away($url);
@@ -145,17 +120,45 @@ class RedirectController extends Controller {
 		return Redirect::away($url);
 	}
 
-	public function vitali() {
-		$url = "https://meet.jit.si/svitalimz";
-		return Redirect::away($url);
-	}
-
 	public function aceresuelap() {
 		$url = "https://meet.jit.si/aceresuelap";
 		return Redirect::away($url);
 	}
 
+	public function cahumadah() {
+		$url = "https://meet.jit.si/cahumadah";
+		return Redirect::away($url);
+	}
 
+	public function ncedeñow() {
+		$url = "https://meet.jit.si/ncedeñow";
+		return Redirect::away($url);
+	}
+
+	public function rnuches() {
+		$url = "https://meet.jit.si/rnuches";
+		return Redirect::away($url);
+	}
+
+	public function asaezm() {
+		$url = "https://meet.jit.si/asaezm";
+		return Redirect::away($url);
+	}
+
+	public function msilvaa() {
+		$url = "https://meet.jit.si/msilvaa";
+		return Redirect::away($url);
+	}
+
+	public function jvalcarcels() {
+		$url = "https://meet.jit.si/jvalcarcels";
+		return Redirect::away($url);
+	}
+
+	public function mrebolledon() {
+		$url = "https://meet.jit.si/mrebolledon";
+		return Redirect::away($url);
+	}
 
 	public function rrhh() {
 		$url = "https://docs.google.com/forms/d/e/1FAIpQLSfp5FjEXouwK0_Tm6hkHaLMvrzqU6OsXmNhIYHUQ3-vdlbJSA/viewform?usp=sf_link";
