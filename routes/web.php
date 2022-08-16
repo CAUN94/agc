@@ -122,22 +122,23 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/academia', 'App\Http\Controllers\RedirectController@academia');
 
     Route::get('/box/dcontrerasb', 'App\Http\Controllers\RedirectController@contreras');
-    Route::get('/box/rbarchiesiv', 'App\Http\Controllers\RedirectController@barchiesi');
-    Route::get('/box/icristis', 'App\Http\Controllers\RedirectController@cristi');
     Route::get('/box/jmguzmanh', 'App\Http\Controllers\RedirectController@guzman');
-    Route::get('/box/amaldonados', 'App\Http\Controllers\RedirectController@maldonado');
-    Route::get('/box/mjmartinezm', 'App\Http\Controllers\RedirectController@martinez');
     Route::get('/box/cmoyac', 'App\Http\Controllers\RedirectController@moya');
     Route::get('/box/aniklitscheks', 'App\Http\Controllers\RedirectController@niklitschek');
     Route::get('/box/mrossg', 'App\Http\Controllers\RedirectController@ross');
     Route::get('/box/cvalenzuelar', 'App\Http\Controllers\RedirectController@valenzuela');
     Route::get('/box/dvivallov', 'App\Http\Controllers\RedirectController@vivallo');
     Route::get('/box/internos', 'App\Http\Controllers\RedirectController@internos');
-    Route::get('/box/alopezm', 'App\Http\Controllers\RedirectController@lopez');
     Route::get('/box/fguzmanh', 'App\Http\Controllers\RedirectController@fguzman');
     Route::get('/box/chernandezc', 'App\Http\Controllers\RedirectController@hernandez');
-    Route::get('/box/svitalim', 'App\Http\Controllers\RedirectController@vitali');
     Route::get('/box/aceresuelap', 'App\Http\Controllers\RedirectController@aceresuelap');
+    Route::get('/box/cahumadah', 'App\Http\Controllers\RedirectController@cahumadah');
+    Route::get('/box/ncedeñow', 'App\Http\Controllers\RedirectController@ncedeñow');
+    Route::get('/box/rnuches', 'App\Http\Controllers\RedirectController@rnuches');
+    Route::get('/box/asaezm', 'App\Http\Controllers\RedirectController@asaezm');
+    Route::get('/box/msilvaa', 'App\Http\Controllers\RedirectController@msilvaa');
+    Route::get('/box/jvalcarcels', 'App\Http\Controllers\RedirectController@jvalcarcels');
+    Route::get('/box/mrebolledon', 'App\Http\Controllers\RedirectController@mrebolledon');
     Route::get('/box/meetyou', 'App\Http\Controllers\RedirectController@meetyou');
 
     Route::get('change-password', 'App\Http\Controllers\ChangePasswordController@index')->withoutMiddleware([UpdatePassword::class]);
