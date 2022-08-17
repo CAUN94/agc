@@ -39,7 +39,7 @@
                 cesar.jpg|cotie.jpg|javi.jpg|katherine.jpg|sofi.jpg
             </x-slot>
             <x-slot name="texts">
-                Cesar Diaz|Coti Echeverri|Javiera Errázuriz|Katherine Cañete|Sofia Cofre Safier
+                Cesar Diaz|Coti Echeverri|Javiera Errázuriz|Katherine Cañete|Sofia Cofre Saphier
             </x-slot>
             <x-slot name="team">
                 Atleta y Entrenador|Corredora|Record Chileno 400m con Vallas|Montañista, Ciclista y Runner
