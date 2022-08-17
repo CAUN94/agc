@@ -61,7 +61,7 @@
                 <div class="text-white text-center text-3xl"><a x-text="texts[index]"x-transition></a></div>
                 {{-- <div class="text-white text-center text-3xl"><a x-text="texts[index]" x-bind:href="insta[index]" x-bind:target="'_blank'" x-transition></a></div> --}}
                 {{-- <div class="text-white text-center text-lg" x-text="team[index]" x-transition></div> --}}
-                <div class="text-white text-center text-sm px-20 pt-10" x-text="description[index]" x-transition></div>
+                <div class="text-white text-center text-sm m-auto w-2/3 p-5" x-text="description[index]" x-transition></div>
 
             </div>
 
