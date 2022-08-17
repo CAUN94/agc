@@ -36,16 +36,16 @@
         <div id="embajadores"></div>
         <x-landing.alliance>
             <x-slot name="img">
-                cesar.png|gringa.png|javierra.png|Paus.png
+                cesar.jpg|cotie.jpg|javi.jpg|katherine.jpg|sofi.jpg
             </x-slot>
             <x-slot name="texts">
-                Cesar Diaz|Andi Mcrostie|Javiera Errázuriz|Paula Cofre Safier
+                Cesar Diaz|Coti Echeverri|Javiera Errázuriz|Katherine Cañete|Sofia Cofre Safier
             </x-slot>
             <x-slot name="team">
                 Atleta y Entrenador|Corredora|Record Chileno 400m con Vallas|Montañista, Ciclista y Runner
             </x-slot>
             <x-slot name="description">
-                Soy Paula Cofré Saphier, 26 años, deportista de alto rendimiento de montaña, ciclismo, running y escalada. Ingeniera Civil Industrial de la Universidad de Chile|Hola! Soy Coti Echeverría, atleta nacional, corredora de 400 metros planos. Orgullosa madres de 4 pequeños y directora de proyectos de Fundación Ganbaru. Me siento afortunada de ser parte de la familia You. Su apoyo ha sido vital para esta nueva etapa de atleta adulta. Y me ha permitido llevar mi cuerpo a su maximo potencial alcanzando un desempeño deportivo que jamás imagine a mi edad|Yo soy una profesora de educación física que el destino quiso que encontrara su pasión en los cerros. Al principio no lo tenía claro, pero el tiempo me llevó a amar mi trabajo. Soy una persona persistente, valiente y auténtica cualidades que han servido para sentirme orgullosa de quién soy hoy.|Katherine Cañete Arredondo. Madre, esposa, corredora y entrenadora de Trail Running.
+                Soy atleta aficionado, profesor de educación física y padre de familia. Practico atletismo desde los 18 años, cuando lo conocí en la Universidad, y me desempeño en las pruebas de medio fondo y fondo. Actualmente trabajo como profesor de colegio San Francisco de Asís, entrenador de la selección de cross country y atletismo (medio fondo/fondo) de la Pontificia Universidad Católica de Chile, entrenador de RunClub y Nike Running Club Santiago.|Hola! Soy Coti Echeverría, atleta nacional, corredora de 400 metros planos. Orgullosa madres de 4 pequeños y directora de proyectos de Fundación Ganbaru. Me siento afortunada de ser parte de la familia You. Su apoyo ha sido vital para esta nueva etapa de atleta adulta. Y me ha permitido llevar mi cuerpo a su maximo potencial alcanzando un desempeño deportivo que jamás imagine a mi edad||Soy una profesora de educación física que el destino quiso que encontrara su pasión en los cerros. Al principio no lo tenía claro, pero el tiempo me llevó a amar mi trabajo. Soy una persona persistente, valiente y auténtica cualidades que han servido para sentirme orgullosa de quién soy hoy.|Atleta de montaña con record femenino de ascenso al Cerro el Plomo (5424 msnm) y Volcán San José (5856 msnm), además de numerosas cumbres técnicas de nuestro país y podio en carreras de ultra distancia.
 
             </x-slot>
             <x-slot name="insta">
