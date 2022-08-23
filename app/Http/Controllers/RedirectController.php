@@ -215,6 +215,11 @@ class RedirectController extends Controller {
 		return Redirect::away($url);
 	}
 
+	public function endurance(){
+		$url = "https://docs.google.com/forms/d/e/1FAIpQLSdJFzOwZ1MbJ83sR2-iyY76EUPTkCSQHJsmjNjV6NUX1EO8OA/viewform?usp=sf_link";
+		return Redirect::away($url);
+	}
+
 	public function academia(){
 		$url = "https://you-just-better-programs.teachable.com/courses";
 		return Redirect::away($url);
