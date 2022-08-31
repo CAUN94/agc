@@ -56,7 +56,7 @@ class AppointmentMl extends Model
     public static function nextProfessional($professional){
         $professional = 'Alonso Niklitschek Sanhueza';
         return AppointmentMl::where('Fecha','>=',\Carbon\Carbon::tomorrow()->format('Y-m-d'))
-            // ->where('Profesional',$professional)
+            ->where('Profesional',$professional)
             ->where('professional_calendar','like',0)
             ->whereIn('Estado',['Confirmado por teléfono','No confirmado'])
             ->orderby('Fecha','asc')->limit(50);
