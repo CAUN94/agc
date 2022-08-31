@@ -120,6 +120,8 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/krunners', 'App\Http\Controllers\RedirectController@krunners');
     Route::get('/viarunning', 'App\Http\Controllers\RedirectController@viarunning');
     Route::get('/academia', 'App\Http\Controllers\RedirectController@academia');
+    Route::get('/endurance', 'App\Http\Controllers\RedirectController@endurance');
+    Route::get('/agendate', 'App\Http\Controllers\RedirectController@agendate');
 
     Route::get('/box/dcontrerasb', 'App\Http\Controllers\RedirectController@contreras');
     Route::get('/box/jmguzmanh', 'App\Http\Controllers\RedirectController@guzman');

@@ -215,8 +215,18 @@ class RedirectController extends Controller {
 		return Redirect::away($url);
 	}
 
+	public function endurance(){
+		$url = "https://docs.google.com/forms/d/e/1FAIpQLSdJFzOwZ1MbJ83sR2-iyY76EUPTkCSQHJsmjNjV6NUX1EO8OA/viewform?usp=sf_link";
+		return Redirect::away($url);
+	}
+
 	public function academia(){
 		$url = "https://you-just-better-programs.teachable.com/courses";
+		return Redirect::away($url);
+	}
+
+	public function agendate(){
+		$url = "https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento";
 		return Redirect::away($url);
 	}
 

@@ -1,93 +1,51 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Console\Commands;
 
 use App\Models\AppointmentMl;
+use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Spatie\GoogleCalendar\Event;
 use Google\Client;
 use Google\Service\Calendar;
-use Illuminate\Support\Facades\Auth;
 use Google_Service_Calendar_Event;
-use Session as FlashSession;
 
-class CalendarController extends Controller
+class GoogleCalendarUpdate extends Command
 {
-    public function index(){
-        $client = $this->getClient();
-        $service = new Calendar($client);
-        try{
-            $calendarId = 'c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com';
-            $optParams = array(
-                'maxResults' => 1000,
-                'orderBy' => 'startTime',
-                'singleEvents' => true,
-                'timeMin' => date('c'),
-            );
-            $results = $service->events->listEvents($calendarId, $optParams);
-            $events = $results->getItems();
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'ln:googleCalendarUpdate';
 
-            if (empty($events)) {
-                return 0;
-            } else {
-                return $events;
-            }
-        }
-        catch(Exception $e) {
-            // TODO(developer) - handle error appropriately
-            return False;
-        }
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Google Calendar Update';
 
-
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
     }
 
-    public function create(){
-
-    }
-
-    public function store($id){
-        $client = $this->getClient();
-        $service = new Calendar($client);
-        $appointment = AppointmentMl::findorfail($id);
-        if(Auth::user()->rut != $appointment->Rut_Paciente){
-            FlashSession::flash('primary', "Error");
-        } else {
-            $start = \Carbon\Carbon::parse($appointment->Fecha)->format('Y-m-d')."T".$appointment->Hora_inicio;
-            $end = \Carbon\Carbon::parse($appointment->Fecha)->format('Y-m-d')."T".$appointment->Hora_termino;
-            $event = new Google_Service_Calendar_Event(array(
-              'summary' => 'Atención con en You Just Better',
-              'location' => 'San Pascual 736',
-              'description' => 'Atención con '.$appointment->Profesional .'\n Estado: ',
-              'start' => array(
-                'dateTime' => $start,
-                'timeZone' => 'America/Santiago',
-              ),
-              'sendNotifications' => true,
-              'sendUpdates' => 'all',
-              'end' => array(
-                'dateTime' => $end,
-                'timeZone' => 'America/Santiago',
-              ),
-              'attendees' => array(
-                array('email' => Auth::user()->email)
-              ),
-              'reminders' => array(
-                'useDefault' => False,
-                'overrides' => array(
-                  array('method' => 'email', 'minutes' => 24 * 60),
-                  array('method' => 'popup', 'minutes' => 10),
-                ),
-              ),
-            ));
-
-            $calendarId = 'c_1dhlgacu9kmin254ievq27cp7s@group.calendar.google.com';
-            $event = $service->events->insert($calendarId, $event);
-            FlashSession::flash('primary', 'Agendado');
-            $appointment->professional_calendar = !$appointment->professional_calendar;
-            $appointment->save();
-        }
-
-        return redirect('/calendar');
+    /**
+     * Execute the console command.
+     *
+     * @return int
+     */
+    public function handle()
+    {
+        $this->getClient();
+        $this->superStore();
+        $this->superUpdate();
     }
 
     public function superStore(){
@@ -114,6 +72,7 @@ class CalendarController extends Controller
               'attendees' => array(
                 array('email' => 'alonso7@gmail.com'),
                 array('email' => 'you@justbetter.cl'),
+                // array('email' => 'cugarte@guiasyscoutschile.cl'),
                 // array('email' => 'iver@justbetter.cl'),
                 // array('email' => 'pablo@justbetter.cl'),
               ),
@@ -140,9 +99,22 @@ class CalendarController extends Controller
         $client = $this->getClient();
         $calendarId = 'c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com';
         foreach ($appointments as $key => $appointment) {
-            // if(!in_array($appointment->Estado, ['Cambio de fecha','Anulado'])){
-            //     continue;
-            // }
+            $service = new Calendar($client);
+            $service->events->delete($calendarId, $appointment->professional_calendar);
+            $appointment->professional_calendar = 0;
+            $appointment->save();
+        }
+        return $appointments;
+    }
+
+    public function superUpdate(){
+        $appointments = AppointmentMl::calendarAppointments()->get();
+        $client = $this->getClient();
+        $calendarId = 'c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com';
+        foreach ($appointments as $key => $appointment) {
+            if(!in_array($appointment->Estado, ['Cambio de fecha','Anulado'])){
+                continue;
+            }
             $service = new Calendar($client);
             $service->events->delete($calendarId, $appointment->professional_calendar);
             $appointment->professional_calendar = 0;
@@ -198,5 +170,4 @@ class CalendarController extends Controller
         }
         return $client;
     }
-
 }
