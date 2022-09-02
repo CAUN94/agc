@@ -18,7 +18,7 @@ use App\Http\Middleware\UpdatePassword;
 Route::get('/gcalendar', [CalendarController::class, 'index']);
 Route::get('/gcalendar_massive', [CalendarController::class, 'superstore']);
 Route::get('/gcalendar_delete', [CalendarController::class, 'superdelete']);
-Route::get('/google', [CalendarController::class, 'google']);
+// Route::get('/google', [CalendarController::class, 'google']);
 
 Route::get('/nubox', [ AdminNuboxController::class, 'nubox']);
 
