@@ -44,9 +44,9 @@ class GoogleCalendarUpdate extends Command
     public function handle()
     {
         $this->getClient();
-        $this->superdelete();
-        // $this->superStore();
-        // $this->superUpdate();
+        // $this->superdelete();
+        $this->superStore();
+        $this->superUpdate();
     }
 
     public function superStore(){
