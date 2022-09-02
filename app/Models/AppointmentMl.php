@@ -59,7 +59,7 @@ class AppointmentMl extends Model
             ->where('Profesional',$professional)
             ->where('professional_calendar','like',0)
             ->whereIn('Estado',['Confirmado por teléfono','No confirmado'])
-            ->orderby('Fecha','asc')->limit(5);
+            ->orderby('Fecha','asc')->limit(50);
     }
 
     public static function calendarAppointments(){
