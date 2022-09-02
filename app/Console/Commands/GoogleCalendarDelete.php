@@ -10,7 +10,7 @@ use Google\Client;
 use Google\Service\Calendar;
 use Google_Service_Calendar_Event;
 
-class googleCalendarDelete extends Command
+class GoogleCalendarDelete extends Command
 {
     /**
      * The name and signature of the console command.
