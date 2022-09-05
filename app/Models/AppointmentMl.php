@@ -58,7 +58,7 @@ class AppointmentMl extends Model
         return AppointmentMl::where('Fecha','>=',\Carbon\Carbon::now()->startOfDay()->format('Y-m-d'))
             ->where('Profesional',$professional)
             ->where('professional_calendar','like',0)
-            ->whereIn('Estado',['Confirmado por teléfono','No confirmado'])
+            ->whereNotIn('Estado',['Cambio de fecha','Anulado'])
             ->orderby('Fecha','asc')->limit(50);
     }
 
