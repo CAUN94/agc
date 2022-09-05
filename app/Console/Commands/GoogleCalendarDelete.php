@@ -10,7 +10,7 @@ use Google\Client;
 use Google\Service\Calendar;
 use Google_Service_Calendar_Event;
 
-class googleCalendarDelete extends Command
+class GoogleCalendarDelete extends Command
 {
     /**
      * The name and signature of the console command.
@@ -53,10 +53,15 @@ class googleCalendarDelete extends Command
         $client = $this->getClient();
         $calendarId = 'c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com';
         foreach ($appointments as $key => $appointment) {
-            $service = new Calendar($client);
-            $service->events->delete($calendarId, $appointment->professional_calendar);
-            $appointment->professional_calendar = 0;
-            $appointment->save();
+            try {
+                $service = new Calendar($client);
+                $service->events->delete($calendarId, $appointment->professional_calendar);
+                $appointment->professional_calendar = 0;
+                $appointment->save();
+            } catch (Exception $e) {
+                echo $clientt, "\n";
+            }
+
         }
         return $appointments;
     }

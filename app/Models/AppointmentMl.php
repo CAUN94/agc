@@ -54,16 +54,15 @@ class AppointmentMl extends Model
     }
 
     public static function nextProfessional($professional){
-        $professional = 'Alonso Niklitschek Sanhueza';
-        return AppointmentMl::where('Fecha','>=',\Carbon\Carbon::tomorrow()->format('Y-m-d'))
+        return AppointmentMl::where('Fecha','>=',\Carbon\Carbon::now()->startOfDay()->format('Y-m-d'))
             ->where('Profesional',$professional)
             ->where('professional_calendar','like',0)
-            ->whereIn('Estado',['Confirmado por teléfono','No confirmado'])
+            ->whereNotIn('Estado',['Cambio de fecha','Anulado'])
             ->orderby('Fecha','asc')->limit(50);
     }
 
     public static function calendarAppointments(){
-        return AppointmentMl::where('Fecha','>=',\Carbon\Carbon::tomorrow()->format('Y-m-d'))->where('professional_calendar','not like',0);
+        return AppointmentMl::where('Fecha','>=',\Carbon\Carbon::now()->startOfDay()->format('Y-m-d'))->where('professional_calendar','not like',0);
     }
 
     public static function balance($date){
