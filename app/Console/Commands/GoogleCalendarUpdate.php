@@ -99,7 +99,7 @@ class GoogleCalendarUpdate extends Command
         $client = $this->getClient();
         $calendarId = 'c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com';
         foreach ($appointments as $key => $appointment) {
-            if(!in_array($appointment->Estado, ['Cambio de fecha','Anulado'])){
+            if(!in_array($appointment->Estado, ['Cambio de fecha','Cambio de Fecha','Anulado'])){
                 continue;
             }
             $service = new Calendar($client);
