@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\TrainAppointment;
+use App\Models\ProfesionalAppointment;
 use App\Models\TrainAppointmentPivot;
 use App\Models\TrainBook;
 use App\Models\Trainer;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Session as FlashSession;
 
-class AdminTrainAppointments extends Component
+class AdminProfessionalAppointments extends Component
 {
     public $days = ['Lun','Mar','Mie','Jue','Vie','Sab'];
     public $now = '';
@@ -28,6 +28,7 @@ class AdminTrainAppointments extends Component
     public $train = null;
     public $selectedPlans = [];
     public $selectedTrainer = [];
+    public $selectedProfessional = [];
     public $plans = [];
     public $date;
     public $name;
@@ -71,10 +72,12 @@ class AdminTrainAppointments extends Component
             ->toArray();
     }
 
-    public function updateSelectedTrainer(){
+
+
+    public function updateSelectedProfessional(){
         $this->selectedPlans = [];
-        $this->plans = DB::table('train_appointments')
-            ->whereIN('trainer_id',$this->selectedTrainer)
+        $this->plans = DB::table('appointment_mls')
+            ->orWhere('Profesional', 'LIKE' , '%' . implode(" ",$this->selectedProfessional) . '%')
             ->pluck('id')
             ->toArray();
     }
@@ -219,6 +222,6 @@ class AdminTrainAppointments extends Component
         $this->trainings_s = Training::where('type','!=','group')->orderby('name', 'asc')->get();
         $this->coachs = Trainer::with('user')->get();
 
-        return view('livewire.admin-train-appointments');
+        return view('livewire.admin-professional-appointments');
     }
 }
