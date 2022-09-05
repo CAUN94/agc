@@ -46,7 +46,9 @@ class GoogleCalendarUpdate extends Command
         $this->getClient();
         // $this->superdelete();
         $this->superStore('Alonso Niklitschek Sanhueza','c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com');
-        $this->superUpdate('c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com');
+        $this->superUpdate('Alonso Niklitschek Sanhueza','c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com');
+        // $this->superStore('Jaime Pantoja Rodriguez','c_1dhlgacu9kmin254ievq27cp7s@group.calendar.google.com');
+        // $this->superUpdate('Jaime Pantoja Rodriguez','c_1dhlgacu9kmin254ievq27cp7s@group.calendar.google.com');
     }
 
     public function superStore($professional,$calendarId){
@@ -73,6 +75,7 @@ class GoogleCalendarUpdate extends Command
               'attendees' => array(
                 array('email' => 'alonso7@gmail.com'),
                 array('email' => 'you@justbetter.cl'),
+                // array('email' => 'Docencia@justbetter.cl'),
                 // array('email' => 'cugarte@guiasyscoutschile.cl'),
                 // array('email' => 'iver@justbetter.cl'),
                 // array('email' => 'pablo@justbetter.cl'),
@@ -94,10 +97,9 @@ class GoogleCalendarUpdate extends Command
         return $appointments;
     }
 
-    public function superUpdate($calendarId){
-        $appointments = AppointmentMl::calendarAppointments()->get();
+    public function superUpdate($professional,$calendarId){
+        $appointments = AppointmentMl::calendarAppointments($professional)->get();
         $client = $this->getClient();
-        $calendarId = 'c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com';
         foreach ($appointments as $key => $appointment) {
             if(!in_array($appointment->Estado, ['Cambio de fecha','Cambio de Fecha','Anulado'])){
                 continue;

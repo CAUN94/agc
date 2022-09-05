@@ -63,8 +63,10 @@ class AppointmentMl extends Model
             ->orderby('Fecha','asc')->limit(50);
     }
 
-    public static function calendarAppointments(){
-        return AppointmentMl::where('Fecha','>=',\Carbon\Carbon::now()->startOfDay()->format('Y-m-d'))->where('professional_calendar','not like',0);
+    public static function calendarAppointments($professional){
+        return AppointmentMl::where('Fecha','>=',\Carbon\Carbon::now()->startOfDay()->format('Y-m-d'))
+            ->where('Profesional',$professional)
+            ->where('professional_calendar','not like',0);
     }
 
     public static function balance($date){

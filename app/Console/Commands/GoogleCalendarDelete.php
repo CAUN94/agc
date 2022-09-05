@@ -44,14 +44,14 @@ class GoogleCalendarDelete extends Command
     public function handle()
     {
         $this->getClient();
-        $this->superdelete();
+        $this->superdelete('Alonso Niklitschek Sanhueza','c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com');
+        // $this->superdelete('Jaime Pantoja Rodriguez','c_1dhlgacu9kmin254ievq27cp7s@group.calendar.google.com');
     }
 
 
-    public function superdelete(){
-        $appointments = AppointmentMl::calendarAppointments()->get();
+    public function superdelete($professional,$calendarId){
+        $appointments = AppointmentMl::calendarAppointments($professional)->get();
         $client = $this->getClient();
-        $calendarId = 'c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com';
         foreach ($appointments as $key => $appointment) {
             try {
                 $service = new Calendar($client);
