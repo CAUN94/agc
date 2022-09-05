@@ -45,11 +45,11 @@ class GoogleCalendarUpdate extends Command
     {
         $this->getClient();
         // $this->superdelete();
-        $this->superStore('Alonso Niklitschek Sanhueza');
-        $this->superUpdate();
+        $this->superStore('Alonso Niklitschek Sanhueza','c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com');
+        $this->superUpdate('c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com');
     }
 
-    public function superStore($professional){
+    public function superStore($professional,$calendarId){
         $appointments = AppointmentMl::nextProfessional($professional)->get();
         foreach ($appointments as $key => $appointment) {
             $client = $this->getClient();
@@ -85,7 +85,6 @@ class GoogleCalendarUpdate extends Command
                 ),
               ),
             ));
-            $calendarId = 'c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com';
             $event = $service->events->insert($calendarId, $event);
             $appointment->professional_calendar = $event->id;
             // $service = new Calendar($client);
@@ -95,7 +94,7 @@ class GoogleCalendarUpdate extends Command
         return $appointments;
     }
 
-    public function superUpdate(){
+    public function superUpdate($calendarId){
         $appointments = AppointmentMl::calendarAppointments()->get();
         $client = $this->getClient();
         $calendarId = 'c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com';
