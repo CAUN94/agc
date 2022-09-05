@@ -28,7 +28,6 @@ class AdminTrainAppointments extends Component
     public $train = null;
     public $selectedPlans = [];
     public $selectedTrainer = [];
-    public $selectedProfessional = [];
     public $plans = [];
     public $date;
     public $name;
@@ -76,14 +75,6 @@ class AdminTrainAppointments extends Component
         $this->selectedPlans = [];
         $this->plans = DB::table('train_appointments')
             ->whereIN('trainer_id',$this->selectedTrainer)
-            ->pluck('id')
-            ->toArray();
-    }
-
-    public function updateSelectedProfessional(){
-        $this->selectedPlans = [];
-        $this->plans = DB::table('appointment_mls')
-            ->orWhere('Profesional', 'LIKE' , '%' . implode(" ",$this->selectedProfessional) . '%')
             ->pluck('id')
             ->toArray();
     }
