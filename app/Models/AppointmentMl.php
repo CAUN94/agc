@@ -54,7 +54,6 @@ class AppointmentMl extends Model
     }
 
     public static function nextProfessional($professional){
-        $professional = 'Alonso Niklitschek Sanhueza';
         return AppointmentMl::where('Fecha','>=',\Carbon\Carbon::now()->startOfDay()->format('Y-m-d'))
             ->where('Profesional',$professional)
             ->where('professional_calendar','like',0)
