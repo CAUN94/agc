@@ -27,6 +27,8 @@ class AppointmentMl extends Model
         'Convenio_Secundario',
         'Generación_Presupuesto',
         'Sucursal',
+        'professional_calendar',
+        'user_calendar'
     ];
 
     public function setRut_PacienteAttribute($value) {
