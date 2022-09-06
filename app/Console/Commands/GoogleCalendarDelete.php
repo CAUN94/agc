@@ -45,7 +45,7 @@ class GoogleCalendarDelete extends Command
     {
         $this->getClient();
         $this->superdelete('Alonso Niklitschek Sanhueza','c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com');
-        // $this->superdelete('Jaime Pantoja Rodriguez','c_1dhlgacu9kmin254ievq27cp7s@group.calendar.google.com');
+        $this->superdelete('Jaime Pantoja Rodriguez','c_1dhlgacu9kmin254ievq27cp7s@group.calendar.google.com');
     }
 
 
