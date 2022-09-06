@@ -80,14 +80,6 @@ class AdminTrainAppointments extends Component
             ->toArray();
     }
 
-    public function updateSelectedProfessional(){
-        $this->selectedPlans = [];
-        $this->plans = DB::table('appointment_mls')
-            ->orWhere('Profesional', 'LIKE' , '%' . implode(" ",$this->selectedProfessional) . '%')
-            ->pluck('id')
-            ->toArray();
-    }
-
     public function subPeriod(){
         $this->startOfMonth->subMonth();
         $this->endOfMonth->subMonth();

@@ -26,7 +26,7 @@ class Professional extends Model
     public static function monthAppointments($first,$last){
        //where('Profesional' , '=', 'Alonso Niklitschek Sanhueza')
         return ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
-        ->get();
+        ->get()->count();
     }
 
     public static function remuneracion($first,$last){
