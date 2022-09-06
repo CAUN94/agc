@@ -131,7 +131,7 @@ class UpdateMedilink extends Command
         foreach($appointments as $appointment){
             $value = json_decode("{".$appointment."}",true);
             $limit = Carbon::now()->subMonth()->subMonth();
-            $now = Carbon::parse($value['Fecha'])->subWeek();
+            $now = Carbon::parse($value['Fecha'])->addWeek();
             if($now<$limit){
                 continue;
             }
