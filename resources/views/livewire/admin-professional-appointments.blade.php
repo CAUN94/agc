@@ -1,4 +1,4 @@
-<div x-data="{ pay: true }">
+<div x-data="{ pay: false }">
     <div class="w-full overflow-x-auto gap-y-2 box-white p-3">
         <div class="mb-2 w-full flex justify-between">
             Periodo del {{$startOfMonth->format('d-m')}} al {{$endOfMonth->format('d-m')}}
@@ -32,31 +32,38 @@
         </div>
         <div x-show="pay">
             @foreach(App\Models\Professional::all() as $professional)
-                <ul class="grid grid-cols-4 gap-1">
+                <ul class="grid grid-cols-5 gap-1">
                     <li>
                         <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                            {{$professional->user->fullname()}}
+                            {{$professional->user->id}}
                         </a>
                     </li>
                     <li>
                         <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                            <span class="flex-1 ml-3 whitespace-nowrap">Atenciones Realizadas</span>
-                            <span class="inline-flex items-center justify-center px-2 py-1 ml-3 text-sm font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400"></span>
+                            <i class="fa fa-money" aria-hidden="true"></i>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Prestaciones</span>
+                            <span class="inline-flex items-center justify-center px-2 py-1 ml-3 text-sm font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->prestaciones($startOfMonth,$endOfMonth,$professional->user->fullname())}}</span>
                         </a>
                     </li>
                     <li>
                         <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                            <span class="flex-1 ml-3 whitespace-nowrap">Atenciones del Mes</span>
-                            <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->monthAppointments($startOfMonth,$endOfMonth)}}</span>
+                            <i class="fa fa-money" aria-hidden="true"></i>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Abono</span>
+                            <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->abonos($startOfMonth,$endOfMonth,$professional->user->fullname())}}</span>
                         </a>
                     </li>
                     <li>
                         <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                             <i class="fa fa-money" aria-hidden="true"></i>
                             <span class="flex-1 ml-3 whitespace-nowrap">Remuneración</span>
-                            <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->remuneracion($startOfMonth,$endOfMonth)}}</span>
+                            <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->remuneracion($startOfMonth,$endOfMonth,$professional->user->fullname())}}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Atenciones Realizadas</span>
+                            <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->monthAppointments($startOfMonth,$endOfMonth,$professional->user->fullname())}}</span>
                         </a>
                     </li>
                 </ul>
@@ -68,7 +75,7 @@
         <div class="grid grid-cols-3 gap-1">
             @foreach(App\Models\Professional::where('id','>',0)->get() as $professional)
                 <div class="flex">
-                    <input class="form-check-input appearance-none h-3 w-3 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="{{ $professional->user->fullName() }}" value={{ $professional->user->fullName() }} wire:model="selectedProfessional.{{ $professional->user->fullName() }}">
+                    <input class="form-check-input appearance-none h-3 w-3 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="{{ $professional->user->id }}" value={{ $professional->user->id }} wire:model="selectedProfessional.{{ $professional->user->id }}">
                     <label class="form-check-label inline-block text-gray-800 text-sm break-words" for="{{ $professional->user->id }}">
                         {{ $professional->user->fullname() }}
                     </label>
@@ -77,24 +84,13 @@
         </div>
         </form>
     </div>
-    <div class="w-full overflow-x-auto gap-y-2 box-white mt-2 p-3">
-        <form wire:change="updateSelectedPlans">
-        <div class="grid grid-cols-5 gap-1">
-            @foreach(App\Models\Training::where('id','>',0)->orderby('name','desc')->get() as $training)
-              <div class="flex">
-                <input class="form-check-input appearance-none h-3 w-3 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="{{ $training->id }}" value={{ $training->id }} wire:model="selectedPlans.{{ $training->id }}">
-                <label class="form-check-label inline-block text-gray-800 text-sm break-words" for="{{ $training->id }}">{{ $training->planComplete() }}</label>
-              </div>
-            @endforeach
-        </div>
-        </form>
-    </div>
+
     <div class="flex flex-col lg:flex-row gap-2 mt-2">
         <div class="w-full lg:w-1/3 flex flex-col overflow-x-auto gap-y-2">
             <div class="align-middle inline-block min-w-full" x-data="{ classShow: false, createShow: true }">
                 <div class="box-white p-3">
                     <div class="flex justify-between">
-                        <span class="block">Selecciona un plan.</span>
+                        <span class="block">Selecciona una cita.</span>
 
                         <div class="modal-close cursor-pointer z-50" wire:click="close">
                             <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
@@ -103,7 +99,6 @@
                         </div>
                     </div>
                     @if(!is_null($train))
-
                     <div x-show="$wire.classShow" x-cloak>
                         <dl>
                           <div class="train-class-resume">
@@ -138,7 +133,7 @@
                         <dl>
                           <div class="train-class-resume">
                             <dt class="text-sm font-medium text-gray-500 my-auto">
-                              Nombre Clase
+                              Nombre Cita
                             </dt>
                             <dd class="train-class-resume-text">
                               <x-admin.input class="col-span-6 sm:col-span-3" type="text" name="name" value="{{$train->name}}" readonly="edit"></x-admin.input>
@@ -195,7 +190,7 @@
 
                     <div class="flex justify-between">
                         <x-auth-validation-errors class="mb-4" :errors="$errors" />
-                        <span class="block cursor-pointer" wire:click="openCreate">Crear Clases.</span>
+                        <span class="block cursor-pointer" wire:click="openCreate">Crear Cita Medica.</span>
 
                         <div class="modal-close cursor-pointer z-50" wire:click="closeCreate">
                             <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
@@ -207,7 +202,7 @@
                         <div>
                           <div class="block">
                             <select class="w-full bg-gray-200 border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="newAppointment" id="newAppointment" wire:model="newAppointment">
-                                <option selected value="0">Elegir Plan</option>
+                                <option selected value="0">Elegir Categoria</option>
                                 @foreach($trainings_g as $training)
                                     <option value="{{$training->id}}">{{$training->name}} {{$training->format}}</option>
                                 @endforeach
@@ -221,7 +216,7 @@
                           </div>
                           <div class="block mt-3">
                             <select class="w-full bg-gray-200 border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="coach" id="coach" wire:model="coach">
-                                <option selected value="0">Elegir Entrenador</option>
+                                <option selected value="0">Elegir Profesional</option>
                                 @foreach($coachs as $coach)
                                     <option value="{{$coach->user->id}}">{{$coach->user->fullName()}}</option>
                                 @endforeach
@@ -274,7 +269,7 @@
                         </dl>
                         <div class="grid justify-items-end">
                             <p class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-500 hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 cursor-pointer" wire:click='trainAppointmentCreate()'>
-                                Crear Clase
+                                Crear Cita
                             </p>
                         </div>
                         </div>
@@ -348,10 +343,9 @@
                                                     {{$date->format('d')}}
                                                 </div>
                                                 <div style="height: {{$heightbox}};" class="overflow-y-auto mt-1">
-                                                    {{-- @foreach(Auth::user()->student()->training->daysCheck($date) as $trainAppointment) --}}
-                                                    @foreach(App\Models\AppointmentMl::where('Fecha',$date)->whereIN('id',$plans)->orderby('Hora_inicio', 'ASC')->get() as $professionalAppointment)
+                                                    @foreach(App\Models\AppointmentMl::where('Fecha',$date)->whereIN('Profesional',$plans)->orderby('Hora_inicio', 'ASC')->get() as $professionalAppointment)
                                                         <div
-                                                            wire:click="show({{$professionalAppointment->id}})"
+                                                            wire:click="show({{$professionalAppointment->Tratamiento_Nr}})"
                                                             @if($professionalAppointment->Estado=='Atendido' | $professionalAppointment->Estado=='Confirmado por teléfono')
                                                                 @php $color = 'green'; @endphp
                                                             @else

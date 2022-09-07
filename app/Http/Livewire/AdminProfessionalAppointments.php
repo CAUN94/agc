@@ -27,7 +27,6 @@ class AdminProfessionalAppointments extends Component
     public $heightbox = '80px';
     public $train = null;
     public $selectedPlans = [];
-    public $selectedTrainer = [];
     public $selectedProfessional = [];
     public $plans = [];
     public $date;
@@ -65,21 +64,23 @@ class AdminProfessionalAppointments extends Component
     }
 
     public function updateSelectedPlans(){
-        $this->selectedTrainer = [];
+        $this->selectedProfessional = [];
         $this->plans = DB::table('train_appointments_pivot')
             ->whereIN('training_id',$this->selectedPlans)
             ->pluck('train_appointment_id')
             ->toArray();
     }
 
-
-
     public function updateSelectedProfessional(){
         $this->selectedPlans = [];
-        $this->plans = DB::table('appointment_mls')
-            ->orWhere('Profesional', 'LIKE' , '%' . implode(" ",$this->selectedProfessional) . '%')
-            ->pluck('id')
+        if(isset($this->selectedProfessional)){
+        $this->plans = DB::table('professionals')
+            ->join('appointment_mls', 'professionals.description', '=', 'appointment_mls.Profesional')
+            ->whereIN('professionals.user_id',$this->selectedProfessional)
+            ->pluck('appointment_mls.Profesional')
             ->toArray();
+        }
+
     }
 
     public function subPeriod(){

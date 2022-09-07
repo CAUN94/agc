@@ -23,13 +23,22 @@ class Professional extends Model
                             ->get();
     }
 
-    public static function monthAppointments($first,$last){
+    public static function monthAppointments($first,$last,$user){
        //where('Profesional' , '=', 'Alonso Niklitschek Sanhueza')
         return ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
+        ->orWhere('Profesional', 'LIKE' , '%' . $user . '%')
         ->get()->count();
     }
 
-    public static function remuneracion($first,$last){
-      return (ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])->sum('Precio_Prestacion'))*1;
+    public static function prestaciones($first,$last,$user){
+      return (ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])->orWhere('Profesional', 'LIKE' , '%' . $user . '%')->sum('Precio_Prestacion'))*1;
+    }
+
+    public static function abonos($first,$last,$user){
+      return (ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])->orWhere('Profesional', 'LIKE' , '%' . $user . '%')->sum('Abono'))*1;
+    }
+
+    public static function remuneracion($first,$last,$user){
+      return (ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])->orWhere('Profesional', 'LIKE' , '%' . $user . '%')->sum('Total'))*1;
     }
 }

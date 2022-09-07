@@ -28,7 +28,6 @@ class AdminTrainAppointments extends Component
     public $train = null;
     public $selectedPlans = [];
     public $selectedTrainer = [];
-    public $selectedProfessional = [];
     public $plans = [];
     public $date;
     public $name;
