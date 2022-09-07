@@ -45,8 +45,8 @@ class GoogleCalendarUpdate extends Command
     {
         $this->getClient();
         // $this->superdelete();
-        $this->superStore('Alonso Niklitschek Sanhueza','c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com','alonso7@gmail.com');
-        $this->superUpdate('Alonso Niklitschek Sanhueza','c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com');
+        // $this->superStore('Alonso Niklitschek Sanhueza','c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com','alonso7@gmail.com');
+        // $this->superUpdate('Alonso Niklitschek Sanhueza','c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com');
         $this->superStore('Jaime Pantoja Rodriguez','c_1dhlgacu9kmin254ievq27cp7s@group.calendar.google.com','docencia@justbetter.cl');
         $this->superUpdate('Jaime Pantoja Rodriguez','c_1dhlgacu9kmin254ievq27cp7s@group.calendar.google.com');
     }
@@ -92,8 +92,10 @@ class GoogleCalendarUpdate extends Command
             $appointment->professional_calendar = $event->id;
             // $service = new Calendar($client);
             // $service->events->delete($calendarId, $event->id);
+            $this->info('Creado:'.$appointment->Nombre_paciente.' '.$appointment->Apellidos_paciente);
             $appointment->save();
         }
+        $this->info('---');
         return $appointments;
     }
 
@@ -106,6 +108,7 @@ class GoogleCalendarUpdate extends Command
             }
             $service = new Calendar($client);
             $service->events->delete($calendarId, $appointment->professional_calendar);
+            $this->info('Borrar:'.$appointment->Nombre_paciente.' '.$appointment->Apellidos_paciente);
             $appointment->professional_calendar = 0;
             $appointment->save();
         }
