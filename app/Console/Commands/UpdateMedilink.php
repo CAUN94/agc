@@ -93,7 +93,8 @@ class UpdateMedilink extends Command
                 [
                     'Prestacion_Nr' => $value['Id. Prestacion'],
                     'Tratamiento_Nr' => $value['# Tratamiento'],
-                    'Fecha_Realizacion' => $value['Fecha Realizacion']
+                    'Fecha_Realizacion' => $value['Fecha Realizacion'],
+                    'Estado' => $value['Estado de la consulta'],
                 ],
                 [
                     'Sucursal' => $value['Sucursal'],
