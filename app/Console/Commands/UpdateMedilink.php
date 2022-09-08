@@ -94,7 +94,6 @@ class UpdateMedilink extends Command
                     'Prestacion_Nr' => $value['Id. Prestacion'],
                     'Tratamiento_Nr' => $value['# Tratamiento'],
                     'Fecha_Realizacion' => $value['Fecha Realizacion'],
-                    'Estado' => $value['Estado de la consulta'],
                 ],
                 [
                     'Sucursal' => $value['Sucursal'],
@@ -141,6 +140,7 @@ class UpdateMedilink extends Command
                     'Tratamiento_Nr' => $value['Atencion'],
                     'Rut_Paciente' => $value['Rut Paciente'],
                     'Fecha' => $value['Fecha'],
+                    'Hora_inicio' => $value['Hora inicio'],
                 ],
                 [
                     'Estado' => $value['Estado'],
