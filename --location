@@ -1,0 +1,21 @@
+HTTP/2 200 
+date: Tue, 13 Sep 2022 12:43:05 GMT
+content-type: application/json; charset=utf-8
+content-length: 171
+cache-control: no-cache
+pragma: no-cache
+expires: -1
+server: Microsoft-IIS/8.5
+x-stackifyid: V2|45ed57ce-bd4a-4172-90ef-444c306b409e|C77694|CD47
+set-cookie: .Stackify.Rum=45ed57ce-bd4a-4172-90ef-444c306b409e; path=/
+tokenexpiry: 900
+access-control-expose-headers: Token,TokenExpiry
+token: a9f0afad-8e2a-4ec3-a9a7-c4443232ee15
+x-aspnet-version: 4.0.30319
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+server: NONE
+x-aspnetmvc-version: NONE
+x-aspnet-version: NONE
+x-content-type-options: nosniff
+x-xss-protection: 1;mode=block
+

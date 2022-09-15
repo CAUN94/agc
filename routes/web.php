@@ -20,7 +20,9 @@ Route::get('/gcalendar_massive', [CalendarController::class, 'superstore']);
 Route::get('/gcalendar_delete', [CalendarController::class, 'superdelete']);
 // Route::get('/google', [CalendarController::class, 'google']);
 
-Route::get('/nubox', [ AdminNuboxController::class, 'nubox']);
+Route::get('/nubox/auth', [ AdminNuboxController::class, 'auth']);
+Route::get('/nubox/comprobante', [ AdminNuboxController::class, 'comprobante']);
+Route::get('/nubox/comuna', [ AdminNuboxController::class, 'comuna']);
 
 Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/mercadopagosearch', [MercadoPagoController::class, 'index']);
