@@ -107,9 +107,9 @@ class GoogleCalendarUpdate extends Command
         $appointments = AppointmentMl::calendarAppointments($professional)->get();
         $client = $this->getClient();
         foreach ($appointments as $key => $appointment) {
-            if(!in_array($appointment->Estado, ['Cambio de fecha','Anulado','Anulado vía validación','No asiste'])){
-                continue;
-            }
+            // if(!in_array($appointment->Estado, ['Cambio de fecha','Anulado','Anulado vía validación','No asiste'])){
+            //     continue;
+            // }
             $service = new Calendar($client);
             $service->events->delete($calendarId, $appointment->professional_calendar);
             $this->info('Borrar:'.$appointment->Nombre_paciente.' '.$appointment->Apellidos_paciente);
