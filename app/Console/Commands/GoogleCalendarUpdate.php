@@ -59,6 +59,7 @@ class GoogleCalendarUpdate extends Command
     }
 
     public function superStore($professional,$calendarId,$email){
+        $this->info($professional);
         $appointments = AppointmentMl::nextProfessional($professional)->get();
         foreach ($appointments as $key => $appointment) {
             $client = $this->getClient();
@@ -102,7 +103,6 @@ class GoogleCalendarUpdate extends Command
             $this->info('Creado:'.$appointment->Nombre_paciente.' '.$appointment->Apellidos_paciente);
             $appointment->save();
         }
-        $this->info('---');
         return $appointments;
     }
 
