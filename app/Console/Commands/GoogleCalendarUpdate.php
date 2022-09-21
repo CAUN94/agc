@@ -62,6 +62,9 @@ class GoogleCalendarUpdate extends Command
 
         $this->superStore('Nicole Cedeño Wolf ','c_50e57474f2f9941c93de2de40212b24f6a44a65d72a40399bbab8cfcb1221fa2@group.calendar.google.com','Niccole.cedeno@lanek.cl');
         $this->superUpdate('Nicole Cedeño Wolf ','c_50e57474f2f9941c93de2de40212b24f6a44a65d72a40399bbab8cfcb1221fa2@group.calendar.google.com');
+
+        $this->superStore('Constanza Ahumada Huerta','c_5bd69a1568b6d8319f6bac34e6eb66a336de83458e7a206645ac43c265f93104@group.calendar.google.com','Coniahum@gmail.com');
+        $this->superUpdate('Constanza Ahumada Huerta','c_5bd69a1568b6d8319f6bac34e6eb66a336de83458e7a206645ac43c265f93104@group.calendar.google.com');
     }
 
     public function superStore($professional,$calendarId,$email){
