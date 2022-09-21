@@ -45,17 +45,20 @@ class GoogleCalendarUpdate extends Command
     {
         $this->getClient();
         // $this->superdelete();
-        $this->superStore('Alonso Niklitschek Sanhueza','c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com','alonso7@gmail.com');
-        $this->superUpdate('Alonso Niklitschek Sanhueza','c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com');
+        $this->superStore('Alonso Niklitschek Sanhueza','c_0f1ec4cb6ddb69027c0f6e89110fb1708a9613a28be7efc2165475004be2398d@group.calendar.google.com','alonso7@gmail.com');
+        $this->superUpdate('Alonso Niklitschek Sanhueza','c_0f1ec4cb6ddb69027c0f6e89110fb1708a9613a28be7efc2165475004be2398d@group.calendar.google.com');
 
-        $this->superStore('Jaime Pantoja Rodriguez','c_1dhlgacu9kmin254ievq27cp7s@group.calendar.google.com','docencia@justbetter.cl');
-        $this->superUpdate('Jaime Pantoja Rodriguez','c_1dhlgacu9kmin254ievq27cp7s@group.calendar.google.com');
+        $this->superStore('Jaime Pantoja Rodriguez','c_a5e903612c38cf636cddc1ad9f5d85f5cfc58fc2350ab902696cef768930fe27@group.calendar.google.com','docencia@justbetter.cl');
+        $this->superUpdate('Jaime Pantoja Rodriguez','c_a5e903612c38cf636cddc1ad9f5d85f5cfc58fc2350ab902696cef768930fe27@group.calendar.google.com');
 
-        $this->superStore('Daniella Vivallo Vera','c_jur7p65ntosbr42ghs94cnj3no@group.calendar.google.com','clinica@justbetter.cl');
-        $this->superUpdate('Daniella Vivallo Vera','c_jur7p65ntosbr42ghs94cnj3no@group.calendar.google.com');
+        $this->superStore('Daniella Vivallo Vera','c_70cc091402f167e8244d73d4a32ad15d0e21368ead3e7145eede9f69ce57b019@group.calendar.google.com','clinica@justbetter.cl');
+        $this->superUpdate('Daniella Vivallo Vera','c_70cc091402f167e8244d73d4a32ad15d0e21368ead3e7145eede9f69ce57b019@group.calendar.google.com');
 
-        $this->superStore('Manuel Silva Ávila','c_f5424f6ac3c015033e864d560b48c582ebf2f5519eb1f9cab67d803d27cf8f0c@group.calendar.google.com','Kine.Manuel.silva@gmail.com');
-        $this->superUpdate('Manuel Silva Ávila','c_f5424f6ac3c015033e864d560b48c582ebf2f5519eb1f9cab67d803d27cf8f0c@group.calendar.google.com');
+        $this->superStore('Manuel Silva Ávila','c_cdc49b01298351d88c6468980988cf46b288841aeabf875ebffaed4a06b45530@group.calendar.google.com','Kine.Manuel.silva@gmail.com');
+        $this->superUpdate('Manuel Silva Ávila','c_cdc49b01298351d88c6468980988cf46b288841aeabf875ebffaed4a06b45530@group.calendar.google.com');
+
+        $this->superStore('Camila Valentini Rojas','c_774a51d77aa92fff83bc27c54aea7caa6214d02b32415d38e38833e2bf6c88ea@group.calendar.google.com','cvalentini@uc.cl');
+        $this->superUpdate('Camila Valentini Rojas','c_774a51d77aa92fff83bc27c54aea7caa6214d02b32415d38e38833e2bf6c88ea@group.calendar.google.com');
     }
 
     public function superStore($professional,$calendarId,$email){
