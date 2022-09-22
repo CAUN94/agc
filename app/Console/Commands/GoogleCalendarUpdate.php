@@ -78,7 +78,7 @@ class GoogleCalendarUpdate extends Command
             $event = new Google_Service_Calendar_Event(array(
               'summary' => 'Atención a '.$appointment->Nombre_paciente." ".$appointment->Apellidos_paciente,
               'location' => 'San Pascual 736',
-              'description' => $appointment->Nombre_paciente." ".$appointment->Apellidos_paciente."\n Estado: ".$appointment->Estado."\n Con: ".$appointment->Profesional,
+              'description' => $appointment->Nombre_paciente." ".$appointment->Apellidos_paciente."\nEstado: ".$appointment->Estado."\nCon: ".$appointment->Profesional,
               'start' => array(
                 'dateTime' => $start,
                 'timeZone' => 'America/Santiago',
@@ -107,8 +107,6 @@ class GoogleCalendarUpdate extends Command
             ));
             $event = $service->events->insert($calendarId, $event);
             $appointment->professional_calendar = $event->id;
-            // $service = new Calendar($client);
-            // $service->events->delete($calendarId, $event->id);
             $this->info('Creado:'.$appointment->Nombre_paciente.' '.$appointment->Apellidos_paciente);
             $appointment->save();
         }
