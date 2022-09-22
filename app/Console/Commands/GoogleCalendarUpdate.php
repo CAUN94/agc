@@ -82,7 +82,7 @@ class GoogleCalendarUpdate extends Command
             $event = new Google_Service_Calendar_Event(array(
               'summary' => 'Atención a '.$appointment->Nombre_paciente." ".$appointment->Apellidos_paciente,
               'location' => 'San Pascual 736',
-              'description' => $appointment->Nombre_paciente." ".$appointment->Apellidos_paciente."\nEstado: ".$appointment->Estado."\nCon: ".$appointment->Profesional."\nUltima Atención: ".$lastDate." con ".$lastProfessional,
+              'description' => "Paciente: ".$appointment->Nombre_paciente." ".$appointment->Apellidos_paciente."\nCon: ".$appointment->Profesional."\nUltima Atención: ".$lastDate." con ".$lastProfessional,
               'start' => array(
                 'dateTime' => $start,
                 'timeZone' => 'America/Santiago',
