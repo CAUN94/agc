@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\AppointmentMl;
+use App\Models\UserMl;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Spatie\GoogleCalendar\Event;
@@ -75,10 +76,13 @@ class GoogleCalendarUpdate extends Command
             $service = new Calendar($client);
             $start = \Carbon\Carbon::parse($appointment->Fecha)->format('Y-m-d')."T".$appointment->Hora_inicio;
             $end = \Carbon\Carbon::parse($appointment->Fecha)->format('Y-m-d')."T".$appointment->Hora_termino;
+            $last = AppointmentMl::lastAppointment($appointment->Rut_Paciente);
+            $lastDate = \Carbon\Carbon::parse($last->Fecha)->format('Y-m-d');
+            $lastProfessional = $last->Profesional;
             $event = new Google_Service_Calendar_Event(array(
               'summary' => 'Atención a '.$appointment->Nombre_paciente." ".$appointment->Apellidos_paciente,
               'location' => 'San Pascual 736',
-              'description' => $appointment->Nombre_paciente." ".$appointment->Apellidos_paciente."\nEstado: ".$appointment->Estado."\nCon: ".$appointment->Profesional,
+              'description' => $appointment->Nombre_paciente." ".$appointment->Apellidos_paciente."\nEstado: ".$appointment->Estado."\nCon: ".$appointment->Profesional."\nUltima Atención: ".$lastDate." con ".$lastProfessional,
               'start' => array(
                 'dateTime' => $start,
                 'timeZone' => 'America/Santiago',
