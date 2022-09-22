@@ -70,7 +70,11 @@ class AppointmentMl extends Model
     }
 
     public static function lastAppointment($rut){
-        return AppointmentMl::where('RUT_Paciente',$rut)->where('Fecha','<=',\Carbon\Carbon::now()->endOfDay())->orderby('Fecha','desc')->whereIn('Estado',['Atendido','Atendiendose'])->take(1)->first();
+        $appointment_mls = AppointmentMl::where('RUT_Paciente',$rut)->where('Fecha','<=',\Carbon\Carbon::now()->endOfDay())->orderby('Fecha','desc')->whereIn('Estado',['Atendido','Atendiendose'])->take(1)->first();
+        if (!is_null($appointment_mls)){
+            return $appointment_mls;
+        }
+        return AppointmentMl::where('RUT_Paciente',$rut)->where('Fecha','<=',\Carbon\Carbon::tomorrow()->endOfDay())->orderby('Fecha','desc')->take(1)->first();;
     }
 
     public static function balance($date){
