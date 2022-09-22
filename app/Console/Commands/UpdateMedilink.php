@@ -247,4 +247,5 @@ class UpdateMedilink extends Command
         $this->info("Payments: ".PaymentMl::all()->count());
         $this->info('Payments Updated!');
     }
+
 }
