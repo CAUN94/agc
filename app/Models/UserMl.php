@@ -43,7 +43,7 @@ class UserMl extends Model
     }
 
     public function lastAppointment(){
-        return AppointmentMl::where('RUT_Paciente','16874329-7')->where('Fecha','<=',Carbon::now())->orderby('Fecha','desc')->whereIn('Estado',['Atendido'])->skip(1)->take(1)->first();
+        return AppointmentMl::where('RUT_Paciente','16874329-7')->where('Fecha','<',Carbon::now())->orderby('Fecha','desc')->whereIn('Estado',['Atendido'])->take(1)->first();
     }
 
 
