@@ -142,7 +142,6 @@ class UpdateMedilink extends Command
                     'Rut_Paciente' => $value['Rut Paciente'],
                     'Fecha' => $value['Fecha'],
                     'Hora_inicio' => $value['Hora inicio'],
-                    'Estado' => $value['Estado'],
                 ],
                 [
                     'Estado' => $value['Estado'],
