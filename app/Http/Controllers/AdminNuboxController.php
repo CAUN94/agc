@@ -99,8 +99,8 @@ class AdminNuboxController extends Controller
           ]
         }',
         CURLOPT_HTTPHEADER => array(
-          'token: 582e388b-816a-4370-aecd-9b1febafc0ad',
-          'Cookie: .Stackify.Rum=5c8c0fbb-30cb-4d64-a0ea-bc47f5fade1b',
+          'token: '.$this->auth()['Token'],
+          'Cookie: '.$this->auth()['Set-Cookie'],
           'Content-Type: application/json',
           "Content-Length: 0",
         ),
@@ -125,8 +125,8 @@ class AdminNuboxController extends Controller
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'GET',
         CURLOPT_HTTPHEADER => array(
-          'token: 582e388b-816a-4370-aecd-9b1febafc0ad',
-          'Cookie: .Stackify.Rum=5c8c0fbb-30cb-4d64-a0ea-bc47f5fade1b'
+          'token: '.$this->auth()['Token'],
+          'Cookie: '.$this->auth()['Set-Cookie'],
         ),
       ));
 

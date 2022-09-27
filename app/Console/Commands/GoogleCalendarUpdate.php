@@ -76,7 +76,7 @@ class GoogleCalendarUpdate extends Command
             $service = new Calendar($client);
             $start = \Carbon\Carbon::parse($appointment->Fecha)->format('Y-m-d')."T".$appointment->Hora_inicio;
             $end = \Carbon\Carbon::parse($appointment->Fecha)->format('Y-m-d')."T".$appointment->Hora_termino;
-            $last = AppointmentMl::lastAppointment($appointment->Rut_Paciente);
+            $last = AppointmentMl::lastAppointment($appointment->id);
             $lastDate = \Carbon\Carbon::parse($last->Fecha)->format('Y-m-d');
             $lastProfessional = $last->Profesional;
             $event = new Google_Service_Calendar_Event(array(

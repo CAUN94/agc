@@ -91,6 +91,9 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/scraping-actionml', 'App\Http\Controllers\ScrapingController@actionMl')->name('scraping-actionml');
     Route::get('/scraping-appointmentml', 'App\Http\Controllers\ScrapingController@appointmentMl')->name('scraping-appointmentml');
     Route::get('/scraping-treatmentsml', 'App\Http\Controllers\ScrapingController@treatmentsMl')->name('scraping-treatmentsml');
+
+    Route::get('/ficha', 'App\Http\Controllers\ScrapingController@ficha')->name('ficha');
+
     Route::get('/scraping-paymentsml', 'App\Http\Controllers\ScrapingController@paymentsMl')->name('scraping-paymentsml');
     Route::get('/professionals', 'App\Http\Controllers\ScrapingController@professionals')->middleware(['intranet']);
     Route::get('/professionals/{id}', 'App\Http\Controllers\ScrapingController@professional')->middleware(['intranet']);

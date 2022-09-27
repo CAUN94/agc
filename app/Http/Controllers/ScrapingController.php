@@ -38,6 +38,7 @@ class ScrapingController extends Controller
         return $split;
     }
 
+
     public function userMl(){
 
         $split = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/pacientes_nuevos");
@@ -112,6 +113,14 @@ class ScrapingController extends Controller
         }
         // return $professional;
         return view('professionalsml.show',compact('professional','value'));
+    }
+
+    public function ficha(){
+        $actions = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/ficha_personalizada?filters%5Bsucursal%5D%5Bstatus%5D=activated&filters%5Bsucursal%5D%5Bvalue%5D=1&filters",true);
+
+        var_dump($actions);
+
+        // return redirect()->back();
     }
 
     public function actionMl(){
