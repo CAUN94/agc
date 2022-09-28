@@ -66,7 +66,12 @@ Route::middleware([UpdatePassword::class])->group(function () {
 
     // Admins
     Route::resource('adminusers', 'App\Http\Controllers\AdminUserController')->middleware(['intranet']);
-    Route::resource('adminstudents', 'App\Http\Controllers\AdminStudentController')->middleware(['intranet']);
+    Route::get('adminstudents', 'App\Http\Controllers\AdminStudentController@index')->middleware(['intranet']);
+    Route::get('wireframe2', 'App\Http\Controllers\AdminStudentController@wireframe2')->middleware(['intranet']);
+    Route::get('wireframe', 'App\Http\Controllers\AdminStudentController@wireframe')->middleware(['intranet']);
+
+
+
     Route::resource('adminclass', 'App\Http\Controllers\AdminTrainingController')->middleware(['intranet']);
     Route::resource('admintrainappointment', 'App\Http\Controllers\AdminTrainAppointmentsController')->middleware(['intranet']);
     Route::resource('adminprofessionalappointment', 'App\Http\Controllers\AdminProfessionalAppointmentsController')->middleware(['intranet']);

@@ -5,7 +5,7 @@
       <x-slot name="name"><i class="fas fa-user text-xs mr-1"></i> Usuarios</x-slot>
       <x-slot name="trigger">Usuarios</x-slot>
       <a class="py-1" href="/adminusers">Todos</a>
-      <a class="my-1 py-1" href="/adminstudents">Estudiantes</a>
+      <a class="my-1 py-1" href="/adminstudents">Alumnos</a>
       <a class="my-1 py-1" href="/adminprofessionals">Profesionales</a>
       <a class="my-1 py-1" href="/admintrainers">Entrenadores</a>
     </x-nav-dropdown>

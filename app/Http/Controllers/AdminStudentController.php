@@ -21,6 +21,14 @@ class AdminStudentController extends Controller {
 		return view('admin.students.index');
 	}
 
+	public function wireframe() {
+		return view('admin.students.wireframe');
+	}
+
+	public function wireframe2() {
+		return view('admin.students.wireframe2');
+	}
+
 	/**
 	 * Show the form for creating a new resource.
 	 *
