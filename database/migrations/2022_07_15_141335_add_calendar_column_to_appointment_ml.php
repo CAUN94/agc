@@ -14,7 +14,7 @@ class AddCalendarColumnToAppointmentMl extends Migration
     public function up()
     {
         Schema::table('appointment_mls', function (Blueprint $table) {
-            $table->boolean('professional_calendar')->after('Sucursal')->default(0);
+            $table->string('professional_calendar')->after('Sucursal')->default(0);
             $table->boolean('user_calendar')->after('professional_calendar')->default(0);
         });
     }
@@ -28,6 +28,7 @@ class AddCalendarColumnToAppointmentMl extends Migration
     {
         Schema::table('appointment_mls', function (Blueprint $table) {
             $table->dropColumn('professional_calendar');
+            $table->dropColumn('user_calendar');
         });
     }
 }

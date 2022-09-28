@@ -43,7 +43,7 @@
         <template x-for="(img,index) in imgs">
             <div class="flex flex-col mx-auto py-4"
             x-show="activeSlide === index+1" x-transition>
-                <img class="object-cover mx-auto h-64 w-96" style="object-position: center -30px;"  :src="'img/alianzas/' + img">
+                <img class="object-cover mx-auto h-64" :src="'img/alianzas/' + img">
                 <div class="flex mx-auto">
                     <button type="button" class="flex relative z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none" data-carousel-prev  @click="subOne">
                         <span class="inline-flex text-you-grey justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
@@ -58,9 +58,10 @@
                         </span>
                     </button>
                 </div>
-                <div class="text-white text-center text-3xl"><a x-text="texts[index]" x-bind:href="insta[index]" x-bind:target="'_blank'" x-transition></a></div>
-                <div class="text-white text-center text-lg" x-text="team[index]" x-transition></div>
-                {{-- <div class="text-white text-center text-sm" x-text="description[index]" x-transition></div> --}}
+                <div class="text-white text-center text-3xl"><a x-text="texts[index]"x-transition></a></div>
+                {{-- <div class="text-white text-center text-3xl"><a x-text="texts[index]" x-bind:href="insta[index]" x-bind:target="'_blank'" x-transition></a></div> --}}
+                {{-- <div class="text-white text-center text-lg" x-text="team[index]" x-transition></div> --}}
+                <div class="text-white text-center text-sm m-auto w-2/3 p-5" x-text="description[index]" x-transition></div>
 
             </div>
 
