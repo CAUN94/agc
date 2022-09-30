@@ -105,7 +105,7 @@
 		        <tbody>
 		            <tr class="bg-gray-50 text-center">
 		                <td class="p-1">
-		                	Insertar
+		                	Filtrar
 		                </td>
 		                <td class="p-1">
 		                    <input type="text" class="border p-1 block w-full">
