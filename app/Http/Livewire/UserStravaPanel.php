@@ -34,7 +34,6 @@ class UserStravaPanel extends Component
         $token = $this->user->access_token;
         $this->activities = Strava::activities($token,1,200);
         $chargesAndProgress = $this->chargesAndProgress($this->activities);
-        ddd($chargesAndProgress);
         $this->charges = $chargesAndProgress[0];
         $this->progress = $chargesAndProgress[1];
         $this->user = User::find($this->user->user_id);
@@ -110,7 +109,7 @@ class UserStravaPanel extends Component
             return $activities->type == 'Run';
         });
         if(count($activities_run) == 0){
-            return -1;
+            return [-1,-1,-1,-1];
         }
         $last_start_date = reset($activities_run)->start_date;
 
