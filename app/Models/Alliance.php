@@ -10,4 +10,6 @@ class Alliance extends Model
     use HasFactory;
 
     protected $fillable = ['name','desc'];
+
+
 }

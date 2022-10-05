@@ -109,7 +109,7 @@ class UserStravaPanel extends Component
             return $activities->type == 'Run';
         });
         if(count($activities_run) == 0){
-            return [-1,-1,[],[]];
+            return [-1,-1,[],[ ]];
         }
         $last_start_date = reset($activities_run)->start_date;
 

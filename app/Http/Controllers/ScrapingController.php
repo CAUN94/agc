@@ -45,14 +45,14 @@ class ScrapingController extends Controller
         foreach($split as $string){
             $jsonobj = "{".$string."}";
             $value = json_decode($jsonobj,true);
-            $limit = Carbon::now()->subMonth()->subMonth()->subMonth();
+            $limit = Carbon::parse(UserMl::max('Fecha_Ingreso'));
             if(is_null($value['Fecha Afiliación'])){
                 continue;
             }
             $now = Carbon::parse($value['Fecha Afiliación']);
-            // if($now<$limit){
-            //     continue;
-            // }
+            if($now<$limit){
+                continue;
+            }
             $userMl = UserMl::updateOrCreate(
                 [
                     'RUT' => $value['RUT/DNI'],
