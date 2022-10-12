@@ -18,6 +18,7 @@ class Student extends Model {
 		return $this->belongsTo(User::class);
 	}
 
+
 	public function Training() {
 		return $this->belongsTo(Training::class);
 	}

@@ -69,6 +69,16 @@ class AppointmentMl extends Model
             ->where('professional_calendar','not like',0);
     }
 
+    public static function lastAppointment($id){
+        $appointmentMl = AppointmentMl::find($id);
+        $rut = $appointmentMl->RUT_Paciente;
+        $appointment_mls = AppointmentMl::where('RUT_Paciente',$rut)->where('Fecha','<=',\Carbon\Carbon::now()->endOfDay())->orderby('Fecha','desc')->whereIn('Estado',['Atendido','Atendiendose'])->take(1)->first();
+        if (!is_null($appointment_mls)){
+            return $appointment_mls;
+        }
+        return $appointmentMl;
+    }
+
     public static function balance($date){
         return \DB::table('treatment_mls')
             ->Join('appointment_mls', 'treatment_mls.Atencion', '=' ,'appointment_mls.Tratamiento_Nr')

@@ -7,6 +7,7 @@ use App\Models\Training;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Carbon\Carbon;
 
 class AdminStudent extends Component {
 
@@ -16,6 +17,7 @@ class AdminStudent extends Component {
 	public $searchTerm;
 	public $trainings;
 	public $training;
+	public $now;
 
 	public function mount($student) {
 		$this->user = $student;
@@ -32,6 +34,7 @@ class AdminStudent extends Component {
 		$this->view = '';
 		$this->userid = $student->id;
 		$this->view = '';
+		$this->now = Carbon\Carbon::now();
 	}
 
 	public function selectPlan($id)
@@ -39,6 +42,17 @@ class AdminStudent extends Component {
         $this->searchTerm = null;
         $this->training = Training::find($id);
     }
+
+    public function subMonth()
+    {
+        $this->now->subMonth();
+    }
+
+    public function addMonth()
+    {
+        $this->now->addMonth();
+    }
+
     public function addPlan($id){
 		$new_student = new Student;
 		$new_student->user_id = $this->user->id;
@@ -51,8 +65,8 @@ class AdminStudent extends Component {
 		return redirect()->to('/adminstudents/'.$this->rut);
     }
 
-
 	public function render() {
+
 		$query = Training::query();
         if (empty($this->searchTerm)) {
             $this->trainings = Training::where('id', $this->searchTerm)->get();

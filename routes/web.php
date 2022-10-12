@@ -20,7 +20,11 @@ Route::get('/gcalendar_massive', [CalendarController::class, 'superstore']);
 Route::get('/gcalendar_delete', [CalendarController::class, 'superdelete']);
 // Route::get('/google', [CalendarController::class, 'google']);
 
-Route::get('/nubox', [ AdminNuboxController::class, 'nubox']);
+Route::get('/nubox/auth', [ AdminNuboxController::class, 'auth']);
+Route::get('/nubox/comprobante', [ AdminNuboxController::class, 'comprobante']);
+Route::get('/nubox/comuna', [ AdminNuboxController::class, 'comuna']);
+Route::get('/nubox/emit', [ AdminNuboxController::class, 'emit']);
+Route::get('/nubox/cliente', [ AdminNuboxController::class, 'cliente']);
 
 Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/mercadopagosearch', [MercadoPagoController::class, 'index']);
@@ -64,7 +68,12 @@ Route::middleware([UpdatePassword::class])->group(function () {
 
     // Admins
     Route::resource('adminusers', 'App\Http\Controllers\AdminUserController')->middleware(['intranet']);
-    Route::resource('adminstudents', 'App\Http\Controllers\AdminStudentController')->middleware(['intranet']);
+    Route::get('adminstudents', 'App\Http\Controllers\AdminStudentController@index')->middleware(['intranet']);
+    Route::get('wireframe2', 'App\Http\Controllers\AdminStudentController@wireframe2')->middleware(['intranet']);
+    Route::get('wireframe', 'App\Http\Controllers\AdminStudentController@wireframe')->middleware(['intranet']);
+
+
+
     Route::resource('adminclass', 'App\Http\Controllers\AdminTrainingController')->middleware(['intranet']);
     Route::resource('admintrainappointment', 'App\Http\Controllers\AdminTrainAppointmentsController')->middleware(['intranet']);
     Route::resource('adminprofessionals', 'App\Http\Controllers\AdminProfessionalsController')->middleware(['intranet']);
@@ -93,6 +102,9 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/scraping-actionml', 'App\Http\Controllers\ScrapingController@actionMl')->name('scraping-actionml');
     Route::get('/scraping-appointmentml', 'App\Http\Controllers\ScrapingController@appointmentMl')->name('scraping-appointmentml');
     Route::get('/scraping-treatmentsml', 'App\Http\Controllers\ScrapingController@treatmentsMl')->name('scraping-treatmentsml');
+
+    Route::get('/ficha', 'App\Http\Controllers\ScrapingController@ficha')->name('ficha');
+
     Route::get('/scraping-paymentsml', 'App\Http\Controllers\ScrapingController@paymentsMl')->name('scraping-paymentsml');
     Route::get('/professionals', 'App\Http\Controllers\ScrapingController@professionals')->middleware(['intranet']);
     Route::get('/professionals/{id}', 'App\Http\Controllers\ScrapingController@professional')->middleware(['intranet']);

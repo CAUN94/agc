@@ -50,6 +50,7 @@ class UpdateMedilink extends Command
         $command = new CommandSchedule;
         $command->command = 'UpdateMedilink';
         $command->save();
+
         $this->actionMl();
         $this->info('----');
         $this->appointmentMl();
@@ -57,6 +58,47 @@ class UpdateMedilink extends Command
         $this->treatmentsMl();
         $this->info('----');
         $this->paymentsMl();
+    }
+
+    public function userMl(){
+        $this->info("Users: ".UserMl::all()->count());
+        $split = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/pacientes_nuevos");
+        foreach($split as $string){
+            $jsonobj = "{".$string."}";
+            $value = json_decode($jsonobj,true);
+            $limit = Carbon::parse(UserMl::max('Fecha_Ingreso'));
+            if(is_null($value['Fecha Afiliación'])){
+                continue;
+            }
+            $now = Carbon::parse($value['Fecha Afiliación']);
+            if($now<$limit){
+                continue;
+            }
+            $userMl = UserMl::updateOrCreate(
+                [
+                    'RUT' => $value['RUT/DNI'],
+                    'Email' => $value['E-Mail'],
+                ],
+                [
+                    'Nombre' => $value['Nombre paciente'],
+                    'Apellidos' => $value['Apellidos paciente'],
+                    'Fecha_Ingreso' => $value['Fecha Afiliación'],
+                    'Ultima_Cita' => $value['Última Cita'],
+                    'RUT' => $value['RUT/DNI'],
+                    'Nacimiento' => $value['Fecha nacimiento'],
+                    'Celular' => $value['Celular'],
+                    'Ciudad' => $value['Ciudad'],
+                    'Comuna' => $value['Comuna'],
+                    'Direccion' => $value['Dirección'],
+                    'Email' => $value['E-Mail'],
+                    'Observaciones' => $value['Observaciones'],
+                    'Sexo' => $value['Sexo'],
+                    'Convenio' => $value['Convenio']
+                ]
+            );
+        }
+        $this->info("Users: ".UserMl::all()->count());
+        $this->info("Users Updated");
     }
 
     public function create_client($url, $filter = False){
@@ -93,7 +135,8 @@ class UpdateMedilink extends Command
                 [
                     'Prestacion_Nr' => $value['Id. Prestacion'],
                     'Tratamiento_Nr' => $value['# Tratamiento'],
-                    'Fecha_Realizacion' => $value['Fecha Realizacion']
+                    'Fecha_Realizacion' => $value['Fecha Realizacion'],
+                    'Profesional' => $value['Realizado por'],
                 ],
                 [
                     'Sucursal' => $value['Sucursal'],
@@ -140,6 +183,7 @@ class UpdateMedilink extends Command
                     'Tratamiento_Nr' => $value['Atencion'],
                     'Rut_Paciente' => $value['Rut Paciente'],
                     'Fecha' => $value['Fecha'],
+                    'Hora_inicio' => $value['Hora inicio'],
                 ],
                 [
                     'Estado' => $value['Estado'],
@@ -245,4 +289,5 @@ class UpdateMedilink extends Command
         $this->info("Payments: ".PaymentMl::all()->count());
         $this->info('Payments Updated!');
     }
+
 }
