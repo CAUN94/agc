@@ -134,4 +134,132 @@ class AdminNuboxController extends Controller
       curl_close($curl);
       echo $response;
     }
+
+    public function emit(){
+      $curl = curl_init();
+      curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://api.nubox.com/Nubox.API.cert/factura/documento/15478788-7/1/rutFuncionario/1/emitir/ventaExtendido?rutFuncionario=13954729-2&emitir=true',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS =>'{
+          "productos": [
+            {
+              "rutContraparte": "18783405-8",
+              "razonSocialContraparte": "venta23",
+              "giroContraparte": "venta23",
+              "tipo": 33,
+              "folio": 1600,
+              "secuencia": 1,
+              "fecha": "2022-06-22T00:00:00.8751996-04:00",
+              "afecto": "SI",
+              "producto": "producto de ejemplo",
+              "descripcion": null,
+              "cantidad": 1,
+              "comunaContraparte": "Las Condes",
+              "direccionContraparte": "Av Vitacura 3110",
+              "precio": 70000,
+              "valor": 70000,
+              "ponderacionDescuento": 0,
+              "emailContraparte": "mail@ejemplo.com",
+              "tipoDeServicio": "",
+              "fechaPeriodoDesde": "",
+              "fechaPeriodoHasta": "",
+              "fechaVencimiento": "",
+              "codigoSucursal": "Cod 0001",
+              "vendedor": "Pedro Sanchez",
+              "codigoItem": "01",
+              "unidadMedida": "UNID",
+              "codigoIMP": "",
+              "montoIMP": 0,
+              "indicadorDeTraslado": "1",
+              "formaDePago": "1",
+              "medioDePago": "EF",
+              "terminosDePagoDias": "",
+              "terminosDePagoCodigo": "",
+              "comunaDestino": "Santiago",
+              "rutSolicitanteFactura": "18783405-8",
+              "productoCambioSujeto": "",
+              "cantidadMontoCambioSujeto": 0,
+              "tipoGlobalAfecto": "",
+              "valorGlobalAfecto": 0,
+              "tipoGlobalExento": "",
+              "valorGlobalExento": 0,
+              "precioCambioSujeto": 0,
+              "descuentoMonto": 0,
+              "rutTransportista": "18783405-8",
+              "rutChofer": "18783405-8",
+              "patente": "SVFV02",
+              "nombreChofer": "Juan Pereira",
+              "direccionDestino": "Santa Rosa 215",
+              "ciudadDestino": "Santiago",
+              "tipoDeDespacho": "",
+              "nombreDeContacto": "Lorena Álvarez",
+              "observacion": "Observación."
+            }
+          ],
+          "documentoReferenciado": {
+            "tipo": 0,
+            "folio": 2343,
+            "secuencia": 0,
+            "tipoDocumentoReferenciado": 0,
+            "folioDocumentoReferenciado": 34,
+            "fechaDocumentoReferenciado": "2020-06-22T15:31:10.8751996-04:00",
+            "motivoReferencia": 0,
+            "glosa": "Glosa"
+          }
+        }',
+        CURLOPT_HTTPHEADER => array(
+          'token: '.$this->auth()['Token'],
+          'Content-Type: application/json',
+          'Cookie: '.$this->auth()['Set-Cookie'],
+        ),
+      ));
+      $response = curl_exec($curl);
+
+      curl_close($curl);
+      echo $response;
+    }
+
+    public function cliente(){
+      $curl = curl_init();
+
+      curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://api.nubox.com/Nubox.API.cert/factura/1-9/1/clientes',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS =>'[
+        {
+          "Rut": "18783405-8",
+          "RazonSocial": "Juan Cliente",
+          "Giro": "EMPRESA DE SERVICIOS DE INFORMATICA",
+          "Acteco": "ACTIVIDADES DE ASESORAMIENTO EMPRESARIAL Y EN MATERIA DE GESTION",
+          "DireccionLegal": "Orinoco 90",
+          "ComunaLegalNombre": "Las Condes",
+          "Contacto": "Juan Contador",
+          "Email": "juan.contador@ejemplo.com",
+          "seEnviaPDF": 1
+        }
+      ]',
+        CURLOPT_HTTPHEADER => array(
+          'token: '.$this->auth()['Token'],
+          'Content-Type: application/json',
+          'Cookie: '.$this->auth()['Set-Cookie'],
+        ),
+      ));
+
+      $response = curl_exec($curl);
+
+      curl_close($curl);
+      echo $response;
+    }
 }

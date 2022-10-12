@@ -23,6 +23,8 @@ Route::get('/gcalendar_delete', [CalendarController::class, 'superdelete']);
 Route::get('/nubox/auth', [ AdminNuboxController::class, 'auth']);
 Route::get('/nubox/comprobante', [ AdminNuboxController::class, 'comprobante']);
 Route::get('/nubox/comuna', [ AdminNuboxController::class, 'comuna']);
+Route::get('/nubox/emit', [ AdminNuboxController::class, 'emit']);
+Route::get('/nubox/cliente', [ AdminNuboxController::class, 'cliente']);
 
 Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/mercadopagosearch', [MercadoPagoController::class, 'index']);
