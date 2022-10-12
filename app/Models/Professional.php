@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 
 class Professional extends Model
 {
@@ -27,58 +26,19 @@ class Professional extends Model
     public static function monthAppointments($first,$last,$user){
        //where('Profesional' , '=', 'Alonso Niklitschek Sanhueza')
         return ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
-        ->Where('Profesional', 'LIKE' , '%' . $user . '%')
+        ->orWhere('Profesional', 'LIKE' , '%' . $user . '%')
         ->get()->count();
     }
 
     public static function prestaciones($first,$last,$user){
-      return (ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
-      ->Where('Profesional', 'LIKE' , '%' . $user . '%')
-      ->sum('Precio_Prestacion'))*1;
+      return (ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])->orWhere('Profesional', 'LIKE' , '%' . $user . '%')->sum('Precio_Prestacion'))*1;
+    }
+
+    public static function abonos($first,$last,$user){
+      return (ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])->orWhere('Profesional', 'LIKE' , '%' . $user . '%')->sum('Abono'))*1;
     }
 
     public static function remuneracion($first,$last,$user){
-      return (ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
-      ->Where('Profesional', 'LIKE' , '%' . $user . '%')
-      ->sum('Total'))*1;
+      return (ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])->orWhere('Profesional', 'LIKE' , '%' . $user . '%')->sum('Total'))*1;
     }
-
-    public static function Prom_prestaciones($first,$last,$user){
-      $remuneracion = (ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
-      ->Where('Profesional', 'LIKE' , '%' . $user . '%')
-      ->sum('Precio_Prestacion'))*1;
-
-      $appointment = ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
-      ->Where('Profesional', 'LIKE' , '%' . $user . '%')
-      ->get()->count();
-      if($appointment == 0){
-        return 0;
-      }else{
-      return ceil($remuneracion/$appointment);
-      }
-    }
-
-    public static function Prom_remuneracion($first,$last,$user){
-      $remuneracion = (ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
-      ->Where('Profesional', 'LIKE' , '%' . $user . '%')
-      ->sum('Total'))*1;
-
-      $appointment = ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
-      ->Where('Profesional', 'LIKE' , '%' . $user . '%')
-      ->get()->count();
-      if($appointment == 0){
-        return 0;
-      }else{
-      return ceil($remuneracion/$appointment);
-      }
-    }
-
-    public static function tasaOcupacion($first,$last,$user){
-      $atenciones =  ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
-      ->Where('Profesional', 'LIKE' , '%' . $user . '%')
-      ->get()->count();
-
-      return ceil(($atenciones/120)*100);
-    }
-
 }
