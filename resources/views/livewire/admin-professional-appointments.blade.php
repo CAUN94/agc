@@ -1,4 +1,4 @@
-<div x-data="{ pay: false }">
+<div x-data="{ pay: true }">
     <div class="w-full overflow-x-auto gap-y-2 box-white p-3">
         <div class="mb-2 w-full flex justify-between">
             Periodo del {{$startOfMonth->format('d-m')}} al {{$endOfMonth->format('d-m')}}
@@ -35,7 +35,7 @@
                 <ul class="grid grid-cols-5 gap-1">
                     <li>
                         <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                            {{$professional->user->id}}
+                            {{$professional->user->fullname()}}
                         </a>
                     </li>
                     <li>
