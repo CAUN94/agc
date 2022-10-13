@@ -84,8 +84,12 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::resource('adminbookappointment', 'App\Http\Controllers\AdminBookAppointmentsController')->middleware(['intranet']);
     Route::get('/userml', [UserMlController::class, 'index'])->middleware(['intranet']);
 
-    // Admin Haas
+    //Remuneración
+    Route::resource('mesActual', 'App\Http\Controllers\mesActualController')->middleware(['intranet']);
+    Route::resource('mesVencido', 'App\Http\Controllers\mesVencidoController')->middleware(['intranet']);
+    Route::resource('historial', 'App\Http\Controllers\historialController')->middleware(['intranet']);
 
+    // Admin Haas
     Route::get('/admin/nutrition', [AdminHaasController::class, 'nutrition'])->middleware(['intranet']);
 
     // TrainerAdmins

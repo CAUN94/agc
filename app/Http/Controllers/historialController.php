@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProfesionalAppointment;
+use App\Models\historial;
 use Illuminate\Http\Request;
 
-class AdminProfessionalAppointmentsController extends Controller
+class historialController extends Controller
 {
     public function __construct() {
         $this->middleware('intranet');
@@ -17,7 +17,7 @@ class AdminProfessionalAppointmentsController extends Controller
      */
     public function index()
     {
-        return view('admin.professionalAppointments.index');
+        return view('admin.historial.index');
     }
 
     /**
@@ -44,10 +44,10 @@ class AdminProfessionalAppointmentsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ProfessionalAppointment  $professionalAppointment
+     * @param  \App\Models\historial  $mesActual
      * @return \Illuminate\Http\Response
      */
-    public function show(ProfessionalAppointment $professionalAppointment)
+    public function show(historial $historial)
     {
         //
     }
@@ -55,10 +55,10 @@ class AdminProfessionalAppointmentsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ProfessionalAppointment  $professionaAppointment
+     * @param  \App\Models\historial  $historial
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProfessionalAppointment $professionalAppointment)
+    public function edit(historial $historial)
     {
         //
     }
@@ -67,10 +67,10 @@ class AdminProfessionalAppointmentsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ProfessionalAppointment  $professionalAppointment
+     * @param  \App\Models\historial $historial
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProfessionalAppointment $professionalAppointment)
+    public function update(Request $request, historial $historial)
     {
         //
     }
@@ -78,10 +78,10 @@ class AdminProfessionalAppointmentsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ProfessionalAppointment  $professionalAppointment
+     * @param  \App\Models\historial  $historial
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProfessionalAppointment $professionalAppointment)
+    public function destroy(historial $historial)
     {
         //
     }
