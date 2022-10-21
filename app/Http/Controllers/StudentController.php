@@ -49,8 +49,9 @@ class StudentController extends Controller {
 			'terms' => 'required',
 			'extra' => 'sometimes'
 		]);
-		// ddd($attributes);
 		$student = Student::create($attributes);
+		$student->end_day = $student->lastPlan()->endMonth();
+		$student->save();
 		$student->newPlan($request, $request->months - 1);
 
 		$user = User::find($student->user_id);

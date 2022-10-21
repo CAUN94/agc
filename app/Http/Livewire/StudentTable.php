@@ -58,13 +58,10 @@ class StudentTable extends LivewireDatatable {
 				->label('Fecha de Inicio del Plan')
 				->filterable()
 				->sortBy('start_day','desc'),
-			DateColumn::raw("DATE_ADD(start_day, INTERVAL days day)")
+			DateColumn::name('end_day')
 				->label('Fecha de Termino del Plan')
 				->filterable()
-				->sortBy('start_day','desc'),
-			NumberColumn::callback(['trainings.price'], function ($price) {
-                return Helper::moneda_chilena($price);
-            })->label('Valor')->filterable(),
+				->sortBy('end_day','desc'),
             NumberColumn::name('alliances.desc')
                 ->label('Descuento')
                 ->filterable(),

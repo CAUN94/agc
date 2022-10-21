@@ -255,6 +255,8 @@ class Student extends Model {
 			$new_student->terms = $request->terms;
 			$new_student->start_day = $this->lastPlan()->endMonth();
 			$new_student->save();
+			$new_student->end_day = $new_student->lastPlan()->endMonth();
+			$new_student->save();
 		}
 		return;
 	}

@@ -25,6 +25,7 @@ Route::get('/nubox/comprobante', [ AdminNuboxController::class, 'comprobante']);
 Route::get('/nubox/comuna', [ AdminNuboxController::class, 'comuna']);
 Route::get('/nubox/emit', [ AdminNuboxController::class, 'emit']);
 Route::get('/nubox/cliente', [ AdminNuboxController::class, 'cliente']);
+Route::get('/nubox/boleta', [ AdminNuboxController::class, 'boleta']);
 
 Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/mercadopagosearch', [MercadoPagoController::class, 'index']);

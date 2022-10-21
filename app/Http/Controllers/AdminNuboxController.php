@@ -138,7 +138,7 @@ class AdminNuboxController extends Controller
     public function emit(){
       $curl = curl_init();
       curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://api.nubox.com/Nubox.API.cert/factura/documento/15478788-7/1/rutFuncionario/1/emitir/ventaExtendido?rutFuncionario=13954729-2&emitir=true',
+        CURLOPT_URL => 'https://api.nubox.com/Nubox.API.cert/factura/documento/76914578-8/1/rutFuncionario/1/emitir/ventaExtendido?rutFuncionario=18018579-8&emitir=true',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -152,10 +152,10 @@ class AdminNuboxController extends Controller
               "rutContraparte": "18783405-8",
               "razonSocialContraparte": "venta23",
               "giroContraparte": "venta23",
-              "tipo": 33,
-              "folio": 1600,
+              "tipo": 34,
+              "folio": 10,
               "secuencia": 1,
-              "fecha": "2022-06-22T00:00:00.8751996-04:00",
+              "fecha": "2022-09-14",
               "afecto": "SI",
               "producto": "producto de ejemplo",
               "descripcion": null,
@@ -167,8 +167,8 @@ class AdminNuboxController extends Controller
               "ponderacionDescuento": 0,
               "emailContraparte": "mail@ejemplo.com",
               "tipoDeServicio": "",
-              "fechaPeriodoDesde": "",
-              "fechaPeriodoHasta": "",
+              "fechaPeriodoDesde": "2022-09-14",
+              "fechaPeriodoHasta": "2022-09-14",
               "fechaVencimiento": "",
               "codigoSucursal": "Cod 0001",
               "vendedor": "Pedro Sanchez",
@@ -204,11 +204,11 @@ class AdminNuboxController extends Controller
           ],
           "documentoReferenciado": {
             "tipo": 0,
-            "folio": 2343,
+            "folio": 1600,
             "secuencia": 0,
             "tipoDocumentoReferenciado": 0,
             "folioDocumentoReferenciado": 34,
-            "fechaDocumentoReferenciado": "2020-06-22T15:31:10.8751996-04:00",
+            "fechaDocumentoReferenciado": "2022-09-14T00:00:00.8751996-04:00",
             "motivoReferencia": 0,
             "glosa": "Glosa"
           }
@@ -229,7 +229,7 @@ class AdminNuboxController extends Controller
       $curl = curl_init();
 
       curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://api.nubox.com/Nubox.API.cert/factura/1-9/1/clientes',
+        CURLOPT_URL => 'https://api.nubox.com/Nubox.API.cert/factura/76914578-8/1/clientes',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -254,6 +254,69 @@ class AdminNuboxController extends Controller
           'token: '.$this->auth()['Token'],
           'Content-Type: application/json',
           'Cookie: '.$this->auth()['Set-Cookie'],
+        ),
+      ));
+
+      $response = curl_exec($curl);
+
+      curl_close($curl);
+      echo $response;
+    }
+
+    public function boleta(){
+      $curl = curl_init();
+
+      curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://api.nubox.com/Nubox.API.cert/factura/documento/76914578-8/1/18018579-8/1/39/dte/extendido',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS =>'{
+          "productos": [
+            {
+              "fechaEmision": "2022-09-04",
+              "folio": 39,
+              "rutContraparte": "18783405-8",
+              "razonSocialContraparte": "venta23",
+              "giroContraparte": "Servicios",
+              "comunaContraparte": "Vitacura",
+              "direccionContraparte": "Candelaria Goyenechea 3820, Vitacura",
+              "emailContraparte": "mail@ejemplo.com",
+              "codigoSucursal": "123",
+              "secuencia": 1,
+              "afecto": "SI",
+              "producto": "Privado",
+              "descripcion": "Servicio",
+              "cantidad": 1,
+              "precio": 150000,
+              "valor": 150000,
+              "codigoItem": "01",
+              "unidadMedida": "UNID",
+              "fechaVencimiento": "2020-06-16T08:36:14.4221255-04:00",
+              "codigoSIITipoDeServicio": "1",
+              "fechaPeriodoDesde": "2020-06-16T08:36:14.4221255-04:00",
+              "fechaPeriodoHasta": "2020-06-16T08:36:14.4221255-04:00",
+              "observacion": "Observación"
+            }
+          ],
+          "documentoReferenciado": {
+            "tipo": 0,
+            "folio": 39,
+            "secuencia": 1,
+            "tipoDocumentoReferenciado": 0,
+            "folioDocumentoReferenciado": 654321,
+            "fechaDocumentoReferenciado": "2020-06-16T08:36:14.4221255-04:00",
+            "motivoReferencia": 1000,
+            "glosa": "Glosa"
+          }
+        }',
+        CURLOPT_HTTPHEADER => array(
+          'token: '.$this->auth()['Token'],
+          'Content-Type: application/json',
         ),
       ));
 
