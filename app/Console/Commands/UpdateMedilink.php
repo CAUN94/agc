@@ -180,10 +180,10 @@ class UpdateMedilink extends Command
             }
             $actionMl = AppointmentMl::updateOrCreate(
                 [
-                    'Tratamiento_Nr' => $value['Atencion'],
                     'Rut_Paciente' => $value['Rut Paciente'],
                     'Fecha' => $value['Fecha'],
                     'Hora_inicio' => $value['Hora inicio'],
+                    'Profesional' => $value['Profesional/Recurso'],
                 ],
                 [
                     'Estado' => $value['Estado'],
