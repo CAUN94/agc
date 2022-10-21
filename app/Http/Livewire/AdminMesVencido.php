@@ -15,9 +15,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Session as FlashSession;
+use Livewire\WithPagination;
+
 
 class AdminMesVencido extends Component
 {
+    use WithPagination;
+
     public $days = ['Lun','Mar','Mie','Jue','Vie','Sab'];
     public $now = '';
     public $dates = [];
@@ -41,7 +45,6 @@ class AdminMesVencido extends Component
     public $message;
     public $trainings_g;
     public $trainings_s;
-    public $appointments = [];
     public $coach;
     public $newname;
     public $newdate;
@@ -162,12 +165,12 @@ class AdminMesVencido extends Component
             }
         }
 
-        $this->appointments = ActionMl::where('Estado','Atendido')
-                              ->whereBetween('Fecha_Realizacion',[$this->expiredstartOfMonth->format('Y-m-d'),$this->expiredendOfMonth->format('Y-m-d')])
-                              ->whereIN('Profesional',$this->selectedProfessional)
-                              ->orderby('Fecha_Realizacion', 'DESC')
-                              ->get();
-
-        return view('livewire.admin-mes-vencido');
+        return view('livewire.admin-mes-vencido', [
+            'appointments' => ActionMl::where('Estado','Atendido')
+                                  ->whereBetween('Fecha_Realizacion',[$this->expiredstartOfMonth->format('Y-m-d'),$this->expiredendOfMonth->format('Y-m-d')])
+                                  ->whereIN('Profesional',$this->selectedProfessional)
+                                  ->orderby('Fecha_Realizacion', 'DESC')
+                                  ->Paginate(13),
+        ]);
     }
 }

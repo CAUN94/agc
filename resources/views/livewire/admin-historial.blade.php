@@ -17,39 +17,40 @@
         <tbody>
         <!---->
           @foreach($periods as $periodo)
+          @foreach(App\Models\Professional::where('user_id','=',$selectedProfessional_id)->get() as $professional)
         <tr class=>
-
           <td class=>
             <div class="flex flex-col items-center justify-between">
-              <span>{{$periodo->format('Y-m-d')}}</span>
+              <span>{{$periodo->format('Y-m-d')}} - {{$this->endPeriod($periodo)}}</span>
             </div>
           </td>
           <td>
              <div class="flex flex-col items-center justify-between">
-              <span class="text-sm">-</span>
+              <span class="text-sm">{{$professional->prestaciones($periodo,$this->endPeriod($periodo),$professional->user->fullname())}}</span>
             </div>
           </td>
           <td>
             <div class="flex flex-col items-center justify-between">
-               <span class="text-sm">-</span>
+               <span class="text-sm">{{$professional->remuneracion($periodo,$this->endPeriod($periodo),$professional->user->fullname())}}</span>
             </div>
           </td>
           <td>
             <div class="flex flex-col items-center justify-between">
-              <span class="text-sm">-</span>
+              <span class="text-sm">{{$professional->monthAppointments($periodo,$this->endPeriod($periodo),$professional->user->fullname())}}</span>
             </div>
           </td>
           <td>
             <div class="flex flex-col items-center justify-between">
-              <span class="text-sm">-</span>
+              <span class="text-sm">{{$professional->tasaOcupacion($periodo,$this->endPeriod($periodo),$professional->user->fullname())}}</span>
             </div>
           </td>
-
         </tr>
+          @endforeach
           @endforeach
         <!---->
         </tbody>
       </table>
+      <div></div>
     </div>
     <div class="w-full overflow-x-auto gap-y-2 box-white p-3 mt-2">
         <form wire:change="updateSelectedProfessional">

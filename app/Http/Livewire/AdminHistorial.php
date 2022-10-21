@@ -95,11 +95,12 @@ class AdminHistorial extends Component
     }
 
     public function endPeriod($startOfPeriod){
-      return Carbon::createFromDate(Carbon::parse($firstRemuneration->Fecha_Realizacion)->format('Y'),Carbon::parse($firstRemuneration->Fecha_Realizacion)->format('m')->addMonth(),20)->startOfDay();
+      return Carbon::createFromDate(Carbon::parse($startOfPeriod)->format('Y'),Carbon::parse($startOfPeriod)->format('m')+1,20)->startOfDay();
     }
 
     public function render()
     {
+
       $firstRemuneration = DB::table('professionals')
             ->join('action_mls', 'professionals.description', '=', 'action_mls.Profesional')
             ->where('professionals.user_id',$this->selectedProfessional_id)

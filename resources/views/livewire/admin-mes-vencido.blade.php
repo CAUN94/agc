@@ -1,4 +1,4 @@
-<div x-data="{ pay: false }">
+<div x-data="{ calendar: false }">
     <div class="w-full overflow-x-auto gap-y-2 box-white p-3">
         <div class="mb-2 w-full flex justify-between">
             Periodo del {{$expiredstartOfMonth->format('d-m')}} al {{$expiredendOfMonth->format('d-m')}}
@@ -90,6 +90,7 @@
               @endforeach
               </tbody>
             </table>
+            <div class='py-3'>{{$appointments->links()}}</div>
           </div>
         </div>
       </div>
@@ -113,6 +114,98 @@
         </div>
       </div>
     </div>
+    <button x-on:click="calendar = !calendar">Ver calendario</button>
+    <div x-show="calendar">
+    <div class="w-full flex flex-col overflow-x-auto gap-1">
+      <div class="align-middle inline-block min-w-full">
+        <div class="box-white">
+            <div class="bg-gray-100">
+                <div>
+                    <div class="container mx-auto">
+                        <div class="bg-white rounded-lg shadow overflow-hidden">
+                            <div class="flex items-center justify-between py-2 px-6">
+                                <div>
+                                    <span class="text-lg font-bold text-gray-800">{{$now->format('F')}}</span>
+                                    <span class="ml-1 text-lg text-gray-600 font-normal">{{$now->format('Y')}}</span>
+                                </div>
+                                <div class="border rounded-lg px-1" style="padding-top: 2px;">
+                                    <button
+                                        type="button"
+                                        class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 items-center"
+                                        wire:click="subMonth"
+                                        >
+                                        <svg class="h-6 w-6 text-gray-500 inline-flex leading-none"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                                        </svg>
+                                    </button>
+                                    <div class="border-r inline-flex h-6"></div>
+                                    <button
+                                        type="button"
+                                        class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex items-center cursor-pointer hover:bg-gray-200 p-1"
+                                        wire:click="incrementMonth"
+                                        >
+                                        <svg class="h-6 w-6 text-gray-500 inline-flex leading-none"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                              </div>
+                              <div class="-mx-1 -mb-1" x-data="{ openModal: false }">
+                                  <div class="flex flex-wrap">
+                                      @forelse($days as $day)
+                                          <div style="width: {{$width}}" class="px-2 py-2">
+                                              <div
+                                                  class="text-gray-600 text-sm uppercase tracking-wide font-bold text-center">
+                                                      {{$day}}
+                                              </div>
+                                          </div>
+                                      @empty
+                                      @endforelse
+                                  </div>
+                                  <div class="flex flex-wrap border-t border-l">
+                                      @foreach($nodates as $date)
+                                      <div
+                                          style="width: {{$width}}; height: {{$height}}"
+                                          class="text-center border-r border-b px-4 pt-2"
+                                      ></div>
+                                      @endforeach
+
+                                      @foreach($dates as $date)
+                                          <div style="width: {{$width}}; height: {{$height}}" class="px-1 lg:px-4 pt-2 border-r border-b relative">
+                                              <div
+                                                  class="inline-flex w-6 h-6 items-center justify-center text-center leading-none rounded-full transition ease-in-out duration-100 text-xs lg:text-sm
+                                                  {{ $date->format('Y-m-d') > date('Y-m-d') ? "text-primary-500 hover:bg-primary-500 hover:text-white" : "" }}
+                                                  ">
+                                                  {{$date->format('d')}}
+                                              </div>
+                                              <div style="height: {{$heightbox}};" class="overflow-y-auto mt-1">
+                                                  @foreach(App\Models\AppointmentMl::where('Estado','Atendido')->whereBetween('Fecha',[$expiredstartOfMonth, $expiredendOfMonth])->where('Fecha',$date->format('Y-m-d'))->whereIN('Profesional',$selectedProfessional)->orderby('Hora_inicio', 'ASC')->get() as $professionalAppointment)
+                                                      <div
+                                                          wire:click="show({{$professionalAppointment->id}})"
+                                                          @if($professionalAppointment->Estado=='Atendido')
+                                                              @php $color = 'green'; @endphp
+                                                          @endif
+
+                                                          class="box-class border-{{$color}}-200 text-{{$color}}-800 bg-{{$color}}-100 cursor-pointer
+                                                          ">
+                                                          <p class="text-xs lg:text-sm lg:truncate leading-tight">{{$professionalAppointment->Hora_inicio}} {{$professionalAppointment->Estado}}</p>
+                                                      </div>
+                                                  @endforeach
+                                              </div>
+                                          </div>
+                                      @endforeach
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
     <!--
     <div class="w-full overflow-x-auto gap-y-2 box-white p-3 mt-2">
         <form wire:change="updateSelectedProfessional">
