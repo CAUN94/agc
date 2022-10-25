@@ -108,6 +108,7 @@ Route::middleware([UpdatePassword::class])->group(function () {
 
     Route::get('/scraping-paymentsml', 'App\Http\Controllers\ScrapingController@paymentsMl')->name('scraping-paymentsml');
     Route::get('/professionals', 'App\Http\Controllers\ScrapingController@professionals')->middleware(['intranet']);
+    Route::get('/professionalshours', 'App\Http\Controllers\ScrapingController@professionalshours')->middleware(['intranet']);
     Route::get('/professionals/{id}', 'App\Http\Controllers\ScrapingController@professional')->middleware(['intranet']);
 
     // Medilink

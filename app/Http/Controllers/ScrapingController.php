@@ -85,6 +85,42 @@ class ScrapingController extends Controller
         return view('professionalsml.index',compact('professionals'));
     }
 
+    public function professionalshours(){
+        $client = new Client();
+        $crawler = $client->request('GET', 'https://youjustbetter.softwaremedilink.com/reportesdinamicos');
+        $form = $crawler->selectButton('Ingresar')->form();
+        $form->setValues(['rut' => 'admin', 'password' => 'Pascual4900']);
+        $crawler = $client->submit($form);
+
+        $professionals = self::create_client("https://youjustbetter.softwaremedilink.com/dentistas/autocomplete");
+        $hours = [];
+        foreach($professionals as $names){
+            $values = json_decode("{".$names."}",true);
+            $id = $values['id'];
+            $now = Carbon::now();
+            $weekStartDate = $now->startOfWeek()->format('Y-m-d');
+            $url = "https://youjustbetter.softwaremedilink.com/agendas/semanalJSON/".$weekStartDate."/?id_profesional=".$id;
+
+            $crawler = $client->request('GET', $url);
+            $professional = $crawler->text();
+            $professional = json_decode($professional,true);
+
+            // $nextWeekStartDate = $now->addWeek()->startOfWeek()->format('Y-m-d');
+            // $url = "https://youjustbetter.softwaremedilink.com/agendas/semanalJSON/".$nextWeekStartDate."/?id_profesional=".$id;
+            // $crawler = $client->request('GET', $url);
+            // $professional2 = $crawler->text();
+            // $professional = array_merge($professional,json_decode($professional2,true));
+            $count = 0;
+            foreach ($professional as $key => $value) {
+                $count += count($value);
+            }
+            $hours[$values['rut']] = $count;
+
+        }
+
+        return $hours;
+    }
+
     public function professional($id){
         $client = new Client();
         $crawler = $client->request('GET', 'https://youjustbetter.softwaremedilink.com/reportesdinamicos');
