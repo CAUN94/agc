@@ -26,6 +26,7 @@ Route::get('/nubox/comuna', [ AdminNuboxController::class, 'comuna']);
 Route::get('/nubox/emit', [ AdminNuboxController::class, 'emit']);
 Route::get('/nubox/cliente', [ AdminNuboxController::class, 'cliente']);
 Route::get('/nubox/boleta', [ AdminNuboxController::class, 'boleta']);
+Route::get('/professionalshours', 'App\Http\Controllers\ScrapingController@professionalshours');
 
 Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/mercadopagosearch', [MercadoPagoController::class, 'index']);
@@ -108,7 +109,7 @@ Route::middleware([UpdatePassword::class])->group(function () {
 
     Route::get('/scraping-paymentsml', 'App\Http\Controllers\ScrapingController@paymentsMl')->name('scraping-paymentsml');
     Route::get('/professionals', 'App\Http\Controllers\ScrapingController@professionals')->middleware(['intranet']);
-    Route::get('/professionalshours', 'App\Http\Controllers\ScrapingController@professionalshours');
+
     Route::get('/professionals/{id}', 'App\Http\Controllers\ScrapingController@professional')->middleware(['intranet']);
 
     // Medilink
