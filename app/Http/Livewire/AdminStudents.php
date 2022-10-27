@@ -56,6 +56,8 @@ class AdminStudents extends Component
         $new_student->terms = True;
         $new_student->start_day = $date;
         $new_student->save();
+        $new_student->end_day = $new_student->lastPlan()->endMonth();
+        $new_student->save();
 
         return redirect()->to('/adminstudents');
     }
@@ -72,15 +74,11 @@ class AdminStudents extends Component
             }
             $this->trainings = $queryt->get();
         }
-        $queryu = User::query();
         if (empty($this->searchTermUser)) {
-            $this->users = Training::where('id', $this->searchTermUser)->get();
-        } else {
-            $columns = ['name','lastnames','rut','email'];
-            foreach ($columns as $column) {
-                $queryu->orWhere($column, 'LIKE', '%' . $this->searchTermUser . '%');
-            }
-            $this->users = $queryu->get();
+            $this->users = '';
+        }
+        else {
+            $this->users = User::search($this->searchTermUser)->get();
         }
         return view('livewire.admin-students');
     }

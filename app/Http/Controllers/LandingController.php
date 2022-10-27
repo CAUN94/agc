@@ -17,6 +17,11 @@ class LandingController extends Controller
         return view('about');
     }
 
+    public function packverano()
+    {
+        return view('packverano');
+    }
+
     public function terms()
     {
         return redirect('/pdf/tyc.pdf');

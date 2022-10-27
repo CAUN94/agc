@@ -14,6 +14,7 @@ use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\Schema;
 
 class StudentTable extends LivewireDatatable {
 	public $now;
@@ -33,7 +34,7 @@ class StudentTable extends LivewireDatatable {
 		return [
 
 			Column::name('users.rut')
-				->link('/adminstudents/{{users.rut}}', '{{users.rut}}')
+				// ->link('/adminstudents/{{users.rut}}', '{{users.rut}}')
 				->label('Rut')
 				->filterable(),
 			Column::name('users.name')
@@ -54,17 +55,23 @@ class StudentTable extends LivewireDatatable {
 			NumberColumn::name('trainings.class')
                 ->label('Clases por semana')
                 ->filterable(),
-			DateColumn::name('start_day')
+			DateColumn::name('start_day as sd')
 				->label('Fecha de Inicio del Plan')
 				->filterable()
 				->sortBy('start_day','desc'),
-			DateColumn::name('end_day')
+			Column::name('start_day')
+				->label('Inicio Editable')
+				->editable(),
+			DateColumn::name('end_day as ed')
 				->label('Fecha de Termino del Plan')
-				->filterable()
-				->sortBy('end_day','desc'),
+				->filterable(),
+			Column::name('end_day')
+				->label('Termino Editable')
+				->editable(),
             NumberColumn::name('alliances.desc')
                 ->label('Descuento')
-                ->filterable(),
+                ->filterable()
+                ->editable(),
             NumberColumn::callback(['trainings.price', 'alliances.desc'], function ($price, $desc) {
             	if($desc == ''){
             		return Helper::moneda_chilena($price);
@@ -93,7 +100,11 @@ class StudentTable extends LivewireDatatable {
 				->label('Celular')
 				->filterable()
 				->editable(),
-			$this->deleteView(),
+			Column::name('students.text')
+				->label('Comentario')
+				->filterable()
+				->editable(),
+			$this->actionView(),
 		];
 	}
 
@@ -105,27 +116,51 @@ class StudentTable extends LivewireDatatable {
 
 
 	public function edited($value, $key, $column, $rowId) {
-		$user = Student::find($rowId)->User;
-		$user->$column = $value;
-		$request = new Request($user->toArray());
-		$request->validate([
-			'name' => ['required', 'string', 'max:255'],
-			'lastnames' => ['required', 'string', 'max:255'],
-			'email' => ['required', 'string', 'email', 'max:255'],
-			'gender' => ['required', 'string', 'min:1', 'max:1', 'in:m,f,n'],
-			'rut' => ['required', 'string', 'unique:users,id,' . $user->id],
-			// 'rut' => ['required', 'string', 'cl_rut'],
-			'phone' => ['required', 'string', 'max:255'],
-			'birthday' => ['required', 'date', 'before:tomorrow', 'after:1900-01-91'],
-		]);
-		$user->save();
+		if(Schema::hasColumn('users', $column)){
+			$user = Student::find($rowId)->User;
+			$user->$column = $value;
+			$request = new Request($user->toArray());
+			$request->validate([
+				'name' => ['required', 'string', 'max:255'],
+				'lastnames' => ['required', 'string', 'max:255'],
+				'email' => ['required', 'string', 'email', 'max:255'],
+				'gender' => ['required', 'string', 'min:1', 'max:1', 'in:m,f,n'],
+				'rut' => ['required', 'string', 'unique:users,id,' . $user->id],
+				// 'rut' => ['required', 'string', 'cl_rut'],
+				'phone' => ['required', 'string', 'max:255'],
+				'birthday' => ['required', 'date', 'before:tomorrow', 'after:1900-01-91'],
+			]);
+			$user->save();
+		}
+		if(Schema::hasColumn('students', $column)){
+			$student = Student::find($rowId);
+			$student->$column = $value;
+			$student->save();
+		}
+		// $user = Student::find($rowId)->User;
+		// if(is_null($user)){
+
+		// }
+		// $user->$column = $value;
+		// $request = new Request($user->toArray());
+		// $request->validate([
+		// 	'name' => ['required', 'string', 'max:255'],
+		// 	'lastnames' => ['required', 'string', 'max:255'],
+		// 	'email' => ['required', 'string', 'email', 'max:255'],
+		// 	'gender' => ['required', 'string', 'min:1', 'max:1', 'in:m,f,n'],
+		// 	'rut' => ['required', 'string', 'unique:users,id,' . $user->id],
+		// 	// 'rut' => ['required', 'string', 'cl_rut'],
+		// 	'phone' => ['required', 'string', 'max:255'],
+		// 	'birthday' => ['required', 'date', 'before:tomorrow', 'after:1900-01-91'],
+		// ]);
+		// $user->save();
 		// ddd($request);
 	}
 
-	public function deleteView($name = 'id') {
+	public function actionView($name = 'id') {
 		return Column::callback($name, function ($value) {
 			$fullname = Student::find($value)->user->fullName()." ".Student::find($value)->trainingPlan();
-			return view('datatables::delete', ['value' => $value, 'fullname' => $fullname]);
+			return view('datatables::actions', ['value' => $value, 'fullname' => $fullname]);
 		});
 	}
 }

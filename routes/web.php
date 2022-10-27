@@ -34,6 +34,7 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/', [LandingController::class, 'welcome']);
     Route::get('/landing', [LandingController::class, 'welcome2']);
     Route::get('/kinesiología', [LandingController::class, 'about']);
+    Route::get('/packverano', [LandingController::class, 'packverano']);
     Route::get('/team', [LandingController::class, 'team']);
     Route::get('/terms', [LandingController::class, 'terms']);
     Route::get('/tables', [LandingController::class, 'tables']);

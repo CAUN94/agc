@@ -152,8 +152,8 @@ class AdminNuboxController extends Controller
               "rutContraparte": "18783405-8",
               "razonSocialContraparte": "venta23",
               "giroContraparte": "venta23",
-              "tipo": 34,
-              "folio": 10,
+              "tipo": 33,
+              "folio": 1,
               "secuencia": 1,
               "fecha": "2022-09-14",
               "afecto": "SI",
@@ -279,7 +279,7 @@ class AdminNuboxController extends Controller
           "productos": [
             {
               "fechaEmision": "2022-09-04",
-              "folio": 39,
+              "folio": 1,
               "rutContraparte": "18783405-8",
               "razonSocialContraparte": "venta23",
               "giroContraparte": "Servicios",
@@ -305,9 +305,9 @@ class AdminNuboxController extends Controller
           ],
           "documentoReferenciado": {
             "tipo": 0,
-            "folio": 39,
+            "folio": 1,
             "secuencia": 1,
-            "tipoDocumentoReferenciado": 0,
+            "tipoDocumentoReferenciado": 39,
             "folioDocumentoReferenciado": 654321,
             "fechaDocumentoReferenciado": "2020-06-16T08:36:14.4221255-04:00",
             "motivoReferencia": 1000,
