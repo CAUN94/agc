@@ -49,7 +49,10 @@ class LandingController extends Controller
         return view('users.nutrition',compact('user'));
     }
 
-
+    public function packverano()
+    {
+        return view('packverano');
+    }
 
     public function tables()
     {
