@@ -65,7 +65,7 @@ class LandingController extends Controller
         \Mail::to('cristobalugarte6@gmail.com')->send(new \App\Mail\PackVerano($details));
 
         FlashSession::flash('primary', 'Inscripción Lista');
-        return redirect('/mailverano');
+        return redirect('/packverano');
     }
 
     public function tables()
