@@ -53,6 +53,9 @@
            		</div>
            		<p class="w-1/14">&nbsp</p>
 			</div>
+			<button {{ $attributes->merge(['type' => 'submit', 'class' => 'items-center px-4 py-2 bg-white-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-white-900 active:bg-white-900 focus:outline-none focus:border-primary-900 focus:ring ring-primary-100 disabled:opacity-25 transition ease-in-out duration-150']) }}>
+				    Hola
+				</button>
 			<img src="{{ asset('img/fotos/Regalo.png')}}" class="hidden sm:block -mt-24 h-40 absolute right-1/4">
 		</div>
 	</div>

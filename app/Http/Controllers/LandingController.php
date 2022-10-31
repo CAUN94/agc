@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Session as FlashSession;
 
 class LandingController extends Controller
 {
@@ -51,6 +52,19 @@ class LandingController extends Controller
 
     public function packverano()
     {
+        return view('packverano');
+    }
+
+    public function mailverano(Request $request)
+    {
+        $details = [
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'pack' => $request->pack,
+         ];
+        \Mail::to('cristobalugarte6@gmail.com')->send(new \App\Mail\PackVerano($details));
+
+        FlashSession::flash('primary', 'Inscripción Lista');
         return view('packverano');
     }
 

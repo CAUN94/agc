@@ -40,6 +40,7 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/calendar', [LandingController::class, 'calendar'])->middleware(['auth']);
     Route::get('/healthy', [LandingController::class, 'healthy'])->middleware(['auth']);
     Route::get('/packverano', [LandingController::class, 'packverano']);
+    Route::post('/mailverano', [LandingController::class, 'mailverano']);
     Route::get('/nutrition', [LandingController::class, 'nutrition'])->middleware(['auth']);
     Route::get('/calendar/store/{id}', [CalendarController::class, 'store'])->middleware(['auth']);
 
