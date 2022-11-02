@@ -2,7 +2,9 @@
 {{--         <x-landing.header>
 
         </x-landing.header> --}}
+        <a href="/packverano">
         <img src="{{ asset('img/fotos/Banner.jpg')}}" style="max-width: 100%;height: auto;">
+        </a>
         <x-landing.call>
         </x-landing.call>
 
