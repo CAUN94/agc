@@ -1,8 +1,8 @@
 <x-landing.layout>
-        <x-landing.header>
+{{--         <x-landing.header>
 
-        </x-landing.header>
-
+        </x-landing.header> --}}
+        <img src="{{ asset('img/fotos/Banner.jpg')}}" style="max-width: 100%;height: auto;">
         <x-landing.call>
         </x-landing.call>
 
