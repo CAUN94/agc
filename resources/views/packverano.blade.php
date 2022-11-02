@@ -3,7 +3,10 @@
 	<div class="relative">
 		<img src="{{ asset('img/fotos/WEB02.png')}}" style="max-width: 100%;height: auto;">
 		  <div class="z-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-3/4">
-		    <img src="{{ asset('img/fotos/video.jpg')}}" style="width: 1400px; height: auto;">
+		     <video controls>
+			  <source src="movie.ogg" type="video/mov">
+				Your browser does not support the video tag.
+			</video>
 		  </div>
 	</div>
 	<div class="relative w-full">
