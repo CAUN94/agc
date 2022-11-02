@@ -50,11 +50,12 @@
 			                                placeholder="Telefono (+56 9 7****)"/>
 			           		</div>
 			           		<div class="mt-4">
-			           		<x-input id="pack" class="block mt-1 w-full mx-auto"
-			                                type="text"
-			                                name="pack"
-			                                placeholder="Pack que te interesa"/>
+			           		<select id="pack" name="pack" class="form-select block w-full mt-1 rounded-md shadow-sm border-gray-300 focus:border-primary-100 focus:ring focus:ring-primary-100 focus:ring-opacity-50">
+			                  <option value="Pack Nutrición" {{old("pack") == 'Pack Nutrición'  ? 'selected' : ''}}>Pack Nutrición</option>
+			                  <option value="Pack Completo" {{old("pack") == 'Pack Completo'  ? 'selected' : ''}}>Pack Completo</option>
+			              </select>
 			           		</div>
+
 		           		</div>
 	           		</div>
 	           		<p class="w-1/14">&nbsp</p>
