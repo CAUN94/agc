@@ -132,9 +132,9 @@ class UpdateMedilink extends Command
             $value = json_decode("{".$appointment."}",true);
             $limit = Carbon::now()->subYear()->subYear()->subYear();
             $now = Carbon::parse($value['Fecha']);
-            if($now<$limit){
-                continue;
-            }
+            // if($now<$limit){
+            //     continue;
+            // }
             $actionMl = AppointmentMl::updateOrCreate(
                 [
                     'Tratamiento_Nr' => $value['Atencion'],
