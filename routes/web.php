@@ -75,7 +75,8 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('wireframe2', 'App\Http\Controllers\AdminStudentController@wireframe2')->middleware(['intranet']);
     Route::get('wireframe', 'App\Http\Controllers\AdminStudentController@wireframe')->middleware(['intranet']);
 
-
+    //lista Espera
+    Route::resource('listaEspera', 'App\Http\Controllers\listaEsperaController')->middleware(['intranet']);
 
     Route::resource('adminclass', 'App\Http\Controllers\AdminTrainingController')->middleware(['intranet']);
     Route::resource('admintrainappointment', 'App\Http\Controllers\AdminTrainAppointmentsController')->middleware(['intranet']);
@@ -88,6 +89,7 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/userml', [UserMlController::class, 'index'])->middleware(['intranet']);
 
     //Remuneración
+    Route::resource('adminRemuneracion', 'App\Http\Controllers\adminRemuneracionController')->middleware(['intranet']);
     Route::resource('mesActual', 'App\Http\Controllers\mesActualController')->middleware(['intranet']);
     Route::resource('mesVencido', 'App\Http\Controllers\mesVencidoController')->middleware(['intranet']);
     Route::resource('historial', 'App\Http\Controllers\historialController')->middleware(['intranet']);

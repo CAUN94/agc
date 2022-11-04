@@ -23,11 +23,11 @@
             </div>
         </div>
         <div>
-          @foreach(App\Models\Professional::where('user_id','=',$selectedProfessional_id)->get() as $professional)
+          @foreach(App\Models\Professional::where('user_id','=',Auth::user()->id)->get() as $professional)
               <ul class="grid grid-cols-4 gap-1">
                   <li>
                       <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                          {{$professional->user->fullname()}}
+                          {{Auth::user()->fullname()}}
                       </a>
                   </li>
                   <li>
@@ -36,9 +36,9 @@
                           <span class="flex-1 ml-3 whitespace-nowrap">Prestaciones</span>
                           <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-sm font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
                             @if($weekly)
-                              {{$professional->prestaciones($startOfWeek,$endOfWeek,$professional->user->fullname())}}
+                              {{$professional->prestaciones($startOfWeek,$endOfWeek,Auth::user()->fullname())}}
                             @else
-                              {{$professional->prestaciones($startOfMonth,$endOfMonth,$professional->user->fullname())}}
+                              {{$professional->prestaciones($startOfMonth,$endOfMonth,Auth::user()->fullname())}}
                             @endif
                           </span>
                       </a>
@@ -49,9 +49,9 @@
                           <span class="flex-1 ml-3 whitespace-nowrap">Remuneración</span>
                           <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
                             @if($weekly)
-                              {{$professional->remuneracion($startOfWeek,$endOfWeek,$professional->user->fullname())}}
+                              {{$professional->remuneracion($startOfWeek,$endOfWeek,Auth::user()->fullname())}}
                             @else
-                              {{$professional->remuneracion($startOfMonth,$endOfMonth,$professional->user->fullname())}}
+                              {{$professional->remuneracion($startOfMonth,$endOfMonth,Auth::user()->fullname())}}
                             @endif
                           </span>
                       </a>
@@ -62,9 +62,9 @@
                           <span class="flex-1 ml-3 whitespace-nowrap">Atenciones Realizadas</span>
                           <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
                             @if($weekly)
-                              {{$professional->monthAppointments($startOfWeek,$endOfWeek,$professional->user->fullname())}}
+                              {{$professional->monthAppointments($startOfWeek,$endOfWeek,Auth::user()->fullname())}}
                             @else
-                              {{$professional->monthAppointments($startOfMonth,$endOfMonth,$professional->user->fullname())}}
+                              {{$professional->monthAppointments($startOfMonth,$endOfMonth,Auth::user()->fullname())}}
                             @endif
                             </span>
                       </a>
@@ -75,27 +75,27 @@
 
         <button x-on:click="pay = !pay">Ver más</button>
         <div x-show="pay">
-          @foreach(App\Models\Professional::where('user_id','=',$selectedProfessional_id)->get() as $professional)
+          @foreach(App\Models\Professional::where('user_id','=',Auth::user()->id)->get() as $professional)
               <ul class="grid grid-cols-3 gap-1">
                   <li>
                       <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                           <i class="fa fa-money" aria-hidden="true"></i>
                           <span class="flex-1 ml-3 whitespace-nowrap">Promedio Remuneración Semanal</span>
-                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-sm font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->Prom_remuneracion($startOfWeek,$endOfWeek,$professional->user->fullname())}}</span>
+                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-sm font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->Prom_remuneracion($startOfWeek,$endOfWeek,Auth::user()->fullname())}}</span>
                       </a>
                   </li>
                   <li>
                       <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                           <i class="fa fa-money" aria-hidden="true"></i>
                           <span class="flex-1 ml-3 whitespace-nowrap">Promedio Remuneración Mensual</span>
-                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->Prom_remuneracion($startOfMonth,$endOfMonth,$professional->user->fullname())}}</span>
+                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->Prom_remuneracion($startOfMonth,$endOfMonth,Auth::user()->fullname())}}</span>
                       </a>
                   </li>
                   <li>
                       <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                           <i class="fa fa-money" aria-hidden="true"></i>
                           <span class="flex-1 ml-3 whitespace-nowrap">Tasa de Ocupación</span>
-                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->tasaOcupacion($startOfMonth,$endOfMonth,$professional->user->fullname())}}%</span>
+                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->tasaOcupacion($startOfMonth,$endOfMonth,Auth::user()->fullname())}}%</span>
                       </a>
                   </li>
               </ul>
@@ -103,7 +103,7 @@
         </div>
     </div>
 
-    <!---->
+    <!--
     <div class="w-full overflow-x-auto gap-y-2 box-white p-3 mt-2">
         <form wire:change="updateSelectedProfessional">
         <div class="grid grid-cols-3 gap-1">
@@ -111,13 +111,13 @@
                 <div class="flex">
                     <input class="form-check-input appearance-none h-3 w-3 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="{{ $professional->user->id }}" value={{ $professional->user->id }} wire:model="selectedProfessional.{{ $professional->user->id }}">
                     <label class="form-check-label inline-block text-gray-800 text-sm break-words" for="{{ $professional->user->id }}">
-                        {{ $professional->user->id }}
+                        {{ $professional->user->fullname() }}
                     </label>
               </div>
             @endforeach
         </div>
         </form>
-    </div>
+    </div>-->
 
     <div class="flex flex-col lg:flex-row gap-2 mt-2">
         <div class="w-full lg:w-1/3 flex flex-col overflow-x-auto gap-y-2">
@@ -256,7 +256,7 @@
                                                       {{$date->format('d')}}
                                                   </div>
                                                   <div style="height: {{$heightbox}};" class="overflow-y-auto mt-1">
-                                                      @foreach(App\Models\AppointmentMl::where('Estado','Atendido')->whereBetween('Fecha',[$startOfMonth, $endOfMonth])->where('Fecha',$date->format('Y-m-d'))->whereIN('Profesional',$selectedProfessional)->orderby('Hora_inicio', 'ASC')->get() as $professionalAppointment)
+                                                      @foreach(App\Models\AppointmentMl::where('Estado','Atendido')->whereBetween('Fecha',[$startOfMonth, $endOfMonth])->where('Fecha',$date->format('Y-m-d'))->where('Profesional',Auth::user()->fullname())->orderby('Hora_inicio', 'ASC')->get() as $professionalAppointment)
                                                           <div
                                                               wire:click="show({{$professionalAppointment->id}})"
                                                               @if($professionalAppointment->Estado=='Atendido')

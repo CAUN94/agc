@@ -25,12 +25,9 @@ class AdminHistorial extends Component
     public $heightbox = '80px';
     public $treatment = null;
     public $train = null;
-    public $selectedProfessional = [];
-    public $selectedProfessional_id = 8;
     public $firstRemuneration;
     public $firstPeriod;
     public $periods = [];
-    public $plans = [];
     public $date;
     public $name;
     public $namePaciente;
@@ -62,18 +59,6 @@ class AdminHistorial extends Component
         // $this->plans = DB::table('train_appointments_pivot')->distinct('train_appointment_id')->pluck('train_appointment_id')->toArray();
     }
 
-
-    public function updateSelectedProfessional(){
-        $this->selectedProfessional_id = $this->selectedProfessional;
-        if(isset($this->selectedProfessional)){
-        $this->selectedProfessional = DB::table('professionals')
-            ->join('appointment_mls', 'professionals.description', '=', 'appointment_mls.Profesional')
-            ->whereIN('professionals.user_id',$this->selectedProfessional)
-            ->pluck('appointment_mls.Profesional')
-            ->toArray();
-        }
-    }
-
     public function subPeriod(){
         $this->startOfMonth->subMonth();
         $this->endOfMonth->subMonth();
@@ -95,7 +80,7 @@ class AdminHistorial extends Component
     }
 
     public function endPeriod($startOfPeriod){
-      return Carbon::createFromDate(Carbon::parse($startOfPeriod)->format('Y'),Carbon::parse($startOfPeriod)->format('m')+1,20)->startOfDay();
+      return (Carbon::createFromDate(Carbon::parse($startOfPeriod)->format('Y'),Carbon::parse($startOfPeriod)->format('m')+1,20)->startOfDay())->format('Y-m-d');
     }
 
     public function render()
@@ -103,12 +88,12 @@ class AdminHistorial extends Component
 
       $firstRemuneration = DB::table('professionals')
             ->join('action_mls', 'professionals.description', '=', 'action_mls.Profesional')
-            ->where('professionals.user_id',$this->selectedProfessional_id)
+            ->where('professionals.user_id',Auth::user()->id)
             ->orderBy('Fecha_Realizacion', 'ASC')
             ->get()
             ->first();
 
-        if (Carbon::parse($firstRemuneration->Fecha_Realizacion)->format('d') <=  21 and $firstRemuneration != null){
+        if (Carbon::parse($firstRemuneration->Fecha_Realizacion)->format('d') <=  21 and $firstRemuneration != NULL){
             $firstPeriod = Carbon::createFromDate(Carbon::parse($firstRemuneration->Fecha_Realizacion)->format('Y'),Carbon::parse($firstRemuneration->Fecha_Realizacion)->format('m')-1,21)->startOfDay();
         } else {
             $firstPeriod = Carbon::createFromDate(Carbon::parse($firstRemuneration->Fecha_Realizacion)->format('Y'),Carbon::parse($firstRemuneration->Fecha_Realizacion)->format('m'),21)->startOfDay();
@@ -121,6 +106,8 @@ class AdminHistorial extends Component
             $this->periods[] = $lastPeriod;
             $lastPeriod = Carbon::createFromDate(Carbon::parse($lastPeriod)->format('Y'),Carbon::parse($lastPeriod)->format('m')-1,21)->startOfDay();
           }
+
+          $this->periods[] = $firstPeriod;
 
         $periodnodays = CarbonPeriod::create($this->now->copy()->subMonth()->endOfMonth()->startOfWeek(), $this->now->copy()->subMonth()->endOfMonth());
 

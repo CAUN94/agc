@@ -1,5 +1,5 @@
-+<div class="flex flex-row gap-3 m-2 mt-4">
-  <div class="flex-grow admin-box">
+<div class="flex flex-row gap-3 m-2 mt-4">
+  <div class="flex-grow admin-box box-white">
     <div class="font-bold rounded-t-lg p-3 h-16 flex items-center justify-between">
       <p>Periodos Anteriores</p>
     </div>
@@ -16,8 +16,9 @@
         </thead>
         <tbody>
         <!---->
+
+        @foreach(App\Models\Professional::where('user_id','=',Auth::user()->id)->get() as $professional)
           @foreach($periods as $periodo)
-          @foreach(App\Models\Professional::where('user_id','=',$selectedProfessional_id)->get() as $professional)
         <tr class=>
           <td class=>
             <div class="flex flex-col items-center justify-between">
@@ -26,22 +27,22 @@
           </td>
           <td>
              <div class="flex flex-col items-center justify-between">
-              <span class="text-sm">{{$professional->prestaciones($periodo,$this->endPeriod($periodo),$professional->user->fullname())}}</span>
+              <span class="text-sm">{{$professional->prestaciones($periodo,$this->endPeriod($periodo),Auth::user()->fullname())}}</span>
             </div>
           </td>
           <td>
             <div class="flex flex-col items-center justify-between">
-               <span class="text-sm">{{$professional->remuneracion($periodo,$this->endPeriod($periodo),$professional->user->fullname())}}</span>
+               <span class="text-sm">{{$professional->remuneracion($periodo,$this->endPeriod($periodo),Auth::user()->fullname())}}</span>
             </div>
           </td>
           <td>
             <div class="flex flex-col items-center justify-between">
-              <span class="text-sm">{{$professional->monthAppointments($periodo,$this->endPeriod($periodo),$professional->user->fullname())}}</span>
+              <span class="text-sm">{{$professional->monthAppointments($periodo,$this->endPeriod($periodo),Auth::user()->fullname())}}</span>
             </div>
           </td>
           <td>
             <div class="flex flex-col items-center justify-between">
-              <span class="text-sm">{{$professional->tasaOcupacion($periodo,$this->endPeriod($periodo),$professional->user->fullname())}}</span>
+              <span class="text-sm">{{$professional->tasaOcupacion($periodo,$this->endPeriod($periodo),Auth::user()->fullname())}}</span>
             </div>
           </td>
         </tr>
@@ -51,20 +52,6 @@
         </tbody>
       </table>
       <div></div>
-    </div>
-    <div class="w-full overflow-x-auto gap-y-2 box-white p-3 mt-2">
-        <form wire:change="updateSelectedProfessional">
-        <div class="grid grid-cols-3 gap-1">
-            @foreach(App\Models\Professional::where('id','>',0)->get() as $professional)
-                <div class="flex">
-                    <input class="form-check-input appearance-none h-3 w-3 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="{{ $professional->user->id }}" value={{ $professional->user->id }} wire:model="selectedProfessional.{{ $professional->user->id }}">
-                    <label class="form-check-label inline-block text-gray-800 text-sm break-words" for="{{ $professional->user->id }}">
-                        {{ $professional->user->id }}
-                    </label>
-              </div>
-            @endforeach
-        </div>
-        </form>
     </div>
   </div>
 </div>

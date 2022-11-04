@@ -4,11 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\ProfesionalAppointment;
 use App\Models\AppointmentMl;
-use App\Models\ActionMl;
-use App\Models\TrainAppointmentPivot;
-use App\Models\TrainBook;
-use App\Models\Trainer;
-use App\Models\Training;
+use App\Models\ActionMl;  
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Auth;
@@ -29,10 +25,6 @@ class AdminMesActual extends Component
     public $height = '120px';
     public $heightbox = '80px';
     public $treatment = null;
-    public $selectedPlans = [];
-    public $selectedProfessional = [];
-    public $selectedProfessional_id = 0;
-    public $plans = [];
     public $date;
     public $name;
     public $namePaciente;
@@ -84,18 +76,6 @@ class AdminMesActual extends Component
     public function weeklyOff()
     {
       $this->weekly = false;
-    }
-
-    public function updateSelectedProfessional(){
-        $this->selectedPlans = [];
-        $this->selectedProfessional_id = $this->selectedProfessional;
-        if(isset($this->selectedProfessional)){
-        $this->selectedProfessional = DB::table('professionals')
-            ->join('appointment_mls', 'professionals.description', '=', 'appointment_mls.Profesional')
-            ->whereIN('professionals.user_id',$this->selectedProfessional)
-            ->pluck('appointment_mls.Profesional')
-            ->toArray();
-        }
     }
 
     public function subPeriod(){
