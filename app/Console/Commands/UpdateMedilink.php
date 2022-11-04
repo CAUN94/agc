@@ -66,7 +66,7 @@ class UpdateMedilink extends Command
         $form->setValues(['rut' => 'admin', 'password' => 'Pascual4900']);
         $crawler = $client->submit($form);
         if($filter){
-            $first = strval(Carbon::now()->subYear()->subYear()->format('Y-m-d'));
+            $first = strval(Carbon::now()->subMonth()->subMonth()->format('Y-m-d'));
             $last = strval(Carbon::now()->addmonth()->format('Y-m-d'));
             $url = $url."%5Bfecha_inicio%5D%5Bstatus%5D=activated&filters%5Bfecha_inicio%5D%5Bvalue%5D=".$first."&filters%5Bfecha_fin%5D%5Bstatus%5D=activated&filters%5Bfecha_fin%5D%5Bvalue%5D=".$last."";
         }
@@ -130,11 +130,11 @@ class UpdateMedilink extends Command
         $appointments = $this->create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/citas?filters%5Bsucursal%5D%5Bstatus%5D=activated&filters%5Bsucursal%5D%5Bvalue%5D=1&filters",true);
         foreach($appointments as $appointment){
             $value = json_decode("{".$appointment."}",true);
-            $limit = Carbon::now()->subYear()->subYear();
+            $limit = Carbon::now()->subMonth()->subMonth();
             $now = Carbon::parse($value['Fecha']);
-            // if($now<$limit){
-            //     continue;
-            // }
+            if($now<$limit){
+                continue;
+            }
             $actionMl = AppointmentMl::updateOrCreate(
                 [
                     'Tratamiento_Nr' => $value['Atencion'],
