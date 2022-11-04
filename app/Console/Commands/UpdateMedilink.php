@@ -130,7 +130,7 @@ class UpdateMedilink extends Command
         $appointments = $this->create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/citas?filters%5Bsucursal%5D%5Bstatus%5D=activated&filters%5Bsucursal%5D%5Bvalue%5D=1&filters",true);
         foreach($appointments as $appointment){
             $value = json_decode("{".$appointment."}",true);
-            $limit = Carbon::now()->subYear()->subYear()->subYear();
+            $limit = Carbon::now()->subYear()->subYear();
             $now = Carbon::parse($value['Fecha']);
             // if($now<$limit){
             //     continue;

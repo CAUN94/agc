@@ -207,7 +207,7 @@ class ScrapingController extends Controller
         $appointments = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/citas?filters%5Bsucursal%5D%5Bstatus%5D=activated&filters%5Bsucursal%5D%5Bvalue%5D=1&filters",true);
         foreach($appointments as $appointment){
             $value = json_decode("{".$appointment."}",true);
-            $limit = Carbon::now()->subYear()->subYear()->subYear();
+            $limit = Carbon::now()->subMonth()->subMonth();
             $now = Carbon::parse($value['Fecha']);
             if($now<$limit){
                 continue;
