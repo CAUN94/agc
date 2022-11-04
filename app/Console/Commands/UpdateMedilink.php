@@ -50,7 +50,6 @@ class UpdateMedilink extends Command
         $command = new CommandSchedule;
         $command->command = 'UpdateMedilink';
         $command->save();
-
         $this->actionMl();
         $this->info('----');
         $this->appointmentMl();
@@ -58,47 +57,6 @@ class UpdateMedilink extends Command
         $this->treatmentsMl();
         $this->info('----');
         $this->paymentsMl();
-    }
-
-    public function userMl(){
-        $this->info("Users: ".UserMl::all()->count());
-        $split = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/pacientes_nuevos");
-        foreach($split as $string){
-            $jsonobj = "{".$string."}";
-            $value = json_decode($jsonobj,true);
-            $limit = Carbon::parse(UserMl::max('Fecha_Ingreso'));
-            if(is_null($value['Fecha Afiliación'])){
-                continue;
-            }
-            $now = Carbon::parse($value['Fecha Afiliación']);
-            if($now<$limit){
-                continue;
-            }
-            $userMl = UserMl::updateOrCreate(
-                [
-                    'RUT' => $value['RUT/DNI'],
-                    'Email' => $value['E-Mail'],
-                ],
-                [
-                    'Nombre' => $value['Nombre paciente'],
-                    'Apellidos' => $value['Apellidos paciente'],
-                    'Fecha_Ingreso' => $value['Fecha Afiliación'],
-                    'Ultima_Cita' => $value['Última Cita'],
-                    'RUT' => $value['RUT/DNI'],
-                    'Nacimiento' => $value['Fecha nacimiento'],
-                    'Celular' => $value['Celular'],
-                    'Ciudad' => $value['Ciudad'],
-                    'Comuna' => $value['Comuna'],
-                    'Direccion' => $value['Dirección'],
-                    'Email' => $value['E-Mail'],
-                    'Observaciones' => $value['Observaciones'],
-                    'Sexo' => $value['Sexo'],
-                    'Convenio' => $value['Convenio']
-                ]
-            );
-        }
-        $this->info("Users: ".UserMl::all()->count());
-        $this->info("Users Updated");
     }
 
     public function create_client($url, $filter = False){
@@ -135,8 +93,7 @@ class UpdateMedilink extends Command
                 [
                     'Prestacion_Nr' => $value['Id. Prestacion'],
                     'Tratamiento_Nr' => $value['# Tratamiento'],
-                    'Fecha_Realizacion' => $value['Fecha Realizacion'],
-                    'Profesional' => $value['Realizado por'],
+                    'Fecha_Realizacion' => $value['Fecha Realizacion']
                 ],
                 [
                     'Sucursal' => $value['Sucursal'],
@@ -173,17 +130,15 @@ class UpdateMedilink extends Command
         $appointments = $this->create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/citas?filters%5Bsucursal%5D%5Bstatus%5D=activated&filters%5Bsucursal%5D%5Bvalue%5D=1&filters",true);
         foreach($appointments as $appointment){
             $value = json_decode("{".$appointment."}",true);
-            $limit = Carbon::now()->subMonth()->subMonth();
-            $now = Carbon::parse($value['Fecha'])->addWeek();
+            $limit = Carbon::now()->subYear()->subYear();
+            $now = Carbon::parse($value['Fecha']);
             if($now<$limit){
                 continue;
             }
             $actionMl = AppointmentMl::updateOrCreate(
                 [
+                    'Tratamiento_Nr' => $value['Atencion'],
                     'Rut_Paciente' => $value['Rut Paciente'],
-                    'Fecha' => $value['Fecha'],
-                    'Hora_inicio' => $value['Hora inicio'],
-                    'Profesional' => $value['Profesional/Recurso'],
                 ],
                 [
                     'Estado' => $value['Estado'],
@@ -289,5 +244,4 @@ class UpdateMedilink extends Command
         $this->info("Payments: ".PaymentMl::all()->count());
         $this->info('Payments Updated!');
     }
-
 }
