@@ -204,7 +204,7 @@ class AdminNuboxController extends Controller
           ],
           "documentoReferenciado": {
             "tipo": 0,
-            "folio": 1600,
+            "folio": 1,
             "secuencia": 0,
             "tipoDocumentoReferenciado": 0,
             "folioDocumentoReferenciado": 34,

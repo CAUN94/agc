@@ -100,7 +100,7 @@ class StudentTable extends LivewireDatatable {
 				->label('Celular')
 				->filterable()
 				->editable(),
-			Column::name('students.text')
+			Column::name('students.description')
 				->label('Comentario')
 				->filterable()
 				->editable(),
@@ -112,6 +112,14 @@ class StudentTable extends LivewireDatatable {
 		return Training::all()->map(function ($training) {
 			return $training->planComplete();
 		});
+	}
+
+	public function pay($value){
+		$student = Student::find($value);
+		$student->settled = !$student->settled;
+		$student->save();
+		$this->open = false;
+		$open = false;
 	}
 
 
