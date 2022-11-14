@@ -31,7 +31,11 @@
                 Alonso Niklischeck|Camila Valentini|Matias Rebolledo|Jaime Pantoja|Cesar Moya|Melissa Ross|Rocio Nuche|Cristóbal Ugarte
             </x-slot>
             <x-slot name="team">
+<<<<<<< HEAD
                 Kinesiologo|Kinesiologo|Entrenador|Kinesiologa|Kinesiologa|Nutricionista|Medico del Deporte|Desarrollador
+=======
+                Director Clinico|Kinesiologa|Entrenador|Kinesiologo|Kinesiologo|Nutricionista|Desarrollador
+>>>>>>> 1d45687 (update)
             </x-slot>
         </x-landing.team>
 
