@@ -5,33 +5,39 @@ namespace App\Http\Livewire;
 use App\Models\ProfesionalAppointment;
 use App\Models\AppointmentMl;
 use App\Models\ActionMl;
+use App\Models\TrainAppointmentPivot;
+use App\Models\TrainBook;
+use App\Models\Trainer;
+use App\Models\Training;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Session as FlashSession;
+use Livewire\WithPagination;
 
-class AdminMesActual extends Component
+class AdminRemuneracion extends Component
 {
+    use WithPagination;
+    
     public $days = ['Lun','Mar','Mie','Jue','Vie','Sab'];
     public $now = '';
     public $dates = [];
     public $nodates = [];
-    public $classShow = false;
-    public $createShow = true;
+    public $classShow = true;
     public $weekly = false;
     public $width = '16.66%';
     public $height = '120px';
     public $heightbox = '80px';
-    public $treatment = null;
+    public $atenciones = null;
     public $date;
     public $name;
     public $namePaciente;
     public $remuneracion;
     public $hour;
     public $message;
-    public $newAppointment;
+    public $lista_id = null;
     public $coach;
     public $newname;
     public $newdate;
@@ -46,6 +52,7 @@ class AdminMesActual extends Component
             $this->actualstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')-1,21)->startOfDay();
             $this->expiredstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')-1,21)->startOfDay()->subMonth();
             $this->endOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m'),20)->endOfDay();
+            $this->expiredendOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m'),20)->startOfDay()->subMonth();
 
             $this->startOfWeek = Carbon::createFromDate($this->now->format('Y'),$this->now->startOfWeek()->format('m'),$this->now->startOfWeek()->format('d'))->startOfDay();
             $this->endOfWeek = Carbon::createFromDate($this->now->format('Y'),$this->now->endOfWeek()->format('m'),$this->now->endOfWeek()->format('d'))->startOfDay();
@@ -55,6 +62,7 @@ class AdminMesActual extends Component
             $this->actualstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m'),21)->startOfDay();
             $this->expiredstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m'),21)->startOfDay()->subMonth();
             $this->endOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m')+1,20)->endOfDay();
+            $this->expiredendOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')+1,20)->startOfDay()->subMonth();
 
             $this->startOfWeek = Carbon::createFromDate($this->now->format('Y'),$this->now->startOfWeek()->format('m'),$this->now->startOfWeek()->format('d'))->startOfDay();
             $this->endOfWeek = Carbon::createFromDate($this->now->format('Y'),$this->now->endOfWeek()->format('m'),$this->now->endOfWeek()->format('d'))->startOfDay();
@@ -98,24 +106,21 @@ class AdminMesActual extends Component
         $this->now->addMonth();
     }
 
-    public function close(){
-        $this->classShow = false ;
-        $this->train = null;
-        $this->name = null;
-        $this->date = null;
-        $this->hour = null;
-    }
-
     public function show($id){
-        $this->treatment = appointmentMl::find($id);
-        $this->classShow = true;
-        $this->namePaciente = $this->treatment->Nombre_paciente . " " . $this->treatment->Apellidos_paciente;
-        $this->date = Carbon::parse($this->treatment->Fecha)->format('d-M-Y');
-        $this->convenio = $this->treatment->Convenio;
 
-        //dd($this->remuneracion);
-        //$this->remuneracion = $this->treatment->Total;
+      $selectedProfessional = DB::table('professionals')
+      ->where('user_id',$id)
+      ->first();
+      $this->lista_id = $selectedProfessional->description;
+
+      $this->classShow = false;
+
     }
+
+    public function close(){
+        $this->classShow = true ;
+    }
+
 
     public function render()
     {
@@ -146,6 +151,12 @@ class AdminMesActual extends Component
           }
       }
 
-        return view('livewire.admin-mes-actual');
+      return view('livewire.admin-remuneracion', [
+          'appointments' => ActionMl::where('Estado','Atendido')
+                                ->whereBetween('Fecha_Realizacion',[$this->expiredstartOfMonth->format('Y-m-d'),$this->expiredendOfMonth->format('Y-m-d')])
+                                ->where('Profesional',$this->lista_id)
+                                ->orderby('Fecha_Realizacion', 'DESC')
+                                ->Paginate(13),
+      ]);
     }
 }

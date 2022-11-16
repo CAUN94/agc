@@ -86,18 +86,19 @@ class AdminHistorial extends Component
     public function render()
     {
 
-      $firstRemuneration = DB::table('professionals')
-            ->join('action_mls', 'professionals.description', '=', 'action_mls.Profesional')
+      $firstRemuneration = DB::table('action_mls')
+            ->join('professionals', 'professionals.description', '=', 'action_mls.Profesional')
             ->where('professionals.user_id',Auth::user()->id)
             ->orderBy('Fecha_Realizacion', 'ASC')
             ->get()
             ->first();
-
-        if (Carbon::parse($firstRemuneration->Fecha_Realizacion)->format('d') <=  21 and $firstRemuneration != NULL){
-            $firstPeriod = Carbon::createFromDate(Carbon::parse($firstRemuneration->Fecha_Realizacion)->format('Y'),Carbon::parse($firstRemuneration->Fecha_Realizacion)->format('m')-1,21)->startOfDay();
-        } else {
-            $firstPeriod = Carbon::createFromDate(Carbon::parse($firstRemuneration->Fecha_Realizacion)->format('Y'),Carbon::parse($firstRemuneration->Fecha_Realizacion)->format('m'),21)->startOfDay();
-          }
+        if(!is_null($firstRemuneration)){
+          if (Carbon::parse($firstRemuneration->Fecha_Realizacion)->format('d') <=  21){
+              $firstPeriod = Carbon::createFromDate(Carbon::parse($firstRemuneration->Fecha_Realizacion)->format('Y'),Carbon::parse($firstRemuneration->Fecha_Realizacion)->format('m')-1,21)->startOfDay();
+          } else {
+              $firstPeriod = Carbon::createFromDate(Carbon::parse($firstRemuneration->Fecha_Realizacion)->format('Y'),Carbon::parse($firstRemuneration->Fecha_Realizacion)->format('m'),21)->startOfDay();
+            }
+        }
 
 
           $lastPeriod = $this->expiredstartOfMonth;
