@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class AppointmentMl extends Model
 {
@@ -67,6 +68,19 @@ class AppointmentMl extends Model
         return AppointmentMl::where('Fecha','>=',\Carbon\Carbon::yesterday()->startOfDay()->format('Y-m-d'))
             ->where('Profesional',$professional)
             ->where('professional_calendar','not like',0);
+    }
+
+    public static function allCalendarAppointments(){
+        return DB::table('appointment_mls as a')
+           ->whereExists(function ($query) {
+               $query->select(DB::raw(1))
+                     ->from('appointment_mls as b')
+                     ->whereRaw('a.Hora_inicio = b.Hora_inicio')
+                     ->whereRaw('a.Profesional = b.Profesional')
+                     ->whereRaw("a.Fecha >='".\Carbon\Carbon::yesterday()->startOfDay()->format('Y-m-d')."'")
+                     ->whereRaw("a.professional_calendar not like '0'")
+                     ->havingRaw('count(*) > 1');
+           });
     }
 
     public static function lastAppointment($id){

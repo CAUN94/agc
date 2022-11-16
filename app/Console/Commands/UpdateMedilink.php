@@ -135,7 +135,7 @@ class UpdateMedilink extends Command
             if($now<$limit){
                 continue;
             }
-            $actionMl = AppointmentMl::updateOrCreate(
+            $appointmentMl = AppointmentMl::updateOrCreate(
                 [
                     'Tratamiento_Nr' => $value['Atencion'],
                     'Rut_Paciente' => $value['Rut Paciente'],

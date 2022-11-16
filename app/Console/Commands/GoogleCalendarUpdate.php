@@ -66,6 +66,7 @@ class GoogleCalendarUpdate extends Command
 
         $this->superStore('Constanza Ahumada Huerta','c_5bd69a1568b6d8319f6bac34e6eb66a336de83458e7a206645ac43c265f93104@group.calendar.google.com','Coniahum@gmail.com');
         $this->superUpdate('Constanza Ahumada Huerta','c_5bd69a1568b6d8319f6bac34e6eb66a336de83458e7a206645ac43c265f93104@group.calendar.google.com');
+        $this->deleteRepeats();
     }
 
     public function superStore($professional,$calendarId,$email){
@@ -131,6 +132,22 @@ class GoogleCalendarUpdate extends Command
             $appointment->save();
         }
         return $appointments;
+    }
+
+    public function deleteRepeats(){
+        $results = DB::table('appointment_mls as a')
+           ->whereExists(function ($query) {
+               $query->select(DB::raw(1))
+                     ->from('appointment_mls as b')
+                     ->whereRaw('a.Hora_inicio = b.Hora_inicio')
+                     ->whereRaw('a.Profesional = b.Profesional')
+                     ->whereRaw('a.Rut_Paciente = b.Rut_Paciente')
+                     ->whereRaw('a.Rut_Paciente = b.Rut_Paciente')
+                     ->whereRaw(' a.Fecha >='.\Carbon\Carbon::yesterday()->startOfDay()->format('Y-m-d'))
+                     ->whereRaw("a.professional_calendar not like '0'")
+                     ->havingRaw('count(*) > 1');
+           })
+           ->get();
     }
 
     public function getClient(){
