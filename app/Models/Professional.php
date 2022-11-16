@@ -39,9 +39,15 @@ class Professional extends Model
       ->sum('Precio_Prestacion'));
     }
 
+    public static function abonos($first,$last,$user){
+      return (ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
+      ->Where('Profesional', 'LIKE' , '%' . $user . '%')
+      ->Where('Estado','=', 'Atendido')
+      ->sum('Abono'));
+    }
 
     public static function remuneracion($first,$last,$user){
-      if($user == "Daniella Vivallo Vera" || $user == "Jaime Pantoja Rodríguez"){
+      if($user == "Daniella Vivallo Vera" || $user == "Jaime Pantoja Rodriguez"){
         $coef=0.45;
       }elseif($user == "Constanza Ahumada Huerta"){
         $coef=0.32;

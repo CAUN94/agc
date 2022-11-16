@@ -27,22 +27,22 @@
           </td>
           <td>
              <div class="flex flex-col items-center justify-between">
-              <span class="text-sm">{{$professional->prestaciones($periodo,$this->endPeriod($periodo),Auth::user()->fullname())}}</span>
+              <span class="text-sm">{{$professional->prestaciones($periodo,$this->endPeriod($periodo),$professional->description)}}</span>
             </div>
           </td>
           <td>
             <div class="flex flex-col items-center justify-between">
-               <span class="text-sm">{{$professional->remuneracion($periodo,$this->endPeriod($periodo),Auth::user()->fullname())}}</span>
+               <span class="text-sm">{{$professional->remuneracion($periodo,$this->endPeriod($periodo),$professional->description)}}</span>
             </div>
           </td>
           <td>
             <div class="flex flex-col items-center justify-between">
-              <span class="text-sm">{{$professional->monthAppointments($periodo,$this->endPeriod($periodo),Auth::user()->fullname())}}</span>
+              <span class="text-sm">{{$professional->monthAppointments($periodo,$this->endPeriod($periodo),$professional->description)}}</span>
             </div>
           </td>
           <td>
             <div class="flex flex-col items-center justify-between">
-              <span class="text-sm">{{$professional->tasaOcupacion($periodo,$this->endPeriod($periodo),Auth::user()->fullname())}}</span>
+              <span class="text-sm">{{$professional->tasaOcupacion($periodo,$this->endPeriod($periodo),$professional->description)}}</span>
             </div>
           </td>
         </tr>

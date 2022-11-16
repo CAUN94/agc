@@ -10,21 +10,21 @@
                       <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                           <i class="fa fa-money" aria-hidden="true"></i>
                           <span class="flex-1 ml-3 whitespace-nowrap">Prestaciones</span>
-                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-sm font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->prestaciones($expiredstartOfMonth,$expiredendOfMonth,Auth::user()->fullname())}}</span>
+                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-sm font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->prestaciones($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
                       </a>
                   </li>
                   <li>
                       <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                           <i class="fa fa-money" aria-hidden="true"></i>
                           <span class="flex-1 ml-3 whitespace-nowrap">Remuneración</span>
-                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->remuneracion($expiredstartOfMonth,$expiredendOfMonth,Auth::user()->fullname())}}</span>
+                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->remuneracion($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
                       </a>
                   </li>
                   <li>
                       <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                           <i class="fa fa-calendar" aria-hidden="true"></i>
                           <span class="flex-1 ml-3 whitespace-nowrap">Atenciones Realizadas</span>
-                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->monthAppointments($expiredstartOfMonth,$expiredendOfMonth,Auth::user()->fullname())}}</span>
+                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->monthAppointments($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
                       </a>
                   </li>
               </ul>
@@ -65,7 +65,7 @@
                   {{$Appointment->Categoria_Nombre}}
                 </td>
                 <td class="text-center">
-                  {{$Appointment->Total}}
+                  {{$Appointment->Precio_Prestacion}}
                 </td>
               </tr>
               @endforeach
@@ -81,15 +81,15 @@
           @foreach(App\Models\Professional::where('user_id','=',Auth::user()->id)->get() as $professional)
           <div class = "w-full box-white mt-1.5">
             <span>Tasa de Ocupación</span>
-            <span class= "ml-12">{{$professional->tasaOcupacion($expiredstartOfMonth,$expiredendOfMonth,Auth::user()->fullname())}}%</span>
+            <span class= "ml-12">{{$professional->tasaOcupacion($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}%</span>
           </div>
           <div class = "w-full box-white mt-1.5">
             <span>Prom. Prestaciones</span>
-            <span class="ml-9">{{$professional->Prom_prestaciones($expiredstartOfMonth,$expiredendOfMonth,Auth::user()->fullname())}}</span>
+            <span class="ml-9">{{$professional->Prom_prestaciones($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
           </div>
           <div class = "w-full box-white mt-1.5">
             <span>Prom. Remuneraciones</span>
-            <span class="ml-2">{{$professional->Prom_remuneracion($expiredstartOfMonth,$expiredendOfMonth,Auth::user()->fullname())}}</span>
+            <span class="ml-2">{{$professional->Prom_remuneracion($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
             </div>
           @endforeach
         </div>
@@ -161,7 +161,7 @@
                                                   {{$date->format('d')}}
                                               </div>
                                               <div style="height: {{$heightbox}};" class="overflow-y-auto mt-1">
-                                                  @foreach(App\Models\AppointmentMl::where('Estado','Atendido')->whereBetween('Fecha',[$expiredstartOfMonth, $expiredendOfMonth])->where('Fecha',$date->format('Y-m-d'))->where('Profesional',Auth::user()->fullname())->orderby('Hora_inicio', 'ASC')->get() as $professionalAppointment)
+                                                  @foreach(App\Models\Professional::join('appointment_mls', 'professionals.description', '=', 'appointment_mls.Profesional')->where('professionals.user_id',Auth::user()->id)->where('Estado','Atendido')->whereBetween('Fecha',[$expiredstartOfMonth, $expiredendOfMonth])->where('Fecha',$date->format('Y-m-d'))->orderby('Hora_inicio', 'ASC')->get() as $professionalAppointment)
                                                       <div
                                                           wire:click="show({{$professionalAppointment->id}})"
                                                           @if($professionalAppointment->Estado=='Atendido')

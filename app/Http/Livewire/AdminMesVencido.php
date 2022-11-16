@@ -141,9 +141,10 @@ class AdminMesVencido extends Component
         }
 
         return view('livewire.admin-mes-vencido', [
-            'appointments' => ActionMl::where('Estado','Atendido')
+            'appointments' => ActionMl::join('professionals', 'professionals.description', '=' ,'action_mls.Profesional')
+                                  ->where('action_mls.Estado','Atendido')
                                   ->whereBetween('Fecha_Realizacion',[$this->expiredstartOfMonth->format('Y-m-d'),$this->expiredendOfMonth->format('Y-m-d')])
-                                  ->where('Profesional',Auth::user()->fullname())
+                                  ->where('professionals.user_id',Auth::user()->id)
                                   ->orderby('Fecha_Realizacion', 'DESC')
                                   ->Paginate(13),
         ]);
