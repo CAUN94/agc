@@ -140,7 +140,7 @@ class GoogleCalendarUpdate extends Command
         return $appointments;
     }
 
-    // public function deleteRepeats($professional,$calendarId){
+    public function deleteRepeats($professional,$calendarId){
         $results = AppointmentMl::allCalendarAppointments($professional)->get(['id'])->toArray();
         $client = $this->getClient();
         foreach($results as $result){
