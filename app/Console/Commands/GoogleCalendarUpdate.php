@@ -48,31 +48,31 @@ class GoogleCalendarUpdate extends Command
         // $this->superdelete();
         $this->superStore('Alonso Niklitschek Sanhueza','c_0f1ec4cb6ddb69027c0f6e89110fb1708a9613a28be7efc2165475004be2398d@group.calendar.google.com','alonso@justbetter.cl');
         $this->superUpdate('Alonso Niklitschek Sanhueza','c_0f1ec4cb6ddb69027c0f6e89110fb1708a9613a28be7efc2165475004be2398d@group.calendar.google.com');
-        $this->deleteRepeats('Alonso Niklitschek Sanhueza','c_0f1ec4cb6ddb69027c0f6e89110fb1708a9613a28be7efc2165475004be2398d@group.calendar.google.com');
+        // $this->deleteRepeats('Alonso Niklitschek Sanhueza','c_0f1ec4cb6ddb69027c0f6e89110fb1708a9613a28be7efc2165475004be2398d@group.calendar.google.com');
 
         $this->superStore('Jaime Pantoja Rodriguez','c_a5e903612c38cf636cddc1ad9f5d85f5cfc58fc2350ab902696cef768930fe27@group.calendar.google.com','docencia@justbetter.cl');
         $this->superUpdate('Jaime Pantoja Rodriguez','c_a5e903612c38cf636cddc1ad9f5d85f5cfc58fc2350ab902696cef768930fe27@group.calendar.google.com');
-        $this->deleteRepeats('Jaime Pantoja Rodriguez','c_a5e903612c38cf636cddc1ad9f5d85f5cfc58fc2350ab902696cef768930fe27@group.calendar.google.com');
+        // $this->deleteRepeats('Jaime Pantoja Rodriguez','c_a5e903612c38cf636cddc1ad9f5d85f5cfc58fc2350ab902696cef768930fe27@group.calendar.google.com');
 
         $this->superStore('Daniella Vivallo Vera','c_70cc091402f167e8244d73d4a32ad15d0e21368ead3e7145eede9f69ce57b019@group.calendar.google.com','clinica@justbetter.cl');
         $this->superUpdate('Daniella Vivallo Vera','c_70cc091402f167e8244d73d4a32ad15d0e21368ead3e7145eede9f69ce57b019@group.calendar.google.com');
-        $this->deleteRepeats('Daniella Vivallo Vera','c_70cc091402f167e8244d73d4a32ad15d0e21368ead3e7145eede9f69ce57b019@group.calendar.google.com');
+        // $this->deleteRepeats('Daniella Vivallo Vera','c_70cc091402f167e8244d73d4a32ad15d0e21368ead3e7145eede9f69ce57b019@group.calendar.google.com');
 
         $this->superStore('Manuel Silva Ávila','c_cdc49b01298351d88c6468980988cf46b288841aeabf875ebffaed4a06b45530@group.calendar.google.com','Kine.Manuel.silva@gmail.com');
         $this->superUpdate('Manuel Silva Ávila','c_cdc49b01298351d88c6468980988cf46b288841aeabf875ebffaed4a06b45530@group.calendar.google.com');
-        $this->deleteRepeats('Manuel Silva Ávila','c_cdc49b01298351d88c6468980988cf46b288841aeabf875ebffaed4a06b45530@group.calendar.google.com','Kine.Manuel.silva@gmail.com');
+        // $this->deleteRepeats('Manuel Silva Ávila','c_cdc49b01298351d88c6468980988cf46b288841aeabf875ebffaed4a06b45530@group.calendar.google.com','Kine.Manuel.silva@gmail.com');
 
         $this->superStore('Camila Valentini Rojas','c_774a51d77aa92fff83bc27c54aea7caa6214d02b32415d38e38833e2bf6c88ea@group.calendar.google.com','cvalentini@uc.cl');
         $this->superUpdate('Camila Valentini Rojas','c_774a51d77aa92fff83bc27c54aea7caa6214d02b32415d38e38833e2bf6c88ea@group.calendar.google.com');
-        $this->deleteRepeats('Camila Valentini Rojas','c_774a51d77aa92fff83bc27c54aea7caa6214d02b32415d38e38833e2bf6c88ea@group.calendar.google.com');
+        // $this->deleteRepeats('Camila Valentini Rojas','c_774a51d77aa92fff83bc27c54aea7caa6214d02b32415d38e38833e2bf6c88ea@group.calendar.google.com');
 
         $this->superStore('Nicole Cedeño Wolf ','c_50e57474f2f9941c93de2de40212b24f6a44a65d72a40399bbab8cfcb1221fa2@group.calendar.google.com','Niccole.cedeno@lanek.cl');
         $this->superUpdate('Nicole Cedeño Wolf ','c_50e57474f2f9941c93de2de40212b24f6a44a65d72a40399bbab8cfcb1221fa2@group.calendar.google.com');
-        $this->deleteRepeats('Nicole Cedeño Wolf ','c_50e57474f2f9941c93de2de40212b24f6a44a65d72a40399bbab8cfcb1221fa2@group.calendar.google.com');
+        // $this->deleteRepeats('Nicole Cedeño Wolf ','c_50e57474f2f9941c93de2de40212b24f6a44a65d72a40399bbab8cfcb1221fa2@group.calendar.google.com');
 
         $this->superStore('Constanza Ahumada Huerta','c_5bd69a1568b6d8319f6bac34e6eb66a336de83458e7a206645ac43c265f93104@group.calendar.google.com','Coniahum@gmail.com');
         $this->superUpdate('Constanza Ahumada Huerta','c_5bd69a1568b6d8319f6bac34e6eb66a336de83458e7a206645ac43c265f93104@group.calendar.google.com');
-        $this->deleteRepeats('Constanza Ahumada Huerta','c_5bd69a1568b6d8319f6bac34e6eb66a336de83458e7a206645ac43c265f93104@group.calendar.google.com');
+        // $this->deleteRepeats('Constanza Ahumada Huerta','c_5bd69a1568b6d8319f6bac34e6eb66a336de83458e7a206645ac43c265f93104@group.calendar.google.com');
     }
 
     public function superStore($professional,$calendarId,$email){
@@ -140,7 +140,7 @@ class GoogleCalendarUpdate extends Command
         return $appointments;
     }
 
-    public function deleteRepeats($professional,$calendarId){
+    // public function deleteRepeats($professional,$calendarId){
         $results = AppointmentMl::allCalendarAppointments($professional)->get(['id'])->toArray();
         $client = $this->getClient();
         foreach($results as $result){
