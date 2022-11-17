@@ -70,13 +70,17 @@ class AppointmentMl extends Model
             ->where('professional_calendar','not like',0);
     }
 
-    public static function allCalendarAppointments(){
+    public static function allCalendarAppointments($professional){
         return DB::table('appointment_mls as a')
-           ->whereExists(function ($query) {
+           ->whereExists(function ($query) use ($professional) {
                $query->select(DB::raw(1))
                      ->from('appointment_mls as b')
+                     ->where('a.Profesional',$professional)
                      ->whereRaw('a.Hora_inicio = b.Hora_inicio')
+                     ->whereRaw('a.Fecha = b.Fecha')
+                     ->whereRaw('a.Rut_Paciente = b.Rut_Paciente')
                      ->whereRaw('a.Profesional = b.Profesional')
+                     ->whereRaw("a.Estado like 'Agenda Online'")
                      ->whereRaw("a.Fecha >='".\Carbon\Carbon::yesterday()->startOfDay()->format('Y-m-d')."'")
                      ->whereRaw("a.professional_calendar not like '0'")
                      ->havingRaw('count(*) > 1');
