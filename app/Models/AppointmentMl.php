@@ -73,6 +73,7 @@ class AppointmentMl extends Model
     public static function allCalendarAppointments($professional){
         return DB::table('appointment_mls as a')
             ->whereRaw("a.Fecha >='".\Carbon\Carbon::yesterday()->startOfDay()->format('Y-m-d')."'")
+            ->where('a.Profesional',$professional)
             ->whereExists(function ($query) use ($professional) {
                $query->select(DB::raw(1))
                      ->from('appointment_mls as b')
