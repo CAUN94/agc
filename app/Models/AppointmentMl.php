@@ -72,7 +72,8 @@ class AppointmentMl extends Model
 
     public static function allCalendarAppointments($professional){
         return DB::table('appointment_mls as a')
-           ->whereExists(function ($query) use ($professional) {
+            ->whereRaw("a.Fecha >='".\Carbon\Carbon::yesterday()->startOfDay()->format('Y-m-d')."'")
+            ->whereExists(function ($query) use ($professional) {
                $query->select(DB::raw(1))
                      ->from('appointment_mls as b')
                      ->where('a.Profesional',$professional)
@@ -81,7 +82,6 @@ class AppointmentMl extends Model
                      ->whereRaw('a.Rut_Paciente = b.Rut_Paciente')
                      ->whereRaw('a.Profesional = b.Profesional')
                      ->whereRaw("a.Estado like 'Agenda Online'")
-                     ->whereRaw("a.Fecha >='".\Carbon\Carbon::yesterday()->startOfDay()->format('Y-m-d')."'")
                      ->whereRaw("a.professional_calendar not like '0'")
                      ->havingRaw('count(*) > 1');
            });

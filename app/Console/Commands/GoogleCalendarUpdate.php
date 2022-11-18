@@ -60,7 +60,7 @@ class GoogleCalendarUpdate extends Command
 
         $this->superStore('Manuel Silva Ávila','c_cdc49b01298351d88c6468980988cf46b288841aeabf875ebffaed4a06b45530@group.calendar.google.com','Kine.Manuel.silva@gmail.com');
         $this->superUpdate('Manuel Silva Ávila','c_cdc49b01298351d88c6468980988cf46b288841aeabf875ebffaed4a06b45530@group.calendar.google.com');
-        // $this->deleteRepeats('Manuel Silva Ávila','c_cdc49b01298351d88c6468980988cf46b288841aeabf875ebffaed4a06b45530@group.calendar.google.com','Kine.Manuel.silva@gmail.com');
+        $this->deleteRepeats('Manuel Silva Ávila','c_cdc49b01298351d88c6468980988cf46b288841aeabf875ebffaed4a06b45530@group.calendar.google.com','Kine.Manuel.silva@gmail.com');
 
         $this->superStore('Camila Valentini Rojas','c_774a51d77aa92fff83bc27c54aea7caa6214d02b32415d38e38833e2bf6c88ea@group.calendar.google.com','cvalentini@uc.cl');
         $this->superUpdate('Camila Valentini Rojas','c_774a51d77aa92fff83bc27c54aea7caa6214d02b32415d38e38833e2bf6c88ea@group.calendar.google.com');
