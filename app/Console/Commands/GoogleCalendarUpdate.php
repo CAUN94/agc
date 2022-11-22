@@ -94,7 +94,7 @@ class GoogleCalendarUpdate extends Command
                 'dateTime' => $start,
                 'timeZone' => 'America/Santiago',
               ),
-              'sendNotifications' => true,
+              'sendNotifications' => false,
               'sendUpdates' => 'all',
               'end' => array(
                 'dateTime' => $end,
