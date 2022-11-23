@@ -157,6 +157,13 @@ class UpdateMedilink extends Command
                     'Sucursal' => $value['Sucursal'],
                 ]
             );
+
+            if($value['Estado'] == 'Atendiéndose' and is_null($appointmentMl->Fecha_Atendiendose)){
+                $appointmentMl->Fecha_Atendiendose = Carbon::now();
+            } elseif ($value['Estado'] == 'Atendido' and is_null($appointmentMl->Fecha_Atendido)) {
+                $appointmentMl->Fecha_Atendido = Carbon::now();
+            }
+            $appointmentMl->save();
         }
         $time2 = time();
         // $this->info("Appointment: ".AppointmentMl::all()->count()." tiempo " .$time2-$time1." seg");
