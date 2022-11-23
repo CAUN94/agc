@@ -1,6 +1,6 @@
 <div x-data="{ calendar: false }">
     <div class="w-full overflow-x-auto gap-y-2 box-white p-3">
-        <div class="mb-2 w-full flex justify-between">
+        <div class="mb-2 w-full flex justify-between font-bold text-gray-600">
             Periodo del {{$expiredstartOfMonth->format('d-m')}} al {{$expiredendOfMonth->format('d-m')}}
         </div>
         <div>
@@ -10,14 +10,14 @@
                       <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                           <i class="fa fa-money" aria-hidden="true"></i>
                           <span class="flex-1 ml-3 whitespace-nowrap">Prestaciones</span>
-                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-sm font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->prestaciones($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
+                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">${{$professional->prestaciones($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
                       </a>
                   </li>
                   <li>
                       <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                           <i class="fa fa-money" aria-hidden="true"></i>
                           <span class="flex-1 ml-3 whitespace-nowrap">Remuneración</span>
-                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->remuneracion($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
+                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">${{$professional->remuneracion($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
                       </a>
                   </li>
                   <li>
@@ -53,7 +53,7 @@
               @foreach($appointments as $Appointment)
               <tr>
                 <td class="text-center">
-                    {{Carbon\Carbon::parse($Appointment->Fecha_Realizacion)->format('Y-m-d')}}
+                    {{Carbon\Carbon::parse($Appointment->Fecha_Realizacion)->format('d-m-Y')}}
                 </td>
                 <td class="text-left">
                    {{$Appointment->Nombre}} {{$Appointment->Apellido}}
@@ -65,7 +65,7 @@
                   {{$Appointment->Categoria_Nombre}}
                 </td>
                 <td class="text-center">
-                  {{$Appointment->Precio_Prestacion}}
+                  ${{$Appointment->Precio_Prestacion}}
                 </td>
               </tr>
               @endforeach
@@ -85,11 +85,11 @@
           </div>
           <div class = "w-full box-white mt-1.5">
             <span>Prom. Prestaciones</span>
-            <span class="ml-9">{{$professional->Prom_prestaciones($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
+            <span class="ml-9">${{$professional->Prom_prestaciones($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
           </div>
           <div class = "w-full box-white mt-1.5">
             <span>Prom. Remuneraciones</span>
-            <span class="ml-2">{{$professional->Prom_remuneracion($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
+            <span class="ml-2">${{$professional->Prom_remuneracion($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
             </div>
           @endforeach
         </div>
@@ -171,7 +171,7 @@
 
                                                               class="box-class border-{{$color}}-200 text-{{$color}}-800 bg-{{$color}}-100 cursor-pointer
                                                               ">
-                                                              <p class="text-xs lg:text-sm lg:truncate leading-tight">{{$professionalAppointment->Hora_inicio}} {{$professionalAppointment->Estado}}</p>
+                                                              <p class="text-xs lg:text-sm lg:truncate leading-tight">{{Carbon\Carbon::parse($professionalAppointment->Hora_inicio)->format('H:00')}} {{$professionalAppointment->Nombre_paciente}}</p>
                                                           </div>
                                                       @endforeach
                                                   </div>
@@ -241,7 +241,7 @@
                             Remuneración
                           </dt>
                           <dd class="train-class-resume-text">
-                              <li class="list-none">{{App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Precio_Prestacion')}}</li>
+                              <li class="list-none">${{App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Precio_Prestacion')}}</li>
                           </dd>
                         </div>
                       </dl>

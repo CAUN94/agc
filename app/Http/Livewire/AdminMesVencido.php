@@ -65,7 +65,7 @@ class AdminMesVencido extends Component
         }
         $this->newAppointment = 0;
         $this->coach = 0;
-
+        $this->now = Carbon::Now()->subMonth();
         // $this->selectedPlans = Training::where('id','>',0)->pluck('id')->toArray();
         // $this->plans = DB::table('train_appointments_pivot')->distinct('train_appointment_id')->pluck('train_appointment_id')->toArray();
     }
@@ -144,7 +144,7 @@ class AdminMesVencido extends Component
                                   ->where('action_mls.Estado','Atendido')
                                   ->whereBetween('Fecha_Realizacion',[$this->expiredstartOfMonth->format('Y-m-d'),$this->expiredendOfMonth->format('Y-m-d')])
                                   ->where('professionals.user_id',Auth::user()->id)
-                                  ->orderby('Fecha_Realizacion', 'DESC')
+                                  ->orderby('Fecha_Realizacion', 'ASC')
                                   ->Paginate(13),
         ]);
     }
