@@ -20,7 +20,7 @@ use Livewire\WithPagination;
 class AdminRemuneracion extends Component
 {
     use WithPagination;
-    
+
     public $days = ['Lun','Mar','Mie','Jue','Vie','Sab'];
     public $now = '';
     public $dates = [];
@@ -35,6 +35,7 @@ class AdminRemuneracion extends Component
     public $name;
     public $namePaciente;
     public $remuneracion;
+    public $treatment = null;
     public $hour;
     public $message;
     public $lista_id = null;
@@ -67,7 +68,7 @@ class AdminRemuneracion extends Component
             $this->startOfWeek = Carbon::createFromDate($this->now->format('Y'),$this->now->startOfWeek()->format('m'),$this->now->startOfWeek()->format('d'))->startOfDay();
             $this->endOfWeek = Carbon::createFromDate($this->now->format('Y'),$this->now->endOfWeek()->format('m'),$this->now->endOfWeek()->format('d'))->startOfDay();
         }
-        $this->now = Carbon::Now();
+        $this->now = Carbon::Now()->subMonth();
 
         $this->newAppointment = 0;
         $this->coach = 0;

@@ -89,7 +89,7 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/userml', [UserMlController::class, 'index'])->middleware(['intranet']);
 
     //Remuneración
-    Route::resource('adminRemuneracion', 'App\Http\Controllers\adminRemuneracionController')->middleware(['intranet']);
+    Route::resource('adminRemuneracion', 'App\Http\Controllers\adminRemuneracionController')->middleware(['admin']);
     Route::resource('mesActual', 'App\Http\Controllers\mesActualController')->middleware(['intranet']);
     Route::resource('mesVencido', 'App\Http\Controllers\mesVencidoController')->middleware(['intranet']);
     Route::resource('historial', 'App\Http\Controllers\historialController')->middleware(['intranet']);

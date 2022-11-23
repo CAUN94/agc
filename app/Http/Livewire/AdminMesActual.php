@@ -41,7 +41,7 @@ class AdminMesActual extends Component
     public function mount()
     {
       $this->now = Carbon::Now();
-        if (Carbon::now()->format('d') <= 21 ){
+        if (Carbon::now()->format('d') < 21 ){
             $this->startOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m')-1,21)->startOfDay();
             $this->actualstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')-1,21)->startOfDay();
             $this->expiredstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')-1,21)->startOfDay()->subMonth();
