@@ -22,17 +22,17 @@
         <tr class=>
           <td class=>
             <div class="flex flex-col items-center justify-between">
-              <span>{{$periodo->format('Y-m-d')}} - {{$this->endPeriod($periodo)}}</span>
+              <span>{{$periodo->format('d-m-Y')}} - {{Carbon\Carbon::parse($this->endPeriod($periodo))->format('d-m-Y')}}</span>
             </div>
           </td>
           <td>
              <div class="flex flex-col items-center justify-between">
-              <span class="text-sm">{{$professional->prestaciones($periodo,$this->endPeriod($periodo),$professional->description)}}</span>
+              <span class="text-sm">${{$professional->prestaciones($periodo,$this->endPeriod($periodo),$professional->description)}}</span>
             </div>
           </td>
           <td>
             <div class="flex flex-col items-center justify-between">
-               <span class="text-sm">{{$professional->remuneracion($periodo,$this->endPeriod($periodo),$professional->description)}}</span>
+               <span class="text-sm">${{$professional->remuneracion($periodo,$this->endPeriod($periodo),$professional->description)}}</span>
             </div>
           </td>
           <td>
@@ -42,7 +42,7 @@
           </td>
           <td>
             <div class="flex flex-col items-center justify-between">
-              <span class="text-sm">{{$professional->tasaOcupacion($periodo,$this->endPeriod($periodo),$professional->description)}}</span>
+              <span class="text-sm">{{$professional->tasaOcupacion($periodo,$this->endPeriod($periodo),$professional->description)}}%</span>
             </div>
           </td>
         </tr>

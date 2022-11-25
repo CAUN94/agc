@@ -112,7 +112,8 @@ class Professional extends Model
       $atenciones =  ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
       ->Where('Profesional', 'LIKE' , '%' . $user . '%')
       ->Where('Estado','=', 'Atendido')
-      ->get()->count();
+      ->distinct(['Tratamiento_Nr'])
+      ->count(['Tratamiento_Nr']);
 
       if($user == "Daniella Vivallo Vera"){
         $Ocupacion=25;
@@ -123,7 +124,8 @@ class Professional extends Model
       }
 
       $Ocupacion = $Ocupacion*4;
+      $porcentaje = ceil(($atenciones/$Ocupacion)*100);
 
-      return ceil(($atenciones/$Ocupacion)*100);
+      return ($porcentaje);
     }
 }

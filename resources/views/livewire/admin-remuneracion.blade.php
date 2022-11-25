@@ -280,7 +280,7 @@
 
                                                                   class="box-class border-{{$color}}-200 text-{{$color}}-800 bg-{{$color}}-100 cursor-pointer
                                                                   ">
-                                                                  <p class="text-xs lg:text-sm lg:truncate leading-tight">{{$professionalAppointment->Hora_inicio}} {{$professionalAppointment->Estado}}</p>
+                                                                  <p class="text-xs lg:text-sm lg:truncate leading-tight">{{Carbon\Carbon::parse($professionalAppointment->Hora_inicio)->format('H:00')}} {{$professionalAppointment->Estado}}</p>
                                                               </div>
                                                           @endforeach
                                                       </div>

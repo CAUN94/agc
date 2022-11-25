@@ -1,22 +1,22 @@
 <div x-data="{ pay: false }">
     <div class="w-full overflow-x-auto gap-y-2 box-white p-3">
-        <div class="mb-2 w-full flex justify-between">
+        <div class="mb-2 w-full flex justify-between font-bold text-gray-600">
             @if($weekly)
               Periodo del {{$startOfWeek->format('d-m')}} al {{$endOfWeek->format('d-m')}}
             @else
               Periodo del {{$startOfMonth->format('d-m')}} al {{$endOfMonth->format('d-m')}}
             @endif
-            <div class="border rounded-lg px-1" style="padding-bottom: 3.5px;" >
+            <div class="border rounded-lg px-1 bg-gray-100" style="padding-bottom: 3.5px;" >
                 <button
                     type="button"
-                    class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 items-center"
+                    class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-white p-1 items-center"
                     wire:click="weeklyOn"
                     >
                 Semanal</button>
                 <div class="border-r inline-flex h-6"></div>
                 <button
                     type="button"
-                    class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex items-center cursor-pointer hover:bg-gray-200 p-1"
+                    class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex items-center cursor-pointer hover:bg-white p-1"
                     wire:click="weeklyOff"
                     >
                 Mensual</button>
@@ -34,11 +34,11 @@
                       <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                           <i class="fa fa-money" aria-hidden="true"></i>
                           <span class="flex-1 ml-3 whitespace-nowrap">Prestaciones</span>
-                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-sm font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
+                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
                             @if($weekly)
-                              {{$professional->prestaciones($startOfWeek,$endOfWeek,$professional->description)}}
+                              ${{$professional->prestaciones($startOfWeek,$endOfWeek,$professional->description)}}
                             @else
-                              {{$professional->prestaciones($startOfMonth,$endOfMonth,$professional->description)}}
+                              ${{$professional->prestaciones($startOfMonth,$endOfMonth,$professional->description)}}
                             @endif
                           </span>
                       </a>
@@ -49,9 +49,9 @@
                           <span class="flex-1 ml-3 whitespace-nowrap">Remuneración</span>
                           <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
                             @if($weekly)
-                              {{$professional->remuneracion($startOfWeek,$endOfWeek,$professional->description)}}
+                              ${{$professional->remuneracion($startOfWeek,$endOfWeek,$professional->description)}}
                             @else
-                              {{$professional->remuneracion($startOfMonth,$endOfMonth,$professional->description)}}
+                              ${{$professional->remuneracion($startOfMonth,$endOfMonth,$professional->description)}}
                             @endif
                           </span>
                       </a>
@@ -73,7 +73,7 @@
           @endforeach
         </div>
 
-        <button x-on:click="pay = !pay">Ver más</button>
+        <button x-on:click="pay = !pay" class= "border rounded-lg mt-1 ml-2 mb-1 bg-gray-100 hover:bg-white">Ver más</button>
         <div x-show="pay">
           @foreach(App\Models\Professional::where('user_id','=',Auth::user()->id)->get() as $professional)
               <ul class="grid grid-cols-3 gap-1">
@@ -81,14 +81,14 @@
                       <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                           <i class="fa fa-money" aria-hidden="true"></i>
                           <span class="flex-1 ml-3 whitespace-nowrap">Promedio Remuneración Semanal</span>
-                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-sm font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->Prom_remuneracion($startOfWeek,$endOfWeek,$professional->description)}}</span>
+                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">${{$professional->Prom_remuneracion($startOfWeek,$endOfWeek,$professional->description)}}</span>
                       </a>
                   </li>
                   <li>
                       <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                           <i class="fa fa-money" aria-hidden="true"></i>
                           <span class="flex-1 ml-3 whitespace-nowrap">Promedio Remuneración Mensual</span>
-                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->Prom_remuneracion($startOfMonth,$endOfMonth,$professional->description)}}</span>
+                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">${{$professional->Prom_remuneracion($startOfMonth,$endOfMonth,$professional->description)}}</span>
                       </a>
                   </li>
                   <li>
@@ -174,7 +174,7 @@
                               Remuneración
                             </dt>
                             <dd class="train-class-resume-text">
-                                <li class="list-none">{{App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Precio_Prestacion')}}</li>
+                                <li class="list-none">${{App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Precio_Prestacion')}}</li>
                             </dd>
                           </div>
                         </dl>
@@ -264,7 +264,7 @@
 
                                                               class="box-class border-{{$color}}-200 text-{{$color}}-800 bg-{{$color}}-100 cursor-pointer
                                                               ">
-                                                              <p class="text-xs lg:text-sm lg:truncate leading-tight">{{$professionalAppointment->Hora_inicio}} {{$professionalAppointment->Estado}}</p>
+                                                              <p class="text-xs lg:text-sm lg:truncate leading-tight">{{Carbon\Carbon::parse($professionalAppointment->Hora_inicio)->format('H:00')}} {{$professionalAppointment->Nombre_paciente}}</p>
                                                           </div>
                                                       @endforeach
                                                   </div>
