@@ -160,8 +160,15 @@ class UpdateMedilink extends Command
 
             if($value['Estado'] == 'Atendiéndose' and is_null($appointmentMl->Fecha_Atendiendose)){
                 $appointmentMl->Fecha_Atendiendose = Carbon::now();
-            } elseif ($value['Estado'] == 'Atendido' and is_null($appointmentMl->Fecha_Atendido)) {
+            }
+            if ($value['Estado'] == 'Atendido' and is_null($appointmentMl->Fecha_Atendido)) {
                 $appointmentMl->Fecha_Atendido = Carbon::now();
+            }
+            if ($value['Estado'] == 'En sala de espera' and is_null($appointmentMl->En_sala_de_espera)) {
+                $appointmentMl->En_sala_de_espera = Carbon::now();
+            }
+            if ($value['Estado'] == 'No confirmado' and is_null($appointmentMl->No_confirmado)) {
+                $appointmentMl->No_confirmado = Carbon::now();
             }
             $appointmentMl->save();
         }
