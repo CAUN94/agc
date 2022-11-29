@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class AppointmentMl extends Model
 {
@@ -42,6 +43,13 @@ class AppointmentMl extends Model
 
     public function setCelularAttribute($value) {
         $this->attributes['Celular'] = "+569".substr(preg_replace('/[^0-9]+/', '', $value),-8);
+    }
+
+    public function dayhour(){
+        $day = \Carbon\Carbon::parse($this->Fecha)->format('Y-m-d');
+        $hour = \Carbon\Carbon::parse($this->Hora_inicio)->format('H:i');
+
+        return $day." ".$hour;
     }
 
     public function actions(){

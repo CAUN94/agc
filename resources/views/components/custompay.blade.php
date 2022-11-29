@@ -1,5 +1,8 @@
+@props(['appointmentMl'])
+
 @php
 	// SDK de Mercado Pago
+	$appointmentMl = App\Models\AppointmentMl::find($appointmentMl);
 	require base_path('/vendor/autoload.php');
 	// Agrega credenciales
 	MercadoPago\SDK::setAccessToken(config('services.mercadopago.token'));
@@ -7,11 +10,11 @@
 
 	// Crea un ítem en la preferencia
 	$item = new MercadoPago\Item();
-	$item->id = 1;
-	$item->title = 'Pago';
-	$item->description = 'Hora con Alonso';
+	$item->id = $appointmentMl->id;
+	$item->title = 'Pago You Just Better';
+	$item->description = 'Hora con '.$appointmentMl->Profesional;
 	$item->quantity = 1;
-	$item->unit_price = 20000;
+	$item->unit_price = $appointmentMl->treatments()->totalPay();
 
 	$products[] = $item;
 

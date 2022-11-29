@@ -10,9 +10,13 @@
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
         <!-- Validation Errors -->
-
-        <x-custompay>Pagar Plan</x-custompay>
-
+        <div class="mb-2 text-lg flex flex-col">
+        	<span>Paciente: {{$appointmentMl->Nombre_paciente}} {{$appointmentMl->Apellidos_paciente}}</span>
+        	<span>Profesional: {{$appointmentMl->Profesional}}</span>
+        	<span>Fecha: {{$appointmentMl->dayhour()}}</span>
+        	<span>Valor: {{$appointmentMl->treatments()->totalPrice()}}</span>
+        </div>
+        <x-custompay class appointmentMl="{{$appointmentMl->id}}">Pagar Plan</x-custompay>
 
     </x-auth-card>
 </x-landing.layout>

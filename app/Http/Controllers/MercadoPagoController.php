@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AppointmentMl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -17,6 +18,7 @@ class MercadoPagoController extends Controller
     }
 
     public function pay($id){
-        return view('mercadopago.pay');
+        $appointmentMl = AppointmentMl::where('Tratamiento_Nr',$id)->first();
+        return view('mercadopago.pay',compact('appointmentMl'));
     }
 }
