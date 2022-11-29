@@ -15,4 +15,8 @@ class MercadoPagoController extends Controller
         ]);
         return $response;
     }
+
+    public function pay($id){
+        return view('mercadopago.pay');
+    }
 }

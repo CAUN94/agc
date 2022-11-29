@@ -88,7 +88,7 @@ class ScrapingController extends Controller
     public function professionalshours(){
         $client = new Client();
         $crawler = $client->request('GET', 'https://youjustbetter.softwaremedilink.com/reportesdinamicos');
-        $form = $crawler->selectButton('Ingresar')->form();
+        $form = $crawler->filter('form')->form();
         $form->setValues(['rut' => 'admin', 'password' => 'Pascual4900']);
         $crawler = $client->submit($form);
 
@@ -124,7 +124,7 @@ class ScrapingController extends Controller
     public function professional($id){
         $client = new Client();
         $crawler = $client->request('GET', 'https://youjustbetter.softwaremedilink.com/reportesdinamicos');
-        $form = $crawler->selectButton('Ingresar')->form();
+        $form = $crawler->filter('form')->form();
         $form->setValues(['rut' => 'admin', 'password' => 'Pascual4900']);
         $crawler = $client->submit($form);
         $now = Carbon::now();
