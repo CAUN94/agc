@@ -65,7 +65,7 @@ class AppointmentMl extends Model
     }
 
     public static function nextProfessional($professional){
-        return AppointmentMl::where('Fecha','>=',\Carbon\Carbon::now()->startOfDay()->format('Y-m-d'))
+        return AppointmentMl::where('Fecha','>=',\Carbon\Carbon::yesterday()->startOfDay()->format('Y-m-d'))
             ->where('Profesional',$professional)
             ->where('professional_calendar','like',0)
             ->whereNotIn('Estado',['Cambio de fecha','Anulado'])

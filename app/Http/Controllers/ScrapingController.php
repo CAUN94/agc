@@ -313,4 +313,17 @@ class ScrapingController extends Controller
         FlashSession::flash('primary', 'PaymentMl Actualizada');
         return redirect()->back();
     }
+
+    public function alta(){
+        $client = new Client();
+        $crawler = $client->request('GET', 'https://youjustbetter.softwaremedilink.com/reportesdinamicos');
+        $form = $crawler->filter('form')->form();
+        $form->setValues(['rut' => 'admin', 'password' => 'Pascual4900']);
+        $crawler = $client->submit($form);
+        $crawler = $client->request('GET', 'https://youjustbetter.softwaremedilink.com/fichas/imprimir/3');
+        $crawler->filter('div[class="ficha-header"]')->each(function ($node) {
+            print $node->text()." ";
+        });
+
+    }
 }
