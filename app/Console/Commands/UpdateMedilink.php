@@ -62,7 +62,7 @@ class UpdateMedilink extends Command
     public function create_client($url, $filter = False){
         $client = new Client();
         $crawler = $client->request('GET', 'https://youjustbetter.softwaremedilink.com/reportesdinamicos');
-        $form = $crawler->selectButton('Ingresar')->form();
+        $form = $crawler->filter('form')->form();
         $form->setValues(['rut' => 'admin', 'password' => 'Pascual4900']);
         $crawler = $client->submit($form);
         if($filter){
@@ -70,6 +70,7 @@ class UpdateMedilink extends Command
             $last = strval(Carbon::now()->addmonth()->format('Y-m-d'));
             $url = $url."%5Bfecha_inicio%5D%5Bstatus%5D=activated&filters%5Bfecha_inicio%5D%5Bvalue%5D=".$first."&filters%5Bfecha_fin%5D%5Bstatus%5D=activated&filters%5Bfecha_fin%5D%5Bvalue%5D=".$last."";
         }
+
         $crawler = $client->request('GET', $url);
         $array = $crawler->text();
         $array = substr($array,2,-2);
@@ -135,7 +136,7 @@ class UpdateMedilink extends Command
             if($now<$limit){
                 continue;
             }
-            $actionMl = AppointmentMl::updateOrCreate(
+            $appointmentMl = AppointmentMl::updateOrCreate(
                 [
                     'Tratamiento_Nr' => $value['Atencion'],
                     'Rut_Paciente' => $value['Rut Paciente'],
@@ -145,6 +146,7 @@ class UpdateMedilink extends Command
                     'Fecha' => $value['Fecha'],
                     'Hora_inicio' => $value['Hora inicio'],
                     'Hora_termino' => $value['Hora termino'],
+                    'Fecha_Generación' => $value['Fecha Generación'],
                     'Tratamiento_Nr' => $value['Atencion'],
                     'Profesional' => $value['Profesional/Recurso'],
                     'Rut_Paciente' => $value['Rut Paciente'],
@@ -156,6 +158,20 @@ class UpdateMedilink extends Command
                     'Sucursal' => $value['Sucursal'],
                 ]
             );
+
+            if($value['Estado'] == 'Atendiéndose' and is_null($appointmentMl->Fecha_Atendiendose)){
+                $appointmentMl->Fecha_Atendiendose = Carbon::now();
+            }
+            if ($value['Estado'] == 'Atendido' and is_null($appointmentMl->Fecha_Atendido)) {
+                $appointmentMl->Fecha_Atendido = Carbon::now();
+            }
+            if ($value['Estado'] == 'En sala de espera' and is_null($appointmentMl->En_sala_de_espera)) {
+                $appointmentMl->En_sala_de_espera = Carbon::now();
+            }
+            if ($value['Estado'] == 'No confirmado' and is_null($appointmentMl->No_confirmado)) {
+                $appointmentMl->No_confirmado = Carbon::now();
+            }
+            $appointmentMl->save();
         }
         $time2 = time();
         // $this->info("Appointment: ".AppointmentMl::all()->count()." tiempo " .$time2-$time1." seg");

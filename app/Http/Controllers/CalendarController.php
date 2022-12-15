@@ -112,9 +112,8 @@ class CalendarController extends Controller
                 'timeZone' => 'America/Santiago',
               ),
               'attendees' => array(
-                array('email' => 'cristobalugarte6@gmail.com'),
-                // array('email' => 'alonso7@gmail.com'),
-                array('email' => 'cugarte@guiasyscoutschile.cl'),
+                array('email' => 'alonso7@gmail.com'),
+                array('email' => 'you@justbetter.cl'),
                 // array('email' => 'iver@justbetter.cl'),
                 // array('email' => 'pablo@justbetter.cl'),
               ),
@@ -141,7 +140,9 @@ class CalendarController extends Controller
         $client = $this->getClient();
         $calendarId = 'c_1hkcfsu55r04nisn1b087b4f5g@group.calendar.google.com';
         foreach ($appointments as $key => $appointment) {
-            // Falta un if para borrar solo las que no cumplen con las condiciones
+            // if(!in_array($appointment->Estado, ['Cambio de fecha','Anulado'])){
+            //     continue;
+            // }
             $service = new Calendar($client);
             $service->events->delete($calendarId, $appointment->professional_calendar);
             $appointment->professional_calendar = 0;

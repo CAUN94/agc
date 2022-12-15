@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\AppointmentMl;
+use Freshwork\ChileanBundle\Rut;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Freshwork\ChileanBundle\Rut;
+use Carbon\Carbon;
 
 class UserMl extends Model
 {
@@ -39,4 +41,10 @@ class UserMl extends Model
     public function setCelularAttribute($value) {
         $this->attributes['Celular'] = "+569".substr(preg_replace('/[^0-9]+/', '', $value),-8);
     }
+
+    public function lastAppointment(){
+        return AppointmentMl::where('RUT_Paciente','16874329-7')->where('Fecha','<',Carbon::now())->orderby('Fecha','desc')->whereIn('Estado',['Atendido'])->take(1)->first();
+    }
+
+
 }

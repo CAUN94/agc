@@ -105,9 +105,6 @@
                           @endif
                         </dd>
                       </div>
-
-
-
                     </dl>
                   </div>
                   <hr class="my-2">

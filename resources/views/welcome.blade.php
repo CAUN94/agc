@@ -1,7 +1,5 @@
 <x-landing.layout>
-{{--         <x-landing.header>
-
-        </x-landing.header> --}}
+{{--         <x-landing.header></x-landing.header> --}}
         <a href="/packverano">
         <img src="{{ asset('img/fotos/Banner.jpg')}}" style="max-width: 100%;height: auto;">
         </a>
@@ -31,7 +29,15 @@
                 Alonso Niklischeck|Camila Valentini|Matias Rebolledo|Jaime Pantoja|Cesar Moya|Melissa Ross|Cristóbal Ugarte
             </x-slot>
             <x-slot name="team">
+<<<<<<< HEAD
+<<<<<<< HEAD
+                Kinesiologo|Kinesiologo|Entrenador|Kinesiologa|Kinesiologa|Nutricionista|Medico del Deporte|Desarrollador
+=======
                 Director Clinico|Kinesiologa|Entrenador|Kinesiologo|Kinesiologo|Nutricionista|Desarrollador
+>>>>>>> 1d45687 (update)
+=======
+                Director Clinico|Kinesiologa|Entrenador|Kinesiologo|Kinesiologo|Nutricionista|Desarrollador
+>>>>>>> dd636e636b86f86792a868452ce668bbd5647436
             </x-slot>
         </x-landing.team>
 

@@ -18,7 +18,7 @@ body {
 }
 
 .sticky-menu {
-	@apply bg-you-grey sticky top-0 z-20;
+	@apply bg-you-grey fixed top-0 z-20 w-full;
 }
 
 .nav-menu {

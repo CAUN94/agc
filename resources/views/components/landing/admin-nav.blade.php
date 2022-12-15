@@ -5,7 +5,7 @@
       <x-slot name="name"><i class="fas fa-user text-xs mr-1"></i> Usuarios</x-slot>
       <x-slot name="trigger">Usuarios</x-slot>
       <a class="py-1" href="/adminusers">Todos</a>
-      <a class="my-1 py-1" href="/adminstudents">Estudiantes</a>
+      <a class="my-1 py-1" href="/adminstudents">Alumnos</a>
       <a class="my-1 py-1" href="/adminprofessionals">Profesionales</a>
       <a class="my-1 py-1" href="/admintrainers">Entrenadores</a>
     </x-nav-dropdown>
@@ -54,7 +54,17 @@
       {{-- <a class="my-1 py-1" href="#">Link #3</a> --}}
     </x-nav-dropdown>
 
+    <a class="mt-3 py-1" href="/adminRemuneracion">Remuneraciones</a>
+
   @endif
+
+  <x-nav-dropdown>
+    <x-slot name="name">Remuneración</x-slot>
+    <x-slot name="trigger">encuestas</x-slot>
+    <a class="py-1" href="/mesActual">Mes Actual</a>
+    <a class="my-1 py-1" href="/mesVencido">Mes Vencido</a>
+    <a class="my-1 py-1" href="/historial">Historial</a>
+  </x-nav-dropdown>
 
   @if(Auth::user()->isTrainer())
     <x-nav-dropdown>

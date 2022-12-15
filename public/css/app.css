@@ -33185,10 +33185,10 @@ body {
 }
 
 .sticky-menu {
-  position: -webkit-sticky;
-  position: sticky;
+  position: fixed;
   top: 0px;
   z-index: 20;
+  width: 100%;
   --tw-bg-opacity: 1;
   background-color: rgba(44, 44, 44, var(--tw-bg-opacity));
 }

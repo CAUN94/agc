@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class AppointmentMl extends Model
 {
@@ -27,6 +29,8 @@ class AppointmentMl extends Model
         'Convenio_Secundario',
         'Generación_Presupuesto',
         'Sucursal',
+        'professional_calendar',
+        'user_calendar'
     ];
 
     public function setRut_PacienteAttribute($value) {
@@ -39,6 +43,13 @@ class AppointmentMl extends Model
 
     public function setCelularAttribute($value) {
         $this->attributes['Celular'] = "+569".substr(preg_replace('/[^0-9]+/', '', $value),-8);
+    }
+
+    public function dayhour(){
+        $day = \Carbon\Carbon::parse($this->Fecha)->format('Y-m-d');
+        $hour = \Carbon\Carbon::parse($this->Hora_inicio)->format('H:i');
+
+        return $day." ".$hour;
     }
 
     public function actions(){
@@ -54,16 +65,45 @@ class AppointmentMl extends Model
     }
 
     public static function nextProfessional($professional){
-        $professional = 'Alonso Niklitschek Sanhueza';
-        return AppointmentMl::where('Fecha','>=',\Carbon\Carbon::tomorrow()->format('Y-m-d'))
-            // ->where('Profesional',$professional)
+        return AppointmentMl::where('Fecha','>=',\Carbon\Carbon::yesterday()->startOfDay()->format('Y-m-d'))
+            ->where('Profesional',$professional)
             ->where('professional_calendar','like',0)
-            ->whereIn('Estado',['Confirmado por teléfono','No confirmado'])
+            ->whereNotIn('Estado',['Cambio de fecha','Anulado'])
             ->orderby('Fecha','asc')->limit(50);
     }
 
-    public static function calendarAppointments(){
-        return AppointmentMl::where('Fecha','>=',\Carbon\Carbon::tomorrow()->format('Y-m-d'))->where('professional_calendar','not like',0);
+    public static function calendarAppointments($professional){
+        return AppointmentMl::where('Fecha','>=',\Carbon\Carbon::yesterday()->startOfDay()->format('Y-m-d'))
+            ->where('Profesional',$professional)
+            ->where('professional_calendar','not like',0);
+    }
+
+    public static function allCalendarAppointments($professional){
+        return DB::table('appointment_mls as a')
+            ->whereRaw("a.Fecha >='".\Carbon\Carbon::yesterday()->startOfDay()->format('Y-m-d')."'")
+            ->where('a.Profesional',$professional)
+            ->whereExists(function ($query) use ($professional) {
+               $query->select(DB::raw(1))
+                     ->from('appointment_mls as b')
+                     ->where('a.Profesional',$professional)
+                     ->whereRaw('a.Hora_inicio = b.Hora_inicio')
+                     ->whereRaw('a.Fecha = b.Fecha')
+                     ->whereRaw('a.Rut_Paciente = b.Rut_Paciente')
+                     ->whereRaw('a.Profesional = b.Profesional')
+                     ->whereRaw("a.Estado like 'Agenda Online'")
+                     ->whereRaw("a.professional_calendar not like '0'")
+                     ->havingRaw('count(*) > 1');
+           });
+    }
+
+    public static function lastAppointment($id){
+        $appointmentMl = AppointmentMl::find($id);
+        $rut = $appointmentMl->RUT_Paciente;
+        $appointment_mls = AppointmentMl::where('RUT_Paciente',$rut)->where('Fecha','<=',\Carbon\Carbon::now()->endOfDay())->orderby('Fecha','desc')->whereIn('Estado',['Atendido','Atendiendose'])->take(1)->first();
+        if (!is_null($appointment_mls)){
+            return $appointment_mls;
+        }
+        return $appointmentMl;
     }
 
     public static function balance($date){

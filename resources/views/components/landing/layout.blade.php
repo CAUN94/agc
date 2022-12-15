@@ -63,7 +63,9 @@
             </div>
         </div>
 
+
         <div class="mt-0 mb-auto">
+            <div class="h-24"></div>
             {{ $slot }}
         </div>
 

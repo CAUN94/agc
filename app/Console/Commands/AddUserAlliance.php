@@ -41,27 +41,13 @@ class AddUserAlliance extends Command
      */
     public function handle()
     {
-        $usersMl = UserML::all();
-
+        $this->info("Alliance: ".DB::table('users_alliances_pivot')->count());
+        $usersMl = UserMl::all();
         foreach($usersMl as $userMl){
-            if($userMl->Nacimiento == null){
-                $userMl->Nacimiento = '1000-10-10';
+            $user = User::where('rut',$userMl->RUT)->first();
+            if(is_null($user)){
+                continue;
             }
-            $userMl->RUT = strtolower($userMl->RUT);
-            $user = User::firstOrCreate(
-                [
-                    'rut' => $userMl->RUT ,
-                ],
-                [
-                    'name' => $userMl->Nombre,
-                    'lastnames' => $userMl->Apellidos,
-                    'gender' => strtolower($userMl->Sexo),
-                    'email' => $userMl->Email,
-                    'phone' => $userMl->Celular,
-                    'birthday' => $userMl->Nacimiento,
-                    'password' => strtolower($userMl->RUT),
-                ]
-            );
             $pivot = DB::table('users_alliances_pivot')->where('user_id', $user->id)->first();
             if(!is_null($pivot)){
                 continue;
@@ -75,9 +61,17 @@ class AddUserAlliance extends Command
                     'user_id' => $user->id,
                     'alliance_id' => $alliance->id
                 ]);
+            } else {
+                $alliance = Alliance::where('name','Sin Convenio')->first();
+                if(is_null($alliance)){
+                    continue;
+                }
+                DB::table('users_alliances_pivot')->insert([
+                    'user_id' => $user->id,
+                    'alliance_id' => $alliance->id
+                ]);
             }
-
-
         }
+    $this->info("Alliance: ".DB::table('users_alliances_pivot')->count());
     }
 }

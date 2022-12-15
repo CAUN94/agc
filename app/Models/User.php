@@ -7,6 +7,7 @@ use App\Models\Alliance;
 use App\Models\AppointmentMl;
 use App\Models\Nutrition;
 use App\Models\Professional;
+use App\Models\Search;
 use App\Models\StravaUser;
 use App\Models\Student;
 use App\Models\TrainAppointment;
@@ -22,6 +23,7 @@ use Strava;
 
 class User extends Authenticatable {
 	use HasApiTokens, HasFactory, Notifiable;
+	use Search;
 
 	/**
 	 * The attributes that are mass assignable.
@@ -49,6 +51,13 @@ class User extends Authenticatable {
 		'password',
 		'remember_token',
 	];
+
+	protected $searchable = [
+        'rut',
+        'name',
+		'email',
+		'lastnames',
+    ];
 
 	/**
 	 * The attributes that should be cast.

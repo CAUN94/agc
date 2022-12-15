@@ -18,6 +18,7 @@ class Student extends Model {
 		return $this->belongsTo(User::class);
 	}
 
+
 	public function Training() {
 		return $this->belongsTo(Training::class);
 	}
@@ -253,6 +254,8 @@ class Student extends Model {
 			$new_student->extra = $request->extra;
 			$new_student->terms = $request->terms;
 			$new_student->start_day = $this->lastPlan()->endMonth();
+			$new_student->save();
+			$new_student->end_day = $new_student->lastPlan()->endMonth();
 			$new_student->save();
 		}
 		return;
