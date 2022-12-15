@@ -1,10 +1,8 @@
 <x-landing.layout>
-        <x-landing.header>
-
-        </x-landing.header>
-
-
-
+{{--         <x-landing.header></x-landing.header> --}}
+        <a href="/packverano">
+        <img src="{{ asset('img/fotos/Banner.jpg')}}" style="max-width: 100%;height: auto;">
+        </a>
         <x-landing.call>
         </x-landing.call>
 
@@ -25,17 +23,21 @@
         <div id="equipo"></div>
         <x-landing.team>
             <x-slot name="img">
-                fotos-01.jpg|fotos-02.jpg|fotos-03.jpg|fotos-04.jpg|fotos-05.jpg|fotos-06.jpg|fotos-07.jpg|fotos-08.jpg
+                fotos-01.jpg|fotos-02.jpg|fotos-03.jpg|fotos-04.jpg|fotos-05.jpg|fotos-06.jpg|fotos-08.jpg
             </x-slot>
             <x-slot name="texts">
-                Alonso Niklischeck|Camila Valentini|Matias Rebolledo|Jaime Pantoja|Cesar Moya|Melissa Ross|Rocio Nuche|Cristóbal Ugarte
+                Alonso Niklischeck|Camila Valentini|Matias Rebolledo|Jaime Pantoja|Cesar Moya|Melissa Ross|Cristóbal Ugarte
             </x-slot>
             <x-slot name="team">
+<<<<<<< HEAD
 <<<<<<< HEAD
                 Kinesiologo|Kinesiologo|Entrenador|Kinesiologa|Kinesiologa|Nutricionista|Medico del Deporte|Desarrollador
 =======
                 Director Clinico|Kinesiologa|Entrenador|Kinesiologo|Kinesiologo|Nutricionista|Desarrollador
 >>>>>>> 1d45687 (update)
+=======
+                Director Clinico|Kinesiologa|Entrenador|Kinesiologo|Kinesiologo|Nutricionista|Desarrollador
+>>>>>>> dd636e636b86f86792a868452ce668bbd5647436
             </x-slot>
         </x-landing.team>
 
@@ -63,7 +65,7 @@
         <x-landing.reviews>
         </x-landing.reviews>
 
-{{--         <x-landing.instagram>
+      {{--   <x-landing.instagram>
         </x-landing.instagram> --}}
 
         <x-slot name="script">

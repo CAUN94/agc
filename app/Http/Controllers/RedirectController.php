@@ -220,6 +220,11 @@ class RedirectController extends Controller {
 		return Redirect::away($url);
 	}
 
+	public function trailwomen(){
+		$url = "https://docs.google.com/forms/d/e/1FAIpQLSefo6oAHhD-UutTWb-95E4PUGmrR56bBRosZShO_SFr5b4_5g/viewform";
+		return Redirect::away($url);
+	}
+
 	public function academia(){
 		$url = "https://you-just-better-programs.teachable.com/courses";
 		return Redirect::away($url);
@@ -229,5 +234,7 @@ class RedirectController extends Controller {
 		$url = "https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento";
 		return Redirect::away($url);
 	}
+
+
 
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Helpers\Helper;
 use Carbon\Carbon;
+use Session as FlashSession;
 
 class LandingController extends Controller
 {
@@ -168,6 +169,24 @@ class LandingController extends Controller
     public function nutrition(){
         $user = Auth::user();
         return view('users.nutrition',compact('user'));
+    }
+
+    public function packverano()
+    {
+        return view('packverano');
+    }
+
+    public function mailverano(Request $request)
+    {
+        $details = [
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'pack' => $request->pack,
+         ];
+        \Mail::to('cristobalugarte6@gmail.com')->send(new \App\Mail\PackVerano($details));
+
+        FlashSession::flash('primary', 'Inscripción Lista');
+        return redirect('/packverano');
     }
 
     public function tables()
