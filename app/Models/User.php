@@ -7,6 +7,7 @@ use App\Models\Alliance;
 use App\Models\AppointmentMl;
 use App\Models\Nutrition;
 use App\Models\Professional;
+use App\Models\Reception;
 use App\Models\Search;
 use App\Models\StravaUser;
 use App\Models\Student;
@@ -220,7 +221,6 @@ class User extends Authenticatable {
 
     }
 
-
 	public function isStudent() {
 		if ($this->Student()) {
 			return True;
@@ -234,6 +234,17 @@ class User extends Authenticatable {
 
 	public function isProfessional() {
 		if (is_null($this->Professional)) {
+			return False;
+		}
+		return True;
+	}
+
+	public function Reception() {
+		return $this->hasOne(Reception::class);
+	}
+
+	public function isReception() {
+		if (is_null($this->Reception)) {
 			return False;
 		}
 		return True;
@@ -262,7 +273,7 @@ class User extends Authenticatable {
 	}
 
 	public function hasIntranet(){
-		if($this->isAdmin() or $this->isProfessional() or $this->isTrainer()){
+		if($this->isAdmin() or $this->isProfessional() or $this->isTrainer() or $this->isReception()){
 			return true;
 		}
 		return false;

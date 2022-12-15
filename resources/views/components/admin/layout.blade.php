@@ -48,6 +48,7 @@
       <x-landing.admin-nav>
 
       </x-landing.admin-nav>
+
     </div>
     <div class="flex flex-col w-10/12 flex-shrink-1">
       <!-- This example requires Tailwind CSS v2.0+ -->

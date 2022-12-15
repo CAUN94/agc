@@ -58,6 +58,15 @@
 
   @endif
 
+  @if(Auth::user()->isReception())
+    <x-nav-dropdown>
+      <x-slot name="name"><i class="fas fa-calendar-alt"></i> Confirmaciones</x-slot>
+      <x-slot name="trigger">confirmations</x-slot>
+      <a class="py-1" href="/confirmations">Mañana</a>
+      {{-- <a class="my-1 py-1" href="/trainerbookappointment">Clases Reservadas</a> --}}
+    </x-nav-dropdown>
+  @endif
+
   <x-nav-dropdown>
     <x-slot name="name">Remuneración</x-slot>
     <x-slot name="trigger">encuestas</x-slot>
