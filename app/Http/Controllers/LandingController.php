@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Helpers\Helper;
+use Carbon\Carbon;
 
 class LandingController extends Controller
 {
@@ -20,6 +22,120 @@ class LandingController extends Controller
     public function packverano()
     {
         return view('packverano');
+    }
+
+    public function confirmations()
+    {
+        return view('confirmation');
+    }
+
+    public function confirmation($id)
+    {
+        $token = "WzpwZkzjncn1nyfvYx3VovEzTvpB2YSie4YPfvf1.8sggWtpBM3vzmAuE6aYAAmRYiAwxbXNIaM16oJ30";
+        $client = new \GuzzleHttp\Client();
+
+        $url = 'https://api.medilink.healthatom.com/api/v1/citas/'.$id;
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $token
+            ]
+        ]);
+
+        $appointment = json_decode($response->getBody())->data;
+        $id_atencion = $appointment->id_atencion;
+        $client = new \GuzzleHttp\Client();
+        $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/'.$id_atencion;
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $token
+            ]
+        ]);
+
+        $atention = json_decode($response->getBody())->data;
+
+        $id_paciente = $appointment->id_paciente;
+        $url = 'https://api.medilink.healthatom.com/api/v1/pacientes/'.$id_paciente;
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $token
+            ]
+        ]);
+
+        $patient = json_decode($response->getBody())->data;
+
+        // ddd($appointment);
+        // ddd($atention);
+        // ddd($patient);
+        // return view('confirmation');
+    }
+
+    public function sendconfirmation($id)
+    {
+        $url = "https://web.whatsapp.com/send?phone=56976693894&text=Hola%20".$id;
+        $token = "WzpwZkzjncn1nyfvYx3VovEzTvpB2YSie4YPfvf1.8sggWtpBM3vzmAuE6aYAAmRYiAwxbXNIaM16oJ30";
+        $client = new \GuzzleHttp\Client();
+
+        $url = 'https://api.medilink.healthatom.com/api/v1/citas/'.$id;
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $token
+            ]
+        ]);
+
+        $appointment = json_decode($response->getBody())->data;
+        $id_atencion = $appointment->id_atencion;
+        $client = new \GuzzleHttp\Client();
+        $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/'.$id_atencion;
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $token
+            ]
+        ]);
+
+        $atention = json_decode($response->getBody())->data;
+
+        $id_paciente = $appointment->id_paciente;
+        $url = 'https://api.medilink.healthatom.com/api/v1/pacientes/'.$id_paciente;
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $token
+            ]
+        ]);
+
+        $patient = json_decode($response->getBody())->data;
+        // ddd($appointment);
+        // ddd($atention);
+        // ddd($patient);
+
+        $hora = Carbon::parse($appointment->hora_inicio)->format('H:i');
+        $phone = str_replace(' ','',$patient->celular);
+        $phone = "569".substr($phone, strlen($phone) -8);
+        $text = 'Hola '.$patient->nombre.'! Te recordamos que tienes atención el lunes con '.$atention->nombre_profesional.' a las '.$hora.' hrs.';
+        $text .= '-- *Favor confirmar tu asistencia respondiendo este mensaje*';
+        if($atention->total!=0){
+            $text .= '--Te recordamos que puedes pagar tu atención en el siguiente link http://yjb.cl/pago. El monto a pagar es de '.Helper::moneda_chilena($atention->total);
+        }
+
+        if ($atention->nombre_profesional == "Melissa Ross Guerra"){
+            $text .= '--Traer short y/o peto';
+        }
+        else {
+            $text .= '--Trae ropa cómoda';
+        }
+
+        $text .= ', estamos en San pascual 736, Las Condes. Contamos con estacionamiento afuera del local.';
+        $text .= '--Puedes revisar nuestros terminos y condiciones de agendamiento en www.yjb.cl/terms';
+
+        $text = str_replace('--','%0A%0A',$text);
+        $whatsapp = "https://web.whatsapp.com/send?phone=".$phone."&text=".$text;
+
+        return \Redirect::away($whatsapp);
     }
 
     public function terms()
@@ -53,8 +169,6 @@ class LandingController extends Controller
         $user = Auth::user();
         return view('users.nutrition',compact('user'));
     }
-
-
 
     public function tables()
     {

@@ -12,7 +12,7 @@
 	$item = new MercadoPago\Item();
 	$item->id = $appointmentMl->id;
 	$item->title = 'Pago You Just Better';
-	$item->description = 'Hora con '.$appointmentMl->Profesional;
+	$item->description = 'Pago You Just Better';
 	$item->quantity = 1;
 	$item->unit_price = $appointmentMl->treatments()->totalPay();
 

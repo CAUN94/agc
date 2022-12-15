@@ -21,4 +21,8 @@ class MercadoPagoController extends Controller
         $appointmentMl = AppointmentMl::where('Tratamiento_Nr',$id)->first();
         return view('mercadopago.pay',compact('appointmentMl'));
     }
+
+    public function personalizepay(){
+        return view('mercadopago.personalizepay');
+    }
 }

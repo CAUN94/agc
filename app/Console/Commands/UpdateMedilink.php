@@ -70,6 +70,7 @@ class UpdateMedilink extends Command
             $last = strval(Carbon::now()->addmonth()->format('Y-m-d'));
             $url = $url."%5Bfecha_inicio%5D%5Bstatus%5D=activated&filters%5Bfecha_inicio%5D%5Bvalue%5D=".$first."&filters%5Bfecha_fin%5D%5Bstatus%5D=activated&filters%5Bfecha_fin%5D%5Bvalue%5D=".$last."";
         }
+
         $crawler = $client->request('GET', $url);
         $array = $crawler->text();
         $array = substr($array,2,-2);
