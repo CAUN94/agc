@@ -57,6 +57,8 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::resource('users', 'App\Http\Controllers\UsersController')->middleware(['auth']);
     Route::get('/calendar', [LandingController::class, 'calendar'])->middleware(['auth']);
     Route::get('/healthy', [LandingController::class, 'healthy'])->middleware(['auth']);
+    Route::get('/packverano', [LandingController::class, 'packverano']);
+    Route::post('/mailverano', [LandingController::class, 'mailverano']);
     Route::get('/nutrition', [LandingController::class, 'nutrition'])->middleware(['auth']);
     Route::get('/calendar/store/{id}', [CalendarController::class, 'store'])->middleware(['auth']);
 
@@ -158,6 +160,7 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/viarunning', 'App\Http\Controllers\RedirectController@viarunning');
     Route::get('/academia', 'App\Http\Controllers\RedirectController@academia');
     Route::get('/endurance', 'App\Http\Controllers\RedirectController@endurance');
+    Route::get('/trailwomen', 'App\Http\Controllers\RedirectController@trailwomen');
     Route::get('/agendate', 'App\Http\Controllers\RedirectController@agendate');
 
     Route::get('/box/dcontrerasb', 'App\Http\Controllers\RedirectController@contreras');

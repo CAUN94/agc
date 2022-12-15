@@ -30,7 +30,6 @@
 					<div class="w-auto text-center">
 						<span class="uppercase items-center text-2xl font-bold">¡Inscríbete y participa!</span>
 					</div>
-<<<<<<< HEAD
 					<div class="mx-3">
 						<div class="mt-4">
 		                <x-input id="name" class="block mt-1 w-full mx-auto"
@@ -49,7 +48,6 @@
 		                                type="text"
 		                                name="phone"
 		                                placeholder="Pack que te interesa"/>
-=======
 						<div class="mx-3">
 							<div class="mt-4">
 			                <x-input id="name" class="block mt-1 w-full mx-auto"
@@ -69,8 +67,6 @@
 			                  <option value="Pack Completo" {{old("pack") == 'Pack Completo'  ? 'selected' : ''}}>Pack Completo</option>
 			              </select>
 			           		</div>
-
->>>>>>> 9ad87a4 (pack verano)
 		           		</div>
 	           		</div>
            		</div>
