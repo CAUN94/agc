@@ -21,6 +21,8 @@ Route::get('/gcalendar_delete', [CalendarController::class, 'superdelete']);
 // Route::get('/google', [CalendarController::class, 'google']);
 Route::get('/apimedilink', [AdminMedilinkController::class, 'index']);
 Route::get('/apimedilink/profesionales', [AdminMedilinkController::class, 'profesionales']);
+Route::get('/apimedilink/profesionales/{id}', [AdminMedilinkController::class, 'profesional']);
+Route::get('/apimedilink/profesionales/{id}/appointments', [AdminMedilinkController::class, 'profesional_appointment']);
 Route::get('/apimedilink/sucursales', [AdminMedilinkController::class, 'sucursales']);
 Route::get('/apimedilink/citas', [AdminMedilinkController::class, 'citas']);
 Route::get('/apimedilink/convenios', [AdminMedilinkController::class, 'convenios']);

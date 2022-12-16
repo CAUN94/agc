@@ -21,14 +21,61 @@ class AdminMedilinkController extends Controller
 
     public function profesionales() {
         $client = new \GuzzleHttp\Client();
-        $url    = 'https://api.medilink.healthatom.com/api/v1/profesionales';
+        $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/';
 
         $response = $client->request('GET', $url, [
             'headers'  => [
                 'Authorization' => 'Token ' . $this->token
             ]
         ]);
-        echo $response->getBody()->getContents();
+
+        echo $response->getBody();
+    }
+
+    public function profesional($id) {
+        $client = new \GuzzleHttp\Client();
+        $id_profesional = 2;
+        $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/'.$id;
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $this->token
+            ]
+        ]);
+
+        echo $response->getBody();
+    }
+
+    public function profesional_appointment($id) {
+        $client = new \GuzzleHttp\Client();
+        $id_profesional = 2;
+        $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/'.$id.'/citas?q={"fecha":{"gte":"2022-11-01"}}&sort=fecha:desc';
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $this->token
+            ]
+        ]);
+
+        $body = json_decode($response->getBody());
+        $appointments = [];
+        foreach($body->data as $data){
+            $appointments[] = $data;
+        }
+
+        while(isset($body->links->next)){
+            $url = $body->links->next;
+            $response = $client->request('GET', $url, [
+                'headers'  => [
+                    'Authorization' => 'Token ' . $this->token
+                ]
+            ]);
+            $body = json_decode($response->getBody());
+            foreach($body->data as $data){
+                $appointments[] = $data;
+            }
+        }
+        return $appointments;
     }
 
     public function sucursales() {
@@ -172,6 +219,8 @@ class AdminMedilinkController extends Controller
 
         echo $response->getBody();
     }
+
+
 
 
 }
