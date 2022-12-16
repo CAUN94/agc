@@ -15,7 +15,7 @@
                         <td>{{$appointment->nombre_paciente}}</td>
                         <td>{{$appointment->estado_cita}}</td>
                         <td>{{\Carbon\Carbon::parse($appointment->hora_inicio)->format('H:i')}}</td>
-                        <td><a class="text-primary-500 hover:text-primary-900" href="/confirmation/{{$appointment->id}}" target="_blank">Enviar</a></td>
+                        <td><a class="text-primary-500 hover:text-primary-900" href="/confirmation/{{$appointment->id}}" target="_blank" onclick="myFunction(this)">Enviar</a></td>
                     </tr>
                 @endforeach
             </tbody>
@@ -30,3 +30,9 @@
         </button> --}}
     </div>
 </div>
+<script type="text/javascript">
+    function myFunction(obj) {
+        console.log(obj)
+        obj.parentElement.parentElement.classList.add('bg-gray-300')
+    }
+</script>
