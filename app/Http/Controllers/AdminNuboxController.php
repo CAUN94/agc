@@ -152,11 +152,11 @@ class AdminNuboxController extends Controller
               "rutContraparte": "18783405-8",
               "razonSocialContraparte": "venta23",
               "giroContraparte": "venta23",
-              "tipo": 34,
-              "folio": 478,
+              "tipo": 33,
+              "folio": 1,
               "secuencia": 1,
               "fecha": "2022-09-14",
-              "afecto": "NO",
+              "afecto": "SI",
               "producto": "producto de ejemplo",
               "descripcion": null,
               "cantidad": 1,
@@ -165,7 +165,7 @@ class AdminNuboxController extends Controller
               "precio": 70000,
               "valor": 70000,
               "ponderacionDescuento": 0,
-              "emailContraparte": "cristobalugarte6@gmail.com",
+              "emailContraparte": "mail@ejemplo.com",
               "tipoDeServicio": "",
               "fechaPeriodoDesde": "2022-09-14",
               "fechaPeriodoHasta": "2022-09-14",
@@ -204,9 +204,9 @@ class AdminNuboxController extends Controller
           ],
           "documentoReferenciado": {
             "tipo": 0,
-            "folio": 478,
+            "folio": 1,
             "secuencia": 0,
-            "tipoDocumentoReferenciado": 34,
+            "tipoDocumentoReferenciado": 0,
             "folioDocumentoReferenciado": 34,
             "fechaDocumentoReferenciado": "2022-09-14T00:00:00.8751996-04:00",
             "motivoReferencia": 0,
@@ -222,7 +222,7 @@ class AdminNuboxController extends Controller
       $response = curl_exec($curl);
 
       curl_close($curl);
-      return json_decode($response);
+      echo $response;
     }
 
     public function cliente(){
