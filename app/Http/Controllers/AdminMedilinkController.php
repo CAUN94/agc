@@ -79,9 +79,6 @@ class AdminMedilinkController extends Controller
                 $pays[] = $pay->data;
                 // $total += $pay->data->total;
                 foreach($pay->data as $data){
-                    if($data->total == 0){
-                         ddd($data);
-                    }
                     $total += $data->total;
                 }
 
