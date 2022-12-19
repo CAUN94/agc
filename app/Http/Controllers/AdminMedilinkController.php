@@ -79,7 +79,23 @@ class AdminMedilinkController extends Controller
                 $pays[] = $pay->data;
                 // $total += $pay->data->total;
                 foreach($pay->data as $data){
-                    $total += $data->total;
+                    if($data->total == 0){
+                        $client = new \GuzzleHttp\Client();
+
+                        $url = 'https://api.medilink.healthatom.com/api/v1/prestaciones/'.$data->id_prestacion;
+                        $response = $client->request('GET', $url, [
+                            'headers'  => [
+                                'Authorization' => 'Token ' . $this->token
+                            ]
+                        ]);
+
+                        $prestacion = json_decode($response->getBody())->data;
+                        $total += $prestacion->precio;
+
+                    } else {
+                        $total += $data->total;
+                    }
+
                 }
 
             }
@@ -94,6 +110,7 @@ class AdminMedilinkController extends Controller
             ]);
             $body = json_decode($response->getBody());
         }
+        return $total;
         return $pays;
     }
 
