@@ -29,6 +29,8 @@ Route::get('/apimedilink/convenios', [AdminMedilinkController::class, 'convenios
 Route::get('/apimedilink/convenios/{cursor}', [AdminMedilinkController::class, 'convenios_cursor']);
 Route::get('/apimedilink/tratamientos', [AdminMedilinkController::class, 'tratamientos']);
 Route::get('/apimedilink/atenciones', [AdminMedilinkController::class, 'atenciones']);
+Route::get('/apimedilink/prestaciones', [AdminMedilinkController::class, 'prestaciones']);
+Route::get('/apimedilink/prestaciones/{id}', [AdminMedilinkController::class, 'prestacion']);
 
 Route::get('/nubox/auth', [ AdminNuboxController::class, 'auth']);
 Route::get('/nubox/comprobante', [ AdminNuboxController::class, 'comprobante']);

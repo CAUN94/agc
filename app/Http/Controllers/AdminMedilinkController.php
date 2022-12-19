@@ -48,8 +48,7 @@ class AdminMedilinkController extends Controller
 
     public function profesional_appointment($id) {
         $client = new \GuzzleHttp\Client();
-        $id_profesional = 2;
-        $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/'.$id.'/citas?q={"fecha":{"gte":"2022-11-01"}}&sort=fecha:desc';
+        $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/'.$id.'/citas?q={"fecha":{"gt":"2022-10-20"},"estado_cita":{"eq":"Atendido"}}&sort=fecha:desc';
 
         $response = $client->request('GET', $url, [
             'headers'  => [
@@ -59,11 +58,37 @@ class AdminMedilinkController extends Controller
 
         $body = json_decode($response->getBody());
         $appointments = [];
-        foreach($body->data as $data){
-            $appointments[] = $data;
-        }
+        $pays = [];
+        $total = 0;
+        while(True){
+            foreach($body->data as $data){
+                if($data->fecha >= '2022-11-20'){
+                    continue;
+                }
+                $id_atencion = $data->id_atencion;
+                $client = new \GuzzleHttp\Client();
+                $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/'.$id_atencion.'/detalles';
 
-        while(isset($body->links->next)){
+                $response = $client->request('GET', $url, [
+                    'headers'  => [
+                        'Authorization' => 'Token ' . $this->token
+                    ]
+                ]);
+                $pay = json_decode($response->getBody());
+                $appointments[] = $data;
+                $pays[] = $pay->data;
+                // $total += $pay->data->total;
+                foreach($pay->data as $data){
+                    if($data->total == 0){
+                         ddd($data);
+                    }
+                    $total += $data->total;
+                }
+
+            }
+            if(!isset($body->links->next)){
+                break;
+            }
             $url = $body->links->next;
             $response = $client->request('GET', $url, [
                 'headers'  => [
@@ -71,11 +96,8 @@ class AdminMedilinkController extends Controller
                 ]
             ]);
             $body = json_decode($response->getBody());
-            foreach($body->data as $data){
-                $appointments[] = $data;
-            }
         }
-        return $appointments;
+        return $pays;
     }
 
     public function sucursales() {
@@ -211,6 +233,32 @@ class AdminMedilinkController extends Controller
         $client = new \GuzzleHttp\Client();
         $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/';
 
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $this->token
+            ]
+        ]);
+
+        echo $response->getBody();
+    }
+
+    public function prestaciones() {
+        $client = new \GuzzleHttp\Client();
+
+        $url    = 'https://api.medilink.healthatom.com/api/v1/prestaciones/';
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $this->token
+            ]
+        ]);
+
+        echo $response->getBody();
+    }
+
+    public function prestacion($id) {
+        $client = new \GuzzleHttp\Client();
+
+        $url = 'https://api.medilink.healthatom.com/api/v1/prestaciones/'.$id;
         $response = $client->request('GET', $url, [
             'headers'  => [
                 'Authorization' => 'Token ' . $this->token
