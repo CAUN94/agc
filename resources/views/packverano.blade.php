@@ -48,6 +48,25 @@
 		                                type="text"
 		                                name="phone"
 		                                placeholder="Pack que te interesa"/>
+						<div class="mx-3">
+							<div class="mt-4">
+			                <x-input id="name" class="block mt-1 w-full mx-auto"
+			                                type="text"
+			                                name="name"
+			                                placeholder="Nombre Completo"/>
+			           		</div>
+			           		<div class="mt-4">
+			           		<x-input id="phone" class="block mt-1 w-full mx-auto"
+			                                type="text"
+			                                name="phone"
+			                                placeholder="Telefono (+56 9 7****)"/>
+			           		</div>
+			           		<div class="mt-4">
+			           		<select id="pack" name="pack" class="form-select block w-full mt-1 rounded-md shadow-sm border-gray-300 focus:border-primary-100 focus:ring focus:ring-primary-100 focus:ring-opacity-50">
+			                  <option value="Pack Nutrición" {{old("pack") == 'Pack Nutrición'  ? 'selected' : ''}}>Pack Nutrición</option>
+			                  <option value="Pack Completo" {{old("pack") == 'Pack Completo'  ? 'selected' : ''}}>Pack Completo</option>
+			              </select>
+			           		</div>
 		           		</div>
 	           		</div>
            		</div>

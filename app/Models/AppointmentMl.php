@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class AppointmentMl extends Model
 {
@@ -44,6 +45,13 @@ class AppointmentMl extends Model
         $this->attributes['Celular'] = "+569".substr(preg_replace('/[^0-9]+/', '', $value),-8);
     }
 
+    public function dayhour(){
+        $day = \Carbon\Carbon::parse($this->Fecha)->format('Y-m-d');
+        $hour = \Carbon\Carbon::parse($this->Hora_inicio)->format('H:i');
+
+        return $day." ".$hour;
+    }
+
     public function actions(){
         return $this->hasMany(ActionMl::class,'Tratamiento_Nr','Tratamiento_Nr');
     }
@@ -57,7 +65,7 @@ class AppointmentMl extends Model
     }
 
     public static function nextProfessional($professional){
-        return AppointmentMl::where('Fecha','>=',\Carbon\Carbon::now()->startOfDay()->format('Y-m-d'))
+        return AppointmentMl::where('Fecha','>=',\Carbon\Carbon::yesterday()->startOfDay()->format('Y-m-d'))
             ->where('Profesional',$professional)
             ->where('professional_calendar','like',0)
             ->whereNotIn('Estado',['Cambio de fecha','Anulado'])
