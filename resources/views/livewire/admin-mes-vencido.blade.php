@@ -2,8 +2,7 @@
     <div class="w-full overflow-x-auto gap-y-2 box-white p-3">
         <div class="mb-2 w-full flex justify-between font-bold text-gray-600">
             Periodo del {{$expiredstartOfMonth->format('d-m')}} al {{$expiredendOfMonth->format('d-m')}}
-        </div>
-        <div>
+        </div>        <div>
           @foreach(App\Models\Professional::where('user_id','=',Auth::user()->id)->get() as $professional)
               <ul class="grid grid-cols-3 gap-1">
                   <li>

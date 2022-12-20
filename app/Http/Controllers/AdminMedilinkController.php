@@ -60,8 +60,13 @@ class AdminMedilinkController extends Controller
         $appointments = [];
         $pays = [];
         $total = 0;
+        // $i = 0;
         while(True){
             foreach($body->data as $data){
+                // $i++;
+                // if($i >= 60){
+                //     break;
+                // }
                 if($data->fecha >= '2022-11-20'){
                     continue;
                 }
@@ -75,8 +80,7 @@ class AdminMedilinkController extends Controller
                     ]
                 ]);
                 $pay = json_decode($response->getBody());
-                $appointments[] = $data;
-                $pays[] = $pay->data;
+                $pays[] = [$data, $pay->data];
                 // $total += $pay->data->total;
                 foreach($pay->data as $data){
                     if($data->total == 0){
@@ -110,8 +114,9 @@ class AdminMedilinkController extends Controller
             ]);
             $body = json_decode($response->getBody());
         }
-        return $total;
-        return $pays;
+        // return $total;
+        // return $pays;
+        return view('remunerations.show',compact('total','pays'));
     }
 
     public function sucursales() {
