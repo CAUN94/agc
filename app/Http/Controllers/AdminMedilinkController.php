@@ -67,6 +67,7 @@ class AdminMedilinkController extends Controller
                 // if($i >= 60){
                 //     break;
                 // }
+                sleep(1);
                 if($data->fecha >= '2022-11-20'){
                     continue;
                 }
