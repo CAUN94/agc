@@ -1,15 +1,17 @@
 <x-admin.layout>
 	<div class="bg-white  p-4">
 		<h1 class="text-3xl font-bold text-gray-600">
-	       	Mes Vencido
+	       	Mes Vencido del 2022-11-21 al 2022-12-20
 	    </h1>
+	    <p>{{$pays[0][0]->nombre_profesional}}</p>
 	</div>
 	<div class="container mx-auto mt-4 px-4">
 		<div>
 		    <div class="w-full overflow-x-auto gap-y-2 box-white p-3">
 		        <div class="mb-2 w-full flex justify-between font-bold text-gray-600">
-		            Periodo del <br>
-		            {{$total}}
+		            Total {{\App\Helpers\Helper::moneda_chilena($total)}} <br>
+		            Cantidad: {{count($pays)}}
+		            Remuneración 0
 		        </div>
 		    </div>
 
@@ -30,6 +32,7 @@
 					            <th class="text-center">Hora</th>
 					            <th class="text-center">Pagado</th>
 					            <th class="text-center">Total</th>
+					            <th class="text-center">Remuneración</th>
 					        </tr>
 					    </thead>
 					    <tbody>
@@ -48,8 +51,9 @@
 					            <td>{{$pay[0]->estado_cita}}</td>
 					            <td>{{$pay[0]->fecha}}</td>
 					            <td>{{$pay[0]->hora_inicio}}</td>
-					            <td>{{$total_p}}</td>
-					            <td>{{$total_a}}</td>
+					            <td>{{\App\Helpers\Helper::moneda_chilena($total_p)}}</td>
+					            <td>{{\App\Helpers\Helper::moneda_chilena($total_a)}}</td>
+					            <td>{{\App\Helpers\Helper::moneda_chilena(0)}}</td>
 					        </tr>
 					        @endforeach
 					    </tbody>
@@ -60,7 +64,6 @@
 		      <div class="w-full lg:w-1/4 flex flex-col overflow-x-auto gap-y-2">
 		        <div class="w-full overflow-x-auto gap-y-2 box-white p-3 mt-3">
 		          <div class="w-full font-medium flex justify-between ml-3">Información Adicional</div>
-
 		        </div>
 		      </div>
 		    </div>
