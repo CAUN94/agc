@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AppointmentMl;
+use App\Models\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +49,18 @@ class AdminMedilinkController extends Controller
     }
 
     public function profesional_appointment($id) {
+
+        $client = new \GuzzleHttp\Client();
+        $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/'.$id;
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $this->token
+            ]
+        ]);
+
+        $rut = json_decode($response->getBody())->data->rut;
+        $coff = User::where('rut',$rut)->first()->professional->coff/100;
+
         $client = new \GuzzleHttp\Client();
         $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/'.$id.'/citas?q={"fecha":{"gt":"2022-11-20"},"estado_cita":{"eq":"Atendido"}}&sort=fecha:desc';
 
@@ -60,7 +73,7 @@ class AdminMedilinkController extends Controller
         $body = json_decode($response->getBody());
         $appointments = [];
         $pays = [];
-        $total = 0;
+        $total_final = 0;
         // $i = 0;
         while(True){
             foreach($body->data as $data){
@@ -83,6 +96,7 @@ class AdminMedilinkController extends Controller
                 ]);
                 $pay = json_decode($response->getBody());
                 // $total += $pay->data->total;
+                $total = 0;
                 foreach($pay->data as $i => $data_pay){
                     if($data_pay->total === 0 and isset($data_pay->total)){
                         $client = new \GuzzleHttp\Client();
@@ -96,14 +110,13 @@ class AdminMedilinkController extends Controller
                         $prestacion = json_decode($response->getBody())->data;
                         $total += $prestacion->precio;
                         $pay->data[$i]->total = $prestacion->precio;
-                        $pays[] = [$data, $pay->data];
                     } else {
                         $total += $data_pay->total;
-                        $pays[] = [$data, $pay->data];
                     }
 
                 }
-
+                $total_final += $total;
+                $pays[] = [$data, $pay->data,$total];
                 // $pays[] = [$data, $pay->data];
 
             }
@@ -120,7 +133,8 @@ class AdminMedilinkController extends Controller
         }
         // return $total;
         // return $pays;
-        return view('remunerations.index',compact('total','pays'));
+        // $coff = User::find(7780)->professional->coff;
+        return view('remunerations.index',compact('total_final','pays','coff'));
     }
 
     public function remuneration() {

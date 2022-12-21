@@ -9,9 +9,9 @@
 		<div>
 		    <div class="w-full overflow-x-auto gap-y-2 box-white p-3">
 		        <div class="mb-2 w-full flex justify-between font-bold text-gray-600">
-		            Total {{\App\Helpers\Helper::moneda_chilena($total)}} <br>
-		            Cantidad: {{count($pays)}}
-		            Remuneración 0
+		            Total {{\App\Helpers\Helper::moneda_chilena($total_final)}} <br>
+		            Cantidad: {{count($pays)}} <br>
+		            Remuneración {{\App\Helpers\Helper::moneda_chilena($total_final*$coff)}}
 		        </div>
 		    </div>
 
@@ -53,7 +53,7 @@
 					            <td>{{$pay[0]->hora_inicio}}</td>
 					            <td>{{\App\Helpers\Helper::moneda_chilena($total_p)}}</td>
 					            <td>{{\App\Helpers\Helper::moneda_chilena($total_a)}}</td>
-					            <td>{{\App\Helpers\Helper::moneda_chilena(0)}}</td>
+					            <td>{{\App\Helpers\Helper::moneda_chilena($total_a*$coff)}}</td>
 					        </tr>
 					        @endforeach
 					    </tbody>
