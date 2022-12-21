@@ -51,9 +51,9 @@
 					            <td>{{$pay[0]->estado_cita}}</td>
 					            <td>{{$pay[0]->fecha}}</td>
 					            <td>{{$pay[0]->hora_inicio}}</td>
-					            <td>{{\App\Helpers\Helper::moneda_chilena($total_p)}}</td>
-					            <td>{{\App\Helpers\Helper::moneda_chilena($total_a)}}</td>
-					            <td>{{\App\Helpers\Helper::moneda_chilena($total_a*$coff)}}</td>
+					            <td>{{\App\Helpers\Helper::moneda_chilena(round($total_p))}}</td>
+					            <td>{{\App\Helpers\Helper::moneda_chilena(round($total_a))}}</td>
+					            <td>{{\App\Helpers\Helper::moneda_chilena(round($total_a*$coff))}}</td>
 					        </tr>
 					        @endforeach
 					    </tbody>
