@@ -9,8 +9,9 @@
 		<div>
 		    <div class="w-full overflow-x-auto gap-y-2 box-white p-3">
 		        <div class="mb-2 w-full flex justify-between font-bold text-gray-600">
-		            Total {{\App\Helpers\Helper::moneda_chilena(round($total_final*(Auth::user()->professional->coff/100)))}} <br>
-		            Cantidad de atenciones: {{count($pays)}}
+		            Total {{\App\Helpers\Helper::moneda_chilena($total)}} <br>
+		            Cantidad: {{count($pays)}}
+		            Remuneración 0
 		        </div>
 		    </div>
 
@@ -29,19 +30,30 @@
 					            <th class="text-center">Estado</th>
 					            <th class="text-center">Fecha</th>
 					            <th class="text-center">Hora</th>
+					            <th class="text-center">Pagado</th>
+					            <th class="text-center">Total</th>
 					            <th class="text-center">Remuneración</th>
 					        </tr>
 					    </thead>
 					    <tbody>
 					    	@foreach($pays as $pay)
-
+					    	@php
+				            	$total_p = 0;
+				            	$total_a = 0;
+				            	foreach($pay[1] as $t){
+				            		$total_p = $t->pagado;
+				            		$total_a = $t->total;
+				            	}
+					        @endphp
 					        <tr>
 					            <td>{{$pay[0]->id}}</td>
 					            <td>{{$pay[0]->nombre_paciente}}</td>
 					            <td>{{$pay[0]->estado_cita}}</td>
 					            <td>{{$pay[0]->fecha}}</td>
 					            <td>{{$pay[0]->hora_inicio}}</td>
-					            <td>{{\App\Helpers\Helper::moneda_chilena(round($pay[2]*(Auth::user()->professional->coff/100)))}}</td>
+					            <td>{{\App\Helpers\Helper::moneda_chilena($total_p)}}</td>
+					            <td>{{\App\Helpers\Helper::moneda_chilena($total_a)}}</td>
+					            <td>{{\App\Helpers\Helper::moneda_chilena(0)}}</td>
 					        </tr>
 					        @endforeach
 					    </tbody>
