@@ -11,7 +11,7 @@
 		        <div class="mb-2 w-full flex justify-between font-bold text-gray-600">
 		            Total {{\App\Helpers\Helper::moneda_chilena($total_final)}} <br>
 		            Cantidad: {{count($pays)}} <br>
-		            Remuneración {{\App\Helpers\Helper::moneda_chilena($total_final*$coff)}}
+		            Remuneración {{\App\Helpers\Helper::moneda_chilena(round($total_final*$coff))}}
 		        </div>
 		    </div>
 
