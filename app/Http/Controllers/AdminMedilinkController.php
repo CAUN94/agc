@@ -76,13 +76,13 @@ class AdminMedilinkController extends Controller
         $total_final = 0;
         // $i = 0;
         while(True){
-            foreach($body->data as $data){
+            foreach($body->data as $j => $data){
                 // $i++;
                 // if($i >= 60){
                 //     break;
                 // }
                 sleep(0.3);
-                if($data->fecha >= '2022-12-20'){
+                if($data->fecha > '2022-12-20'){
                     continue;
                 }
                 $id_atencion = $data->id_atencion;
@@ -98,7 +98,7 @@ class AdminMedilinkController extends Controller
                 // $total += $pay->data->total;
                 $total = 0;
                 foreach($pay->data as $i => $data_pay){
-                    if($data_pay->total === 0 and isset($data_pay->total)){
+                    if($data_pay->total === 0 or !isset($data_pay->total)){
                         $client = new \GuzzleHttp\Client();
 
                         $url = 'https://api.medilink.healthatom.com/api/v1/prestaciones/'.$data_pay->id_prestacion;
@@ -108,15 +108,27 @@ class AdminMedilinkController extends Controller
                             ]
                         ]);
                         $prestacion = json_decode($response->getBody())->data;
-                        $total += $prestacion->precio;
-                        $pay->data[$i]->total = $prestacion->precio;
+                        // ddd($data_pay);
+                        $total += $data_pay->subtotal;
+                        $pay->data[$i]->total = $data_pay->subtotal;
+
+
                     } else {
                         $total += $data_pay->total;
                     }
 
                 }
+                if(count($pay->data) == 0){
+                    $total += 23990;
+                    $pay = ['pagado' => 0, 'total' => 23990];
+                    $pay = (object)$pay;
+                    $pay = [$pay];
+                } else {
+                    $pay = $pay->data;
+                }
+
                 $total_final += $total;
-                $pays[] = [$data, $pay->data,$total];
+                $pays[] = [$data, $pay,$total];
                 // $pays[] = [$data, $pay->data];
 
             }
@@ -133,7 +145,6 @@ class AdminMedilinkController extends Controller
         }
         // return $total;
         // return $pays;
-        // $coff = User::find(7780)->professional->coff;
         return view('remunerations.index',compact('total_final','pays','coff'));
     }
 
@@ -164,13 +175,13 @@ class AdminMedilinkController extends Controller
         $total_final = 0;
         // $i = 0;
         while(True){
-            foreach($body->data as $data){
+            foreach($body->data as $j => $data){
                 // $i++;
                 // if($i >= 60){
                 //     break;
                 // }
                 sleep(0.3);
-                if($data->fecha >= '2022-12-20'){
+                if($data->fecha > '2022-12-20'){
                     continue;
                 }
                 $id_atencion = $data->id_atencion;
@@ -186,7 +197,7 @@ class AdminMedilinkController extends Controller
                 // $total += $pay->data->total;
                 $total = 0;
                 foreach($pay->data as $i => $data_pay){
-                    if($data_pay->total === 0 and isset($data_pay->total)){
+                    if($data_pay->total === 0 or !isset($data_pay->total)){
                         $client = new \GuzzleHttp\Client();
 
                         $url = 'https://api.medilink.healthatom.com/api/v1/prestaciones/'.$data_pay->id_prestacion;
@@ -196,15 +207,27 @@ class AdminMedilinkController extends Controller
                             ]
                         ]);
                         $prestacion = json_decode($response->getBody())->data;
-                        $total += $prestacion->precio;
-                        $pay->data[$i]->total = $prestacion->precio;
+                        // ddd($data_pay);
+                        $total += $data_pay->subtotal;
+                        $pay->data[$i]->total = $data_pay->subtotal;
+
+
                     } else {
                         $total += $data_pay->total;
                     }
 
                 }
+                if(count($pay->data) == 0){
+                    $total += 23990;
+                    $pay = ['pagado' => 0, 'total' => 23990];
+                    $pay = (object)$pay;
+                    $pay = [$pay];
+                } else {
+                    $pay = $pay->data;
+                }
+
                 $total_final += $total;
-                $pays[] = [$data, $pay->data,$total];
+                $pays[] = [$data, $pay,$total];
                 // $pays[] = [$data, $pay->data];
 
             }
