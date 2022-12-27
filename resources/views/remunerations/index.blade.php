@@ -36,13 +36,15 @@
 					        </tr>
 					    </thead>
 					    <tbody>
+						
 					    	@foreach($pays as $pay)
 					    	@php
 				            	$total_p = 0;
 				            	$total_a = 0;
 				            	foreach($pay[1] as $t){
-				            		$total_p = $t->pagado;
-				            		$total_a = $t->total;
+				            		$total_p += $t->pagado;
+				            		$total_a += $t->subtotal;
+									
 				            	}
 					        @endphp
 					        <tr>
