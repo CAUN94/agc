@@ -43,7 +43,12 @@
 				            	$total_a = 0;
 				            	foreach($pay[1] as $t){
 				            		$total_p += $t->pagado;
-				            		$total_a += $t->subtotal;
+									if(isset($t->subtotal)){
+										$total_a += $t->subtotal;
+									} else {
+										$total_a += $t->total;
+									}
+				            		
 									
 				            	}
 					        @endphp
