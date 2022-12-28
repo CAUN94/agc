@@ -24,6 +24,8 @@
         "@headlessui/vue": "^1.4.1",
         "@heroicons/vue": "^1.0.4",
         "alpinejs": "^3.4.2",
+        "datatables.net": "^1.13.1",
+        "datatables.net-dt": "^1.13.1",
         "gulp": "^4.0.2"
     }
 }

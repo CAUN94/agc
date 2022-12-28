@@ -58,13 +58,25 @@
 
   @endif
 
-  <x-nav-dropdown>
-    <x-slot name="name">Remuneración</x-slot>
-    <x-slot name="trigger">encuestas</x-slot>
-    <a class="py-1" href="/mesActual">Mes Actual</a>
-    <a class="my-1 py-1" href="/mesVencido">Mes Vencido</a>
-    <a class="my-1 py-1" href="/historial">Historial</a>
-  </x-nav-dropdown>
+  @if(Auth::user()->isReception())
+    <x-nav-dropdown>
+      <x-slot name="name"><i class="fas fa-calendar-alt"></i> Confirmaciones</x-slot>
+      <x-slot name="trigger">confirmations</x-slot>
+      <a class="py-1" href="/confirmations">Mañana</a>
+      {{-- <a class="my-1 py-1" href="/trainerbookappointment">Clases Reservadas</a> --}}
+    </x-nav-dropdown>
+  @endif
+
+  @if(Auth::user()->isProfessional())
+    <x-nav-dropdown>
+      <x-slot name="name">Remuneración</x-slot>
+      <x-slot name="trigger">remuneracion</x-slot>
+      <a class="py-1" href="/apimedilink/profesional/remuneration">Mes Vencido</a>
+{{--       <a class="py-1" href="/mesActual">Mes Actual</a>
+      <a class="my-1 py-1" href="/mesVencido">Mes Vencido</a>
+      <a class="my-1 py-1" href="/historial">Historial</a> --}}
+    </x-nav-dropdown>
+  @endif
 
   @if(Auth::user()->isTrainer())
     <x-nav-dropdown>

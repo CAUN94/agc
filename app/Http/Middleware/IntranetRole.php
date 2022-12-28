@@ -21,6 +21,7 @@ class IntranetRole
         if (Auth::check() &&
             (Auth::user()->isProfessional() ||
             Auth::user()->isAdmin() ||
+            Auth::user()->isReception() ||
             Auth::user()->isTrainer())) {
              return $next($request);
         }

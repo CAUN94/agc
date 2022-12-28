@@ -18,6 +18,15 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script src="//code.jquery.com/jquery-1.12.3.js"></script>
+        <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+        <script
+            src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+{{--         <link rel="stylesheet"
+            href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> --}}
+        <link rel="stylesheet"
+            href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+
         @livewireStyles
         <style>
             [x-cloak] {
@@ -48,6 +57,7 @@
       <x-landing.admin-nav>
 
       </x-landing.admin-nav>
+
     </div>
     <div class="flex flex-col w-10/12 flex-shrink-1">
       <!-- This example requires Tailwind CSS v2.0+ -->

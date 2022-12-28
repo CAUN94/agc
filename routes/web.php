@@ -15,10 +15,14 @@ use App\Http\Middleware\UpdatePassword;
 |
  */
 
-Route::get('/gcalendar', [CalendarController::class, 'index']);
-Route::get('/gcalendar_massive', [CalendarController::class, 'superstore']);
-Route::get('/gcalendar_delete', [CalendarController::class, 'superdelete']);
+// Route::get('/gcalendar', [CalendarController::class, 'index']);
+// Route::get('/gcalendar_massive', [CalendarController::class, 'superstore']);
+// Route::get('/gcalendar_delete', [CalendarController::class, 'superdelete']);
 // Route::get('/google', [CalendarController::class, 'google']);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 70dbad92d19bf0180086b716e60c439bd32b6f4f
 
 Route::get('/nubox/auth', [ AdminNuboxController::class, 'auth']);
 Route::get('/nubox/comprobante', [ AdminNuboxController::class, 'comprobante']);
@@ -27,10 +31,15 @@ Route::get('/nubox/emit', [ AdminNuboxController::class, 'emit']);
 Route::get('/nubox/cliente', [ AdminNuboxController::class, 'cliente']);
 Route::get('/nubox/boleta', [ AdminNuboxController::class, 'boleta']);
 Route::get('/professionalshours', 'App\Http\Controllers\ScrapingController@professionalshours');
+<<<<<<< HEAD
+=======
+Route::get('/pago2', [MercadoPagoController::class, 'personalizepay']);
+Route::get('/pago2/{id}', [MercadoPagoController::class, 'pay']);
+// Route::get('/scraping-alta', [ScrapingController::class, 'alta']);
+>>>>>>> 70dbad92d19bf0180086b716e60c439bd32b6f4f
 
 Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/mercadopagosearch', [MercadoPagoController::class, 'index']);
-
     Route::get('/', [LandingController::class, 'welcome']);
     Route::get('/landing', [LandingController::class, 'welcome2']);
     Route::get('/kinesiología', [LandingController::class, 'about']);
@@ -100,6 +109,8 @@ Route::middleware([UpdatePassword::class])->group(function () {
     // TrainerAdmins
     Route::resource('trainertrainappointment', 'App\Http\Controllers\TrainerTrainController');
     Route::resource('trainerbookappointment', 'App\Http\Controllers\AdminBookAppointmentsController');
+
+
 
     // Scrap
 
@@ -182,6 +193,21 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/strava/auth', \App\Http\Controllers\StravaController::class .'@auth')->middleware(['auth']);
     Route::get('/strava/unauth', \App\Http\Controllers\StravaController::class .'@unauth')->middleware(['auth']);
     Route::get('/strava/callback', \App\Http\Controllers\StravaController::class .'@authCallback')->middleware(['auth']);
+
+    // ApiMedilink
+    Route::get('/apimedilink', [AdminMedilinkController::class, 'index']);
+    Route::get('/apimedilink/profesionales', [AdminMedilinkController::class, 'profesionales']);
+    Route::get('/apimedilink/profesionales/{id}', [AdminMedilinkController::class, 'profesional']);
+    Route::get('/apimedilink/profesionales/{id}/appointments', [AdminMedilinkController::class, 'profesional_appointment']);
+    Route::get('/apimedilink/profesional/remuneration', [AdminMedilinkController::class, 'remuneration']);
+    Route::get('/apimedilink/sucursales', [AdminMedilinkController::class, 'sucursales']);
+    Route::get('/apimedilink/citas', [AdminMedilinkController::class, 'citas']);
+    Route::get('/apimedilink/convenios', [AdminMedilinkController::class, 'convenios']);
+    Route::get('/apimedilink/convenios/{cursor}', [AdminMedilinkController::class, 'convenios_cursor']);
+    Route::get('/apimedilink/tratamientos', [AdminMedilinkController::class, 'tratamientos']);
+    Route::get('/apimedilink/atenciones', [AdminMedilinkController::class, 'atenciones']);
+    Route::get('/apimedilink/prestaciones', [AdminMedilinkController::class, 'prestaciones']);
+    Route::get('/apimedilink/prestaciones/{id}', [AdminMedilinkController::class, 'prestacion']);
 });
 
 require __DIR__ . '/auth.php';
