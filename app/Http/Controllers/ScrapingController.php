@@ -9,16 +9,9 @@ use App\Models\TreatmentMl;
 use App\Models\UserMl;
 use Carbon\Carbon;
 use Goutte\Client;
-use Symfony\Component\Panther\Client as CP;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpClient\HttpClient;
 use Session as FlashSession;
-use Behat\Mink\Mink;
-use Behat\Mink\Session;
-// use Behat\Mink\Driver\GoutteDriver;
-use Behat\Mink\Driver\Goutte\Client as GoutteClient;
-use Symfony\Component\Panther\DomCrawler\Crawler;
-
 
 class ScrapingController extends Controller
 {
@@ -29,9 +22,10 @@ class ScrapingController extends Controller
 
     public function create_client($url, $filter = False){
         $client = new Client();
-        $crawler = $client->request('GET', 'https://youjustbetter.softwaremedilink.com/sessions/login');
-        $form = $crawler->filter('form')->form();
-        $crawler = $client->click($form, array('rut' => 'admin', 'password' => 'Pascual4900'));
+        $crawler = $client->request('GET', 'https://youjustbetter.softwaremedilink.com/reportesdinamicos');
+        $form = $crawler->selectButton('Ingresar')->form();
+        $form->setValues(['rut' => 'admin', 'password' => 'Pascual4900']);
+        $crawler = $client->submit($form);
         if($filter){
             $first = strval(Carbon::now()->subMonth()->subMonth()->format('Y-m-d'));
             $last = strval(Carbon::now()->addmonth()->format('Y-m-d'));
@@ -41,25 +35,7 @@ class ScrapingController extends Controller
         $array = $crawler->text();
         $array = substr($array,2,-2);
         $split = explode('},{', $array);
-    }
-
-    public function mink(){
-        // $url = "https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/listado_acciones?filters[sucursal][status]=activated&filters[sucursal][value]=1&filters[fecha_inicio][status]=activated&filters[fecha_inicio][value]=2022-10-07&filters[fecha_fin][status]=activated&filters[fecha_fin][value]=2023-01-07";
-        $url = "https://youjustbetter.softwaremedilink.com/sessions/login";
-
-        $client = CP::createChromeClient(base_path("drivers/chromedriver"), null, ["port" => 9558]);    // create a chrome client
-
-        $crawler = $client->request('GET', $url);
-        $form = $crawler->filter('form')->form();
-        $form['rut'] = 'admin';
-        $form['password'] = 'Pascual4900';
-
-        // $crawler = $client->submit($form);
-        // $link = $crawler->selectLink('Déconnexion');
-        // $link->click();
-        $crawler->selectButton('#ingresar');
-        $crawler->executeScript("document.querySelector('#ingresar').click()");
-        ddd($client->getCurrentURL());
+        return $split;
     }
 
 
@@ -112,7 +88,7 @@ class ScrapingController extends Controller
     public function professionalshours(){
         $client = new Client();
         $crawler = $client->request('GET', 'https://youjustbetter.softwaremedilink.com/reportesdinamicos');
-        $form = $crawler->filter('form')->form();
+        $form = $crawler->selectButton('Ingresar')->form();
         $form->setValues(['rut' => 'admin', 'password' => 'Pascual4900']);
         $crawler = $client->submit($form);
 
@@ -148,7 +124,7 @@ class ScrapingController extends Controller
     public function professional($id){
         $client = new Client();
         $crawler = $client->request('GET', 'https://youjustbetter.softwaremedilink.com/reportesdinamicos');
-        $form = $crawler->filter('form')->form();
+        $form = $crawler->selectButton('Ingresar')->form();
         $form->setValues(['rut' => 'admin', 'password' => 'Pascual4900']);
         $crawler = $client->submit($form);
         $now = Carbon::now();
@@ -185,11 +161,9 @@ class ScrapingController extends Controller
 
     public function actionMl(){
         $actions = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/listado_acciones?filters%5Bsucursal%5D%5Bstatus%5D=activated&filters%5Bsucursal%5D%5Bvalue%5D=1&filters",true);
-        ddd($actions);
         foreach($actions as $action){
             $value = json_decode("{".$action."}",true);
             $limit = Carbon::now()->subMonth();
-            return $value;
             $now = Carbon::parse($value['Fecha Realizacion']);
             if($now<$limit){
                 continue;
@@ -338,18 +312,5 @@ class ScrapingController extends Controller
         }
         FlashSession::flash('primary', 'PaymentMl Actualizada');
         return redirect()->back();
-    }
-
-    public function alta(){
-        $client = new Client();
-        $crawler = $client->request('GET', 'https://youjustbetter.softwaremedilink.com/reportesdinamicos');
-        $form = $crawler->filter('form')->form();
-        $form->setValues(['rut' => 'admin', 'password' => 'Pascual4900']);
-        $crawler = $client->submit($form);
-        $crawler = $client->request('GET', 'https://youjustbetter.softwaremedilink.com/fichas/imprimir/3');
-        $crawler->filter('div[class="ficha-header"]')->each(function ($node) {
-            print $node->text()." ";
-        });
-
     }
 }

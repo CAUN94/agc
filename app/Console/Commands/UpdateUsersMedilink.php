@@ -94,7 +94,7 @@ class UpdateUsersMedilink extends Command
     public function create_client($url, $filter = False){
         $client = new Client();
         $crawler = $client->request('GET', 'https://youjustbetter.softwaremedilink.com/reportesdinamicos');
-        $form = $crawler->filter('form')->form();
+        $form = $crawler->selectButton('Ingresar')->form();
         $form->setValues(['rut' => 'admin', 'password' => 'Pascual4900']);
         $crawler = $client->submit($form);
         if($filter){

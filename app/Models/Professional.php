@@ -24,7 +24,6 @@ class Professional extends Model
     }
 
     public static function monthAppointments($first,$last,$user){
-       //where('Profesional' , '=', 'Alonso Niklitschek Sanhueza')
         return ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
         ->Where('Profesional', 'LIKE' , '%' . $user . '%')
         ->Where('Estado','=', 'Atendido')
@@ -47,36 +46,27 @@ class Professional extends Model
     }
 
     public static function remuneracion($first,$last,$user){
-      if($user == "Daniella Vivallo Vera" || $user == "Jaime Pantoja Rodriguez"){
-        $coef=0.45;
-      }elseif($user == "Constanza Ahumada Huerta"){
-        $coef=0.32;
-      }else{
-        $coef=1;
-      }
+      $coef = Professional::where('description' ,'=',  $user)->first(['coeff']);
+
       return ceil(ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
       ->Where('Profesional', 'LIKE' , '%' . $user . '%')
       ->Where('Estado','=', 'Atendido')
-      ->sum('Precio_Prestacion')*$coef);
+      ->sum('Precio_Prestacion')*$coef->coeff);
     }
 
     public static function Prom_prestaciones($first,$last,$user){
-      if($user == "Daniella Vivallo Vera" || $user == "Jaime Pantoja Rodriguez"){
-        $coef=0.45;
-      }elseif($user == "Constanza Ahumada Huerta"){
-        $coef=0.32;
-      }else{
-        $coef=1;
-      }
+      $coef = Professional::where('description' ,'=',  $user)->first(['coeff']);
+
      $remuneracion = (ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
      ->Where('Profesional', 'LIKE' , '%' . $user . '%')
      ->Where('Estado','=', 'Atendido')
-     ->sum('Precio_Prestacion')*$coef);
+     ->sum('Precio_Prestacion')*$coef->coeff);
 
      $appointment = ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
      ->Where('Profesional', 'LIKE' , '%' . $user . '%')
      ->Where('Estado','=', 'Atendido')
      ->get()->count();
+
      if($appointment == 0){
        return 0;
      }else{
@@ -85,22 +75,18 @@ class Professional extends Model
    }
 
    public static function Prom_remuneracion($first,$last,$user){
-     if($user == "Daniella Vivallo Vera" || $user == "Jaime Pantoja Rodriguez"){
-       $coef=0.45;
-     }elseif($user == "Constanza Ahumada Huerta"){
-       $coef=0.32;
-     }else{
-       $coef=1;
-     }
+     $coef = Professional::where('description' ,'=',  $user)->first(['coeff']);
+
       $remuneracion = (ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
       ->Where('Profesional', 'LIKE' , '%' . $user . '%')
       ->Where('Estado','=', 'Atendido')
-      ->sum('Precio_Prestacion')*$coef);
+      ->sum('Precio_Prestacion')*$coef->coeff);
 
       $appointment = ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
       ->Where('Profesional', 'LIKE' , '%' . $user . '%')
       ->Where('Estado','=', 'Atendido')
       ->get()->count();
+
       if($appointment == 0){
         return 0;
       }else{
@@ -115,15 +101,9 @@ class Professional extends Model
       ->distinct(['Tratamiento_Nr'])
       ->count(['Tratamiento_Nr']);
 
-      if($user == "Daniella Vivallo Vera"){
-        $Ocupacion=25;
-      }elseif($user == "Constanza Ahumada Huerta"){
-        $Ocupacion=22;
-      }else{
-        $Ocupacion=30;
-      }
+      $Ocupacion = Professional::where('description' ,'=',  $user)->first(['Horas_disponible']);
 
-      $Ocupacion = $Ocupacion*4;
+      $Ocupacion = $Ocupacion->Horas_disponible*4;
       $porcentaje = ceil(($atenciones/$Ocupacion)*100);
 
       return ($porcentaje);

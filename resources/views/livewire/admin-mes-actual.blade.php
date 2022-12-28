@@ -103,22 +103,6 @@
         </div>
     </div>
 
-    <!--
-    <div class="w-full overflow-x-auto gap-y-2 box-white p-3 mt-2">
-        <form wire:change="updateSelectedProfessional">
-        <div class="grid grid-cols-3 gap-1">
-            @foreach(App\Models\Professional::where('id','>',0)->get() as $professional)
-                <div class="flex">
-                    <input class="form-check-input appearance-none h-3 w-3 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="{{ $professional->user->id }}" value={{ $professional->user->id }} wire:model="selectedProfessional.{{ $professional->user->id }}">
-                    <label class="form-check-label inline-block text-gray-800 text-sm break-words" for="{{ $professional->user->id }}">
-                        {{ $professional->user->fullname() }}
-                    </label>
-              </div>
-            @endforeach
-        </div>
-        </form>
-    </div>-->
-
     <div class="flex flex-col lg:flex-row gap-2 mt-2">
         <div class="w-full lg:w-1/3 flex flex-col overflow-x-auto gap-y-2">
             <div class="align-middle inline-block min-w-full" x-data="{ classShow: false, createShow: true }">

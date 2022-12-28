@@ -5,10 +5,6 @@ namespace App\Http\Livewire;
 use App\Models\ProfesionalAppointment;
 use App\Models\AppointmentMl;
 use App\Models\ActionMl;
-use App\Models\TrainAppointmentPivot;
-use App\Models\TrainBook;
-use App\Models\Trainer;
-use App\Models\Training;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +22,7 @@ class AdminRemuneracion extends Component
     public $dates = [];
     public $nodates = [];
     public $classShow = true;
+    public $classShowAppointment = false;
     public $weekly = false;
     public $width = '16.66%';
     public $height = '120px';
@@ -38,7 +35,7 @@ class AdminRemuneracion extends Component
     public $treatment = null;
     public $hour;
     public $message;
-    public $lista_id = null;
+    public $lista_id = '';
     public $coach;
     public $newname;
     public $newdate;
@@ -48,7 +45,7 @@ class AdminRemuneracion extends Component
     public function mount()
     {
       $this->now = Carbon::Now();
-        if (Carbon::now()->format('d') <= 21 ){
+        if (Carbon::now()->format('d') < 21 ){
             $this->startOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m')-1,21)->startOfDay();
             $this->actualstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')-1,21)->startOfDay();
             $this->expiredstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')-1,21)->startOfDay()->subMonth();
@@ -108,14 +105,24 @@ class AdminRemuneracion extends Component
     }
 
     public function show($id){
-
-      $selectedProfessional = DB::table('professionals')
+      $Professional = DB::table('professionals')
       ->where('user_id',$id)
-      ->first();
-      $this->lista_id = $selectedProfessional->description;
+      ->first(['description']);
+
+      $this->lista_id = $Professional->description;
 
       $this->classShow = false;
+    }
 
+    public function showAppointment($id){
+        $this->treatment = appointmentMl::find($id);
+        $this->classShowAppointment = true;
+        $this->namePaciente = $this->treatment->Nombre_paciente . " " . $this->treatment->Apellidos_paciente;
+        $this->date = Carbon::parse($this->treatment->Fecha)->format('d-M-Y');
+        $this->convenio = $this->treatment->Convenio;
+
+        //dd($this->remuneracion);
+        //$this->remuneracion = $this->treatment->Total;
     }
 
     public function close(){

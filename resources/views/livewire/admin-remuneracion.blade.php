@@ -35,7 +35,7 @@
                       <a class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                           <i class="fa fa-money" aria-hidden="true"></i>
                           <span class="flex-1 ml-3 whitespace-nowrap">Prestaciones</span>
-                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-sm font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
+                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
                             @if($weekly)
                               ${{$professional->prestaciones($startOfWeek,$endOfWeek,$professional->description)}}
                             @else
@@ -48,7 +48,7 @@
                       <a class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                           <i class="fa fa-money" aria-hidden="true"></i>
                           <span class="flex-1 ml-3 whitespace-nowrap">Abonos</span>
-                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-sm font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
+                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
                             @if($weekly)
                               ${{$professional->abonos($startOfWeek,$endOfWeek,$professional->description)}}
                             @else
@@ -61,7 +61,7 @@
                       <a class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                           <i class="fa fa-money" aria-hidden="true"></i>
                           <span class="flex-1 ml-3 whitespace-nowrap">Remuneración</span>
-                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-sm font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
+                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
                             @if($weekly)
                               ${{$professional->remuneracion($startOfWeek,$endOfWeek,$professional->description)}}
                             @else
@@ -104,21 +104,21 @@
                           <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                               <i class="fa fa-money" aria-hidden="true"></i>
                               <span class="flex-1 ml-3 whitespace-nowrap">Prestaciones</span>
-                              <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-sm font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">${{$professional->prestaciones($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
+                              <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">${{$professional->prestaciones($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
                           </a>
                       </li>
                       <li>
                           <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                               <i class="fa fa-calendar" aria-hidden="true"></i>
                               <span class="flex-1 ml-3 whitespace-nowrap">Abonos</span>
-                              <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->abonos($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
+                              <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">${{$professional->abonos($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
                           </a>
                       </li>
                       <li>
                           <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                               <i class="fa fa-money" aria-hidden="true"></i>
                               <span class="flex-1 ml-3 whitespace-nowrap">Remuneración</span>
-                              <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-sm font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">${{$professional->remuneracion($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
+                              <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">${{$professional->remuneracion($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
                           </a>
                       </li>
                       <li>
@@ -164,7 +164,7 @@
                     @foreach($appointments as $Appointment)
                     <tr>
                       <td class="text-center">
-                          {{Carbon\Carbon::parse($Appointment->Fecha_Realizacion)->format('Y-m-d')}}
+                          {{Carbon\Carbon::parse($Appointment->Fecha_Realizacion)->format('d-m-Y')}}
                       </td>
                       <td class="text-left">
                          {{$Appointment->Nombre}} {{$Appointment->Apellido}}
@@ -176,7 +176,7 @@
                         {{$Appointment->Categoria_Nombre}}
                       </td>
                       <td class="text-center">
-                        {{$Appointment->Precio_restacion}}
+                        ${{$Appointment->Precio_Prestacion}}
                       </td>
                     </tr>
                     @endforeach
@@ -195,11 +195,11 @@
                 </div>
                 <div class = "box-white mt-1.5">
                   <span>Prom. Prestaciones</span>
-                  <span class="ml-9">{{$professional->Prom_prestaciones($expiredstartOfMonth,$expiredendOfMonth,$lista_id)}}</span>
+                  <span class="ml-9">${{$professional->Prom_prestaciones($expiredstartOfMonth,$expiredendOfMonth,$lista_id)}}</span>
                 </div>
                 <div class = "box-white mt-1.5">
                   <span>Prom. Remuneraciones</span>
-                  <span class="ml-2">{{$professional->Prom_remuneracion($expiredstartOfMonth,$expiredendOfMonth,$lista_id)}}</span>
+                  <span class="ml-2">${{$professional->Prom_remuneracion($expiredstartOfMonth,$expiredendOfMonth,$lista_id)}}</span>
                 </div>
               </div>
             </div>
@@ -272,8 +272,8 @@
                                                       <div style="height: {{$heightbox}};" class="overflow-y-auto mt-1">
 
                                                           @foreach(App\Models\Professional::join('appointment_mls', 'professionals.description', '=', 'appointment_mls.Profesional')->where('professionals.description',$lista_id)->where('Estado','Atendido')->whereBetween('Fecha',[$expiredstartOfMonth, $expiredendOfMonth])->where('Fecha',$date->format('Y-m-d'))->orderby('Hora_inicio', 'ASC')->get() as $professionalAppointment)
-                                                              <div
-                                                                  wire:click="show({{$professionalAppointment->id}})"
+                                                             <div
+                                                                  wire:click="showAppointment({{$professionalAppointment->id}})"
                                                                   @if($professionalAppointment->Estado=='Atendido')
                                                                       @php $color = 'green'; @endphp
                                                                   @endif

@@ -19,7 +19,10 @@ use App\Http\Middleware\UpdatePassword;
 // Route::get('/gcalendar_massive', [CalendarController::class, 'superstore']);
 // Route::get('/gcalendar_delete', [CalendarController::class, 'superdelete']);
 // Route::get('/google', [CalendarController::class, 'google']);
+<<<<<<< HEAD
+=======
 
+>>>>>>> 70dbad92d19bf0180086b716e60c439bd32b6f4f
 
 Route::get('/nubox/auth', [ AdminNuboxController::class, 'auth']);
 Route::get('/nubox/comprobante', [ AdminNuboxController::class, 'comprobante']);
@@ -28,9 +31,12 @@ Route::get('/nubox/emit', [ AdminNuboxController::class, 'emit']);
 Route::get('/nubox/cliente', [ AdminNuboxController::class, 'cliente']);
 Route::get('/nubox/boleta', [ AdminNuboxController::class, 'boleta']);
 Route::get('/professionalshours', 'App\Http\Controllers\ScrapingController@professionalshours');
+<<<<<<< HEAD
+=======
 Route::get('/pago2', [MercadoPagoController::class, 'personalizepay']);
 Route::get('/pago2/{id}', [MercadoPagoController::class, 'pay']);
 // Route::get('/scraping-alta', [ScrapingController::class, 'alta']);
+>>>>>>> 70dbad92d19bf0180086b716e60c439bd32b6f4f
 
 Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/mercadopagosearch', [MercadoPagoController::class, 'index']);
@@ -49,8 +55,6 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::resource('users', 'App\Http\Controllers\UsersController')->middleware(['auth']);
     Route::get('/calendar', [LandingController::class, 'calendar'])->middleware(['auth']);
     Route::get('/healthy', [LandingController::class, 'healthy'])->middleware(['auth']);
-    Route::get('/packverano', [LandingController::class, 'packverano']);
-    Route::post('/mailverano', [LandingController::class, 'mailverano']);
     Route::get('/nutrition', [LandingController::class, 'nutrition'])->middleware(['auth']);
     Route::get('/calendar/store/{id}', [CalendarController::class, 'store'])->middleware(['auth']);
 
@@ -79,9 +83,6 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('adminstudents', 'App\Http\Controllers\AdminStudentController@index')->middleware(['intranet']);
     Route::get('wireframe2', 'App\Http\Controllers\AdminStudentController@wireframe2')->middleware(['intranet']);
     Route::get('wireframe', 'App\Http\Controllers\AdminStudentController@wireframe')->middleware(['intranet']);
-    Route::get('/confirmations', [LandingController::class, 'confirmations'])->middleware(['intranet']);
-    // Route::get('/confirmation/{id}', [LandingController::class, 'confirmation'])->middleware(['intranet']);
-    Route::get('/confirmation/{id}', [LandingController::class, 'sendconfirmation'])->middleware(['intranet']);
 
     //lista Espera
     Route::resource('listaEspera', 'App\Http\Controllers\listaEsperaController')->middleware(['intranet']);
@@ -154,7 +155,6 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/viarunning', 'App\Http\Controllers\RedirectController@viarunning');
     Route::get('/academia', 'App\Http\Controllers\RedirectController@academia');
     Route::get('/endurance', 'App\Http\Controllers\RedirectController@endurance');
-    Route::get('/trailwomen', 'App\Http\Controllers\RedirectController@trailwomen');
     Route::get('/agendate', 'App\Http\Controllers\RedirectController@agendate');
 
     Route::get('/box/dcontrerasb', 'App\Http\Controllers\RedirectController@contreras');
