@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Helpers\Helper;
+use Carbon\Carbon;
+use Session as FlashSession;
 
 class LandingController extends Controller
 {
@@ -22,8 +25,6 @@ class LandingController extends Controller
         return view('packverano');
     }
 
-<<<<<<< HEAD
-=======
     public function confirmations()
     {
         return view('confirmation');
@@ -148,7 +149,6 @@ class LandingController extends Controller
         return \Redirect::away($whatsapp);
     }
 
->>>>>>> 70dbad92d19bf0180086b716e60c439bd32b6f4f
     public function terms()
     {
         return redirect('/pdf/tyc.pdf');
@@ -181,9 +181,6 @@ class LandingController extends Controller
         return view('users.nutrition',compact('user'));
     }
 
-<<<<<<< HEAD
-
-=======
     public function mailverano(Request $request)
     {
         $details = [
@@ -196,7 +193,6 @@ class LandingController extends Controller
         FlashSession::flash('primary', 'Inscripción Lista');
         return redirect('/packverano');
     }
->>>>>>> 70dbad92d19bf0180086b716e60c439bd32b6f4f
 
     public function tables()
     {
