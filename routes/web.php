@@ -19,10 +19,6 @@ use App\Http\Middleware\UpdatePassword;
 // Route::get('/gcalendar_massive', [CalendarController::class, 'superstore']);
 // Route::get('/gcalendar_delete', [CalendarController::class, 'superdelete']);
 // Route::get('/google', [CalendarController::class, 'google']);
-<<<<<<< HEAD
-=======
-
->>>>>>> 70dbad92d19bf0180086b716e60c439bd32b6f4f
 
 Route::get('/nubox/auth', [ AdminNuboxController::class, 'auth']);
 Route::get('/nubox/comprobante', [ AdminNuboxController::class, 'comprobante']);
@@ -31,12 +27,6 @@ Route::get('/nubox/emit', [ AdminNuboxController::class, 'emit']);
 Route::get('/nubox/cliente', [ AdminNuboxController::class, 'cliente']);
 Route::get('/nubox/boleta', [ AdminNuboxController::class, 'boleta']);
 Route::get('/professionalshours', 'App\Http\Controllers\ScrapingController@professionalshours');
-<<<<<<< HEAD
-=======
-Route::get('/pago2', [MercadoPagoController::class, 'personalizepay']);
-Route::get('/pago2/{id}', [MercadoPagoController::class, 'pay']);
-// Route::get('/scraping-alta', [ScrapingController::class, 'alta']);
->>>>>>> 70dbad92d19bf0180086b716e60c439bd32b6f4f
 
 Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/mercadopagosearch', [MercadoPagoController::class, 'index']);
