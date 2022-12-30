@@ -11,11 +11,13 @@ class Professional extends Model
     use HasFactory;
 
     public function user()
-    {
+    {      
         return $this->belongsTo(User::class);
+
     }
 
-    public static function nextAppointments(){
+    public static function nextAppointments()
+    {
         return AppointmentMl::where('Hora_inicio','>=',\Carbon\Carbon::now('America/Santiago')->format('H:i:s'))
                             ->where('Fecha','>=',\Carbon\Carbon::now('America/Santiago')->format('Y-m-d'))
                             ->where('Estado', '!=', 'Anulado')
@@ -32,6 +34,8 @@ class Professional extends Model
     }
 
     public static function prestaciones($first,$last,$user){
+
+      
       return (ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
       ->Where('Profesional', 'LIKE' , '%' . $user . '%')
       ->Where('Estado','=', 'Atendido')

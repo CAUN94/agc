@@ -66,7 +66,7 @@ class GoogleCalendarDelete extends Command
                 $appointment->professional_calendar = 0;
                 $appointment->save();
             } catch (Exception $e) {
-                echo $clientt, "\n";
+                echo $client, "\n";
             }
 
         }
