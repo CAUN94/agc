@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\AppointmentMl;
 use App\Models\User;
 use GuzzleHttp\Client;
+use App\Models\actionMl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class ApiMedilinkController extends Controller
 {
@@ -62,7 +64,7 @@ class ApiMedilinkController extends Controller
         $allAtentions = [];
         $atentions = json_decode($response->getBody());
         $allAtentions[] = $atentions->data;
-        
+
         while(isset($atentions->links->next)){
             $response = $client->request('GET', $atentions->links->next, [
                 'headers'  => [
@@ -71,7 +73,7 @@ class ApiMedilinkController extends Controller
             ]);
             $atentions = json_decode($response->getBody());
             $allAtentions[] = $atentions->data;
-            
+
         }
         return array_merge(...$allAtentions);
     }
@@ -110,7 +112,45 @@ class ApiMedilinkController extends Controller
         $allAppointments = [];
         $appointments = json_decode($response->getBody());
         $allAppointments[] = $appointments->data;
-        
+
+        foreach ($appointments->data as $appointment) {
+
+          if($a->finalizado=1){
+            $estado = 'Atendido';
+          }else{
+            $estado = 'No Atendido';
+          }
+
+          if(empty($action->convenio)){
+            $action->convenio = 'Sin Convenio';
+          }
+
+          $nombre = strtok($appointment->nombre_paciente,  ' ');
+          $apellido = substr($appointment->nombre_paciente, strpos($appointment->nombre_paciente, " ") + 1);
+
+            $new_row = AppointmentMl::create([
+              'id'=> $action->id,
+              'Estado'=> $estado,
+              'Fecha'=> $action->fecha,
+              'Profesional'=> $action->nombre_profesional,
+              'Nombre'=>$nombre,
+              'Apellido'=>$apellido,
+              'Categoria_Nr' => $action->id_tipo,
+              'Categoria_Nombre'=> $action->nombre_tipo,
+              'Tratamiento_Nr'=> $action->id,
+              'Convenio'=> $action->nombre_convenio,
+              'Prestacion_Nr'=> $action->id,
+              'Prestacion_Nombre'=> $action->nombre_tipo,
+              'Precio_Prestacion'=> $action->total,
+              'Abono'=> $action->abonado,
+              'Total'=> $action->total_realizado,
+              'Sucursal'=> $action->nombre_sucursal,
+              'created_at'=> Carbon::Now(),
+              'updated_at'=> Carbon::Now()
+            ]);
+          $new_row->save();
+        }
+
         while(isset($appointments->links->next)){
             $response = $client->request('GET', $appointments->links->next, [
                 'headers'  => [
@@ -119,8 +159,115 @@ class ApiMedilinkController extends Controller
             ]);
             $appointments = json_decode($response->getBody());
             $allAppointments[] = $appointments->data;
-            
+
         }
         return array_merge(...$allAppointments);
+    }
+
+    public function allActions()
+    {
+        $client = new \GuzzleHttp\Client();
+
+        $query_string   = '?q={"fecha":{"gt":"2022-09-01"}}';
+        $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/';
+        $url = $url."".$query_string;
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $this->token
+            ]
+        ]);
+
+        $allActions = [];
+        $actions = json_decode($response->getBody());
+        $allActions[] = $actions->data;
+
+        foreach ($actions->data as $action) {
+
+          if($action->finalizado=1){
+            $estado = 'Atendido';
+          }else{
+            $estado = 'No Atendido';
+          }
+
+          if(empty($action->convenio)){
+            $action->convenio = 'Sin Convenio';
+          }
+
+          $nombre = strtok($action->nombre_paciente,  ' ');
+          $apellido = substr($action->nombre_paciente, strpos($action->nombre_paciente, " ") + 1);
+
+            $new_row = actionMl::create([
+              'id'=> $action->id,
+              'Sucursal'=> $action->nombre_sucursal,
+              'Nombre'=>$nombre,
+              'Apellido'=>$apellido,
+              'Categoria_Nr' => $action->id_tipo,
+              'Categoria_Nombre'=> $action->nombre_tipo,
+              'Tratamiento_Nr'=> $action->id,
+              'Profesional'=> $action->nombre_profesional,
+              'Estado'=> $estado,
+              'Convenio'=> $action->nombre_convenio,
+              'Prestacion_Nr'=> $action->id,
+              'Prestacion_Nombre'=> $action->nombre_tipo,
+              'Fecha_Realizacion'=> $action->fecha,
+              'Precio_Prestacion'=> $action->total,
+              'Abono'=> $action->abonado,
+              'Total'=> $action->total_realizado,
+              'created_at'=> Carbon::Now(),
+              'updated_at'=> Carbon::Now()
+            ]);
+          $new_row->save();
+        }
+
+        while(isset($actions->links->next)){
+            $response = $client->request('GET', $actions->links->next, [
+                'headers'  => [
+                    'Authorization' => 'Token ' . $this->token
+                ]
+            ]);
+            $actions = json_decode($response->getBody());
+            $allActions[] = $actions->data;
+
+            foreach ($actions->data as $action) {
+
+              if($action->finalizado=1){
+                $estado = 'Atendido';
+              }else{
+                $estado = 'No Atendido';
+              }
+
+              if($action->convenio=""){
+                $action->convenio = 'Sin Convenio';
+              }
+
+              $nombre = strtok($action->nombre_paciente,  ' ');
+              $apellido = substr($action->nombre_paciente, strpos($action->nombre_paciente, " ") + 1);
+
+                $new_row = actionMl::create([
+                  'id'=> $action->id,
+                  'Sucursal'=> $action->nombre_sucursal,
+                  'Nombre'=>$nombre,
+                  'Apellido'=>$apellido,
+                  'Categoria_Nr' => $action->id_tipo,
+                  'Categoria_Nombre'=> $action->nombre_tipo,
+                  'Tratamiento_Nr'=> $action->id,
+                  'Profesional'=> $action->nombre_profesional,
+                  'Estado'=> $estado,
+                  'Convenio'=> $action->nombre_convenio,
+                  'Prestacion_Nr'=> $action->id,
+                  'Prestacion_Nombre'=> $action->nombre_tipo,
+                  'Fecha_Realizacion'=> $action->fecha,
+                  'Precio_Prestacion'=> $action->total,
+                  'Abono'=> $action->abonado,
+                  'Total'=> $action->total_realizado,
+                  'created_at'=> Carbon::Now(),
+                  'updated_at'=> Carbon::Now()
+                ]);
+              $new_row->save();
+            }
+        }
+
+        return array_merge(...$allActions);
     }
 }
