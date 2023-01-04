@@ -52,6 +52,7 @@ class ApiMedelinkCalendar extends Command
         foreach($professionals as $professional){
             if(isset($professional->professional_calendar)){
                 $this->store($professional);
+                // $this->delete($professional);
             }
         }
     }
@@ -72,7 +73,7 @@ class ApiMedelinkCalendar extends Command
         
         $professional_api = json_decode($response->getBody())->data[0];
 
-        $query_string   = '?q={"fecha":{"gt":"2022-12-29"}}';
+        $query_string   = '?q={"fecha":{"gt":"2022-12-30"}}';
         $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/'.$professional_api->id.'/citas';
         $url = $url."".$query_string;
 
@@ -97,37 +98,31 @@ class ApiMedelinkCalendar extends Command
             
         }
         $allAppointments = array_merge(...$allAppointments);
+
+        $filterBy = 'CarEnquiry'; // or Finance etc.
+
+        $filterBy = ['Anulado','Cambio de fecha','Anulado por sesiones en conflicto','Anulado vía validación'];
+
+        $allAppointments = array_filter($allAppointments, function ($var) use ($filterBy) {
+            if(!in_array($var->estado_cita,$filterBy)){
+                return $var;
+            }
+        });
+
+        // $this->info(var_dump($allAppointments));
+
+        // return;
+
         
         // $appointments = json_decode($response->getBody())->data;
         // $allAppointments = array_slice($allAppointments, 0, 10, false);
 
         $this->info(count($allAppointments));
         foreach($allAppointments as $appointment){
-
-            if(AppointmentMl::where('Tratamiento_Nr',$appointment->id_atencion)->where('professional_calendar','not like','0')->count() > 0)
-            {
-                $actual = AppointmentMl::where('Tratamiento_Nr',$appointment->id_atencion)->where('professional_calendar','not like','0')->first();
-                $this->info($appointment->id_atencion);
-                if(in_array($appointment->estado_cita,['Anulado','Cambio de fecha','Anulado por sesiones en conflicto','Anulado vía validación'])){
-                    try {
-                        $client = $this->getClient();
-                        $service = new Calendar($client);
-                        $service->events->delete($professional->professional_calendar,$actual->professional_calendar);
-                        $actual->professional_calendar = 0;
-                        $actual->save();
-                    } catch (Exception $e) {
-                        echo $client, "\n";
-                    }
-                } else {
-                    $this->info('este safo');
-                }
-                continue;
-            } 
-
-            if(in_array($appointment->estado_cita,['Anulado','Cambio de fecha','Anulado por sesiones en conflicto','Anulado vía validación'])){
+            $ap = AppointmentMl::where('Tratamiento_nr',$appointment->id_atencion);
+            if($ap->count() > 0){
                 continue;
             }
-
             $client = $this->getClient();
             $service = new Calendar($client);
             $start = Carbon::parse($appointment->fecha)->format('Y-m-d')."T".$appointment->hora_inicio;
@@ -149,7 +144,7 @@ class ApiMedelinkCalendar extends Command
                 'attendees' => array(
                     array('email' => 'cristobalugarte6@gmail.com'),
                     // array('email' => '".$professional_api->email."'),
-                    array('email' => 'you@justbetter.cl'),
+                    // array('email' => 'you@justbetter.cl'),
                     // array('email' => 'Docencia@justbetter.cl'),
                     // array('email' => 'cugarte@guiasyscoutschile.cl'),
                     // array('email' => 'iver@justbetter.cl'),
@@ -163,13 +158,14 @@ class ApiMedelinkCalendar extends Command
                     ),
                 ),
             ));
+
             $event = $service->events->insert($professional->professional_calendar, $event);
             
             $this->info('Creado:'.ucwords(strtolower($appointment->nombre_paciente)));
 
             $client = new \GuzzleHttp\Client();
 
-            $url = 'https://api.medilink.healthatom.com/api/v1/pacientes/'.$appointment->id_paciente;
+            $url = $appointment->links[1]->href;
 
             $response = $client->request('GET', $url, [
                 'headers'  => [
@@ -182,8 +178,6 @@ class ApiMedelinkCalendar extends Command
             $appointmentml = AppointmentMl::updateOrCreate(
                 [
                     'Tratamiento_Nr' => $appointment->id_atencion,
-                    'Rut_Paciente' => $patient->rut,
-                    'Fecha' => $appointment->fecha ,
                 ],
                 [
                     'Estado' => $appointment->estado_cita,
@@ -204,6 +198,45 @@ class ApiMedelinkCalendar extends Command
                 ]
             );
         }
+
+    }
+
+    public function delete($professional)
+    {
+        $appointmentMls = AppointmentMl::where('Fecha','>','2022-12-30')->where('professional_calendar','not like',0)->get();
+        foreach($appointmentMls as $appointmentMl){
+            $client = new \GuzzleHttp\Client();
+
+            $id_cita = $appointmentMl->Tratamiento_Nr;
+            $url = 'https://api.medilink.healthatom.com/api/v1/citas/'.$id_cita;
+
+            // Cambiar esta logica
+
+            $response = $client->request('GET', $url, [
+                'headers'  => [
+                    'Authorization' => 'Token ' . $this->token
+                ]
+            ]);
+            
+            $appointment = json_decode($response->getBody());
+            $this->info(var_dump($appointment->data));
+            $filterBy = ['Anulado','Cambio de fecha','Anulado por sesiones en conflicto','Anulado vía validación'];
+            // if(in_array($appointment->data->estado_cita,$filterBy)){
+                // $this->info(var_dump($appointment->data));
+                // try {
+                //     $client = $this->getClient();
+                //     $service = new Calendar($client);
+                //     $service->events->delete($professional->professional_calendar, $appointmentMl->professional_calendar);
+                //     $appointmentMl->professional_calendar = 0;
+                //     $appointmentMl->save();
+                //     $this->info('Borrado'.$appointmentMl->Tratamiento_Nr);
+                // } catch (Exception $e) {
+                //     echo $client, "\n";
+                // }
+            // }
+        }
+
+            
 
     }
 

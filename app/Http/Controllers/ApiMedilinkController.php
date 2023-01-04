@@ -80,7 +80,7 @@ class ApiMedilinkController extends Controller
     {
         $client = new \GuzzleHttp\Client();
 
-        $query_string   = '?q={"fecha":{"gt":"2022-08-01"}}';
+        $query_string   = '?q={"fecha":{"gt":"2022-12-30"}}';
         $url = 'https://api.medilink.healthatom.com/api/v1/citas';
         $url = $url."".$query_string;
 
@@ -97,7 +97,7 @@ class ApiMedilinkController extends Controller
     {
         $client = new \GuzzleHttp\Client();
 
-        $query_string   = '?q={"fecha":{"gt":"2022-08-01"},"estado_cita":{"eq":"Atendido"}}';
+        $query_string   = '?q={"fecha":{"gt":"2022-08-01"}}';
         $url = 'https://api.medilink.healthatom.com/api/v1/citas';
         $url = $url."".$query_string;
 
@@ -122,5 +122,22 @@ class ApiMedilinkController extends Controller
             
         }
         return array_merge(...$allAppointments);
+    }
+
+    public function estado()
+    {
+        $client = new \GuzzleHttp\Client();
+
+        $query_string   = '?q={"fecha":{"gt":"2022-08-01"}}';
+        $url = 'https://api.medilink.healthatom.com/api/v1/citas';
+        $url = $url."".$query_string;
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $this->token
+            ]
+        ]);
+
+        echo $response->getBody();
     }
 }
