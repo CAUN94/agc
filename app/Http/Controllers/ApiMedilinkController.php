@@ -187,9 +187,6 @@ class ApiMedilinkController extends Controller
             ]
         ]);
 
-<<<<<<< HEAD
-        echo $response->getBody();
-=======
         $allActions = [];
         $actions = json_decode($response->getBody());
         $allActions[] = $actions->data;
@@ -281,6 +278,5 @@ class ApiMedilinkController extends Controller
         }
 
         return array_merge(...$allActions);
->>>>>>> 9589e7c1b3b8055fe4a4bc02427c9ab7b00ac4c7
     }
 }
