@@ -71,9 +71,10 @@ class UpdateDatabase extends Command
         }
         $allAppointments = array_merge(...$allAppointments);
 
+        $fecha  = array_column($allAppointments, 'fecha');
         $fecha_r  = array_column($allAppointments, 'fecha_actualizacion');
 
-        array_multisort($fecha_r, SORT_ASC, $allAppointments);
+        array_multisort($fecha, SORT_ASC,$fecha_r, SORT_ASC, $allAppointments);
 
 
         $count = 0;
