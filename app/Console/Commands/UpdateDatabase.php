@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Carbon\Carbon;
 use App\Models\AppointmentMl;
 
 class UpdateDatabase extends Command
@@ -44,8 +45,9 @@ class UpdateDatabase extends Command
 
     public function store(){
         $client = new \GuzzleHttp\Client();
+        $date = strval(Carbon::now()->startOfMonth()->format('Y-m-d'));
         $url = 'https://api.dentalink.healthatom.com/api/v1/citas';
-        $query_string   = '?q={"fecha":{"gt":"2022-12-30"}}';
+        $query_string   = '?q={"fecha":{"gt":"'.$date.'"}}';
         $url = $url."".$query_string;
         $response = $client->request('GET', $url, [
             'headers'  => [
@@ -83,7 +85,7 @@ class UpdateDatabase extends Command
                 ]
             ]);
             if($count%20 == 0){
-                sleep(7);
+                slee(12));
             }
             
             $patient = json_decode($response->getBody())->data;
