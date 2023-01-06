@@ -164,21 +164,12 @@ class ApiMedilinkController extends Controller
         return array_merge(...$allAppointments);
     }
 
-<<<<<<< HEAD
-    public function estado()
-    {
-        $client = new \GuzzleHttp\Client();
-
-        $query_string   = '?q={"fecha":{"gt":"2022-08-01"}}';
-        $url = 'https://api.medilink.healthatom.com/api/v1/citas';
-=======
     public function allActions()
     {
         $client = new \GuzzleHttp\Client();
 
         $query_string   = '?q={"fecha":{"gt":"2022-09-01"}}';
         $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/';
->>>>>>> 9589e7c1b3b8055fe4a4bc02427c9ab7b00ac4c7
         $url = $url."".$query_string;
 
         $response = $client->request('GET', $url, [
