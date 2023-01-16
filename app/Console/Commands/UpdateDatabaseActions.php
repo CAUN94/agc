@@ -47,7 +47,7 @@ class UpdateDatabaseActions extends Command
     {
         $client = new \GuzzleHttp\Client();
 
-        $query_string   = '?q={"fecha":{"gt":"2022-09-01"}}';
+        $query_string   = '?q={"fecha":{"gt":"2022-12-01"}}';
         $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/';
         $url = $url."".$query_string;
 
