@@ -65,7 +65,7 @@ class AppointmentMl extends Model
     }
 
     public static function calendarAppointments($professional){
-        return AppointmentMl::where('Fecha','>=',\Carbon\Carbon::parse('2022-01-016')->startOfDay()->format('Y-m-d'))
+        return AppointmentMl::where('Fecha','>=',\Carbon\Carbon::parse('2022-01-16')->startOfDay()->format('Y-m-d'))
             ->where('Profesional',$professional)
             ->where('professional_calendar','not like',0);
     }
