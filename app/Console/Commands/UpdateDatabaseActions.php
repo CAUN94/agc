@@ -144,6 +144,7 @@ class UpdateDatabaseActions extends Command
                   'updated_at'=> Carbon::Now()
                 ]);
               $new_row->save();
+              $this->info($new_row->id);
             }
         }
 
