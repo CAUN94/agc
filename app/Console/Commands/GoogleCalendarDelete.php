@@ -58,8 +58,9 @@ class GoogleCalendarDelete extends Command
 
     public function superdelete($professional,$calendarId){
         $appointments = AppointmentMl::calendarAppointments($professional)->get();
-        $client = $this->getClient();
+        // $client = $this->getClient();
         foreach ($appointments as $key => $appointment) {
+            $this->info($appointment->professional_calendar);
             try {
                 $service = new Calendar($client);
                 $service->events->delete($calendarId, $appointment->professional_calendar);
