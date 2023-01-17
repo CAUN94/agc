@@ -125,7 +125,7 @@ class UpdateDatabaseActions extends Command
         }
         $count += 1;
         if($count%20 == 0){
-          sleep(5);
+          sleep(6);
         }
       }
 
