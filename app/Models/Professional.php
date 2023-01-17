@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\Helper;
 
 class Professional extends Model
 {
@@ -35,7 +36,7 @@ class Professional extends Model
 
     public static function prestaciones($first,$last,$user){
 
-      return (ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
+      return Helper::moneda_chilena(ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
                       ->Where('Profesional', 'LIKE' , '%' . $user . '%')
                       ->Where('Estado','=', 'Atendido')
                       ->distinct(['Tratamiento_Nr'])
@@ -44,7 +45,7 @@ class Professional extends Model
 
     public static function abonos($first,$last,$user){
 
-      return (ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
+      return Helper::moneda_chilena(ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
                       ->Where('Profesional', 'LIKE' , '%' . $user . '%')
                       ->Where('Estado','=', 'Atendido')
                       ->distinct(['Tratamiento_Nr'])
