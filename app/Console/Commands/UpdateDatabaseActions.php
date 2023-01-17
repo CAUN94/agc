@@ -45,11 +45,37 @@ class UpdateDatabaseActions extends Command
 
     public function allActions()
     {
-        $client = new \GuzzleHttp\Client();
+      $client = new \GuzzleHttp\Client();
+      $query_string   = '?q={"fecha":{"gt":"2022-12-01"}}';
+      $url = 'https://api.medilink.healthatom.com/api/v1/atenciones';
+      $url = $url."".$query_string;
 
-        $query_string   = '?q={"fecha":{"gt":"2022-12-01"}}';
-        $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/';
-        $url = $url."".$query_string;
+      $response = $client->request('GET', $url, [
+          'headers'  => [
+              'Authorization' => 'Token ' . $this->token
+          ]
+      ]);
+
+      $allAtentions = [];
+      $atentions = json_decode($response->getBody());
+      $allAtentions[] = $atentions->data;
+
+      while(isset($atentions->links->next)){
+          $response = $client->request('GET', $atentions->links->next, [
+              'headers'  => [
+                  'Authorization' => 'Token ' . $this->token
+              ]
+          ]);
+          $atentions = json_decode($response->getBody());
+          $allAtentions[] = $atentions->data;
+
+      }
+      $allAtentions = array_merge(...$allAtentions);
+      $this->info(count($allAtentions));
+      $count = 0;
+      foreach($allAtentions as $atention){
+        $this->info($count);
+        $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/'.$atention->id.'/detalles';
 
         $response = $client->request('GET', $url, [
             'headers'  => [
@@ -57,97 +83,51 @@ class UpdateDatabaseActions extends Command
             ]
         ]);
 
-        $allActions = [];
-        $actions = json_decode($response->getBody());
-        $allActions[] = $actions->data;
+        $actions = json_decode($response->getBody())->data;
 
-        foreach ($actions->data as $action) {
-
-          if($action->finalizado=1){
+        
+        foreach($actions as $action){
+          if($atention->finalizado=1){
             $estado = 'Atendido';
           }else{
             $estado = 'No Atendido';
           }
 
-          if(empty($action->convenio)){
-            $action->convenio = 'Sin Convenio';
+          if(empty($atention->convenio)){
+            $atention->convenio = 'Sin Convenio';
           }
 
-          $nombre = strtok($action->nombre_paciente,  ' ');
-          $apellido = substr($action->nombre_paciente, strpos($action->nombre_paciente, " ") + 1);
+          $nombre = strtok($atention->nombre_paciente,  ' ');
+          $apellido = substr($atention->nombre_paciente, strpos($atention->nombre_paciente, " ") + 1);
 
-            $new_row = actionMl::create([
-              'id'=> $action->id,
-              'Sucursal'=> $action->nombre_sucursal,
-              'Nombre'=>$nombre,
-              'Apellido'=>$apellido,
-              'Categoria_Nr' => $action->id_tipo,
-              'Categoria_Nombre'=> $action->nombre_tipo,
-              'Tratamiento_Nr'=> $action->id,
-              'Profesional'=> $action->nombre_profesional,
-              'Estado'=> $estado,
-              'Convenio'=> $action->nombre_convenio,
-              'Prestacion_Nr'=> $action->id,
-              'Prestacion_Nombre'=> $action->nombre_tipo,
-              'Fecha_Realizacion'=> $action->fecha,
-              'Precio_Prestacion'=> $action->total,
-              'Abono'=> $action->abonado,
-              'Total'=> $action->total_realizado,
-              'created_at'=> Carbon::Now(),
-              'updated_at'=> Carbon::Now()
-            ]);
-          $new_row->save();
+          $new_row = actionMl::updateOrCreate([
+            'Tratamiento_Nr'=> $atention->id,
+            'Prestacion_Nr'=> $action->id_prestacion
+          ],[
+            'Sucursal'=> $atention->nombre_sucursal,
+            'Nombre'=>$nombre,
+            'Apellido'=>$apellido,
+            'Categoria_Nr' => $atention->id_tipo,
+            'Categoria_Nombre'=> $atention->nombre_tipo,
+            'Tratamiento_Nr'=> $atention->id,
+            'Profesional'=> $atention->nombre_profesional,
+            'Estado'=> $estado,
+            'Convenio'=> $atention->nombre_convenio,
+            'Prestacion_Nr'=> $action->id_prestacion,
+            'Prestacion_Nombre'=> $action->nombre_prestacion,
+            'Fecha_Realizacion'=> $atention->fecha,
+            'Precio_Prestacion'=> $atention->total,
+            'Abono'=> $atention->abonado,
+            'Total'=> $atention->total_realizado,
+            'created_at'=> Carbon::Now(),
+            'updated_at'=> Carbon::Now()
+          ]);
         }
-
-        while(isset($actions->links->next)){
-            $response = $client->request('GET', $actions->links->next, [
-                'headers'  => [
-                    'Authorization' => 'Token ' . $this->token
-                ]
-            ]);
-            $actions = json_decode($response->getBody());
-            $allActions[] = $actions->data;
-
-            foreach ($actions->data as $action) {
-
-              if($action->finalizado=1){
-                $estado = 'Atendido';
-              }else{
-                $estado = 'No Atendido';
-              }
-
-              if($action->convenio=""){
-                $action->convenio = 'Sin Convenio';
-              }
-
-              $nombre = strtok($action->nombre_paciente,  ' ');
-              $apellido = substr($action->nombre_paciente, strpos($action->nombre_paciente, " ") + 1);
-
-                $new_row = actionMl::create([
-                  'id'=> $action->id,
-                  'Sucursal'=> $action->nombre_sucursal,
-                  'Nombre'=>$nombre,
-                  'Apellido'=>$apellido,
-                  'Categoria_Nr' => $action->id_tipo,
-                  'Categoria_Nombre'=> $action->nombre_tipo,
-                  'Tratamiento_Nr'=> $action->id,
-                  'Profesional'=> $action->nombre_profesional,
-                  'Estado'=> $estado,
-                  'Convenio'=> $action->nombre_convenio,
-                  'Prestacion_Nr'=> $action->id,
-                  'Prestacion_Nombre'=> $action->nombre_tipo,
-                  'Fecha_Realizacion'=> $action->fecha,
-                  'Precio_Prestacion'=> $action->total,
-                  'Abono'=> $action->abonado,
-                  'Total'=> $action->total_realizado,
-                  'created_at'=> Carbon::Now(),
-                  'updated_at'=> Carbon::Now()
-                ]);
-              $new_row->save();
-              $this->info($new_row->id);
-            }
+        $count += 1;
+        if($count%20 == 0){
+          sleep(1);
         }
+      }
 
-         $this->info(count(array_merge(...$allActions)));
     }
 }

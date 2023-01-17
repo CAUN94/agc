@@ -78,6 +78,22 @@ class ApiMedilinkController extends Controller
         return array_merge(...$allAtentions);
     }
 
+    public function atention($id)
+    {
+        $client = new \GuzzleHttp\Client();
+        $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/'.$id.'/detalles';
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $this->token
+            ]
+        ]);
+
+        $atention = json_decode($response->getBody());
+
+        return $atention;
+    }
+
     public function appointments()
     {
         $client = new \GuzzleHttp\Client();
