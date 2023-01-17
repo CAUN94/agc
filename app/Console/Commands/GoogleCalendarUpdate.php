@@ -95,13 +95,13 @@ class GoogleCalendarUpdate extends Command
                 'timeZone' => 'America/Santiago',
               ),
               'sendNotifications' => false,
-              'sendUpdates' => 'none',
+              'sendUpdates' => 'externalOnly',
               'end' => array(
                 'dateTime' => $end,
                 'timeZone' => 'America/Santiago',
               ),
               'attendees' => array(
-                // array('email' => $email),
+                array('email' => $email),
                 array('email' => 'you@justbetter.cl'),
                 // array('email' => 'Docencia@justbetter.cl'),
                 // array('email' => 'cugarte@guiasyscoutschile.cl'),
