@@ -63,9 +63,9 @@
                           <span class="flex-1 ml-3 whitespace-nowrap">Remuneración</span>
                           <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
                             @if($weekly)
-                              ${{$professional->remuneracion($startOfWeek,$endOfWeek,$professional->description)}}
+                              {{$professional->remuneracion($startOfWeek,$endOfWeek,$professional->description)}}
                             @else
-                              ${{$professional->remuneracion($startOfMonth,$endOfMonth,$professional->description)}}
+                              {{$professional->remuneracion($startOfMonth,$endOfMonth,$professional->description)}}
                             @endif
                           </span>
                       </a>
@@ -203,7 +203,7 @@
                 </div>
                 <div class = "box-white mt-1.5">
                   <span>Prom. Remuneraciones</span>
-                  <span class="ml-2">${{$professional->Prom_remuneracion($expiredstartOfMonth,$expiredendOfMonth,$lista_id)}}</span>
+                  <span class="ml-2">{{$professional->Prom_remuneracion($expiredstartOfMonth,$expiredendOfMonth,$lista_id)}}</span>
                 </div>
               </div>
             </div>

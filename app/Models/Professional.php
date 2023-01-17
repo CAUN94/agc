@@ -79,7 +79,7 @@ class Professional extends Model
      if($appointment == 0){
        return 0;
      }else{
-     return ceil($remuneracion/$appointment);
+     return Helper::moneda_chilena(ceil($remuneracion/$appointment));
      }
    }
 
