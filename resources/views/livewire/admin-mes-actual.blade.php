@@ -109,7 +109,6 @@
                 <div class="box-white p-3">
                     <div class="flex justify-between">
                         <span class="block">Selecciona una cita.</span>
-
                         <div class="modal-close cursor-pointer z-50" wire:click="close">
                             <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                               <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
@@ -134,7 +133,7 @@
                               Convenio
                             </dt>
                             <dd class="train-class-resume-text">
-                                @if(!is_null($treatment->Convenio))
+                                @if(!empty($treatment->Convenio))
                                 <li class="list-none">{{$treatment->Convenio}}</li>
                                 @else
                                 <li class="list-none">Sin Convenio</li>
@@ -258,7 +257,6 @@
                                   </div>
                               </div>
                           </div>
-
                       </div>
                 </div>
               </div>

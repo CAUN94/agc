@@ -108,25 +108,22 @@ class AdminRemuneracion extends Component
       $Professional = DB::table('professionals')
       ->where('user_id',$id)
       ->first(['description']);
-
       $this->lista_id = $Professional->description;
-
       $this->classShow = false;
     }
 
     public function showAppointment($id){
         $this->treatment = appointmentMl::find($id);
-        $this->classShowAppointment = true;
         $this->namePaciente = $this->treatment->Nombre_paciente . " " . $this->treatment->Apellidos_paciente;
         $this->date = Carbon::parse($this->treatment->Fecha)->format('d-M-Y');
         $this->convenio = $this->treatment->Convenio;
-
+        $this->classShowAppointment = true;
         //dd($this->remuneracion);
         //$this->remuneracion = $this->treatment->Total;
     }
 
     public function close(){
-        $this->classShow = true ;
+        $this->classShow = true;
     }
 
 

@@ -216,7 +216,7 @@
                             Convenio
                           </dt>
                           <dd class="train-class-resume-text">
-                              @if(!is_null($treatment->Convenio))
+                              @if(!empty($treatment->Convenio))
                               <li class="list-none">{{$treatment->Convenio}}</li>
                               @else
                               <li class="list-none">Sin Convenio</li>

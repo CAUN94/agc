@@ -170,7 +170,11 @@
                          {{$Appointment->Nombre}} {{$Appointment->Apellido}}
                       </td>
                       <td class="text-center">
-                        {{$Appointment->Convenio}}
+                        @if(!empty($treatment->Convenio))
+                        <li class="list-none">{{$treatment->Convenio}}</li>
+                        @else
+                        <li class="list-none">Sin Convenio</li>
+                        @endif
                       </td>
                       <td class="text-center">
                         {{$Appointment->Categoria_Nombre}}
@@ -280,7 +284,7 @@
 
                                                                   class="box-class border-{{$color}}-200 text-{{$color}}-800 bg-{{$color}}-100 cursor-pointer
                                                                   ">
-                                                                  <p class="text-xs lg:text-sm lg:truncate leading-tight">{{Carbon\Carbon::parse($professionalAppointment->Hora_inicio)->format('H:00')}} {{$professionalAppointment->Estado}}</p>
+                                                                  <p class="text-xs lg:text-sm lg:truncate leading-tight">{{Carbon\Carbon::parse($professionalAppointment->Hora_inicio)->format('H:00')}} {{$professionalAppointment->Nombre_paciente}}</p>
                                                               </div>
                                                           @endforeach
                                                       </div>
@@ -308,7 +312,7 @@
                           </div>
                       </div>
                       @if(!is_null($treatment))
-                      <div x-show="$wire.classShow" x-cloak>
+                      <div x-show="$wire.classShowAppointment" x-cloak>
                           <dl>
                             <div class="train-class-resume">
                               <dt class="text-sm font-medium text-gray-500">
@@ -339,7 +343,7 @@
                                 Prestación
                               </dt>
                               <dd class="train-class-resume-text">
-                                  <li class="list-none">{{App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Categoria_Nombre')}}</li>
+                                  <li class="list-none">-</li>
                               </dd>
                             </div>
                           </dl>

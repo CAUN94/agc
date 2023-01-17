@@ -26,17 +26,10 @@ class AdminMesActual extends Component
     public $heightbox = '80px';
     public $treatment = null;
     public $date;
-    public $name;
     public $namePaciente;
     public $remuneracion;
-    public $hour;
-    public $message;
     public $newAppointment;
-    public $coach;
-    public $newname;
-    public $newdate;
-    public $newhour;
-    public $places;
+
 
     public function mount()
     {
@@ -62,7 +55,6 @@ class AdminMesActual extends Component
         $this->now = Carbon::Now();
 
         $this->newAppointment = 0;
-        $this->coach = 0;
 
         // $this->selectedPlans = Training::where('id','>',0)->pluck('id')->toArray();
         // $this->plans = DB::table('train_appointments_pivot')->distinct('train_appointment_id')->pluck('train_appointment_id')->toArray();
@@ -78,16 +70,6 @@ class AdminMesActual extends Component
       $this->weekly = false;
     }
 
-    public function subPeriod(){
-        $this->startOfMonth->subMonth();
-        $this->endOfMonth->subMonth();
-    }
-
-    public function addPeriod(){
-        $this->startOfMonth->addMonth();
-        $this->endOfMonth->addMonth();
-    }
-
     public function subMonth()
     {
         $this->now->subMonth();
@@ -99,11 +81,7 @@ class AdminMesActual extends Component
     }
 
     public function close(){
-        $this->classShow = false ;
-        $this->train = null;
-        $this->name = null;
-        $this->date = null;
-        $this->hour = null;
+        $this->classShow = false;
     }
 
     public function show($id){
@@ -113,8 +91,6 @@ class AdminMesActual extends Component
         $this->date = Carbon::parse($this->treatment->Fecha)->format('d-M-Y');
         $this->convenio = $this->treatment->Convenio;
 
-        //dd($this->remuneracion);
-        //$this->remuneracion = $this->treatment->Total;
     }
 
     public function render()
