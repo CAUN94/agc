@@ -55,11 +55,11 @@ class Professional extends Model
     public static function remuneracion($first,$last,$user){
       $coef = Professional::where('description' ,'=',  $user)->first(['coeff']);
 
-      return ceil(ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
+      return Helper::moneda_chilena(ceil(ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
                           ->Where('Profesional', 'LIKE' , '%' . $user . '%')
                           ->Where('Estado','=', 'Atendido')
                           ->distinct(['Tratamiento_Nr'])
-                          ->sum('Precio_Prestacion')*$coef->coeff);
+                          ->sum('Precio_Prestacion')*$coef->coeff));
     }
 
     public static function Prom_prestaciones($first,$last,$user){
