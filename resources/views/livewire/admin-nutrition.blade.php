@@ -71,19 +71,19 @@
           <tr>
             <td class="text-center">Adiposa</td>
             <td class="text-center">{{round($M_adiposa_kg, 2)}} kg</td>
-            <td class="text-center">{{round($M_adiposa_porc, 2)}}%  </td>
+            <td class="text-center">{{round($M_adiposa_porc, 1)}}%  </td>
           </tr>
 
           <tr>
             <td class="text-center">Muscular</td>
             <td class="text-center">{{round($M_muscular_kg, 2)}} kg</td>
-            <td class="text-center">{{round($M_muscular_porc, 2)}}%</td>
+            <td class="text-center">{{round($M_muscular_porc, 1)}}%</td>
           </tr>
 
           <tr>
             <td class="text-center">Osea</td>
             <td class="text-center">{{round($M_osea_kg, 2)}} kg</td>
-            <td class="text-center">{{round($M_osea_porc, 2)}}%</td>
+            <td class="text-center">{{round($M_osea_porc, 1)}}%</td>
           </tr>
         </tbody>
       </table>

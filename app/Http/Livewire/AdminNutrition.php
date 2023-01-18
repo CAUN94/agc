@@ -91,6 +91,7 @@ class AdminNutrition extends Component
             'femoral' => ['required'],
             'cabeza' => ['required'],
             'brazo_relajado' => ['required'],
+            'brazo_flexionado' => ['required'],
             'antebrazo_maximo' => ['required'],
             't_mesoesternal' => ['required'],
             'cintura' => ['required'],
@@ -177,34 +178,48 @@ class AdminNutrition extends Component
 
 
         //$this->indice_M_O =I51/I53;
-        //$nutrition = new Nutrition;
+        $nutrition = new Nutrition;
 
-        //$nutrition->fecha = $this->fecha;
-        //$nutrition->plan = 'example.pdf';
-        //$nutrition->peso = $this->peso;
-        //$nutrition->talla_parado = $this->talla_parado;
-        //$nutrition->talla_sentado = $this->talla_sentado;
-        //$nutrition->masa_adiposa = $this->masa_adiposa;
-        //$nutrition->indice_musculo = $this->indice_musculo;
-        //$nutrition->masa_muscular = $this->masa_muscular;
-        //$nutrition->indice_adiposo = $this->indice_adiposo;
-        //$nutrition->masa_osea = $this->masa_osea;
-        //$nutrition->indice_corporal = $this->indice_corporal;
-        //$nutrition->tricep = $this->tricep;
-        //$nutrition->bicep = $this->bicep;
-        //$nutrition->muslo_medial = $this->muslo_medial;
-        //$nutrition->supraespinal = $this->supraespinal;
-        //$nutrition->subescapular = $this->subescapular;
-        //$nutrition->cresta_iliaca = $this->cresta_iliaca;
-        //$nutrition->pierna = $this->pierna;
-        //$nutrition->abdominal = $this->abdominal;
-        //$nutrition->rut = $this->user->rut;
+        $nutrition->fecha = $this->fecha;
+        $nutrition->plan = 'example.pdf';
+        $nutrition->peso = $this->peso;
+        $nutrition->talla_parado = $this->talla_parado;
+        $nutrition->talla_sentado = $this->talla_sentado;
+        $nutrition->biacromial = $this->biacromial;
+        $nutrition->torax_t= $this->t_transverso;
+        $nutrition->torax_ap= $this->t_antero_posterior;
+        $nutrition->iliocrestideo= $this->bi_iliocrestideo;
+        $nutrition->humeral= $this->humeral;
+        $nutrition->femoral= $this->femoral;
+        $nutrition->cabeza= $this->cabeza;
+        $nutrition->brazo_r= $this->brazo_relajado;
+        $nutrition->brazo_flex= $this->brazo_flexionado;
+        $nutrition->antebrazo_max= $this->antebrazo_maximo;
+        $nutrition->cintura= $this->cintura;
+        $nutrition->muslo_max= $this->muslo;
+        $nutrition->pierna_cm= $this->pierna_cm;
+        $nutrition->pierna_mm= $this->pierna_mm;
+        $nutrition->torax_meso= $this->t_mesoesternal;
+        $nutrition->torax_meso= $this->t_mesoesternal;
+        $nutrition->abdominal = $this->abdominal;
+        $nutrition->tricep = $this->triceps;
+        $nutrition->muslo_medial = $this->muslo_medial;
+        $nutrition->supraespinal = $this->supraespinal;
+        $nutrition->subescapular = $this->subescapular;
+        $nutrition->masa_adiposa = $this->M_adiposa_kg;
+        $nutrition->masa_adiposa_porc = $this->M_adiposa_porc;
+        $nutrition->masa_muscular = $this->M_muscular_kg;
+        $nutrition->masa_muscular_porc= $this->M_muscular_porc;
+        $nutrition->masa_osea = $this->M_osea_kg;
+        $nutrition->masa_osea_porc = $this->M_osea_porc;
+        $nutrition->indice_adiposo = 1;
+        $nutrition->indice_musculo = 1;
+        $nutrition->indice_corporal = $this->indice_masa_corporal;
+        $nutrition->rut = $this->user->rut;
 
         $this->showAntropometria = true;
 
-
-
-        //$nutrition->save();
+        $nutrition->save();
     }
 
     public function masaIdealCalculate(){
