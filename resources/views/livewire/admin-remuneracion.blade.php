@@ -143,7 +143,6 @@
             <button class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer bg-white hover:bg-gray-400 p-1.5 items-center mt-2"
                     wire:click="close()">Ocultar Lista
             </button>
-            <div class="flex flex-col lg:flex-row gap-3">
             <div class="w-full lg:w-3/4 flex flex-col overflow-x-auto gap-y-2">
               <div class="w-full overflow-x-auto gap-y-2 box-white p-3 mt-3">
                 <div class="w-full font-medium flex justify-between ml-3">
@@ -155,8 +154,9 @@
                       <tr class="bg-gray-300 text-sm font-semibold tracking-wide text-left">
                         <th class="text-center py-2 min-w-1/8 w-2/12">Fecha</th>
                         <th class="py-2 min-w-1/8 w-3/12 ">Paciente</th>
-                        <th class="text-center py-2 min-w-1/8 w-3/12">Alianza</th>
+                        <th class="text-center py-2 min-w-1/8 w-2/12">Alianza</th>
                         <th class="text-center py-2 min-w-1/8 w-2/12">Prestación</th>
+                        <th class="text-center py-2 min-w-1/8 w-1/12">Abono</th>
                         <th class="text-center py-2 min-w-1/8 w-2/12">Remuneración</th>
                       </tr>
                     </thead>
@@ -178,6 +178,9 @@
                       </td>
                       <td class="text-center">
                         {{$Appointment->Categoria_Nombre}}
+                      </td>
+                      <td class="text-center">
+                        ${{$Appointment->Abono}}
                       </td>
                       <td class="text-center">
                         ${{$Appointment->Precio_Prestacion}}
