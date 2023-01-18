@@ -46,7 +46,8 @@ class UpdateDatabaseActions extends Command
     public function allActions()
     {
       $client = new \GuzzleHttp\Client();
-      $query_string   = '?q={"fecha":{"gt":"2022-12-01"}}';
+      $date = Carbon::now()->startOfMonth()->format('Y-m-d');
+      $query_string   = '?q={"fecha":{"gt":"'.$date.'"}}';
       $url = 'https://api.medilink.healthatom.com/api/v1/atenciones';
       $url = $url."".$query_string;
 
@@ -125,7 +126,7 @@ class UpdateDatabaseActions extends Command
         }
         $count += 1;
         if($count%20 == 0){
-          sleep(6);
+          sleep(12);
         }
       }
 
