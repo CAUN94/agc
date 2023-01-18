@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\ProfesionalAppointment;
 use App\Models\AppointmentMl;
 use App\Models\ActionMl;
+use App\Models\Professional;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Auth;
@@ -106,10 +107,10 @@ class AdminRemuneracion extends Component
 
     public function show($id){
       $Professional = DB::table('professionals')
-      ->where('user_id',$id)
-      ->first(['description']);
-      $this->lista_id = $Professional->description;
-      $this->classShow = false;
+                          ->where('user_id',$id)
+                          ->first(['description']);
+                          $this->lista_id = $Professional->description;
+                          $this->classShow = false;
     }
 
     public function showAppointment($id){
@@ -162,6 +163,7 @@ class AdminRemuneracion extends Component
                                 ->where('Profesional',$this->lista_id)
                                 ->orderby('Fecha_Realizacion', 'DESC')
                                 ->Paginate(13),
+          'coeff' => Professional::where('description',$this->lista_id)->first(['coeff']),
       ]);
     }
 }

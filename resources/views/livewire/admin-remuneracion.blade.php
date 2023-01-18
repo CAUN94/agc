@@ -140,9 +140,11 @@
             @endif
           </div>
           @if(!$classShow and !is_null($lista_id))
+
             <button class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer bg-white hover:bg-gray-400 p-1.5 items-center mt-2"
                     wire:click="close()">Ocultar Lista
             </button>
+            <div class="flex flex-col lg:flex-row gap-3">
             <div class="w-full lg:w-3/4 flex flex-col overflow-x-auto gap-y-2">
               <div class="w-full overflow-x-auto gap-y-2 box-white p-3 mt-3">
                 <div class="w-full font-medium flex justify-between ml-3">
@@ -177,13 +179,13 @@
                         @endif
                       </td>
                       <td class="text-center">
-                        {{$Appointment->Categoria_Nombre}}
+                        ${{$Appointment->Precio_Prestacion}}
                       </td>
                       <td class="text-center">
                         ${{$Appointment->Abono}}
                       </td>
                       <td class="text-center">
-                        ${{$Appointment->Precio_Prestacion}}
+                        ${{ceil($Appointment->Precio_Prestacion*$coeff->coeff)}}
                       </td>
                     </tr>
                     @endforeach
@@ -202,7 +204,7 @@
                 </div>
                 <div class = "box-white mt-1.5">
                   <span>Prom. Prestaciones</span>
-                  <span class="ml-9">{{$professional->Prom_prestaciones($expiredstartOfMonth,$expiredendOfMonth,$lista_id)}}</span>
+                  <span class="ml-9">${{$professional->Prom_prestaciones($expiredstartOfMonth,$expiredendOfMonth,$lista_id)}}</span>
                 </div>
                 <div class = "box-white mt-1.5">
                   <span>Prom. Remuneraciones</span>
@@ -366,7 +368,6 @@
               </div>
           </div>
           </div>
-
           @endif
     @endif
 </div>
