@@ -46,7 +46,7 @@ class UpdateDatabaseActions extends Command
     public function allActions()
     {
       $client = new \GuzzleHttp\Client();
-      $date = Carbon::now()->subdays(51)->format('Y-m-d');
+      $date = Carbon::now()->subdays(15)->format('Y-m-d');
       $query_string   = '?q={"fecha":{"gt":"'.$date.'"}}';
       $url = 'https://api.medilink.healthatom.com/api/v1/atenciones';
       $url = $url."".$query_string;
@@ -106,7 +106,6 @@ class UpdateDatabaseActions extends Command
           $new_row = actionMl::updateOrCreate([
             'Tratamiento_Nr'=> $atention->id,
             'Prestacion_Nr'=> $action->id_prestacion,
-            'Estado'=> $estado,
           ],[
             'Sucursal'=> $atention->nombre_sucursal,
             'Nombre'=>$nombre,
