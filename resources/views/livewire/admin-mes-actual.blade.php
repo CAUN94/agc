@@ -33,25 +33,24 @@
                   <li>
                       <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                           <i class="fa fa-money" aria-hidden="true"></i>
-                          <span class="flex-1 ml-3 whitespace-nowrap">Prestaciones</span>
-                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
-                            @if($weekly)
-                              {{$professional->prestaciones($startOfWeek,$endOfWeek,$professional->description)}}
-                            @else
-                              {{$professional->prestaciones($startOfMonth,$endOfMonth,$professional->description)}}
-                            @endif
-                          </span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                          <i class="fa fa-money" aria-hidden="true"></i>
                           <span class="flex-1 ml-3 whitespace-nowrap">Remuneración</span>
                           <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
                             @if($weekly)
                               {{$professional->remuneracion($startOfWeek,$endOfWeek,$professional->description)}}
                             @else
                               {{$professional->remuneracion($startOfMonth,$endOfMonth,$professional->description)}}
+                            @endif
+                          </span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                          <span class="flex-1 ml-3 whitespace-nowrap">Tasa de Ocupación</span>
+                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
+                            @if($weekly)
+                              {{$professional->tasaOcupacion($startOfWeek,$endOfWeek,$professional->description)}}%
+                            @else
+                              {{$professional->tasaOcupacion($startOfMonth,$endOfMonth,$professional->description)}}%
                             @endif
                           </span>
                       </a>
@@ -72,35 +71,51 @@
               </ul>
           @endforeach
         </div>
+    </div>
 
-        <button x-on:click="pay = !pay" class= "border rounded-lg mt-1 ml-2 mb-1 bg-gray-100 hover:bg-white">Ver más</button>
-        <div x-show="pay">
-          @foreach(App\Models\Professional::where('user_id','=',Auth::user()->id)->get() as $professional)
-              <ul class="grid grid-cols-3 gap-1">
-                  <li>
-                      <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                          <i class="fa fa-money" aria-hidden="true"></i>
-                          <span class="flex-1 ml-3 whitespace-nowrap">Promedio Remuneración Semanal</span>
-                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->Prom_remuneracion($startOfWeek,$endOfWeek,$professional->description)}}</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                          <i class="fa fa-money" aria-hidden="true"></i>
-                          <span class="flex-1 ml-3 whitespace-nowrap">Promedio Remuneración Mensual</span>
-                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->Prom_remuneracion($startOfMonth,$endOfMonth,$professional->description)}}</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                          <i class="fa fa-money" aria-hidden="true"></i>
-                          <span class="flex-1 ml-3 whitespace-nowrap">Tasa de Ocupación</span>
-                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->tasaOcupacion($startOfMonth,$endOfMonth,$professional->description)}}%</span>
-                      </a>
-                  </li>
-              </ul>
-          @endforeach
+    <div class="flex flex-col lg:flex-row gap-3 mt-2">
+      <div class="w-full lg:w-3/4 flex flex-col overflow-x-auto gap-y-2">
+        <div class="w-full overflow-x-auto gap-y-2 box-white p-3 mt-3">
+          <div class="w-full font-medium flex justify-between ml-3">
+            Atendidos
+          </div>
+          <div class="rounded-b-lg h-full p-3">
+            <table class="table-fixed w-full overflow-hidden rounded-lg shadow-lg p-6">
+              <thead>
+                <tr class="bg-gray-300 text-sm font-semibold tracking-wide text-left">
+                  <th class="text-center py-2 min-w-1/8 w-2/12">Fecha</th>
+                  <th class="py-2 min-w-1/8 w-3/12 ">Paciente</th>
+                  <th class="text-center py-2 min-w-1/8 w-3/12">Alianza</th>
+                  <th class="text-center py-2 min-w-1/8 w-2/12">Prestación</th>
+                  <th class="text-center py-2 min-w-1/8 w-2/12">Remuneración</th>
+                </tr>
+              </thead>
+              <tbody>
+              @foreach($appointments as $Appointment)
+              <tr>
+                <td class="text-center">
+                    {{Carbon\Carbon::parse($Appointment->Fecha_Realizacion)->format('d-m-Y')}}
+                </td>
+                <td class="text-left">
+                   {{$Appointment->Nombre}} {{$Appointment->Apellido}}
+                </td>
+                <td class="text-center">
+                  {{$Appointment->Convenio}}
+                </td>
+                <td class="text-center">
+                  {{$Appointment->Categoria_Nombre}}
+                </td>
+                <td class="text-center">
+                  {{Helper::moneda_chilena($Appointment->Precio_Prestacion)}}
+                </td>
+              </tr>
+              @endforeach
+              </tbody>
+            </table>
+            <div class='py-3'>{{$appointments->links()}}</div>
+          </div>
         </div>
+      </div>
     </div>
 
     <div class="flex flex-col lg:flex-row gap-2 mt-2">
@@ -147,7 +162,7 @@
                               Prestación
                             </dt>
                             <dd class="train-class-resume-text">
-                                <li class="list-none">{{App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Categoria_Nombre')}}</li>
+                                <li class="list-none">{{Helper::moneda_chilena(App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Categoria_Nombre'))}}</li>
                             </dd>
                           </div>
                         </dl>
@@ -157,7 +172,7 @@
                               Remuneración
                             </dt>
                             <dd class="train-class-resume-text">
-                                <li class="list-none">{{App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Precio_Prestacion')}}</li>
+                                <li class="list-none">{{Helper::moneda_chilena(App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Precio_Prestacion'))}}</li>
                             </dd>
                           </div>
                         </dl>

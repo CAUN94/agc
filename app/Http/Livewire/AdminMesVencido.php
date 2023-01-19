@@ -6,9 +6,6 @@ use App\Models\ProfesionalAppointment;
 use App\Models\AppointmentMl;
 use App\Models\ActionMl;
 use App\Models\TrainAppointmentPivot;
-use App\Models\TrainBook;
-use App\Models\Trainer;
-use App\Models\Training;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Auth;
@@ -32,20 +29,12 @@ class AdminMesVencido extends Component
     public $height = '120px';
     public $heightbox = '80px';
     public $treatment = null;
-    public $train = null;
     public $date;
     public $name;
     public $namePaciente;
     public $remuneracion;
     public $hour;
     public $message;
-    public $trainings_g;
-    public $trainings_s;
-    public $coach;
-    public $newname;
-    public $newdate;
-    public $newhour;
-    public $places;
 
     public function mount()
     {
@@ -92,18 +81,6 @@ class AdminMesVencido extends Component
 
     public function close(){
         $this->classShow = false ;
-        $this->train = null;
-        $this->name = null;
-        $this->date = null;
-        $this->hour = null;
-    }
-
-    public function openCreate(){
-        $this->createShow = true ;
-    }
-
-    public function closeCreate(){
-        $this->createShow = false;
     }
 
     public function show($id){
@@ -112,10 +89,6 @@ class AdminMesVencido extends Component
         $this->namePaciente = $this->treatment->Nombre_paciente . " " . $this->treatment->Apellidos_paciente;
         $this->date = Carbon::parse($this->treatment->Fecha)->format('d M Y');
         $this->convenio = $this->treatment->Convenio;
-
-        //$this->remuneracion = $this->remuneracion->Total;
-        //dd($this->remuneracion);
-        //$this->remuneracion = $this->treatment->Total;
     }
 
     public function render()

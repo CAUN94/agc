@@ -122,6 +122,13 @@ class AdminMesActual extends Component
           }
       }
 
-        return view('livewire.admin-mes-actual');
+        return view('livewire.admin-mes-actual', [
+            'appointments' => ActionMl::join('professionals', 'professionals.description', '=' ,'action_mls.Profesional')
+                                  ->where('action_mls.Estado','Atendido')
+                                  ->whereBetween('Fecha_Realizacion',[$this->startOfMonth->format('Y-m-d'),$this->endOfMonth->format('Y-m-d')])
+                                  ->where('professionals.user_id',Auth::user()->id)
+                                  ->orderby('Fecha_Realizacion', 'ASC')
+                                  ->Paginate(13),
+        ]);
     }
 }
