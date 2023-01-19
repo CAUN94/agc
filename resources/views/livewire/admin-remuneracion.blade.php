@@ -179,13 +179,13 @@
                         @endif
                       </td>
                       <td class="text-center">
-                        ${{$Appointment->Precio_Prestacion}}
+                        {{$Appointment->Precio_Prestacion}}
                       </td>
                       <td class="text-center">
-                        ${{$Appointment->Abono}}
+                        {{$Appointment->Abono}}
                       </td>
                       <td class="text-center">
-                        ${{ceil($Appointment->Precio_Prestacion*$coeff->coeff)}}
+                        {{ceil($Appointment->Precio_Prestacion*$coeff->coeff)}}
                       </td>
                     </tr>
                     @endforeach
@@ -204,7 +204,7 @@
                 </div>
                 <div class = "box-white mt-1.5">
                   <span>Prom. Prestaciones</span>
-                  <span class="ml-9">${{$professional->Prom_prestaciones($expiredstartOfMonth,$expiredendOfMonth,$lista_id)}}</span>
+                  <span class="ml-9">{{$professional->Prom_prestaciones($expiredstartOfMonth,$expiredendOfMonth,$lista_id)}}</span>
                 </div>
                 <div class = "box-white mt-1.5">
                   <span>Prom. Remuneraciones</span>
