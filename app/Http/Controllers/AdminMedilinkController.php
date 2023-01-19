@@ -82,7 +82,7 @@ class AdminMedilinkController extends Controller
                 //     break;
                 // }
                 sleep(0.3);
-                if($data->fecha > '2022-12-20'){
+                if($data->fecha < '2022-12-21' or $data->fecha > '2023-01-20'){
                     continue;
                 }
                 $id_atencion = $data->id_atencion;
