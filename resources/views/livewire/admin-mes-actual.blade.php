@@ -36,9 +36,9 @@
                           <span class="flex-1 ml-3 whitespace-nowrap">Prestaciones</span>
                           <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
                             @if($weekly)
-                              ${{$professional->prestaciones($startOfWeek,$endOfWeek,$professional->description)}}
+                              {{$professional->prestaciones($startOfWeek,$endOfWeek,$professional->description)}}
                             @else
-                              ${{$professional->prestaciones($startOfMonth,$endOfMonth,$professional->description)}}
+                              {{$professional->prestaciones($startOfMonth,$endOfMonth,$professional->description)}}
                             @endif
                           </span>
                       </a>
@@ -49,9 +49,9 @@
                           <span class="flex-1 ml-3 whitespace-nowrap">Remuneración</span>
                           <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
                             @if($weekly)
-                              ${{$professional->remuneracion($startOfWeek,$endOfWeek,$professional->description)}}
+                              {{$professional->remuneracion($startOfWeek,$endOfWeek,$professional->description)}}
                             @else
-                              ${{$professional->remuneracion($startOfMonth,$endOfMonth,$professional->description)}}
+                              {{$professional->remuneracion($startOfMonth,$endOfMonth,$professional->description)}}
                             @endif
                           </span>
                       </a>
@@ -81,14 +81,14 @@
                       <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                           <i class="fa fa-money" aria-hidden="true"></i>
                           <span class="flex-1 ml-3 whitespace-nowrap">Promedio Remuneración Semanal</span>
-                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">${{$professional->Prom_remuneracion($startOfWeek,$endOfWeek,$professional->description)}}</span>
+                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->Prom_remuneracion($startOfWeek,$endOfWeek,$professional->description)}}</span>
                       </a>
                   </li>
                   <li>
                       <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                           <i class="fa fa-money" aria-hidden="true"></i>
                           <span class="flex-1 ml-3 whitespace-nowrap">Promedio Remuneración Mensual</span>
-                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">${{$professional->Prom_remuneracion($startOfMonth,$endOfMonth,$professional->description)}}</span>
+                          <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->Prom_remuneracion($startOfMonth,$endOfMonth,$professional->description)}}</span>
                       </a>
                   </li>
                   <li>
@@ -157,7 +157,7 @@
                               Remuneración
                             </dt>
                             <dd class="train-class-resume-text">
-                                <li class="list-none">${{App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Precio_Prestacion')}}</li>
+                                <li class="list-none">{{App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Precio_Prestacion')}}</li>
                             </dd>
                           </div>
                         </dl>
