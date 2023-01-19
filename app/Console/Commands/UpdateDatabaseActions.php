@@ -127,8 +127,8 @@ class UpdateDatabaseActions extends Command
             'updated_at'=> Carbon::Now()
           ]);
           $count += 1;
-        if($count%40 == 0){
-          sleep(10);
+        if($count%30 == 0){
+          sleep(15);
         }
         }
         
