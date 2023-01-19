@@ -86,24 +86,27 @@ class UpdateDatabaseActions extends Command
 
         $actions = json_decode($response->getBody())->data;
 
+        $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/'.$atention->id.'/citas';
+        
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $this->token
+            ]
+        ]);
+
+        $cita = json_decode($response->getBody())->data[0];
+
+        $estado = $cita->estado_cita;
         
         foreach($actions as $action){
-          if($atention->finalizado=1){
-            $estado = 'Atendido';
-          }else{
-            $estado = 'No Atendido';
-          }
-
-          if(empty($atention->convenio)){
-            $atention->convenio = 'Sin Convenio';
-          }
-
           $nombre = strtok($atention->nombre_paciente,  ' ');
           $apellido = substr($atention->nombre_paciente, strpos($atention->nombre_paciente, " ") + 1);
 
           $new_row = actionMl::updateOrCreate([
             'Tratamiento_Nr'=> $atention->id,
-            'Prestacion_Nr'=> $action->id_prestacion
+            'Prestacion_Nr'=> $action->id_prestacion,
+            'Estado'=> $estado,
           ],[
             'Sucursal'=> $atention->nombre_sucursal,
             'Nombre'=>$nombre,
