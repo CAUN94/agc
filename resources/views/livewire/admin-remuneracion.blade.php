@@ -88,7 +88,7 @@
         </div>
 
             <div class="mb-3 mt-6 w-full flex justify-between">
-                Periodo de Mes vencido ({{$expiredstartOfMonth->format('d-m')}} al {{$expiredendOfMonth->format('d-m')}})
+                Periodo de Mes Actual ({{$startOfMonth->format('d-m')}} al {{$endOfMonth->format('d-m')}})
 
             </div>
             @if($classShow)
