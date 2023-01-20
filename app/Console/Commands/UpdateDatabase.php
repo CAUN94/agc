@@ -86,7 +86,7 @@ class UpdateDatabase extends Command
                 ]
             ]);
             if($count%20 == 0){
-                sleep(10);
+                sleep(20);
             }
             
             $patient = json_decode($response->getBody())->data;
