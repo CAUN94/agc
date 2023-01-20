@@ -162,7 +162,7 @@ class AdminRemuneracion extends Component
                                 ->where('Fecha_Realizacion','>',$this->startOfMonth->format('Y-m-d'))
                                 ->where('Fecha_Realizacion','<',$this->endOfMonth->format('Y-m-d'))
                                 ->where('Profesional',$this->lista_id)
-                                ->groupBy('Prestacion_Nr')
+                                ->groupBy('Tratamiento_Nr')
                                 ->orderby('Fecha_Realizacion', 'DESC')
                                 ->Paginate(13),
 
