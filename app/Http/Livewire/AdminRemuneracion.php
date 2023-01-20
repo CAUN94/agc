@@ -159,10 +159,10 @@ class AdminRemuneracion extends Component
 
       return view('livewire.admin-remuneracion', [
           'appointments' => ActionMl::where('Estado','Atendido')
-                                ->where('Fecha_Realizacion','>',$this->expiredstartOfMonth->format('Y-m-d'))
-                                ->where('Fecha_Realizacion','<',$this->expiredendOfMonth->format('Y-m-d'))
+                                ->where('Fecha_Realizacion','>',$this->startOfMonth->format('Y-m-d'))
+                                ->where('Fecha_Realizacion','<',$this->endOfMonth->format('Y-m-d'))
                                 ->where('Profesional',$this->lista_id)
-                                ->groupBy('Tratamiento_Nr')
+                                ->groupBy('Prestacion_Nr')
                                 ->orderby('Fecha_Realizacion', 'DESC')
                                 ->Paginate(13),
 
