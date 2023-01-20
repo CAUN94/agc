@@ -27,7 +27,8 @@ class Professional extends Model
     }
 
     public static function monthAppointments($first,$last,$user){
-        return ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
+        return ActionMl::where('Fecha_Realizacion','>',$first)
+                        ->where('Fecha_Realizacion','<', $last)
                         ->Where('Profesional', 'LIKE' , '%' . $user . '%')
                         ->Where('Estado','=', 'Atendido')
                         ->distinct(['Tratamiento_Nr'])
@@ -36,7 +37,8 @@ class Professional extends Model
 
     public static function prestaciones($first,$last,$user){
 
-      return Helper::moneda_chilena(ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
+      return Helper::moneda_chilena(ActionMl::where('Fecha_Realizacion','>',$first)
+                      ->where('Fecha_Realizacion','<', $last)
                       ->Where('Profesional', 'LIKE' , '%' . $user . '%')
                       ->Where('Estado','=', 'Atendido')
                       ->distinct(['Tratamiento_Nr'])
@@ -45,7 +47,8 @@ class Professional extends Model
 
     public static function abonos($first,$last,$user){
 
-      return Helper::moneda_chilena(ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
+      return Helper::moneda_chilena(ActionMl::where('Fecha_Realizacion','>',$first)
+                      ->where('Fecha_Realizacion','<', $last)
                       ->Where('Profesional', 'LIKE' , '%' . $user . '%')
                       ->Where('Estado','=', 'Atendido')
                       ->distinct(['Tratamiento_Nr'])
@@ -55,7 +58,8 @@ class Professional extends Model
     public static function remuneracion($first,$last,$user){
       $coef = Professional::where('description' ,'=',  $user)->first(['coeff']);
 
-      return Helper::moneda_chilena(ceil(ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
+      return Helper::moneda_chilena(ceil(ActionMl::where('Fecha_Realizacion','>',$first)
+                          ->where('Fecha_Realizacion','<', $last)
                           ->Where('Profesional', 'LIKE' , '%' . $user . '%')
                           ->Where('Estado','=', 'Atendido')
                           ->distinct(['Tratamiento_Nr'])
@@ -65,7 +69,8 @@ class Professional extends Model
     public static function Prom_prestaciones($first,$last,$user){
       $coef = Professional::where('description' ,'=',  $user)->first(['coeff']);
 
-     $remuneracion = (ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
+     $remuneracion = (ActionMl::where('Fecha_Realizacion','>',$first)
+                              ->where('Fecha_Realizacion','<', $last)
                                ->Where('Profesional', 'LIKE' , '%' . $user . '%')
                                ->Where('Estado','=', 'Atendido')
                                ->distinct(['Tratamiento_Nr'])
@@ -106,7 +111,8 @@ class Professional extends Model
     }
 
     public static function tasaOcupacion($first,$last,$user){
-      $atenciones =  ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
+      $atenciones =  ActionMl::where('Fecha_Realizacion','>',$first)
+                               ->where('Fecha_Realizacion','<', $last)
                               ->Where('Profesional', 'LIKE' , '%' . $user . '%')
                               ->Where('Estado','=', 'Atendido')
                               ->distinct(['Tratamiento_Nr'])
