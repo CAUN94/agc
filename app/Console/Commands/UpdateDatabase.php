@@ -45,7 +45,7 @@ class UpdateDatabase extends Command
 
     public function store(){
         $client = new \GuzzleHttp\Client();
-        $date = strval(Carbon::now()->subDays(90)->format('Y-m-d'));
+        $date = strval(Carbon::now()->subDays(60)->format('Y-m-d'));
         $url = 'https://api.dentalink.healthatom.com/api/v1/citas';
         $query_string   = '?q={"fecha":{"gt":"'.$date.'"}}';
         $url = $url."".$query_string;
@@ -86,7 +86,7 @@ class UpdateDatabase extends Command
                 ]
             ]);
             if($count%20 == 0){
-                sleep(25);
+                sleep(15);
             }
             
             $patient = json_decode($response->getBody())->data;

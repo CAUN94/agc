@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Carbon\Carbon;
 use App\Models\ActionMl;
+use App\Models\AppointmentMl;
 
 class UpdateDatabaseActions extends Command
 {
@@ -46,37 +47,51 @@ class UpdateDatabaseActions extends Command
     public function allActions()
     {
       $client = new \GuzzleHttp\Client();
-      $date = Carbon::now()->subdays(90)->format('Y-m-d');
-      $query_string   = '?q={"fecha":{"gt":"'.$date.'"}}';
-      $url = 'https://api.medilink.healthatom.com/api/v1/atenciones';
-      $url = $url."".$query_string;
+      // $date = Carbon::now()->subdays(15)->format('Y-m-d');
+      // $query_string   = '?q={"fecha":{"gt":"'.$date.'"}}';
+      // $url = 'https://api.medilink.healthatom.com/api/v1/atenciones';
+      // $url = $url."".$query_string;
 
-      $response = $client->request('GET', $url, [
-          'headers'  => [
-              'Authorization' => 'Token ' . $this->token
-          ]
-      ]);
+      // $response = $client->request('GET', $url, [
+      //     'headers'  => [
+      //         'Authorization' => 'Token ' . $this->token
+      //     ]
+      // ]);
 
-      $allAtentions = [];
-      $atentions = json_decode($response->getBody());
-      $allAtentions[] = $atentions->data;
+      // $allAtentions = [];
+      // $atentions = json_decode($response->getBody());
+      // $allAtentions[] = $atentions->data;
 
-      while(isset($atentions->links->next)){
-          $response = $client->request('GET', $atentions->links->next, [
-              'headers'  => [
-                  'Authorization' => 'Token ' . $this->token
-              ]
-          ]);
-          $atentions = json_decode($response->getBody());
-          $allAtentions[] = $atentions->data;
+      // while(isset($atentions->links->next)){
+      //     $response = $client->request('GET', $atentions->links->next, [
+      //         'headers'  => [
+      //             'Authorization' => 'Token ' . $this->token
+      //         ]
+      //     ]);
+      //     $atentions = json_decode($response->getBody());
+      //     $allAtentions[] = $atentions->data;
 
-      }
-      $allAtentions = array_merge(...$allAtentions);
-      $this->info(count($allAtentions));
+      // }
+      // $allAtentions = array_merge(...$allAtentions);
+      // $this->info(count($allAtentions));
       $count = 0;
-      foreach($allAtentions as $atention){
+
+      $allAtentions = AppointmentMl::where('Fecha','>','2022-12-01')->get();
+
+      foreach($allAtentions as $ar){
         $this->info($count);
-        $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/'.$atention->id.'/detalles';
+
+        $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/'.$ar->Tratamiento_Nr;
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $this->token
+            ]
+        ]);
+
+        $atention = json_decode($response->getBody())->data;
+
+        $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/'.$ar->Tratamiento_Nr.'/detalles';
 
         $response = $client->request('GET', $url, [
             'headers'  => [
@@ -86,7 +101,7 @@ class UpdateDatabaseActions extends Command
 
         $actions = json_decode($response->getBody())->data;
 
-        $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/'.$atention->id.'/citas';
+        $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/'.$ar->Tratamiento_Nr.'/citas';
         
 
         $response = $client->request('GET', $url, [
@@ -127,7 +142,7 @@ class UpdateDatabaseActions extends Command
           ]);
           $count += 1;
         if($count%30 == 0){
-          sleep(25);
+          sleep(15);
         }
         }
         
