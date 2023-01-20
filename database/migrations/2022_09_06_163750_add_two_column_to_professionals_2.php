@@ -14,7 +14,7 @@ class AddTwoColumnToProfessionals2 extends Migration
     public function up()
     {
         Schema::table('professionals', function (Blueprint $table) {
-            $table->string('mail')->after('description');
+            // $table->string('mail')->after('description');
             $table->text('class')->after('mail');
         });
     }
