@@ -179,13 +179,13 @@
                         @endif
                       </td>
                       <td class="text-center">
-                        {{$Appointment->Precio_Prestacion}}
+                        {{Helper::moneda_chilena($Appointment->Precio_Prestacion)}}
                       </td>
                       <td class="text-center">
-                        {{$Appointment->Abono}}
+                        {{Helper::moneda_chilena($Appointment->Abono)}}
                       </td>
                       <td class="text-center">
-                        {{ceil($Appointment->Precio_Prestacion*$coeff->coeff)}}
+                        {{Helper::moneda_chilena(ceil($Appointment->Precio_Prestacion*$coeff->coeff))}}
                       </td>
                     </tr>
                     @endforeach
