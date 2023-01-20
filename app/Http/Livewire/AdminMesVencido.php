@@ -118,7 +118,7 @@ class AdminMesVencido extends Component
                                   ->where('Fecha_Realizacion','>',$this->expiredstartOfMonth->format('Y-m-d'))
                                   ->where('Fecha_Realizacion','<',$this->expiredendOfMonth->format('Y-m-d'))
                                   ->where('professionals.user_id',Auth::user()->id)
-                                  ->distinct(['Tratamiento_Nr'])
+                                  ->groupBy('Tratamiento_Nr')
                                   ->orderby('Fecha_Realizacion', 'ASC')
                                   ->Paginate(13),
         ]);

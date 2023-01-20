@@ -154,6 +154,7 @@
                   <table class="table-fixed w-full overflow-hidden rounded-lg shadow-lg p-6">
                     <thead>
                       <tr class="bg-gray-300 text-sm font-semibold tracking-wide text-left">
+                        <th class="text-center py-2 min-w-1/8 w-1/12">id</th>
                         <th class="text-center py-2 min-w-1/8 w-2/12">Fecha</th>
                         <th class="py-2 min-w-1/8 w-3/12 ">Paciente</th>
                         <th class="text-center py-2 min-w-1/8 w-2/12">Alianza</th>
@@ -165,6 +166,9 @@
                     <tbody>
                     @foreach($appointments as $Appointment)
                     <tr>
+                      <td class="text-center">
+                         {{$Appointment->id}}
+                      </td>
                       <td class="text-center">
                           {{Carbon\Carbon::parse($Appointment->Fecha_Realizacion)->format('d-m-Y')}}
                       </td>

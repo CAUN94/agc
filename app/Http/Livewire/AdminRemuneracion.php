@@ -162,10 +162,10 @@ class AdminRemuneracion extends Component
                                 ->where('Fecha_Realizacion','>',$this->expiredstartOfMonth->format('Y-m-d'))
                                 ->where('Fecha_Realizacion','<',$this->expiredendOfMonth->format('Y-m-d'))
                                 ->where('Profesional',$this->lista_id)
-                                ->distinct(['Tratamiento_Nr'])
+                                ->groupBy('Tratamiento_Nr')
                                 ->orderby('Fecha_Realizacion', 'DESC')
                                 ->Paginate(13),
-                                
+
           'coeff' => Professional::where('description',$this->lista_id)->first(['coeff']),
       ]);
     }

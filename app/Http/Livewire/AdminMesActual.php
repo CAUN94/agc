@@ -128,7 +128,7 @@ class AdminMesActual extends Component
                                   ->where('Fecha_Realizacion','>',$this->startOfMonth->format('Y-m-d'))
                                   ->where('Fecha_Realizacion','<',$this->endOfMonth->format('Y-m-d'))
                                   ->where('professionals.user_id',Auth::user()->id)
-                                  ->distinct(['Tratamiento_Nr'])
+                                  ->groupBy('Tratamiento_Nr')
                                   ->orderby('Fecha_Realizacion', 'ASC')
                                   ->Paginate(13),
         ]);
