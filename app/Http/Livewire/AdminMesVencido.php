@@ -8,6 +8,7 @@ use App\Models\ActionMl;
 use App\Models\TrainAppointmentPivot;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
+use App\Models\Professional;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
