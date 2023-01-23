@@ -7,6 +7,9 @@
             @else
               Periodo de Mes Actual ({{$startOfMonth->format('d-m')}} al {{$endOfMonth->format('d-m')}})
             @endif
+            <button class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer bg-gray-100 hover:bg-gray-400 p-1.5 items-center mt-0.5 mb-1"
+                    wire:click="changePeriod()">Cambio de periodo
+            </button>
             <div class="border rounded-lg px-1" style="padding-bottom: 3.5px;" >
                 <button
                     type="button"
@@ -84,12 +87,16 @@
                       </a>
                   </li>
               </ul>
+              <div>
+              <button class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer bg-gray-100 hover:bg-gray-400 p-1.5 items-center mt-0.5 mb-1"
+                      wire:click="show({{$professional->user->id}},{{$startOfMonth}},{{$endOfMonth}})">Mostrar lista
+              </button>
+            </div>
           @endforeach
         </div>
 
             <div class="mb-3 mt-6 w-full flex justify-between">
-                Periodo de Mes Actual ({{$startOfMonth->format('d-m')}} al {{$endOfMonth->format('d-m')}})
-
+                Periodo de Mes Vencido ({{$expiredstartOfMonth->format('d-m')}} al {{$expiredendOfMonth->format('d-m')}})
             </div>
             @if($classShow)
             <div>
@@ -140,7 +147,6 @@
             @endif
           </div>
           @if(!$classShow and !is_null($lista_id))
-
             <button class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer bg-white hover:bg-gray-400 p-1.5 items-center mt-2"
                     wire:click="close()">Ocultar Lista
             </button>
@@ -164,7 +170,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                    @foreach($appointments as $Appointment)
+                    @foreach($appointments_vencido as $Appointment)
                     <tr>
                       <td class="text-center">
                          {{$Appointment->id}}
@@ -189,13 +195,13 @@
                         {{Helper::moneda_chilena($Appointment->Abono)}}
                       </td>
                       <td class="text-center">
-                        {{Helper::moneda_chilena(ceil($Appointment->Precio_Prestacion*$coeff->coeff))}}
+                        {{Helper::moneda_chilena(ceil($Appointment->Precio_Prestacion*$coff->coff/100))}}
                       </td>
                     </tr>
                     @endforeach
                     </tbody>
                   </table>
-                  <div class='py-3'>{{$appointments->links()}}</div>
+                  <div class='py-3'>{{$appointments_vencido->links()}}</div>
                 </div>
               </div>
             </div>

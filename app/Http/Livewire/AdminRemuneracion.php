@@ -37,11 +37,6 @@ class AdminRemuneracion extends Component
     public $hour;
     public $message;
     public $lista_id = '';
-    public $coach;
-    public $newname;
-    public $newdate;
-    public $newhour;
-    public $places;
 
     public function mount()
     {
@@ -95,6 +90,11 @@ class AdminRemuneracion extends Component
         $this->endOfMonth->addMonth();
     }
 
+    public function changePeriod(){
+        $this->startOfMonth->addMonth();
+        $this->endOfMonth->addMonth();
+    }
+
     public function subMonth()
     {
         $this->now->subMonth();
@@ -119,12 +119,11 @@ class AdminRemuneracion extends Component
         $this->date = Carbon::parse($this->treatment->Fecha)->format('d-M-Y');
         $this->convenio = $this->treatment->Convenio;
         $this->classShowAppointment = true;
-        //dd($this->remuneracion);
-        //$this->remuneracion = $this->treatment->Total;
     }
 
     public function close(){
         $this->classShow = true;
+        $this->lista_id = null;
     }
 
 
@@ -158,7 +157,7 @@ class AdminRemuneracion extends Component
       }
 
       return view('livewire.admin-remuneracion', [
-          'appointments' => ActionMl::where('Estado','Atendido')
+          'appointments_actual' => ActionMl::where('Estado','Atendido')
                                 ->where('Fecha_Realizacion','>',$this->startOfMonth->format('Y-m-d'))
                                 ->where('Fecha_Realizacion','<',$this->endOfMonth->format('Y-m-d'))
                                 ->where('Profesional',$this->lista_id)
@@ -166,7 +165,7 @@ class AdminRemuneracion extends Component
                                 ->orderby('Fecha_Realizacion', 'DESC')
                                 ->Paginate(13),
 
-          'coeff' => Professional::where('description',$this->lista_id)->first(['coeff']),
+          'coff' => Professional::where('description',$this->lista_id)->first(['coff']),
       ]);
     }
 }
