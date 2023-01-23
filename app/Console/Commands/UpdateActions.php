@@ -46,12 +46,15 @@ class UpdateActions extends Command
      */
     public function handle()
     {
-        $this->allActions();
+        $ids = [2,49,46,10,19,48,26,37,20,44,54,52,53,50,34,47,45];
+        foreach($ids as $id){
+            $this->allActions($id);
+            sleep(2);
+        }
+        
     }
 
-    public function allActions(){
-
-        $id = 48;
+    public function allActions($id){
         $client = new \GuzzleHttp\Client();
         $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/'.$id;
         $response = $client->request('GET', $url, [
@@ -61,6 +64,9 @@ class UpdateActions extends Command
         ]);
 
         $rut = json_decode($response->getBody())->data->rut;
+        if(!isset(User::where('rut',$rut)->first()->professional->coeff)){
+            return;
+        }
         $coff = User::where('rut',$rut)->first()->professional->coeff;
 
         $client = new \GuzzleHttp\Client();
@@ -152,7 +158,6 @@ class UpdateActions extends Command
             foreach($pay[1] as $action){
                 $this->info(isset($action->id_prestacion));
                 if(!isset($action->id_prestacion)){
-                    
                     $action->id_prestacion = $pay[0]->nombre_atencion;
                     $action->nombre_prestacion = $pay[0]->nombre_atencion;
                     $action->subtotal = $action->total;
