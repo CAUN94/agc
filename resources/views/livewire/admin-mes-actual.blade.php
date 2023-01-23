@@ -162,7 +162,7 @@
                               Prestación
                             </dt>
                             <dd class="train-class-resume-text">
-                                <li class="list-none">{{Helper::moneda_chilena(App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Categoria_Nombre'))}}</li>
+                                <li class="list-none">{{App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Categoria_Nombre')}}</li>
                             </dd>
                           </div>
                         </dl>
@@ -172,7 +172,7 @@
                               Remuneración
                             </dt>
                             <dd class="train-class-resume-text">
-                                <li class="list-none">{{Helper::moneda_chilena(App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Precio_Prestacion'))}}</li>
+                                <li class="list-none">{{Helper::moneda_chilena(App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Precio_Prestacion'))*$coeff}}</li>
                             </dd>
                           </div>
                         </dl>
