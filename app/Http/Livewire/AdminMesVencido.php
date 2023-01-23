@@ -5,7 +5,6 @@ namespace App\Http\Livewire;
 use App\Models\ProfesionalAppointment;
 use App\Models\AppointmentMl;
 use App\Models\ActionMl;
-use App\Models\Professional;
 use App\Models\TrainAppointmentPivot;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
@@ -122,7 +121,7 @@ class AdminMesVencido extends Component
                                   ->groupBy('Tratamiento_Nr')
                                   ->orderby('Fecha_Realizacion', 'ASC')
                                   ->Paginate(13),
-            'coff' => Professional::where('description',$this->lista_id)->first(['coff']),
+            'coff' => Professional::where('user_id',Auth::user()->id)->first(['coff']),
         ]);
     }
 }
