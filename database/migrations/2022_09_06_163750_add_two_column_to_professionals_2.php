@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddTwoColumnToProfessionals extends Migration
+class AddTwoColumnToProfessionals2 extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,8 @@ class AddTwoColumnToProfessionals extends Migration
     public function up()
     {
         Schema::table('professionals', function (Blueprint $table) {
-            $table->string('mail')->after('description');
-            $table->text('class')->after('mail');
+            // $table->string('mail')->after('description');
+            // $table->text('class')->after('mail');
         });
     }
 

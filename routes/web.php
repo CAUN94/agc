@@ -104,6 +104,7 @@ Route::middleware([UpdatePassword::class])->group(function () {
     
     Route::get('/apim/professionals', [ApiMedilinkController::class, 'professionals'])->middleware(['intranet']);
     Route::get('/apim/atentions', [ApiMedilinkController::class, 'atentions'])->middleware(['intranet']);
+    Route::get('/apim/atentions/{id}', [ApiMedilinkController::class, 'atention'])->middleware(['intranet']);
     Route::get('/apim/allAtentions', [ApiMedilinkController::class, 'allAtentions'])->middleware(['intranet']);
     Route::get('/apim/appointments', [ApiMedilinkController::class, 'appointments'])->middleware(['intranet']);
     Route::get('/apim/allappointments', [ApiMedilinkController::class, 'allAppointments'])->middleware(['intranet']);

@@ -26,35 +26,28 @@ class AdminMesActual extends Component
     public $heightbox = '80px';
     public $treatment = null;
     public $date;
-    public $name;
     public $namePaciente;
     public $remuneracion;
-    public $hour;
-    public $message;
     public $newAppointment;
-    public $coach;
-    public $newname;
-    public $newdate;
-    public $newhour;
-    public $places;
+
 
     public function mount()
     {
       $this->now = Carbon::Now();
         if (Carbon::now()->format('d') < 21 ){
-            $this->startOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m')-1,21)->startOfDay();
-            $this->actualstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')-1,21)->startOfDay();
-            $this->expiredstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')-1,21)->startOfDay()->subMonth();
-            $this->endOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m'),20)->endOfDay();
+            $this->startOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m')-1,20)->startOfDay();
+            $this->actualstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')-1,20)->startOfDay();
+            $this->expiredstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')-1,20)->startOfDay()->subMonth();
+            $this->endOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m'),21)->endOfDay();
 
             $this->startOfWeek = Carbon::createFromDate($this->now->format('Y'),$this->now->startOfWeek()->format('m'),$this->now->startOfWeek()->format('d'))->startOfDay();
             $this->endOfWeek = Carbon::createFromDate($this->now->format('Y'),$this->now->endOfWeek()->format('m'),$this->now->endOfWeek()->format('d'))->startOfDay();
         } else {
 
-            $this->startOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m'),21)->startOfDay();
-            $this->actualstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m'),21)->startOfDay();
-            $this->expiredstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m'),21)->startOfDay()->subMonth();
-            $this->endOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m')+1,20)->endOfDay();
+            $this->startOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m'),20)->startOfDay();
+            $this->actualstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m'),20)->startOfDay();
+            $this->expiredstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m'),20)->startOfDay()->subMonth();
+            $this->endOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m')+1,21)->endOfDay();
 
             $this->startOfWeek = Carbon::createFromDate($this->now->format('Y'),$this->now->startOfWeek()->format('m'),$this->now->startOfWeek()->format('d'))->startOfDay();
             $this->endOfWeek = Carbon::createFromDate($this->now->format('Y'),$this->now->endOfWeek()->format('m'),$this->now->endOfWeek()->format('d'))->startOfDay();
@@ -62,7 +55,6 @@ class AdminMesActual extends Component
         $this->now = Carbon::Now();
 
         $this->newAppointment = 0;
-        $this->coach = 0;
 
         // $this->selectedPlans = Training::where('id','>',0)->pluck('id')->toArray();
         // $this->plans = DB::table('train_appointments_pivot')->distinct('train_appointment_id')->pluck('train_appointment_id')->toArray();
@@ -78,16 +70,6 @@ class AdminMesActual extends Component
       $this->weekly = false;
     }
 
-    public function subPeriod(){
-        $this->startOfMonth->subMonth();
-        $this->endOfMonth->subMonth();
-    }
-
-    public function addPeriod(){
-        $this->startOfMonth->addMonth();
-        $this->endOfMonth->addMonth();
-    }
-
     public function subMonth()
     {
         $this->now->subMonth();
@@ -99,11 +81,7 @@ class AdminMesActual extends Component
     }
 
     public function close(){
-        $this->classShow = false ;
-        $this->train = null;
-        $this->name = null;
-        $this->date = null;
-        $this->hour = null;
+        $this->classShow = false;
     }
 
     public function show($id){
@@ -113,8 +91,6 @@ class AdminMesActual extends Component
         $this->date = Carbon::parse($this->treatment->Fecha)->format('d-M-Y');
         $this->convenio = $this->treatment->Convenio;
 
-        //dd($this->remuneracion);
-        //$this->remuneracion = $this->treatment->Total;
     }
 
     public function render()
@@ -146,6 +122,16 @@ class AdminMesActual extends Component
           }
       }
 
-        return view('livewire.admin-mes-actual');
+        return view('livewire.admin-mes-actual', [
+            'appointments' => ActionMl::join('professionals', 'professionals.description', '=' ,'action_mls.Profesional')
+                                  ->where('action_mls.Estado','Atendido')
+                                  ->where('Fecha_Realizacion','>',$this->startOfMonth->format('Y-m-d'))
+                                  ->where('Fecha_Realizacion','<',$this->endOfMonth->format('Y-m-d'))
+                                  ->where('professionals.user_id',Auth::user()->id)
+                                  ->groupBy('Tratamiento_Nr')
+                                  ->orderby('Fecha_Realizacion', 'ASC')
+                                  ->Paginate(13),
+            'coeff' => Professional::where('description',$this->lista_id)->first(['coeff']),
+        ]);
     }
 }

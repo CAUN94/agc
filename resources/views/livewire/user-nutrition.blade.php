@@ -47,7 +47,7 @@
                     <div class="w-auto">
                         <p class="py-2">Masa Adiposa</p>
                         <div class="grid grid-cols-2">
-                            <div class="border text-base flex px-2 items-center">23.7%</div>
+                            <div class="border text-base flex px-2 items-center">{{$nutrition->masa_adiposa_porc}}%</div>
                             <div class="border text-base flex px-2 items-center">{{$nutrition->masa_adiposa}}</div>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                     <div class="w-auto">
                         <p class="py-2">Masa Múscular</p>
                         <div class="grid grid-cols-2">
-                            <div class="border text-base flex px-2 items-center">23.7%</div>
+                            <div class="border text-base flex px-2 items-center">{{$nutrition->masa_muscular_porc}}%</div>
                             <div class="border text-base flex px-2 items-center">{{$nutrition->masa_muscular}}</div>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                     <div class="w-auto">
                         <p class="py-2">Masa Ósea</p>
                         <div class="grid grid-cols-2">
-                            <div class="border text-base flex px-2 items-center">23.7%</div>
+                            <div class="border text-base flex px-2 items-center">{{$nutrition->masa_osea_porc}}%</div>
                             <div class="border text-base flex px-2 items-center">{{$nutrition->masa_osea}}</div>
                         </div>
                     </div>

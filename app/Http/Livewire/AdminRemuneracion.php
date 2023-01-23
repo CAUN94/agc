@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\ProfesionalAppointment;
 use App\Models\AppointmentMl;
 use App\Models\ActionMl;
+use App\Models\Professional;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Auth;
@@ -36,31 +37,26 @@ class AdminRemuneracion extends Component
     public $hour;
     public $message;
     public $lista_id = '';
-    public $coach;
-    public $newname;
-    public $newdate;
-    public $newhour;
-    public $places;
 
     public function mount()
     {
       $this->now = Carbon::Now();
         if (Carbon::now()->format('d') < 21 ){
-            $this->startOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m')-1,21)->startOfDay();
-            $this->actualstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')-1,21)->startOfDay();
-            $this->expiredstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')-1,21)->startOfDay()->subMonth();
+            $this->startOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m')-1,20)->startOfDay();
+            $this->actualstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')-1,20)->startOfDay();
+            $this->expiredstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')-1,20)->startOfDay()->subMonth();
             $this->endOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m'),20)->endOfDay();
-            $this->expiredendOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m'),20)->startOfDay()->subMonth();
+            $this->expiredendOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m'),21)->startOfDay()->subMonth();
 
             $this->startOfWeek = Carbon::createFromDate($this->now->format('Y'),$this->now->startOfWeek()->format('m'),$this->now->startOfWeek()->format('d'))->startOfDay();
             $this->endOfWeek = Carbon::createFromDate($this->now->format('Y'),$this->now->endOfWeek()->format('m'),$this->now->endOfWeek()->format('d'))->startOfDay();
         } else {
 
-            $this->startOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m'),21)->startOfDay();
-            $this->actualstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m'),21)->startOfDay();
-            $this->expiredstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m'),21)->startOfDay()->subMonth();
-            $this->endOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m')+1,20)->endOfDay();
-            $this->expiredendOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')+1,20)->startOfDay()->subMonth();
+            $this->startOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m'),20)->startOfDay();
+            $this->actualstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m'),20)->startOfDay();
+            $this->expiredstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m'),20)->startOfDay()->subMonth();
+            $this->endOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m')+1,21)->endOfDay();
+            $this->expiredendOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')+1,21)->startOfDay()->subMonth();
 
             $this->startOfWeek = Carbon::createFromDate($this->now->format('Y'),$this->now->startOfWeek()->format('m'),$this->now->startOfWeek()->format('d'))->startOfDay();
             $this->endOfWeek = Carbon::createFromDate($this->now->format('Y'),$this->now->endOfWeek()->format('m'),$this->now->endOfWeek()->format('d'))->startOfDay();
@@ -94,6 +90,11 @@ class AdminRemuneracion extends Component
         $this->endOfMonth->addMonth();
     }
 
+    public function changePeriod(){
+        $this->startOfMonth->addMonth();
+        $this->endOfMonth->addMonth();
+    }
+
     public function subMonth()
     {
         $this->now->subMonth();
@@ -106,27 +107,23 @@ class AdminRemuneracion extends Component
 
     public function show($id){
       $Professional = DB::table('professionals')
-      ->where('user_id',$id)
-      ->first(['description']);
-
-      $this->lista_id = $Professional->description;
-
-      $this->classShow = false;
+                          ->where('user_id',$id)
+                          ->first(['description']);
+                          $this->lista_id = $Professional->description;
+                          $this->classShow = false;
     }
 
     public function showAppointment($id){
         $this->treatment = appointmentMl::find($id);
-        $this->classShowAppointment = true;
         $this->namePaciente = $this->treatment->Nombre_paciente . " " . $this->treatment->Apellidos_paciente;
         $this->date = Carbon::parse($this->treatment->Fecha)->format('d-M-Y');
         $this->convenio = $this->treatment->Convenio;
-
-        //dd($this->remuneracion);
-        //$this->remuneracion = $this->treatment->Total;
+        $this->classShowAppointment = true;
     }
 
     public function close(){
-        $this->classShow = true ;
+        $this->classShow = true;
+        $this->lista_id = null;
     }
 
 
@@ -161,10 +158,14 @@ class AdminRemuneracion extends Component
 
       return view('livewire.admin-remuneracion', [
           'appointments' => ActionMl::where('Estado','Atendido')
-                                ->whereBetween('Fecha_Realizacion',[$this->expiredstartOfMonth->format('Y-m-d'),$this->expiredendOfMonth->format('Y-m-d')])
+                                ->where('Fecha_Realizacion','>',$this->expiredstartOfMonth->format('Y-m-d'))
+                                ->where('Fecha_Realizacion','<',$this->expiredendOfMonth->format('Y-m-d'))
                                 ->where('Profesional',$this->lista_id)
+                                ->groupBy('Tratamiento_Nr')
                                 ->orderby('Fecha_Realizacion', 'DESC')
                                 ->Paginate(13),
+
+          'coff' => Professional::where('description',$this->lista_id)->first(['coff']),
       ]);
     }
 }
