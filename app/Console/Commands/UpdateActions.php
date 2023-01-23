@@ -150,11 +150,14 @@ class UpdateActions extends Command
         foreach($pays as $pay){
             $this->info($pay[0]->nombre_paciente);
             foreach($pay[1] as $action){
+                $this->info(isset($action->id_prestacion));
                 if(!isset($action->id_prestacion)){
+                    
                     $action->id_prestacion = $pay[0]->nombre_atencion;
                     $action->nombre_prestacion = $pay[0]->nombre_atencion;
                     $action->subtotal = $action->total;
                 }
+                $this->info(isset($action->nombre_prestacion));
                 $new_row = actionMl::updateOrCreate([
                     'Tratamiento_Nr'=> $pay[0]->id_atencion,
                     'Prestacion_Nr'=> $action->id_prestacion,
