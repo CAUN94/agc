@@ -49,7 +49,7 @@ class UpdateActions extends Command
         $ids = [2,49,46,10,19,48,26,37,20,44,54,52,53,50,34,47,45];
         foreach($ids as $id){
             $this->allActions($id);
-            sleep(2);
+            sleep(5);
         }
         
     }
@@ -89,7 +89,7 @@ class UpdateActions extends Command
                 // if($i >= 60){
                 //     break;
                 // }
-                sleep(0.3);
+                sleep(2);
                 if($data->fecha < '2022-12-21' or $data->fecha > '2023-01-20'){
                     continue;
                 }
