@@ -368,7 +368,7 @@
                                 Remuneración
                               </dt>
                               <dd class="train-class-resume-text">
-                                  <li class="list-none">{{App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Precio_Prestacion')}}</li>
+                                  <li class="list-none">{{App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Precio_Prestacion')*$coff->coff/100}}</li>
                               </dd>
                             </div>
                           </dl>
