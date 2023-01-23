@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Carbon\Carbon;
 use App\Models\ActionMl;
+use App\Models\Professional;
 use App\Models\AppointmentMl;
 use App\Models\User;
 use GuzzleHttp\Client;
