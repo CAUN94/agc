@@ -201,7 +201,7 @@
                     @endforeach
                     </tbody>
                   </table>
-                  <div class='py-3'>{{$appointments_vencido->links()}}</div>
+                  <div class='py-3'>{{$appointments->links()}}</div>
                 </div>
               </div>
             </div>
