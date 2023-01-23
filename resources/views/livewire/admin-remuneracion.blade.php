@@ -170,7 +170,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                    @foreach($appointments_vencido as $Appointment)
+                    @foreach($appointments as $Appointment)
                     <tr>
                       <td class="text-center">
                          {{$Appointment->id}}
