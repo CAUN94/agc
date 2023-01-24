@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\ProfesionalAppointment;
 use App\Models\AppointmentMl;
 use App\Models\ActionMl;
+use App\Models\Professional;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Auth;
@@ -131,7 +132,7 @@ class AdminMesActual extends Component
                                   ->groupBy('Tratamiento_Nr')
                                   ->orderby('Fecha_Realizacion', 'ASC')
                                   ->Paginate(13),
-            'coeff' => Professional::where('description',$this->lista_id)->first(['coeff']),
+            'coeff' => Professional::where('user_id',Auth::user()->id)->first(['coeff']),
         ]);
     }
 }
