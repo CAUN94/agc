@@ -122,6 +122,7 @@ class AdminMesVencido extends Component
                                   ->groupBy('Tratamiento_Nr')
                                   ->orderby('Fecha_Realizacion', 'ASC')
                                   ->Paginate(13),
+
             'coff' => Professional::where('user_id',Auth::user()->id)->first(['coff']),
         ]);
     }

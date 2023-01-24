@@ -195,7 +195,7 @@
                         {{Helper::moneda_chilena($Appointment->Abono)}}
                       </td>
                       <td class="text-center">
-                        {{Helper::moneda_chilena(ceil($Appointment->Precio_Prestacion*$coff->coff/100))}}
+                        {{Helper::moneda_chilena(ceil($Appointment->Precio_Prestacion*$coff->coff)/100)}}
                       </td>
                     </tr>
                     @endforeach
