@@ -41,7 +41,7 @@ class Professional extends Model
                       ->where('Fecha_Realizacion','<', $last)
                       ->Where('Profesional', 'LIKE' , '%' . $user . '%')
                       ->Where('Estado','=', 'Atendido')
-                      ->distinct(['Tratamiento_Nr'])
+                      // ->distinct(['Tratamiento_Nr'])
                       ->sum('Precio_Prestacion'));
     }
 
@@ -51,7 +51,7 @@ class Professional extends Model
                       ->where('Fecha_Realizacion','<', $last)
                       ->Where('Profesional', 'LIKE' , '%' . $user . '%')
                       ->Where('Estado','=', 'Atendido')
-                      ->distinct(['Tratamiento_Nr'])
+                      // ->distinct(['Tratamiento_Nr'])
                       ->sum('Abono'));
     }
 
@@ -62,7 +62,7 @@ class Professional extends Model
                           ->where('Fecha_Realizacion','<', $last)
                           ->Where('Profesional', 'LIKE' , '%' . $user . '%')
                           ->Where('Estado','=', 'Atendido')
-                          ->distinct(['Tratamiento_Nr'])
+                          // ->distinct(['Tratamiento_Nr'])
                           ->sum('Precio_Prestacion')*$coef->coeff));
     }
 
@@ -73,7 +73,7 @@ class Professional extends Model
                               ->where('Fecha_Realizacion','<', $last)
                                ->Where('Profesional', 'LIKE' , '%' . $user . '%')
                                ->Where('Estado','=', 'Atendido')
-                               ->distinct(['Tratamiento_Nr'])
+                              //  ->distinct(['Tratamiento_Nr'])
                                ->sum('Precio_Prestacion')*$coef->coeff);
 
      $appointment = ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
@@ -94,13 +94,13 @@ class Professional extends Model
       $remuneracion = (ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
                                 ->Where('Profesional', 'LIKE' , '%' . $user . '%')
                                 ->Where('Estado','=', 'Atendido')
-                                ->distinct(['Tratamiento_Nr'])
+                                // ->distinct(['Tratamiento_Nr'])
                                 ->sum('Precio_Prestacion')*$coef->coeff);
 
       $appointment = ActionMl::whereBetween('Fecha_Realizacion',[$first, $last])
                               ->Where('Profesional', 'LIKE' , '%' . $user . '%')
                               ->Where('Estado','=', 'Atendido')
-                              ->distinct(['Tratamiento_Nr'])
+                              // ->distinct(['Tratamiento_Nr'])
                               ->get()->count();
 
       if($appointment == 0){
@@ -115,7 +115,7 @@ class Professional extends Model
                                ->where('Fecha_Realizacion','<', $last)
                               ->Where('Profesional', 'LIKE' , '%' . $user . '%')
                               ->Where('Estado','=', 'Atendido')
-                              ->distinct(['Tratamiento_Nr'])
+                              // ->distinct(['Tratamiento_Nr'])
                               ->count(['Tratamiento_Nr']);
 
       $Ocupacion = Professional::where('description' ,'=',  $user)->first(['Horas_disponible']);
