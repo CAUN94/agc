@@ -18,7 +18,7 @@ use Livewire\WithPagination;
 
 class AdminMesVencido extends Component
 {
-    use WithPagination;
+    use WithPagination;`
 
     public $days = ['Lun','Mar','Mie','Jue','Vie','Sab'];
     public $now = '';
