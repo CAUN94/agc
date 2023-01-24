@@ -246,8 +246,8 @@ class AdminMedilinkController extends Controller
         }
         // return $total;
         // return $pays;
-        return $pays;
-        return view('remunerations.index',compact('pays'));
+        // return $pays;
+        return view('remunerations.index',compact('total_final','pays','coff'));
     }
 
     public function remuneration() {
