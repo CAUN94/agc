@@ -27,7 +27,7 @@
         <div id="equipo"></div>
         <x-landing.team>
             <x-slot name="img">
-                fotos-01.jpg|fotos-02.jpg|fotos-03.jpg|fotos-04.jpg|fotos-05.jpg|fotos-06.jpg|fotos-07.jpg|fotos-08.jpg
+                fotos-01.jpg|fotos-02.jpg|fotos-03.jpg|fotos-04.jpg|fotos-05.jpg|fotos-06.jpg|fotos-08.jpg
             </x-slot>
             <x-slot name="texts">
                 Alonso Niklischeck|Camila Valentini|Matias Rebolledo|Jaime Pantoja|César Moya|Melissa Ross|Cristóbal Ugarte
