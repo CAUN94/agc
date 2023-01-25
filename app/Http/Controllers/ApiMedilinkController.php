@@ -286,4 +286,55 @@ class ApiMedilinkController extends Controller
 
         return array_merge(...$allActions);
     }
+
+    public function allClients(){
+
+      $client = new \GuzzleHttp\Client();
+      $url = 'https://api.medilink.healthatom.com/api/v1/pacientes/';
+
+      $response = $client->request('GET', $url, [
+          'headers'  => [
+              'Authorization' => 'Token ' . $this->token
+          ]
+      ]);
+
+      $allclients = [];
+      $clients = json_decode($response->getBody());
+      $allclients[] = $clients->data;
+
+      while(isset($clients->links->next)){
+          $response = $client->request('GET', $clients->links->next, [
+              'headers'  => [
+                  'Authorization' => 'Token ' . $this->token
+              ]
+          ]);
+          $clients = json_decode($response->getBody());
+          $allclients[] = $clients->data;
+
+      }
+      return array_merge(...$allclients);
+    }
+
+    public function addAppointment(){
+      $client = new \GuzzleHttp\Client();
+      $url = 'https://api.medilink.healthatom.com/api/v1/citas/';
+
+      $response = $client->request('POST', $url, [
+        'headers'  => [
+                'Authorization' => 'Token ' . $this->token
+            ],
+            'json'  => [
+                'id_profesional'    => 48,
+                'id_sucursal'       => 1,
+                'id_estado'         => 7,
+                'id_sillon'        => 7,
+                'id_paciente'       => 864,
+                'fecha'             => '2023-01-25',
+                'hora_inicio'       => '20:00',
+                'duracion'          => 60,
+                'comentario'        => 'Control general'
+        ]]);
+
+      echo $response->getBody();
+    }
 }
