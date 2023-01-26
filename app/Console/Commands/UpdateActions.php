@@ -47,7 +47,7 @@ class UpdateActions extends Command
      */
     public function handle()
     {
-        $ids = [2,49,46,10,19,48,26,37,20,44,54,52,53,50,34,47,45,54,35];
+         $ids = [2,49,46,10,19,48,26,37,20,44,54,52,53,50,34,47,45,54,35];
         foreach($ids as $id){
             $this->allActions($id);
             sleep(5);
