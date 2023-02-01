@@ -7,9 +7,6 @@
             @else
               Periodo de Mes Actual ({{$startOfMonth->format('d-m')}} al {{$endOfMonth->format('d-m')}})
             @endif
-            <button class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer bg-gray-100 hover:bg-gray-400 p-1.5 items-center mt-0.5 mb-1"
-                    wire:click="changePeriod()">Cambio de periodo
-            </button>
             <div class="border rounded-lg px-1" style="padding-bottom: 3.5px;" >
                 <button
                     type="button"
@@ -27,7 +24,7 @@
             </div>
         </div>
         <div>
-          @foreach(App\Models\Professional::where('user_id','>',0)->get() as $professional)
+          @foreach(App\Models\Professional::where('user_id','>',0)->orderBy('description')->get() as $professional)
               <ul class="grid grid-cols-5 gap-1 py-0.5">
                   <li>
                       <a class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
@@ -100,7 +97,7 @@
             </div>
             @if($classShow)
             <div>
-              @foreach(App\Models\Professional::where('user_id','>',0)->get() as $professional)
+              @foreach(App\Models\Professional::where('user_id','>',0)->orderBy('description')->get() as $professional)
                   <ul class="grid grid-cols-5 gap-1 py-0.5">
                     <li>
                         <a class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
