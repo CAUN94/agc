@@ -152,14 +152,14 @@ class AdminNuboxController extends Controller
               "rutContraparte": "18783405-8",
               "razonSocialContraparte": "venta23",
               "giroContraparte": "venta23",
-              "tipo": 33,
-              "folio": 1,
+              "tipo": 34,
+              "folio": 478,
               "secuencia": 1,
               "fecha": "2022-09-14",
-              "afecto": "SI",
-              "producto": "producto de ejemplo",
+              "afecto": "NO",
+              "producto": "ATENCION KINESIOLOGICA INTEGRAL.RUT: 16608122-k Daniella Vivallo Vera",
               "descripcion": null,
-              "cantidad": 1,
+              "cantidad": 10,
               "comunaContraparte": "Las Condes",
               "direccionContraparte": "Av Vitacura 3110",
               "precio": 70000,
@@ -204,7 +204,7 @@ class AdminNuboxController extends Controller
           ],
           "documentoReferenciado": {
             "tipo": 0,
-            "folio": 1,
+            "folio": 478,
             "secuencia": 0,
             "tipoDocumentoReferenciado": 0,
             "folioDocumentoReferenciado": 34,
@@ -278,8 +278,8 @@ class AdminNuboxController extends Controller
         CURLOPT_POSTFIELDS =>'{
           "productos": [
             {
-              "fechaEmision": "2022-09-04",
-              "folio": 1,
+              "fechaEmision": "2023-01-30",
+              "folio": 2,
               "rutContraparte": "18783405-8",
               "razonSocialContraparte": "venta23",
               "giroContraparte": "Servicios",
@@ -305,7 +305,7 @@ class AdminNuboxController extends Controller
           ],
           "documentoReferenciado": {
             "tipo": 0,
-            "folio": 1,
+            "folio": 2,
             "secuencia": 1,
             "tipoDocumentoReferenciado": 39,
             "folioDocumentoReferenciado": 654321,
