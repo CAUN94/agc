@@ -315,6 +315,65 @@ class ApiMedilinkController extends Controller
       return array_merge(...$allclients);
     }
 
+
+
+    public function appointmentsProfessional($id, $start, $end){
+    
+      // Carbon parse date 
+      $client = new \GuzzleHttp\Client();
+      $id_sucursal    = 1;
+      $id_profesional = $id;
+
+      $dateStart =  Carbon::parse($start);
+      $dateEnd = Carbon::parse($end);
+      $diff = $dateStart->diffInWeeks($dateEnd);
+
+      $start = Carbon::parse($start);
+      $end = $dateStart->addWeek();
+
+      $professionalAppointmens = [];
+      for($i=0; $i < $diff; $i++){
+        $url = 'https://api.medilink.healthatom.com/api/v1/sucursales/'.$id_sucursal.'/profesionales/'.$id_profesional.'/agendas';
+        $params =   [
+          'fecha_inicio'      => ['eq' => $start->format('Y-m-d')],
+          'fecha_fin'         => ['eq' => $end->format('Y-m-d')],
+          'mostrar_detalles'  => ['eq' => 0]
+        ];
+
+        $response = $client->request('GET', $url, [
+          'query'     => "q=".json_encode($params),
+                'headers'   => [
+                'Authorization' => 'Token ' . $this->token
+            ]
+        ]);
+
+        //json decode  response
+        $appointments = json_decode($response->getBody());
+        
+        foreach ($appointments->data->fechas as $date => $appointment) {
+          $professionalAppointmens[$date] = $appointment;
+        }
+
+        $start = $start->addWeek();
+        
+        if($i == $diff-1){
+          $end = $dateEnd;
+        } else {
+          $end = $end->addWeek();
+        }
+      }
+
+      return $professionalAppointmens;
+      
+      
+      
+      
+
+      
+
+      
+    }
+
     public function addAppointment(){
       $client = new \GuzzleHttp\Client();
       $url = 'https://api.medilink.healthatom.com/api/v1/citas/';

@@ -119,6 +119,8 @@ Route::middleware([UpdatePassword::class])->group(function () {
 
     Route::get('/apim/addAppointment', [ApiMedilinkController::class, 'addAppointment'])->middleware(['intranet']);
 
+    Route::get('/apim/appointmentsProfessional/{id}/{startdate}/{enddate}', [ApiMedilinkController::class, 'appointmentsProfessional'])->middleware(['intranet']);
+
     // Admin Haas
     Route::get('/admin/nutrition', [AdminHaasController::class, 'nutrition'])->middleware(['intranet']);
 
