@@ -45,7 +45,7 @@
                   <div class="mt-4 flex justify-between items-center">
                         <div class="w-4/5 mr-4">
                               <span class="block text-base text-justify mr-1">
-                              Buscamos hacer un chequeo de salud del atleta desde la salud cardiaca hasta aspectios físicos, metabólicos y nutricionales.</span>
+                              Buscamos hacer un chequeo de salud del atleta desde la salud cardiaca hasta aspectos físicos, metabólicos y nutricionales.</span>
                         </div>
                         <div class="ml-2 flex flex-col justify-between items-center">
                               <img class="h-16 lg:h-20 block bg-white rounded-full border-2 border-primary-500 hover:border-primary-900" src="{{ asset('img/iconos/nutricion.png')}}">

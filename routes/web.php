@@ -22,11 +22,18 @@ use App\Http\Middleware\UpdatePassword;
 
 
 Route::get('/nubox/auth', [ AdminNuboxController::class, 'auth']);
+// No cuento con permiso
 Route::get('/nubox/comprobante', [ AdminNuboxController::class, 'comprobante']);
+// Funciona
 Route::get('/nubox/comuna', [ AdminNuboxController::class, 'comuna']);
+
 Route::get('/nubox/emit', [ AdminNuboxController::class, 'emit']);
+//Funciona
 Route::get('/nubox/cliente', [ AdminNuboxController::class, 'cliente']);
+//
 Route::get('/nubox/boleta', [ AdminNuboxController::class, 'boleta']);
+
+
 Route::get('/professionalshours', 'App\Http\Controllers\ScrapingController@professionalshours');
 Route::get('/pago2', [MercadoPagoController::class, 'personalizepay']);
 Route::get('/pago2/{id}', [MercadoPagoController::class, 'pay']);
