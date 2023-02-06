@@ -138,7 +138,7 @@ class AdminNuboxController extends Controller
     public function emit(){
       $curl = curl_init();
       curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://api.nubox.com/Nubox.API.cert/factura/documento/76914578-8/1/rutFuncionario/1/emitir/ventaExtendido?rutFuncionario=18018579-8&emitir=true',
+        CURLOPT_URL => 'https://api.nubox.com/Nubox.API.cert/factura/documento/76914578-8/1/rutFuncionario/1/emitir/ventaExtendido?rutFuncionario=18018579-8&emitir=false',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -155,20 +155,20 @@ class AdminNuboxController extends Controller
               "tipo": 34,
               "folio": 478,
               "secuencia": 1,
-              "fecha": "2022-09-14",
+              "fecha": "2022-12-03",
               "afecto": "NO",
               "producto": "ATENCION KINESIOLOGICA INTEGRAL.RUT: 16608122-k Daniella Vivallo Vera",
               "descripcion": null,
               "cantidad": 10,
               "comunaContraparte": "Las Condes",
               "direccionContraparte": "Av Vitacura 3110",
-              "precio": 70000,
-              "valor": 70000,
+              "precio": 60200,
+              "valor": 60200,
               "ponderacionDescuento": 0,
               "emailContraparte": "mail@ejemplo.com",
               "tipoDeServicio": "",
-              "fechaPeriodoDesde": "2022-09-14",
-              "fechaPeriodoHasta": "2022-09-14",
+              "fechaPeriodoDesde": "2022-12-03",
+              "fechaPeriodoHasta": "2022-12-03",
               "fechaVencimiento": "",
               "codigoSucursal": "Cod 0001",
               "vendedor": "Pedro Sanchez",
@@ -208,7 +208,7 @@ class AdminNuboxController extends Controller
             "secuencia": 0,
             "tipoDocumentoReferenciado": 0,
             "folioDocumentoReferenciado": 34,
-            "fechaDocumentoReferenciado": "2022-09-14T00:00:00.8751996-04:00",
+            "fechaDocumentoReferenciado": "2022-12-03T00:00:00.8751996-04:00",
             "motivoReferencia": 0,
             "glosa": "Glosa"
           }
@@ -278,8 +278,8 @@ class AdminNuboxController extends Controller
         CURLOPT_POSTFIELDS =>'{
           "productos": [
             {
-              "fechaEmision": "2023-01-30",
-              "folio": 2,
+              "fechaEmision": "2023-01-02",
+              "folio": 337,
               "rutContraparte": "18783405-8",
               "razonSocialContraparte": "venta23",
               "giroContraparte": "Servicios",
@@ -296,16 +296,16 @@ class AdminNuboxController extends Controller
               "valor": 150000,
               "codigoItem": "01",
               "unidadMedida": "UNID",
-              "fechaVencimiento": "2020-06-16T08:36:14.4221255-04:00",
+              "fechaVencimiento": "2023-01-02T08:36:14.4221255-04:00",
               "codigoSIITipoDeServicio": "1",
-              "fechaPeriodoDesde": "2020-06-16T08:36:14.4221255-04:00",
-              "fechaPeriodoHasta": "2020-06-16T08:36:14.4221255-04:00",
+              "fechaPeriodoDesde": "2023-01-02T08:36:14.4221255-04:00",
+              "fechaPeriodoHasta": "2023-01-02T08:36:14.4221255-04:00",
               "observacion": "Observación"
             }
           ],
           "documentoReferenciado": {
             "tipo": 0,
-            "folio": 2,
+            "folio": 337,
             "secuencia": 1,
             "tipoDocumentoReferenciado": 39,
             "folioDocumentoReferenciado": 654321,

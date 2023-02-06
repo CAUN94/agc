@@ -109,7 +109,7 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::resource('mesVencido', 'App\Http\Controllers\mesVencidoController')->middleware(['intranet']);
     Route::resource('historial', 'App\Http\Controllers\historialController')->middleware(['intranet']);
     
-    Route::get('/apim/professionals', [ApiMedilinkController::class, 'professionals'])->middleware(['intranet']);
+    Route::get('/apim/professionals', [ApiMedilinkController::class, 'professionals']);
     Route::get('/apim/atentions', [ApiMedilinkController::class, 'atentions'])->middleware(['intranet']);
     Route::get('/apim/atentions/{id}', [ApiMedilinkController::class, 'atention'])->middleware(['intranet']);
     Route::get('/apim/allAtentions', [ApiMedilinkController::class, 'allAtentions'])->middleware(['intranet']);
@@ -118,6 +118,8 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/apim/allappointments', [ApiMedilinkController::class, 'allAppointments'])->middleware(['intranet']);
 
     Route::get('/apim/addAppointment', [ApiMedilinkController::class, 'addAppointment'])->middleware(['intranet']);
+
+    Route::get('/apim/appointmentsProfessional/{id}/{startdate}/{enddate}', [ApiMedilinkController::class, 'appointmentsProfessional']);
 
     // Admin Haas
     Route::get('/admin/nutrition', [AdminHaasController::class, 'nutrition'])->middleware(['intranet']);
