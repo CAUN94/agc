@@ -19,7 +19,8 @@ class AdminNuboxController extends Controller
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => "POST",
         CURLOPT_HTTPHEADER => array(
-          "Authorization: Basic eWFBQTRzU0FPQ3J0OkNsTUNtVDdF",
+          // "Authorization: Basic ZHZqN0xSV1JXUHJkOkdhenVJUGpt", // pro
+          "Authorization: Basic eWFBQTRzU0FPQ3J0OkNsTUNtVDdF", // dev
           "Content-Length: 0",
         ),
       ));
@@ -45,100 +46,100 @@ class AdminNuboxController extends Controller
       return $response_headers;
     }
 
-    public function comprobante(){
+    public function emit(){
       $curl = curl_init();
-
       curl_setopt_array($curl, array(
-      CURLOPT_URL => 'https://api.nubox.com/Nubox.API.cert/contabilidad/Partner%20API/1/comprobante',
-      CURLOPT_RETURNTRANSFER => true,
-      CURLOPT_ENCODING => '',
-      CURLOPT_MAXREDIRS => 10,
-      CURLOPT_TIMEOUT => 0,
-      CURLOPT_FOLLOWLOCATION => true,
-      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-      CURLOPT_CUSTOMREQUEST => 'POST',
-      CURLOPT_POSTFIELDS =>'{
-        "Descripcion": "comprobante ingresado por partner",
-        "Periodo": "2020-04-15T15:23:22.9470207-04:00",
-        "NumeroAsiento": 12,
-        "FechaIngreso": "2020-04-15T15:23:22.9470207-04:00",
-        "ValorTotal": 3000,
-        "TipoAsiento": 2,
-        "EstadoAsiento": 4,
-        "MovimientosContables": [
-          {
-            "Descripcion": "desde API - debe",
-            "CodigoCuenta": "1101-02",
-            "EsDebito": true,
-            "Valor": 1500,
-            "CodigoCentroDeCosto": "",
-            "CodigoSucursal": "",
-            "MovimientosAuxiliares": [],
-            "MovimientosBancarios": [],
-            "BoletasDeHonorarios": []
-          },
-          {
-            "Descripcion": "movimiento insertado desde API",
-            "CodigoCuenta": "1103-01",
-            "EsDebito": false,
-            "Valor": 1500,
-            "CodigoCentroDeCosto": "",
-            "CodigoSucursal": "",
-            "MovimientosAuxiliares": [],
-            "MovimientosBancarios": [
-              {
-                "EsDebito": false,
-                "Fecha": "2020-04-15T15:41:50.8812359-04:00",
-                "Valor": 1500,
-                "Folio": 123456,
-                "TipoMovimientoBancario": "COBRO CHEQUE"
-              }
-            ],
-            "BoletasDeHonorarios": []
-          }
-        ]
-      }',
-      CURLOPT_HTTPHEADER => array(
-        'token: '.$this->auth()['Token'],
-        'Content-Type: application/json',
-        'Cookie: '.$this->auth()['Set-Cookie'],
-      ),
-    ));
-
-    $response = curl_exec($curl);
-
-    curl_close($curl);
-    echo $response;
-    }
-
-    public function comuna(){
-      $curl = curl_init();
-
-      curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://api.nubox.com/Nubox.API.cert/factura/comunas',
+        CURLOPT_URL => 'https://api.nubox.com/Nubox.API.cert/factura/documento/76914578-8/1/rutFuncionario/1/emitir/ventaExtendido?rutFuncionario=18018579-8&emitir=true',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
         CURLOPT_TIMEOUT => 0,
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'GET',
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS =>'{
+          "productos": [
+            {
+              "rutContraparte": "18783405-8",
+              "razonSocialContraparte": "venta23",
+              "giroContraparte": "venta23",
+              "tipo": 41,
+              "folio": 478,
+              "secuencia": 1,
+              "fecha": "2022-12-03",
+              "afecto": "NO",
+              "producto": "ATENCION KINESIOLOGICA INTEGRAL.RUT: 16608122-k Daniella Vivallo Vera",
+              "descripcion": null,
+              "cantidad": 10,
+              "comunaContraparte": "Las Condes",
+              "direccionContraparte": "Av Vitacura 3110",
+              "precio": 60200,
+              "valor": 60200,
+              "ponderacionDescuento": 0,
+              "emailContraparte": " ",
+              "tipoDeServicio": "3",
+              "fechaPeriodoDesde": "",
+              "fechaPeriodoHasta": "",
+              "fechaVencimiento": "",
+              "codigoSucursal": "Cod 0001",
+              "vendedor": "",
+              "codigoItem": "",
+              "unidadMedida": "",
+              "codigoIMP": "",
+              "montoIMP": 0,
+              "indicadorDeTraslado": "1",
+              "formaDePago": "",
+              "medioDePago": "",
+              "terminosDePagoDias": "",
+              "terminosDePagoCodigo": "",
+              "comunaDestino": "",
+              "rutSolicitanteFactura": "",
+              "productoCambioSujeto": "",
+              "cantidadMontoCambioSujeto": 0,
+              "tipoGlobalAfecto": "",
+              "valorGlobalAfecto": 0,
+              "tipoGlobalExento": "",
+              "valorGlobalExento": 0,
+              "precioCambioSujeto": 0,
+              "descuentoMonto": 0,
+              "rutTransportista": "",
+              "rutChofer": "",
+              "patente": "",
+              "nombreChofer": "",
+              "direccionDestino": "",
+              "ciudadDestino": "",
+              "tipoDeDespacho": "",
+              "nombreDeContacto": "",
+              "observacion": ""
+            }
+          ],
+          "documentoReferenciado": {
+            "tipo": 0,
+            "folio": 478,
+            "secuencia": 0,
+            "tipoDocumentoReferenciado": 0,
+            "folioDocumentoReferenciado": 34,
+            "fechaDocumentoReferenciado": "2022-12-03T00:00:00.8751996-04:00",
+            "motivoReferencia": 0,
+            "glosa": "Glosa"
+          }
+        }',
         CURLOPT_HTTPHEADER => array(
           'token: '.$this->auth()['Token'],
+          'Content-Type: application/json',
           'Cookie: '.$this->auth()['Set-Cookie'],
         ),
       ));
-
       $response = curl_exec($curl);
 
       curl_close($curl);
       echo $response;
     }
 
-    public function emit(){
+    public function emit_f(){
       $curl = curl_init();
       curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://api.nubox.com/Nubox.API.cert/factura/documento/76914578-8/1/rutFuncionario/1/emitir/ventaExtendido?rutFuncionario=18018579-8&emitir=false',
+        CURLOPT_URL => 'https://api.nubox.com/Nubox.API/factura/documento/76914578-8/1/rutFuncionario/1/emitir/ventaExtendido?rutFuncionario=18018579-8&emitir=false',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -225,6 +226,96 @@ class AdminNuboxController extends Controller
       echo $response;
     }
 
+    public function comprobante(){
+      $curl = curl_init();
+
+      curl_setopt_array($curl, array(
+      CURLOPT_URL => 'https://api.nubox.com/Nubox.API/contabilidad/Partner%20API/1/comprobante',
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'POST',
+      CURLOPT_POSTFIELDS =>'{
+        "Descripcion": "comprobante ingresado por partner",
+        "Periodo": "2020-04-15T15:23:22.9470207-04:00",
+        "NumeroAsiento": 12,
+        "FechaIngreso": "2020-04-15T15:23:22.9470207-04:00",
+        "ValorTotal": 3000,
+        "TipoAsiento": 2,
+        "EstadoAsiento": 4,
+        "MovimientosContables": [
+          {
+            "Descripcion": "desde API - debe",
+            "CodigoCuenta": "1101-02",
+            "EsDebito": true,
+            "Valor": 1500,
+            "CodigoCentroDeCosto": "",
+            "CodigoSucursal": "",
+            "MovimientosAuxiliares": [],
+            "MovimientosBancarios": [],
+            "BoletasDeHonorarios": []
+          },
+          {
+            "Descripcion": "movimiento insertado desde API",
+            "CodigoCuenta": "1103-01",
+            "EsDebito": false,
+            "Valor": 1500,
+            "CodigoCentroDeCosto": "",
+            "CodigoSucursal": "",
+            "MovimientosAuxiliares": [],
+            "MovimientosBancarios": [
+              {
+                "EsDebito": false,
+                "Fecha": "2020-04-15T15:41:50.8812359-04:00",
+                "Valor": 1500,
+                "Folio": 123456,
+                "TipoMovimientoBancario": "COBRO CHEQUE"
+              }
+            ],
+            "BoletasDeHonorarios": []
+          }
+        ]
+      }',
+      CURLOPT_HTTPHEADER => array(
+        'token: '.$this->auth()['Token'],
+        'Content-Type: application/json',
+        'Cookie: '.$this->auth()['Set-Cookie'],
+      ),
+    ));
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+    echo $response;
+    }
+
+    public function comuna(){
+      $curl = curl_init();
+
+      curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://api.nubox.com/Nubox.API/factura/comunas',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+        CURLOPT_HTTPHEADER => array(
+          'token: '.$this->auth()['Token'],
+          'Cookie: '.$this->auth()['Set-Cookie'],
+        ),
+      ));
+
+      $response = curl_exec($curl);
+
+      curl_close($curl);
+      echo $response;
+    }
+
     public function cliente(){
       $curl = curl_init();
 
@@ -267,7 +358,7 @@ class AdminNuboxController extends Controller
       $curl = curl_init();
 
       curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://api.nubox.com/Nubox.API.cert/factura/documento/76914578-8/1/18018579-8/1/39/dte/extendido',
+        CURLOPT_URL => 'https://api.nubox.com/Nubox.API/factura/documento/76914578-8/1/18018579-8/1/39/dte/extendido&emitir=false',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
