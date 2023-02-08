@@ -4,7 +4,7 @@
             Periodo del {{$expiredstartOfMonth->format('d-m')}} al {{$expiredendOfMonth->format('d-m')}}
         </div>        <div>
           @foreach(App\Models\Professional::where('user_id','=',Auth::user()->id)->get() as $professional)
-              <ul class="grid grid-cols-3 gap-1">
+              <ul class="grid sm:grid-cols-3 gap-1">
                   <li>
                       <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                           <i class="fa fa-money" aria-hidden="true"></i>
@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    <div class="flex flex-col lg:flex-row gap-3 mt-2">
+    <div class="hidden sm:block flex flex-col lg:flex-row gap-3 mt-2">
       <div class="w-full lg:w-3/4 flex flex-col overflow-x-auto gap-y-2">
         <div class="w-full overflow-x-auto gap-y-2 box-white p-3 mt-3">
           <div class="w-full font-medium flex justify-between ml-3">
