@@ -3,9 +3,54 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\Models\Professional;
+use App\Models\Pack;
 
 class AdminNuboxController extends Controller
 {
+    
+    private $token;
+    // construct just intranet users
+    public function __construct()
+    {
+        $this->middleware('intranet');
+        $this->token = "WzpwZkzjncn1nyfvYx3VovEzTvpB2YSie4YPfvf1.8sggWtpBM3vzmAuE6aYAAmRYiAwxbXNIaM16oJ30";
+    }
+
+    //index
+    public function index(){
+      
+      $professionals = Professional::with('user')->orderby('description')->get();
+      $packs = Pack::orderby('name')->get();
+      $client = new \GuzzleHttp\Client();
+      $url = 'https://api.medilink.healthatom.com/api/v1/pacientes/';
+
+      $response = $client->request('GET', $url, [
+          'headers'  => [
+              'Authorization' => 'Token ' . $this->token
+          ]
+      ]);
+
+      $alPatients = [];
+      $patients = json_decode($response->getBody());
+      $alPatients[] = $patients->data;
+
+      while(isset($patients->links->next)){
+          $response = $client->request('GET', $patients->links->next, [
+              'headers'  => [
+                  'Authorization' => 'Token ' . $this->token
+              ]
+          ]);
+          $patients = json_decode($response->getBody());
+          $alPatients[] = $patients->data;
+
+      }
+      $patients = array_merge(...$alPatients);
+      array_multisort( array_column($patients, "nombre"), SORT_ASC, $patients );
+      return view('admin.nubox.index',compact('professionals','packs','patients'));
+    }
+
     public function auth(){
       $curl = curl_init();
       curl_setopt($curl, CURLOPT_HEADER, 1);
@@ -46,94 +91,120 @@ class AdminNuboxController extends Controller
       return $response_headers;
     }
 
-    public function emit(){
-      $curl = curl_init();
-      curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://api.nubox.com/Nubox.API.cert/factura/documento/76914578-8/1/rutFuncionario/1/emitir/ventaExtendido?rutFuncionario=18018579-8&emitir=true',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS =>'{
-          "productos": [
-            {
-              "rutContraparte": "18783405-8",
-              "razonSocialContraparte": "venta23",
-              "giroContraparte": "venta23",
-              "tipo": 41,
-              "folio": 478,
-              "secuencia": 1,
-              "fecha": "2022-12-03",
-              "afecto": "NO",
-              "producto": "ATENCION KINESIOLOGICA INTEGRAL.RUT: 16608122-k Daniella Vivallo Vera",
-              "descripcion": null,
-              "cantidad": 10,
-              "comunaContraparte": "Las Condes",
-              "direccionContraparte": "Av Vitacura 3110",
-              "precio": 60200,
-              "valor": 60200,
-              "ponderacionDescuento": 0,
-              "emailContraparte": " ",
-              "tipoDeServicio": "3",
-              "fechaPeriodoDesde": "",
-              "fechaPeriodoHasta": "",
-              "fechaVencimiento": "",
-              "codigoSucursal": "Cod 0001",
-              "vendedor": "",
-              "codigoItem": "",
-              "unidadMedida": "",
-              "codigoIMP": "",
-              "montoIMP": 0,
-              "indicadorDeTraslado": "1",
-              "formaDePago": "",
-              "medioDePago": "",
-              "terminosDePagoDias": "",
-              "terminosDePagoCodigo": "",
-              "comunaDestino": "",
-              "rutSolicitanteFactura": "",
-              "productoCambioSujeto": "",
-              "cantidadMontoCambioSujeto": 0,
-              "tipoGlobalAfecto": "",
-              "valorGlobalAfecto": 0,
-              "tipoGlobalExento": "",
-              "valorGlobalExento": 0,
-              "precioCambioSujeto": 0,
-              "descuentoMonto": 0,
-              "rutTransportista": "",
-              "rutChofer": "",
-              "patente": "",
-              "nombreChofer": "",
-              "direccionDestino": "",
-              "ciudadDestino": "",
-              "tipoDeDespacho": "",
-              "nombreDeContacto": "",
-              "observacion": ""
-            }
-          ],
-          "documentoReferenciado": {
-            "tipo": 0,
-            "folio": 478,
-            "secuencia": 0,
-            "tipoDocumentoReferenciado": 0,
-            "folioDocumentoReferenciado": 34,
-            "fechaDocumentoReferenciado": "2022-12-03T00:00:00.8751996-04:00",
-            "motivoReferencia": 0,
-            "glosa": "Glosa"
-          }
-        }',
-        CURLOPT_HTTPHEADER => array(
-          'token: '.$this->auth()['Token'],
-          'Content-Type: application/json',
-          'Cookie: '.$this->auth()['Set-Cookie'],
-        ),
-      ));
-      $response = curl_exec($curl);
+    public function emit(Request $request){
+      // return $request;
+      $pack = Pack::find($request->pack);
+      $professional = Professional::find($request->professional)->with('user')->first();
+      $client = new \GuzzleHttp\Client();
+      $id_paciente = 2;
+      $url = 'https://api.medilink.healthatom.com/api/v1/pacientes/'.$request->patient;
 
-      curl_close($curl);
-      echo $response;
+      $response = $client->request('GET', $url, [
+          'headers'  => [
+              'Authorization' => 'Token ' . $this->token
+          ]
+      ]);
+
+      $patient = json_decode($response->getBody());
+
+
+      if($request->alliance == 'True'){
+        $price = $pack->alliance_price;
+      } else {
+        $price = $pack->price;
+      }
+
+      for($i=0; $i<1; $i++){
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => 'https://api.nubox.com/Nubox.API.cert/factura/documento/76914578-8/1/rutFuncionario/1/emitir/ventaExtendido?rutFuncionario=18018579-8&emitir=true',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'POST',
+          CURLOPT_POSTFIELDS =>'{
+            "productos": [
+              {
+                "rutContraparte": "'.$patient->data->rut.'",
+                "razonSocialContraparte": "'.$patient->data->nombre.' '.$patient->data->apellidos.'",
+                "giroContraparte": "Paciente",
+                "tipo": 41,
+                "folio": 478,
+                "secuencia": 1,
+                "fecha": "'.Carbon::now()->format("Y-m-d").'",
+                "afecto": "NO",
+                "producto": "ATENCION KINESIOLOGICA INTEGRAL",
+                "descripcion": "RUT PROFESIONAL: '.$professional->user->rut.' '.$professional->user->name.' '.$professional->user->lastnames.'",
+                "cantidad": 10,
+                "comunaContraparte": "Las Condes",
+                "direccionContraparte": "San Pascual 736",
+                "precio": "'.$price.'",
+                "valor": "'.$price.'",
+                "ponderacionDescuento": 0,
+                "emailContraparte": "",
+                "tipoDeServicio": "3",
+                "fechaPeriodoDesde": "",
+                "fechaPeriodoHasta": "",
+                "fechaVencimiento": "",
+                "codigoSucursal": "1",
+                "vendedor": "",
+                "codigoItem": "",
+                "unidadMedida": "",
+                "codigoIMP": "",
+                "montoIMP": 0,
+                "indicadorDeTraslado": "1",
+                "formaDePago": "",
+                "medioDePago": "",
+                "terminosDePagoDias": "",
+                "terminosDePagoCodigo": "",
+                "comunaDestino": "",
+                "rutSolicitanteFactura": "",
+                "productoCambioSujeto": "",
+                "cantidadMontoCambioSujeto": 0,
+                "tipoGlobalAfecto": "",
+                "valorGlobalAfecto": 0,
+                "tipoGlobalExento": "",
+                "valorGlobalExento": 0,
+                "precioCambioSujeto": 0,
+                "descuentoMonto": 0,
+                "rutTransportista": "",
+                "rutChofer": "",
+                "patente": "",
+                "nombreChofer": "",
+                "direccionDestino": "",
+                "ciudadDestino": "",
+                "tipoDeDespacho": "",
+                "nombreDeContacto": "",
+                "observacion": ""
+              }
+            ],
+            "documentoReferenciado": {
+              "tipo": 0,
+              "folio": 478,
+              "secuencia": 0,
+              "tipoDocumentoReferenciado": 0,
+              "folioDocumentoReferenciado": 34,
+              "fechaDocumentoReferenciado":  "'.Carbon::now().'",
+              "motivoReferencia": 0,
+              "glosa": "Glosa"
+            }
+          }',
+          CURLOPT_HTTPHEADER => array(
+            'token: '.$this->auth()['Token'],
+            'Content-Type: application/json',
+            'Cookie: '.$this->auth()['Set-Cookie'],
+          ),
+        ));
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+      }
+      $emit = json_decode($response, true);
+      // return $emit;
+      return view('admin.nubox.show',compact('emit'));
     }
 
     public function emit_f(){
@@ -330,14 +401,14 @@ class AdminNuboxController extends Controller
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS =>'[
         {
-          "Rut": "18783405-8",
-          "RazonSocial": "Juan Cliente",
-          "Giro": "EMPRESA DE SERVICIOS DE INFORMATICA",
-          "Acteco": "ACTIVIDADES DE ASESORAMIENTO EMPRESARIAL Y EN MATERIA DE GESTION",
-          "DireccionLegal": "Orinoco 90",
+          "Rut": "15829796-5",
+          "RazonSocial": "Franciscos Sepulveda Vejar",
+          "Giro": "Paciente",
+          "Acteco": "",
+          "DireccionLegal": "San Pascual 736",
           "ComunaLegalNombre": "Las Condes",
-          "Contacto": "Juan Contador",
-          "Email": "juan.contador@ejemplo.com",
+          "Contacto": "You Just Better",
+          "Email": "cristobalugarte6@gmail.com",
           "seEnviaPDF": 1
         }
       ]',

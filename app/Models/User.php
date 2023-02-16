@@ -377,4 +377,15 @@ class User extends Authenticatable {
 		}
 		return False;
 	}
+
+	public function nutritionist(){
+		return $this->hasOne(Nutritionist::class);
+	}
+
+	public function isNutritionist(){
+		if (is_null($this->nutritionist)){
+			return False;
+		}
+		return True;
+	}
 }

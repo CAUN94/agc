@@ -517,7 +517,61 @@ class AdminMedilinkController extends Controller
         echo $response->getBody();
     }
 
+    public function pays(){
+        $client = new \GuzzleHttp\Client();
 
+        $url = 'https://api.medilink.healthatom.com/api/v1/pagos/';
 
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+            'Authorization' => 'Token ' . $this->token
+            ]
+        ]);
+
+        echo $response->getBody();
+    }
+
+    public function pay($id){
+        $client = new \GuzzleHttp\Client();
+        $id_pago = $id;
+        $url = 'https://api.medilink.healthatom.com/api/v1/pagos/'.$id_pago.'/boletas';
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $this->token
+            ]
+        ]);
+
+        echo $response->getBody();
+    }
+
+    public function patients(){
+        $client = new \GuzzleHttp\Client();
+
+        $url = 'https://api.medilink.healthatom.com/api/v1/pacientes/';
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+            'Authorization' => 'Token ' . $this->token
+            ]
+        ]);
+
+        echo $response->getBody();
+    }
+
+    public function patient($id){
+        $client = new \GuzzleHttp\Client();
+
+        $id_paciente = $id;
+        $url = 'https://api.medilink.healthatom.com/api/v1/pacientes/'.$id_paciente.'/pagos';
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+            'Authorization' => 'Token ' . $this->token
+            ]
+        ]);
+
+        echo $response->getBody();
+    }
 
 }
