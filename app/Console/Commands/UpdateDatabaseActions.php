@@ -31,7 +31,7 @@ class UpdateDatabaseActions extends Command
     public function __construct()
     {
         parent::__construct();
-        $this->token = "WzpwZkzjncn1nyfvYx3VovEzTvpB2YSie4YPfvf1.8sggWtpBM3vzmAuE6aYAAmRYiAwxbXNIaM16oJ30";
+        $this->token = config('app.medilink');
     }
 
     /**

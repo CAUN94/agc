@@ -121,6 +121,13 @@ return [
 
     'key' => env('APP_KEY'),
 
+    'medilink' => env('MEDILINK_TOKEN'),
+
+    'nubox' => env('NUBOX_BASE_64'),
+
+    'nubox_env' => env('NUBOX_ENV'),
+    
+
     'cipher' => 'AES-256-CBC',
 
     /*

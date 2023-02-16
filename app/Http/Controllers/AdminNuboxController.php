@@ -15,7 +15,7 @@ class AdminNuboxController extends Controller
     public function __construct()
     {
         $this->middleware('intranet');
-        $this->token = "WzpwZkzjncn1nyfvYx3VovEzTvpB2YSie4YPfvf1.8sggWtpBM3vzmAuE6aYAAmRYiAwxbXNIaM16oJ30";
+        $this->token = config('app.medilink');
     }
 
     //index
@@ -55,7 +55,7 @@ class AdminNuboxController extends Controller
       $curl = curl_init();
       curl_setopt($curl, CURLOPT_HEADER, 1);
       curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://api.nubox.com/Nubox.API.cert/autenticar",
+        CURLOPT_URL => "https://api.nubox.com/".config('app.nubox_env')."/autenticar",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
         CURLOPT_MAXREDIRS => 10,
@@ -65,7 +65,7 @@ class AdminNuboxController extends Controller
         CURLOPT_CUSTOMREQUEST => "POST",
         CURLOPT_HTTPHEADER => array(
           // "Authorization: Basic ZHZqN0xSV1JXUHJkOkdhenVJUGpt", // pro
-          "Authorization: Basic eWFBQTRzU0FPQ3J0OkNsTUNtVDdF", // dev
+          "Authorization: Basic ".config('app.nubox'), // dev
           "Content-Length: 0",
         ),
       ));
@@ -117,7 +117,7 @@ class AdminNuboxController extends Controller
       for($i=0; $i<1; $i++){
         $curl = curl_init();
         curl_setopt_array($curl, array(
-          CURLOPT_URL => 'https://api.nubox.com/Nubox.API.cert/factura/documento/76914578-8/1/rutFuncionario/1/emitir/ventaExtendido?rutFuncionario=18018579-8&emitir=true',
+          CURLOPT_URL => "https://api.nubox.com/".config('app.nubox_env')."/factura/documento/76914578-8/1/rutFuncionario/1/emitir/ventaExtendido?rutFuncionario=18018579-8&emitir=true",
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => '',
           CURLOPT_MAXREDIRS => 10,
@@ -391,7 +391,7 @@ class AdminNuboxController extends Controller
       $curl = curl_init();
 
       curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://api.nubox.com/Nubox.API.cert/factura/76914578-8/1/clientes',
+        CURLOPT_URL => "https://api.nubox.com/".config('app.nubox_env')."/factura/76914578-8/1/clientes",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
