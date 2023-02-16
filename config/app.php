@@ -126,7 +126,8 @@ return [
     'nubox' => env('NUBOX_BASE_64'),
 
     'nubox_env' => env('NUBOX_ENV'),
-    
+
+    'nubox_emit' => (string) env('NUBOX_EMIT'),
 
     'cipher' => 'AES-256-CBC',
 

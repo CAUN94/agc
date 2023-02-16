@@ -117,7 +117,7 @@ class AdminNuboxController extends Controller
       for($i=0; $i<1; $i++){
         $curl = curl_init();
         curl_setopt_array($curl, array(
-          CURLOPT_URL => "https://api.nubox.com/".config('app.nubox_env')."/factura/documento/76914578-8/1/rutFuncionario/1/emitir/ventaExtendido?rutFuncionario=18018579-8&emitir=true",
+          CURLOPT_URL => "https://api.nubox.com/".config('app.nubox_env')."/factura/documento/76914578-8/1/rutFuncionario/1/emitir/ventaExtendido?rutFuncionario=18018579-8&emitir=".getenv('NUBOX_EMIT'),
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => '',
           CURLOPT_MAXREDIRS => 10,
@@ -210,7 +210,7 @@ class AdminNuboxController extends Controller
     public function emit_f(){
       $curl = curl_init();
       curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://api.nubox.com/Nubox.API/factura/documento/76914578-8/1/rutFuncionario/1/emitir/ventaExtendido?rutFuncionario=18018579-8&emitir=false',
+        CURLOPT_URL => "https://api.nubox.com/Nubox.API/factura/documento/76914578-8/1/rutFuncionario/1/emitir/ventaExtendido?rutFuncionario=18018579-8&emitir=".getenv('NUBOX_EMIT'),
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -429,7 +429,7 @@ class AdminNuboxController extends Controller
       $curl = curl_init();
 
       curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://api.nubox.com/Nubox.API/factura/documento/76914578-8/1/18018579-8/1/39/dte/extendido&emitir=false',
+        CURLOPT_URL => "https://api.nubox.com/Nubox.API/factura/documento/76914578-8/1/18018579-8/1/39/dte/extendido&emitir=".getenv('NUBOX_EMIT'),
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
