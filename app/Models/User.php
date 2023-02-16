@@ -273,7 +273,7 @@ class User extends Authenticatable {
 	}
 
 	public function hasIntranet(){
-		if($this->isAdmin() or $this->isProfessional() or $this->isTrainer() or $this->isReception()){
+		if($this->isAdmin() or $this->isProfessional() or $this->isTrainer() or $this->isReception() or $this->isNutritionist()){
 			return true;
 		}
 		return false;
