@@ -20,7 +20,7 @@ class AdminConfirmation extends Component
     public function New()
     {
         $date = $this->newdate;
-        $this->token = "WzpwZkzjncn1nyfvYx3VovEzTvpB2YSie4YPfvf1.8sggWtpBM3vzmAuE6aYAAmRYiAwxbXNIaM16oJ30";
+        $this->token = config('app.medilink');
         $date = Carbon::parse($date)->format('Y-m-d');
         $client = new \GuzzleHttp\Client();
         $url = 'https://api.dentalink.healthatom.com/api/v1/citas?q={"fecha":{"eq":"'.$date.'"}}';
@@ -38,7 +38,7 @@ class AdminConfirmation extends Component
 
     public function render()
     {
-        $this->token = "WzpwZkzjncn1nyfvYx3VovEzTvpB2YSie4YPfvf1.8sggWtpBM3vzmAuE6aYAAmRYiAwxbXNIaM16oJ30";
+        $this->token = config('app.medilink');
         $date = $this->newdate;
         $client = new \GuzzleHttp\Client();
         $url = 'https://api.dentalink.healthatom.com/api/v1/citas?q={"fecha":{"eq":"'.$date.'"}}';

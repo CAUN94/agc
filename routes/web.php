@@ -21,17 +21,7 @@ use App\Http\Middleware\UpdatePassword;
 // Route::get('/google', [CalendarController::class, 'google']);
 
 
-Route::get('/nubox/auth', [ AdminNuboxController::class, 'auth']);
-// No cuento con permiso
-Route::get('/nubox/comprobante', [ AdminNuboxController::class, 'comprobante']);
-// Funciona
-Route::get('/nubox/comuna', [ AdminNuboxController::class, 'comuna']);
 
-Route::get('/nubox/emit', [ AdminNuboxController::class, 'emit']);
-//Funciona
-Route::get('/nubox/cliente', [ AdminNuboxController::class, 'cliente']);
-//
-Route::get('/nubox/boleta', [ AdminNuboxController::class, 'boleta']);
 
 
 Route::get('/professionalshours', 'App\Http\Controllers\ScrapingController@professionalshours');
@@ -116,7 +106,6 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/apim/clients', [ApiMedilinkController::class, 'allClients'])->middleware(['intranet']);
     Route::get('/apim/appointments', [ApiMedilinkController::class, 'appointments'])->middleware(['intranet']);
     Route::get('/apim/allappointments', [ApiMedilinkController::class, 'allAppointments'])->middleware(['intranet']);
-
     Route::get('/apim/addAppointment', [ApiMedilinkController::class, 'addAppointment'])->middleware(['intranet']);
 
     Route::get('/apim/appointmentsProfessional/{id}/{startdate}/{enddate}', [ApiMedilinkController::class, 'appointmentsProfessional']);
@@ -227,6 +216,25 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/apimedilink/atenciones', [AdminMedilinkController::class, 'atenciones']);
     Route::get('/apimedilink/prestaciones', [AdminMedilinkController::class, 'prestaciones']);
     Route::get('/apimedilink/prestaciones/{id}', [AdminMedilinkController::class, 'prestacion']);
+    Route::get('/apimedilink/pays', [AdminMedilinkController::class, 'pays']);
+    Route::get('/apimedilink/pays/{id}', [AdminMedilinkController::class, 'pay']);
+    Route::get('/apimedilink/patients', [AdminMedilinkController::class, 'patients']);
+    Route::get('/apimedilink/patients/{id}', [AdminMedilinkController::class, 'patient']);
+
+    // Nubox
+    Route::get('/nubox', [ AdminNuboxController::class, 'index']);
+    Route::post('/nubox/emit', [ AdminNuboxController::class, 'emit']);
+    Route::get('/nubox/auth', [ AdminNuboxController::class, 'auth']);
+    // No cuento con permiso
+    Route::get('/nubox/comprobante', [ AdminNuboxController::class, 'comprobante']);
+    // Funciona
+    Route::get('/nubox/comuna', [ AdminNuboxController::class, 'comuna']);
+
+    // Route::get('/nubox/emit', [ AdminNuboxController::class, 'emit']);
+    //Funciona
+    Route::get('/nubox/cliente', [ AdminNuboxController::class, 'cliente']);
+    //
+    Route::get('/nubox/boleta', [ AdminNuboxController::class, 'boleta']);
 });
 
 require __DIR__ . '/auth.php';

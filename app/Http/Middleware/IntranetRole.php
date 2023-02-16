@@ -22,7 +22,9 @@ class IntranetRole
             (Auth::user()->isProfessional() ||
             Auth::user()->isAdmin() ||
             Auth::user()->isReception() ||
-            Auth::user()->isTrainer())) {
+            Auth::user()->isTrainer()) ||
+            Auth::user()->isNutritionist()
+            ) {
              return $next($request);
         }
         FlashSession::flash('primary','No cuentas con los permisos');

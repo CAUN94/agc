@@ -32,7 +32,7 @@ class LandingController extends Controller
 
     public function confirmation($id)
     {
-        $token = "WzpwZkzjncn1nyfvYx3VovEzTvpB2YSie4YPfvf1.8sggWtpBM3vzmAuE6aYAAmRYiAwxbXNIaM16oJ30";
+        $token = config('app.medilink');
         $client = new \GuzzleHttp\Client();
 
         $url = 'https://api.medilink.healthatom.com/api/v1/citas/'.$id;
@@ -76,7 +76,7 @@ class LandingController extends Controller
     public function sendconfirmation($id)
     {
         $url = "https://web.whatsapp.com/send?phone=56976693894&text=Hola%20".$id;
-        $token = "WzpwZkzjncn1nyfvYx3VovEzTvpB2YSie4YPfvf1.8sggWtpBM3vzmAuE6aYAAmRYiAwxbXNIaM16oJ30";
+        $token = config('app.medilink');
         $client = new \GuzzleHttp\Client();
 
         $url = 'https://api.medilink.healthatom.com/api/v1/citas/'.$id;
