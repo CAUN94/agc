@@ -92,11 +92,9 @@ class AdminNuboxController extends Controller
     }
 
     public function emit(Request $request){
-      // return $request;
       $pack = Pack::find($request->pack);
-      $professional = Professional::find($request->professional)->with('user')->first();
+      $professional = Professional::where('id',$request->professional)->with('user')->first();
       $client = new \GuzzleHttp\Client();
-      $id_paciente = 2;
       $url = 'https://api.medilink.healthatom.com/api/v1/pacientes/'.$request->patient;
 
       $response = $client->request('GET', $url, [
@@ -138,7 +136,7 @@ class AdminNuboxController extends Controller
                 "afecto": "NO",
                 "producto": "ATENCION KINESIOLOGICA INTEGRAL",
                 "descripcion": "RUT PROFESIONAL: '.$professional->user->rut.' '.$professional->user->name.' '.$professional->user->lastnames.'",
-                "cantidad": 10,
+                "cantidad": "'.$pack->count.'",
                 "comunaContraparte": "Las Condes",
                 "direccionContraparte": "San Pascual 736",
                 "precio": "'.$price.'",
