@@ -92,7 +92,7 @@ class UpdateDatabaseActions extends Command
           ]);
 
             
-        } catch () {
+        } catch (Exception $e) {
           $this->info('Error: ');
           continue;
         }
