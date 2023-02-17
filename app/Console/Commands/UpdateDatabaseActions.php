@@ -84,7 +84,6 @@ class UpdateDatabaseActions extends Command
 
         $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/'.$ar->Tratamiento_Nr;
 
-        //try api request to get atention
         try {
           $response = $client->request('GET', $url, [
             'headers'  => [
@@ -93,12 +92,10 @@ class UpdateDatabaseActions extends Command
           ]);
 
             
-        } catch (Exception $e) {
-          $this->info('Error: '.$e->getMessage());
+        } catch () {
+          $this->info('Error: ');
           continue;
         }
-
-
         
         $atention = json_decode($response->getBody())->data;
 
