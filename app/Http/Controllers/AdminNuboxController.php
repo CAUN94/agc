@@ -106,12 +106,11 @@ class AdminNuboxController extends Controller
       $patient = json_decode($response->getBody());
 
 
-      if($request->alliance == 'True'){
+      if($request->alliance == 'true'){
         $price = $pack->alliance_price;
       } else {
         $price = $pack->price;
       }
-
       for($i=0; $i<1; $i++){
         $curl = curl_init();
         curl_setopt_array($curl, array(
