@@ -77,19 +77,29 @@ class UpdateDatabaseActions extends Command
       $count = 0;
       // Carbon Yesterday Date
       
-      $allAtentions = AppointmentMl::where('Fecha','>',Carbon::now()->subdays(1)->format('Y-m-d'))->get();
+      $allAtentions = AppointmentMl::where('Fecha','>',Carbon::now()->subdays(30)->format('Y-m-d'))->get();
 
       foreach($allAtentions as $ar){
         $this->info($count);
 
         $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/'.$ar->Tratamiento_Nr;
 
-        $response = $client->request('GET', $url, [
+        //try api request to get atention
+        try {
+          $response = $client->request('GET', $url, [
             'headers'  => [
                 'Authorization' => 'Token ' . $this->token
             ]
-        ]);
+          ]);
 
+            
+        } catch (Exception $e) {
+          $this->info('Error: '.$e->getMessage());
+          continue;
+        }
+
+
+        
         $atention = json_decode($response->getBody())->data;
 
         $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/'.$ar->Tratamiento_Nr.'/detalles';
