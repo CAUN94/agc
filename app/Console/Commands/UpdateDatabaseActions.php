@@ -77,7 +77,7 @@ class UpdateDatabaseActions extends Command
       $count = 0;
       // Carbon Yesterday Date
       
-      $allAtentions = AppointmentMl::where('Fecha','>',Carbon::now()->subdays(30)->format('Y-m-d'))->get();
+      $allAtentions = AppointmentMl::where('Fecha','>',Carbon::now()->subdays(5)->format('Y-m-d'))->get();
 
       foreach($allAtentions as $ar){
         $this->info($count);
