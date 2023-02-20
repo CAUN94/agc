@@ -45,10 +45,12 @@ class UpdateDatabase extends Command
 
     public function store(){
         $client = new \GuzzleHttp\Client();
-        $date = strval(Carbon::now()->subDays(10)->format('Y-m-d'));
-        $url = 'https://api.dentalink.healthatom.com/api/v1/citas';
+        $date = strval(Carbon::now()->subdays(30)->format('Y-m-d'));
         $query_string   = '?q={"fecha":{"gt":"'.$date.'"}}';
+        // $query_string   = '?q={"fecha":{"gt":"2023-02-10"}}';
+        $url = 'https://api.medilink.healthatom.com/api/v1/citas';
         $url = $url."".$query_string;
+
         $response = $client->request('GET', $url, [
             'headers'  => [
                 'Authorization' => 'Token ' . $this->token
@@ -59,6 +61,7 @@ class UpdateDatabase extends Command
         $appointments = json_decode($response->getBody());
         $allAppointments[] = $appointments->data;
         
+
         while(isset($appointments->links->next)){
             $response = $client->request('GET', $appointments->links->next, [
                 'headers'  => [
@@ -67,10 +70,12 @@ class UpdateDatabase extends Command
             ]);
             $appointments = json_decode($response->getBody());
             $allAppointments[] = $appointments->data;
-            
+            $this->info(count($allAppointments));
         }
+        
         $allAppointments = array_merge(...$allAppointments);
 
+        
         $fecha  = array_column($allAppointments, 'fecha');
         $fecha_r  = array_column($allAppointments, 'fecha_actualizacion');
 
@@ -85,15 +90,15 @@ class UpdateDatabase extends Command
                     'Authorization' => 'Token ' . $this->token
                 ]
             ]);
-            if($count%20 == 0){
+            if($count%20 == 0 and $count != 0){
+                $this->info("Count:".$count);
                 sleep(15);
             }
-            
             $patient = json_decode($response->getBody())->data;
 
             $apMl = AppointmentMl::UpdateOrCreate(
                 [
-                    'Tratamiento_Nr' => $appointment->id_tratamiento,
+                    'Tratamiento_Nr' => $appointment->id_atencion,
                     'Rut_Paciente' => $patient->rut ,
                     // 'Estado' => $appointment->estado_cita,
                 ],
@@ -103,8 +108,8 @@ class UpdateDatabase extends Command
                     'Fecha_Generación' => $appointment->fecha_actualizacion ,
                     'Hora_inicio' => $appointment->hora_inicio ,
                     'Hora_termino' => $appointment->hora_fin ,
-                    'Tratamiento_Nr' => $appointment->id_tratamiento ,
-                    'Profesional' => $appointment->nombre_dentista ,
+                    'Tratamiento_Nr' => $appointment->id_atencion ,
+                    'Profesional' => $appointment->nombre_profesional ,
                     'Rut_Paciente' => $patient->rut ,
                     'Nombre_paciente' => $patient->nombre ,
                     'Apellidos_paciente' => $patient->apellidos ,
@@ -115,9 +120,7 @@ class UpdateDatabase extends Command
                 ]
             );
 
-            // if($apMl->wasChanged()){
-            //     $this->info('Modificado:'.$apMl->Nombre_paciente.' '.$apMl->Apellidos_paciente);
-            // }
+            $this->info($apMl->id);
 
             if(isset($apMl->getChanges()['Fecha_Generación'])){
                 $this->info('Modificado:'.$apMl->Nombre_paciente.' '.$apMl->Apellidos_paciente);
