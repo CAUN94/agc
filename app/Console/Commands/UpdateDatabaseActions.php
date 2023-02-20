@@ -77,27 +77,18 @@ class UpdateDatabaseActions extends Command
       $count = 0;
       // Carbon Yesterday Date
       
-      $allAtentions = AppointmentMl::where('Fecha','>',Carbon::now()->subdays(30)
+      $allAtentions = AppointmentMl::where('Fecha','>',Carbon::now()->subdays(5)
         ->format('Y-m-d'))->whereIn('Estado',['Atendido','Atendiéndose'])->get();
 
       foreach($allAtentions as $ar){
-        $this->info($count);
-
         $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/'.$ar->Tratamiento_Nr;
 
-        try {
-          $response = $client->request('GET', $url, [
-            'headers'  => [
-                'Authorization' => 'Token ' . $this->token
-            ]
-          ]);
-
+        $response = $client->request('GET', $url, [
+          'headers'  => [
+              'Authorization' => 'Token ' . $this->token
+          ]
+        ]);
             
-        } catch (Exception $e) {
-          $this->info('Error: ');
-          continue;
-        }
-        
         $atention = json_decode($response->getBody())->data;
 
         $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/'.$ar->Tratamiento_Nr.'/detalles';
@@ -149,6 +140,7 @@ class UpdateDatabaseActions extends Command
             'created_at'=> Carbon::Now(),
             'updated_at'=> Carbon::Now()
           ]);
+          $this->info($new_row->id);
           $count += 1;
         if($count%30 == 0){
           sleep(15);
