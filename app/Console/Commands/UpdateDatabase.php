@@ -122,10 +122,6 @@ class UpdateDatabase extends Command
 
             $this->info($apMl->id);
 
-            if(isset($apMl->getChanges()['Fecha_Generación'])){
-                $this->info('Modificado:'.$apMl->Nombre_paciente.' '.$apMl->Apellidos_paciente);
-            }
-
 
             
             $count++;
