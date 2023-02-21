@@ -27,8 +27,8 @@ class Professional extends Model
     }
 
     public static function monthAppointments($first,$last,$user){
-        return ActionMl::where('Fecha_Realizacion','>',$first)
-                        ->where('Fecha_Realizacion','<', $last)
+        return AppointmentMl::where('Fecha','>',$first)
+                        ->where('Fecha','<', $last)
                         ->Where('Profesional', 'LIKE' , '%' . $user . '%')
                         ->Where('Estado','=', 'Atendido')
                         ->distinct(['Tratamiento_Nr'])
