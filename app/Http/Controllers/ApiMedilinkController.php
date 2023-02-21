@@ -131,15 +131,15 @@ class ApiMedilinkController extends Controller
 
         foreach ($appointments->data as $appointment) {
 
-          if($a->finalizado=1){
-            $estado = 'Atendido';
-          }else{
-            $estado = 'No Atendido';
-          }
+          // if($a->finalizado=1){
+          //   $estado = 'Atendido';
+          // }else{
+          //   $estado = 'No Atendido';
+          // }
 
-          if(empty($action->convenio)){
-            $action->convenio = 'Sin Convenio';
-          }
+          // if(empty($action->convenio)){
+          //   $action->convenio = 'Sin Convenio';
+          // }
 
           $nombre = strtok($appointment->nombre_paciente,  ' ');
           $apellido = substr($appointment->nombre_paciente, strpos($appointment->nombre_paciente, " ") + 1);
