@@ -235,6 +235,8 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/nubox/cliente', [ AdminNuboxController::class, 'cliente']);
     //
     Route::get('/nubox/boleta', [ AdminNuboxController::class, 'boleta']);
+
+    Route::get('/nubox/documentos', [ AdminNuboxController::class, 'documentos']);
 });
 
 require __DIR__ . '/auth.php';

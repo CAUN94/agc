@@ -64,8 +64,7 @@ class AdminNuboxController extends Controller
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => "POST",
         CURLOPT_HTTPHEADER => array(
-          // "Authorization: Basic ZHZqN0xSV1JXUHJkOkdhenVJUGpt", // pro
-          "Authorization: Basic ".config('app.nubox'), // dev
+          "Authorization: Basic ".config('app.nubox'), 
           "Content-Length: 0",
         ),
       ));
@@ -484,4 +483,32 @@ class AdminNuboxController extends Controller
       curl_close($curl);
       echo $response;
     }
+
+    public function documentos(){
+      $curl = curl_init();
+ 
+      curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://api.nubox.com/Nubox.API/factura/documento/76914578-8/venta/2023-02-06/BOL-EE/12596/1",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_HTTPHEADER => array(
+          'token: '.$this->auth()['Token'],
+          'Content-Type: application/json',
+        ),
+      ));
+      
+      $response = curl_exec($curl);
+      // convert to xml to json
+      return $response;
+      //xml to json
+      $xml = simplexml_load_string($response);
+      curl_close($curl);
+      echo $xml;
+    }
+
 }
