@@ -27,13 +27,13 @@ class Professional extends Model
     }
 
     public static function monthAppointments($first,$last,$user){
-        return AppointmentMl::where('Fecha','>',$first)
-                        ->where('Fecha','<', $last)
-                        ->Where('Profesional', 'LIKE' , '%' . $user . '%')
-                        ->Where('Estado','=', 'Atendido')
-                        ->distinct(['Tratamiento_Nr'])
-                        ->count(['Tratamiento_Nr']);
-    }
+      return ActionMl::where('Fecha_Realizacion','>',$first)
+                      ->where('Fecha_Realizacion','<', $last)
+                      ->Where('Profesional', 'LIKE' , '%' . $user . '%')
+                      ->Where('Estado','=', 'Atendido')
+                      ->distinct(['Tratamiento_Nr'])
+                      ->count(['Tratamiento_Nr']);
+  }
 
     public static function prestaciones($first,$last,$user){
 
