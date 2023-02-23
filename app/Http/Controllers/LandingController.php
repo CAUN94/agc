@@ -67,10 +67,6 @@ class LandingController extends Controller
 
         $patient = json_decode($response->getBody())->data;
 
-        // ddd($appointment);
-        // ddd($atention);
-        // ddd($patient);
-        // return view('confirmation');
     }
 
     public function sendconfirmation($id)
