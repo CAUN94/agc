@@ -155,8 +155,8 @@ class AdminRemuneracion extends Component
               $this->dates[] = $date;
           }
       }
-
       return view('livewire.admin-remuneracion', [
+        
           'appointments' => ActionMl::where('Estado','Atendido')
                                 ->where('Fecha_Realizacion','>',$this->expiredstartOfMonth->format('Y-m-d'))
                                 ->where('Fecha_Realizacion','<',$this->expiredendOfMonth->format('Y-m-d'))

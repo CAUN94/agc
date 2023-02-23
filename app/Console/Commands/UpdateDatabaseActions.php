@@ -77,8 +77,8 @@ class UpdateDatabaseActions extends Command
       $count = 0;
       // Carbon Yesterday Date
       
-      $allAtentions = AppointmentMl::where('Fecha','>',Carbon::now()->subdays(30)
-        ->format('Y-m-d'))->whereIn('Estado',['Atendido','Atendiéndose'])->get();
+      $allAtentions = AppointmentMl::where('Fecha','>',Carbon::now()->subdays(5)
+        ->format('Y-m-d'))->whereIn('Estado',['Atendido','Atendiéndose','No asiste'])->get();
 
       foreach($allAtentions as $ar){
         $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/'.$ar->Tratamiento_Nr;

@@ -163,7 +163,7 @@ class AdminMedilinkController extends Controller
         $coff = User::where('rut',$rut)->first()->professional->coeff;
 
         $client = new \GuzzleHttp\Client();
-        $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/'.$id.'/citas?q={"fecha":{"gt":"2022-12-20"},"estado_cita":{"eq":"Atendido"}}&sort=fecha:desc';
+        $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/'.$id.'/citas?q={"fecha":{"gt":"2023-01-20"},"estado_cita":{"eq":"Atendido"}}&sort=fecha:desc';
 
         $response = $client->request('GET', $url, [
             'headers'  => [
@@ -183,7 +183,7 @@ class AdminMedilinkController extends Controller
                 //     break;
                 // }
                 sleep(0.3);
-                if($data->fecha < '2022-12-21' or $data->fecha > '2023-01-20'){
+                if($data->fecha < '2023-01-21' or $data->fecha > '2023-02-20'){
                     continue;
                 }
                 $id_atencion = $data->id_atencion;
@@ -263,7 +263,7 @@ class AdminMedilinkController extends Controller
         $id = json_decode($response->getBody())->data[0]->id;
 
         $client = new \GuzzleHttp\Client();
-        $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/'.$id.'/citas?q={"fecha":{"gt":"2022-11-20"},"estado_cita":{"eq":"Atendido"}}&sort=fecha:desc';
+        $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/'.$id.'/citas?q={"fecha":{"gt":"2023-01-20"},"estado_cita":{"eq":"Atendido"}}&sort=fecha:desc';
 
         $response = $client->request('GET', $url, [
             'headers'  => [
@@ -283,7 +283,7 @@ class AdminMedilinkController extends Controller
                 //     break;
                 // }
                 sleep(0.3);
-                if($data->fecha > '2022-12-20'){
+                if($data->fecha > '2023-02-20'){
                     continue;
                 }
                 $id_atencion = $data->id_atencion;
