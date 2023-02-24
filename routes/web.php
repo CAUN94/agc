@@ -24,7 +24,7 @@ use App\Http\Middleware\UpdatePassword;
 Route::get('/run-python', function () {
     $output = [];
     $return_var = 0;
-    exec('python ' . base_path('/app/hello.py'), $output, $return_var);
+    exec('python3 ' . base_path('app/hello.py'), $output, $return_var);
     dd($output, $return_var);
 });
 
