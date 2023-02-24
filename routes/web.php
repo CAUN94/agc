@@ -21,6 +21,12 @@ use App\Http\Middleware\UpdatePassword;
 // Route::get('/google', [CalendarController::class, 'google']);
 
 
+Route::get('/run-python', function () {
+    $output = [];
+    $return_var = 0;
+    exec('python3 ' . base_path('app/hello.py'), $output, $return_var);
+    dd($output, $return_var);
+});
 
 
 

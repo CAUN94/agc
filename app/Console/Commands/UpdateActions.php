@@ -180,7 +180,7 @@ class UpdateActions extends Command
                     'Prestacion_Nr'=> $action->id_prestacion,
                     'Prestacion_Nombre'=> $action->nombre_prestacion,
                     'Fecha_Realizacion'=> $pay[0]->fecha,
-                    'Precio_Prestacion'=> $action->subtotal,
+                    'Precio_Prestacion'=> $action->total,
                     'Abono'=> $action->pagado,
                     'Total'=> $action->total,
                     'created_at'=> Carbon::Now(),
