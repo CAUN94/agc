@@ -56,6 +56,11 @@ class UpdateActions extends Command
     }
 
     public function allActions($id){
+        //carbon now sub 30 days format Y-m-d
+        $startOfMonth = Carbon::now()->subDays(30)->format('Y-m-d');
+        //carbon now submonth format Y-m-d
+        $first = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')-1,21)->startOfDay();
+        $last = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m'),20)->startOfDay()->subMonth();
         $client = new \GuzzleHttp\Client();
         $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/'.$id;
         $response = $client->request('GET', $url, [
@@ -71,7 +76,7 @@ class UpdateActions extends Command
         $coff = User::where('rut',$rut)->first()->professional->coeff;
 
         $client = new \GuzzleHttp\Client();
-        $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/'.$id.'/citas?q={"fecha":{"gt":"2023-01-01"},"estado_cita":{"eq":"Atendido"}}&sort=fecha:desc';
+        $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/'.$id.'/citas?q={"fecha":{"gt":"'.$startOfMonth.'"},"estado_cita":{"eq":"Atendido"}}&sort=fecha:desc';
 
         $response = $client->request('GET', $url, [
             'headers'  => [
@@ -91,7 +96,7 @@ class UpdateActions extends Command
                 //     break;
                 // }
                 sleep(2);
-                if($data->fecha < '2023-01-21' or $data->fecha > '2023-02-20'){
+                if($data->fecha < $first or $data->fecha > $last){
                     continue;
                 }
                 $id_atencion = $data->id_atencion;

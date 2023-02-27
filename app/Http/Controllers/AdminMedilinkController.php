@@ -210,8 +210,8 @@ class AdminMedilinkController extends Controller
                         ]);
                         $prestacion = json_decode($response->getBody())->data;
                         // ddd($data_pay);
-                        $total += $data_pay->subtotal;
-                        $pay->data[$i]->total = $data_pay->subtotal;
+                        $total += $data_pay->total;
+                        $pay->data[$i]->total = $data_pay->total;
 
 
                     } else {

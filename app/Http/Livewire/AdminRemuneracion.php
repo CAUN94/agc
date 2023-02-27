@@ -66,6 +66,8 @@ class AdminRemuneracion extends Component
         $this->newAppointment = 0;
         $this->coach = 0;
 
+
+
         // $this->selectedPlans = Training::where('id','>',0)->pluck('id')->toArray();
         // $this->plans = DB::table('train_appointments_pivot')->distinct('train_appointment_id')->pluck('train_appointment_id')->toArray();
     }
