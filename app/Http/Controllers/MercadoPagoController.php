@@ -17,8 +17,43 @@ class MercadoPagoController extends Controller
     }
 
     public function pay($id){
-        $appointmentMl = AppointmentMl::where('Tratamiento_Nr',$id)->first();
-        return view('mercadopago.pay',compact('appointmentMl'));
+        $token = config('app.medilink');
+        $client = new \GuzzleHttp\Client();
+
+        $url = 'https://api.medilink.healthatom.com/api/v1/citas/'.$id;
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $token
+            ]
+        ]);
+
+        $appointment = json_decode($response->getBody())->data;
+        // ddd($appointment);
+        $id_atencion = $appointment->id_atencion;
+        $client = new \GuzzleHttp\Client();
+        $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/'.$id_atencion;
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $token
+            ]
+        ]);
+
+        $atention = json_decode($response->getBody())->data;
+        // ddd($atention->total);
+        $id_paciente = $appointment->id_paciente;
+        $url = 'https://api.medilink.healthatom.com/api/v1/pacientes/'.$id_paciente;
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $token
+            ]
+        ]);
+
+        $patient = json_decode($response->getBody())->data;
+
+        return view('mercadopago.pay',compact('appointment','atention','patient'));
     }
 
     public function personalizepay(){
