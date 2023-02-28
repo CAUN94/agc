@@ -107,4 +107,11 @@ class AppointmentMl extends Model
             ->select('treatment_mls.*')
             ->get();
     }
+
+    public function dayhour(){
+        $day = \Carbon\Carbon::parse($this->Fecha)->format('Y-m-d');
+        $hour = \Carbon\Carbon::parse($this->Hora_inicio)->format('H:i');
+
+        return $day." ".$hour;
+    }
 }
