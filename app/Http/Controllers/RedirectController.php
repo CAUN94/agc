@@ -230,4 +230,9 @@ class RedirectController extends Controller {
 		return Redirect::away($url);
 	}
 
+	public function masterclass(){
+		$url = "https://mpago.la/1Z75Xy3";
+		return Redirect::away($url);
+	}
+
 }

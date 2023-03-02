@@ -15,12 +15,12 @@ use App\Http\Middleware\UpdatePassword;
 |
  */
 
-Route::get('/run-python', function () {
-    $output = [];
-    $return_var = 0;
-    exec('python3 ' . base_path('app/hello.py'), $output, $return_var);
-    dd($output, $return_var);
-});
+// Route::get('/run-python', function () {
+//     $output = [];
+//     $return_var = 0;
+//     exec('python3 ' . base_path('app/hello.py'), $output, $return_var);
+//     dd($output, $return_var);
+// });
 
 
 
@@ -164,6 +164,7 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/endurance', 'App\Http\Controllers\RedirectController@endurance');
     Route::get('/trailwomen', 'App\Http\Controllers\RedirectController@trailwomen');
     Route::get('/agendate', 'App\Http\Controllers\RedirectController@agendate');
+    Route::get('/masterclass', 'App\Http\Controllers\RedirectController@agendate');
 
     Route::get('/box/dcontrerasb', 'App\Http\Controllers\RedirectController@contreras');
     Route::get('/box/jmguzmanh', 'App\Http\Controllers\RedirectController@guzman');
@@ -237,6 +238,9 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/nubox/boleta', [ AdminNuboxController::class, 'boleta']);
 
     Route::get('/nubox/documentos', [ AdminNuboxController::class, 'documentos']);
+
+    Route::get('pay/{user}/{status}', 'App\Http\Controllers\PayController@payStatus');
+    Route::get('pay/{user}/{treatmentMl}/{status}', 'App\Http\Controllers\PayController@payMedilinkStatus');
 });
 
 require __DIR__ . '/auth.php';
