@@ -46,7 +46,6 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::resource('users', 'App\Http\Controllers\UsersController')->middleware(['auth']);
     Route::get('/calendar', [LandingController::class, 'calendar'])->middleware(['auth']);
     Route::get('/healthy', [LandingController::class, 'healthy'])->middleware(['auth']);
-    Route::get('/packverano', [LandingController::class, 'packverano']);
     Route::post('/mailverano', [LandingController::class, 'mailverano']);
     Route::get('/nutrition', [LandingController::class, 'nutrition'])->middleware(['auth']);
     Route::get('/calendar/store/{id}', [CalendarController::class, 'store'])->middleware(['auth']);
@@ -221,6 +220,10 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/apimedilink/pays/{id}', [AdminMedilinkController::class, 'pay']);
     Route::get('/apimedilink/patients', [AdminMedilinkController::class, 'patients']);
     Route::get('/apimedilink/patients/{id}', [AdminMedilinkController::class, 'patient']);
+    Route::get('/apimedilink/payments', [AdminMedilinkController::class, 'payments']);
+    Route::get('/apimedilink/allpayments', [AdminMedilinkController::class, 'allpayments']);
+    Route::get('/apimedilink/payments/{id}', [AdminMedilinkController::class, 'payment']);
+    Route::get('/apimedilink/payments/{id}/boleta', [AdminMedilinkController::class, 'paymentboleta']);
 
     // Nubox
     Route::get('/nubox', [ AdminNuboxController::class, 'index']);
@@ -231,8 +234,6 @@ Route::middleware([UpdatePassword::class])->group(function () {
     // Funciona
     Route::get('/nubox/comuna', [ AdminNuboxController::class, 'comuna']);
 
-    // Route::get('/nubox/emit', [ AdminNuboxController::class, 'emit']);
-    //Funciona
     Route::get('/nubox/cliente', [ AdminNuboxController::class, 'cliente']);
     //
     Route::get('/nubox/boleta', [ AdminNuboxController::class, 'boleta']);
@@ -241,6 +242,8 @@ Route::middleware([UpdatePassword::class])->group(function () {
 
     Route::get('pay/{user}/{status}', 'App\Http\Controllers\PayController@payStatus');
     Route::get('pay/{user}/{treatmentMl}/{status}', 'App\Http\Controllers\PayController@payMedilinkStatus');
+
+    Route::get('/teachable/courses', 'TeachableController@getCourses');
 });
 
 require __DIR__ . '/auth.php';

@@ -574,4 +574,78 @@ class AdminMedilinkController extends Controller
         echo $response->getBody();
     }
 
+    public function payments(){
+        $client = new \GuzzleHttp\Client();
+        $url = 'https://api.medilink.healthatom.com/api/v1/pagos/';
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $this->token
+            ]
+        ]);
+        
+        echo $response->getBody();
+    }
+
+    public function allpayments() {
+        $client = new \GuzzleHttp\Client();
+        $url = 'https://api.medilink.healthatom.com/api/v1/pagos/';
+        $query_string   = '?q={"fecha_recepcion":{"gt":"2022-09-01"}}';
+        $url = $url."".$query_string;
+
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $this->token
+            ]
+        ]);
+        $body = json_decode($response->getBody());
+
+        $allpayments = [];
+        $payments = json_decode($response->getBody());
+        $allpayments[] = $payments->data;
+
+        while(isset($payments->links->next)){
+            $response = $client->request('GET', $payments->links->next, [
+                'headers'  => [
+                    'Authorization' => 'Token ' . $this->token
+                ]
+            ]);
+            $payments = json_decode($response->getBody());
+            $allpayments[] = $payments->data;
+  
+        }
+        return array_merge(...$allpayments);
+    }
+    
+    public function payment($id){
+        $client = new \GuzzleHttp\Client();
+
+        $id_pago = $id;
+        $url = 'https://api.medilink.healthatom.com/api/v1/pagos/'.$id_pago;
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+            'Authorization' => 'Token ' . $this->token
+            ]
+        ]);
+
+        echo $response->getBody();
+    }
+
+    public function paymentboleta($id){
+        $client = new \GuzzleHttp\Client();
+
+        $id_pago = $id;
+        $url = 'https://api.medilink.healthatom.com/api/v1/pagos/'.$id_pago;
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $this->token
+            ]
+        ]);
+
+        echo $response->getBody();
+    }
+
 }

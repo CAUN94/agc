@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pack extends Model
+class SelledPack extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'price',
-        'description',
-        'image',
+        'patient_id',
+        'user_name',
         'professional_id',
         'professional_name',
+        'pack_id',
+        'pack_name',
     ];
 }
