@@ -78,4 +78,39 @@
             </div>
         </form>
 	</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
+
+    <!-- Crea una función para normalizar una cadena -->
+    <script>
+    function normalizarCadena(cadena) {
+    return cadena.toLowerCase().replace(/[\sáéíóúü]/g, function(letra) {
+        switch (letra) {
+        case 'á': return 'a';
+        case 'é': return 'e';
+        case 'í': return 'i';
+        case 'ó': return 'o';
+        case 'ú': return 'u';
+        case 'ü': return 'u';
+        default: return '';
+        }
+    });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+    // Selecciona el elemento select
+    var miSelect = document.querySelector('#patient');
+
+    // Inicializa Select2
+    var select2 = new Select2(miSelect, {
+        minimumInputLength: 1,
+        matcher: function(term, text, opt) {
+        // Normaliza la cadena para comparar sin considerar mayúsculas, espacios ni acentos
+        var textNormalizada = normalizarCadena(text);
+        var termNormalizada = normalizarCadena(term);
+        return textNormalizada.indexOf(termNormalizada) >= 0;
+        }
+    });
+    });
+    </script>
 </x-admin.layout>

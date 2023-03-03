@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\Professional;
 use App\Models\Pack;
+use App\Models\SelledPack;
 
 class AdminNuboxController extends Controller
 {
@@ -199,6 +200,16 @@ class AdminNuboxController extends Controller
         curl_close($curl);
       }
       $emit = json_decode($response, true);
+
+      $selled_pack = new SelledPack;
+      $selled_pack->patient_id = $request->patient;
+      $selled_pack->user_name = $patient->data->nombre.' '.$patient->data->apellidos;
+      $selled_pack->professional_id = $request->professional;
+      $selled_pack->professional_name = $professional->user->name.' '.$professional->user->lastnames;
+      $selled_pack->pack_id = $request->pack;
+      $selled_pack->pack_name = $pack->name;
+      $selled_pack->save();
+
       // return $emit;
       return view('admin.nubox.show',compact('emit'));
     }
