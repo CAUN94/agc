@@ -71,7 +71,7 @@ class UpdateActions extends Command
         $coff = User::where('rut',$rut)->first()->professional->coeff;
 
         $client = new \GuzzleHttp\Client();
-        $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/'.$id.'/citas?q={"fecha":{"gt":"2023-01-10"},"estado_cita":{"eq":"Atendido"}}&sort=fecha:desc';
+        $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/'.$id.'/citas?q={"fecha":{"gt":"2023-02-15"},"estado_cita":{"eq":"Atendido"}}&sort=fecha:desc';
 
         $response = $client->request('GET', $url, [
             'headers'  => [
@@ -180,7 +180,7 @@ class UpdateActions extends Command
                     'Prestacion_Nr'=> $action->id_prestacion,
                     'Prestacion_Nombre'=> $action->nombre_prestacion,
                     'Fecha_Realizacion'=> $pay[0]->fecha,
-                    'Precio_Prestacion'=> $action-> total,
+                    'Precio_Prestacion'=> $action->total,
                     'Abono'=> $action->pagado,
                     'Total'=> $action->total,
                     'created_at'=> Carbon::Now(),
