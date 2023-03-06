@@ -364,14 +364,6 @@ class ApiMedilinkController extends Controller
       }
 
       return $professionalAppointmens;
-      
-      
-      
-      
-
-      
-
-      
     }
 
     public function addAppointment(){
@@ -386,14 +378,60 @@ class ApiMedilinkController extends Controller
                 'id_profesional'    => 48,
                 'id_sucursal'       => 1,
                 'id_estado'         => 7,
-                'id_sillon'        => 7,
+                'id_sillon'        => 1,
                 'id_paciente'       => 864,
-                'fecha'             => '2023-01-25',
-                'hora_inicio'       => '20:00',
+                'fecha'             => '2023-03-06',
+                'hora_inicio'       => '18:00',
                 'duracion'          => 60,
                 'comentario'        => 'Control general'
         ]]);
 
       echo $response->getBody();
     }
+
+    public function sillones(){
+      $client = new \GuzzleHttp\Client();
+      $url = 'https://api.medilink.healthatom.com/api/v1/sillones/';
+
+      $response = $client->request('GET', $url, [
+          'headers'  => [
+              'Authorization' => 'Token ' . $this->token
+          ]
+      ]);
+
+      echo $response->getBody();
+    }
+
+    public function estados(){
+      $client = new \GuzzleHttp\Client();
+
+      $url = 'https://api.medilink.healthatom.com/api/v1/citas/estados';
+
+      $response = $client->request('GET', $url, [
+          'headers'  => [
+              'Authorization' => 'Token ' . $this->token
+          ]
+      ]);
+
+      echo $response->getBody();
+    }
+
+    public function changeAppointment(){
+      $client = new \GuzzleHttp\Client();
+
+      $id_cita = 27020;
+      $url = 'https://api.medilink.healthatom.com/api/v1/citas/'.$id_cita;
+
+      $response = $client->request('PUT', $url, [
+          'headers'  => [
+              'Authorization' => 'Token ' . $this->token
+          ],
+          'json'  => [
+              'id_estado'             => 1,
+          ]
+      ]);
+
+      echo $response->getBody();
+    }
+
 }

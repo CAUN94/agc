@@ -106,6 +106,10 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/apim/appointments', [ApiMedilinkController::class, 'appointments'])->middleware(['intranet']);
     Route::get('/apim/allappointments', [ApiMedilinkController::class, 'allAppointments'])->middleware(['intranet']);
     Route::get('/apim/addAppointment', [ApiMedilinkController::class, 'addAppointment'])->middleware(['intranet']);
+    Route::get('/apim/changeAppointment', [ApiMedilinkController::class, 'changeAppointment'])->middleware(['intranet']);
+    Route::get('/apim/sillones', [ApiMedilinkController::class, 'sillones'])->middleware(['intranet']);
+    Route::get('/apim/estados', [ApiMedilinkController::class, 'estados'])->middleware(['intranet']);
+
 
     Route::get('/apim/appointmentsProfessional/{id}/{startdate}/{enddate}', [ApiMedilinkController::class, 'appointmentsProfessional']);
 
@@ -115,8 +119,6 @@ Route::middleware([UpdatePassword::class])->group(function () {
     // TrainerAdmins
     Route::resource('trainertrainappointment', 'App\Http\Controllers\TrainerTrainController');
     Route::resource('trainerbookappointment', 'App\Http\Controllers\AdminBookAppointmentsController');
-
-
 
     // Scrap
 
