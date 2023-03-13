@@ -366,27 +366,30 @@ class ApiMedilinkController extends Controller
       return $professionalAppointmens;
     }
 
-    public function addAppointment(){
+    public function addAppointment(Request $request){
       $client = new \GuzzleHttp\Client();
-      $url = 'https://api.medilink.healthatom.com/api/v1/citas/';
+      // ddd($request->all());
+      $id_cita = (int)$request->id_appointment;
+      $url = 'https://api.medilink.healthatom.com/api/v1/citas/'.$id_cita;
 
-      $response = $client->request('POST', $url, [
+      if($request->id_estado == 7){
+        $id_estado = 3;
+        //  or 13
+      } else {
+        $id_estado = 1;
+      }
+
+      $response = $client->request('PUT', $url, [
         'headers'  => [
                 'Authorization' => 'Token ' . $this->token
             ],
             'json'  => [
-                'id_profesional'    => 48,
-                'id_sucursal'       => 1,
-                'id_estado'         => 7,
-                'id_sillon'        => 1,
-                'id_paciente'       => 864,
-                'fecha'             => '2023-03-06',
-                'hora_inicio'       => '18:00',
-                'duracion'          => 60,
-                'comentario'        => 'Control general'
-        ]]);
+              'id_estado'             => $id_estado,
+              'comentario'            => 'Update de Cita',
+          ]
+        ]);
 
-      echo $response->getBody();
+      return redirect('pago2/'.$id_cita);
     }
 
     public function sillones(){

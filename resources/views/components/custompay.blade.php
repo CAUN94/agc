@@ -44,9 +44,9 @@
 	$products[] = $item;
 
 	$preference->back_urls = array(
-	    "success" => url("/pay/success"),
-	    "failure" => url("/pay/failure"),
-	    "pending" => url("/pay/pending")
+	    "success" => url("/paystatus/success/{$id}"),
+	    "failure" => url("/paystatus/failure/{$id}"),
+	    "pending" => url("/paystatus/pending/{$id}")
 	);
 	$preference->auto_return = "approved";
 	$preference->items = $products;

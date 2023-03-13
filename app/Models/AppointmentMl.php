@@ -29,7 +29,9 @@ class AppointmentMl extends Model
         'Generación_Presupuesto',
         'Sucursal',
         'professional_calendar',
-        'user_calendar'
+        'user_calendar',
+        'ispay',
+        'payment_id',
     ];
 
     public function setRut_PacienteAttribute($value) {

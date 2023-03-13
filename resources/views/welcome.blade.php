@@ -1,7 +1,7 @@
 <x-landing.layout>
-        <a href="/packverano">
+        <!-- <a href="/packverano">
             <img src="{{ asset('img/fotos/banner.jpg')}}" style="max-width: 100%;height: auto;">
-        </a>
+        </a> -->
         <x-landing.header>
 
         </x-landing.header>
