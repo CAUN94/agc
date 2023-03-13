@@ -271,6 +271,14 @@ footer span {
 	@apply bg-red-500 font-bold w-full;
 }
 
+.normal-button{
+	@apply text-white w-full font-bold block my-2 text-center rounded cursor-pointer;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.875em;
+    padding: 0 1.7142857142857142em;
+    line-height: 2.7142857142857144;
+}
+
 .avatar {
 	@apply inline object-cover rounded-full;
 }
@@ -303,6 +311,10 @@ footer span {
 
 .poll-mb-4 {
     margin-bottom: 1.5rem!important;
+}
+
+.font-you {
+    font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 }
 
 .poll-body {
