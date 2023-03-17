@@ -29,7 +29,9 @@ class AppointmentMl extends Model
         'Generación_Presupuesto',
         'Sucursal',
         'professional_calendar',
-        'user_calendar'
+        'user_calendar',
+        'ispay',
+        'payment_id',
     ];
 
     public function setRut_PacienteAttribute($value) {
@@ -106,5 +108,12 @@ class AppointmentMl extends Model
             ->where('appointment_mls.Fecha', '=' ,$date)
             ->select('treatment_mls.*')
             ->get();
+    }
+
+    public function dayhour(){
+        $day = \Carbon\Carbon::parse($this->Fecha)->format('Y-m-d');
+        $hour = \Carbon\Carbon::parse($this->Hora_inicio)->format('H:i');
+
+        return $day." ".$hour;
     }
 }

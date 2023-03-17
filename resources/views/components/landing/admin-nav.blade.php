@@ -18,9 +18,9 @@
       <a class="my-1 py-1" href="/adminbookappointment">Clases Reservadas</a>
     </x-nav-dropdown>
 
-    <a class="mt-3 py-1" href="/adminalliance">Alianzas</a>
+    <!-- <a class="mt-3 py-1" href="/adminalliance">Alianzas</a> -->
 
-    <x-nav-dropdown>
+    <!-- <x-nav-dropdown>
       <x-slot name="name"><i class="fas fa-notes-medical mr-1"></i>Medilink</x-slot>
       <x-slot name="trigger">medelink</x-slot>
       <a class="py-1" href="/userml">Usuarios</a>
@@ -28,33 +28,28 @@
       <a class="my-1 py-1" href="/medilink/actions">Actions</a>
       <a class="my-1 py-1" href="/medilink/appointments">Appointments</a>
       <a class="my-1 py-1" href="/medilink/treatments">Treatments</a>
-    </x-nav-dropdown>
+    </x-nav-dropdown> -->
 
-    <x-nav-dropdown>
-      <x-slot name="name"><i class="fas fa-notes-medical mr-1"></i>Haas</x-slot>
-      <x-slot name="trigger">haas</x-slot>
-      <a class="py-1" href="/admin/nutrition">Nutrición</a>
-      <a class="my-1 py-1" href="#">Kinesiologia</a>
-      <a class="my-1 py-1" href="#">Deporte</a>
-    </x-nav-dropdown>
+    <!-- check if user isNutritionist -->
+    
 
-{{--     <x-nav-dropdown>
+    <!-- <x-nav-dropdown>
       <x-slot name="name">Example</x-slot>
       <x-slot name="trigger">example</x-slot>
       <a class="py-1" href="#">Link #1</a>
       <a class="my-1 py-1" href="#">Link #2</a>
       <a class="my-1 py-1" href="#">Link #3</a>
-    </x-nav-dropdown> --}}
+    </x-nav-dropdown>  -->
 
-    <x-nav-dropdown>
+    <!-- <x-nav-dropdown>
       <x-slot name="name">Encuestas</x-slot>
       <x-slot name="trigger">encuestas</x-slot>
       <a class="py-1" href="/admin/encuesta_satisfaccion">Encuesta de Satisfacción</a>
-      {{-- <a class="my-1 py-1" href="#">Link #2</a> --}}
-      {{-- <a class="my-1 py-1" href="#">Link #3</a> --}}
-    </x-nav-dropdown>
+      <a class="my-1 py-1" href="#">Link #2</a>
+      <a class="my-1 py-1" href="#">Link #3</a>
+    </x-nav-dropdown> -->
 
-    <a class="mt-3 py-1" href="/adminRemuneracion">Remuneraciones</a>
+    <a class="mt-3 py-1" href="/adminRemuneracion"><i class="fas fa-solid fa-desktop mr-1"></i>Panel Remuneraciones</a>
 
   @endif
 
@@ -67,14 +62,24 @@
     </x-nav-dropdown>
   @endif
 
+  @if(Auth::user()->isNutritionist())
+    <x-nav-dropdown>
+      <x-slot name="name"><i class="fas fa-notes-medical mr-1"></i>Haas</x-slot>
+      <x-slot name="trigger">haas</x-slot>
+      <a class="py-1" href="/admin/nutrition">Nutrición</a>
+      <!-- <a class="my-1 py-1" href="#">Kinesiologia</a>
+      <a class="my-1 py-1" href="#">Deporte</a> -->
+    </x-nav-dropdown>
+    @endif
+
   @if(Auth::user()->isProfessional())
     <x-nav-dropdown>
-      <x-slot name="name">Remuneración</x-slot>
+      <x-slot name="name"><i class="fas fa-notes-medical mr-1"></i>Remuneración</x-slot>
       <x-slot name="trigger">remuneracion</x-slot>
-      <a class="py-1" href="/apimedilink/profesional/remuneration">Mes Vencido</a>
-{{--       <a class="py-1" href="/mesActual">Mes Actual</a>
+      <!-- <a class="py-1" href="/apimedilink/profesional/remuneration">Mes Vencido</a> -->
+      <a class="my-1 py-1" href="/mesActual">Mes Actual</a>
       <a class="my-1 py-1" href="/mesVencido">Mes Vencido</a>
-      <a class="my-1 py-1" href="/historial">Historial</a> --}}
+      <a class="my-1 py-1" href="/historial">Historial</a>
     </x-nav-dropdown>
   @endif
 

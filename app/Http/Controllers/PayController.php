@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AppointmentMl;
 use App\Models\Student;
 use App\Models\TreatmentMl;
 use App\Models\User;
@@ -21,13 +22,13 @@ class PayController extends Controller {
 				$student = Student::find($item->id);
 				$student->settled = True;
 				$student->status = 'approved';
-				$student->payment_type = 'credit_card';
-				$student->payment_id = '1245191589';
+				$student->payment_type = $response->payment_type_id;
+				$student->payment_id = $response->id;
 				$student->save();
 			}
 			FlashSession::flash('primary', 'Pago Realizado');
 		} elseif ($status == 'failure') {
-			$student->status = 'denied';
+			// $student->status = 'denied';
 			FlashSession::flash('primary', 'Pago Fallido');
 		} elseif ($status == 'pending') {
 			FlashSession::flash('primary', 'Pago Pendiente');
@@ -35,12 +36,43 @@ class PayController extends Controller {
 		return redirect('/users');
 	}
 
+	public function payMedilink($status,$appointmentId, Request $request) {
+		$token = config('app.medilink');
+        $client = new \GuzzleHttp\Client();
+
+        $url = 'https://api.medilink.healthatom.com/api/v1/citas/'.$appointmentId;
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $token
+            ]
+        ]);
+
+		$appointment = json_decode($response->getBody())->data;
+
+		$response = Http::get("https://api.mercadopago.com/v1/payments/$request->payment_id" . "?access_token=" . config('services.mercadopago.token'));
+		$response = json_decode($response);
+
+		if ($status == 'success') {
+			FlashSession::flash('primary', 'Pago Realizado');
+			$appointmentML = AppointmentMl::where('Tratamiento_Nr',$appointment->id_atencion)->first();
+			$appointmentML->ispay = True;
+			$appointmentML->payment_id = $response->id;
+			$appointmentML->save();
+		} elseif ($status == 'failure') {
+			$student->status = 'denied';
+			FlashSession::flash('primary', 'Pago Fallido');
+		} elseif ($status == 'pending') {
+			FlashSession::flash('primary', 'Pago Pendiente');
+		}
+		return redirect('/pago2/'.$appointmentId);
+	}
+
 	public function payMedilinkStatus(User $user, TreatmentMl $treatmentMl, $status, Request $request) {
 		if ($status == 'success') {
 			$response = Http::get("https://api.mercadopago.com/v1/payments/$request->payment_id" . "?access_token=" . config('services.mercadopago.token'));
-			$treatmentMl->TotalAbonado = $treatmentMl->TotalAtencion;
-			$treatmentMl->medilink = True;
-			$treatmentMl->save();
+			$response = json_decode($response);
+			ddd($response);
 
 			FlashSession::flash('primary', 'Pago Realizado');
 		} elseif ($status == 'failure') {

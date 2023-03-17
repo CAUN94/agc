@@ -8,7 +8,6 @@
         <thead>
           <tr class="bg-gray-300 text-sm font-semibold tracking-wide text-left">
             <th class="text-center py-2 min-w-1/8 w-auto">Periodo</th>
-            <th class="text-center py-2 min-w-1/8 w-1/8">Prestaciones</th>
             <th class="text-center py-2 min-w-1/8 w-1/8">Remuneración</th>
             <th class="text-center py-2 min-w-1/8 w-1/8">Atenciones</th>
             <th class="text-center py-2 min-w-1/8 w-1/8">Tasa de Ocupacion</th>
@@ -26,13 +25,8 @@
             </div>
           </td>
           <td>
-             <div class="flex flex-col items-center justify-between">
-              <span class="text-sm">${{$professional->prestaciones($periodo,$this->endPeriod($periodo),$professional->description)}}</span>
-            </div>
-          </td>
-          <td>
             <div class="flex flex-col items-center justify-between">
-               <span class="text-sm">${{$professional->remuneracion($periodo,$this->endPeriod($periodo),$professional->description)}}</span>
+               <span class="text-sm">{{$professional->remuneracion($periodo,$this->endPeriod($periodo),$professional->description)}}</span>
             </div>
           </td>
           <td>

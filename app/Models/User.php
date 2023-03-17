@@ -273,7 +273,7 @@ class User extends Authenticatable {
 	}
 
 	public function hasIntranet(){
-		if($this->isAdmin() or $this->isProfessional() or $this->isTrainer() or $this->isReception()){
+		if($this->isAdmin() or $this->isProfessional() or $this->isTrainer() or $this->isReception() or $this->isNutritionist()){
 			return true;
 		}
 		return false;
@@ -376,5 +376,16 @@ class User extends Authenticatable {
 			return True;
 		}
 		return False;
+	}
+
+	public function nutritionist(){
+		return $this->hasOne(Nutritionist::class);
+	}
+
+	public function isNutritionist(){
+		if (is_null($this->nutritionist)){
+			return False;
+		}
+		return True;
 	}
 }

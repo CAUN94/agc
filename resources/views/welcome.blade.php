@@ -1,8 +1,10 @@
 <x-landing.layout>
+        <!-- <a href="/packverano">
+            <img src="{{ asset('img/fotos/banner.png')}}" style="max-width: 100%;height: auto;">
+        </a>  -->
         <x-landing.header>
 
         </x-landing.header>
-
 
 
         <x-landing.call>
@@ -25,13 +27,13 @@
         <div id="equipo"></div>
         <x-landing.team>
             <x-slot name="img">
-                fotos-01.jpg|fotos-02.jpg|fotos-03.jpg|fotos-04.jpg|fotos-05.jpg|fotos-06.jpg|fotos-07.jpg|fotos-08.jpg
+                fotos-01.jpg|fotos-02.jpg|fotos-03.jpg|fotos-04.jpg|fotos-05.jpg|fotos-06.jpg|fotos-08.jpg
             </x-slot>
             <x-slot name="texts">
-                Alonso Niklischeck|Camila Valentini|Matias Rebolledo|Jaime Pantoja|Cesar Moya|Melissa Ross|Rocio Nuche|Cristóbal Ugarte
+                Alonso Niklischeck|Camila Valentini|Matias Rebolledo|Jaime Pantoja|César Moya|Melissa Ross|Cristóbal Ugarte
             </x-slot>
             <x-slot name="team">
-                Kinesiologo|Kinesiologo|Entrenador|Kinesiologa|Kinesiologa|Nutricionista|Medico del Deporte|Desarrollador
+                Kinesiologo|Kinesiologa|Entrenador|Kinesiologo|Kinesiologo|Nutricionista|Desarrollador
             </x-slot>
         </x-landing.team>
 

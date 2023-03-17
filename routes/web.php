@@ -15,20 +15,17 @@ use App\Http\Middleware\UpdatePassword;
 |
  */
 
-// Route::get('/gcalendar', [CalendarController::class, 'index']);
-// Route::get('/gcalendar_massive', [CalendarController::class, 'superstore']);
-// Route::get('/gcalendar_delete', [CalendarController::class, 'superdelete']);
-// Route::get('/google', [CalendarController::class, 'google']);
+// Route::get('/run-python', function () {
+//     $output = [];
+//     $return_var = 0;
+//     exec('python3 ' . base_path('app/hello.py'), $output, $return_var);
+//     dd($output, $return_var);
+// });
 
 
-Route::get('/nubox/auth', [ AdminNuboxController::class, 'auth']);
-Route::get('/nubox/comprobante', [ AdminNuboxController::class, 'comprobante']);
-Route::get('/nubox/comuna', [ AdminNuboxController::class, 'comuna']);
-Route::get('/nubox/emit', [ AdminNuboxController::class, 'emit']);
-Route::get('/nubox/cliente', [ AdminNuboxController::class, 'cliente']);
-Route::get('/nubox/boleta', [ AdminNuboxController::class, 'boleta']);
+
 Route::get('/professionalshours', 'App\Http\Controllers\ScrapingController@professionalshours');
-Route::get('/pago2', [MercadoPagoController::class, 'personalizepay']);
+// Route::get('/pago2', [MercadoPagoController::class, 'personalizepay']);
 Route::get('/pago2/{id}', [MercadoPagoController::class, 'pay']);
 // Route::get('/scraping-alta', [ScrapingController::class, 'alta']);
 
@@ -49,7 +46,6 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::resource('users', 'App\Http\Controllers\UsersController')->middleware(['auth']);
     Route::get('/calendar', [LandingController::class, 'calendar'])->middleware(['auth']);
     Route::get('/healthy', [LandingController::class, 'healthy'])->middleware(['auth']);
-    Route::get('/packverano', [LandingController::class, 'packverano']);
     Route::post('/mailverano', [LandingController::class, 'mailverano']);
     Route::get('/nutrition', [LandingController::class, 'nutrition'])->middleware(['auth']);
     Route::get('/calendar/store/{id}', [CalendarController::class, 'store'])->middleware(['auth']);
@@ -83,13 +79,13 @@ Route::middleware([UpdatePassword::class])->group(function () {
     // Route::get('/confirmation/{id}', [LandingController::class, 'confirmation'])->middleware(['intranet']);
     Route::get('/confirmation/{id}', [LandingController::class, 'sendconfirmation'])->middleware(['intranet']);
 
-    //lista Espera
-    Route::resource('listaEspera', 'App\Http\Controllers\listaEsperaController')->middleware(['intranet']);
+    // //lista Espera
+    // Route::resource('listaEspera', 'App\Http\Controllers\listaEsperaController')->middleware(['intranet']);
 
     Route::resource('adminclass', 'App\Http\Controllers\AdminTrainingController')->middleware(['intranet']);
     Route::resource('admintrainappointment', 'App\Http\Controllers\AdminTrainAppointmentsController')->middleware(['intranet']);
-    Route::resource('adminprofessionalappointment', 'App\Http\Controllers\AdminProfessionalAppointmentsController')->middleware(['intranet']);
-    Route::resource('adminprofessionals', 'App\Http\Controllers\AdminProfessionalsController')->middleware(['intranet']);
+    // Route::resource('adminprofessionalappointment', 'App\Http\Controllers\AdminProfessionalAppointmentsController')->middleware(['intranet']);
+    // Route::resource('adminprofessionals', 'App\Http\Controllers\AdminProfessionalsController')->middleware(['intranet']);
     Route::resource('admintrainers', 'App\Http\Controllers\AdminTrainersController')->middleware(['intranet']);
     Route::get('/adminalliance', [AdminAllianceController::class, 'index'])->middleware(['intranet']);
     Route::post('/adminalliance/create', [AdminAllianceController::class, 'store'])->middleware(['intranet']);
@@ -101,7 +97,23 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::resource('mesActual', 'App\Http\Controllers\mesActualController')->middleware(['intranet']);
     Route::resource('mesVencido', 'App\Http\Controllers\mesVencidoController')->middleware(['intranet']);
     Route::resource('historial', 'App\Http\Controllers\historialController')->middleware(['intranet']);
-    Route::get('/apim/professionals', [ApiMedilinkController::class, 'professionals'])->middleware(['intranet']);
+    
+    Route::get('/apim/professionals', [ApiMedilinkController::class, 'professionals']);
+    Route::get('/apim/atentions', [ApiMedilinkController::class, 'atentions'])->middleware(['intranet']);
+    Route::get('/apim/atentions/{id}', [ApiMedilinkController::class, 'atention'])->middleware(['intranet']);
+    Route::get('/apim/allAtentions', [ApiMedilinkController::class, 'allAtentions'])->middleware(['intranet']);
+    Route::get('/apim/clients', [ApiMedilinkController::class, 'allClients'])->middleware(['intranet']);
+    Route::get('/apim/appointments', [ApiMedilinkController::class, 'appointments'])->middleware(['intranet']);
+    Route::get('/apim/allappointments', [ApiMedilinkController::class, 'allAppointments'])->middleware(['intranet']);
+    // Route::get('/apim/addAppointment', [ApiMedilinkController::class, 'addAppointment'])->middleware(['intranet']);
+    Route::get('/apim/changeAppointment', [ApiMedilinkController::class, 'changeAppointment'])->middleware(['intranet']);
+    Route::get('/apim/sillones', [ApiMedilinkController::class, 'sillones'])->middleware(['intranet']);
+    Route::get('/apim/estados', [ApiMedilinkController::class, 'estados'])->middleware(['intranet']);
+
+    Route::post('/apim/addAppointment', [ApiMedilinkController::class, 'addAppointment'])->middleware(['intranet']);
+
+
+    Route::get('/apim/appointmentsProfessional/{id}/{startdate}/{enddate}', [ApiMedilinkController::class, 'appointmentsProfessional']);
 
     // Admin Haas
     Route::get('/admin/nutrition', [AdminHaasController::class, 'nutrition'])->middleware(['intranet']);
@@ -109,8 +121,6 @@ Route::middleware([UpdatePassword::class])->group(function () {
     // TrainerAdmins
     Route::resource('trainertrainappointment', 'App\Http\Controllers\TrainerTrainController');
     Route::resource('trainerbookappointment', 'App\Http\Controllers\AdminBookAppointmentsController');
-
-
 
     // Scrap
 
@@ -157,6 +167,7 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/endurance', 'App\Http\Controllers\RedirectController@endurance');
     Route::get('/trailwomen', 'App\Http\Controllers\RedirectController@trailwomen');
     Route::get('/agendate', 'App\Http\Controllers\RedirectController@agendate');
+    Route::get('/masterclass', 'App\Http\Controllers\RedirectController@masterclass');
 
     Route::get('/box/dcontrerasb', 'App\Http\Controllers\RedirectController@contreras');
     Route::get('/box/jmguzmanh', 'App\Http\Controllers\RedirectController@guzman');
@@ -209,6 +220,37 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/apimedilink/atenciones', [AdminMedilinkController::class, 'atenciones']);
     Route::get('/apimedilink/prestaciones', [AdminMedilinkController::class, 'prestaciones']);
     Route::get('/apimedilink/prestaciones/{id}', [AdminMedilinkController::class, 'prestacion']);
+    Route::get('/apimedilink/pays', [AdminMedilinkController::class, 'pays']);
+    Route::get('/apimedilink/pays/{id}', [AdminMedilinkController::class, 'pay']);
+    Route::get('/apimedilink/patients', [AdminMedilinkController::class, 'patients']);
+    Route::get('/apimedilink/patients/{id}', [AdminMedilinkController::class, 'patient']);
+    Route::get('/apimedilink/payments', [AdminMedilinkController::class, 'payments']);
+    Route::get('/apimedilink/allpayments', [AdminMedilinkController::class, 'allpayments']);
+    Route::get('/apimedilink/payments/{id}', [AdminMedilinkController::class, 'payment']);
+    Route::get('/apimedilink/payments/{id}/boleta', [AdminMedilinkController::class, 'paymentboleta']);
+
+    // Nubox
+    Route::get('/nubox', [ AdminNuboxController::class, 'index']);
+    Route::post('/nubox/emit', [ AdminNuboxController::class, 'emit']);
+    Route::get('/nubox/auth', [ AdminNuboxController::class, 'auth']);
+    // No cuento con permiso
+    Route::get('/nubox/comprobante', [ AdminNuboxController::class, 'comprobante']);
+    // Funciona
+    Route::get('/nubox/comuna', [ AdminNuboxController::class, 'comuna']);
+
+    Route::get('/nubox/cliente', [ AdminNuboxController::class, 'cliente']);
+
+    Route::get('/nubox/boleta', [ AdminNuboxController::class, 'boleta']);
+
+    Route::get('/nubox/documentos', [ AdminNuboxController::class, 'documentos']);
+
+    Route::get('pay/{user}/{status}', 'App\Http\Controllers\PayController@payStatus');
+    Route::get('pay/{user}/{treatmentMl}/{status}', 'App\Http\Controllers\PayController@payMedilinkStatus');
+    Route::get('paystatus/{status}/{appointmentId}', 'App\Http\Controllers\PayController@payMedilink');
+
+    Route::get('/teachable/courses', 'TeachableController@getCourses');
+
+    Route::get('/streamlit', 'App\Http\Controllers\StreamlitController@index');
 });
 
 require __DIR__ . '/auth.php';

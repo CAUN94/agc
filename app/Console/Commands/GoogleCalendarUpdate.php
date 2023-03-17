@@ -50,9 +50,9 @@ class GoogleCalendarUpdate extends Command
         $this->superUpdate('Alonso Niklitschek Sanhueza','c_0f1ec4cb6ddb69027c0f6e89110fb1708a9613a28be7efc2165475004be2398d@group.calendar.google.com');
         $this->deleteRepeats('Alonso Niklitschek Sanhueza','c_0f1ec4cb6ddb69027c0f6e89110fb1708a9613a28be7efc2165475004be2398d@group.calendar.google.com');
 
-        $this->superStore('Jaime Pantoja Rodriguez','c_a5e903612c38cf636cddc1ad9f5d85f5cfc58fc2350ab902696cef768930fe27@group.calendar.google.com','docencia@justbetter.cl');
-        $this->superUpdate('Jaime Pantoja Rodriguez','c_a5e903612c38cf636cddc1ad9f5d85f5cfc58fc2350ab902696cef768930fe27@group.calendar.google.com');
-        $this->deleteRepeats('Jaime Pantoja Rodriguez','c_a5e903612c38cf636cddc1ad9f5d85f5cfc58fc2350ab902696cef768930fe27@group.calendar.google.com');
+        $this->superStore('Jaime  Pantoja Rodriguez','c_a5e903612c38cf636cddc1ad9f5d85f5cfc58fc2350ab902696cef768930fe27@group.calendar.google.com','docencia@justbetter.cl');
+        $this->superUpdate('Jaime  Pantoja Rodriguez','c_a5e903612c38cf636cddc1ad9f5d85f5cfc58fc2350ab902696cef768930fe27@group.calendar.google.com');
+        $this->deleteRepeats('Jaime  Pantoja Rodriguez','c_a5e903612c38cf636cddc1ad9f5d85f5cfc58fc2350ab902696cef768930fe27@group.calendar.google.com');
 
         $this->superStore('Daniella Vivallo Vera','c_70cc091402f167e8244d73d4a32ad15d0e21368ead3e7145eede9f69ce57b019@group.calendar.google.com','clinica@justbetter.cl');
         $this->superUpdate('Daniella Vivallo Vera','c_70cc091402f167e8244d73d4a32ad15d0e21368ead3e7145eede9f69ce57b019@group.calendar.google.com');
@@ -95,7 +95,7 @@ class GoogleCalendarUpdate extends Command
                 'timeZone' => 'America/Santiago',
               ),
               'sendNotifications' => false,
-              'sendUpdates' => 'all',
+              'sendUpdates' => 'externalOnly',
               'end' => array(
                 'dateTime' => $end,
                 'timeZone' => 'America/Santiago',
@@ -128,7 +128,7 @@ class GoogleCalendarUpdate extends Command
         $appointments = AppointmentMl::calendarAppointments($professional)->get();
         $client = $this->getClient();
         foreach ($appointments as $key => $appointment) {
-            if(!in_array($appointment->Estado, ['Cambio de fecha','Cambio de Fecha','Anulado','Anulado vía validación','No asiste'])){
+            if(!in_array($appointment->Estado, ['Cambio de fecha','Anulado','Anulado vía validación','No asiste'])){
                 continue;
             }
             $service = new Calendar($client);

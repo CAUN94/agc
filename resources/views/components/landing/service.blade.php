@@ -39,13 +39,21 @@
                         </div>
                   </div>
             </div>
-{{--             <div class="bg-light-grey mx-auto rounded-md py-2 px-4 w-full h-auto lg:w-full flex justify-between items-center cursor-pointer hover:text-primary-500"  x-on:click="openMed = ! openMed">
-                  <div>
-                        <h2>Medicina Deportiva</h2>
-                        <span class="text-sm text-primary-500">Ver Más</span>
+
+            <div class="bg-light-grey mx-auto rounded-md py-2 px-4 w-full h-auto lg:w-full cursor-pointer hover:text-primary-900 border-2 border-primary-500 hover:border-primary-900"  x-on:click="openMed = ! openMed">
+                  <h2 class="text-xl">Medicina Deportiva</h2>
+                  <div class="mt-4 flex justify-between items-center">
+                        <div class="w-4/5 mr-4">
+                              <span class="block text-base text-justify mr-1">
+                              Buscamos hacer un chequeo de salud del atleta desde la salud cardiaca hasta aspectos físicos, metabólicos y nutricionales.</span>
+                        </div>
+                        <div class="ml-2 flex flex-col justify-between items-center">
+                              <img class="h-16 lg:h-20 block bg-white rounded-full border-2 border-primary-500 hover:border-primary-900" src="{{ asset('img/iconos/nutricion.png')}}">
+                              <span class="block text-xs sm:text-sm text-primary-500 items-center bg-you-grey mt-2 py-1 px-1.5 sm:px-2 rounded-xl text-center">Ver Más</span>
+                        </div>
                   </div>
-                  <img class="h-16 lg:h-20 block" src="{{ asset('img/iconos/medicina_deportiva.png')}}">
-            </div> --}}
+            </div>
+
             <div class="bg-light-grey mx-auto rounded-md py-2 px-4 w-full h-auto lg:w-full cursor-pointer hover:text-primary-900 border-2 border-primary-500 hover:border-primary-900"  x-on:click="openNutri= ! openNutri">
                   <h2 class="text-xl">Nutrición</h2>
                   <div class="mt-4 flex justify-between items-center">
@@ -106,25 +114,7 @@
 
             </div>
 
-            <div class="bg-light-grey mx-auto rounded-md py-2 px-4 w-full h-auto lg:w-full cursor-pointer hover:text-primary-900 border-2 border-primary-500 hover:border-primary-900"  x-on:click="openPsyc = ! openPsyc">
-                  <h2 class="text-xl">Psicología Clínica</h2>
-                  <div class="mt-4 flex justify-between items-center">
-                        <div class="w-4/5 mr-4">
-                              <span class="block text-base text-justify mr-1">Buscamos conocer e identificar el origen del motivo de la consulta. Luego trabajamos en técnicas y estrategias para conseguir una mejora en tu bienestar.</span>
-                        </div>
-                        <div class="ml-2 flex flex-col justify-between items-center">
-                             <img class="h-16 lg:h-20 block bg-white rounded-full border-2 border-primary-500 hover:border-primary-900" src="{{ asset('img/iconos/psicologia_clinica.png')}}">
-                             <span class="block text-xs sm:text-sm text-primary-500 items-center bg-you-grey mt-2 py-1 px-1.5 sm:px-2 rounded-xl text-center">Ver Más</span>
-                        </div>
-                  </div>
-            </div>
-            {{-- <div class="bg-light-grey mx-auto rounded-md py-2 px-4 w-full h-auto lg:w-full flex justify-between items-center cursor-pointer hover:text-primary-500"  x-on:click="exampleOpen = ! exampleOpen">
-                  <div>
-                  <h2>Med      icina General</h2>
-                  <span class="text-sm text-primary-500">Ver Más</span>
-                        </div>
-                        <img s      rc="{{ asset('img/iconos/medicina-general.png')}}">
-            </div> --}}
+            
 
 
           </div>
@@ -145,7 +135,7 @@
             Su finalidad es rehabilitar y/o realizar un reintegro deportivo correcto y eficiente para quienes hayan sufrido alguna lesión, tengan molestia o dolor y deseen volver a sus actividades normales o rendir en el más alto nivel.  Realizamos una evaluación completa, analizando la historia del paciente junto con la examinación física exhaustiva para llegar a un diagnóstico funcional, que permita educar y potenciar a la persona como alguien capaz de llevar su propia rehabilitación.
 
             <x-slot name="price">
-                  Desde $32,000* por hora
+                  Desde $35,000* por hora
             </x-slot>
             <x-slot name="info">
                   *Cubierto por Isapre con licencia médica
@@ -170,7 +160,7 @@
             </x-slot>
             Evaluación médica completa del paciente, realizando una entrevista exhaustiva, examen físico general y dirigido al motivo de consulta, contemplando solicitud de exámenes complementarios e imágenes en caso de ser necesario. Se realiza un diagnóstico y se indica un tratamiento dirigido al motivo de la consulta, donde se entregan recomendaciones personalizadas para atenuar los factores de riesgo de lesiones del paciente.
             <x-slot name="price">
-                  Desde $48,000* p/consulta
+                  Desde $50,000* p/consulta
             </x-slot>
 
             <x-slot name="button">
@@ -178,8 +168,8 @@
             </x-slot>
       </x-landing.modal-service>
 
-      {{--    Medicina del Deporte    --}}
-      {{-- <x-landing.modal-service>
+      <!-- Medicina del Deporte -->
+      <x-landing.modal-service>
             <x-slot name="xshow">
                   openMed
             </x-slot>
@@ -194,12 +184,15 @@
             En consulta de medicina del deporte, se busca hacer un chequeo de salud del atleta, desde la salud cardiaca hasta aspectos físicos, metabólicos y nutricionales. Además, se revisan aspectos que impactan directamente sobre el rendimiento deportivo y la aparición de lesiones, como por ejemplo el sueño, y los niveles de hierro o de vitamina D dentro de otros.<br>En el caso de una lesión hay dos caminos en paralelo; primero se debe ajustar la carga de entrenamiento, pero además y de manera paralela se generan estrategias para mantener la condición física y prevenir el desentrenamiento. Posterior a la rehabilitación se busca un reintegro deportivo óptimo, buscando los factores que desencadenaron la lesión y corrigiendolos.<br><br><span class="text-primary-500">Ejercicio como tratamiento</span>
             El ejercicio sirve para tratar y prevenir 26 enfermedades diferentes, desde la hipertensión arterial y diabetes hasta ocho tipos distintos de cáncer. Se trabaja en el formato de toma de decisión en conjunto al paciente, para buscar la mejor forma de potenciar su salud o tratar una enfermedad. Para esto se toma en cuenta las preferencias de la persona, su condición física actual y factores propios de cada enfermedad para lograr una práctica de ejercicio segura y efectiva.
 
+            <x-slot name="price">
+                  Desde $50,000* p/consulta
+            </x-slot>
 
 
             <x-slot name="button">
                   Cerrar
             </x-slot>
-      </x-landing.modal-service> --}}
+      </x-landing.modal-service>
 
       {{--    Nutrición    --}}
       <x-landing.modal-service>
@@ -217,7 +210,7 @@
             Se basa en educar a la persona para que se transformes en un experto en su mundo, donde sea capaz de reconocer sus necesidades y aplicar los hábitos alimenticios que le permitan su estado óptimo de bienestar de acuerdo a sus objetivos personales y deportivos. Entregamos balance energético según objetivo, distribución de macro y micronutrientes para llegar a su objetivo.
 
             <x-slot name="price">
-                  Desde $48,000* p/consulta
+                  Desde $45,000* p/consulta
             </x-slot>
 
             <x-slot name="button">
@@ -297,7 +290,7 @@
             </x-slot>
             Área que, de la mano de la tecnología, realiza un análisis cuantitativo del movimiento. Tiene su base teórica en ciencias como anatomía, física, mecánica e ingeniería entre otras. Podrás encontrar análisis de carrera, de marcha y de fuerza entre otros exámenes, además la rehabilitación de patrón de carrera.
             <x-slot name="price">
-                  Desde $64,000* p/consulta
+                  Desde $70,000* p/consulta
             </x-slot>
 
             <x-slot name="button">

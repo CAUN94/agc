@@ -32,7 +32,7 @@ class LandingController extends Controller
 
     public function confirmation($id)
     {
-        $token = "WzpwZkzjncn1nyfvYx3VovEzTvpB2YSie4YPfvf1.8sggWtpBM3vzmAuE6aYAAmRYiAwxbXNIaM16oJ30";
+        $token = config('app.medilink');
         $client = new \GuzzleHttp\Client();
 
         $url = 'https://api.medilink.healthatom.com/api/v1/citas/'.$id;
@@ -67,16 +67,12 @@ class LandingController extends Controller
 
         $patient = json_decode($response->getBody())->data;
 
-        // ddd($appointment);
-        // ddd($atention);
-        // ddd($patient);
-        // return view('confirmation');
     }
 
     public function sendconfirmation($id)
     {
         $url = "https://web.whatsapp.com/send?phone=56976693894&text=Hola%20".$id;
-        $token = "WzpwZkzjncn1nyfvYx3VovEzTvpB2YSie4YPfvf1.8sggWtpBM3vzmAuE6aYAAmRYiAwxbXNIaM16oJ30";
+        $token = config('app.medilink');
         $client = new \GuzzleHttp\Client();
 
         $url = 'https://api.medilink.healthatom.com/api/v1/citas/'.$id;
@@ -142,6 +138,8 @@ class LandingController extends Controller
 
         $text .= ', estamos en San pascual 736, Las Condes. Contamos con estacionamiento afuera del local.';
         $text .= '--Puedes revisar nuestros terminos y condiciones de agendamiento en www.yjb.cl/terms';
+
+        $text .= '--*Notar que realizamos ajustes de aranceles a nuestras prestaciones para el año 2023 de acuerdo con el IPC anual*';
 
         $text = str_replace('--','%0A%0A',$text);
         $whatsapp = "https://web.whatsapp.com/send?phone=".$phone."&text=".$text;

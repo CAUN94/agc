@@ -24,7 +24,7 @@
             </div>
         </div>
         <div>
-          @foreach(App\Models\Professional::where('user_id','>',0)->get() as $professional)
+          @foreach(App\Models\Professional::where('user_id','>',0)->orderBy('description')->get() as $professional)
               <ul class="grid grid-cols-5 gap-1 py-0.5">
                   <li>
                       <a class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
@@ -37,9 +37,9 @@
                           <span class="flex-1 ml-3 whitespace-nowrap">Prestaciones</span>
                           <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
                             @if($weekly)
-                              ${{$professional->prestaciones($startOfWeek,$endOfWeek,$professional->description)}}
+                              {{$professional->prestaciones($startOfWeek,$endOfWeek,$professional->description)}}
                             @else
-                              ${{$professional->prestaciones($startOfMonth,$endOfMonth,$professional->description)}}
+                              {{$professional->prestaciones($startOfMonth,$endOfMonth,$professional->description)}}
                             @endif
                           </span>
                       </a>
@@ -50,9 +50,9 @@
                           <span class="flex-1 ml-3 whitespace-nowrap">Abonos</span>
                           <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
                             @if($weekly)
-                              ${{$professional->abonos($startOfWeek,$endOfWeek,$professional->description)}}
+                              {{$professional->abonos($startOfWeek,$endOfWeek,$professional->description)}}
                             @else
-                              ${{$professional->abonos($startOfMonth,$endOfMonth,$professional->description)}}
+                              {{$professional->abonos($startOfMonth,$endOfMonth,$professional->description)}}
                             @endif
                           </span>
                       </a>
@@ -63,9 +63,9 @@
                           <span class="flex-1 ml-3 whitespace-nowrap">Remuneración</span>
                           <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
                             @if($weekly)
-                              ${{$professional->remuneracion($startOfWeek,$endOfWeek,$professional->description)}}
+                              {{$professional->remuneracion($startOfWeek,$endOfWeek,$professional->description)}}
                             @else
-                              ${{$professional->remuneracion($startOfMonth,$endOfMonth,$professional->description)}}
+                              {{$professional->remuneracion($startOfMonth,$endOfMonth,$professional->description)}}
                             @endif
                           </span>
                       </a>
@@ -84,16 +84,20 @@
                       </a>
                   </li>
               </ul>
+              <div>
+              <button class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer bg-gray-100 hover:bg-gray-400 p-1.5 items-center mt-0.5 mb-1"
+                      wire:click="show({{$professional->user->id}},{{$startOfMonth}},{{$endOfMonth}})">Mostrar lista
+              </button>
+            </div>
           @endforeach
         </div>
 
             <div class="mb-3 mt-6 w-full flex justify-between">
-                Periodo de Mes vencido ({{$expiredstartOfMonth->format('d-m')}} al {{$expiredendOfMonth->format('d-m')}})
-
+                Periodo de Mes Vencido ({{$expiredstartOfMonth->format('d-m')}} al {{$expiredendOfMonth->format('d-m')}})
             </div>
             @if($classShow)
             <div>
-              @foreach(App\Models\Professional::where('user_id','>',0)->get() as $professional)
+              @foreach(App\Models\Professional::where('user_id','>',0)->orderBy('description')->get() as $professional)
                   <ul class="grid grid-cols-5 gap-1 py-0.5">
                     <li>
                         <a class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
@@ -104,21 +108,21 @@
                           <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                               <i class="fa fa-money" aria-hidden="true"></i>
                               <span class="flex-1 ml-3 whitespace-nowrap">Prestaciones</span>
-                              <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">${{$professional->prestaciones($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
+                              <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->prestaciones($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
                           </a>
                       </li>
                       <li>
                           <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                               <i class="fa fa-calendar" aria-hidden="true"></i>
                               <span class="flex-1 ml-3 whitespace-nowrap">Abonos</span>
-                              <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">${{$professional->abonos($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
+                              <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->abonos($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
                           </a>
                       </li>
                       <li>
                           <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                               <i class="fa fa-money" aria-hidden="true"></i>
                               <span class="flex-1 ml-3 whitespace-nowrap">Remuneración</span>
-                              <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">${{$professional->remuneracion($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
+                              <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$professional->remuneracion($expiredstartOfMonth,$expiredendOfMonth,$professional->description)}}</span>
                           </a>
                       </li>
                       <li>
@@ -153,10 +157,12 @@
                   <table class="table-fixed w-full overflow-hidden rounded-lg shadow-lg p-6">
                     <thead>
                       <tr class="bg-gray-300 text-sm font-semibold tracking-wide text-left">
+                        <th class="text-center py-2 min-w-1/8 w-1/12">id</th>
                         <th class="text-center py-2 min-w-1/8 w-2/12">Fecha</th>
                         <th class="py-2 min-w-1/8 w-3/12 ">Paciente</th>
-                        <th class="text-center py-2 min-w-1/8 w-3/12">Alianza</th>
+                        <th class="text-center py-2 min-w-1/8 w-2/12">Alianza</th>
                         <th class="text-center py-2 min-w-1/8 w-2/12">Prestación</th>
+                        <th class="text-center py-2 min-w-1/8 w-1/12">Abono</th>
                         <th class="text-center py-2 min-w-1/8 w-2/12">Remuneración</th>
                       </tr>
                     </thead>
@@ -164,19 +170,29 @@
                     @foreach($appointments as $Appointment)
                     <tr>
                       <td class="text-center">
+                         {{$Appointment->id}}
+                      </td>
+                      <td class="text-center">
                           {{Carbon\Carbon::parse($Appointment->Fecha_Realizacion)->format('d-m-Y')}}
                       </td>
                       <td class="text-left">
                          {{$Appointment->Nombre}} {{$Appointment->Apellido}}
                       </td>
                       <td class="text-center">
-                        {{$Appointment->Convenio}}
+                        @if(!empty($treatment->Convenio))
+                        <li class="list-none">{{$treatment->Convenio}}</li>
+                        @else
+                        <li class="list-none">Sin Convenio</li>
+                        @endif
                       </td>
                       <td class="text-center">
-                        {{$Appointment->Categoria_Nombre}}
+                        {{Helper::moneda_chilena($Appointment->Precio_Prestacion)}}
                       </td>
                       <td class="text-center">
-                        ${{$Appointment->Precio_Prestacion}}
+                        {{Helper::moneda_chilena($Appointment->Abono)}}
+                      </td>
+                      <td class="text-center">
+                        {{Helper::moneda_chilena(ceil(($Appointment->Precio_Prestacion*$coff->coff)/100))}}
                       </td>
                     </tr>
                     @endforeach
@@ -195,11 +211,11 @@
                 </div>
                 <div class = "box-white mt-1.5">
                   <span>Prom. Prestaciones</span>
-                  <span class="ml-9">${{$professional->Prom_prestaciones($expiredstartOfMonth,$expiredendOfMonth,$lista_id)}}</span>
+                  <span class="ml-9">{{$professional->Prom_prestaciones($expiredstartOfMonth,$expiredendOfMonth,$lista_id)}}</span>
                 </div>
                 <div class = "box-white mt-1.5">
                   <span>Prom. Remuneraciones</span>
-                  <span class="ml-2">${{$professional->Prom_remuneracion($expiredstartOfMonth,$expiredendOfMonth,$lista_id)}}</span>
+                  <span class="ml-2">{{$professional->Prom_remuneracion($expiredstartOfMonth,$expiredendOfMonth,$lista_id)}}</span>
                 </div>
               </div>
             </div>
@@ -280,7 +296,7 @@
 
                                                                   class="box-class border-{{$color}}-200 text-{{$color}}-800 bg-{{$color}}-100 cursor-pointer
                                                                   ">
-                                                                  <p class="text-xs lg:text-sm lg:truncate leading-tight">{{Carbon\Carbon::parse($professionalAppointment->Hora_inicio)->format('H:00')}} {{$professionalAppointment->Estado}}</p>
+                                                                  <p class="text-xs lg:text-sm lg:truncate leading-tight">{{Carbon\Carbon::parse($professionalAppointment->Hora_inicio)->format('H:00')}} {{$professionalAppointment->Nombre_paciente}}</p>
                                                               </div>
                                                           @endforeach
                                                       </div>
@@ -308,7 +324,7 @@
                           </div>
                       </div>
                       @if(!is_null($treatment))
-                      <div x-show="$wire.classShow" x-cloak>
+                      <div x-show="$wire.classShowAppointment" x-cloak>
                           <dl>
                             <div class="train-class-resume">
                               <dt class="text-sm font-medium text-gray-500">
@@ -339,7 +355,7 @@
                                 Prestación
                               </dt>
                               <dd class="train-class-resume-text">
-                                  <li class="list-none">{{App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Categoria_Nombre')}}</li>
+                                  <li class="list-none">-</li>
                               </dd>
                             </div>
                           </dl>
@@ -349,7 +365,7 @@
                                 Remuneración
                               </dt>
                               <dd class="train-class-resume-text">
-                                  <li class="list-none">{{App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Precio_Prestacion')}}</li>
+                                  <li class="list-none">{{App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Precio_Prestacion')*$coff->coff/100}}</li>
                               </dd>
                             </div>
                           </dl>
@@ -359,7 +375,6 @@
               </div>
           </div>
           </div>
-
           @endif
     @endif
 </div>
