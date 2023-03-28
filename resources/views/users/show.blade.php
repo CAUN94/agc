@@ -182,7 +182,7 @@
                       Profesional: {{ $appointment->Profesional}}
                     </span>
                   </div>
-                  @if($appointment->hasTreatments)
+                  @if($appointment->hasTreatments())
                     @if($appointment->treatments()->isPay())
                       <span class="text-green-500">Pagado</span>
                     @else
