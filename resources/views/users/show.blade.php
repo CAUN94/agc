@@ -182,10 +182,12 @@
                       Profesional: {{ $appointment->Profesional}}
                     </span>
                   </div>
-                  @if($appointment->treatments()->isPay())
-                    <span class="text-green-500">Pagado</span>
-                  @else
-                    <x-medilinkpay id="{{$appointment->treatments()->id}}">Pagar Plan</x-medilinkpay>
+                  @if($appointment->hasTreatments)
+                    @if($appointment->treatments()->isPay())
+                      <span class="text-green-500">Pagado</span>
+                    @else
+                      <x-medilinkpay id="{{$appointment->treatments()->id}}">Pagar Plan</x-medilinkpay>
+                    @endif
                   @endif
                 </div>
               @empty
