@@ -5,7 +5,7 @@
             @if($weekly)
               Periodo de Semana Actual ({{$startOfWeek->format('d-m')}} al {{$endOfWeek->format('d-m')}})
             @else
-              Periodo de Mes Actual ({{$startOfMonth->format('d-m')}} al {{$endOfMonth->format('d-m')}})
+              Periodo de Mes Actual ({{$startOfMonth->copy()->addday()->format('d-m')}} al {{$endOfMonth->copy()->subday()->format('d-m')}})
             @endif
             <div class="border rounded-lg px-1" style="padding-bottom: 3.5px;" >
                 <button
@@ -93,7 +93,7 @@
         </div>
 
             <div class="mb-3 mt-6 w-full flex justify-between">
-                Periodo de Mes Vencido ({{$expiredstartOfMonth->format('d-m')}} al {{$expiredendOfMonth->format('d-m')}})
+            Periodo del {{$expiredstartOfMonth->copy()->addday()->format('d-m')}} al {{$expiredendOfMonth->copy()->subday()->format('d-m')}}
             </div>
             @if($classShow)
             <div>

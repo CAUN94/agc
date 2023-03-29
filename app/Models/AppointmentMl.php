@@ -54,6 +54,15 @@ class AppointmentMl extends Model
         return $this->hasMany(PaymentMl::class,'Atencion','Tratamiento_Nr');
     }
 
+    public function hasTreatments(){
+        $treatments = TreatmentMl::where('Atencion',$this->Tratamiento_Nr)->count();
+        if($treatments > 0){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
     public function treatments(){
         return TreatmentMl::where('Atencion',$this->Tratamiento_Nr)->first();
     }

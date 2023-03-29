@@ -26,6 +26,10 @@
 
         <div id="equipo"></div>
         <x-landing.team>
+
+        </x-landing.team>
+
+        <!-- <x-landing.team>
             <x-slot name="img">
                 fotos-01.jpg|fotos-02.jpg|fotos-03.jpg|fotos-04.jpg|fotos-05.jpg|fotos-06.jpg|fotos-08.jpg
             </x-slot>
@@ -35,7 +39,7 @@
             <x-slot name="team">
                 Kinesiologo|Kinesiologa|Entrenador|Kinesiologo|Kinesiologo|Nutricionista|Desarrollador
             </x-slot>
-        </x-landing.team>
+        </x-landing.team> -->
 
         <div id="embajadores"></div>
         <x-landing.alliance>
