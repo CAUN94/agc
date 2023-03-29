@@ -1,66 +1,126 @@
-@php
-    $imgs = json_encode(explode('|', $img));
-    $texts = json_encode(explode('|', $texts));
-    $team = json_encode(explode('|', $team));
-@endphp
+<div class="mt-24">
+  <script>
+    window.carousel = function () {
+      return {
+        container: null,
+        prev: null,
+        next: null,
+        init() {
+          this.container = this.$refs.container
 
-<div x-data="{
-    activeSlide: 1,
-    imgs: {{$imgs}},
-    texts: {{$texts}},
-    team: {{$team}},
-    timer: 10000,
-    autoaddOne: function() {
+          this.update();
+
+          this.container.addEventListener('scroll', this.update.bind(this), {passive: true});
+        },
+        update() {
+          const rect = this.container.getBoundingClientRect();
+
+          const visibleElements = Array.from(this.container.children).filter((child) => {
+            const childRect = child.getBoundingClientRect()
+
+            return childRect.left >= rect.left && childRect.right <= rect.right;
+          });
+
+          if (visibleElements.length > 0) {
+            this.prev = this.getPrevElement(visibleElements);
+            this.next = this.getNextElement(visibleElements);
+          }
+        },
+        autoaddOne: function() {
             if(this.activeSlide === this.imgs.length){
                 this.activeSlide = 1
             } else {
                 this.activeSlide++
             }
         },
-    addOne: function() {
-            if(this.activeSlide === this.imgs.length){
-                this.activeSlide = 1
-            } else {
-                this.activeSlide++
-            }
+        getPrevElement(list) {
+          const sibling = list[0].previousElementSibling;
+
+          if (sibling instanceof HTMLElement) {
+            return sibling;
+          }
+
+          return null;
         },
-    subOne: function() {
-            if(this.activeSlide === 1){
-                this.activeSlide = this.imgs.length
-            } else {
-                this.activeSlide--
-            }
+        getNextElement(list) {
+          const sibling = list[list.length - 1].nextElementSibling;
+
+          if (sibling instanceof HTMLElement) {
+            return sibling;
+          }
+
+          return null;
+        },
+        scrollTo(element) {
+          const current = this.container;
+
+          if (!current || !element) return;
+
+          const nextScrollPosition =
+            element.offsetLeft +
+            element.getBoundingClientRect().width / 2 -
+            current.getBoundingClientRect().width / 2;
+
+          current.scroll({
+            left: nextScrollPosition,
+            behavior: 'smooth',
+          });
         }
+      };
     }
-    ",
-    x-init="$interval(addOne, timer)" x-cloack>
-    <div class="relative bg-primary-500 py-10">
-        <h2 class="text-3xl text-center font-bold text-white">¿Quiénes somos?</h2>
-        <template x-for="(img,index) in imgs">
-            <div class="flex flex-col mx-auto py-4"
-            x-show="activeSlide === index+1" x-transition>
-                <img class="object-cover mx-auto h-64" :src="'img/equipo/' + img">
-                <div class="flex mx-auto">
-                    <button type="button" class="flex relative z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none" data-carousel-prev  @click="subOne">
-                        <span class="inline-flex text-you-grey justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                            <svg class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>Hola</svg>
-                            <span class="hidden">Previous</span>
-                        </span>
-                    </button>
-                    <button type="button" class="flex relative z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none" data-carousel-next @click="addOne">
-                        <span class="inline-flex text-you-grey justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                            <svg class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                            <span class="hidden">Next</span>
-                        </span>
-                    </button>
+  </script>
+  <style>
+    .scroll-snap-x {
+      scroll-snap-type: x mandatory;
+    }
+
+    .snap-center {
+      scroll-snap-align: center;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+
+    @php
+        $files = File::allFiles('img/equipo/');
+        shuffle($files);
+    @endphp
+
+<div class="bg-primary-500 py-8 ">
+    <h2 class="text-3xl text-center font-bold text-white">¿Quiénes somos?</h2>
+    <div class="mt-12 flex mx-auto items-center relative "> 
+        <div x-data="carousel()" x-init="init()" class="relative overflow-hidden group">
+        <div x-ref="container"
+            class="md:-ml-4 md:flex md:overflow-x-scroll scroll-snap-x md:space-x-4 space-y-4 md:space-y-0 no-scrollbar">
+            @foreach($files as $file)
+                <div
+                class="ml-4 flex-auto flex-grow-0 flex-shrink-0 w-96 rounded-lg bg-gray-100 items-center justify-center snap-center overflow-hidden shadow-md">
+                    <div><img class="w-full h-64 object-cover" src="{{ asset('img/equipo/'.$file->getFilename())}}"></div>
+                    <!-- <div class="px-2 py-3 flex justify-between">
+                        <div class="text-lg font-semibold">Content Title</div>
+                        <time>3/6/2021</time>
+                    </div> -->
                 </div>
-                <div class="text-white text-center text-3xl" x-text="texts[index]" x-transition></div>
-                <div class="text-white text-center text-lg" x-text="team[index]" x-transition></div>
-
-            </div>
-
-        </template>
-
-
+            @endforeach
+        
+        <div @click="scrollTo(prev)" x-show="prev !== null"
+            class="hidden md:block absolute top-1/2 left-0 bg-white p-2 rounded-full transition-transform ease-in-out transform -translate-x-full -translate-y-1/2 group-hover:translate-x-0 cursor-pointer">
+            <div>&lt;</div>
+        </div>
+        <div @click="scrollTo(next)" x-show="next !== null"
+            class="hidden md:block absolute top-1/2 right-0 bg-white p-2 rounded-full transition-transform ease-in-out transform translate-x-full -translate-y-1/2 group-hover:translate-x-0 cursor-pointer">
+            <div>&gt;</div>
+        </div>
+        </div>
+    </div>
+    </div>
     </div>
 </div>
+

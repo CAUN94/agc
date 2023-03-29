@@ -75,7 +75,7 @@
       </div>
     </div>
 
-    <button x-on:click="calendar = !calendar">Ver calendario</button>
+    <button x-on:click="calendar = !calendar" class="items-center mt-2 px-4 py-2 bg-primary-500 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-primary-900 active:bg-primary-900 focus:outline-none focus:border-primary-900 focus:ring ring-primary-100 disabled:opacity-25 transition ease-in-out duration-150">Ver calendario</button>
     <div x-show="calendar">
       <div class="flex flex-col lg:flex-row gap-2 mt-2">
         <div class="w-full flex flex-col overflow-x-auto gap-1">
