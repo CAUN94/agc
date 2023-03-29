@@ -26,13 +26,7 @@
             this.next = this.getNextElement(visibleElements);
           }
         },
-        autoaddOne: function() {
-            if(this.activeSlide === this.imgs.length){
-                this.activeSlide = 1
-            } else {
-                this.activeSlide++
-            }
-        },
+
         getPrevElement(list) {
           const sibling = list[0].previousElementSibling;
 
@@ -102,14 +96,14 @@
             @foreach($files as $file)
                 <div
                 class="ml-4 flex-auto flex-grow-0 flex-shrink-0 w-96 rounded-lg bg-gray-100 items-center justify-center snap-center overflow-hidden shadow-md">
-                    <div><img class="w-full h-64 object-cover" src="{{ asset('img/equipo/'.$file->getFilename())}}"></div>
-                    <!-- <div class="px-2 py-3 flex justify-between">
-                        <div class="text-lg font-semibold">Content Title</div>
-                        <time>3/6/2021</time>
-                    </div> -->
+                    <div>
+                      <img class="w-full h-64 object-cover" src="{{ asset('img/equipo/'.$file->getFilename())}}">
+                    </div>
+                    <div class="flex">
+                    </div>
                 </div>
             @endforeach
-        
+        </div>
         <div @click="scrollTo(prev)" x-show="prev !== null"
             class="hidden md:block absolute top-1/2 left-0 bg-white p-2 rounded-full transition-transform ease-in-out transform -translate-x-full -translate-y-1/2 group-hover:translate-x-0 cursor-pointer">
             <div>&lt;</div>
