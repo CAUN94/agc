@@ -127,14 +127,14 @@
             </dd>
           </div>
           @endif
-          <div class="bg-white border-t border-gray-200 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <!-- <div class="bg-white border-t border-gray-200 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt class="text-sm font-medium text-gray-500">
               Registrado desde
             </dt>
             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
               {{ $user->created_at->format('d M Y'); }}
             </dd>
-          </div>
+          </div> -->
         </dl>
         <div class="px-4 py-3 bg-white border-t border-gray-200 text-right sm:px-6">
           <a href="users/{{$user->id}}/edit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-500 hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-900">
