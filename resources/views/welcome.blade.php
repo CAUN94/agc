@@ -25,9 +25,9 @@
         </x-landing.contact>
 
         <div id="equipo"></div>
-        <x-landing.team2>
+        <x-landing.team>
 
-        </x-landing.team2>
+        </x-landing.team>
 
         <!-- <x-landing.team>
             <x-slot name="img">
