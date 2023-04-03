@@ -50,9 +50,6 @@ class Training extends Model {
 			return "Plan por " . $this->class . " mes";
 
 		}
-		if($this->type == 'guideline'){
-			return '1 vez al mes';
-		}
 		return $this->class . " clase" . $this->plural() . " por mes";
 	}
 
