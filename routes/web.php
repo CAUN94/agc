@@ -211,6 +211,7 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/apimedilink/profesionales', [AdminMedilinkController::class, 'profesionales']);
     Route::get('/apimedilink/profesionales/{id}', [AdminMedilinkController::class, 'profesional']);
     Route::get('/apimedilink/profesionales/{id}/appointments', [AdminMedilinkController::class, 'profesional_appointment']);
+    Route::get('/apimedilink/profesionales/{id}/hours', [AdminMedilinkController::class, 'profesional_hours']);
     Route::get('/apimedilink/profesional/remuneration', [AdminMedilinkController::class, 'remuneration']);
     Route::get('/apimedilink/sucursales', [AdminMedilinkController::class, 'sucursales']);
     Route::get('/apimedilink/citas', [AdminMedilinkController::class, 'citas']);
