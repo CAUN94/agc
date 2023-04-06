@@ -81,13 +81,13 @@ class AdminRemuneracion extends Component
     }
 
     public function subPeriod(){
-        $this->startOfMonth->subMonth();
-        $this->endOfMonth->subMonth();
+        $this->expiredstartOfMonth->subMonth();
+        $this->expiredendOfMonth->subMonth();
     }
 
     public function addPeriod(){
-        $this->startOfMonth->addMonth();
-        $this->endOfMonth->addMonth();
+        $this->expiredstartOfMonth->addMonth();
+        $this->expiredendOfMonth->addMonth();
     }
 
     public function changePeriod(){
@@ -156,7 +156,7 @@ class AdminRemuneracion extends Component
           }
       }
       return view('livewire.admin-remuneracion', [
-        
+
           'appointments' => ActionMl::where('Estado','Atendido')
                                 ->where('Fecha_Realizacion','>',$this->expiredstartOfMonth->format('Y-m-d'))
                                 ->where('Fecha_Realizacion','<',$this->expiredendOfMonth->format('Y-m-d'))

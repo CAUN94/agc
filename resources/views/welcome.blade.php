@@ -1,7 +1,13 @@
 <x-landing.layout>
         <a href="/youphone" target="_blank">
-            <img src="{{ asset('img/fotos/banner.png')}}" style="max-width: 100%;height: auto;">
+            <div class="relative">
+                <img src="{{ asset('img/fotos/banner.png')}}" style="max-width: 100%;height: auto;">
+                <div class="flex flex-col items-center">
+                    <button class="absolute text-2xl top-3/4 bg-primary-500 text-white p-2 rounded hover:bg-primary-900">Consulta Aquí</button>
+                </div>
+            </div>
         </a> 
+
         <x-landing.header>
 
         </x-landing.header>
