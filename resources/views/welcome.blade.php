@@ -1,7 +1,4 @@
 <x-landing.layout>
-        
-            
-        
         <a href="/youphone" target="_blank">
             <div class="relative">
                 <img src="{{ asset('img/fotos/banner.png')}}" style="max-width: 100%;height: auto;">
