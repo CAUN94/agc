@@ -1,4 +1,11 @@
+
 <div x-data="{ Lista: false }">
+  <style>
+    .active {
+      background-color: #f2715a;
+      color: white;
+    }
+  </style>
   @if(Auth::user()->isAdmin())
       <div class="w-full overflow-x-auto gap-y-2 box-white p-3">
         <div class="mb-2 w-full flex justify-between">
@@ -177,7 +184,7 @@
                   Atendidos
                 </div>
                 <div class="rounded-b-lg h-full p-3">
-                  <table class="table-fixed w-full overflow-hidden rounded-lg shadow-lg p-6">
+                  <table class="table-fixed w-full overflow-hidden rounded-lg shadow-lg p-6" id="myTable">
                     <thead>
                       <tr class="bg-gray-300 text-sm font-semibold tracking-wide text-left">
                         <th class="text-center py-2 min-w-1/8 w-1/12">id</th>
@@ -221,7 +228,13 @@
                     @endforeach
                     </tbody>
                   </table>
-                  <div class='py-3'>{{$appointments->links()}}</div>
+                  <script>
+                    $(document).ready( function () {
+                        $('#myTable').DataTable();
+
+                    } );
+                  </script>
+                    
                 </div>
               </div>
             </div>

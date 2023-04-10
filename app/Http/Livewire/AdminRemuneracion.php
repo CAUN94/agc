@@ -40,6 +40,7 @@ class AdminRemuneracion extends Component
 
     public function mount()
     {
+      $this->emit('table');
       $this->now = Carbon::Now();
         if (Carbon::now()->format('d') < 21 ){
             $this->startOfMonth = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m')-1,20)->startOfDay();
@@ -83,6 +84,7 @@ class AdminRemuneracion extends Component
     public function subPeriod(){
         $this->expiredstartOfMonth->subMonth();
         $this->expiredendOfMonth->subMonth();
+        $this->close();
     }
 
     public function addPeriod(){
@@ -98,6 +100,8 @@ class AdminRemuneracion extends Component
     public function subMonth()
     {
         $this->now->subMonth();
+        $this->close();
+        
     }
 
     public function incrementMonth()
@@ -162,8 +166,7 @@ class AdminRemuneracion extends Component
                                 ->where('Fecha_Realizacion','<',$this->expiredendOfMonth->format('Y-m-d'))
                                 ->where('Profesional',$this->lista_id)
                                 ->groupBy('Tratamiento_Nr')
-                                ->orderby('Fecha_Realizacion', 'DESC')
-                                ->Paginate(13),
+                                ->orderby('Fecha_Realizacion', 'DESC')->get(),
 
           'coff' => Professional::where('description',$this->lista_id)->first(['coff']),
       ]);
