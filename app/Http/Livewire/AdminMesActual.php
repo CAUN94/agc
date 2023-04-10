@@ -131,7 +131,7 @@ class AdminMesActual extends Component
                                   ->where('professionals.user_id',Auth::user()->id)
                                   ->groupBy('Tratamiento_Nr')
                                   ->orderby('Fecha_Realizacion', 'ASC')
-                                  ->Paginate(13),
+                                  ->get(),
             'coff' => Professional::where('user_id',Auth::user()->id)->first(['coff']),
         ]);
     }

@@ -1,4 +1,10 @@
 <div x-data="{ calendar: false }">
+<style>
+	.active {
+		background-color: #f2715a;
+		color: white;
+	}
+</style>
     <div class="w-full overflow-x-auto gap-y-2 box-white p-3">
         <div class="mb-2 w-full flex justify-between font-bold text-gray-600">
             Periodo del {{$expiredstartOfMonth->copy()->addday()->format('d-m')}} al {{$expiredendOfMonth->copy()->subday()->format('d-m')}}
@@ -37,39 +43,45 @@
             Atendidos
           </div>
           <div class="rounded-b-lg h-full p-3">
-            <table class="table-fixed w-full overflow-hidden rounded-lg shadow-lg p-6">
+            <table id="table">
               <thead>
-                <tr class="bg-gray-300 text-sm font-semibold tracking-wide text-left">
-                  <th class="text-center py-2 min-w-1/8 w-2/12">Fecha</th>
-                  <th class="py-2 min-w-1/8 w-3/12 ">Paciente</th>
-                  <th class="text-center py-2 min-w-1/8 w-3/12">Alianza</th>
-                  <th class="text-center py-2 min-w-1/8 w-2/12">Prestación</th>
-                  <th class="text-center py-2 min-w-1/8 w-2/12">Remuneración</th>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Paciente</th>
+                  <th>Alianza</th>
+                  <th>Prestación</th>
+                  <th>Remuneración</th>
                 </tr>
               </thead>
               <tbody>
               @foreach($appointments as $Appointment)
               <tr>
-                <td class="text-center">
+                <td>
                     {{Carbon\Carbon::parse($Appointment->Fecha_Realizacion)->format('d-m-Y')}}
                 </td>
-                <td class="text-left">
+                <td>
                    {{$Appointment->Nombre}} {{$Appointment->Apellido}}
                 </td>
-                <td class="text-center">
+                <td>
                   {{$Appointment->Convenio}}
                 </td>
-                <td class="text-center">
+                <td>
                   {{$Appointment->Categoria_Nombre}}
                 </td>
-                <td class="text-center">
+                <td>
                   {{Helper::moneda_chilena(ceil(($Appointment->Precio_Prestacion*$coff->coff)/100))}}
                 </td>
               </tr>
               @endforeach
               </tbody>
             </table>
-            <div class='py-3'>{{$appointments->links()}}</div>
+            <script>
+                    $(document).ready( function () {
+                        $('#myTable').DataTable();
+
+                    } );
+                  </script>
+            
           </div>
         </div>
       </div>
