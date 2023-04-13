@@ -124,13 +124,10 @@ class LandingController extends Controller
             'Saturday' => 'Sabado'
         );
         $text = 'Hola '.$patient->nombre.'! Te recordamos que tienes atención el '.$days[$day->format('l')].' '.$day->format('d').' con '.$atention->nombre_profesional.' a las '.$hora.' hrs.';
-        // $text .= '-- *Para confirmar tu asistencia haz click en el siguiente link: *';
+        $text .= '--Para confirmar tu asistencia haz click en el siguiente link: http://yjb.cl/confirmacion/'.$id;
         if($atention->total!=0){
-            $text .= '--Para confirmar tu asistencia haz click en el siguiente link: http://yjb.cl/confirmacion/'.$id.'. El monto a pagar es de '.Helper::moneda_chilena($atention->total);
-        } else {
-            $text .= '--Para confirmar tu asistencia haz click en el siguiente link: http://yjb.cl/confirmacion/'.$id;
-        }
-        $text .= '-- También puedes pagar tu atención de {Monto} en el mismo link.';
+            $text .= '--También puedes pagar tu atención de '.Helper::moneda_chilena($atention->total).' en el mismo link.';
+        } 
 
         
         if ($atention->nombre_profesional == "Melissa Ross Guerra"){
