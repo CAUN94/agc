@@ -24,6 +24,7 @@
                     <x-custompay class id="{{$appointment->id}}">Pagar y Confirmar Hora</x-custompay>
                 @else
                 <x-custompay class id="{{$appointment->id}}">Pagar Hora</x-custompay>
+                <span class="normal-button bg-green-500">Hora Confirmada</span>
                 @endif
             @else
                 <span class="normal-button bg-green-500">Pagado</span>
