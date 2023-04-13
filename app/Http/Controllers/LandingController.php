@@ -139,8 +139,6 @@ class LandingController extends Controller
         $text .= ', estamos en San pascual 736, Las Condes. Contamos con estacionamiento afuera del local.';
         $text .= '--Puedes revisar nuestros terminos y condiciones de agendamiento en www.yjb.cl/terms';
 
-        $text .= '--*Notar que realizamos ajustes de aranceles a nuestras prestaciones para el año 2023 de acuerdo con el IPC anual*';
-
         $text = str_replace('--','%0A%0A',$text);
         $whatsapp = "https://web.whatsapp.com/send?phone=".$phone."&text=".$text;
 

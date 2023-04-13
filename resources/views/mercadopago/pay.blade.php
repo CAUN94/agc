@@ -20,7 +20,11 @@
             <a href="https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento" class="normal-button bg-blue-500">Reagendar</a>
         @else
             @if(!App\Models\AppointmentMl::where('Tratamiento_Nr',$appointment->id_atencion)->first()->ispay)
-                <x-custompay class id="{{$appointment->id}}">Pagar y Confirmar Hora</x-custompay>
+                @if(in_array($appointment->estado_cita, ['Agenda Online', 'No confirmado']))
+                    <x-custompay class id="{{$appointment->id}}">Pagar y Confirmar Hora</x-custompay>
+                @else
+                <x-custompay class id="{{$appointment->id}}">Pagar Hora</x-custompay>
+                @endif
             @else
                 <span class="normal-button bg-green-500">Pagado</span>
             @endif
@@ -32,12 +36,13 @@
                     <input class="normal-button bg-blue-500"  type="submit" value="Confirmar Hora">
                 </form>
             @else
-                <form action="/apim/addAppointment" method="POST">
+                <!-- <a class="normal-button bg-red-500" href="https://api.whatsapp.com/send?phone=56933809726&text=Hola%20quiero%20cancelar%20mi%20hora">Anular Hora</a> -->
+                <!-- <form action="/apim/addAppointment" method="POST">
                     @csrf
                     <input type="hidden" name="id_appointment" value="{{$appointment->id}}">
                     <input type="hidden" name="id_estado" value="{{$appointment->id_estado}}">
                     <input class="normal-button bg-red-500"  type="submit" value="Anular Hora">
-                </form>
+                </form> -->
             @endif
         @endif
     </x-auth-card>
