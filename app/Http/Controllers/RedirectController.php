@@ -256,4 +256,9 @@ class RedirectController extends Controller {
 		return Redirect::away($url);
 	}
 
+	public function recomiendanos(){
+		$url = 'https://g.page/r/Cc9xYzd7nYRrEB0/review';
+		return Redirect::away($url);
+	}
+
 }
