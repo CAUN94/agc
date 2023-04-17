@@ -235,4 +235,25 @@ class RedirectController extends Controller {
 		return Redirect::away($url);
 	}
 
+	public function indicadores(){
+		$url = 'https://auto-indicadores-yjb.streamlit.app/';
+		return Redirect::away($url);
+	}
+	public function alianzas(){
+		$url = 'https://alianzas-yjb.streamlit.app/';
+		return Redirect::away($url);
+	}
+	public function progreso(){
+		$url = 'https://progreso-yjb.streamlit.app/';
+		return Redirect::away($url);
+	}
+	public function pnl(){
+		$url = 'https://datos-relevantes-yjb.streamlit.app/';
+		return Redirect::away($url);
+	}
+	public function horariospeak(){
+		$url = 'https://horarios-peak-yjb.streamlit.app/';
+		return Redirect::away($url);
+	}
+
 }
