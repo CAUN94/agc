@@ -173,6 +173,7 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/progreso-mensual', 'App\Http\Controllers\RedirectController@progreso');
     Route::get('/pnl', 'App\Http\Controllers\RedirectController@pnl');
     Route::get('/horarios-peak', 'App\Http\Controllers\RedirectController@horariospeak');
+    Route::get('/recomiendanos', 'App\Http\Controllers\RedirectController@recomiendanos');
 
     Route::get('/box/dcontrerasb', 'App\Http\Controllers\RedirectController@contreras');
     Route::get('/box/jmguzmanh', 'App\Http\Controllers\RedirectController@guzman');
