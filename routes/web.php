@@ -97,7 +97,7 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::resource('mesActual', 'App\Http\Controllers\mesActualController')->middleware(['intranet']);
     Route::resource('mesVencido', 'App\Http\Controllers\mesVencidoController')->middleware(['intranet']);
     Route::resource('historial', 'App\Http\Controllers\historialController')->middleware(['intranet']);
-    
+
     Route::get('/apim/professionals', [ApiMedilinkController::class, 'professionals']);
     Route::get('/apim/atentions', [ApiMedilinkController::class, 'atentions'])->middleware(['intranet']);
     Route::get('/apim/atentions/{id}', [ApiMedilinkController::class, 'atention'])->middleware(['intranet']);
@@ -117,6 +117,8 @@ Route::middleware([UpdatePassword::class])->group(function () {
 
     // Admin Haas
     Route::get('/admin/nutrition', [AdminHaasController::class, 'nutrition'])->middleware(['intranet']);
+    Route::get('/admin/nutrition/pdf', ['App\Http\Livewire\AdminNutrition', 'pdf'])->middleware(['intranet'])->name('livewire.admin-nutrition');
+    Route::get('/admin/nutrition/pdf-view', [AdminHaasController::class, 'pdf_view'])->middleware(['intranet']);
 
     // TrainerAdmins
     Route::resource('trainertrainappointment', 'App\Http\Controllers\TrainerTrainController');

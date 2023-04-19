@@ -47,42 +47,39 @@
                     <div class="w-auto">
                         <p class="py-2">Masa Adiposa</p>
                         <div class="grid grid-cols-2">
-                            <div class="border text-base flex px-2 items-center">{{$nutrition->masa_adiposa_porc}}%</div>
+                            <div class="border text-base flex px-2 items-center">{{round(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100, 1)}}%</div>
                             <div class="border text-base flex px-2 items-center">{{$nutrition->masa_adiposa}}</div>
                         </div>
                     </div>
                     <div class="w-auto">
                         <p class="py-2">Índice Músculo/Óseo</p>
                         <div class="grid grid-cols-2">
-                            <div class="border text-base flex px-2 items-center">40.7%</div>
                             <div class="border text-base flex px-2 items-center">{{$nutrition->indice_musculo}}</div>
                         </div>
                     </div>
                     <div class="w-auto">
                         <p class="py-2">Masa Múscular</p>
                         <div class="grid grid-cols-2">
-                            <div class="border text-base flex px-2 items-center">{{$nutrition->masa_muscular_porc}}%</div>
+                            <div class="border text-base flex px-2 items-center">{{round(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100, 1)}}%</div>
                             <div class="border text-base flex px-2 items-center">{{$nutrition->masa_muscular}}</div>
                         </div>
                     </div>
                     <div class="w-auto">
                         <p class="py-2">Índice Adiposo/Musc</p>
                         <div class="grid grid-cols-2">
-                            <div class="border text-base flex px-2 items-center">23.7%</div>
                             <div class="border text-base flex px-2 items-center">{{$nutrition->indice_adiposo}}</div>
                         </div>
                     </div>
                     <div class="w-auto">
                         <p class="py-2">Masa Ósea</p>
                         <div class="grid grid-cols-2">
-                            <div class="border text-base flex px-2 items-center">{{$nutrition->masa_osea_porc}}%</div>
+                            <div class="border text-base flex px-2 items-center">{{round(($nutrition->masa_osea/$nutrition->peso_estructurado)*100, 1)}}%</div>
                             <div class="border text-base flex px-2 items-center">{{$nutrition->masa_osea}}</div>
                         </div>
                     </div>
                     <div class="w-auto">
                         <p class="py-2">Índice Masa Corporal</p>
                         <div class="grid grid-cols-2">
-                            <div class="border text-base flex px-2 items-center">23.7%</div>
                             <div class="border text-base flex px-2 items-center">{{$nutrition->indice_corporal}}</div>
                         </div>
                     </div>
@@ -101,7 +98,7 @@
                         </div>
                         <div class="border p-3 flex">
                             <span class="text-base mr-4">Bíceps:</span>
-                            <span class="text-base">{{$nutrition->bicep}}</span>
+                            <span class="text-base">{{$nutrition->biceps}}</span>
                         </div>
                         <div class="border p-3 flex">
                             <span class="text-base mr-4">Muslo Medial:</span>
@@ -121,7 +118,7 @@
                         </div>
                         <div class="border p-3 flex">
                             <span class="text-base mr-4">Pierna:</span>
-                            <span class="text-base">{{$nutrition->pierna}}</span>
+                            <span class="text-base">{{$nutrition->pierna_mm}}</span>
                         </div>
                         <div class="border p-3 flex">
                             <span class="text-base mr-4">Abdominal:</span>
@@ -129,14 +126,14 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="flex justify-center"> --}}
-                    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script> --}}
+                 <div class="flex justify-center">
+                     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
-                {{-- <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+                <canvas id="myChart" style="width:100%;max-width:450px"></canvas>
 
                 <script>
-                    var xValues = ["Masa Ósea", "Masa Adiposa", "Masa Residual", "Masa Muscula"];
-                    var yValues = [55, 49, 44, 24];
+                    var xValues = ["Masa Muscular", "Masa Adiposa", "Masa Ósea", "Masa Residual"];
+                    var yValues = [{{$nutrition->masa_muscular}}, {{$nutrition->masa_adiposa}}, {{$nutrition->masa_osea}}, {{$nutrition->masa_piel+$nutrition->masa_residual}}];
                     var barColors = [
                       "#b91d47",
                       "#00aba9",
@@ -159,7 +156,53 @@
                         }
                       }
                     });
-                </script> --}}
+                </script>
+                <canvas id="myChartline" style="width:100%;max-width:450px"></canvas>
+
+                <script>
+                var xValues = JSON.parse('<?php echo $user->nutrition()->orderby('Fecha','desc')->pluck('Fecha');?>');
+                var yValues = JSON.parse('<?php echo $user->nutrition()->orderby('Fecha','desc')->pluck('masa_adiposa');?>');
+
+                    new Chart("myChartline", {
+                      type: "line",
+                      data: {
+                        labels: xValues,
+                        datasets: [{
+                          backgroundColor: "#e8c3b9",
+                          data: yValues
+                        }]
+                      },
+                      options: {
+                        title: {
+                          display: true,
+                          text: "Masa Adiposa:"
+                        }
+                      }
+                    });
+                </script>
+                <canvas id="myChartline2" style="width:100%;max-width:450px"></canvas>
+
+                <script>
+                var xValues = JSON.parse('<?php echo $user->nutrition()->orderby('Fecha','desc')->pluck('Fecha');?>');
+                var yValues = JSON.parse('<?php echo $user->nutrition()->orderby('Fecha','desc')->pluck('masa_muscular');?>');
+
+                    new Chart("myChartline2", {
+                      type: "line",
+                      data: {
+                        labels: xValues,
+                        datasets: [{
+                          backgroundColor: "#b91d47",
+                          data: yValues
+                        }]
+                      },
+                      options: {
+                        title: {
+                          display: true,
+                          text: "Masa Muscular:"
+                        }
+                      }
+                    });
+                </script>
                 </div>
             </div>
             </div>

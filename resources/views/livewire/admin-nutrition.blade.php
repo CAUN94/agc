@@ -1,7 +1,6 @@
 <div class="m-4">
   <div x-data="{ 'showModal': false }" @keydown.escape="showModal = false" x-cloak>
     <div class="md:grid md:grid-cols-4 md:gap-6">
-
       <div class="mb-3 mt-5 md:mt-0 md:col-span-3">
           <div class="shadow sm:rounded-md sm:overflow-hidden">
             <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
@@ -11,12 +10,43 @@
                   @if($users && $users->count() > 0)<ul class="border border-gray-200 rounded overflow-hidden shadow-md col-span-6">    @foreach($users as $user)      <li wire:click="selectUser({{$user->id}})" class="px-4 py-2 bg-white  hover:bg-primary-100 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out">{{$user->rut}} {{$user->name}} {{$user->lastnames}}</li>    @endforeach</ul>
                   @endif
 
-                  @if($user)<div class="col-span-6 sm:col-span-6">{{$user->rut}} {{$user->name}} {{$user->lastnames}}</div>
+                  @if($user)<div class="col-span-6 sm:col-span-6">{{$user->rut}} {{$user->name}} {{$user->lastnames}} {{\Carbon\Carbon::parse($user->birthday)->diff(\Carbon\Carbon::now())->format('%y años')}}</div>
                   @endif
 
                   <x-admin.input class="col-span-6 sm:col-span-6" type="date" name="fecha" readonly="edit" >Fecha</x-admin.input>
 
-                  <x-admin.input class="col-span-6 sm:col-span-1" type="number" name="edad" readonly="edit" >Edad</x-admin.input>
+
+                  <div class="mb-3 col-span-6 sm:col-span-2">
+                    <x-label for="Sexo" :value="__('Sexo')" />
+                        <select wire:model= 'sexo' class="form-select w-full mt-1 rounded-md shadow-sm border-gray-300 focus:border-primary-100 focus:ring focus:ring-primary-100 focus:ring-opacity-50">
+                              <option>Seleccione el sexo</option>
+                              <option value='f'>Femenino</option>
+                              <option value='m'>Masculino</option>
+                        </select>
+                  </div>
+
+                  <div class="mb-3 col-span-6 sm:col-span-2 ">
+                    <x-label for="Depo/Recrea (D/R)" :value="__('Deporte/Recreacional')" />
+                        <label class = "md-3">
+                          <input type="radio" wire:model= 'habito' name="habito" value ='D'>
+                          D
+                        </label>
+
+                        <label class = "ml-3">
+                          <input type="radio" wire:model= 'habito' name="habito" value ='R'>
+                          R
+                        </label>
+                  </div>
+
+
+                  <div class="col-span-6 sm:col-span-6">
+                    <label for="deporte_seleccionado" class="block text-sm font-medium text-gray-700">Deporte</label>
+                    <select wire:model= 'deporte_seleccionado' class="form-select w-full mt-1 rounded-md shadow-sm border-gray-300 focus:border-primary-100 focus:ring focus:ring-primary-100 focus:ring-opacity-50">
+                        @foreach(App\Models\NutritionSport::where('gender','=',$sexo)->get() as $deporte)
+                          <option value = {{$deporte->descripcion}}>{{$deporte->descripcion}}</option>
+                        @endforeach
+                    </select>
+                  </div>
 
                   <p class="col-span-6 sm:col-span-6 font-bold">Datos Basicos</p>
                   <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="peso" readonly="edit">Peso</x-admin.input>
@@ -38,12 +68,16 @@
                   <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="antebrazo_maximo" readonly="edit">Antebrazo Máximo</x-admin.input>
                   <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="t_mesoesternal" readonly="edit">Tórax-Mesoesternal</x-admin.input>
                   <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="cintura" readonly="edit">Cintura (mínima)</x-admin.input>
-                  <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="muslo" readonly="edit">Muslo (máxima)</x-admin.input>
+                  <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="cadera" readonly="edit">Cadera</x-admin.input>
+                  <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="muslo_maximo" readonly="edit">Muslo (máxima)</x-admin.input>
+                  <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="muslo_medio" readonly="edit">Muslo (medial)</x-admin.input>
                   <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="pierna_cm" readonly="edit">Pantorrilla</x-admin.input>
 
                   <p class="col-span-6 sm:col-span-6 font-bold">Pliegues Cutaneos (mm)</p>
                   <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="triceps" readonly="edit">Tríceps</x-admin.input>
                   <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="subescapular" readonly="edit">Subescapular</x-admin.input>
+                  <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="biceps" readonly="edit">Bíceps</x-admin.input>
+                  <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="cresta_iliaca" readonly="edit">Cresta iliaca</x-admin.input>
                   <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="supraespinal" readonly="edit">Supraespinal</x-admin.input>
                   <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="abdominal" readonly="edit">Abdominal</x-admin.input>
                   <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="muslo_medial" readonly="edit">Muslo Medial</x-admin.input>
@@ -54,6 +88,10 @@
               <p class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-500 hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 cursor-pointer" wire:click='nutrionCreate()'>
                 Cargar Información
               </p>
+
+              <a href= "{{route('livewire.admin-nutrition')}}" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-500 hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 cursor-pointer">
+                Generar PDF
+              </a>
             </div>
       </div>
     </div>
