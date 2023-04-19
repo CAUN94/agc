@@ -386,7 +386,7 @@ class ApiMedilinkController extends Controller
           ]
         ]);
 
-      return redirect('pago2/'.$id_cita);
+      return redirect('confirmacion/'.$id_cita);
     }
 
     public function sillones(){
