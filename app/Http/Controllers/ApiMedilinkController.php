@@ -375,9 +375,7 @@ class ApiMedilinkController extends Controller
       if($request->id_estado == 7){
         $id_estado = 3;
         //  or 13
-      } else {
-        $id_estado = 1;
-      }
+      } 
 
       $response = $client->request('PUT', $url, [
         'headers'  => [
