@@ -82,7 +82,7 @@ class PayController extends Controller {
 		} elseif ($status == 'pending') {
 			FlashSession::flash('primary', 'Pago Pendiente');
 		}
-		return redirect('/pago2/'.$appointmentId);
+		return redirect('/confirmacion/'.$appointmentId);
 	}
 
 	public function payMedilinkStatus(User $user, TreatmentMl $treatmentMl, $status, Request $request) {
