@@ -20,7 +20,7 @@
         @if (Auth::user()->isStudent())
         <li>
             <a href="/students" class="drop-link block text-sm text-gray-700">
-                <span class="drop-span">Reserva de Clases</span>
+                <span class="drop-span">Reservar Entrenamiento</span>
             </a>
         </li>
         @endif
@@ -31,16 +31,16 @@
             </a>
         </li>
         @endif
-        <li>
+        <!-- <li>
             <a href="/strava/show" class="drop-link">
                 <span class="drop-span">Estadísticas Strava</span>
             </a>
-        </li>
-        <li>
+        </li> -->
+        <!-- <li>
             <a href="/strava/auth" class="drop-link">
                 <span class="drop-span">Vincula tu Strava</span>
             </a>
-        </li>
+        </li> -->
         <form method="POST" action="{{ route('logout') }}">
         @csrf
         <li>
