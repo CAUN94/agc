@@ -71,7 +71,7 @@ class UpdateActions extends Command
         $coff = User::where('rut',$rut)->first()->professional->coeff;
 
         $client = new \GuzzleHttp\Client();
-        $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/'.$id.'/citas?q={"fecha":{"gt":"2023-04-01"},"estado_cita":{"eq":"Atendido"}}&sort=fecha:desc';
+        $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/'.$id.'/citas?q={"fecha":{"gt":"2023-03-01"},"estado_cita":{"eq":"Atendido"}}&sort=fecha:desc';
 
         $response = $client->request('GET', $url, [
             'headers'  => [
@@ -91,7 +91,7 @@ class UpdateActions extends Command
                 //     break;
                 // }
                 sleep(2);
-                if($data->fecha < '2023-01-11' or $data->fecha > '2023-03-20'){
+                if($data->fecha < '2023-02-28' or $data->fecha > '2023-04-30'){
                     continue;
                 }
                 $id_atencion = $data->id_atencion;

@@ -191,7 +191,7 @@
                   @endif
                 </div>
               @empty
-                <a href="https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento" class="text-primary-500">No hay proximas horas</a>
+                <a href="https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento" class="items-center mt-2 px-4 py-2 bg-primary-500 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-primary-900 active:bg-primary-900 focus:outline-none focus:border-primary-900 focus:ring ring-primary-100 disabled:opacity-25 transition ease-in-out duration-150 text-center">Reservar Nueva Hora</a>
               @endforelse
               {{Auth::user()->nextAppointments()->paginate(3)->links()}}
             </div>

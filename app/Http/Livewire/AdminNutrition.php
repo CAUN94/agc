@@ -4,7 +4,9 @@ namespace App\Http\Livewire;
 
 use App\Models\Nutrition;
 use App\Models\User;
+use Carbon\Carbon;
 use Livewire\Component;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AdminNutrition extends Component
 {
@@ -25,6 +27,7 @@ class AdminNutrition extends Component
     public $M_muscular_show;
     public $M_muscular_aumentar_show;
     public $showMasaMuscular = false;
+    public $deporte_seleccionado;
 
     public $M_adiposa_kg;
     public $M_adiposa_porc;
@@ -42,7 +45,10 @@ class AdminNutrition extends Component
 
     public $fecha;
     public $edad;
+    public $sexo = 'none';
+    public $rut;
     public $peso;
+    public $habito;
     public $talla_parado;
     public $talla_sentado;
     public $biacromial;
@@ -57,10 +63,14 @@ class AdminNutrition extends Component
     public $antebrazo_maximo;
     public $t_mesoesternal;
     public $cintura;
-    public $muslo;
+    public $cadera;
+    public $muslo_maximo;
+    public $muslo_medio;
     public $pierna_cm;
     public $triceps;
     public $subescapular;
+    public $biceps;
+    public $cresta_iliaca;
     public $supraespinal;
     public $abdominal;
     public $muslo_medial;
@@ -72,6 +82,8 @@ class AdminNutrition extends Component
     {
         $this->searchTerm = null;
         $this->user = User::find($id);
+        $this->edad = Carbon::parse($this->user->birthday)->age;
+        $this->rut = $this->user->rut;
     }
 
     public function nutrionCreate(){
@@ -79,8 +91,10 @@ class AdminNutrition extends Component
       $validate = $this->validate([
 
             'fecha' => ['required'],
-            'edad' => ['required'],
             'peso' => ['required'],
+            'sexo' => ['required'],
+            'habito' => ['required'],
+            'deporte_seleccionado' => ['required'],
             'talla_parado' => ['required'],
             'talla_sentado' => ['required'],
             'biacromial' => ['required'],
@@ -95,10 +109,14 @@ class AdminNutrition extends Component
             'antebrazo_maximo' => ['required'],
             't_mesoesternal' => ['required'],
             'cintura' => ['required'],
-            'muslo' => ['required'],
+            'cadera' => ['required'],
+            'muslo_maximo' => ['required'],
+            'muslo_medio' => ['required'],
             'pierna_cm' => ['required'],
             'triceps' => ['required'],
             'subescapular' => ['required'],
+            'biceps' => ['required'],
+            'cresta_iliaca' => ['required'],
             'supraespinal' => ['required'],
             'abdominal' => ['required'],
             'muslo_medial' => ['required'],
@@ -108,7 +126,7 @@ class AdminNutrition extends Component
         //Masa Piel
         if($this->edad < 12){
           $const_AS = 70.691;
-        }elseif ($this->user->gender = 'M') {
+        }elseif ($this->sexo == 'm') {
           $const_AS = 68.308;
           $grosor_piel = 2.07;
         }else{
@@ -130,7 +148,7 @@ class AdminNutrition extends Component
         //Masa Muscular
         $per_Brazo_corregido = $this->brazo_relajado-($this->triceps*3.141/10);
         $per_Antebrazo = $this->antebrazo_maximo;
-        $per_Muslo_corregido = $this->muslo - ($this->muslo_medial*3.141/10);
+        $per_Muslo_corregido = $this->muslo_maximo - ($this->muslo_medial*3.141/10);
         $per_Pantorrilla_corregido = $this->pierna_cm - ($this->pierna_mm*3.141/10);
         $per_Tórax_corregido = $this->t_mesoesternal - ($this->subescapular*3.141/10);
 
@@ -163,6 +181,10 @@ class AdminNutrition extends Component
         $this->M_muscular_porc = ($this->M_muscular_kg/$Peso_estructurado)*100;
         $this->M_osea_porc = ($this->M_osea_kg/$Peso_estructurado)*100;
 
+        $Masa_osea_reajustada = ($this->M_osea_kg - ($this->M_osea_porc*$Diferencia_PE_PB));
+        $Masa_muscular_reajustada = ($this->M_muscular_kg - ($this->M_muscular_porc*$Diferencia_PE_PB));
+        $Masa_adiposa_reajustada = ($this->M_adiposa_kg - ($this->M_adiposa_porc*$Diferencia_PE_PB));
+
         //Somatotipos
         $sum_SF = ($this->triceps + $this->subescapular + $this->supraespinal) * (170.18/$this->talla_parado);
         $this->somatotipo_Endo = (-0.7182 + (0.1451*$sum_SF) - (0.00068*pow($sum_SF, 2)) + (0.0000014*pow($sum_SF, 3)) );
@@ -181,7 +203,7 @@ class AdminNutrition extends Component
         $nutrition = new Nutrition;
 
         $nutrition->fecha = $this->fecha;
-        $nutrition->plan = 'example.pdf';
+        $nutrition->plan = $this->user->name . $this->user->lastnames;
         $nutrition->peso = $this->peso;
         $nutrition->talla_parado = $this->talla_parado;
         $nutrition->talla_sentado = $this->talla_sentado;
@@ -196,7 +218,9 @@ class AdminNutrition extends Component
         $nutrition->brazo_flex= $this->brazo_flexionado;
         $nutrition->antebrazo_max= $this->antebrazo_maximo;
         $nutrition->cintura= $this->cintura;
-        $nutrition->muslo_max= $this->muslo;
+        $nutrition->cadera= $this->cadera;
+        $nutrition->muslo_max= $this->muslo_maximo;
+        $nutrition->muslo_medio=$this->muslo_medio;
         $nutrition->pierna_cm= $this->pierna_cm;
         $nutrition->pierna_mm= $this->pierna_mm;
         $nutrition->torax_meso= $this->t_mesoesternal;
@@ -206,16 +230,25 @@ class AdminNutrition extends Component
         $nutrition->muslo_medial = $this->muslo_medial;
         $nutrition->supraespinal = $this->supraespinal;
         $nutrition->subescapular = $this->subescapular;
+        $nutrition->biceps = $this->biceps;
+        $nutrition->cresta_iliaca = $this->cresta_iliaca;
         $nutrition->masa_adiposa = $this->M_adiposa_kg;
-        $nutrition->masa_adiposa_porc = $this->M_adiposa_porc;
         $nutrition->masa_muscular = $this->M_muscular_kg;
-        $nutrition->masa_muscular_porc= $this->M_muscular_porc;
         $nutrition->masa_osea = $this->M_osea_kg;
-        $nutrition->masa_osea_porc = $this->M_osea_porc;
-        $nutrition->indice_adiposo = 1;
-        $nutrition->indice_musculo = 1;
+        $nutrition->masa_piel = $Masa_Piel;
+        $nutrition->masa_residual = $Masa_Residual;
+        $nutrition->indice_adiposo = $Masa_adiposa_reajustada/$Masa_muscular_reajustada;
+        $nutrition->indice_musculo = $Masa_muscular_reajustada/$Masa_osea_reajustada;
         $nutrition->indice_corporal = $this->indice_masa_corporal;
+        $nutrition->peso_estructurado = $Peso_estructurado;
+        $nutrition->endo = $this->somatotipo_Endo;
+        $nutrition->meso = $this->somatotipo_Meso;
+        $nutrition->ecto = $this->somatotipo_Ecto;
         $nutrition->rut = $this->user->rut;
+        $nutrition->edad = $this->edad;
+        $nutrition->gender = $this->sexo;
+        $nutrition->habito = $this->habito;
+        $nutrition->deporte = $this->deporte_seleccionado;
 
         $this->showAntropometria = true;
 
@@ -261,6 +294,16 @@ class AdminNutrition extends Component
       $this->M_muscular = null;
     }
 
+    public function pdf(){
+        $nutrition = Nutrition::latest()->first();
+        $pdf = Pdf::loadView('livewire.pdf', compact('nutrition'));
+        return $pdf->stream('livewire.pdf');
+    }
+
+    public function pdf_view(){
+        return view('livewire.pdf');
+    }
+
     public function render()
     {
         $query = User::query();
@@ -273,6 +316,7 @@ class AdminNutrition extends Component
             }
             $this->users = $query->get();
         }
+
         return view('livewire.admin-nutrition');
     }
 }
