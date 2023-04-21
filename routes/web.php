@@ -23,8 +23,9 @@ use App\Http\Middleware\UpdatePassword;
 // });
 
 
+// Arreglar
+// Route::get('/professionalshours', 'App\Http\Controllers\ScrapingController@professionalshours');
 
-Route::get('/professionalshours', 'App\Http\Controllers\ScrapingController@professionalshours');
 // Route::get('/pago2', [MercadoPagoController::class, 'personalizepay']);
 Route::get('/confirmacion/{id}', [MercadoPagoController::class, 'pay']);
 // Route::get('/scraping-alta', [ScrapingController::class, 'alta']);
