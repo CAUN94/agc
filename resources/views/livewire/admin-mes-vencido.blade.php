@@ -66,7 +66,7 @@
                   {{$Appointment->Convenio}}
                 </td>
                 <td>
-                  {{$Appointment->Categoria_Nombre}}
+                  {{Helper::moneda_chilena(ceil(($Appointment->Precio_Prestacion)))}}
                 </td>
                 <td>
                   {{Helper::moneda_chilena(ceil(($Appointment->Precio_Prestacion*$coff->coff)/100))}}
