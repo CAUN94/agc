@@ -1,7 +1,13 @@
 <x-landing.layout>
-        <!-- <a href="/packverano">
-            <img src="{{ asset('img/fotos/banner.png')}}" style="max-width: 100%;height: auto;">
-        </a>  -->
+        <a href="/youphone" target="_blank">
+            <div class="relative">
+                <img src="{{ asset('img/fotos/banner.png')}}" style="max-width: 100%;height: auto;">
+                <div class="flex flex-col items-center">
+                    <button class="absolute text-2xl top-3/4 bg-primary-500 text-white p-2 rounded hover:bg-primary-900">Consulta Aquí</button>
+                </div>
+            </div>
+        </a> 
+
         <x-landing.header>
 
         </x-landing.header>
@@ -47,7 +53,7 @@
                 cesar.jpg|cotie.jpg|javi.jpg|katherine.jpg|sofi.jpg
             </x-slot>
             <x-slot name="texts">
-                Cesar Diaz|Coti Echeverri|Javiera Errázuriz|Katherine Cañete|Sofia Cofre Saphier
+                Cesar Diaz|Coti Echeverria|Javiera Errázuriz|Katherine Cañete|Sofia Cofre Saphier
             </x-slot>
             <x-slot name="team">
                 Atleta y Entrenador|Corredora|Record Chileno 400m con Vallas|Montañista, Ciclista y Runner
@@ -71,6 +77,8 @@
         <x-slot name="script">
             <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
             <script src="{{ asset('js/map.js')}}"></script>
+
+            <script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"6512313e663a34e312952e4bcd8fe576"})});</script>
         </x-slot>
 
 </x-landing.layout>

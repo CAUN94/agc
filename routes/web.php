@@ -23,10 +23,11 @@ use App\Http\Middleware\UpdatePassword;
 // });
 
 
+// Arreglar
+// Route::get('/professionalshours', 'App\Http\Controllers\ScrapingController@professionalshours');
 
-Route::get('/professionalshours', 'App\Http\Controllers\ScrapingController@professionalshours');
 // Route::get('/pago2', [MercadoPagoController::class, 'personalizepay']);
-Route::get('/pago2/{id}', [MercadoPagoController::class, 'pay']);
+Route::get('/confirmacion/{id}', [MercadoPagoController::class, 'pay']);
 // Route::get('/scraping-alta', [ScrapingController::class, 'alta']);
 
 Route::middleware([UpdatePassword::class])->group(function () {
@@ -97,7 +98,7 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::resource('mesActual', 'App\Http\Controllers\mesActualController')->middleware(['intranet']);
     Route::resource('mesVencido', 'App\Http\Controllers\mesVencidoController')->middleware(['intranet']);
     Route::resource('historial', 'App\Http\Controllers\historialController')->middleware(['intranet']);
-    
+
     Route::get('/apim/professionals', [ApiMedilinkController::class, 'professionals']);
     Route::get('/apim/atentions', [ApiMedilinkController::class, 'atentions'])->middleware(['intranet']);
     Route::get('/apim/atentions/{id}', [ApiMedilinkController::class, 'atention'])->middleware(['intranet']);
@@ -110,13 +111,15 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/apim/sillones', [ApiMedilinkController::class, 'sillones'])->middleware(['intranet']);
     Route::get('/apim/estados', [ApiMedilinkController::class, 'estados'])->middleware(['intranet']);
 
-    Route::post('/apim/addAppointment', [ApiMedilinkController::class, 'addAppointment'])->middleware(['intranet']);
+    Route::post('/apim/addAppointment', [ApiMedilinkController::class, 'addAppointment']);
 
 
     Route::get('/apim/appointmentsProfessional/{id}/{startdate}/{enddate}', [ApiMedilinkController::class, 'appointmentsProfessional']);
 
     // Admin Haas
     Route::get('/admin/nutrition', [AdminHaasController::class, 'nutrition'])->middleware(['intranet']);
+    Route::get('/admin/nutrition/pdf', ['App\Http\Livewire\AdminNutrition', 'pdf'])->middleware(['intranet'])->name('livewire.admin-nutrition');
+    Route::get('/admin/nutrition/pdf-view', [AdminHaasController::class, 'pdf_view'])->middleware(['intranet']);
 
     // TrainerAdmins
     Route::resource('trainertrainappointment', 'App\Http\Controllers\TrainerTrainController');
@@ -168,6 +171,12 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/trailwomen', 'App\Http\Controllers\RedirectController@trailwomen');
     Route::get('/agendate', 'App\Http\Controllers\RedirectController@agendate');
     Route::get('/masterclass', 'App\Http\Controllers\RedirectController@masterclass');
+    Route::get('/indicadores', 'App\Http\Controllers\RedirectController@indicadores');
+    Route::get('/alianzas', 'App\Http\Controllers\RedirectController@alianzas');
+    Route::get('/progreso-mensual', 'App\Http\Controllers\RedirectController@progreso');
+    Route::get('/pnl', 'App\Http\Controllers\RedirectController@pnl');
+    Route::get('/horarios-peak', 'App\Http\Controllers\RedirectController@horariospeak');
+    Route::get('/recomiendanos', 'App\Http\Controllers\RedirectController@recomiendanos');
 
     Route::get('/box/dcontrerasb', 'App\Http\Controllers\RedirectController@contreras');
     Route::get('/box/jmguzmanh', 'App\Http\Controllers\RedirectController@guzman');
@@ -211,6 +220,7 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/apimedilink/profesionales', [AdminMedilinkController::class, 'profesionales']);
     Route::get('/apimedilink/profesionales/{id}', [AdminMedilinkController::class, 'profesional']);
     Route::get('/apimedilink/profesionales/{id}/appointments', [AdminMedilinkController::class, 'profesional_appointment']);
+    Route::get('/apimedilink/profesionales/{id}/hours', [AdminMedilinkController::class, 'profesional_hours']);
     Route::get('/apimedilink/profesional/remuneration', [AdminMedilinkController::class, 'remuneration']);
     Route::get('/apimedilink/sucursales', [AdminMedilinkController::class, 'sucursales']);
     Route::get('/apimedilink/citas', [AdminMedilinkController::class, 'citas']);

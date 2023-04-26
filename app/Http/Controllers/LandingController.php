@@ -124,11 +124,12 @@ class LandingController extends Controller
             'Saturday' => 'Sabado'
         );
         $text = 'Hola '.$patient->nombre.'! Te recordamos que tienes atención el '.$days[$day->format('l')].' '.$day->format('d').' con '.$atention->nombre_profesional.' a las '.$hora.' hrs.';
-        $text .= '-- *Favor confirmar tu asistencia respondiendo este mensaje*';
+        $text .= '--Para confirmar tu asistencia haz click en el siguiente link: http://yjb.cl/confirmacion/'.$id;
         if($atention->total!=0){
-            $text .= '--Te recordamos que puedes pagar tu atención en el siguiente link http://yjb.cl/pago. El monto a pagar es de '.Helper::moneda_chilena($atention->total);
-        }
+            $text .= '--También puedes pagar tu atención de '.Helper::moneda_chilena($atention->total).' en el mismo link.';
+        } 
 
+        
         if ($atention->nombre_profesional == "Melissa Ross Guerra"){
             $text .= '--Traer short y/o peto';
         }
@@ -138,8 +139,6 @@ class LandingController extends Controller
 
         $text .= ', estamos en San pascual 736, Las Condes. Contamos con estacionamiento afuera del local.';
         $text .= '--Puedes revisar nuestros terminos y condiciones de agendamiento en www.yjb.cl/terms';
-
-        $text .= '--*Notar que realizamos ajustes de aranceles a nuestras prestaciones para el año 2023 de acuerdo con el IPC anual*';
 
         $text = str_replace('--','%0A%0A',$text);
         $whatsapp = "https://web.whatsapp.com/send?phone=".$phone."&text=".$text;

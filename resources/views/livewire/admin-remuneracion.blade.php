@@ -1,4 +1,11 @@
+
 <div x-data="{ Lista: false }">
+  <style>
+    .active {
+      background-color: #f2715a;
+      color: white;
+    }
+  </style>
   @if(Auth::user()->isAdmin())
       <div class="w-full overflow-x-auto gap-y-2 box-white p-3">
         <div class="mb-2 w-full flex justify-between">
@@ -23,6 +30,8 @@
                 Mensual</button>
             </div>
         </div>
+
+
         <div>
           @foreach(App\Models\Professional::where('user_id','>',0)->orderBy('description')->get() as $professional)
               <ul class="grid grid-cols-5 gap-1 py-0.5">
@@ -94,6 +103,27 @@
 
             <div class="mb-3 mt-6 w-full flex justify-between">
             Periodo del {{$expiredstartOfMonth->copy()->addday()->format('d-m')}} al {{$expiredendOfMonth->copy()->subday()->format('d-m')}}
+            <div class="border rounded-lg px-1" style="padding-top: 2px;">
+                <button
+                    type="button"
+                    class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 items-center"
+                    wire:click="subPeriod"
+                    >
+                    <svg class="h-6 w-6 text-gray-500 inline-flex leading-none"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <div class="border-r inline-flex h-6"></div>
+                <button
+                    type="button"
+                    class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex items-center cursor-pointer hover:bg-gray-200 p-1"
+                    wire:click="addPeriod"
+                    >
+                    <svg class="h-6 w-6 text-gray-500 inline-flex leading-none"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            </div>
             </div>
             @if($classShow)
             <div>
@@ -154,7 +184,7 @@
                   Atendidos
                 </div>
                 <div class="rounded-b-lg h-full p-3">
-                  <table class="table-fixed w-full overflow-hidden rounded-lg shadow-lg p-6">
+                  <table class="table-fixed w-full overflow-hidden rounded-lg shadow-lg p-6" id="myTable">
                     <thead>
                       <tr class="bg-gray-300 text-sm font-semibold tracking-wide text-left">
                         <th class="text-center py-2 min-w-1/8 w-1/12">id</th>
@@ -198,7 +228,13 @@
                     @endforeach
                     </tbody>
                   </table>
-                  <div class='py-3'>{{$appointments->links()}}</div>
+                  <script>
+                    $(document).ready( function () {
+                        $('#myTable').DataTable();
+
+                    } );
+                  </script>
+                    
                 </div>
               </div>
             </div>

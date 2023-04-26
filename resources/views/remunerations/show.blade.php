@@ -1,4 +1,10 @@
 <x-admin.layout>
+<style>
+	.active {
+		background-color: #f2715a;
+		color: white;
+	}
+</style>
 	<div class="bg-white  p-4">
 		<h1 class="text-3xl font-bold text-gray-600">
 	       	Mes Vencido del 2022-11-21 al 2022-12-20
@@ -46,6 +52,12 @@
 					        @endforeach
 					    </tbody>
 					</table>
+					<script>
+                    $(document).ready( function () {
+                        $('#myTable').DataTable();
+
+                    } );
+                  </script>
 		          </div>
 		        </div>
 		      </div>
@@ -59,11 +71,7 @@
 		</div>
 
 
-		{{-- <livewire:admin-remuneration></livewire:admin-remuneration> --}}
+		<livewire:admin-remuneration></livewire:admin-remuneration> --}}
 	</div>
-<script>
-  $(document).ready(function() {
-    $('#table').DataTable();
-} );
- </script>
+
 </x-admin.layout>

@@ -127,14 +127,14 @@
             </dd>
           </div>
           @endif
-          <div class="bg-white border-t border-gray-200 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <!-- <div class="bg-white border-t border-gray-200 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt class="text-sm font-medium text-gray-500">
               Registrado desde
             </dt>
             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
               {{ $user->created_at->format('d M Y'); }}
             </dd>
-          </div>
+          </div> -->
         </dl>
         <div class="px-4 py-3 bg-white border-t border-gray-200 text-right sm:px-6">
           <a href="users/{{$user->id}}/edit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-500 hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-900">
@@ -191,7 +191,7 @@
                   @endif
                 </div>
               @empty
-                <a href="https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento" class="text-primary-500">No hay proximas horas</a>
+                <a href="https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento" class="items-center mt-2 px-4 py-2 bg-primary-500 border border-transparent rounded-md font-semibold text-base text-white uppercase tracking-widest hover:bg-primary-900 active:bg-primary-900 focus:outline-none focus:border-primary-900 focus:ring ring-primary-100 disabled:opacity-25 transition ease-in-out duration-150 text-center">Reservar Nueva Hora</a>
               @endforelse
               {{Auth::user()->nextAppointments()->paginate(3)->links()}}
             </div>

@@ -17,6 +17,10 @@ class NutritionController extends Controller
         //
     }
 
+    public function pdf(){
+        //
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -21,6 +21,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Strava;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable {
 	use HasApiTokens, HasFactory, Notifiable;
@@ -383,6 +384,9 @@ class User extends Authenticatable {
 	}
 
 	public function isNutritionist(){
+		if (Auth::guest()){
+			return False;
+		}
 		if (is_null($this->nutritionist)){
 			return False;
 		}

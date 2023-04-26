@@ -63,7 +63,7 @@ nav {
 }
 
 .drop-span {
-	@apply text-you-grey text-base text-right hover:text-primary-500;
+	@apply text-you-grey text-base text-left hover:text-primary-500;
 }
 
 .selected {
@@ -435,3 +435,12 @@ footer span {
     font-size: 1.25rem;
     border-radius: 0.3rem;
 }
+
+.simple-button {
+    @apply items-center mt-2 px-4 py-2 bg-primary-500 border border-transparent rounded-md font-semibold text-base; 
+    @apply text-white uppercase tracking-widest hover:bg-primary-900  focus:outline-none;
+    @apply focus:border-primary-900 focus:ring ring-primary-100 disabled:opacity-25 transition ease-in-out;
+    @apply duration-150 text-center;
+    /* @apply active:bg-primary-900; */
+}
+

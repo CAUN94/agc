@@ -372,12 +372,9 @@ class ApiMedilinkController extends Controller
       $id_cita = (int)$request->id_appointment;
       $url = 'https://api.medilink.healthatom.com/api/v1/citas/'.$id_cita;
 
-      if($request->id_estado == 7){
+      if($request->id_estado == 7 or $request->id_estado == 13) {
         $id_estado = 3;
-        //  or 13
-      } else {
-        $id_estado = 1;
-      }
+      } 
 
       $response = $client->request('PUT', $url, [
         'headers'  => [
@@ -389,7 +386,7 @@ class ApiMedilinkController extends Controller
           ]
         ]);
 
-      return redirect('pago2/'.$id_cita);
+      return redirect('confirmacion/'.$id_cita);
     }
 
     public function sillones(){

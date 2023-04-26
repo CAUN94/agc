@@ -59,13 +59,30 @@ class PayController extends Controller {
 			$appointmentML->ispay = True;
 			$appointmentML->payment_id = $response->id;
 			$appointmentML->save();
+
+			$id_cita = $appointmentId;
+			$url = 'https://api.medilink.healthatom.com/api/v1/citas/'.$id_cita;
+
+			$id_estado = 3;		
+
+			$response = $client->request('PUT', $url, [
+				'headers'  => [
+						'Authorization' => 'Token ' . config('app.medilink')
+					],
+					'json'  => [
+					'id_estado'             => $id_estado,
+					'comentario'            => 'Update de Cita',
+				]
+				]);
+
+			
 		} elseif ($status == 'failure') {
 			$student->status = 'denied';
 			FlashSession::flash('primary', 'Pago Fallido');
 		} elseif ($status == 'pending') {
 			FlashSession::flash('primary', 'Pago Pendiente');
 		}
-		return redirect('/pago2/'.$appointmentId);
+		return redirect('/confirmacion/'.$appointmentId);
 	}
 
 	public function payMedilinkStatus(User $user, TreatmentMl $treatmentMl, $status, Request $request) {

@@ -18,14 +18,15 @@ class IntranetRole
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() &&
-            (Auth::user()->isProfessional() ||
+        if (Auth::check()){
+            if (Auth::user()->isProfessional() ||
             Auth::user()->isAdmin() ||
             Auth::user()->isReception() ||
-            Auth::user()->isTrainer()) ||
-            Auth::user()->isNutritionist()
-            ) {
-             return $next($request);
+            Auth::user()->isTrainer() ||
+            Auth::user()->isNutritionist()){
+                return $next($request);
+            }
+             
         }
         FlashSession::flash('primary','No cuentas con los permisos');
         return redirect('/');
