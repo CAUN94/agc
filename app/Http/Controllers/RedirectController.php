@@ -261,4 +261,9 @@ class RedirectController extends Controller {
 		return Redirect::away($url);
 	}
 
+	public function mds(){
+		$url = 'https://forms.gle/w8Dg1Ruhgiijne29A';
+		return Redirect::away($url);
+	}
+
 }
