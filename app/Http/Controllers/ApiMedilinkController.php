@@ -382,7 +382,6 @@ class ApiMedilinkController extends Controller
             ],
             'json'  => [
               'id_estado'             => $id_estado,
-              'comentario'            => 'Update de Cita',
           ]
         ]);
 
