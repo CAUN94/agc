@@ -27,7 +27,11 @@ class AdminNutrition extends Component
     public $M_muscular_show;
     public $M_muscular_aumentar_show;
     public $showMasaMuscular = false;
-    public $deporte_seleccionado;
+    public $deporte;
+    public $deporteEndo;
+    public $deporteMeso;
+    public $deporteEcto;
+    public $deporteSumatoria;
 
     public $M_adiposa_kg;
     public $M_adiposa_porc;
@@ -42,6 +46,8 @@ class AdminNutrition extends Component
     public $somatotipo_Meso;
     public $somatotipo_Ecto;
     public $sumatoria_6_plieges;
+    public $diferencia_PE_PB;
+    public $diferencia_porc;
 
     public $fecha;
     public $edad;
@@ -75,8 +81,11 @@ class AdminNutrition extends Component
     public $abdominal;
     public $muslo_medial;
     public $pierna_mm;
+    public $masa_osea_ref;
 
     public $showAntropometria = false;
+    public $nutritionID;
+    public $viewsNutrition;
 
     public function selectUser($id)
     {
@@ -84,6 +93,11 @@ class AdminNutrition extends Component
         $this->user = User::find($id);
         $this->edad = Carbon::parse($this->user->birthday)->age;
         $this->rut = $this->user->rut;
+    }
+
+    public function updatedNutritionId()
+    {
+        $this->viewsNutrition = Nutrition::find($this->nutritionID);
     }
 
     public function nutrionCreate(){
@@ -94,7 +108,7 @@ class AdminNutrition extends Component
             'peso' => ['required'],
             'sexo' => ['required'],
             'habito' => ['required'],
-            'deporte_seleccionado' => ['required'],
+            'deporte' => ['required'],
             'talla_parado' => ['required'],
             'talla_sentado' => ['required'],
             'biacromial' => ['required'],
@@ -174,16 +188,16 @@ class AdminNutrition extends Component
 
         //Peso Estructurado y Porcentual
         $Peso_estructurado = $Masa_Piel + $this->M_adiposa_kg + $this->M_muscular_kg + $Masa_Residual + $this->M_osea_kg;
-        $Diferencia_PE_PB = $Peso_estructurado - $this->peso;
-        $diferencia_porc = $Diferencia_PE_PB/$this->peso;
+        $this->diferencia_PE_PB = $Peso_estructurado - $this->peso;
+        $this->diferencia_porc = $this->diferencia_PE_PB/$this->peso;
 
         $this->M_adiposa_porc = ($this->M_adiposa_kg/$Peso_estructurado)*100;
         $this->M_muscular_porc = ($this->M_muscular_kg/$Peso_estructurado)*100;
         $this->M_osea_porc = ($this->M_osea_kg/$Peso_estructurado)*100;
 
-        $Masa_osea_reajustada = ($this->M_osea_kg - ($this->M_osea_porc*$Diferencia_PE_PB));
-        $Masa_muscular_reajustada = ($this->M_muscular_kg - ($this->M_muscular_porc*$Diferencia_PE_PB));
-        $Masa_adiposa_reajustada = ($this->M_adiposa_kg - ($this->M_adiposa_porc*$Diferencia_PE_PB));
+        $Masa_osea_reajustada = ($this->M_osea_kg - ($this->M_osea_porc*$this->diferencia_PE_PB));
+        $Masa_muscular_reajustada = ($this->M_muscular_kg - ($this->M_muscular_porc*$this->diferencia_PE_PB));
+        $Masa_adiposa_reajustada = ($this->M_adiposa_kg - ($this->M_adiposa_porc*$this->diferencia_PE_PB));
 
         //Somatotipos
         $sum_SF = ($this->triceps + $this->subescapular + $this->supraespinal) * (170.18/$this->talla_parado);
@@ -199,7 +213,9 @@ class AdminNutrition extends Component
         }
 
 
-        //$this->indice_M_O =I51/I53;
+        $this->indice_M_O = $Masa_adiposa_reajustada/$Masa_muscular_reajustada;
+        $this->indice_A_M = $Masa_muscular_reajustada/$Masa_osea_reajustada;
+
         $nutrition = new Nutrition;
 
         $nutrition->fecha = $this->fecha;
@@ -248,11 +264,13 @@ class AdminNutrition extends Component
         $nutrition->edad = $this->edad;
         $nutrition->gender = $this->sexo;
         $nutrition->habito = $this->habito;
-        $nutrition->deporte = $this->deporte_seleccionado;
+        $nutrition->deporte = $this->deporte;
 
         $this->showAntropometria = true;
-
+        $this->viewsNutrition = $nutrition;
+        session()->flash('nutricionMensaje','Se cargó la informacion exitosamente');
         $nutrition->save();
+
     }
 
     public function masaIdealCalculate(){
