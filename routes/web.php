@@ -110,6 +110,7 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/apim/changeAppointment', [ApiMedilinkController::class, 'changeAppointment'])->middleware(['intranet']);
     Route::get('/apim/sillones', [ApiMedilinkController::class, 'sillones'])->middleware(['intranet']);
     Route::get('/apim/estados', [ApiMedilinkController::class, 'estados'])->middleware(['intranet']);
+    Route::get('/apim/alianzas', [ApiMedilinkController::class, 'alianzas'])->middleware(['intranet']);
 
     Route::post('/apim/addAppointment', [ApiMedilinkController::class, 'addAppointment']);
 

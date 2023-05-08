@@ -209,11 +209,11 @@
                          {{$Appointment->Nombre}} {{$Appointment->Apellido}}
                       </td>
                       <td class="text-center">
-                        @if(!empty($treatment->Convenio))
-                        <li class="list-none">{{$treatment->Convenio}}</li>
-                        @else
-                        <li class="list-none">Sin Convenio</li>
-                        @endif
+                            @if(is_null(App\Models\User::where('rut',App\Models\AppointmentMl::where('Tratamiento_Nr',$Appointment->Tratamiento_Nr)->first()->Rut_Paciente)->first()))
+                              {{App\Models\User::where('rut',App\Models\AppointmentMl::where('Tratamiento_Nr',$Appointment->Tratamiento_Nr)->first()->Rut_Paciente)->first()->alliance()->name}}
+                            @else
+                              Sin Convenio
+                            @endif
                       </td>
                       <td class="text-center">
                         {{Helper::moneda_chilena($Appointment->Precio_Prestacion)}}

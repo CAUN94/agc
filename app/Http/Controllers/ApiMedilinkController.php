@@ -48,6 +48,35 @@ class ApiMedilinkController extends Controller
         echo $response->getBody();
     }
 
+    public function alianzas(){
+      $client = new \GuzzleHttp\Client();
+      $url = 'https://api.medilink.healthatom.com/api/v1/convenios/';
+
+      $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $this->token
+            ]
+        ]);
+      
+      $allAlliance = [];
+      $alliance = json_decode($response->getBody());
+      $allAlliance[] = $alliance->data;
+
+      while(isset($alliance->links->next)){
+          $response = $client->request('GET', $alliance->links->next, [
+              'headers'  => [
+                  'Authorization' => 'Token ' . $this->token
+              ]
+          ]);
+          $alliance = json_decode($response->getBody());
+          $allAlliance[] = $alliance->data;
+
+      }
+
+      return array_merge(...$allAlliance);
+
+    }
+
     public function allAtentions()
     {
         $client = new \GuzzleHttp\Client();
