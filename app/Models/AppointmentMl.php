@@ -54,6 +54,11 @@ class AppointmentMl extends Model
         return $this->hasMany(PaymentMl::class,'Atencion','Tratamiento_Nr');
     }
 
+    public function user(){
+        // join with rut using rut
+        return $this->hasOne(User::class,'rut','Rut_Paciente');
+    }
+
     public function hasTreatments(){
         $treatments = TreatmentMl::where('Atencion',$this->Tratamiento_Nr)->count();
         if($treatments > 0){
