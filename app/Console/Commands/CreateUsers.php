@@ -142,6 +142,8 @@ class CreateUsers extends Command
             if($user->hasAlliance()){
                 continue;
             }
+            $this->info('2');
+
             $id_paciente    = $user->id;
             $url = 'https://api.medilink.healthatom.com/api/v1/pacientes/'.$id_paciente.'/convenios';
     

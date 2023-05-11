@@ -27,55 +27,55 @@ use App\Http\Middleware\UpdatePassword;
 // Route::get('/professionalshours', 'App\Http\Controllers\ScrapingController@professionalshours');
 
 // Route::get('/pago2', [MercadoPagoController::class, 'personalizepay']);
-Route::get('/confirmacion/{id}', [MercadoPagoController::class, 'pay']);
 // Route::get('/scraping-alta', [ScrapingController::class, 'alta']);
 
+Route::get('/confirmacion/{id}', [MercadoPagoController::class, 'pay']);
+
 Route::middleware([UpdatePassword::class])->group(function () {
-    Route::get('/mercadopagosearch', [MercadoPagoController::class, 'index']);
+    
+    // Route::get('/mercadopagosearch', [MercadoPagoController::class, 'index']);
+    // Route::get('/packverano', [LandingController::class, 'packverano']);
+    // Route::get('/team', [LandingController::class, 'team']);
+    // Route::get('/tables', [LandingController::class, 'tables']);
+    // Route::get('/example', [LandingController::class, 'example']);
+    // Route::post('/mailverano', [LandingController::class, 'mailverano']);
+    // Route::get('/instagram', [InstagramController::class, 'index'])->middleware(['auth']);
+
     Route::get('/', [LandingController::class, 'welcome']);
-    Route::get('/landing', [LandingController::class, 'welcome2']);
     Route::get('/kinesiología', [LandingController::class, 'about']);
-    Route::get('/packverano', [LandingController::class, 'packverano']);
-    Route::get('/team', [LandingController::class, 'team']);
     Route::get('/terms', [LandingController::class, 'terms']);
-    Route::get('/tables', [LandingController::class, 'tables']);
-    Route::get('/example', [LandingController::class, 'example']);
     Route::get('/renew', [LandingController::class, 'renew'])->middleware(['auth']);
-
-
-
     Route::resource('users', 'App\Http\Controllers\UsersController')->middleware(['auth']);
-    Route::get('/calendar', [LandingController::class, 'calendar'])->middleware(['auth']);
-    Route::get('/healthy', [LandingController::class, 'healthy'])->middleware(['auth']);
-    Route::post('/mailverano', [LandingController::class, 'mailverano']);
+    // Revisar
+    // Route::get('/calendar', [LandingController::class, 'calendar'])->middleware(['auth']);
+    // Revisar
+    // Route::get('/healthy', [LandingController::class, 'healthy'])->middleware(['auth']);
+    
     Route::get('/nutrition', [LandingController::class, 'nutrition'])->middleware(['auth']);
-    Route::get('/calendar/store/{id}', [CalendarController::class, 'store'])->middleware(['auth']);
+    // Route::get('/calendar/store/{id}', [CalendarController::class, 'store'])->middleware(['auth']);
 
 
     Route::resource('trainings', 'App\Http\Controllers\TrainingController');
     Route::resource('students', 'App\Http\Controllers\StudentController');
-    Route::get('/table', [TableController::class, 'index']);
+    // Route::get('/table', [TableController::class, 'index']);
 
-    Route::get('/mailcontact', 'App\Http\Controllers\MailContactController@show')->middleware(['auth']);
-    Route::post('/mailcontact', 'App\Http\Controllers\MailContactController@store')->middleware(['auth']);
+    // Route::get('/mailcontact', 'App\Http\Controllers\MailContactController@show')->middleware(['auth']);
+    // Route::post('/mailcontact', 'App\Http\Controllers\MailContactController@store')->middleware(['auth']);
 
     // Polls
-    Route::get('/encuesta_satisfaccion', 'App\Http\Controllers\PollController@encuesta_satisfaccion_index');
-    Route::post('/encuesta_satisfaccion', 'App\Http\Controllers\PollController@encuesta_satisfaccion_store');
-    Route::get('/ganate_una_sesion', 'App\Http\Controllers\PollController@ganate_una_sesion_index');
-    Route::post('/ganate_una_sesion', 'App\Http\Controllers\PollController@ganate_una_sesion_store');
+    // Route::get('/encuesta_satisfaccion', 'App\Http\Controllers\PollController@encuesta_satisfaccion_index');
+    // Route::post('/encuesta_satisfaccion', 'App\Http\Controllers\PollController@encuesta_satisfaccion_store');
+    // Route::get('/ganate_una_sesion', 'App\Http\Controllers\PollController@ganate_una_sesion_index');
+    // Route::post('/ganate_una_sesion', 'App\Http\Controllers\PollController@ganate_una_sesion_store');
+    // Route::get('/admin/encuesta_satisfaccion', 'App\Http\Controllers\AdminPollController@encuesta_satisfaccion_index');
 
-    Route::get('/admin/encuesta_satisfaccion', 'App\Http\Controllers\AdminPollController@encuesta_satisfaccion_index');
-
-    Route::get('/instagram', [InstagramController::class, 'index'])->middleware(['auth']);
-
-    Route::get('/adminpage', [AdminPageController::class, 'index'])->middleware(['intranet']);
 
     // Admins
+    Route::get('/adminpage', [AdminPageController::class, 'index'])->middleware(['intranet']);
     Route::resource('adminusers', 'App\Http\Controllers\AdminUserController')->middleware(['intranet']);
     Route::get('adminstudents', 'App\Http\Controllers\AdminStudentController@index')->middleware(['intranet']);
-    Route::get('wireframe2', 'App\Http\Controllers\AdminStudentController@wireframe2')->middleware(['intranet']);
-    Route::get('wireframe', 'App\Http\Controllers\AdminStudentController@wireframe')->middleware(['intranet']);
+    // Route::get('wireframe2', 'App\Http\Controllers\AdminStudentController@wireframe2')->middleware(['intranet']);
+    // Route::get('wireframe', 'App\Http\Controllers\AdminStudentController@wireframe')->middleware(['intranet']);
     Route::get('/confirmations', [LandingController::class, 'confirmations'])->middleware(['intranet']);
     // Route::get('/confirmation/{id}', [LandingController::class, 'confirmation'])->middleware(['intranet']);
     Route::get('/confirmation/{id}', [LandingController::class, 'sendconfirmation'])->middleware(['intranet']);
@@ -91,7 +91,8 @@ Route::middleware([UpdatePassword::class])->group(function () {
     Route::get('/adminalliance', [AdminAllianceController::class, 'index'])->middleware(['intranet']);
     Route::post('/adminalliance/create', [AdminAllianceController::class, 'store'])->middleware(['intranet']);
     Route::resource('adminbookappointment', 'App\Http\Controllers\AdminBookAppointmentsController')->middleware(['intranet']);
-    Route::get('/userml', [UserMlController::class, 'index'])->middleware(['intranet']);
+
+    // Route::get('/userml', [UserMlController::class, 'index'])->middleware(['intranet']);
 
     //Remuneración
     Route::resource('adminRemuneracion', 'App\Http\Controllers\adminRemuneracionController')->middleware(['admin']);
