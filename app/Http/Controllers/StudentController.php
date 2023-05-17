@@ -47,7 +47,8 @@ class StudentController extends Controller {
 			'user_id' => ['required', Rule::unique('students', 'user_id')],
 			'start_day' => ['required', 'date', 'after:yesterday', 'before:' . \Carbon\Carbon::Now()->addMonth()->endOfMonth()],
 			'terms' => 'required',
-			'extra' => 'sometimes'
+			'extra' => 'sometimes',
+			'comment' => 'sometimes',
 		]);
 		$student = Student::create($attributes);
 		$student->end_day = $student->lastPlan()->endMonth();
