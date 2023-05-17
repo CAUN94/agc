@@ -20,7 +20,7 @@
               </select>
             </div>
             <div class="items-center">
-                <a href="{{asset('pdf/tyc.pdf')}}" download>Descargar PDF <img src="{{$user->profilePic()}}" class="avatar h-10 w-10 sm:h-12 sm:w-12 ml-4"></a>
+                <a wire:click="descargarPDF('{{$nutrition->fecha}}','{{$user->rut}}')" download>Descargar PDF <img src="{{$user->profilePic()}}" class="avatar h-10 w-10 sm:h-12 sm:w-12 ml-4"></a>
             </div>
           </div>
 
