@@ -253,6 +253,7 @@ class Student extends Model {
 			$new_student->training_id = $request->training_id;
 			$new_student->extra = $request->extra;
 			$new_student->terms = $request->terms;
+			$new_student->comment = $request->comment;
 			$new_student->start_day = $this->lastPlan()->endMonth();
 			$new_student->save();
 			$new_student->end_day = $new_student->lastPlan()->endMonth();

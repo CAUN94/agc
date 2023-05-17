@@ -101,6 +101,10 @@ class StudentTable extends LivewireDatatable {
 				->filterable()
 				->editable(),
 			Column::name('students.description')
+				->label('Descripción')
+				->filterable()
+				->editable(),
+			Column::name('students.comment')
 				->label('Comentario')
 				->filterable()
 				->editable(),
