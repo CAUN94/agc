@@ -246,34 +246,44 @@
                   action="/students"
                   :id="$selectedTraining->id"
                   >
-
+              
                   <x-slot name="options">
                     <x-slot name="title">
                       <span>¿Inscribirme al Plan {{$selectedTraining->plan()}}?</span>
                     </x-slot>
                     @php $message = "Elige la fecha de inicio de tu plan de ".$selectedTraining->days." días" @endphp
-                    <x-label for="start_day" :value="$message" />
-                    <x-input id="start_day" class="block mt-1 w-full"
-                      type="date"
-                      name="start_day"
-                      :value="old('start_day')"
-                      min="{{ \Carbon\Carbon::Now()->format('Y-m-d'); }}"
-                      max="{{ \Carbon\Carbon::Now()->addDays(30)->format('Y-m-d'); }}"
-                      required />
+                      <x-label for="start_day" :value="$message" />
+                      <x-input id="start_day" class="block mt-1 w-full"
+                        type="date"
+                        name="start_day"
+                        :value="old('start_day')"
+                        min="{{ \Carbon\Carbon::Now()->format('Y-m-d'); }}"
+                        max="{{ \Carbon\Carbon::Now()->addDays(30)->format('Y-m-d'); }}"
+                        required />
                     @if(!$selectedTraining->isMonthly() and $selectedTraining->price > 0)
-                    <x-label for="months" :value="__('¿Por cuántos meses quiere inscribir su plan?')" />
-                    <div class="relative">
-                        <select name="months" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="months">
-                            @for ($i = 1; $i <= 12; $i++)
-                                @if($i == 1)
-                                    <option value={{$i}}>{{$i}} mes</option>
-                                    @continue
-                                @endif
-                                <option value={{$i}}>{{$i}} meses</option>
-                            @endfor
-                        </select>
-                    </div>
+                      <x-label for="months" :value="__('¿Por cuántos meses quiere inscribir su plan?')" />
+                      <div class="relative">
+                          <select name="months" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="months">
+                              @for ($i = 1; $i <= 12; $i++)
+                                  @if($i == 1)
+                                      <option value={{$i}}>{{$i}} mes</option>
+                                      @continue
+                                  @endif
+                                  <option value={{$i}}>{{$i}} meses</option>
+                              @endfor
+                          </select>
+                      </div>
+                      
                     @endif
+                    <x-label for="comment" :value="__('Información relevante para tu entrenador (patología, dolencia, saliendo de una lesión, etc)')" />
+                      <div class="relative">
+                          <div class="max-w-lg shadow-md">
+                              <div class="mb-2">
+                                <textarea class="block appearance-none w-full border border-gray-200 text-gray-700 rounded leading-tight focus:outline-none focus:bg-white"
+                                  name="comment" placeholder="Deja tus comentarios"></textarea>
+                              </div>
+                          </div>
+                      </div>
                     @if($selectedTraining->extra > 0)
                       <div class="flex m-1">
                         <div>
@@ -285,7 +295,7 @@
                     @endif
 
                   </x-slot>
-
+                  
                   Recibirás un correo con la información para activar tu plan al realizar el pago.
                   <x-slot name="important">
 

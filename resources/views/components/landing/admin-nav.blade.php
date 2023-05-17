@@ -60,6 +60,22 @@
       <a class="py-1" href="/confirmations">Mañana</a>
       {{-- <a class="my-1 py-1" href="/trainerbookappointment">Clases Reservadas</a> --}}
     </x-nav-dropdown>
+    <x-nav-dropdown>
+      <x-slot name="name"><i class="fas fa-user text-xs mr-1"></i> Usuarios</x-slot>
+      <x-slot name="trigger">Usuarios</x-slot>
+      <a class="py-1" href="/adminusers">Todos</a>
+      <a class="my-1 py-1" href="/adminstudents">Alumnos</a>
+      <a class="my-1 py-1" href="/adminprofessionals">Profesionales</a>
+      <a class="my-1 py-1" href="/admintrainers">Entrenadores</a>
+    </x-nav-dropdown>
+
+    <x-nav-dropdown>
+      <x-slot name="name"><i class="fas fa-calendar-alt mr-1"></i> Coordinación Ent</x-slot>
+      <x-slot name="trigger">Clases</x-slot>
+      <a class="py-1" href="/adminclass">Programas</a>
+      <a class="my-1 py-1" href="/admintrainappointment">Calendario</a>
+      <a class="my-1 py-1" href="/adminbookappointment">Clases Reservadas</a>
+    </x-nav-dropdown>
   @endif
 
   @if(Auth::user()->isNutritionist())

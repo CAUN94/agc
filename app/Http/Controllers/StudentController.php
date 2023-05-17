@@ -47,7 +47,8 @@ class StudentController extends Controller {
 			'user_id' => ['required', Rule::unique('students', 'user_id')],
 			'start_day' => ['required', 'date', 'after:yesterday', 'before:' . \Carbon\Carbon::Now()->addMonth()->endOfMonth()],
 			'terms' => 'required',
-			'extra' => 'sometimes'
+			'extra' => 'sometimes',
+			'comment' => 'sometimes',
 		]);
 		$student = Student::create($attributes);
 		$student->end_day = $student->lastPlan()->endMonth();
@@ -95,11 +96,12 @@ class StudentController extends Controller {
 			return redirect('/trainings');
 		}
 		$student = $student->lastPlan();
-		$request->merge(['user_id' => Auth::id(),'terms' => 1]);
+		$request->merge(['user_id' => Auth::id(),'terms' => 1,'comment' => $student->comment]);
 		$attributes = $request->validate([
 			'training_id' => ['required', 'exists:trainings,id'],
 			'user_id' => ['required', 'exists:users,id'],
-			'extra' => 'sometimes'
+			'extra' => 'sometimes',
+
 		]);
 
 		$student->newPlan($request, $request->months);

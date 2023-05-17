@@ -392,4 +392,27 @@ class User extends Authenticatable {
 		}
 		return True;
 	}
+
+	public function allRoles(){
+		// check if user has any of this roles isProfessional() isAdmin() isReception() isTrainer() isNutritionist()
+
+		$roles = [];
+		if ($this->isProfessional()){
+			$roles[] = 'professional';
+		}
+		if ($this->isAdmin()){
+			$roles[] = 'admin';
+		}
+		if ($this->isReception()){
+			$roles[] = 'reception';
+		}
+		if ($this->isTrainer()){
+			$roles[] = 'trainer';
+		}
+		if ($this->isNutritionist()){
+			$roles[] = 'nutritionist';
+		}
+		return $roles;
+
+	}
 }

@@ -26,8 +26,7 @@ class StudentTable extends LivewireDatatable {
 			->leftjoin('users', 'students.user_id', 'users.id')
 			->leftjoin('trainings', 'trainings.id', 'students.training_id')
 			->leftjoin('users_alliances_pivot','students.user_id','users_alliances_pivot.user_id')
-			->leftjoin('alliances','users_alliances_pivot.alliance_id','alliances.id')
-			->orderby('start_day', 'desc');
+			->leftjoin('alliances','users_alliances_pivot.alliance_id','alliances.id');
 	}
 
 	public function columns() {
@@ -39,7 +38,6 @@ class StudentTable extends LivewireDatatable {
 				->filterable(),
 			Column::name('users.name')
 				->label('Nombre')
-				->defaultSort('desc')
 				->filterable()
 				->editable(),
 			Column::name('users.lastnames')
@@ -101,6 +99,10 @@ class StudentTable extends LivewireDatatable {
 				->filterable()
 				->editable(),
 			Column::name('students.description')
+				->label('Descripción')
+				->filterable()
+				->editable(),
+			Column::name('students.comment')
 				->label('Comentario')
 				->filterable()
 				->editable(),

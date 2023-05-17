@@ -51,7 +51,7 @@
 
 </head>
 <body class="flex h-auto bg-gray-100 font-sans">
-  <div class="md:flex flex-col md:flex-row md:min-h-screen w-full">
+  <div class="md:flex flex-col md:flex-row md:min w-full">
     <div class="flex flex-col w-full md:w-2/12 text-gray-700 bg-primary-500 flex-shrink-0">
       <div class="flex-shrink-0 px-8 py-4 flex flex-row items-center justify-between">
         <a href="/adminpage" class=" dark-mode:text-white focus:outline-none focus:shadow-outline">
@@ -63,13 +63,13 @@
       </x-landing.admin-nav>
 
     </div>
-    <div class="flex flex-col sm:w-10/12 flex-shrink-1">
+    <div class="flex flex-col sm:w-10/12 flex-shrink-1 h-screen">
       <!-- This example requires Tailwind CSS v2.0+ -->
       <x-landing.user-nav>
 
       </x-landing.user-nav>
       {{$slot}}
-      <div class="flex flex-row h-screen gap-3 m-2 mt-4">
+      <div class="flex flex-row gap-3 m-2 mt-4">
         @if(isset($title1) and isset($slot1))
         <div class="flex-grow admin-box">
           <div class="bg-light-grey rounded-t-lg p-3 h-12">{{ $title1  }}</div>
