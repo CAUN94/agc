@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Nutrition;
+use App\Models\NutritionDocuments;
 use App\Models\User;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -81,7 +82,6 @@ class AdminNutrition extends Component
     public $abdominal;
     public $muslo_medial;
     public $pierna_mm;
-    public $masa_osea_ref;
 
     public $showAntropometria = false;
     public $nutritionID;
@@ -150,8 +150,9 @@ class AdminNutrition extends Component
 
         $this->indice_masa_corporal = round($this->peso/pow(($this->talla_parado/100), 2), 2);
 
-        $Area_superficial = (pow(($const_AS*$this->peso), 0.425)*pow(($this->talla_parado), 0.725))/10000;
+        $Area_superficial = ($const_AS*(pow($this->peso, 0.425))*(pow($this->talla_parado, 0.725)))/10000;
         $Masa_Piel = ($Area_superficial*$grosor_piel*1.05);
+
 
         //Masa Adiposa
         $this->sumatoria_6_plieges = $this->triceps + $this->subescapular + $this->supraespinal + $this->abdominal + $this->muslo_medial +  $this->pierna_mm;
@@ -170,11 +171,13 @@ class AdminNutrition extends Component
         $Score_Z_muscular = (($Suma_perímetros_corregidos*(170.18/$this->talla_parado)-207.21)/13.74);
         $this->M_muscular_kg = (($Score_Z_muscular*5.4)+24.5)/pow((170.18/$this->talla_parado), 3);
 
+
         //Masa_Residual
         $per_Cintura_corregido = $this->cintura - ($this->abdominal*0.3141);
         $Suma_de_torax = $this->t_transverso + $this->t_antero_posterior + $per_Cintura_corregido;
         $Score_Z_residual = (($Suma_de_torax*(89.92/$this->talla_sentado)-109.35)/7.08);
         $Masa_Residual = (($Score_Z_residual*1.24)+6.1)/pow((89.92/$this->talla_sentado), 3);
+
 
         //Masa Osea
         $Score_Z_cabeza = ($this->cabeza - 56)/1.44;
@@ -188,17 +191,21 @@ class AdminNutrition extends Component
 
         //Peso Estructurado y Porcentual
         $Peso_estructurado = $Masa_Piel + $this->M_adiposa_kg + $this->M_muscular_kg + $Masa_Residual + $this->M_osea_kg;
-        $this->diferencia_PE_PB = $Peso_estructurado - $this->peso;
+        $this->diferencia_PE_PB = ($Peso_estructurado) - ($this->peso);
         $this->diferencia_porc = $this->diferencia_PE_PB/$this->peso;
 
-        $this->M_adiposa_porc = ($this->M_adiposa_kg/$Peso_estructurado)*100;
-        $this->M_muscular_porc = ($this->M_muscular_kg/$Peso_estructurado)*100;
-        $this->M_osea_porc = ($this->M_osea_kg/$Peso_estructurado)*100;
+        $this->M_adiposa_porc = ($this->M_adiposa_kg/$Peso_estructurado);
+        $this->M_muscular_porc = ($this->M_muscular_kg/$Peso_estructurado);
+        $this->M_osea_porc = ($this->M_osea_kg/$Peso_estructurado);
 
         $Masa_osea_reajustada = ($this->M_osea_kg - ($this->M_osea_porc*$this->diferencia_PE_PB));
         $Masa_muscular_reajustada = ($this->M_muscular_kg - ($this->M_muscular_porc*$this->diferencia_PE_PB));
         $Masa_adiposa_reajustada = ($this->M_adiposa_kg - ($this->M_adiposa_porc*$this->diferencia_PE_PB));
 
+        $this->M_adiposa_porc = ($this->M_adiposa_kg/$Peso_estructurado);
+        $this->M_muscular_porc = ($this->M_muscular_kg/$Peso_estructurado);
+        $this->M_osea_porc = ($this->M_osea_kg/$Peso_estructurado);
+        //dd($Masa_Piel, $this->M_adiposa_kg, $this->M_muscular_kg,$Masa_Residual,$this->M_osea_kg,$Peso_estructurado,$this->diferencia_PE_PB,$this->diferencia_porc);
         //Somatotipos
         $sum_SF = ($this->triceps + $this->subescapular + $this->supraespinal) * (170.18/$this->talla_parado);
         $this->somatotipo_Endo = (-0.7182 + (0.1451*$sum_SF) - (0.00068*pow($sum_SF, 2)) + (0.0000014*pow($sum_SF, 3)) );
@@ -248,9 +255,12 @@ class AdminNutrition extends Component
         $nutrition->subescapular = $this->subescapular;
         $nutrition->biceps = $this->biceps;
         $nutrition->cresta_iliaca = $this->cresta_iliaca;
-        $nutrition->masa_adiposa = $this->M_adiposa_kg;
-        $nutrition->masa_muscular = $this->M_muscular_kg;
-        $nutrition->masa_osea = $this->M_osea_kg;
+        $nutrition->masa_adiposa = $Masa_adiposa_reajustada;
+        $nutrition->masa_adiposa_porc = $this->M_adiposa_porc;
+        $nutrition->masa_muscular = $Masa_muscular_reajustada;
+        $nutrition->masa_muscular_porc = $this->M_muscular_porc;
+        $nutrition->masa_osea = $Masa_osea_reajustada;
+        $nutrition->masa_osea_porc = $this->M_osea_porc;
         $nutrition->masa_piel = $Masa_Piel;
         $nutrition->masa_residual = $Masa_Residual;
         $nutrition->indice_adiposo = $Masa_adiposa_reajustada/$Masa_muscular_reajustada;
@@ -314,8 +324,18 @@ class AdminNutrition extends Component
 
     public function pdf(){
         $nutrition = Nutrition::latest()->first();
-        $pdf = Pdf::loadView('livewire.pdf', compact('nutrition'));
+        $pdf = pdf::loadView('livewire.pdf', compact('nutrition'));
+        $pdf->render();
+
+        $nutrucion_pdf = new NutritionDocuments;
+        $nutrucion_pdf->fecha = $nutrition->fecha;
+        $nutrucion_pdf->rut_paciente = $nutrition->rut;
+        $nutrucion_pdf->pdf = $pdf->output();;
+        $nutrucion_pdf->save();
+
         return $pdf->stream('livewire.pdf');
+
+
     }
 
     public function pdf_view(){

@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Nutrition;
 use Livewire\Component;
+use App\Models\NutritionDocuments;
 
 class UserNutrition extends Component
 {
@@ -23,6 +24,18 @@ class UserNutrition extends Component
     }
 
     public function createNutrinion(){}
+
+    public function descargarPDF($fecha,$rut)
+    {
+        $pdf = NutritionDocuments::where('fecha',$fecha)->where('rut_paciente',$rut)->first();
+
+        if (!$pdf) {
+          return redirect()->back()->with('error', 'El PDF no se encuentra.');
+        }
+        return response()->streamDownload(function () use ($pdf) {
+                      echo $pdf->pdf;
+                  }, "Evaluacion_nutricional.pdf", ['Content-Type' => 'application/pdf']);;
+    }
 
     public function render()
     {
