@@ -83,6 +83,19 @@ class Training extends Model {
 			'train_appointment_id');
 	}
 
+	public function trainAppointmentsFromThisAndNexWeek() {
+		$today = date('Y-m-d');
+		$nextWeek = date('Y-m-d', strtotime('+1 week'));
+		return $this->belongsToMany(TrainAppointment::class,
+			'train_appointments_pivot',
+			'training_id',
+			'train_appointment_id')
+			->whereBetween('date', [$today, $nextWeek])
+			->orderby('date', 'ASC')
+			->orderby('hour', 'ASC')
+			->get();
+	}
+
 	public function classSelect($value) {
 		return Training::where('name', $this->name)->orderby($value, 'ASC')->distinct($value)->get($value);
 	}

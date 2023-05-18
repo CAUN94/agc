@@ -66,6 +66,29 @@ class TrainAppointments extends Component
         }
     }
 
+    public function phonebook($id){
+        if(Auth::user()->checkTrainBook($id)->count()>0){
+            Auth::user()->checkTrainBook($id)->first()->delete();
+            session()->flash('primary','Reserva Cancelada');
+        } else {
+            if (TrainBook::bookClass(Auth::id(),$id)){
+                session()->flash('primary','Clase ya reservada');
+            } else {
+                if(Auth::user()->canBook($id)){
+                    $trainBook = TrainBook::create([
+                        'user_id' => Auth::id(),
+                        'train_appointment_id' => $id
+                    ]);
+                    session()->flash('primary','Reservada la clase de '.$trainBook->TrainAppointment->name);
+                }
+                else {
+                    session()->flash('primary','Maximo de clases alcanzado');
+                }
+    
+            }
+        }
+    }
+
     public function unbook(TrainBook $trainBook){
         session()->flash('primary','Cancelada la reserva');
         $trainBook->delete();

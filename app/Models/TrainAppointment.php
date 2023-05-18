@@ -78,5 +78,10 @@ class TrainAppointment extends Model
         return Carbon::parse($this->attributes['hour'])->format('H:i');
     }
 
+    public function trainDisplay(){
+        // write the day and hour not display the year
+        return Carbon::parse($this->date)->format('d M') . ' ' . Carbon::parse($this->hour)->format('H:i'). " " . $this->name;        
+    }
+
 
 }

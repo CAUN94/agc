@@ -280,8 +280,12 @@ class User extends Authenticatable {
 		return false;
 	}
 
-	public function TrainBooks() {
+	public function trainBooks() {
 		return $this->hasMany(TrainBook::class)->where('train_appointment_id','!=','null');
+	}
+
+	public function checkTrainBook($id) {
+		return $this->hasMany(TrainBook::class)->where('train_appointment_id',$id);
 	}
 
 	public function canBook($train_id) {
@@ -415,4 +419,5 @@ class User extends Authenticatable {
 		return $roles;
 
 	}
+
 }
