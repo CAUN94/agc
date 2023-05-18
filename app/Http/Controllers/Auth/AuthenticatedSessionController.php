@@ -37,6 +37,10 @@ class AuthenticatedSessionController extends Controller
            return redirect('/change-password');
         }
         Session::flash('primary','Hola '.Auth::user()->name);
+        if($request->session()->has('pp_url')){
+            $request->session()->forget('pp_url');
+            return redirect('/students');
+        }
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 

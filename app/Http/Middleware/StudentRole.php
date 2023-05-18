@@ -18,6 +18,8 @@ class StudentRole
      */
     public function handle(Request $request, Closure $next)
     {
+        $request->session()->put('pp_url', $request->url());
+        
         if (Auth::check() &&  Auth::user()->isStudent()) {
              return $next($request);
         }
