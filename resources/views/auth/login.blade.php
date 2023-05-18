@@ -11,7 +11,6 @@
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
         @if(session()->has('primary'))
         <div>
             Hola, como ya te has atendido con nosotros para entrar a nuestra plataforma solo debes poner tu rut y usarlo como clave, la primera vez que ingreses por tu seguridad tendrás que cambiarla.

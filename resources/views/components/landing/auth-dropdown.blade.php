@@ -18,7 +18,7 @@
             </a>
         </li>
         @if (Auth::user()->isStudent())
-        <li>
+        <li class="hidden sm:block">
             <a href="/students" class="drop-link block text-sm text-gray-700">
                 <span class="drop-span">Reservar Entrenamiento</span>
             </a>

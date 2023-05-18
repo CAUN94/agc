@@ -31,7 +31,7 @@ use App\Http\Middleware\UpdatePassword;
 
 Route::get('/confirmacion/{id}', [MercadoPagoController::class, 'pay']);
 
-Route::middleware([UpdatePassword::class])->group(function () {
+Route::middleware([UpdatePassword::class,])->group(function () {
     
     // Route::get('/mercadopagosearch', [MercadoPagoController::class, 'index']);
     // Route::get('/packverano', [LandingController::class, 'packverano']);

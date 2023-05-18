@@ -55,6 +55,9 @@
                   <a class="nav-menu-link" href="/#equipo">Equipo</a>
                   {{-- <a class="nav-menu-link" href="/#embajadores">Embajadores</a> --}}
                   <a class="nav-menu-link" href="/#testimonios">Testimonios</a>
+                  <a href="/students" class="nav-menu-link block sm:hidden">
+                    Reservar Clase
+                  </a>
                   <a class="nav-menu-link {{ Request::is('trainings') ? 'selected' : '' }}" href="/trainings">Entrenamiento</a>
                   <a class="nav-menu-link {{ Request::is('school') ? 'selected' : '' }}" href="https://you-just-better-programs.teachable.com/courses" target="_blank">Cursos</a>
                   <x-landing.auth-dropdown></x-landing.auth-dropdown>
