@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCommentColumnToStudents extends Migration
+class CreateNutritionDocumentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddCommentColumnToStudents extends Migration
      */
     public function up()
     {
-        Schema::table('students', function (Blueprint $table) {
-            $table->string('comment')->after('description')->default('Sin Comentarios')->nullable();
+        Schema::create('nutrition_documents', function (Blueprint $table) {
+            $table->id();
+            $table->datetime('fecha');
+            $table->string('rut_paciente');
+            $table->binary('pdf');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddCommentColumnToStudents extends Migration
      */
     public function down()
     {
-        Schema::table('students', function (Blueprint $table) {
-            $table->dropColumn('comment');
-        });
+        Schema::dropIfExists('nutrition_documents');
     }
 }

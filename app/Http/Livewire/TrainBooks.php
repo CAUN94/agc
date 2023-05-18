@@ -34,6 +34,10 @@ class TrainBooks extends LivewireDatatable
             Column::name('users.lastnames')
                 ->label('Apellido')
                 ->filterable(),
+            $this->actionView(),
+            BooleanColumn::name('train_books.status')
+                ->label('Estado')
+                ->filterable(),
             Column::name('train_appointments.name')
                 ->label('Clase')
                 ->filterable(),
@@ -52,6 +56,22 @@ class TrainBooks extends LivewireDatatable
             Column::name('users.email')
                 ->label('Mail')
                 ->filterable(),
+            
         ];
     }
+
+    public function status($value){
+		$trainBook = TrainBook::find($value);
+		$trainBook->status = !$trainBook->status;
+		$trainBook->save();
+		$this->open = false;
+		$open = false;
+	}
+
+    public function actionView($name = 'id') {
+		return Column::callback($name, function ($value) {
+            $fullname = TrainBook::find($value)->user->fullName();
+			return view('datatables::confirmstudent', ['value' => $value, 'fullname' => $fullname]);
+		});
+	}
 }

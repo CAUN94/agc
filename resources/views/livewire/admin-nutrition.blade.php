@@ -79,9 +79,6 @@
                   <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="abdominal" readonly="edit" value="{{ old('abdominal') }}">Abdominal</x-admin.input>
                   <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="muslo_medial" readonly="edit" value="{{ old('muslo_medial') }}">Muslo Medial</x-admin.input>
                   <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="pierna_mm" readonly="edit" value="{{ old('´pierna_mm') }}">Pantorrilla</x-admin.input>
-
-                  <p class="col-span-6 sm:col-span-6 font-bold">Masa Osea Referencial</p>
-                  <x-admin.input class="col-span-6 sm:col-span-1" type="number" name="masa_osea_ref" readonly="edit" value="{{ old('masa_osea_ref') }}">Masa Osea de referencia</x-admin.input>
               </div>
             </div>
             <div class=" px-4 py-3 bg-gray-50 text-right sm:px-6">
@@ -125,6 +122,7 @@
               @endif
             </select>
 
+            @if(!is_null($viewsNutrition))
             <div class="md:col-span-2">
               <table class="table-fixed w-full overflow-hidden rounded-lg shadow-lg p-6">
                 <thead class="cabecera">
@@ -134,7 +132,6 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @if(!is_null($viewsNutrition))
                   <tr>
                     <td class="text-center">Peso (kg)</td>
                     <td class="text-center">{{$viewsNutrition->peso}}</td>
@@ -264,7 +261,7 @@
                     <td class="text-center">Pierna</td>
                     <td class="text-center">{{$viewsNutrition->pierna_mm}}</td>
                   </tr>
-                  @endif
+
                 </tbody>
               </table>
             </div>
@@ -280,20 +277,20 @@
                 <tbody>
                   <tr>
                     <td class="text-center">Adiposa</td>
-                    <td class="text-center">{{round($M_adiposa_kg, 2)}} kg</td>
-                    <td class="text-center">{{round($M_adiposa_porc, 1)}}%  </td>
+                    <td class="text-center">{{$viewsNutrition->masa_adiposa}} kg</td>
+                    <td class="text-center">{{round(($viewsNutrition->masa_adiposa_porc)*100, 2)}}%  </td>
                   </tr>
 
                   <tr>
                     <td class="text-center">Muscular</td>
-                    <td class="text-center">{{round($M_muscular_kg, 2)}} kg</td>
-                    <td class="text-center">{{round($M_muscular_porc, 1)}}%</td>
+                    <td class="text-center">{{$viewsNutrition->masa_muscular}} kg</td>
+                    <td class="text-center">{{round(($viewsNutrition->masa_muscular_porc)*100, 2)}}%</td>
                   </tr>
 
                   <tr>
                     <td class="text-center">Osea</td>
-                    <td class="text-center">{{round($M_osea_kg, 2)}} kg</td>
-                    <td class="text-center">{{round($M_osea_porc, 1)}}%</td>
+                    <td class="text-center">{{$viewsNutrition->masa_osea}} kg</td>
+                    <td class="text-center">{{round(($viewsNutrition->masa_osea_porc)*100, 2)}}%</td>
                   </tr>
                 </tbody>
               </table>
@@ -307,23 +304,17 @@
                 <tbody>
                   <tr>
                     <td class="text-center">Músculo/Óseo:</td>
-                    <td class="text-center">{{round($indice_M_O, 1)}}</td>
+                    <td class="text-center">{{$viewsNutrition->indice_musculo}}</td>
                   </tr>
 
                   <tr>
                     <td class="text-center">Adiposo/Muscular</td>
-                    <td class="text-center">{{round($indice_A_M, 1)}}</td>
+                    <td class="text-center">{{$viewsNutrition->indice_adiposo}}</td>
                   </tr>
 
                   <tr>
                     <td class="text-center">Masa corporal</td>
-                    <td class="text-center">{{$indice_masa_corporal}} Kg/m2</td>
-                  </tr>
-
-                  <tr>
-                    <td class="text-center">Diferencia PE/PB</td>
-                    <td class="text-center">{{$diferencia_PE_PB}}</td>
-                    <td class="text-center">{{$diferencia_porc}}%</td>
+                    <td class="text-center">{{$viewsNutrition->indice_corporal}} Kg/m2</td>
                   </tr>
                 </tbody>
               </table>
@@ -337,17 +328,17 @@
                 <tbody>
                   <tr>
                     <td class="text-center">Endomorfo</td>
-                    <td class="text-center">{{round($somatotipo_Endo, 1)}}</td>
+                    <td class="text-center">{{round($viewsNutrition->endo, 1)}}</td>
                   </tr>
 
                   <tr>
                     <td class="text-center">Mesomorfo</td>
-                    <td class="text-center">{{round($somatotipo_Meso, 1)}}</td>
+                    <td class="text-center">{{round($viewsNutrition->meso, 1)}}</td>
                   </tr>
 
                   <tr>
                     <td class="text-center">Ectomorfo</td>
-                    <td class="text-center">{{round($somatotipo_Ecto, 1)}}</td>
+                    <td class="text-center">{{round($viewsNutrition->ecto, 1)}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -361,7 +352,7 @@
                 <tbody>
                   <tr>
                     <td class="text-center">Sumatoria 6 plieges</td>
-                    <td class="text-center">{{round($sumatoria_6_plieges, 1)}} mm</td>
+                    <td class="text-center">{{($viewsNutrition->tricep + $viewsNutrition->subescapular + $viewsNutrition->supraespinal + $viewsNutrition->abdominal + $viewsNutrition->muslo_medial +  $viewsNutrition->pierna_mm)}} mm</td>
                   </tr>
                 </tbody>
               </table>
@@ -381,6 +372,7 @@
                 </tbody>
               </table>
             </div>
+            @endif
             </div>
           </div>
         </div>

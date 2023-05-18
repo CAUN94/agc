@@ -13,14 +13,14 @@ td{
 }
 
 th{
-  background-color: palegoldenrod;
+  background-color: lightsalmon;
 }
 
 </style>
 
 <body style="font-family: Arial, Helvetica, sans-serif;">
+  <img class="logo" src="https://yjb.cl/img/logo.png" style="width: 160px; height: 100px; position: absolute; right: 0;">
   <h1 style= "text-align: center">Evaluación Nutricional</h1>
-
   <p>
     <span style= "text-align: center">Nombre: {{$nutrition->plan}}</span>
   </p>
@@ -50,8 +50,8 @@ th{
             <td>{{$nutrition->talla_sentado}}</td>
           </tr>
           <tr>
-            <td style="background-color: palegoldenrod; text-align: center; font-weight: bold;">Diametros</td>
-            <td style="background-color: palegoldenrod;"></td>
+            <td style="background-color: lightsalmon; text-align: center; font-weight: bold;">Diametros</td>
+            <td style="background-color: lightsalmon;"></td>
           </tr>
           <tr>
             <td class="text-center">Biacromial</td>
@@ -79,8 +79,8 @@ th{
           </tr>
 
           <tr>
-            <td style="background-color: palegoldenrod; text-align: center; font-weight: bold;">Perimetros (cm)</td>
-            <td style="background-color: palegoldenrod;"></td>
+            <td style="background-color: lightsalmon; text-align: center; font-weight: bold;">Perimetros (cm)</td>
+            <td style="background-color: lightsalmon;"></td>
           </tr>
           <tr>
             <td class="text-center">Cabeza</td>
@@ -124,8 +124,8 @@ th{
           </tr>
 
           <tr>
-            <td style="background-color: palegoldenrod; text-align: center; font-weight: bold;">Pliegues (mm)</td>
-            <td style="background-color: palegoldenrod;"></td>
+            <td style="background-color: lightsalmon; text-align: center; font-weight: bold;">Pliegues (mm)</td>
+            <td style="background-color: lightsalmon;"></td>
           </tr>
           <tr>
             <td class="text-center">Tríceps</td>
@@ -184,7 +184,7 @@ th{
             <tr>
               <td style="text-align: left;">Masa Adiposa</td>
               <td style="text-align: center;">{{$nutrition->masa_adiposa}} kg</td>
-              <td style="text-align: center;">{{round(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100, 0)}}%  </td>
+              <td style="text-align: center;">{{round(($nutrition->masa_adiposa_porc)*100, 0)}}%  </td>
               <td style="text-align: center;">
                 @if($nutrition->gender == 'f')
                   @if($nutrition->habito == 'D')
@@ -261,7 +261,7 @@ th{
             <tr>
               <td style="text-align: left;">Masa Muscular</td>
               <td style="text-align: center;">{{$nutrition->masa_muscular}}kg</td>
-              <td style="text-align: center;">{{round(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100, 0)}}%</td>
+              <td style="text-align: center;">{{round(($nutrition->masa_muscular_porc)*100, 0)}}%</td>
               <td style="text-align: center;">
                 @if($nutrition->gender == 'f')
                   @if($nutrition->habito == 'D')
@@ -338,7 +338,7 @@ th{
             <tr>
               <td style="text-align: left;">Masa Osea</td>
               <td style="text-align: center;">{{$nutrition->masa_osea}} kg</td>
-              <td style="text-align: center;">{{round(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100, 0)}}%</td>
+              <td style="text-align: center;">{{round(($nutrition->masa_osea_porc)*100, 0)}}%</td>
               <td style="text-align: center;">---</td>
             </tr>
 
