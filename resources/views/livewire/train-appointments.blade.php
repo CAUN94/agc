@@ -1,5 +1,6 @@
 <div>
-    <div class="hidden sm:flex flex-col lg:flex-row gap-2">
+    <!-- <div class="hidden sm:flex flex-col lg:flex-row gap-2"> -->
+    <div class="flex flex-col lg:flex-row gap-2">
         <div class="w-full lg:w-1/4 flex flex-col overflow-x-auto gap-y-2">
             <div class="align-middle inline-block min-w-full">
                 <div x-data="{ classShow: false }" class="box-white p-3 {{Auth::user()->student()->isSettled() ? "" : "border-red-500 border-2" }}">
@@ -262,7 +263,7 @@
         
     </div>
 
-    <div class="block sm:hidden">
+    <!-- <div class="block sm:hidden">
         <div class="w-full box-white p-3 flex flex-col gap-2">
             <h1>{{Auth::user()->student()->training->plan()}}</h1>
             <div class="flex flex-col gap-2">
@@ -278,7 +279,7 @@
                 @endforeach
             </div>
         </div>
-    </div>
+    </div> -->
 
     <x-flash-message></x-flash-message>
 </div>
