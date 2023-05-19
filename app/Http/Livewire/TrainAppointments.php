@@ -74,17 +74,18 @@ class TrainAppointments extends Component
             if (TrainBook::bookClass(Auth::id(),$id)){
                 session()->flash('primary','Clase ya reservada');
             } else {
-                $tdid = TrainAppointment::find($id)->training()->id;
-                if(Auth::user()->canBook($tdid)){
-                    $trainBook = TrainBook::create([
-                        'user_id' => Auth::id(),
-                        'train_appointment_id' => $id
-                    ]);
-                    session()->flash('primary','Reservada la clase de '.$trainBook->TrainAppointment->name);
-                }
-                else {
-                    session()->flash('primary','Maximo de clases alcanzado');
-                }
+                session()->flash('primary','Maximo de clases alcanzado');
+                // $tdid = TrainAppointment::find($id)->training()->id;
+                // if(Auth::user()->canBook($tdid)){
+                //     $trainBook = TrainBook::create([
+                //         'user_id' => Auth::id(),
+                //         'train_appointment_id' => $id
+                //     ]);
+                //     session()->flash('primary','Reservada la clase de '.$trainBook->TrainAppointment->name);
+                // }
+                // else {
+                //     session()->flash('primary','Maximo de clases alcanzado');
+                // }
     
             }
         }
