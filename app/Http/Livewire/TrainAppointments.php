@@ -74,7 +74,8 @@ class TrainAppointments extends Component
             if (TrainBook::bookClass(Auth::id(),$id)){
                 session()->flash('primary','Clase ya reservada');
             } else {
-                if(Auth::user()->canBook($id)){
+                $tdid = TrainAppointment::find($id)->training()->id;
+                if(Auth::user()->canBook($tdid)){
                     $trainBook = TrainBook::create([
                         'user_id' => Auth::id(),
                         'train_appointment_id' => $id
