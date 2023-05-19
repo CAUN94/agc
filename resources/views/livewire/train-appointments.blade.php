@@ -268,14 +268,18 @@
             <h1>{{Auth::user()->student()->training->plan()}}</h1>
             <div class="flex flex-col gap-2">
                 @foreach(Auth::user()->student()->training->trainAppointmentsFromThisAndNexWeek() as $trainAppointment)
-                    <span class="
+                    <div class="
                         {{$trainAppointment->isBooking() ? "bg-green-100" : "bg-gray-100" }}
                         shadow overflow-hidden rounded-lg px-2 py-1 flex justify-between">
-                        <span>{{$trainAppointment->trainDisplay()}}</span>
+                        <div class="flex flex-col justify-between">
+                            <span>{{$trainAppointment->trainDisplay()}}</span>
+                            <span class="text-xs">con: {{$trainAppointment->trainer->fullname()}}</span>
+                        </div>
                         <button wire:click="phonebook({{$trainAppointment->id}})" class="text-primary-500">
-                        {{$trainAppointment->isBooking() ? "Reservada" : "Reservar" }}
+                            {{$trainAppointment->isBooking() ? "Reservada" : "Reservar" }}
                         </button>
-                    </span>
+                    </div>
+                    
                 @endforeach
             </div>
         </div>
