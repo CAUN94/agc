@@ -1,6 +1,6 @@
 <div>
-    <!-- <div class="hidden sm:flex flex-col lg:flex-row gap-2"> -->
-    <div class="flex flex-col lg:flex-row gap-2">
+    <div class="hidden sm:flex flex-col lg:flex-row gap-2">
+    <!-- <div class="flex flex-col lg:flex-row gap-2"> -->
         <div class="w-full lg:w-1/4 flex flex-col overflow-x-auto gap-y-2">
             <div class="align-middle inline-block min-w-full">
                 <div x-data="{ classShow: false }" class="box-white p-3 {{Auth::user()->student()->isSettled() ? "" : "border-red-500 border-2" }}">
@@ -263,23 +263,27 @@
         
     </div>
 
-    <!-- <div class="block sm:hidden">
+    <div class="block sm:hidden">
         <div class="w-full box-white p-3 flex flex-col gap-2">
             <h1>{{Auth::user()->student()->training->plan()}}</h1>
             <div class="flex flex-col gap-2">
                 @foreach(Auth::user()->student()->training->trainAppointmentsFromThisAndNexWeek() as $trainAppointment)
-                    <span class="
+                    <div class="
                         {{$trainAppointment->isBooking() ? "bg-green-100" : "bg-gray-100" }}
                         shadow overflow-hidden rounded-lg px-2 py-1 flex justify-between">
-                        <span>{{$trainAppointment->trainDisplay()}}</span>
+                        <div class="flex flex-col justify-between">
+                            <span>{{$trainAppointment->trainDisplay()}}</span>
+                            <span class="text-xs">con: {{$trainAppointment->trainer->fullname()}}</span>
+                        </div>
                         <button wire:click="phonebook({{$trainAppointment->id}})" class="text-primary-500">
-                        {{$trainAppointment->isBooking() ? "Reservada" : "Reservar" }}
+                            {{$trainAppointment->isBooking() ? "Reservada" : "Reservar" }}
                         </button>
-                    </span>
+                    </div>
+                    
                 @endforeach
             </div>
         </div>
-    </div> -->
+    </div>
 
     <x-flash-message></x-flash-message>
 </div>
