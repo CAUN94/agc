@@ -311,6 +311,7 @@ class ApiMedilinkController extends Controller
                 ]);
               $new_row->save();
             }
+            break;
         }
 
         return array_merge(...$allActions);

@@ -33058,6 +33058,21 @@ nav {
   color: rgba(242, 113, 90, var(--tw-text-opacity));
 }
 
+.admin-title-nav {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: rgba(75, 85, 99, var(--tw-text-opacity));
+}
+
+@media (min-width: 768px) {
+  .admin-title-nav {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+}
+
 .selected {
   border-radius: 9999px;
   --tw-bg-opacity: 1;

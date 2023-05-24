@@ -1,6 +1,6 @@
 <div x-data="{ pay: false }">
-    <div class="w-full overflow-x-auto gap-y-2 box-white p-3">
-        <div class="mb-2 w-full flex justify-between">
+<div class="w-full overflow-x-auto gap-y-2 box-white p-3">
+        <div class="mb-2 w-full justify-between md:flex-row flex-col flex">
             Periodo del {{$startOfMonth->format('d-m')}} al {{$endOfMonth->format('d-m')}}
             @if($startOfMonth == $actualstartOfMonth)
                 (Mes Actual)
@@ -8,7 +8,7 @@
                 (Mes Vencido)
             @endif
             <button x-on:click="pay = ! pay">Ver más</button>
-            <div class="border rounded-lg px-1" style="padding-top: 2px;" >
+            <div class="border rounded-lg inline-block px-1 mx-auto sm:mx-1 mt-1 sm:mt-0" style="padding-top: 2px;">
                 <button
                     type="button"
                     class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 items-center"
@@ -65,7 +65,7 @@
     </div>
     <div class="w-full overflow-x-auto gap-y-2 box-white p-3 mt-2">
         <form wire:change="updateSelectedTrainer">
-        <div class="grid grid-cols-3 gap-1">
+        <div class="grid sm:grid-cols-3 gap-1">
             @foreach(App\Models\Trainer::where('id','>',0)->get() as $trainer)
                 <div class="flex">
                     <input class="form-check-input appearance-none h-3 w-3 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="{{ $trainer->user->id }}" value={{ $trainer->user->id }} wire:model="selectedTrainer.{{ $trainer->user->id }}">
@@ -79,7 +79,7 @@
     </div>
     <div class="w-full overflow-x-auto gap-y-2 box-white mt-2 p-3">
         <form wire:change="updateSelectedPlans">
-        <div class="grid grid-cols-5 gap-1">
+        <div class="grid sm:grid-cols-5 gap-1">
             @foreach(App\Models\Training::where('id','>',0)->orderby('name','desc')->get() as $training)
               <div class="flex">
                 <input class="form-check-input appearance-none h-3 w-3 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="{{ $training->id }}" value={{ $training->id }} wire:model="selectedPlans.{{ $training->id }}">

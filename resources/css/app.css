@@ -66,6 +66,10 @@ nav {
 	@apply text-you-grey text-base text-left hover:text-primary-500;
 }
 
+.admin-title-nav {
+    @apply text-base md:text-3xl font-bold text-gray-600;
+}
+
 .selected {
 	@apply bg-primary-500 text-white rounded-full;
 }

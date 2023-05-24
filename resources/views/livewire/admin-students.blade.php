@@ -1,6 +1,6 @@
 <div class="grid grid-cols-1 mx-2">
     <div class="bg-white  p-4">
-        <h1 class="text-3xl font-bold text-gray-600">
+        <h1 class="admin-title-nav">
             Tabla Alumnos
         </h1>
     </div>

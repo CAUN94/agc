@@ -1,4 +1,4 @@
-<nav class="adminav flex-grow md:block px-4 pb-4 md:pb-0 md:overflow-y-auto">
+<nav class="adminav flex-grow block px-4 pb-4 md:pb-0 md:overflow-y-auto">
   <a class="my-1 py-1" href="/adminpage"><i class="fas fa-solid fa-desktop mr-1"></i>Panel Inicio</a>
   @if(Auth::user()->isAdmin())
     <x-nav-dropdown>

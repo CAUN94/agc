@@ -1,6 +1,6 @@
 <x-admin.layout>
 	<div class="bg-white  p-4">
-		<h1 class="text-3xl font-bold text-gray-600">
+		<h1 class="admin-title-nav">
 	       	Mes Vencido del 2022-11-21 al 2022-12-20
 	    </h1>
 	    <p>{{$pays[0][0]->nombre_profesional}}</p>
