@@ -111,22 +111,37 @@
       <div class="mb-3 mt-5 md:mt-0 md:col-span-3">
         <div class="shadow sm:rounded-md sm:overflow-hidden">
           <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
-            <div class="grid grid-cols-5 gap-5">
-              <h3 class="col-span-4 sm:col-span-4 text-lg font-medium leading-6 text-gray-900">Resultados de Antrometría</h3>
-              <select class="col-span-1 sm:col-span-1 bg-gray-200 border-gray-200 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" wire:model="nutritionID" id="nutritionID" name="nutritionID">
-              Fechas
-              @if(!is_null($user))
-                @foreach($user->nutrition()->orderby('Fecha','desc')->get() as $control)
-                  <option value="{{$control->id}}">{{$control->fecha()}}</option>
-                @endforeach
-              @endif
-            </select>
+            <div class="grid grid-cols-8">
+              <h3 class="mb-5 col-span-8 sm:col-span-8 text-lg font-medium leading-6 text-gray-900">Resultados de Antrometría</h3>
+              <label for=user class="mb-2 col-span-1 sm:col-span-5 text-sm font-bold text-gray-700">Usuario</label>
+              <label for=fecha class="mb-1 ml-5 col-span-2 sm:col-span-2 text-sm font-bold text-gray-700">Fecha</label>
+              <input type="text" name="user" class="col-span-1 sm:col-span-5 ocus:ring-primary-500 focus:border-primary-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" wire:model="searchTerm" placeholder="Escribe Rut nombre o usuario">
 
+              <select class="ml-5 col-span-1 sm:col-span-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" wire:model="nutritionID" id="nutritionID" name="nutritionID">
+               @if(!is_null($user) and $user->hasNutrition())
+                    <option selected>fechas</option>
+                  @foreach($user->nutrition()->orderby('Fecha','desc')->get() as $control)
+                    <option value="{{$control->id}}">{{$control->fecha()}}</option>
+                  @endforeach
+                @else
+                  <option selected>fecha</option>
+                @endif
+              </select>
+              @if($users && $users->count() > 0)<ul class="col-span-1 sm:col-span-4 border border-gray-200 rounded overflow-hidden shadow-md col-span-6">    @foreach($users as $user)      <li wire:click="selectUser({{$user->id}})" class="px-4 py-2 bg-white  hover:bg-primary-100 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out">{{$user->rut}} {{$user->name}} {{$user->lastnames}}</li>    @endforeach</ul>
+              @endif
+
+              @if($user)<span class="mt-3 col-span-6 sm:col-span-6">Paciente: {{$user->name}} {{$user->lastnames}}</span>
+                        <span class="col-span-6 sm:col-span-6">Edad: {{\Carbon\Carbon::parse($user->birthday)->diff(\Carbon\Carbon::now())->format('%y años')}}</span>
+              @endif
+            </div>
+
+
+            <div class="grid grid-cols-6 gap-5">
             @if(!is_null($viewsNutrition))
-            <div class="md:col-span-2">
+            <div class="ml-5 md:col-span-2">
               <table class="table-fixed w-full overflow-hidden rounded-lg shadow-lg p-6">
                 <thead class="cabecera">
-                  <tr class="bg-gray-300 text-sm font-semibold tracking-wide text-left">
+                  <tr class="bg-primary-500 text-sm font-semibold tracking-wide text-left">
                     <th class="text-center py-2 min-w-4/8 w-6/12">Básicos</th>
                     <th class="text-center py-2 min-w-4/8 w-6/12 ">Datos</th>
                   </tr>
@@ -141,12 +156,12 @@
                     <td class="text-center">{{$viewsNutrition->talla_parado}}</td>
                   </tr>
                   <tr>
-                    <td>Talla sentado (cm)</td>
+                    <td class="text-center">Talla sentado (cm)</td>
                     <td class="text-center">{{$viewsNutrition->talla_sentado}}</td>
                   </tr>
                   <tr>
-                    <td style="text-align: center; font-weight: bold;">Diametros</td>
-                    <td style=""></td>
+                    <td class= "bg-primary-500" style="text-align: center; font-weight: bold;">Diametros</td>
+                    <td class= "bg-primary-500"></td>
                   </tr>
                   <tr>
                     <td class="text-center">Biacromial</td>
@@ -174,8 +189,8 @@
                   </tr>
 
                   <tr>
-                    <td style=" text-align: center; font-weight: bold;">Perimetros (cm)</td>
-                    <td style=""></td>
+                    <td class= "bg-primary-500" style=" text-align: center; font-weight: bold;">Perimetros (cm)</td>
+                    <td class= "bg-primary-500"></td>
                   </tr>
                   <tr>
                     <td class="text-center">Cabeza</td>
@@ -219,8 +234,8 @@
                   </tr>
 
                   <tr>
-                    <td style=" text-align: center; font-weight: bold;">Pliegues (mm)</td>
-                    <td style=""></td>
+                    <td class= "bg-primary-500" style=" text-align: center; font-weight: bold;">Pliegues (mm)</td>
+                    <td class= "bg-primary-500"></td>
                   </tr>
                   <tr>
                     <td class="text-center">Tríceps</td>
@@ -266,10 +281,10 @@
               </table>
             </div>
 
-            <div class="rounded-b-lg h-full md:col-span-3">
+            <div class="ml-5 rounded-b-lg h-full md:col-span-3">
               <table class="table-fixed w-full overflow-hidden rounded-lg shadow-lg p-6">
                 <thead>
-                  <tr class="bg-gray-300 text-sm font-semibold tracking-wide text-left">
+                  <tr class="bg-primary-500 text-sm font-semibold tracking-wide text-left">
                     <th class="text-center py-2 min-w-4/8 w-6/12">Masa</th>
                     <th colspan="2" class="text-center py-2 min-w-4/8 w-6/12 ">valores</th>
                   </tr>
@@ -296,7 +311,7 @@
               </table>
               <table class="table-fixed w-full overflow-hidden rounded-lg shadow-lg p-6">
                 <thead>
-                  <tr class="bg-gray-300 text-sm font-semibold tracking-wide text-left">
+                  <tr class="bg-primary-500 text-sm font-semibold tracking-wide text-left">
                     <th class="text-center py-2 min-w-4/8 w-6/12">Indices</th>
                     <th class="text-center py-2 min-w-4/8 w-6/12 "></th>
                   </tr>
@@ -320,7 +335,7 @@
               </table>
               <table class="table-fixed w-full overflow-hidden rounded-lg shadow-lg p-6">
                 <thead>
-                  <tr class="bg-gray-300 text-sm font-semibold tracking-wide text-left">
+                  <tr class="bg-primary-500 text-sm font-semibold tracking-wide text-left">
                     <th class="text-center py-2 min-w-4/8 w-6/12">Somatotipos</th>
                     <th class="text-center py-2 min-w-4/8 w-6/12 ">valor</th>
                   </tr>
@@ -344,7 +359,7 @@
               </table>
               <table class="table-fixed w-full overflow-hidden rounded-lg shadow-lg p-6">
                 <thead>
-                  <tr class="bg-gray-300 text-sm font-semibold tracking-wide text-left">
+                  <tr class="bg-primary-500 text-sm font-semibold tracking-wide text-left">
                     <th class="text-center py-2 min-w-4/8 w-6/12">Composición corporal</th>
                     <th class="text-center py-2 min-w-4/8 w-6/12 ">valor</th>
                   </tr>
@@ -358,7 +373,7 @@
               </table>
               <table class="table-fixed w-full overflow-hidden rounded-lg shadow-lg p-6">
                 <thead>
-                  <tr class="bg-gray-300 text-sm font-semibold tracking-wide text-left">
+                  <tr class="bg-primary-500 text-sm font-semibold tracking-wide text-left">
                     <th class="text-center py-2 min-w-4/8 w-6/12">Información Adicional</th>
                     <th colspan="2" class="text-center py-2 min-w-4/8 w-6/12 "></th>
                   </tr>
@@ -366,11 +381,22 @@
                 <tbody>
                   <tr>
                     <td class="text-center">Diferencia PE/PB</td>
-                    <td class="text-center">{{round($diferencia_PE_PB, 1)}}</td>
-                    <td class="text-center">{{round($diferencia_porc, 1)}}%</td>
+                    <td class="text-center">{{round(($viewsNutrition->peso_estructurado - $viewsNutrition->peso), 2)}}</td>
+                    <td class="text-center">{{round(($viewsNutrition->peso_estructurado - $viewsNutrition->peso)/$viewsNutrition->peso*100, 2)}}%</td>
                   </tr>
                 </tbody>
               </table>
+
+                <p class="mt-4 font-bold">Comentario Nutricional</p>
+                <x-admin.input class="mb-2 col-span-6 sm:col-span-2" type="text" name="commentary" readonly="edit" value="{{ old('commentary') }}"></x-admin.input>
+                <p class="inline-flex justify-right py-2 px-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-500 hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 cursor-pointer" wire:click='addCommentary()'>
+                  Incluir Comentario
+                </p>
+                @if (session()->has('comentarioMensaje'))
+                <p style="color: #28a745;" x-data="{ showFlash: true }" x-init="setTimeout(() => showFlash = false, 3000)" x-show.transition.duration.1000ms="showFlash" class="alert alert-success">
+                    {{ session('comentarioMensaje') }}
+                </p>
+                @endif
             </div>
             @endif
             </div>
