@@ -203,12 +203,12 @@ class AdminNutrition extends Component
         $Masa_osea_reajustada = ($this->M_osea_kg - ($this->M_osea_porc*$this->diferencia_PE_PB));
         $Masa_muscular_reajustada = ($this->M_muscular_kg - ($this->M_muscular_porc*$this->diferencia_PE_PB));
         $Masa_adiposa_reajustada = ($this->M_adiposa_kg - ($this->M_adiposa_porc*$this->diferencia_PE_PB));
-        $Masa_piel_reajustada = ($this->Masa_Piel - (($this->M_Piel/$Peso_estructurado)*$this->diferencia_PE_PB));
-        $masa_residual_reajustada = ($this->Masa_residual - (($this->Masa_Residual/$Peso_estructurado)*$this->diferencia_PE_PB));
+        $Masa_piel_reajustada = ($Masa_Piel - (($Masa_Piel/$Peso_estructurado)*$this->diferencia_PE_PB));
+        $masa_residual_reajustada = ($Masa_Residual - (($Masa_Residual/$Peso_estructurado)*$this->diferencia_PE_PB));
 
-        $this->M_adiposa_porc = ($this->M_adiposa_kg/$Peso_estructurado);
-        $this->M_muscular_porc = ($this->M_muscular_kg/$Peso_estructurado);
-        $this->M_osea_porc = ($this->M_osea_kg/$Peso_estructurado);
+        $this->M_adiposa_porc = ($Masa_adiposa_reajustada/$Peso_estructurado);
+        $this->M_muscular_porc = ($Masa_muscular_reajustada/$Peso_estructurado);
+        $this->M_osea_porc = ($Masa_osea_reajustada/$Peso_estructurado);
         //dd($Masa_Piel, $this->M_adiposa_kg, $this->M_muscular_kg,$Masa_Residual,$this->M_osea_kg,$Peso_estructurado,$this->diferencia_PE_PB,$this->diferencia_porc);
         //Somatotipos
         $sum_SF = ($this->triceps + $this->subescapular + $this->supraespinal) * (170.18/$this->talla_parado);
