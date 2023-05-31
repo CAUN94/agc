@@ -20,7 +20,8 @@
               </select>
             </div>
             <div class="items-center">
-                <a wire:click="descargarPDF('{{$nutrition->fecha}}','{{$user->rut}}')" download>Descargar PDF <img src="{{$user->profilePic()}}" class="avatar h-10 w-10 sm:h-12 sm:w-12 ml-4"></a>
+                <a class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-500 hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 cursor-pointer" wire:click="pdf()">Descargar PDF</a>
+                <img src="{{$user->profilePic()}}" class="avatar h-10 w-10 sm:h-12 sm:w-12 ml-4 ">
             </div>
           </div>
 
@@ -134,7 +135,7 @@
                         <div class="grid grid-cols-3">
                             <div class="border text-base flex px-2 items-center">{{round(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100, 1)}}%</div>
                             <div class="border text-base flex px-2 items-center">{{$nutrition->masa_adiposa}} Kg</div>
-                            <div class="border text-base flex px-2 items-center">-3.2 Kg</div>
+                            <div class="border text-base flex px-2 items-center">{{$masa_adiposa_previa - $nutrition->masa_adiposa}} Kg</div>
                         </div>
                     </div>
                     <div class="items-center">
@@ -155,7 +156,7 @@
                         <div class="grid grid-cols-3">
                             <div class="border text-base flex px-2 items-center">{{round(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100, 1)}}%</div>
                             <div class="border text-base flex px-2 items-center">{{$nutrition->masa_muscular}} Kg</div>
-                            <div class="border text-base flex px-2 items-center"> +1.6 Kg</div>
+                            <div class="border text-base flex px-2 items-center">{{$masa_muscular_previa - $nutrition->masa_muscular}} Kg</div>
                         </div>
                     </div>
                     <div class="w-auto">

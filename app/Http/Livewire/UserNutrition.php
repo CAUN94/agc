@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Nutrition;
 use Livewire\Component;
 use App\Models\NutritionDocuments;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class UserNutrition extends Component
 {
@@ -12,29 +13,32 @@ class UserNutrition extends Component
     public $nutrition;
     public $nutritionID;
     public $date;
+    public $masa_adiposa_previa;
+    public $masa_muscular_previa;
 
     public function mount($user){
         $this->user = $user;
-        $this->nutrition = Nutrition::orderBy('fecha', 'desc')->first();;
+        $this->nutrition = Nutrition::where('rut',$user->rut)->orderBy('fecha', 'desc')->first();
+        $this->nutritionID = $this->nutrition->id;
     }
 
     public function updatedNutritionId()
     {
         $this->nutrition = Nutrition::find($this->nutritionID);
+        $sesion_pasada = Nutrition::where('rut',$nutrition->rut)->where('fecha','<',$nutrition->fecha)->orderBy('fecha','desc')->first();
     }
 
     public function createNutrinion(){}
 
-    public function descargarPDF($fecha,$rut)
+    public function pdf()
     {
-        $pdf = NutritionDocuments::where('fecha',$fecha)->where('rut_paciente',$rut)->first();
+        $nutrition = Nutrition::find($this->nutritionID);
 
-        if (!$pdf) {
-          return redirect()->back()->with('error', 'El PDF no se encuentra.');
-        }
-        return response()->streamDownload(function () use ($pdf) {
-                      echo $pdf->pdf;
-                  }, "Evaluacion_nutricional.pdf", ['Content-Type' => 'application/pdf']);;
+        $pdfContent = PDF::loadView('livewire.pdf', compact('nutrition'))->output();
+        return response()->streamDownload(
+             fn () => print($pdfContent),
+             "Evaluacion_Nutricional.pdf"
+        );
     }
 
     public function render()

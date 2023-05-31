@@ -19,7 +19,7 @@ th{
 </style>
 
 <body style="font-family: Arial, Helvetica, sans-serif;">
-  <img class="logo" src="https://yjb.cl/img/logo.png" style="width: 160px; height: 100px; position: absolute; right: 0;">
+  <img class="logo" src='img/you-completo-nn.png' style="width: 160px; height: 100px; position: absolute; right: 0;">
   <h1 style= "text-align: center">Evaluación Nutricional</h1>
   <p>
     <span style= "text-align: center">Nombre: {{$nutrition->plan}}</span>

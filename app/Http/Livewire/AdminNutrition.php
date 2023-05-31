@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Livewire\Component;
 use Barryvdh\DomPDF\Facade\Pdf;
 
+
 class AdminNutrition extends Component
 {
     public $searchTerm;
@@ -82,6 +83,7 @@ class AdminNutrition extends Component
     public $abdominal;
     public $muslo_medial;
     public $pierna_mm;
+    public $commentary;
 
     public $showAntropometria = false;
     public $nutritionID;
@@ -201,10 +203,12 @@ class AdminNutrition extends Component
         $Masa_osea_reajustada = ($this->M_osea_kg - ($this->M_osea_porc*$this->diferencia_PE_PB));
         $Masa_muscular_reajustada = ($this->M_muscular_kg - ($this->M_muscular_porc*$this->diferencia_PE_PB));
         $Masa_adiposa_reajustada = ($this->M_adiposa_kg - ($this->M_adiposa_porc*$this->diferencia_PE_PB));
+        $Masa_piel_reajustada = ($Masa_Piel - (($Masa_Piel/$Peso_estructurado)*$this->diferencia_PE_PB));
+        $masa_residual_reajustada = ($Masa_Residual - (($Masa_Residual/$Peso_estructurado)*$this->diferencia_PE_PB));
 
-        $this->M_adiposa_porc = ($this->M_adiposa_kg/$Peso_estructurado);
-        $this->M_muscular_porc = ($this->M_muscular_kg/$Peso_estructurado);
-        $this->M_osea_porc = ($this->M_osea_kg/$Peso_estructurado);
+        $this->M_adiposa_porc = ($Masa_adiposa_reajustada/$Peso_estructurado);
+        $this->M_muscular_porc = ($Masa_muscular_reajustada/$Peso_estructurado);
+        $this->M_osea_porc = ($Masa_osea_reajustada/$Peso_estructurado);
         //dd($Masa_Piel, $this->M_adiposa_kg, $this->M_muscular_kg,$Masa_Residual,$this->M_osea_kg,$Peso_estructurado,$this->diferencia_PE_PB,$this->diferencia_porc);
         //Somatotipos
         $sum_SF = ($this->triceps + $this->subescapular + $this->supraespinal) * (170.18/$this->talla_parado);
@@ -261,8 +265,8 @@ class AdminNutrition extends Component
         $nutrition->masa_muscular_porc = $this->M_muscular_porc;
         $nutrition->masa_osea = $Masa_osea_reajustada;
         $nutrition->masa_osea_porc = $this->M_osea_porc;
-        $nutrition->masa_piel = $Masa_Piel;
-        $nutrition->masa_residual = $Masa_Residual;
+        $nutrition->masa_piel = $Masa_piel_reajustada;
+        $nutrition->masa_residual = $masa_residual_reajustada;
         $nutrition->indice_adiposo = $Masa_adiposa_reajustada/$Masa_muscular_reajustada;
         $nutrition->indice_musculo = $Masa_muscular_reajustada/$Masa_osea_reajustada;
         $nutrition->indice_corporal = $this->indice_masa_corporal;
@@ -280,7 +284,13 @@ class AdminNutrition extends Component
         $this->viewsNutrition = $nutrition;
         session()->flash('nutricionMensaje','Se cargó la informacion exitosamente');
         $nutrition->save();
+    }
 
+    public function addCommentary(){
+      $validate = $this->validate([
+          'commentary' => ['required'],
+      ]);
+      session()->flash('comentarioMensaje','Se incluyo el mensaje exitosamente');
     }
 
     public function masaIdealCalculate(){
@@ -324,16 +334,21 @@ class AdminNutrition extends Component
 
     public function pdf(){
         $nutrition = Nutrition::latest()->first();
-        $pdf = pdf::loadView('livewire.pdf', compact('nutrition'));
-        $pdf->render();
+        if($nutrition){
+          $pdf = pdf::loadView('livewire.pdf', compact('nutrition'));
 
-        $nutrucion_pdf = new NutritionDocuments;
-        $nutrucion_pdf->fecha = $nutrition->fecha;
-        $nutrucion_pdf->rut_paciente = $nutrition->rut;
-        $nutrucion_pdf->pdf = $pdf->output();;
-        $nutrucion_pdf->save();
+          $pdf->render();
+          $nutrucion_pdf = new NutritionDocuments;
+          $nutrucion_pdf->fecha = $nutrition->fecha;
+          $nutrucion_pdf->rut_paciente = $nutrition->rut;
+          $nutrucion_pdf->pdf = $pdf->output();
+          $nutrucion_pdf->save();
 
-        return $pdf->stream('livewire.pdf');
+          return $pdf->stream('livewire.pdf');
+        }else{
+
+        }
+
 
 
     }

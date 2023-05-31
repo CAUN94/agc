@@ -15,7 +15,4 @@ class AdminHaasController extends Controller
       $pdf = Pdf::loadView('livewire.pdf', compact('nutrition'));
       return $pdf->stream('livewire.pdf');
     }
-    public function pdf_view(){
-        return view('livewire.pdf');
-    }
 }

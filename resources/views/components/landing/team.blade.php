@@ -93,13 +93,17 @@
         <div x-data="carousel()" x-init="init()" class="relative overflow-hidden group">
         <div x-ref="container"
             class="md:-ml-4 md:flex md:overflow-x-scroll scroll-snap-x md:space-x-4 space-y-4 md:space-y-0 no-scrollbar">
-            @foreach($files as $file)
+            @foreach(App\Models\Team::allTeam() as $team)
                 <div
                 class="ml-4 flex-auto flex-grow-0 flex-shrink-0 w-96 rounded-lg bg-gray-100 items-center justify-center snap-center overflow-hidden shadow-md">
                     <div>
-                      <img class="w-full h-64 object-cover" src="{{ asset('img/equipo/'.$file->getFilename())}}">
+                      <img class="w-full h-64 object-cover" src="{{ asset('img/equipo/'.$team->photo)}}">
                     </div>
                     <div class="flex">
+                        <div class="flex-1 p-4">
+                            <h3 class="text-xl font-bold text-gray-900">{{ $team->name }}</h3>
+                            <p class="text-gray-700">{{ $team->position }}</p>
+                        </div>
                     </div>
                 </div>
             @endforeach

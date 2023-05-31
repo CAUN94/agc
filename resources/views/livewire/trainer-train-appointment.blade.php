@@ -1,13 +1,13 @@
 <div>
     <div class="w-full overflow-x-auto gap-y-2 box-white p-3">
-        <div class="mb-2 w-full flex justify-between">
+        <div class="mb-2 w-full justify-between md:flex-row flex-col flex">
             Periodo del {{$startOfMonth->format('d-m')}} al {{$endOfMonth->format('d-m')}}
             @if($startOfMonth == $actualstartOfMonth)
                 (Mes Actual)
             @elseif($startOfMonth == $expiredstartOfMonth)
                 (Mes Vencido)
             @endif
-            <div class="border rounded-lg px-1" style="padding-top: 2px;">
+            <div class="border rounded-lg inline-block px-1 mx-auto sm:mx-1 mt-1 sm:mt-0" style="padding-top: 2px;">
                 <button
                     type="button"
                     class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 items-center"
@@ -29,7 +29,7 @@
                 </button>
             </div>
         </div>
-        <ul class="grid grid-cols-4 gap-1">
+        <ul class="grid md:grid-cols-4 gap-1">
             <li>
                 <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                     <i class="fa fa-calendar" aria-hidden="true"></i>
@@ -55,7 +55,7 @@
     </div>
     <div class="w-full overflow-x-auto gap-y-2 box-white mt-2 p-3">
         <form wire:change="updateSelectedPlans">
-        <div class="grid grid-cols-5 gap-1">
+        <div class="grid sm:grid-cols-5 gap-1">
             @foreach(Auth::user()->trainer->trainings()->get() as $training)
                 @php $training = App\Models\Training::find($training->id) @endphp
                 <div class="flex">
