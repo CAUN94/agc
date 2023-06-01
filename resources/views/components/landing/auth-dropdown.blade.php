@@ -36,11 +36,11 @@
                 <span class="drop-span">Estadísticas Strava</span>
             </a>
         </li> -->
-        <!-- <li>
+        <li>
             <a href="/strava/auth" class="drop-link">
                 <span class="drop-span">Vincula tu Strava</span>
             </a>
-        </li> -->
+        </li>
         <form method="POST" action="{{ route('logout') }}">
         @csrf
         <li>

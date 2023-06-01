@@ -99,8 +99,7 @@ class UpdateDatabase extends Command
             $apMl = AppointmentMl::UpdateOrCreate(
                 [
                     'Tratamiento_Nr' => $appointment->id_atencion,
-                    'Rut_Paciente' => $patient->rut ,
-                    // 'Estado' => $appointment->estado_cita,
+                    'Rut_Paciente' => $patient->rut,
                 ],
                 [
                     'Estado' => $appointment->estado_cita,
@@ -116,6 +115,7 @@ class UpdateDatabase extends Command
                     'Mail' => $patient->email ,
                     'Celular' => $patient->celular ,
                     'Convenio' => 0,
+                    'comentario' => $appointment->comentarios,
                     'Sucursal' => $appointment->nombre_sucursal ,
                 ]
             );

@@ -148,7 +148,7 @@ class LandingController extends Controller
 
     public function terms()
     {
-        return redirect('/pdf/tyc.pdf');
+        return redirect('/pdf/tyc_you.pdf');
     }
 
     public function team()
