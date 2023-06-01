@@ -263,6 +263,7 @@ class RedirectController extends Controller {
 
 	public function pago(){
 		$url = "https://link.mercadopago.cl/yjb";
+		return Redirect::away($url);
 	}
 
 }
