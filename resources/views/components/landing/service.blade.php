@@ -328,7 +328,7 @@
                         <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
                               Entrenamiento
                         </h3>
-                        <span class="text-primary-500 mt-2 text-base block">¿Qué es Entrenamiento?</span>
+                        <span class="text-primary-500 mt-2 text-base block">¿En que consiste el servicio de entrenamiento?</span>
                         <div>
                         <p class="overflow-y-auto text-base text-gray-500 mt-2 text-justify  leading-relaxed ">
                         ¡Tenemos distintos planes de entrenamiento que te podrían interesar!
