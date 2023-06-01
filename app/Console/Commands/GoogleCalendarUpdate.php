@@ -101,8 +101,8 @@ class GoogleCalendarUpdate extends Command
                 'timeZone' => 'America/Santiago',
               ),
               'attendees' => array(
-                array('email' => $email),
-                array('email' => 'you@justbetter.cl'),
+                array('email' => 'cristobalugarte6@gmail.com'),
+                // array('email' => 'you@justbetter.cl'),
                 // array('email' => 'Docencia@justbetter.cl'),
                 // array('email' => 'cugarte@guiasyscoutschile.cl'),
                 // array('email' => 'iver@justbetter.cl'),
