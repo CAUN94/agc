@@ -163,9 +163,9 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::post('/youphone_whatsapp', 'App\Http\Controllers\RedirectController@whatsappform');
     Route::get('/entrenamiento', 'App\Http\Controllers\RedirectController@trainning');
     Route::get('/aranceles', 'App\Http\Controllers\RedirectController@arancel');
-    Route::get('/padpow', 'App\Http\Controllers\RedirectController@pay');
+    Route::get('/pago', 'App\Http\Controllers\RedirectController@pay');
     Route::get('/confirmacion/{id}', [MercadoPagoController::class, 'pay']);
-    Route::get('/pago', 'App\Http\Controllers\RedirectController@pago');
+    Route::get('/mercadopago', 'App\Http\Controllers\RedirectController@pago');
     Route::get('/rrhh', 'App\Http\Controllers\RedirectController@rrhh');
     Route::get('/clinica', 'App\Http\Controllers\RedirectController@clinica');
     Route::get('/club-strava', 'App\Http\Controllers\RedirectController@strava');
