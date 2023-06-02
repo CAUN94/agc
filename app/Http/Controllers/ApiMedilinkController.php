@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AppointmentMl;
+use App\Models\Professional;
 use App\Models\User;
 use GuzzleHttp\Client;
 use App\Models\actionMl;
@@ -461,6 +462,53 @@ class ApiMedilinkController extends Controller
       ]);
 
       echo $response->getBody();
+    }
+
+    public function nextAppointmentsProfessionals(){
+      $professionals = Professional::all();
+
+      return view('professionalsml.index',compact('professionals'));
+      return $professionals;
+      
+    }
+
+    public function nextAppointmentsProfessional($id){
+      $professional = Professional::find($id);
+
+      $client = new \GuzzleHttp\Client();
+      $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/?q={"rut":{"eq":"'.$professional->user->rut.'"}}';
+      
+      $response = $client->request('GET', $url, [
+          'headers'  => [
+              'Authorization' => 'Token ' . $this->token
+          ]
+      ]);
+      
+      $professional = json_decode($response->getBody())->data[0];
+      $id_profesional = $professional->id;
+      $id_sucursal    = 1;
+      $url            = 'https://api.medilink.healthatom.com/api/v1/sucursales/'.$id_sucursal.'/profesionales/'.$id_profesional.'/agendas';
+
+      $start = Carbon::now()->format('Y-m-d');
+      // end date today in 5 days in format yyyy-mm-dd
+      $end = Carbon::now()->addDays(12)->format('Y-m-d');
+
+      $params         =   [
+                              'fecha_inicio'      => ['eq' => $start],
+                              'fecha_fin'         => ['eq' => $end],
+                              'mostrar_detalles'  => ['eq' => 1]
+              ];
+
+      $response = $client->request('GET', $url, [
+          'query'     => "q=".json_encode($params),
+              'headers'   => [
+              'Authorization' => 'Token ' . $this->token
+          ]
+      ]);
+
+      $appointments = json_decode($response->getBody())->data->fechas;
+      $appointments = (array)$appointments;
+      return view('professionalsml.show',compact('professional','appointments'));
     }
 
 }

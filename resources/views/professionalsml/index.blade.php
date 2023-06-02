@@ -1,13 +1,7 @@
 <x-landing.layout>
-<div class="bg-white p-4 w-1/2 mx-auto mt-10">
+<div class="bg-white p-4 w-1/3 mx-auto mt-10 flex flex-col">
 @foreach($professionals as $professional)
-    @php
-    $value = json_decode("{".$professional."}",true);
-    @endphp
-    @if($value["rut"] != "")
-    	{{$value["nombre"]}} {{$value["apellidos"]}} <a class="underline" href="/professionals/{{$value["id"]}}">Agenda</a>
-    	<br>
-    @endif
+    <span>{{$professional->user->name}} {{$professional->user->lastnames}} <a class="underline" href="/professionals/{{$professional->id}}">Agenda</a></span>
 @endforeach
 </div>
 </x-landing.layout>

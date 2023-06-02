@@ -139,9 +139,15 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/ficha', 'App\Http\Controllers\ScrapingController@ficha')->name('ficha');
 
     Route::get('/scraping-paymentsml', 'App\Http\Controllers\ScrapingController@paymentsMl')->name('scraping-paymentsml');
-    Route::get('/professionals', 'App\Http\Controllers\ScrapingController@professionals')->middleware(['intranet']);
 
-    Route::get('/professionals/{id}', 'App\Http\Controllers\ScrapingController@professional')->middleware(['intranet']);
+    // Route::get('/professionals', 'App\Http\Controllers\ScrapingController@professionals')->middleware(['intranet']);
+
+    // Route::get('/professionals/{id}', 'App\Http\Controllers\ScrapingController@professional')->middleware(['intranet']);
+
+
+    Route::get('/professionals', 'App\Http\Controllers\ApiMedilinkController@nextAppointmentsProfessionals')->middleware(['intranet']);
+    Route::get('/professionals/{id}', 'App\Http\Controllers\ApiMedilinkController@nextAppointmentsProfessional')->middleware(['intranet']);
+
 
     // Medilink
     Route::get('/medilink/payments','App\Http\Controllers\MedilinkController@payments');
@@ -245,6 +251,10 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/apimedilink/allpayments', [AdminMedilinkController::class, 'allpayments']);
     Route::get('/apimedilink/payments/{id}', [AdminMedilinkController::class, 'payment']);
     Route::get('/apimedilink/payments/{id}/boleta', [AdminMedilinkController::class, 'paymentboleta']);
+
+    // Usar apim para pruebas
+
+    
 
     // Nubox
     Route::get('/nubox', [ AdminNuboxController::class, 'index']);
