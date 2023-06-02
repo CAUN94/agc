@@ -46,7 +46,9 @@ class GoogleCalendarUpdate extends Command
     {
         $this->getClient();
         // $this->superdelete();
+
         $this->superStore('Alonso Niklitschek Sanhueza','c_0f1ec4cb6ddb69027c0f6e89110fb1708a9613a28be7efc2165475004be2398d@group.calendar.google.com','alonso@justbetter.cl');
+        
         $this->superUpdate('Alonso Niklitschek Sanhueza','c_0f1ec4cb6ddb69027c0f6e89110fb1708a9613a28be7efc2165475004be2398d@group.calendar.google.com');
         $this->deleteRepeats('Alonso Niklitschek Sanhueza','c_0f1ec4cb6ddb69027c0f6e89110fb1708a9613a28be7efc2165475004be2398d@group.calendar.google.com');
 
@@ -78,6 +80,7 @@ class GoogleCalendarUpdate extends Command
     public function superStore($professional,$calendarId,$email){
         $this->info($professional);
         $appointments = AppointmentMl::nextProfessional($professional)->get();
+        $count = 0;
         foreach ($appointments as $key => $appointment) {
             $client = $this->getClient();
             $service = new Calendar($client);
@@ -101,8 +104,8 @@ class GoogleCalendarUpdate extends Command
                 'timeZone' => 'America/Santiago',
               ),
               'attendees' => array(
-                array('email' => $email),
-                array('email' => 'you@justbetter.cl'),
+                array('email' => 'cristobalugarte6@gmail.com'),
+                // array('email' => 'you@justbetter.cl'),
                 // array('email' => 'Docencia@justbetter.cl'),
                 // array('email' => 'cugarte@guiasyscoutschile.cl'),
                 // array('email' => 'iver@justbetter.cl'),
@@ -120,7 +123,14 @@ class GoogleCalendarUpdate extends Command
             $appointment->professional_calendar = $event->id;
             $this->info('Creado:'.$appointment->Nombre_paciente.' '.$appointment->Apellidos_paciente);
             $appointment->save();
+
+            $count++;
+            if($count == 50){
+                sleep(5);
+                $count = 0;
+            }
         }
+        
         return $appointments;
     }
 
@@ -128,7 +138,7 @@ class GoogleCalendarUpdate extends Command
         $appointments = AppointmentMl::calendarAppointments($professional)->get();
         $client = $this->getClient();
         foreach ($appointments as $key => $appointment) {
-            if(!in_array($appointment->Estado, ['Cambio de fecha','Anulado','Anulado vía validación','No asiste'])){
+            if(!in_array($appointment->Estado, ['Cambio de fecha','Anulado vía validación','No asiste'])){
                 continue;
             }
             $service = new Calendar($client);

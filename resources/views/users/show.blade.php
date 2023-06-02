@@ -186,7 +186,7 @@
                     @if($appointment->treatments()->isPay())
                       <span class="text-green-500">Pagado</span>
                     @else
-                      <x-medilinkpay id="{{$appointment->treatments()->id}}">Pagar Plan</x-medilinkpay>
+                      <x-medilinkpay id="{{$appointment->treatments()->id}}">Pagar</x-medilinkpay>
                     @endif
                   @endif
                 </div>
