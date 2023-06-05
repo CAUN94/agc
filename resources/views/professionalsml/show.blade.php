@@ -11,30 +11,24 @@
         );
     @endphp
     <div class="bg-white p-4 w-1/3 mx-auto mt-10">
-        <h1>Agenda de {{$value["nombre"]}} {{$value["apellidos"]}}</h1><br>
-        <p>
-            @foreach($professional as $key => $day)
-                @if(Carbon\Carbon::parse($key)->endofday()>=Carbon\Carbon::now())
-                    @php $days_w_hours = array_filter($day,function($var){ if( $var["id"] == ""){return $var;}}) @endphp
-                    @if(count($day)>0 and count($days_w_hours))
-                        @foreach($days_w_hours as $hour)
-                            @if($loop->first)
-                                {{$days_dias[Carbon\Carbon::parse($hour['fecha'])->format('l')]}}  {{Carbon\Carbon::parse($hour['fecha'])->format('d')}}:
-                            @endif
-                            @if(
-                            Carbon\Carbon::now()->subhour()->format('H:i') >= Carbon\Carbon::parse($hour['inicio'])->format('H:i')
-                            and Carbon\Carbon::parse($hour['fecha'])->format('d') == Carbon\Carbon::now()->format('d')
-                            )
-                            @else
-                                {{Carbon\Carbon::parse($hour['inicio'])->format('H:i')}}
-                            @endif
-                            @if($loop->last)
-                                <br>
-                            @endif
-                        @endforeach
-                    @endif
+        <h1>Agenda de {{$professional->nombre}} {{$professional->apellidos}}</h1><br>
+        <div class="flex flex-col">
+            @foreach($appointments as $key1 => $appointment)
+                @php
+                    $appointment = (array) $appointment;
+                @endphp 
+                @if(count($appointment) > 0)
+                    @php
+                        $day = Carbon\Carbon::parse($key1)->format('l');
+                        $day_number = Carbon\Carbon::parse($key1)->format('d');                         
+                    @endphp
+                    {{$days_dias[$day]}} {{$day_number}}: 
+                    @foreach($appointment['horas'] as $key2 =>$hour)
+                        {{$key2}}
+                    @endforeach
+                    <br>
                 @endif
             @endforeach
-        </p>
+        </div>
     </div>
 </x-landing.layout>
