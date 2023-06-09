@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\AppointmentMl;
 use App\Models\UserMl;
+use App\Models\Professional;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Spatie\GoogleCalendar\Event;
@@ -35,6 +36,7 @@ class GoogleCalendarUpdate extends Command
     public function __construct()
     {
         parent::__construct();
+        $this->token = config('app.medilink');
     }
 
     /**
@@ -45,128 +47,128 @@ class GoogleCalendarUpdate extends Command
     public function handle()
     {
         $this->getClient();
-        // $this->superdelete();
 
-        $this->superStore('Alonso Niklitschek Sanhueza','c_0f1ec4cb6ddb69027c0f6e89110fb1708a9613a28be7efc2165475004be2398d@group.calendar.google.com','alonso@justbetter.cl');
+        $professionals = Professional::google_id();
+        foreach($professionals as $professional){
+            $this->info($professional->description);
+            $this->listCalendar($professional->google_id);
+            $this->addcalendar($professional->id);
+        }        
+    }
+
+    public function addcalendar($id){
+      
+        $professional = Professional::find($id);
+        $calendarId = $professional->google_id;
+        $email = $professional->user->email;
+  
+        $client = new \GuzzleHttp\Client();
+        $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/?q={"rut":{"eq":"'.$professional->user->rut.'"}}';
         
-        $this->superUpdate('Alonso Niklitschek Sanhueza','c_0f1ec4cb6ddb69027c0f6e89110fb1708a9613a28be7efc2165475004be2398d@group.calendar.google.com');
-        $this->deleteRepeats('Alonso Niklitschek Sanhueza','c_0f1ec4cb6ddb69027c0f6e89110fb1708a9613a28be7efc2165475004be2398d@group.calendar.google.com');
-
-        $this->superStore('Jaime  Pantoja Rodriguez','c_a5e903612c38cf636cddc1ad9f5d85f5cfc58fc2350ab902696cef768930fe27@group.calendar.google.com','docencia@justbetter.cl');
-        $this->superUpdate('Jaime  Pantoja Rodriguez','c_a5e903612c38cf636cddc1ad9f5d85f5cfc58fc2350ab902696cef768930fe27@group.calendar.google.com');
-        $this->deleteRepeats('Jaime  Pantoja Rodriguez','c_a5e903612c38cf636cddc1ad9f5d85f5cfc58fc2350ab902696cef768930fe27@group.calendar.google.com');
-
-        $this->superStore('Daniella Vivallo Vera','c_70cc091402f167e8244d73d4a32ad15d0e21368ead3e7145eede9f69ce57b019@group.calendar.google.com','clinica@justbetter.cl');
-        $this->superUpdate('Daniella Vivallo Vera','c_70cc091402f167e8244d73d4a32ad15d0e21368ead3e7145eede9f69ce57b019@group.calendar.google.com');
-        $this->deleteRepeats('Daniella Vivallo Vera','c_70cc091402f167e8244d73d4a32ad15d0e21368ead3e7145eede9f69ce57b019@group.calendar.google.com');
-
-        $this->superStore('Manuel Silva Ávila','c_cdc49b01298351d88c6468980988cf46b288841aeabf875ebffaed4a06b45530@group.calendar.google.com','Kine.Manuel.silva@gmail.com');
-        $this->superUpdate('Manuel Silva Ávila','c_cdc49b01298351d88c6468980988cf46b288841aeabf875ebffaed4a06b45530@group.calendar.google.com');
-        $this->deleteRepeats('Manuel Silva Ávila','c_cdc49b01298351d88c6468980988cf46b288841aeabf875ebffaed4a06b45530@group.calendar.google.com','Kine.Manuel.silva@gmail.com');
-
-        $this->superStore('Camila Valentini Rojas','c_774a51d77aa92fff83bc27c54aea7caa6214d02b32415d38e38833e2bf6c88ea@group.calendar.google.com','cvalentini@uc.cl');
-        $this->superUpdate('Camila Valentini Rojas','c_774a51d77aa92fff83bc27c54aea7caa6214d02b32415d38e38833e2bf6c88ea@group.calendar.google.com');
-        $this->deleteRepeats('Camila Valentini Rojas','c_774a51d77aa92fff83bc27c54aea7caa6214d02b32415d38e38833e2bf6c88ea@group.calendar.google.com');
-
-        $this->superStore('Nicole Cedeño Wolf ','c_50e57474f2f9941c93de2de40212b24f6a44a65d72a40399bbab8cfcb1221fa2@group.calendar.google.com','Niccole.cedeno@lanek.cl');
-        $this->superUpdate('Nicole Cedeño Wolf ','c_50e57474f2f9941c93de2de40212b24f6a44a65d72a40399bbab8cfcb1221fa2@group.calendar.google.com');
-        $this->deleteRepeats('Nicole Cedeño Wolf ','c_50e57474f2f9941c93de2de40212b24f6a44a65d72a40399bbab8cfcb1221fa2@group.calendar.google.com');
-
-        $this->superStore('Constanza Ahumada Huerta','c_5bd69a1568b6d8319f6bac34e6eb66a336de83458e7a206645ac43c265f93104@group.calendar.google.com','Coniahum@gmail.com');
-        $this->superUpdate('Constanza Ahumada Huerta','c_5bd69a1568b6d8319f6bac34e6eb66a336de83458e7a206645ac43c265f93104@group.calendar.google.com');
-        $this->deleteRepeats('Constanza Ahumada Huerta','c_5bd69a1568b6d8319f6bac34e6eb66a336de83458e7a206645ac43c265f93104@group.calendar.google.com');
-    }
-
-    public function superStore($professional,$calendarId,$email){
-        $this->info($professional);
-        $appointments = AppointmentMl::nextProfessional($professional)->get();
-        $count = 0;
-        foreach ($appointments as $key => $appointment) {
-            $client = $this->getClient();
-            $service = new Calendar($client);
-            $start = \Carbon\Carbon::parse($appointment->Fecha)->format('Y-m-d')."T".$appointment->Hora_inicio;
-            $end = \Carbon\Carbon::parse($appointment->Fecha)->format('Y-m-d')."T".$appointment->Hora_termino;
-            $last = AppointmentMl::lastAppointment($appointment->id);
-            $lastDate = \Carbon\Carbon::parse($last->Fecha)->format('Y-m-d');
-            $lastProfessional = $last->Profesional;
-            $event = new Google_Service_Calendar_Event(array(
-              'summary' => 'Atención a '.$appointment->Nombre_paciente." ".$appointment->Apellidos_paciente,
-              'location' => 'San Pascual 736',
-              'description' => "Paciente: ".$appointment->Nombre_paciente." ".$appointment->Apellidos_paciente."\nCon: ".$appointment->Profesional."\nUltima Atención: ".$lastDate." con ".$lastProfessional,
-              'start' => array(
-                'dateTime' => $start,
-                'timeZone' => 'America/Santiago',
-              ),
-              'sendNotifications' => false,
-              'sendUpdates' => 'externalOnly',
-              'end' => array(
-                'dateTime' => $end,
-                'timeZone' => 'America/Santiago',
-              ),
-              'attendees' => array(
-                array('email' => 'cristobalugarte6@gmail.com'),
-                // array('email' => 'you@justbetter.cl'),
-                // array('email' => 'Docencia@justbetter.cl'),
-                // array('email' => 'cugarte@guiasyscoutschile.cl'),
-                // array('email' => 'iver@justbetter.cl'),
-                // array('email' => 'pablo@justbetter.cl'),
-              ),
-              'reminders' => array(
-                'useDefault' => False,
-                'overrides' => array(
-                  array('method' => 'email', 'minutes' => 24 * 60),
-                  array('method' => 'popup', 'minutes' => 10),
-                ),
-              ),
-            ));
-            $event = $service->events->insert($calendarId, $event);
-            $appointment->professional_calendar = $event->id;
-            $this->info('Creado:'.$appointment->Nombre_paciente.' '.$appointment->Apellidos_paciente);
-            $appointment->save();
-
-            $count++;
-            if($count == 50){
-                sleep(5);
-                $count = 0;
-            }
-        }
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $this->token
+            ]
+        ]);
         
-        return $appointments;
+        $professional = json_decode($response->getBody())->data[0];
+  
+        $url = $professional->links[1]->href.'?q={"fecha":{"gt":"2023-06-06"}}';
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $this->token
+            ]
+        ]);
+  
+        $professional_date = json_decode($response->getBody());
+  
+        $allprofessional_date = [];
+        $professional_date = json_decode($response->getBody());
+        $allprofessional_date[] = $professional_date->data;
+        while(isset($professional_date->links->next)){
+          $response = $client->request('GET', $professional_date->links->next, [
+              'headers'  => [
+                  'Authorization' => 'Token ' . $this->token
+              ]
+          ]);
+          $professional_date = json_decode($response->getBody());
+          $allprofessional_date[] = $professional_date->data;
+      }
+  
+      $allprofessional_date = array_merge(...$allprofessional_date);
+  
+      $client = $this->getClient();
+      foreach($allprofessional_date as $appointment){
+        if(in_array($appointment->estado_cita, ['Cambio de fecha','Anulado vía validación','No asiste','Anulado'])){
+            continue;
+        }
+        $service = new Calendar($client);
+        $start = \Carbon\Carbon::parse($appointment->fecha)->format('Y-m-d')."T".$appointment->hora_inicio;
+        $end = \Carbon\Carbon::parse($appointment->fecha)->format('Y-m-d')."T".$appointment->hora_fin;
+        $event = new Google_Service_Calendar_Event(array(
+          'summary' => 'Atención a '.$appointment->nombre_paciente,
+          'location' => 'San Pascual 736',
+          'description' => "Paciente: ".$appointment->nombre_paciente."\nCon: ".$appointment->nombre_profesional,
+          'start' => array(
+            'dateTime' => $start,
+            'timeZone' => 'America/Santiago',
+          ),
+          'sendNotifications' => false,
+          'sendUpdates' => 'externalOnly',
+          'end' => array(
+            'dateTime' => $end,
+            'timeZone' => 'America/Santiago',
+          ),
+          'attendees' => array(
+            array('email' => $email),
+            array('email' => 'you@justbetter.cl'),
+            // array('email' => 'Docencia@justbetter.cl'),
+            // array('email' => 'cugarte@guiasyscoutschile.cl'),
+            // array('email' => 'iver@justbetter.cl'),
+            // array('email' => 'pablo@justbetter.cl'),
+          ),
+          'reminders' => array(
+            'useDefault' => False,
+            'overrides' => array(
+              array('method' => 'email', 'minutes' => 24 * 60),
+              array('method' => 'popup', 'minutes' => 10),
+            ),
+          ),
+        ));
+  
+        $event = $service->events->insert($calendarId, $event);
+        $this->info('Event created: '.$event->getSummary());
+      }
+  
+      return $allprofessional_date;
     }
 
-    public function superUpdate($professional,$calendarId){
-        $appointments = AppointmentMl::calendarAppointments($professional)->get();
+    public function listCalendar($calendarId){
+        // $calendarId = $calendar;
         $client = $this->getClient();
-        foreach ($appointments as $key => $appointment) {
-            if(!in_array($appointment->Estado, ['Cambio de fecha','Anulado vía validación','No asiste'])){
-                continue;
-            }
-            $service = new Calendar($client);
-            $service->events->delete($calendarId, $appointment->professional_calendar);
-            $this->info('Borrar:'.$appointment->Nombre_paciente.' '.$appointment->Apellidos_paciente);
-            $appointment->professional_calendar = 0;
-            $appointment->save();
+        $service = new Calendar($client);
+        // $calendarList = $service->calendarList->listCalendarList();
+        // $calendarListEntry = $service->calendarList->get($calendarId);
+    
+        
+        $events = $service->events->listEvents($calendarId);
+        while(true) {
+          foreach ($events->getItems() as $event) {
+            $this->info("Borrada".$event->getSummary());
+            $service->events->delete($calendarId, $event->getID());
+          }
+          $pageToken = $events->getNextPageToken();
+          if ($pageToken) {
+            $optParams = array('pageToken' => $pageToken);
+            $events = $service->events->listEvents($calendarId, $optParams);
+          } else {
+            break;
+          }
         }
-        return $appointments;
-    }
-
-    public function deleteRepeats($professional,$calendarId){
-        $results = AppointmentMl::allCalendarAppointments($professional)->get(['id'])->toArray();
-        $client = $this->getClient();
-        foreach($results as $result){
-            $this->info($result->id);
-            $appointment = AppointmentMl::find($result->id);
-            $service = new Calendar($client);
-            $service->events->delete($calendarId, $appointment->professional_calendar);
-            $this->info('Borrar:'.$appointment->Nombre_paciente.' '.$appointment->Apellidos_paciente);
-            $appointment->professional_calendar = 0;
-            $appointment->save();
-            $appointment->delete();
-        }
-    }
+      }
 
     public function getClient(){
-        $client = new Client();
+        $client = new Client();        
         $client->setApplicationName('Google Calendar API PHP Quickstart');
         $client->setScopes("https://www.googleapis.com/auth/calendar");
         $client->setAuthConfig(public_path('credentials.json'));
