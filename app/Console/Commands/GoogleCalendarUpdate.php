@@ -154,7 +154,7 @@ class GoogleCalendarUpdate extends Command
         $events = $service->events->listEvents($calendarId);
         while(true) {
           foreach ($events->getItems() as $event) {
-            $this->info("Borrada".$event->getSummary());
+            $this->info("Borrada ".$event->getSummary());
             $service->events->delete($calendarId, $event->getID());
           }
           $pageToken = $events->getNextPageToken();
