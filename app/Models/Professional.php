@@ -125,4 +125,8 @@ class Professional extends Model
 
       return ($porcentaje);
     }
+
+    public static function google_id(){
+      return Professional::whereNotNull('google_id')->get();
+    }
 }

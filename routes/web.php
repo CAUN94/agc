@@ -114,6 +114,15 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/apim/estados', [ApiMedilinkController::class, 'estados'])->middleware(['intranet']);
     Route::get('/apim/alianzas', [ApiMedilinkController::class, 'alianzas'])->middleware(['intranet']);
     Route::get('/apim/actions', [ApiMedilinkController::class, 'allactions'])->middleware(['intranet']);
+    Route::get('/apim/cajas', [ApiMedilinkController::class, 'cajas']);
+    Route::get('/apim/pagos', [ApiMedilinkController::class, 'pagos']);
+    Route::get('/apim/calendar', [ApiMedilinkController::class, 'calendar']);
+    Route::get('/apim/listCalendar', [ApiMedilinkController::class, 'listCalendar']);
+    Route::get('/apim/pagos/{id}', [ApiMedilinkController::class, 'pago']);
+    Route::get('/apim/evoluciones', [ApiMedilinkController::class, 'evoluciones']);
+    Route::get('/apim/user/pagos', [ApiMedilinkController::class, 'UserPays']);
+    Route::get('/apim/documentosTributarios', [ApiMedilinkController::class, 'documentosTributarios']);
+    
 
     Route::post('/apim/addAppointment', [ApiMedilinkController::class, 'addAppointment']);
 
@@ -251,6 +260,9 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/apimedilink/allpayments', [AdminMedilinkController::class, 'allpayments']);
     Route::get('/apimedilink/payments/{id}', [AdminMedilinkController::class, 'payment']);
     Route::get('/apimedilink/payments/{id}/boleta', [AdminMedilinkController::class, 'paymentboleta']);
+    Route::get('/apimedilink/payments/{id}', [AdminMedilinkController::class, 'payment']);
+    
+    
 
     // Usar apim para pruebas
 
