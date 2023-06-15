@@ -8,6 +8,7 @@
         Este cuestionario está basado en el Cuestionario Mundial sobre Actividad Física (GPAQ) e incluye preguntas complementarias de Bienestar  preparadas por el equipo clínico de You Just Better
     @endslot
 
+    <x-poll.rut></x-poll.rut>
     <x-poll.mail></x-poll.mail>
 
     <x-poll.box>
