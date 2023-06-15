@@ -64,11 +64,12 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     // Route::post('/mailcontact', 'App\Http\Controllers\MailContactController@store')->middleware(['auth']);
 
     // Polls
-    // Route::get('/encuesta_satisfaccion', 'App\Http\Controllers\PollController@encuesta_satisfaccion_index');
-    // Route::post('/encuesta_satisfaccion', 'App\Http\Controllers\PollController@encuesta_satisfaccion_store');
+    Route::get('/encuesta_satisfaccion', 'App\Http\Controllers\PollController@encuesta_satisfaccion_index');
+    Route::post('/encuesta_satisfaccion', 'App\Http\Controllers\PollController@encuesta_satisfaccion_store');
     // Route::get('/ganate_una_sesion', 'App\Http\Controllers\PollController@ganate_una_sesion_index');
     // Route::post('/ganate_una_sesion', 'App\Http\Controllers\PollController@ganate_una_sesion_store');
-    // Route::get('/admin/encuesta_satisfaccion', 'App\Http\Controllers\AdminPollController@encuesta_satisfaccion_index');
+    Route::get('/cuestionario', [PollController::class, 'cuestionario_index']);
+    Route::post('/cuestionario', [PollController::class, 'cuestionario_store']);
 
 
     // Admins
