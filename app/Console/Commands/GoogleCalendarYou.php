@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\AppointmentMl;
+use App\Models\TrainAppointment;
 use App\Models\UserMl;
 use App\Models\Professional;
 use Illuminate\Console\Command;
@@ -37,6 +38,7 @@ class GoogleCalendarYou extends Command
     {
         parent::__construct();
         $this->token = config('app.medilink');
+        $this->fecha = \Carbon\Carbon::now()->subdays(1)->format('Y-m-d');
     }
 
     /**
@@ -53,6 +55,61 @@ class GoogleCalendarYou extends Command
             $this->info($professional->description);
             $this->addcalendar($professional->id);
         }        
+
+        $trainAppointments = TrainAppointment::where('date', '>=', \Carbon\Carbon::now()->subdays(10)->format('Y-m-d'))->get();
+        foreach($trainAppointments as $trainAppointment){
+            $this->info($trainAppointment->name);
+            $this->addTraining($trainAppointment->id);
+        }
+        
+    }
+
+    public function addTraining($id){
+        $trainAppointment = TrainAppointment::find($id);
+        $calendarId = 'c_17f6e33645c70703ffca496e309996c1eb2ebb118fd0fb3ab1e878e0b0df2c86@group.calendar.google.com';
+        $email = 'cristobalugarte6@gmail.com';
+        
+        $client = $this->getClient();
+        $service = new Calendar($client);
+
+        $starthour = \Carbon\Carbon::parse($trainAppointment->hour)->format('H:i:s');
+        $start = \Carbon\Carbon::parse($trainAppointment->date)->format('Y-m-d')."T".$starthour;
+        $endhour = \Carbon\Carbon::parse($trainAppointment->hour)->addHour()->format('H:i:s');
+        $end = \Carbon\Carbon::parse($trainAppointment->date)->format('Y-m-d')."T".$endhour;
+
+        $event = new Google_Service_Calendar_Event(array(
+          'summary' => 'Entrenamiento '.$trainAppointment->name,
+          'location' => 'San Pascual 736',
+          'description' => "Con: ".$trainAppointment->trainer->fullname(),
+          'start' => array(
+            'dateTime' => $start,
+            'timeZone' => 'America/Santiago',
+          ),
+          'sendNotifications' => false,
+          'sendUpdates' => 'none',
+          'end' => array(
+            'dateTime' => $end,
+            'timeZone' => 'America/Santiago',
+          ),
+          'attendees' => array(
+            array('email' => $email),
+            // array('email' => 'you@justbetter.cl'),
+            // array('email' => 'cristobalugarte6@gmail.com'),
+            // array('email' => 'Docencia@justbetter.cl'),
+            // array('email' => 'cugarte@guiasyscoutschile.cl'),
+            // array('email' => 'iver@justbetter.cl'),
+            // array('email' => 'pablo@justbetter.cl'),
+          ),
+          'reminders' => array(
+            'useDefault' => False,
+            'overrides' => array(
+              array('method' => 'email', 'minutes' => 24 * 60),
+              array('method' => 'popup', 'minutes' => 10),
+            ),
+          ),
+        ));
+        $event = $service->events->insert($calendarId, $event);
+        $this->info('Event created: '.$event->getSummary());
     }
 
     public function addcalendar($id){
@@ -73,9 +130,9 @@ class GoogleCalendarYou extends Command
         $professional = json_decode($response->getBody())->data[0];
         
         // yesterday date
-        $fecha = date('Y-m-d', strtotime('-1 day'));
+        
 
-        $url = $professional->links[1]->href.'?q={"fecha":{"gt":"'.$fecha.'"}}';
+        $url = $professional->links[1]->href.'?q={"fecha":{"gt":"'.$this->fecha.'"}}';
         $response = $client->request('GET', $url, [
             'headers'  => [
                 'Authorization' => 'Token ' . $this->token
@@ -157,6 +214,12 @@ class GoogleCalendarYou extends Command
         $events = $service->events->listEvents($calendarId);
         while(true) {
           foreach ($events->getItems() as $event) {
+            $date = \Carbon\Carbon::parse($event->getStart()->getDateTime())->format('Y-m-d');
+
+            if($date <= $this->fecha){
+                continue;
+            }
+            
             $this->info("Borrada ".$event->getSummary());
             $service->events->delete($calendarId, $event->getID());
           }
