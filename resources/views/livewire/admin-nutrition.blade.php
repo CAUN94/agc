@@ -124,7 +124,7 @@
                     <option value="{{$control->id}}">{{$control->fecha()}}</option>
                   @endforeach
                 @else
-                  <option selected>fecha</option>
+                  <option selected>fechas</option>
                 @endif
               </select>
               @if($users && $users->count() > 0)<ul class="col-span-1 sm:col-span-4 border border-gray-200 rounded overflow-hidden shadow-md col-span-6">    @foreach($users as $user)      <li wire:click="selectUser({{$user->id}})" class="px-4 py-2 bg-white  hover:bg-primary-100 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out">{{$user->rut}} {{$user->name}} {{$user->lastnames}}</li>    @endforeach</ul>
@@ -383,6 +383,11 @@
                     <td class="text-center">Diferencia PE/PB</td>
                     <td class="text-center">{{round(($viewsNutrition->peso_estructurado - $viewsNutrition->peso), 2)}}</td>
                     <td class="text-center">{{round(($viewsNutrition->peso_estructurado - $viewsNutrition->peso)/$viewsNutrition->peso*100, 2)}}%</td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">Masa Osea Referencial</td>
+                    <td class="text-center">{{round(($viewsNutrition->masa_osea), 2)}}</td>
+                    <td class="text-center">{{round(($viewsNutrition->masa_osea)/$viewsNutrition->peso*100, 2)}}%</td>
                   </tr>
                 </tbody>
               </table>

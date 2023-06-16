@@ -885,10 +885,11 @@ th{
     <h3>DIAGNÓSTICO NUTRICIONAL:</h3>
     <p>Masa adiposa elevada y masa muscular normal.</p>
 
-    <p>Dentro de los objetivos se buscara obtener una reducción de masa adiposa (-5 kg), y así se
-    mejorara el índice adiposo muscular, el índice músculo óseo y la sumatoria de 6 pliegues. La
-    masa muscular debe preservarse en este periodo, para luego aumentar de manera
-    progresiva (+2 kg).</p>
+    <p>@if(empty($nutrition->comment))
+        @else
+        {{$nutrition->comment}}
+        @endif
+    </p>
   </div>
 
   <div style="font-size: 20px; color: purple; text-align: right;">

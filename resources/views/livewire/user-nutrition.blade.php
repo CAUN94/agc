@@ -25,6 +25,7 @@
             </div>
           </div>
 
+<!--
           <div class="bg-white flex justify-center">
               <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
@@ -108,6 +109,8 @@
          </script>
          </div>
 
+       -->
+
           <div class="border-t border-gray-200">
             <div class="bg-white text-sm px-4 py-5 grid sm:gap-4 sm:px-6">
                 <span class="text-lg">Básicos</span>
@@ -135,7 +138,7 @@
                         <div class="grid grid-cols-3">
                             <div class="border text-base flex px-2 items-center">{{round(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100, 1)}}%</div>
                             <div class="border text-base flex px-2 items-center">{{$nutrition->masa_adiposa}} Kg</div>
-                            <div class="border text-base flex px-2 items-center">{{$masa_adiposa_previa - $nutrition->masa_adiposa}} Kg</div>
+                            <div class="border text-base flex px-2 items-center">@if($masa_adiposa_previa == 0) 0 @else {{round($nutrition->masa_adiposa - $masa_adiposa_previa, 2)}} @endif Kg</div>
                         </div>
                     </div>
                     <div class="items-center">
@@ -156,7 +159,7 @@
                         <div class="grid grid-cols-3">
                             <div class="border text-base flex px-2 items-center">{{round(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100, 1)}}%</div>
                             <div class="border text-base flex px-2 items-center">{{$nutrition->masa_muscular}} Kg</div>
-                            <div class="border text-base flex px-2 items-center">{{$masa_muscular_previa - $nutrition->masa_muscular}} Kg</div>
+                            <div class="border text-base flex px-2 items-center">@if($masa_muscular_previa == 0) 0 @else {{round($nutrition->masa_muscular - $masa_muscular_previa, 2)}} @endif Kg</div>
                         </div>
                     </div>
                     <div class="w-auto">
@@ -266,10 +269,7 @@
                 <div class="bg-white text-sm px-4 py-5 grid sm:gap-4 sm:px-6">
                     <span class="text-lg text-center">Diagnostico Nutricional</span>
                         <div class="border p-3 flex">
-                            <span class="text-base mr-4">Dentro de los objetivos se buscara obtener una reducción de masa adiposa (-5 kg), y así se
-mejorara el índice adiposo muscular, el índice músculo óseo y la sumatoria de 6 pliegues. La
-masa muscular debe preservarse en este periodo, para luego aumentar de manera
-progresiva (+2 kg)</span>
+                            <span class="text-base mr-4">{{$nutrition->comment}}</span>
                         </div>
                 </div>
               </div>
