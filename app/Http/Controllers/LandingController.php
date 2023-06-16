@@ -124,10 +124,11 @@ class LandingController extends Controller
             'Saturday' => 'Sabado'
         );
         $text = 'Hola '.$patient->nombre.'! Te recordamos que tienes atención el '.$days[$day->format('l')].' '.$day->format('d').' con '.$atention->nombre_profesional.' a las '.$hora.' hrs.';
-        $text .= '--Para confirmar tu asistencia haz click en el siguiente link: http://yjb.cl/confirmacion/'.$id;
-        if($atention->total!=0){
+        $text .= '--*Para confirmar tu asistencia haz click en el siguiente link o confirma con un mensaje*: http://yjb.cl/confirmacion/'.$id;
+        if($atention->total != $atention->abonado){
             $text .= '--También puedes pagar tu atención de '.Helper::moneda_chilena($atention->total).' en el mismo link.';
-        } 
+            // ddd('Pago');
+        }  
 
         
         if ($atention->nombre_profesional == "Melissa Ross Guerra"){
@@ -148,7 +149,7 @@ class LandingController extends Controller
 
     public function terms()
     {
-        return redirect('/pdf/tyc.pdf');
+        return redirect('/pdf/tyc_you.pdf');
     }
 
     public function team()

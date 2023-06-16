@@ -167,7 +167,7 @@ class User extends Authenticatable {
 	}
 
 	public function notSettledPlan() {
-		return $this->allStudentPlan()->where('settled', '0');
+		return $this->allStudentPlan()->where('settled', '0')->where('training_id','!=','19');
 	}
 
 	public function notSettledSumPlan() {

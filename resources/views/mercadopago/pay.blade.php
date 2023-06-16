@@ -19,7 +19,7 @@
         @if(in_array($appointment->estado_cita, ['Anulado']))
             <a href="https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento" class="normal-button bg-blue-500">Reagendar</a>
         @else
-            @if(!App\Models\AppointmentMl::where('Tratamiento_Nr',$appointment->id_atencion)->first()->ispay)
+            @if($atention->total != $atention->abonado)
                 @if(in_array($appointment->estado_cita, ['Agenda Online', 'No confirmado']))
                     <x-custompay class id="{{$appointment->id}}">Pagar y Confirmar Hora</x-custompay>
                 @else

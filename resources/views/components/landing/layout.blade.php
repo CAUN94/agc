@@ -80,6 +80,8 @@
         <x-contact-fixed></x-contact-fixed>
         <x-flash-message></x-flash-message>
         @if (isset($script)) {{ $script }} @endif
+        <script async src="https://tracking.bciplus.cl/bciplus/script.js"></script>
+
         <livewire:scripts />
 
     </body>

@@ -8,7 +8,8 @@
       openPsyd: false,
       openPsyc: false,
       openTraun: false,
-      openBio: false
+      openBio: false,
+      openTrain: false,
        }">
       <section class="bg-fixed pt-2" style="background-image: url({{ asset('img/bg-gym.jpg')}}); background-size: cover;">
           <h2 class="title">Servicios</h2>
@@ -83,7 +84,21 @@
                   <img class="h-16 lg:h-20 block" src="{{ asset('img/iconos/pscicologia_deportiva.png')}}">
             </div> --}}
 
-            <a href="/trainings">
+            <div class="bg-light-grey mx-auto rounded-md py-2 px-4 w-full h-auto lg:w-full cursor-pointer hover:text-primary-900 border-2 border-primary-500 hover:border-primary-900"  x-on:click="openTrain = ! openTrain">
+                  <h2 class="text-xl">Entrenamiento</h2>
+                  <div class="mt-4 flex justify-between items-center">
+                        <div class="w-4/5 mr-4">
+                              <span class="block text-base text-justify mr-1">Disponemos de clases grupales y personalizados en horarios AM y PM. Son entrenamientos llenos de energía trabajando full body.</span>
+
+                        </div>
+                        <div class="ml-2 flex flex-col justify-between items-center">
+                              <img class="h-16 lg:h-20 block bg-white rounded-full border-2 border-primary-500 hover:border-primary-900 p-2" src="{{ asset('img/iconos/entrenamiento.png')}}">
+                              <span class="block text-xs sm:text-sm text-primary-500 items-center bg-you-grey mt-2 py-1 px-1.5 sm:px-2 rounded-xl text-center">Ver Más</span>
+                        </div>
+                  </div>
+            </div>
+
+            <!-- <a href="/trainings">
                   <div class="bg-light-grey mx-auto rounded-md py-2 px-4 w-full h-auto lg:w-full cursor-pointer hover:text-primary-900 border-2 border-primary-500 hover:border-primary-900">
                         <h2 class="text-xl">Entrenamiento</h2>
                         <div class="mt-4 flex justify-between items-center">
@@ -97,7 +112,7 @@
                               </div>
                         </div>
                   </div>
-            </a>
+            </a> -->
 
             <div class="bg-light-grey mx-auto rounded-md py-2 px-4 w-full h-auto lg:w-full cursor-pointer hover:text-primary-900 border-2 border-primary-500 hover:border-primary-900"  x-on:click="openBio = ! openBio">
                   <h2 class="text-xl">Biomecánica</h2>
@@ -297,4 +312,47 @@
                   Cerrar
             </x-slot>
       </x-landing.modal-service>
+      {{--    Entrenamiento   --}}
+      <div  x-show="openTrain" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true" x-cloak>
+            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full" @click.away="openTrain = false">
+                  <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                  <div class="sm:flex sm:items-start">
+                  <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full sm:mx-0 sm:h-10 sm:w-10">
+                        <!-- Heroicon name: outline/exclamation -->
+                        <img src="{{asset('img/icon.png')}}">
+                  </div>
+                  <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                              Entrenamiento
+                        </h3>
+                        <span class="text-primary-500 mt-2 text-base block">¿En que consiste el servicio de entrenamiento?</span>
+                        <div>
+                        <p class="overflow-y-auto text-base text-gray-500 mt-2 text-justify  leading-relaxed ">
+                        ¡Tenemos distintos planes de entrenamiento que te podrían interesar!
+                        Tenemos planes personalizados y para duplas, donde el entrenador se va a enfocar particularmente en los objetivos y necesidades del/los alumnos.
+                        Por otro lado tenemos clases grupales donde trabajarás todo el cuerpo para mejorar tu estado físico. Estas no son masivas, por lo que el entrenador está atento a cada alumno para brindarle la mejor calidad de servicio.
+                        </p>
+                        </div>
+                  </div>
+                  </div>
+                  </div>
+                  <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                  <div class="flex flex-col">
+                  <a href="/trainings" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary-500 text-base font-medium text-white hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm">
+                        Desde $49.990
+                  </a>
+                  </div>
+                  <button x-on:click="openTrain = ! openTrain" type="button" class="mt-3 self-start w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        Cerrar
+                  </button>
+
+                  </div>
+
+            </div>
+
+            </div>
+            </div>
 </div>

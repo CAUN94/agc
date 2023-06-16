@@ -83,7 +83,7 @@ class AppointmentMl extends Model
     public static function calendarAppointments($professional){
         return AppointmentMl::where('Fecha','>=',\Carbon\Carbon::yesterday()->startOfDay()->format('Y-m-d'))
             ->where('Profesional',$professional)
-            ->where('professional_calendar','not like',0);
+            ->where('professional_calendar','not like','0');
     }
 
     public static function allCalendarAppointments($professional){

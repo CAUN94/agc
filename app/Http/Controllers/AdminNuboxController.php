@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NuboxMail;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\Professional;
 use App\Models\Pack;
 use App\Models\SelledPack;
+use Illuminate\Support\Facades\Mail;
 
 class AdminNuboxController extends Controller
 {
@@ -210,7 +212,8 @@ class AdminNuboxController extends Controller
       $selled_pack->pack_name = $pack->name;
       $selled_pack->save();
 
-      // return $emit;
+      // return $patient->data->email;
+      \Mail::to($patient->data->email)->send(new NuboxMail($selled_pack->id,$emit));
       return view('admin.nubox.show',compact('emit'));
     }
 

@@ -45,7 +45,7 @@ class UpdateDatabase extends Command
 
     public function store(){
         $client = new \GuzzleHttp\Client();
-        $date = strval(Carbon::now()->subdays(2)->format('Y-m-d'));
+        $date = strval(Carbon::now()->subHours(5)->format('Y-m-d'));
         $query_string   = '?q={"fecha":{"gt":"'.$date.'"}}';
         // $query_string   = '?q={"fecha":{"gt":"2023-02-10"}}';
         $url = 'https://api.medilink.healthatom.com/api/v1/citas';
@@ -99,8 +99,6 @@ class UpdateDatabase extends Command
             $apMl = AppointmentMl::UpdateOrCreate(
                 [
                     'Tratamiento_Nr' => $appointment->id_atencion,
-                    'Rut_Paciente' => $patient->rut ,
-                    // 'Estado' => $appointment->estado_cita,
                 ],
                 [
                     'Estado' => $appointment->estado_cita,
@@ -116,6 +114,7 @@ class UpdateDatabase extends Command
                     'Mail' => $patient->email ,
                     'Celular' => $patient->celular ,
                     'Convenio' => 0,
+                    'comentario' => $appointment->comentarios,
                     'Sucursal' => $appointment->nombre_sucursal ,
                 ]
             );

@@ -30,6 +30,7 @@ use App\Http\Middleware\UpdatePassword;
 // Route::get('/scraping-alta', [ScrapingController::class, 'alta']);
 
 Route::get('/confirmacion/{id}', [MercadoPagoController::class, 'pay']);
+Route::get('/pago', 'App\Http\Controllers\RedirectController@pago');
 
 Route::middleware([UpdatePassword::class,])->group(function () {
     
@@ -63,11 +64,12 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     // Route::post('/mailcontact', 'App\Http\Controllers\MailContactController@store')->middleware(['auth']);
 
     // Polls
-    // Route::get('/encuesta_satisfaccion', 'App\Http\Controllers\PollController@encuesta_satisfaccion_index');
-    // Route::post('/encuesta_satisfaccion', 'App\Http\Controllers\PollController@encuesta_satisfaccion_store');
+    Route::get('/encuesta_satisfaccion', 'App\Http\Controllers\PollController@encuesta_satisfaccion_index');
+    Route::post('/encuesta_satisfaccion', 'App\Http\Controllers\PollController@encuesta_satisfaccion_store');
     // Route::get('/ganate_una_sesion', 'App\Http\Controllers\PollController@ganate_una_sesion_index');
     // Route::post('/ganate_una_sesion', 'App\Http\Controllers\PollController@ganate_una_sesion_store');
-    // Route::get('/admin/encuesta_satisfaccion', 'App\Http\Controllers\AdminPollController@encuesta_satisfaccion_index');
+    Route::get('/cuestionario', [PollController::class, 'cuestionario_index']);
+    Route::post('/cuestionario', [PollController::class, 'cuestionario_store']);
 
 
     // Admins
@@ -113,6 +115,15 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/apim/estados', [ApiMedilinkController::class, 'estados'])->middleware(['intranet']);
     Route::get('/apim/alianzas', [ApiMedilinkController::class, 'alianzas'])->middleware(['intranet']);
     Route::get('/apim/actions', [ApiMedilinkController::class, 'allactions'])->middleware(['intranet']);
+    Route::get('/apim/cajas', [ApiMedilinkController::class, 'cajas']);
+    Route::get('/apim/pagos', [ApiMedilinkController::class, 'pagos']);
+    Route::get('/apim/calendar', [ApiMedilinkController::class, 'calendar']);
+    Route::get('/apim/listCalendar', [ApiMedilinkController::class, 'listCalendar']);
+    Route::get('/apim/pagos/{id}', [ApiMedilinkController::class, 'pago']);
+    Route::get('/apim/evoluciones', [ApiMedilinkController::class, 'evoluciones']);
+    Route::get('/apim/user/pagos', [ApiMedilinkController::class, 'UserPays']);
+    Route::get('/apim/documentosTributarios', [ApiMedilinkController::class, 'documentosTributarios']);
+    
 
     Route::post('/apim/addAppointment', [ApiMedilinkController::class, 'addAppointment']);
 
@@ -138,9 +149,15 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/ficha', 'App\Http\Controllers\ScrapingController@ficha')->name('ficha');
 
     Route::get('/scraping-paymentsml', 'App\Http\Controllers\ScrapingController@paymentsMl')->name('scraping-paymentsml');
-    Route::get('/professionals', 'App\Http\Controllers\ScrapingController@professionals')->middleware(['intranet']);
 
-    Route::get('/professionals/{id}', 'App\Http\Controllers\ScrapingController@professional')->middleware(['intranet']);
+    // Route::get('/professionals', 'App\Http\Controllers\ScrapingController@professionals')->middleware(['intranet']);
+
+    // Route::get('/professionals/{id}', 'App\Http\Controllers\ScrapingController@professional')->middleware(['intranet']);
+
+
+    Route::get('/professionals', 'App\Http\Controllers\ApiMedilinkController@nextAppointmentsProfessionals')->middleware(['intranet']);
+    Route::get('/professionals/{id}', 'App\Http\Controllers\ApiMedilinkController@nextAppointmentsProfessional')->middleware(['intranet']);
+
 
     // Medilink
     Route::get('/medilink/payments','App\Http\Controllers\MedilinkController@payments');
@@ -163,6 +180,8 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/entrenamiento', 'App\Http\Controllers\RedirectController@trainning');
     Route::get('/aranceles', 'App\Http\Controllers\RedirectController@arancel');
     Route::get('/pago', 'App\Http\Controllers\RedirectController@pay');
+    Route::get('/confirmacion/{id}', [MercadoPagoController::class, 'pay']);
+    Route::get('/mercadopago', 'App\Http\Controllers\RedirectController@pago');
     Route::get('/rrhh', 'App\Http\Controllers\RedirectController@rrhh');
     Route::get('/clinica', 'App\Http\Controllers\RedirectController@clinica');
     Route::get('/club-strava', 'App\Http\Controllers\RedirectController@strava');
@@ -180,6 +199,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/pnl', 'App\Http\Controllers\RedirectController@pnl');
     Route::get('/horarios-peak', 'App\Http\Controllers\RedirectController@horariospeak');
     Route::get('/recomiendanos', 'App\Http\Controllers\RedirectController@recomiendanos');
+    Route::get('/mds', 'App\Http\Controllers\RedirectController@mds');
 
     Route::get('/box/dcontrerasb', 'App\Http\Controllers\RedirectController@contreras');
     Route::get('/box/jmguzmanh', 'App\Http\Controllers\RedirectController@guzman');
@@ -241,6 +261,13 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/apimedilink/allpayments', [AdminMedilinkController::class, 'allpayments']);
     Route::get('/apimedilink/payments/{id}', [AdminMedilinkController::class, 'payment']);
     Route::get('/apimedilink/payments/{id}/boleta', [AdminMedilinkController::class, 'paymentboleta']);
+    Route::get('/apimedilink/payments/{id}', [AdminMedilinkController::class, 'payment']);
+    
+    
+
+    // Usar apim para pruebas
+
+    
 
     // Nubox
     Route::get('/nubox', [ AdminNuboxController::class, 'index']);
