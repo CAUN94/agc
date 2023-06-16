@@ -19,13 +19,32 @@ class UserNutrition extends Component
     public function mount($user){
         $this->user = $user;
         $this->nutrition = Nutrition::where('rut',$user->rut)->orderBy('fecha', 'desc')->first();
-        $this->nutritionID = $this->nutrition->id;
+        $sesion_pasada = Nutrition::where('rut',$this->nutrition->rut)->where('fecha','<',$this->nutrition->fecha)->orderBy('fecha','desc')->first();
+        if(is_null($sesion_pasada)){
+          $this->masa_adiposa_previa = 0;
+          $this->masa_muscular_previa = 0;
+        }else{
+          $this->masa_adiposa_previa = $sesion_pasada->masa_adiposa;
+          $this->masa_muscular_previa = $sesion_pasada->masa_muscular;
+        }
+        if(!is_null($this->nutrition)){
+          $this->nutritionID = $this->nutrition->id;
+        }
+
     }
 
     public function updatedNutritionId()
     {
         $this->nutrition = Nutrition::find($this->nutritionID);
-        $sesion_pasada = Nutrition::where('rut',$nutrition->rut)->where('fecha','<',$nutrition->fecha)->orderBy('fecha','desc')->first();
+        $sesion_pasada = Nutrition::where('rut',$this->nutrition->rut)->where('fecha','<',$this->nutrition->fecha)->orderBy('fecha','desc')->first();
+        if(is_null($sesion_pasada)){
+          $this->masa_adiposa_previa = 0;
+          $this->masa_muscular_previa = 0;
+        }else{
+          $this->masa_adiposa_previa = $sesion_pasada->masa_adiposa;
+          $this->masa_muscular_previa = $sesion_pasada->masa_muscular;
+        }
+
     }
 
     public function createNutrinion(){}

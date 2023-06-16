@@ -1,7 +1,7 @@
 <div>
     <div class="hidden sm:flex flex-col lg:flex-row gap-2">
     <!-- <div class="flex flex-col lg:flex-row gap-2"> -->
-        <div class="w-full lg:w-1/4 flex flex-col overflow-x-auto gap-y-2">
+        <div class=" w-full lg:w-2/5 flex flex-col overflow-x-auto gap-y-2">
             <div class="align-middle inline-block min-w-full">
                 <div x-data="{ classShow: false }" class="box-white p-3 {{Auth::user()->student()->isSettled() ? "" : "border-red-500 border-2" }}">
                     <div>
@@ -15,8 +15,50 @@
                             @endif
                         </div>
                     </div>
+
+                    @if(!is_null($selected_date))
+                    @if(Auth::user()->student()->training->daysCheck($selected_date)->isNotEmpty())
+                    <p class="ml-2">Clases restantes del mes: {{auth()->user()->training->class}}</p>
+
+                    <u class="ml-2 mt-2">Reservas</u>
+                      <select wire:model="trainerSearch" class="mr-3 mb-3 float-right text-sm rounded-md">
+                        <option selected>Buscar Profesional</option>
+                        @foreach(Auth::user()->student()->training->daysCheck($selected_date)->unique('trainer_id') as $training)
+                          <option>{{Auth::user()->find($training->trainer_id)->fullname()}}</option>
+                        @endforeach
+                      </select>
+
+                    <table class="mt-3 table-fixed w-full overflow-hidden rounded-lg shadow-lg p-6">
+                      <thead>
+                        <tr class="bg-primary-500">
+                          <th>Descripcion</th>
+                          <th>Hora</th>
+                          <th>Entrenador</th>
+                          <th>Cupos</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @foreach(Auth::user()->student()->training->daysCheck($selected_date) as $training)
+                        <tr class="cursor-pointer @if($training->id == $selectedTraining) bg-primary-100 @endif" wire:click="selectTraining({{$training->id}})">
+                          <td class="text-center text-sm border">{{$training->name}}</td>
+                          <td class="text-center text-sm border">{{$training->hour}}</td>
+                          <td class="text-center text-sm border">{{Auth::user()->find($training->trainer_id)->fullname()}}</td>
+                          <td class="text-center text-sm border">{{$training->places - App\Models\TrainBook::where('train_appointment_id',$training->id)->count()}}/{{$training->places}}</td>
+                        </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+
+                    <p class="mt-3 inline-flex justify-center py-1 px-2 border border-transparent shadow-sm text-sm font-medium rounded-md hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 @if(!$validReserve) bg-gray-100 cursor-not-allowed @else bg-primary-500 cursor-pointer @endif" wire:click="reserva({{$selectedTraining}})">
+                      Reservar Sesión
+                    </p>
+                    @else
+                    <p>Fecha sin cupos de entrenamiento</p>
+                    @endif
+                    @endif
+
                     @if(!is_null($train))
-                    <div x-show="$wire.classShow" x-cloak>
+                    <div>
                         <dl>
                         <div class="train-class-resume">
                             <dt class="text-sm font-medium text-gray-500">
@@ -101,10 +143,29 @@
                         @endforelse
                     </div>
                 </div>
-
             </div>
 
+            @if($showReserve)
+            <div class="align-middle inline-block min-w-full">
+              <div class="box-white p-3 {{Auth::user()->student()->isSettled() ? "" : "border-red-500 border-2" }}">
+                <h1 class="text-center font-bold">¡Clase Reservada!</h1>
+                <p class="mt-1 mb-1 text-center text-sm ">Se a enviado un recordatorio a Mail@Mail.com</p>
+                <div class="border grid grid-cols-2 rounded-md">
+                    <div class="text-sm items-center">Fecha: {{$reservedTraining->date}}</div>
+                    <div class="text-sm items-center">Entrenador: {{Auth::user()->find($reservedTraining->trainer_id)->fullname()}}</div>
+                    <div class="text-sm items-center">Hora: {{$reservedTraining->hour}}</div>
+                    <div class="text-sm items-center">Clase: {{$reservedTraining->name}}</div>
+                    <div class="text-sm items-center">Clases Restantes: {{auth()->user()->training->class}}</div>
+                </div>
+                <p class="mt-2 text-center text-sm">Acuérdate de llegar 15 minutos antes de tu clase.</p>
+              </div>
+            </div>
+            @endif
+
         </div>
+
+
+
         <div class="w-full flex flex-col overflow-x-auto gap-1">
         <div class="align-middle inline-block min-w-full">
             <div class="box-white">
@@ -118,7 +179,6 @@
                                         <span class="ml-1 text-lg text-gray-600 font-normal">{{$now->format('Y')}}</span>
 
                                     </div>
-                                    {{-- <span class="ml-1 text-lg text-gray-600 font-normal">Puedes reservar {{auth()->user()->training->class}} clases al mes</span> --}}
                                     <div class="border rounded-lg px-1" style="padding-top: 2px;">
                                         <button
                                             type="button"
@@ -171,7 +231,8 @@
                                                     {{ $date->format('Y-m-d') == date('Y-m-d') ? "bg-primary-500 text-white" : "text-gray-700" }}
                                                     {{ $date->format('Y-m-d') > date('Y-m-d') ? "text-primary-500 hover:bg-primary-500 hover:text-white" : "" }}
                                                     {{ $date->format('Y-m-d') < date('Y-m-d') ? "opacity-25" : "" }}
-                                                    ">
+                                                    "
+                                                    wire:click="selectDate({{$date->format('d')}})">
                                                     {{$date->format('d')}}
                                                 </div>
                                                 @if (Auth::user()->student()->islastday($date))
@@ -188,7 +249,6 @@
                                                 @if(Auth::user()->student()->isStartday($date))
                                                     <span class="block sm:inline-block text-xs lg:text-sm">Inicio Plan</span>
                                                 @endif
-
                                                 <div style="height: {{$heightbox}};" class="overflow-y-auto mt-1">
                                                     @foreach(Auth::user()->student()->training->daysCheck($date) as $trainAppointment)
                                                         <div
@@ -260,7 +320,7 @@
             </div>
         </div>
         </div>
-        
+
     </div>
 
     <div class="block sm:hidden">
@@ -279,7 +339,7 @@
                             {{$trainAppointment->isBooking() ? "Reservada" : "Reservar" }}
                         </button>
                     </div>
-                    
+
                 @endforeach
             </div>
         </div>

@@ -290,6 +290,9 @@ class AdminNutrition extends Component
       $validate = $this->validate([
           'commentary' => ['required'],
       ]);
+
+      $this->viewsNutrition->comment = $this->commentary;
+      $this->viewsNutrition->save();
       session()->flash('comentarioMensaje','Se incluyo el mensaje exitosamente');
     }
 
