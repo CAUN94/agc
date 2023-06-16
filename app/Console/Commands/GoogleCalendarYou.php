@@ -12,21 +12,21 @@ use Google\Client;
 use Google\Service\Calendar;
 use Google_Service_Calendar_Event;
 
-class GoogleCalendarUpdate extends Command
+class GoogleCalendarYou extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'ln:googleCalendarUpdate';
+    protected $signature = 'ln:googleCalendarYou';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Google Calendar Update';
+    protected $description = 'Google Calendar You';
 
     /**
      * Create a new command instance.
@@ -47,11 +47,10 @@ class GoogleCalendarUpdate extends Command
     public function handle()
     {
         $this->getClient();
-
-        $professionals = Professional::google_id();
+        $this->listCalendar('c_17f6e33645c70703ffca496e309996c1eb2ebb118fd0fb3ab1e878e0b0df2c86@group.calendar.google.com');
+        $professionals = Professional::all();
         foreach($professionals as $professional){
             $this->info($professional->description);
-            $this->listCalendar($professional->google_id);
             $this->addcalendar($professional->id);
         }        
     }
@@ -59,8 +58,8 @@ class GoogleCalendarUpdate extends Command
     public function addcalendar($id){
       
         $professional = Professional::find($id);
-        $calendarId = $professional->google_id;
-        $email = $professional->user->email;
+        $calendarId = 'c_17f6e33645c70703ffca496e309996c1eb2ebb118fd0fb3ab1e878e0b0df2c86@group.calendar.google.com';
+        $email = 'cristobalugarte6@gmail.com';
   
         $client = new \GuzzleHttp\Client();
         $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/?q={"rut":{"eq":"'.$professional->user->rut.'"}}';
@@ -72,8 +71,11 @@ class GoogleCalendarUpdate extends Command
         ]);
         
         $professional = json_decode($response->getBody())->data[0];
-  
-        $url = $professional->links[1]->href.'?q={"fecha":{"gt":"2023-06-06"}}';
+        
+        // yesterday date
+        $fecha = date('Y-m-d', strtotime('-1 day'));
+
+        $url = $professional->links[1]->href.'?q={"fecha":{"gt":"'.$fecha.'"}}';
         $response = $client->request('GET', $url, [
             'headers'  => [
                 'Authorization' => 'Token ' . $this->token
@@ -121,7 +123,8 @@ class GoogleCalendarUpdate extends Command
           ),
           'attendees' => array(
             array('email' => $email),
-            array('email' => 'you@justbetter.cl'),
+            // array('email' => 'you@justbetter.cl'),
+            // array('email' => 'cristobalugarte6@gmail.com'),
             // array('email' => 'Docencia@justbetter.cl'),
             // array('email' => 'cugarte@guiasyscoutschile.cl'),
             // array('email' => 'iver@justbetter.cl'),
