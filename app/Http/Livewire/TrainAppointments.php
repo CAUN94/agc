@@ -20,7 +20,13 @@ class TrainAppointments extends Component
     public $width = '16.66%';
     public $height = '120px';
     public $heightbox = '80px';
+    public $reservedTraining;
     public $train = null;
+    public $trainerSearch;
+    public $selectedTraining = null;
+    public $selected_date = null;
+    public $validReserve = true;
+    public $showReserve = false;
 
     public function mount()
     {
@@ -39,6 +45,7 @@ class TrainAppointments extends Component
 
     public function show($id){
         $this->train = TrainAppointment::find($id);
+
         if (Auth::user()->student()->availableday($this->train->date)){
             $this->classShow = true ;
         }
@@ -89,9 +96,27 @@ class TrainAppointments extends Component
                 // else {
                 //     session()->flash('primary','Maximo de clases alcanzado');
                 // }
-    
+
             }
         }
+    }
+
+    public function selectDate($date){
+      $this->selected_date = Carbon::createFromDate($this->now->format('Y'),$this->now->format('m'),$date)->format('Y-m-d');
+    }
+
+    public function selectTraining($trainingId){
+      $this->selectedTraining = $trainingId;
+      if(TrainAppointment::find($trainingId)->places - TrainBook::where('train_appointment_id',$trainingId)->count() > 0){
+        $this->validReserve = true;
+      }else{
+        $this->validReserve = false;
+      }
+    }
+
+    public function reserva($id){
+      $this->showReserve = true;
+      $this->reservedTraining = TrainAppointment::find($id);
     }
 
     public function unbook(TrainBook $trainBook){
@@ -119,7 +144,6 @@ class TrainAppointments extends Component
                 $this->dates[] = $date;
             }
         }
-
         return view('livewire.train-appointments');
     }
 }
