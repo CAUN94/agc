@@ -66,7 +66,7 @@ class GoogleCalendarYou extends Command
 
     public function addTraining($id){
         $trainAppointment = TrainAppointment::find($id);
-        $calendarId = 'c_17f6e33645c70703ffca496e309996c1eb2ebb118fd0fb3ab1e878e0b0df2c86@group.calendar.google.com';
+        $calendarId = 'c_32e5b210b27ab0145bbeea4e8c92fe0f65015066cee8f97bdd06d39f21991253@group.calendar.google.com';
         $email = 'cristobalugarte6@gmail.com';
         
         $client = $this->getClient();
