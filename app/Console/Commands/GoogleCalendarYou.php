@@ -56,9 +56,9 @@ class GoogleCalendarYou extends Command
             $this->addcalendar($professional->id);
         }        
 
-        $trainAppointments = TrainAppointment::where('date', '>=', \Carbon\Carbon::now()->subdays(10)->format('Y-m-d'))->get();
+        $trainAppointments = TrainAppointment::where('date', '>=', \Carbon\Carbon::now()->subdays(1)->format('Y-m-d'))->get();
         foreach($trainAppointments as $trainAppointment){
-            $this->info($trainAppointment->name);
+            $this->info($trainAppointment->name." ".$trainAppointment->id);
             $this->addTraining($trainAppointment->id);
         }
         
