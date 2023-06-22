@@ -95,7 +95,7 @@ class UpdateUsersMedilink extends Command
         $client = new Client();
         $crawler = $client->request('GET', 'https://youjustbetter.softwaremedilink.com/reportesdinamicos');
         $form = $crawler->selectButton('Ingresar')->form();
-        $form->setValues(['rut' => 'admin', 'password' => 'Pascual4900']);
+        
         $crawler = $client->submit($form);
         if($filter){
             $first = strval(Carbon::now()->subMonth()->subMonth()->format('Y-m-d'));

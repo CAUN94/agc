@@ -205,7 +205,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/eventos', 'App\Http\Controllers\RedirectController@eventos');
     Route::get('/eventos/logistica', 'App\Http\Controllers\RedirectController@logistica');
     Route::get('/eventos/comunicaciones', 'App\Http\Controllers\RedirectController@comunicaciones_eventos');
-    Route::get('/eventos/alianzas_yjb', 'App\Http\Controllers\RedirectController@alianzas_yjb');
+    Route::get('/eventos/contrato', 'App\Http\Controllers\RedirectController@alianzas_yjb');
 
 
     Route::get('/box/dcontrerasb', 'App\Http\Controllers\RedirectController@contreras');
