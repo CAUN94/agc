@@ -93,7 +93,8 @@ class GoogleCalendarYou extends Command
           ),
           'attendees' => array(
             array('email' => $email),
-            // array('email' => 'you@justbetter.cl'),
+            array('email' => 'you@justbetter.cl'),
+            array('email' => 'cesar.ilgarci@gmail.com'),
             // array('email' => 'cristobalugarte6@gmail.com'),
             // array('email' => 'Docencia@justbetter.cl'),
             // array('email' => 'cugarte@guiasyscoutschile.cl'),
@@ -180,7 +181,8 @@ class GoogleCalendarYou extends Command
           ),
           'attendees' => array(
             array('email' => $email),
-            // array('email' => 'you@justbetter.cl'),
+            array('email' => 'you@justbetter.cl'),
+            array('email' => 'cesar.ilgarci@gmail.com'),
             // array('email' => 'cristobalugarte6@gmail.com'),
             // array('email' => 'Docencia@justbetter.cl'),
             // array('email' => 'cugarte@guiasyscoutschile.cl'),

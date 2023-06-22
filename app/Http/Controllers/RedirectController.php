@@ -265,6 +265,28 @@ class RedirectController extends Controller {
 		$url = "https://link.mercadopago.cl/yjb";
 		return Redirect::away($url);
 	}
+
+	//crea estas 4 funciones con public function eventos logistica comunicaciones alianzas_yjb 
+
+	public function eventos(){
+		$url = "https://docs.google.com/forms/d/1EkQFPV6k_zhZfhpMICuZyirlPV2QHeFPive6UQ0f3DI/prefill";
+		return Redirect::away($url);
+	}
+
+	public function logistica(){
+		$url = "https://docs.google.com/forms/d/1QCh6-xYxdk6_-nJv2rm3dWAmlaxQhq3pTkbdAIKCgQ8/prefill";
+		return Redirect::away($url);
+	}
+
+	public function comunicaciones_eventos(){
+		$url = "https://docs.google.com/forms/d/1VUhaTIk0OvQSBKNKJcqOquO3e1G7D9GXRhbkvaF4fL4/prefill";
+		return Redirect::away($url);
+	}
+
+	public function alianzas_yjb(){
+		$url = "https://docs.google.com/forms/d/1gxcWkDt-QQ0fQtCqd37cwOHSjSTKsvGeiNQeh89Yzy0/prefill";
+		return Redirect::away($url);
+	}
 	
 
 }
