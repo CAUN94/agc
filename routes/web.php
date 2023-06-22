@@ -123,6 +123,8 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/apim/evoluciones', [ApiMedilinkController::class, 'evoluciones']);
     Route::get('/apim/user/pagos', [ApiMedilinkController::class, 'UserPays']);
     Route::get('/apim/documentosTributarios', [ApiMedilinkController::class, 'documentosTributarios']);
+
+    Route::get('/googlecalendar', [GoogleCalendarController::class, 'index']);
     
 
     Route::post('/apim/addAppointment', [ApiMedilinkController::class, 'addAppointment']);
@@ -200,6 +202,11 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/horarios-peak', 'App\Http\Controllers\RedirectController@horariospeak');
     Route::get('/recomiendanos', 'App\Http\Controllers\RedirectController@recomiendanos');
     Route::get('/mds', 'App\Http\Controllers\RedirectController@mds');
+    Route::get('/eventos', 'App\Http\Controllers\RedirectController@eventos');
+    Route::get('/eventos/logistica', 'App\Http\Controllers\RedirectController@logistica');
+    Route::get('/eventos/comunicaciones', 'App\Http\Controllers\RedirectController@comunicaciones_eventos');
+    Route::get('/eventos/alianzas_yjb', 'App\Http\Controllers\RedirectController@alianzas_yjb');
+
 
     Route::get('/box/dcontrerasb', 'App\Http\Controllers\RedirectController@contreras');
     Route::get('/box/jmguzmanh', 'App\Http\Controllers\RedirectController@guzman');
