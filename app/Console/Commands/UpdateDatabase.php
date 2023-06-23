@@ -45,7 +45,7 @@ class UpdateDatabase extends Command
 
     public function store(){
         $client = new \GuzzleHttp\Client();
-        $date = strval(Carbon::now()->subDays(15)->format('Y-m-d'));
+        $date = strval(Carbon::now()->subDays(35)->format('Y-m-d'));
         $query_string   = '?q={"fecha":{"gt":"'.$date.'"}}';
         // $query_string   = '?q={"fecha":{"gt":"2023-02-10"}}';
         $url = 'https://api.medilink.healthatom.com/api/v1/citas';
