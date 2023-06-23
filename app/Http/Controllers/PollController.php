@@ -78,6 +78,9 @@ class PollController extends Controller {
 			'P19' => ['required', 'string', 'max:255'],
 			'P20' => ['required', 'string', 'max:255'],
 			'P21' => ['required', 'string', 'max:255'],
+			'P22' => ['required', 'string', 'max:255'],
+			'P23' => ['string', 'max:255'],
+			'P24' => ['string', 'max:255'],
 			'PA' => ['required', 'string', 'max:255'],
 			'Comment' => ['string', 'max:255'],
         ]);

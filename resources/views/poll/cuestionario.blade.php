@@ -311,6 +311,40 @@
 
     <x-poll.box>
         <x-poll.box-title>
+        P22. ¿Ud, fuma? Si su respuesta es no, favor evitar las siguientes 2 preguntas.
+        </x-poll.box-title>
+
+        <x-poll.radio-answer>
+            Sí,No,P22
+        </x-poll.radio-answer>
+    </x-poll.box>
+
+    <x-poll.box>
+        <x-poll.box-title>
+        P23. ¿Cuántos cigarros al día fuma?
+        </x-poll.box-title>
+
+        <x-poll.text-answer>
+            @slot('name')
+                P23
+            @endslot
+        </x-poll.text-answer>
+    </x-poll.box>
+
+    <x-poll.box>
+        <x-poll.box-title>
+        P24. ¿Hace cuantos años fuma?
+        </x-poll.box-title>
+
+        <x-poll.text-answer>
+            @slot('name')
+                P24
+            @endslot
+        </x-poll.text-answer>
+    </x-poll.box>
+
+    <x-poll.box>
+        <x-poll.box-title>
         Selecciona la opción que se adecúe a ti. En cuanto a pausas activas:
         </x-poll.box-title>
 
