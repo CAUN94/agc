@@ -20,7 +20,7 @@ class UpdateActions extends Command
      *
      * @var string
      */
-    protected $signature = 'ln:UpdateActions';
+    protected $signature = 'ln:UpdateActions {date?}';
 
     /**
      * The console command description.
@@ -47,6 +47,20 @@ class UpdateActions extends Command
      */
     public function handle()
     {
+        if($this->argument('date') == null){
+            $date = strval(Carbon::now()->subDays(10)->format('Y-m-d'));
+        } else {
+            $date = strval(Carbon::create($this->argument('date'))->format('Y-m-d'));
+        }
+
+        // copy and add 15 days to $date
+        $date2 = strval(Carbon::create($date)->subDays(15)->format('Y-m-d'));
+        $date3 = strval(Carbon::create($date)->addDays(15)->format('Y-m-d'));
+
+        $this->info($date);
+        $this->info($date2);
+        $this->info($date3);
+
         $ids = [56,36,2,49,46,10,19,48,26,37,20,44,54,52,53,50,34,47,45,54,35];
         foreach($ids as $id){
             $this->allActions($id);
@@ -56,6 +70,15 @@ class UpdateActions extends Command
     }
 
     public function allActions($id){
+        if($this->argument('date') == null){
+            $date = strval(Carbon::now()->subDays(10)->format('Y-m-d'));
+        } else {
+            $date = strval(Carbon::create($this->argument('date'))->format('Y-m-d'));
+        }
+
+        $date2 = strval(Carbon::create($date)->subDays(15)->format('Y-m-d'));
+        $date3 = strval(Carbon::create($date)->addDays(15)->format('Y-m-d'));
+
         $client = new \GuzzleHttp\Client();
         $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/'.$id;
         $response = $client->request('GET', $url, [
@@ -71,7 +94,9 @@ class UpdateActions extends Command
         $coff = User::where('rut',$rut)->first()->professional->coeff;
 
         $client = new \GuzzleHttp\Client();
-        $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/'.$id.'/citas?q={"fecha":{"gt":"2023-05-19"},"estado_cita":{"eq":"Atendido"}}&sort=fecha:desc';
+
+
+        $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/'.$id.'/citas?q={"fecha":{"gt":"'.$date.'"},"estado_cita":{"eq":"Atendido"}}&sort=fecha:desc';
 
         $response = $client->request('GET', $url, [
             'headers'  => [
@@ -91,7 +116,7 @@ class UpdateActions extends Command
                 //     break;
                 // }
                 sleep(2);
-                if($data->fecha < '2023-05-30' or $data->fecha > '2023-07-10'){
+                if($data->fecha < $date2 or $data->fecha > $date3){
                     continue;
                 }
                 $id_atencion = $data->id_atencion;

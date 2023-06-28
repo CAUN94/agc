@@ -13,7 +13,7 @@ class UpdateDatabase extends Command
      *
      * @var string
      */
-    protected $signature = 'ln:UpdateDatabase';
+    protected $signature = 'ln:UpdateDatabase {date?}';
 
     /**
      * The console command description.
@@ -45,7 +45,15 @@ class UpdateDatabase extends Command
 
     public function store(){
         $client = new \GuzzleHttp\Client();
-        $date = strval(Carbon::now()->subDays(10)->format('Y-m-d'));
+        // carbon create
+        if($this->argument('date') == null){
+            $date = strval(Carbon::now()->subDays(30)->format('Y-m-d'));
+        } else {
+            $date = strval(Carbon::create($this->argument('date'))->format('Y-m-d'));
+        }
+
+        $this->info($date);
+        
         $query_string   = '?q={"fecha":{"gt":"'.$date.'"}}';
         // $query_string   = '?q={"fecha":{"gt":"2023-02-10"}}';
         $url = 'https://api.medilink.healthatom.com/api/v1/citas';
