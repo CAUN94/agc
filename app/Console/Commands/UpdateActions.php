@@ -76,8 +76,8 @@ class UpdateActions extends Command
             $date = strval(Carbon::create($this->argument('date'))->format('Y-m-d'));
         }
 
-        $date2 = strval(Carbon::create($date)->subDays(15)->format('Y-m-d'));
-        $date3 = strval(Carbon::create($date)->addDays(15)->format('Y-m-d'));
+        $date2 = strval(Carbon::create($date)->subDays(20)->format('Y-m-d'));
+        $date3 = strval(Carbon::create($date)->addDays(20)->format('Y-m-d'));
 
         $client = new \GuzzleHttp\Client();
         $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/'.$id;
