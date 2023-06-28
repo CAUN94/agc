@@ -284,7 +284,7 @@ class RedirectController extends Controller {
 	}
 
 	public function alianzas_yjb(){
-		$url = "https://docs.google.com/forms/d/e/1FAIpQLSdXuE_U_EnhbgNSioX42Jb1ARS98IB5Hto2hGmbMLD6S0RJ4Q/viewform?usp=pp_url";
+		$url = "https://docs.google.com/forms/d/e/1FAIpQLSdXuE_U_EnhbgNSioX42Jb1ARS98IB5Hto2hGmbMLD6S0RJ4Q/viewform";
 		return Redirect::away($url);
 	}
 	
