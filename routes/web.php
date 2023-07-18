@@ -300,4 +300,9 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/streamlit', 'App\Http\Controllers\StreamlitController@index');
 });
 
+// create a route thatt saids hello world
+ Route::get('/hello', function () {
+     return 'Hello World';
+ });
+
 require __DIR__ . '/auth.php';
