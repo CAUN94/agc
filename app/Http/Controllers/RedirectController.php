@@ -288,5 +288,11 @@ class RedirectController extends Controller {
 		return Redirect::away($url);
 	}
 	
+	public function bci(){
+		$url = "https://blog.justbetter.cl/venta";
+		return Redirect::away($url);
+	}
+
+	
 
 }
