@@ -206,6 +206,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/eventos/logistica', 'App\Http\Controllers\RedirectController@logistica');
     Route::get('/eventos/comunicaciones', 'App\Http\Controllers\RedirectController@comunicaciones_eventos');
     Route::get('/contratos/alianzas_yjb', 'App\Http\Controllers\RedirectController@alianzas_yjb');
+    Route::get('/bci', 'App\Http\Controllers\RedirectController@bci');
 
 
     Route::get('/box/dcontrerasb', 'App\Http\Controllers\RedirectController@contreras');
@@ -300,9 +301,6 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/streamlit', 'App\Http\Controllers\StreamlitController@index');
 });
 
-// create a route thatt saids hello world
- Route::get('/hello', function () {
-     return 'Hello World';
- });
+
 
 require __DIR__ . '/auth.php';
