@@ -207,6 +207,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/eventos/comunicaciones', 'App\Http\Controllers\RedirectController@comunicaciones_eventos');
     Route::get('/contratos/alianzas_yjb', 'App\Http\Controllers\RedirectController@alianzas_yjb');
     Route::get('/bci', 'App\Http\Controllers\RedirectController@bci');
+    Route::get('/streamlit-test', 'App\Http\Controllers\RedirectController@streamlit');
 
 
     Route::get('/box/dcontrerasb', 'App\Http\Controllers\RedirectController@contreras');
@@ -235,7 +236,6 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('pay/{user}/{status}', 'App\Http\Controllers\PayController@payStatus');
     Route::get('pay/{user}/{treatmentMl}/{status}', 'App\Http\Controllers\PayController@payMedilinkStatus');
 
-    Route::get('/streamlit-test', 'App\Http\Controllers\RedirectController@streamlit');
 
     // Strava
     Route::get('/strava', \App\Http\Controllers\StravaController::class .'@index')->middleware(['intranet']);
