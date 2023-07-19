@@ -33,7 +33,7 @@ Route::get('/confirmacion/{id}', [MercadoPagoController::class, 'pay']);
 Route::get('/pago', 'App\Http\Controllers\RedirectController@pago');
 
 Route::middleware([UpdatePassword::class,])->group(function () {
-    
+
     // Route::get('/mercadopagosearch', [MercadoPagoController::class, 'index']);
     // Route::get('/packverano', [LandingController::class, 'packverano']);
     // Route::get('/team', [LandingController::class, 'team']);
@@ -51,7 +51,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     // Route::get('/calendar', [LandingController::class, 'calendar'])->middleware(['auth']);
     // Revisar
     // Route::get('/healthy', [LandingController::class, 'healthy'])->middleware(['auth']);
-    
+
     Route::get('/nutrition', [LandingController::class, 'nutrition'])->middleware(['auth']);
     // Route::get('/calendar/store/{id}', [CalendarController::class, 'store'])->middleware(['auth']);
 
@@ -125,7 +125,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/apim/documentosTributarios', [ApiMedilinkController::class, 'documentosTributarios']);
 
     Route::get('/googlecalendar', [GoogleCalendarController::class, 'index']);
-    
+
 
     Route::post('/apim/addAppointment', [ApiMedilinkController::class, 'addAppointment']);
 
@@ -235,6 +235,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('pay/{user}/{status}', 'App\Http\Controllers\PayController@payStatus');
     Route::get('pay/{user}/{treatmentMl}/{status}', 'App\Http\Controllers\PayController@payMedilinkStatus');
 
+    Route::get('/streamlit-test', 'App\Http\Controllers\RedirectController@streamlit');
 
     // Strava
     Route::get('/strava', \App\Http\Controllers\StravaController::class .'@index')->middleware(['intranet']);
@@ -270,12 +271,12 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/apimedilink/payments/{id}', [AdminMedilinkController::class, 'payment']);
     Route::get('/apimedilink/payments/{id}/boleta', [AdminMedilinkController::class, 'paymentboleta']);
     Route::get('/apimedilink/payments/{id}', [AdminMedilinkController::class, 'payment']);
-    
-    
+
+
 
     // Usar apim para pruebas
 
-    
+
 
     // Nubox
     Route::get('/nubox', [ AdminNuboxController::class, 'index']);
