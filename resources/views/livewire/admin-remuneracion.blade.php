@@ -123,7 +123,9 @@
                           {{$Appointment->Nombre}} {{$Appointment->Apellido}}
                       </td>
                       <td class="text-center">
-                        {{$Appointment->appointments()->first()->user->alliance()->name}}
+                        @if (!empty($Appointment->appointments()->first()))
+                          {{$Appointment->appointments()->first()->user->alliance()->name}}
+                        @endif
                       </td>
                       <td class="text-center">
                         {{Helper::moneda_chilena($Appointment->Precio_Prestacion)}}
