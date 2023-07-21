@@ -61,7 +61,7 @@ class UpdateActions extends Command
         $this->info($date2);
         $this->info($date3);
 
-        $ids = [56,36,2,49,46,10,19,48,26,37,20,44,54,52,53,50,34,47,45,54,35];
+        $ids = [55,56,36,2,49,46,10,19,48,26,37,20,44,54,52,53,50,34,47,45,54,35];
         foreach($ids as $id){
             $this->allActions($id);
             sleep(5);
