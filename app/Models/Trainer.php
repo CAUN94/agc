@@ -53,14 +53,24 @@ class Trainer extends Model
     public function trainerRemuneration($months){
         $sum = 0;
         foreach ($this->trainAppointmentsMonthCheck($months)->get() as $key => $checkAppointment) {
-            // return TrainAppointment::find($checkAppointment->id)->trainings();
+            
             $training = TrainAppointment::find($checkAppointment->id)->trainings();
             if ($training->type == 'group' and $training->format == 'Presencial') {
                 $sum = $sum + 12000;
             } elseif ($training->type == 'group' and $training->format == 'Online') {
                 $sum = $sum + 10000;
             } else {
-                $sum = $sum + ceil(($training->price/$training->class)*($this->coff/100));
+                $allianceDesc = 1;
+                $nombreCompleto = trim($checkAppointment->name);
+                $contador = User::whereRaw("CONCAT(name, ' ', lastnames) LIKE ?", ["%$nombreCompleto%"])->select('id')->count();
+                if ($contador == 1) {
+                    $usuarioEncontrado = User::whereRaw("CONCAT(name, ' ', lastnames) LIKE ?", ["%$nombreCompleto%"])->first();
+                    $idUsuarioEncontrado = $usuarioEncontrado->id;
+                    if(User::find($idUsuarioEncontrado)->hasAlliance()){
+                        $allianceDesc = 0.8;
+                    }
+                } 
+                $sum = $sum + ceil(((($training->price/$training->class))*$allianceDesc)*($this->coff/100));
             }
         }
         return Helper::moneda_chilena($sum);
