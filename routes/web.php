@@ -209,6 +209,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/bci', 'App\Http\Controllers\RedirectController@bci');
     Route::get('/streamlit-test', 'App\Http\Controllers\RedirectController@streamlit');
     Route::get('/informe-rodilla', 'App\Http\Controllers\RedirectController@informe_rodilla');
+    Route::get('/test-runners', 'App\Http\Controllers\RedirectController@test_runners');
 
 
     Route::get('/box/dcontrerasb', 'App\Http\Controllers\RedirectController@contreras');

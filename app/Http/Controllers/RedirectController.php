@@ -275,4 +275,9 @@ class RedirectController extends Controller {
 	  $url = "https://informe-rodilla-biomecanica-yjb.streamlit.app/";
 	  return Redirect::away($url);
 	}
+
+	public function test_runners(){
+		$url = "https://test-runners-yjb.streamlit.app/";
+		return Redirect::away($url);
+	}
 }
