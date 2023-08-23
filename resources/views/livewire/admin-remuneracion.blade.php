@@ -123,7 +123,7 @@
                           {{$Appointment->Nombre}} {{$Appointment->Apellido}}
                       </td>
                       <td class="text-center">
-                        @if (!empty($Appointment->appointments()->first()))
+                        @if (!empty($Appointment->appointments()->first()) or !is_null($Appointment->appointments()->first()->user->alliance()))
                           {{$Appointment->appointments()->first()->user->alliance()->name}}
                         @endif
                       </td>
