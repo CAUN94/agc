@@ -125,6 +125,8 @@
                       <td class="text-center">
                         @if (!empty($Appointment->appointments()->first()) )
                           {{$Appointment->appointments()->first()->user->alliance()}}
+                        @else
+                          Sin Convenio
                         @endif
                       </td>
                       <td class="text-center">
