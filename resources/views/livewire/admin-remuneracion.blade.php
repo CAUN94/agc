@@ -123,10 +123,8 @@
                           {{$Appointment->Nombre}} {{$Appointment->Apellido}}
                       </td>
                       <td class="text-center">
-                        @if ( !is_null($Appointment->appointments()))
-                          {{$Appointment->appointments()->first()->user->alliance()->name}}
-                        @else
-                          Sin Convenio
+                        @if (!empty($Appointment->appointments()->first()) )
+                          {{$Appointment->appointments()->first()->user->alliance()}}
                         @endif
                       </td>
                       <td class="text-center">
