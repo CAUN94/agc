@@ -197,12 +197,16 @@ class User extends Authenticatable {
     }
 
     public function hasAlliance(){
+		// si this alliance() es nuloo devuelve false
+		if (is_null($this->alliance())){
+			return False;
+		}
+		if (!is_null($this->alliance())){
+    		return True;
+    	}
 		if($this->alliance()->name == 'Sin Convenio'){
 			return False;
 		}
-    	if (!is_null($this->alliance())){
-    		return True;
-    	}
         return False;
     }
 
@@ -336,6 +340,11 @@ class User extends Authenticatable {
 		return AppointmentMl::where('Rut_Paciente',$this->rut);
 	}
 
+	// revisa la ulima appointment, con la condición de que el Estado sea Atendidio
+	public function lastAppointment(){
+		return $this->appointments()->where('Estado','Atendido')->orderby('Fecha','desc')->orderby('Hora_inicio','desc')->first();
+	}
+	
 	public function nextAppointments(){
 		return $this->appointments()
 			->whereIN('Estado',['Confirmado por teléfono','Agenda Online','No confirmado'])
@@ -422,5 +431,7 @@ class User extends Authenticatable {
 		return $roles;
 
 	}
+
+
 
 }
