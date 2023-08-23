@@ -125,7 +125,7 @@
                       <td class="text-center">
                         @if (!empty($Appointment->appointments()->first()) )
                           @if(!is_null($Appointment->appointments()->first()->user->alliance()))
-                          $Appointment->appointments()->first()->user->alliance()->name
+                          {{$Appointment->appointments()->first()->user->alliance()->name}}
                           @endif
                         @else
                           Sin Convenio
