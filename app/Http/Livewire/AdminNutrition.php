@@ -206,10 +206,12 @@ class AdminNutrition extends Component
         $Masa_piel_reajustada = ($Masa_Piel - (($Masa_Piel/$Peso_estructurado)*$this->diferencia_PE_PB));
         $masa_residual_reajustada = ($Masa_Residual - (($Masa_Residual/$Peso_estructurado)*$this->diferencia_PE_PB));
 
-        $this->M_adiposa_porc = ($Masa_adiposa_reajustada/$Peso_estructurado);
-        $this->M_muscular_porc = ($Masa_muscular_reajustada/$Peso_estructurado);
-        $this->M_osea_porc = ($Masa_osea_reajustada/$Peso_estructurado);
-        //dd($Masa_Piel, $this->M_adiposa_kg, $this->M_muscular_kg,$Masa_Residual,$this->M_osea_kg,$Peso_estructurado,$this->diferencia_PE_PB,$this->diferencia_porc);
+        $Peso_estructurado_reajustado = $Masa_adiposa_reajustada + $Masa_osea_reajustada + $Masa_muscular_reajustada + $Masa_piel_reajustada + $masa_residual_reajustada;
+        $this->M_adiposa_porc = ($Masa_adiposa_reajustada/$Peso_estructurado_reajustado)*100;
+        $this->M_muscular_porc = ($Masa_muscular_reajustada/$Peso_estructurado_reajustado)*100;
+        $this->M_osea_porc = ($Masa_osea_reajustada/$Peso_estructurado_reajustado)*100;
+
+
         //Somatotipos
         $sum_SF = ($this->triceps + $this->subescapular + $this->supraespinal) * (170.18/$this->talla_parado);
         $this->somatotipo_Endo = (-0.7182 + (0.1451*$sum_SF) - (0.00068*pow($sum_SF, 2)) + (0.0000014*pow($sum_SF, 3)) );
@@ -270,7 +272,8 @@ class AdminNutrition extends Component
         $nutrition->indice_adiposo = $Masa_adiposa_reajustada/$Masa_muscular_reajustada;
         $nutrition->indice_musculo = $Masa_muscular_reajustada/$Masa_osea_reajustada;
         $nutrition->indice_corporal = $this->indice_masa_corporal;
-        $nutrition->peso_estructurado = $Peso_estructurado;
+        $nutrition->peso_estructurado = $Peso_estructurado_reajustado;
+        $nutrition->diferencia_peso = $this->diferencia_PE_PB;
         $nutrition->endo = $this->somatotipo_Endo;
         $nutrition->meso = $this->somatotipo_Meso;
         $nutrition->ecto = $this->somatotipo_Ecto;
