@@ -213,7 +213,7 @@ class AdminNuboxController extends Controller
       $selled_pack->save();
 
       // return $patient->data->email;
-      \Mail::to($patient->data->email)->send(new NuboxMail($selled_pack->id,$emit));
+      // \Mail::to($patient->data->email)->send(new NuboxMail($selled_pack->id,$emit));
       return view('admin.nubox.show',compact('emit'));
     }
 
