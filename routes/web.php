@@ -105,6 +105,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/apim/professionals', [ApiMedilinkController::class, 'professionals']);
     Route::get('/apim/atentions', [ApiMedilinkController::class, 'atentions'])->middleware(['intranet']);
     Route::get('/apim/atentions/{id}', [ApiMedilinkController::class, 'atention'])->middleware(['intranet']);
+    Route::get('/apim/atentions/{id}/evolution', [ApiMedilinkController::class, 'evolution'])->middleware(['intranet']);
     Route::get('/apim/allAtentions', [ApiMedilinkController::class, 'allAtentions'])->middleware(['intranet']);
     Route::get('/apim/clients', [ApiMedilinkController::class, 'allClients'])->middleware(['intranet']);
     Route::get('/apim/appointments', [ApiMedilinkController::class, 'appointments'])->middleware(['intranet']);
@@ -210,6 +211,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/streamlit-test', 'App\Http\Controllers\RedirectController@streamlit');
     Route::get('/informe-rodilla', 'App\Http\Controllers\RedirectController@informe_rodilla');
     Route::get('/test-runners', 'App\Http\Controllers\RedirectController@test_runners');
+    Route::get('/isak', 'App\Http\Controllers\RedirectController@isak');
 
 
     Route::get('/box/dcontrerasb', 'App\Http\Controllers\RedirectController@contreras');

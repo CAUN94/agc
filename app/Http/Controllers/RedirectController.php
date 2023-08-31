@@ -280,4 +280,9 @@ class RedirectController extends Controller {
 		$url = "https://test-runners-yjb.streamlit.app/";
 		return Redirect::away($url);
 	}
+
+	public function isak(){
+		$url = "https://mpago.la/2ndZtD1";
+		return Redirect::away($url);
+	}
 }

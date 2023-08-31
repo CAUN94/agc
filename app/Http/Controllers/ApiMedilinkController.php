@@ -55,6 +55,7 @@ class ApiMedilinkController extends Controller
         echo $response->getBody();
     }
 
+
     public function alianzas(){
       $client = new \GuzzleHttp\Client();
       $url = 'https://api.medilink.healthatom.com/api/v1/convenios/';
@@ -118,6 +119,22 @@ class ApiMedilinkController extends Controller
     {
         $client = new \GuzzleHttp\Client();
         $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/'.$id.'/detalles';
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . $this->token
+            ]
+        ]);
+
+        $atention = json_decode($response->getBody());
+
+        return $atention;
+    }
+
+    public function evolution($id)
+    {
+        $client = new \GuzzleHttp\Client();
+        $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/'.$id.'/fichas';
 
         $response = $client->request('GET', $url, [
             'headers'  => [
