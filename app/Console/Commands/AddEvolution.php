@@ -78,8 +78,8 @@ class AddEvolution extends Command
 
             $action->save();
             $i++;
-            if($i == 100){
-                sleep(20);
+            if($i == 600){
+                sleep(30);
                 $i = 0;
                 $this->info('Sleeping 20 seconds');
             }
