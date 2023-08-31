@@ -285,4 +285,9 @@ class RedirectController extends Controller {
 		$url = "https://mpago.la/2ndZtD1";
 		return Redirect::away($url);
 	}
+
+	public function isak_sin_kit(){
+		$url = "https://mpago.la/2hEqr8Q";
+		return Redirect::away($url);
+	}
 }

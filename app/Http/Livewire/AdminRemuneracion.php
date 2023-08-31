@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Session as FlashSession;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\RemunerationExport;
 
 class AdminRemuneracion extends Component
 {
@@ -37,6 +39,7 @@ class AdminRemuneracion extends Component
     public $hour;
     public $message;
     public $lista_id = '';
+    public $professionalid;
 
     public function mount()
     {
@@ -109,12 +112,23 @@ class AdminRemuneracion extends Component
         $this->now->addMonth();
     }
 
+    public function exportToExcel($id)
+    {
+        $Professional = DB::table('professionals')
+                          ->where('user_id',$id)
+                          ->first(['description']);
+                          $this->lista_id = $Professional->description;
+        return Excel::download(new RemunerationExport($this->lista_id,$this->expiredstartOfMonth,$this->expiredendOfMonth), $this->lista_id.'.xlsx');
+        $this->classShow = true;
+    }
+
     public function show($id){
-      $Professional = DB::table('professionals')
+        $Professional = DB::table('professionals')
                           ->where('user_id',$id)
                           ->first(['description']);
                           $this->lista_id = $Professional->description;
                           $this->classShow = false;
+        $this->professionalid = $id;
     }
 
     public function showAppointment($id){
