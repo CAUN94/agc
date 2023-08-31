@@ -28,4 +28,27 @@ class ActionMl extends Model
     public function treatments(){
         return $this->hasMany(TreatmentMl::class,'Atencion','Tratamiento_Nr');
     }
+
+    public function evolution(){
+        $client = new \GuzzleHttp\Client();
+        $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/'.$this->Tratamiento_Nr.'/fichas';
+
+        $response = $client->request('GET', $url, [
+            'headers'  => [
+                'Authorization' => 'Token ' . config('app.medilink')
+            ]
+        ]);
+
+        $atention = json_decode($response->getBody());
+
+        return $atention;
+    }
+
+    public function checkEvolution(){
+        // check if ->data in empty
+        if(empty($this->evolution()->data)){
+            return false;
+        }
+        return $this->evolution()->data->campos[0]->timestamp;
+    }
 }
