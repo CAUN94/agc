@@ -19,7 +19,7 @@ th{
 </style>
 
 <body style="font-family: Arial, Helvetica, sans-serif;">
-  <img class="logo" src='img/you-completo-nn.png' style="width: 160px; height: 100px; position: absolute; right: 0;">
+  <img class="logo" src='img/you-completo-nn.png' style="width: 170px; height: 100px; position: absolute; right: 0;">
   <h1 style= "text-align: center">Evaluación Nutricional</h1>
   <p>
     <span style= "text-align: center">Nombre: {{$nutrition->plan}}</span>
@@ -183,8 +183,8 @@ th{
           <tbody>
             <tr>
               <td style="text-align: left;">Masa Adiposa</td>
+              <td style="text-align: center;">{{round(($nutrition->masa_adiposa_porc), 2)}}%</td>
               <td style="text-align: center;">{{$nutrition->masa_adiposa}} kg</td>
-              <td style="text-align: center;">{{round(($nutrition->masa_adiposa_porc)*100, 0)}}%  </td>
               <td style="text-align: center;">
                 @if($nutrition->gender == 'f')
                   @if($nutrition->habito == 'D')
@@ -260,8 +260,8 @@ th{
 
             <tr>
               <td style="text-align: left;">Masa Muscular</td>
-              <td style="text-align: center;">{{$nutrition->masa_muscular}}kg</td>
-              <td style="text-align: center;">{{round(($nutrition->masa_muscular_porc)*100, 0)}}%</td>
+              <td style="text-align: center;">{{round(($nutrition->masa_muscular_porc), 2)}}%</td>
+              <td style="text-align: center;">{{$nutrition->masa_muscular}} kg</td>
               <td style="text-align: center;">
                 @if($nutrition->gender == 'f')
                   @if($nutrition->habito == 'D')
@@ -337,8 +337,8 @@ th{
 
             <tr>
               <td style="text-align: left;">Masa Osea</td>
+              <td style="text-align: center;">{{round(($nutrition->masa_osea_porc), 2)}}%</td>
               <td style="text-align: center;">{{$nutrition->masa_osea}} kg</td>
-              <td style="text-align: center;">{{round(($nutrition->masa_osea_porc)*100, 0)}}%</td>
               <td style="text-align: center;">---</td>
             </tr>
 
@@ -596,7 +596,38 @@ th{
   </div>
 
   <div>
-    <div style="margin-left:160pt;">
+    <div style="margin-left:160pt; margin-top:25pt;">
+      <table class="table-fixed w-full overflow-hidden rounded-lg shadow-lg p-6">
+        <thead>
+          <tr class="bg-gray-300 text-sm font-semibold tracking-wide text-left">
+            <th class="text-center py-2 min-w-4/8 w-6/12">Composición corporal</th>
+            <th style="text-align: center;">Porcentaje</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align: left;">Masa Adiposa</td>
+            <td style="text-align: center;">{{round(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100, 0)}}%</td>
+          </tr>
+          <tr>
+            <td style="text-align: left;">Masa Múscular</td>
+            <td style="text-align: center;">{{round(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100, 0)}}%</td>
+          </tr>
+          <tr>
+            <td style="text-align: left;">Masa Ósea</td>
+            <td style="text-align: center;">{{round(($nutrition->masa_osea/$nutrition->peso_estructurado)*100, 0)}}%</td>
+          </tr>
+          <tr>
+            <td style="text-align: left;">Masa Residual</td>
+            <td style="text-align: center;">{{round(($nutrition->masa_residual/$nutrition->peso_estructurado)*100, 0)}}%</td>
+          </tr>
+          <tr>
+            <td style="text-align: left;">Masa Piel</td>
+            <td style="text-align: center;">{{round(($nutrition->masa_piel/$nutrition->peso_estructurado)*100, 0)}}%</td>
+          </tr>
+        </tbody>
+      </table>
+
       <h4 >Análisis:</h4>
       <p>La masa adiposa está en
         @if($nutrition->gender == 'f')
@@ -737,37 +768,6 @@ th{
           @endif
         @endif
       @endif.</p>
-
-      <table class="table-fixed w-full overflow-hidden rounded-lg shadow-lg p-6">
-        <thead>
-          <tr class="bg-gray-300 text-sm font-semibold tracking-wide text-left">
-            <th class="text-center py-2 min-w-4/8 w-6/12">Composición corporal</th>
-            <th style="text-align: center;">Porcentaje</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="text-align: left;">Masa Adiposa</td>
-            <td style="text-align: center;">{{round(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100, 0)}}%</td>
-          </tr>
-          <tr>
-            <td style="text-align: left;">Masa Múscular</td>
-            <td style="text-align: center;">{{round(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100, 0)}}%</td>
-          </tr>
-          <tr>
-            <td style="text-align: left;">Masa Ósea</td>
-            <td style="text-align: center;">{{round(($nutrition->masa_osea/$nutrition->peso_estructurado)*100, 0)}}%</td>
-          </tr>
-          <tr>
-            <td style="text-align: left;">Masa Residual</td>
-            <td style="text-align: center;">{{round(($nutrition->masa_residual/$nutrition->peso_estructurado)*100, 0)}}%</td>
-          </tr>
-          <tr>
-            <td style="text-align: left;">Masa Piel</td>
-            <td style="text-align: center;">{{round(($nutrition->masa_piel/$nutrition->peso_estructurado)*100, 0)}}%</td>
-          </tr>
-        </tbody>
-      </table>
     </div>
 
     <p>Según su índice músculo/óseo este se encuentra @if($nutrition->gender == 'f')

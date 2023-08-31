@@ -54,7 +54,7 @@
                   <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="biacromial" readonly="edit" value="{{ old('biacromial') }}">Biacromial</x-admin.input>
                   <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="t_transverso" readonly="edit" value="{{ old('t_transverso') }}">Tórax Transverso</x-admin.input>
                   <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="t_antero_posterior" readonly="edit" value="{{ old('t_antero_posterior') }}">Tórax Antero-Posterior</x-admin.input>
-                  <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="bi_iliocrestideo" readonly="edit" value="{{ old('bi_iliocrestideo') }}">Bi-iliocestídeo</x-admin.input>
+                  <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="bi_iliocrestideo" readonly="edit" value="{{ old('bi_iliocrestideo') }}">Bi-iliocrestídeo</x-admin.input>
                   <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="humeral" readonly="edit" value="{{ old('humeral') }}">Humeral</x-admin.input>
                   <x-admin.input class="col-span-6 sm:col-span-2" type="number" name="femoral" readonly="edit" value="{{ old('femoral') }}">Femoral</x-admin.input>
 
@@ -292,20 +292,20 @@
                 <tbody>
                   <tr>
                     <td class="text-center">Adiposa</td>
-                    <td class="text-center">{{$viewsNutrition->masa_adiposa}} kg</td>
-                    <td class="text-center">{{round(($viewsNutrition->masa_adiposa_porc)*100, 2)}}%  </td>
+                    <td class="text-center">{{round($viewsNutrition->masa_adiposa, 2)}} kg</td>
+                    <td class="text-center">{{round(($viewsNutrition->masa_adiposa_porc), 2)}}%  </td>
                   </tr>
 
                   <tr>
                     <td class="text-center">Muscular</td>
-                    <td class="text-center">{{$viewsNutrition->masa_muscular}} kg</td>
-                    <td class="text-center">{{round(($viewsNutrition->masa_muscular_porc)*100, 2)}}%</td>
+                    <td class="text-center">{{round($viewsNutrition->masa_muscular, 2)}} kg</td>
+                    <td class="text-center">{{round(($viewsNutrition->masa_muscular_porc), 2)}}%</td>
                   </tr>
 
                   <tr>
                     <td class="text-center">Osea</td>
-                    <td class="text-center">{{$viewsNutrition->masa_osea}} kg</td>
-                    <td class="text-center">{{round(($viewsNutrition->masa_osea_porc)*100, 2)}}%</td>
+                    <td class="text-center">{{round($viewsNutrition->masa_osea, 2)}} kg</td>
+                    <td class="text-center">{{round(($viewsNutrition->masa_osea_porc), 2)}}%</td>
                   </tr>
                 </tbody>
               </table>
@@ -319,17 +319,17 @@
                 <tbody>
                   <tr>
                     <td class="text-center">Músculo/Óseo:</td>
-                    <td class="text-center">{{$viewsNutrition->indice_musculo}}</td>
+                    <td class="text-center">{{round($viewsNutrition->indice_musculo, 2)}}</td>
                   </tr>
 
                   <tr>
                     <td class="text-center">Adiposo/Muscular</td>
-                    <td class="text-center">{{$viewsNutrition->indice_adiposo}}</td>
+                    <td class="text-center">{{round($viewsNutrition->indice_adiposo, 2)}}</td>
                   </tr>
 
                   <tr>
                     <td class="text-center">Masa corporal</td>
-                    <td class="text-center">{{$viewsNutrition->indice_corporal}} Kg/m2</td>
+                    <td class="text-center">{{round($viewsNutrition->indice_corporal, 2)}} Kg/m2</td>
                   </tr>
                 </tbody>
               </table>
@@ -381,12 +381,12 @@
                 <tbody>
                   <tr>
                     <td class="text-center">Diferencia PE/PB</td>
-                    <td class="text-center">{{round(($viewsNutrition->peso_estructurado - $viewsNutrition->peso), 2)}}</td>
+                    <td class="text-center">{{$viewsNutrition->diferencia_peso}}</td>
                     <td class="text-center">{{round(($viewsNutrition->peso_estructurado - $viewsNutrition->peso)/$viewsNutrition->peso*100, 2)}}%</td>
                   </tr>
                   <tr>
                     <td class="text-center">Masa Osea Referencial</td>
-                    <td class="text-center">{{round(($viewsNutrition->masa_osea), 2)}}</td>
+                    <td class="text-center">{{App\Models\Nutrition::where('rut',$user->rut)->oldest()->value('masa_osea')}}</td>
                     <td class="text-center">{{round(($viewsNutrition->masa_osea)/$viewsNutrition->peso*100, 2)}}%</td>
                   </tr>
                 </tbody>
