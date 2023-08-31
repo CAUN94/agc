@@ -50,7 +50,7 @@ class EnviarCorreosCitas extends Command
                 continue;
             }
 
-            // cuenta cuanttos usuarios tienen una cita hace más de 3 meses
+            // cuenta cuantos usuarios tienen una cita hace más de 3 meses
 
             
 
