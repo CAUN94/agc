@@ -174,6 +174,7 @@ return [
          * Package Service Providers...
          */
         Freshwork\ChileanBundle\Laravel\ChileanBundleServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
          * Application Service Providers...

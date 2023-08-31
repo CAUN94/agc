@@ -81,6 +81,9 @@
               <button class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer bg-gray-100 hover:bg-gray-400 p-1.5 items-center mt-0.5 mb-1"
                       wire:click="show({{$professional->user->id}})">Mostrar lista
               </button>
+              <button class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer bg-gray-100 hover:bg-gray-400 p-1.5 items-center mt-0.5 mb-1"
+                    wire:click="exportToExcel({{$professional->user->id}})">Descargar Excel
+              </button>
             </div>
 
           @endforeach
@@ -90,6 +93,9 @@
     @if(!$classShow and !is_null($lista_id))
       <button class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer bg-white hover:bg-gray-400 p-1.5 items-center mt-2"
               wire:click="close()">Ocultar Lista
+      </button>
+      <button class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer bg-white hover:bg-gray-400 p-1.5 items-center mt-2"
+              wire:click="exportToExcel({{$this->professionalid}})">Descargar Excel
       </button>
       <div class="flex flex-col lg:flex-row gap-3">
         <div class="w-full lg:w-3/4 flex flex-col overflow-x-auto gap-y-2">
