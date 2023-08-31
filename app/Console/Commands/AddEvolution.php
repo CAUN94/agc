@@ -70,7 +70,7 @@ class AddEvolution extends Command
         foreach ($actions as $action) {
             
             $evolution = $action->checkEvolution();
-            $this->info('Action: '.$action->Tratamiento_Nr.' - '.$action->Nombre.' '.$action->Apellido.' - '.$action->Fecha_Realizacion.' - '.$action->checkEvolution());
+            $this->info(($i+1).') Action: '.$action->Tratamiento_Nr.' - '.$action->Nombre.' '.$action->Apellido.' - '.$action->Fecha_Realizacion.' - '.$action->checkEvolution());
             if($evolution != False){
                 $action->evolution = $evolution;
                 $count++;
@@ -78,10 +78,10 @@ class AddEvolution extends Command
 
             $action->save();
             $i++;
-            if($i == 60){
-                sleep(30);
+            if($i == 40){
+                $this->info('Sleeping 10 seconds');
+                sleep(10);
                 $i = 0;
-                $this->info('Sleeping 30 seconds');
             }
         }
 
