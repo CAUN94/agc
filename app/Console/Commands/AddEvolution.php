@@ -78,7 +78,7 @@ class AddEvolution extends Command
 
             $action->save();
             $i++;
-            if($i == 40){
+            if($i == 10){
                 $this->info('Sleeping 10 seconds');
                 sleep(10);
                 $i = 0;
