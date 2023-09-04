@@ -142,6 +142,7 @@ class AdminRemuneracion extends Component
     public function close(){
         $this->classShow = true;
         $this->lista_id = null;
+        $this->professionalid = null;
     }
 
 

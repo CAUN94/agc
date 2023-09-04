@@ -114,7 +114,6 @@
                     <th class="text-center py-2 min-w-1/8 w-2/12">Prestación</th>
                     <th class="text-center py-2 min-w-1/8 w-1/12">Abono</th>
                     <th class="text-center py-2 min-w-1/8 w-2/12">Remuneración</th>
-                    <th></th>
                   </tr>
                 </thead>
                 <tbody>

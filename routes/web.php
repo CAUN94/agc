@@ -124,6 +124,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/apim/evoluciones', [ApiMedilinkController::class, 'evoluciones']);
     Route::get('/apim/user/pagos', [ApiMedilinkController::class, 'UserPays']);
     Route::get('/apim/documentosTributarios', [ApiMedilinkController::class, 'documentosTributarios']);
+    Route::get('/apim/patients/{id}/evolution', [ApiMedilinkController::class, 'patient']);
 
     Route::get('/googlecalendar', [GoogleCalendarController::class, 'index']);
 

@@ -727,6 +727,20 @@ class ApiMedilinkController extends Controller
       
     }
 
+    public function patient($id){
+      $client = new \GuzzleHttp\Client();
+
+      $url = 'https://api.medilink.healthatom.com/api/v1/pacientes/'.$id.'/evoluciones';
+
+      $response = $client->request('GET', $url, [
+          'headers'  => [
+              'Authorization' => 'Token ' . $this->token
+          ]
+      ]);
+
+      echo $response->getBody();
+    }
+
     public function calendar(){
       $start = microtime(true);
 
