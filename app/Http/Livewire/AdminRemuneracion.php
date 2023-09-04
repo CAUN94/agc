@@ -114,12 +114,15 @@ class AdminRemuneracion extends Component
 
     public function exportToExcel($id)
     {
+        
+
         $Professional = DB::table('professionals')
                           ->where('user_id',$id)
-                          ->first(['description']);
-                          $this->lista_id = $Professional->description;
-        return Excel::download(new RemunerationExport($this->lista_id,$this->expiredstartOfMonth,$this->expiredendOfMonth), $this->lista_id.'.xlsx');
+                          ->first();
+        $this->lista_id = $Professional->description;
+        $export = new RemunerationExport($this->lista_id,$this->expiredstartOfMonth,$this->expiredendOfMonth,$Professional->coff);
         $this->classShow = true;
+        return Excel::download($export, $this->lista_id.'_'.$this->expiredstartOfMonth->format('Y-m-d').'_'.$this->expiredendOfMonth->format('Y-m-d').'.xlsx');
     }
 
     public function show($id){
