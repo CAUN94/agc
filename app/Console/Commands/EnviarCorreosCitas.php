@@ -44,7 +44,7 @@ class EnviarCorreosCitas extends Command
 
         $users = User::all();
         // User where rut like 18783405-8 or 18018579-8 or 17961461-8
-        $users = User::where('rut', '18783405-8')->orWhere('rut', '18018579-8')->orWhere('rut', '17961461-8')->get();
+        $users = User::where('rut', '18783405-8')->get();
         $count = 0;
         foreach ($users as $user) {
             $lastAppointment = $user->lastappointment();
