@@ -43,7 +43,7 @@ class EnviarCorreosCitas extends Command
         $fechaLimite = now()->subMonths(6);
 
         // get 100 random users
-        $users = User::inRandomOrder()->limit(1)->get();
+        $users = User::inRandomOrder()->limit(100)->get();
         // $users = User::all();
 
         $count = 0;
