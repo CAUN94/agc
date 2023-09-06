@@ -44,9 +44,17 @@ class BirthdayReminder extends Command
         
         $users = User::whereRaw("DATE_FORMAT(birthday, '%m-%d') = ?", [$today])->get();
 
+        // Users where id = 1 or 4690
+        $users = User::whereIn('id', [1, 4690])->get();
+
+
         foreach ($users as $user) {
-            // Mail::to($user->email)->send(new BirthdayGreeting($user));
+            Mail::to($user->email)->send(new BirthdayGreeting($user));
             $this->info("Birthday greeting sent to $user->name ($user->email)");
         }
+
+        // count users
+        $count = $users->count();
+        $this->info("Total $count birthday greeting sent");
     }
 }
