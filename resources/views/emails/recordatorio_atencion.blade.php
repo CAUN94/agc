@@ -12,12 +12,12 @@ En You Just Better, estamos comprometidos con tu bienestar y nos gustaría invit
     <li>Nutrición</li>
     <li>Traumatología</li>
     <li>Entrenamiento</li>
-    <li>Masoterapia</li>
+    <li>Masoterapia (nuevo servicio)</li>
     <li>Medicina Deportiva</li>
     <li>Biomecánica</li>
 </ul>
 
-@component('mail::button', ['url' => 'https://api.whatsapp.com/send?phone=56933809726&text=Hola%2C%20%0A%0AQuiero%20pedir%20una%20hora%20con%20el%2010%25%20de%20dscto%20que%20me%20ofrecieron%20por%20mail%20%3A)'])
+@component('mail::button', ['url' => 'https://api.whatsapp.com/send?phone=56933809726&text=Hola%2C%20%0A%0AQuiero%20pedir%20una%20hora%20con%20el%2010%25%20de%20dscto%20que%20me%20ofrecieron%20por%20mail'])
 Contáctanos
 @endcomponent
 

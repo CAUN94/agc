@@ -42,9 +42,10 @@ class EnviarCorreosCitas extends Command
     {
         $fechaLimite = now()->subMonths(6);
 
-        $users = User::all();
-        // User where rut like 18783405-8 or 18018579-8 or 17961461-8
-        $users = User::where('rut', '18783405-8')->get();
+        // get 100 random users
+        $users = User::inRandomOrder()->limit(1)->get();
+        // $users = User::all();
+
         $count = 0;
         foreach ($users as $user) {
             $lastAppointment = $user->lastappointment();
@@ -58,7 +59,7 @@ class EnviarCorreosCitas extends Command
 
             // cuenta cuantos usuarios tienen una cita hace más de 6 meses
 
-            if ($lastAppointment->Fecha < $fechaLimite or $user->rut == '18783405-8' or $user->rut == '18018579-8' or $user->rut == '17961461-8') {
+            if ($lastAppointment->Fecha < $fechaLimite) {
                 // muestra el rut,nombre y fecha del usuario usando this info
                 $this->info(
                     "Rut: $user->rut, Nombre: $user->name, Apellido: $user->lastname,Mail: $user->email,Fecha:  $lastAppointment->Fecha");
