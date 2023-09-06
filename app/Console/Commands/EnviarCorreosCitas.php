@@ -4,6 +4,8 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RecordatorioAtencionMail;
 
 class EnviarCorreosCitas extends Command
 {
@@ -38,9 +40,11 @@ class EnviarCorreosCitas extends Command
      */
     public function handle()
     {
-        $fechaLimite = now()->subMonths(4);
+        $fechaLimite = now()->subMonths(6);
 
         $users = User::all();
+        // User where rut like 18783405-8
+        $users = User::where('rut', '18783405-8')->get();
         $count = 0;
         foreach ($users as $user) {
             $lastAppointment = $user->lastappointment();
@@ -50,20 +54,26 @@ class EnviarCorreosCitas extends Command
                 continue;
             }
 
-            // cuenta cuantos usuarios tienen una cita hace más de 3 meses
 
-            
 
-            if ($lastAppointment && $lastAppointment->Fecha < $fechaLimite) {
+            // cuenta cuantos usuarios tienen una cita hace más de 6 meses
+
+            if ($lastAppointment->Fecha < $fechaLimite or $user->id == 5807) {
                 // muestra el rut,nombre y fecha del usuario usando this info
-                $this->info("Rut: $user->rut, Nombre: $user->name, Fecha: $lastAppointment->Fecha");
+                $this->info(
+                    "Rut: $user->rut, Nombre: $user->name, Apellido: $user->lastname,Mail: $user->email,Fecha:  $lastAppointment->Fecha");
+                    // format date
+                    
+                    // $lastAppointment->Fecha
 
                 $count++;
                 // Aquí puedes enviar el correo al usuario
-                // Utiliza la información de $user y $lastAppointment para construir el correo
+                $nombreUsuario = $user->name . ' ' . $user->lastname;
+                Mail::to($user->email)->send(new RecordatorioAtencionMail($nombreUsuario, '10%'));
+                $this->info("Correo enviado a $user->name ($user->email)");
             }
 
-            // muuestra el total de usuariois
+            // muestra el total de usuarios
             
         }
         $this->info("Total de usuarios: $count");
