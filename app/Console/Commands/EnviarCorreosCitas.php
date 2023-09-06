@@ -58,7 +58,7 @@ class EnviarCorreosCitas extends Command
 
             // cuenta cuantos usuarios tienen una cita hace más de 6 meses
 
-            if ($lastAppointment->Fecha < $fechaLimite or $user->id == 5807) {
+            if ($lastAppointment->Fecha < $fechaLimite or $user->rut == '18783405-8' or $user->rut == '18018579-8' or $user->rut == '17961461-8') {
                 // muestra el rut,nombre y fecha del usuario usando this info
                 $this->info(
                     "Rut: $user->rut, Nombre: $user->name, Apellido: $user->lastname,Mail: $user->email,Fecha:  $lastAppointment->Fecha");
