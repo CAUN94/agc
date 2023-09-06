@@ -16,8 +16,8 @@ En You Just Better, estamos comprometidos con tu bienestar y nos gustaría invit
     <li>Biomecánica</li>
 </ul>
 
-@component('mail::button', ['url' => 'https://yjb.cl/'])
-Boleta
+@component('mail::button', ['url' => 'https://yjb.cl/youphone'])
+Contáctanos
 @endcomponent
 
 <p style="color: rgb(243, 143, 125) ">
