@@ -43,8 +43,8 @@ class EnviarCorreosCitas extends Command
         $fechaLimite = now()->subMonths(6);
 
         $users = User::all();
-        // User where rut like 18783405-8
-        $users = User::where('rut', '18783405-8')->get();
+        // User where rut like 18783405-8 or 18018579-8 or 17961461-8
+        $users = User::where('rut', '18783405-8')->orWhere('rut', '18018579-8')->orWhere('rut', '17961461-8')->get();
         $count = 0;
         foreach ($users as $user) {
             $lastAppointment = $user->lastappointment();
@@ -69,7 +69,7 @@ class EnviarCorreosCitas extends Command
                 $count++;
                 // Aquí puedes enviar el correo al usuario
                 $nombreUsuario = $user->name . ' ' . $user->lastname;
-                Mail::to($user->email)->send(new RecordatorioAtencionMail($nombreUsuario, '10%'));
+                // Mail::to($user->email)->send(new RecordatorioAtencionMail($nombreUsuario, '10%'));
                 $this->info("Correo enviado a $user->name ($user->email)");
             }
 
