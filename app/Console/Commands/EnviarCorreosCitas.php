@@ -69,7 +69,7 @@ class EnviarCorreosCitas extends Command
                 $count++;
                 // Aquí puedes enviar el correo al usuario
                 $nombreUsuario = $user->name . ' ' . $user->lastname;
-                // Mail::to($user->email)->send(new RecordatorioAtencionMail($nombreUsuario, '10%'));
+                Mail::to($user->email)->send(new RecordatorioAtencionMail($nombreUsuario, '10%'));
                 $this->info("Correo enviado a $user->name ($user->email)");
             }
 
