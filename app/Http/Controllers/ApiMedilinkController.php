@@ -40,6 +40,18 @@ class ApiMedilinkController extends Controller
         echo $response->getBody();
     }
 
+    public function professional($rut){
+      $client = new \GuzzleHttp\Client();
+      $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/?q={"rut":{"eq":"'.$rut.'"}}';
+      $response = $client->request('GET', $url, [
+          'headers'  => [
+              'Authorization' => 'Token ' . $this->token
+          ]
+      ]);
+
+      echo $response->getBody();
+      }
+
     public function atentions()
     {
         $client = new \GuzzleHttp\Client();

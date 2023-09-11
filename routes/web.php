@@ -103,6 +103,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::resource('historial', 'App\Http\Controllers\historialController')->middleware(['intranet']);
 
     Route::get('/apim/professionals', [ApiMedilinkController::class, 'professionals']);
+    Route::get('/apim/professionals/{rut}', [ApiMedilinkController::class, 'professional']);
     Route::get('/apim/atentions', [ApiMedilinkController::class, 'atentions'])->middleware(['intranet']);
     Route::get('/apim/atentions/{id}', [ApiMedilinkController::class, 'atention'])->middleware(['intranet']);
     Route::get('/apim/atentions/{id}/evolution', [ApiMedilinkController::class, 'evolution'])->middleware(['intranet']);

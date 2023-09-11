@@ -50,7 +50,8 @@ class GoogleCalendarUpdate extends Command
 
         $professionals = Professional::google_id();
         foreach($professionals as $professional){
-            $this->info($professional->description);
+            // info profesional->description ' '  $professional->user->email
+            $this->info($professional->description.' '.$professional->user->email);
             $this->listCalendar($professional->google_id);
             $this->addcalendar($professional->id);
         }        
@@ -65,6 +66,8 @@ class GoogleCalendarUpdate extends Command
         $client = new \GuzzleHttp\Client();
         $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/?q={"rut":{"eq":"'.$professional->user->rut.'"}}';
         
+        $rut = $professional->user->rut;
+
         $response = $client->request('GET', $url, [
             'headers'  => [
                 'Authorization' => 'Token ' . $this->token
@@ -72,8 +75,15 @@ class GoogleCalendarUpdate extends Command
         ]);
         
         $professional = json_decode($response->getBody())->data[0];
+
+        if($rut == '16608122-k'){
+          $professional = json_decode($response->getBody())->data[1];
+        }
   
-        $url = $professional->links[1]->href.'?q={"fecha":{"gt":"2023-06-06"}}';
+        // yesterday date
+        $yesterday = \Carbon\Carbon::now()->subDays(1)->format('Y-m-d');
+
+        $url = $professional->links[1]->href.'?q={"fecha":{"gt":"'.$yesterday.'"}}';
         $response = $client->request('GET', $url, [
             'headers'  => [
                 'Authorization' => 'Token ' . $this->token
@@ -81,7 +91,7 @@ class GoogleCalendarUpdate extends Command
         ]);
   
         $professional_date = json_decode($response->getBody());
-  
+        
         $allprofessional_date = [];
         $professional_date = json_decode($response->getBody());
         $allprofessional_date[] = $professional_date->data;
@@ -154,6 +164,13 @@ class GoogleCalendarUpdate extends Command
         $events = $service->events->listEvents($calendarId);
         while(true) {
           foreach ($events->getItems() as $event) {
+            // get event date
+            $start = $event->getStart()->dateTime;
+            $this->info($start);
+            // if event date is less than today
+            if($start < date('Y-m-d H:i:s')){
+              continue;
+            }
             $this->info("Borrada ".$event->getSummary());
             $service->events->delete($calendarId, $event->getID());
           }
