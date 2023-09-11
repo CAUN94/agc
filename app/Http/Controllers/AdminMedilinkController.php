@@ -415,7 +415,7 @@ class AdminMedilinkController extends Controller
         $client = new \GuzzleHttp\Client();
 
         $id_paciente = $id;
-        $url = 'https://api.medilink.healthatom.com/api/v1/pacientes/'.$id_paciente.'/pagos';
+        $url = 'https://api.medilink.healthatom.com/api/v1/pacientes/'.$id_paciente.'/convenios';
 
         $response = $client->request('GET', $url, [
             'headers'  => [
@@ -423,7 +423,17 @@ class AdminMedilinkController extends Controller
             ]
         ]);
 
-        echo $response->getBody();
+        $alliance_data = json_decode($response->getBody())->data;
+        if(count($alliance_data) == 0){
+            return 'Sin Convenio';
+        }
+        else {
+            return $alliance_data[0]->nombre;
+        }
+
+        // return $alliance_data;
+
+        // echo $response->getBody();
     }
 
     public function payments(){

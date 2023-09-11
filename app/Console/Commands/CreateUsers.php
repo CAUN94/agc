@@ -138,12 +138,12 @@ class CreateUsers extends Command
             if($user->rut == null or $user == '' or $user->rut == '00000000' or $user->rut == '111111111') {
                 continue;
             }
+            $id_paciente    = $user->id;
             $user = User::where('rut',$user->rut)->first();
             if($user->hasAlliance()){
                 continue;
             }
 
-            $id_paciente    = $user->id;
             $url = 'https://api.medilink.healthatom.com/api/v1/pacientes/'.$id_paciente.'/convenios';
     
             $response = $client->request('GET', $url, [
@@ -160,12 +160,15 @@ class CreateUsers extends Command
                 sleep(10);
             }
 
-            $alliance = json_decode($response->getBody());
-
-            $this->info(var_dump($alliance->data));
-
-
-            if(count($alliance->data) == 0){
+            $alliance_data = json_decode($response->getBody())->data;
+            if(count($alliance_data) == 0){
+                $this->info($user->rut." ".$id_paciente." - No tiene alianza");
+            }
+            else {
+                $this->info($user->rut." - ".$id_paciente." - ".$alliance_data[0]->nombre);
+            }
+            
+            if(count($alliance_data) == 0){
                 DB::table('users_alliances_pivot')->insert([
                     'user_id' => $user->id,
                     'alliance_id' => 142
@@ -173,7 +176,9 @@ class CreateUsers extends Command
                 continue;
             }
 
-            $alliance = Alliance::where('name',$alliance->data[0]->nombre)->first();
+    
+
+            $alliance = Alliance::where('name',$alliance_data[0]->nombre)->first();
 
             DB::table('users_alliances_pivot')->insert([
                 'user_id' => $user->id,

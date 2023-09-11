@@ -41,6 +41,8 @@ class CreateAlliance extends Command
     {
         $actions = ActionMl::distinct('Convenio')->get('Convenio');
 
+        $this->info("Alliance: " . count($actions));
+
         foreach ($actions as $key => $value) {
             $Alliance  = Alliance::updateOrCreate(
                 [
@@ -51,6 +53,8 @@ class CreateAlliance extends Command
                 ]
             );
         }
+
+        $this->info("Alliance: " . count($actions));
 
 
     }

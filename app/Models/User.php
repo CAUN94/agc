@@ -197,7 +197,7 @@ class User extends Authenticatable {
     }
 
     public function hasAlliance(){
-		// si this alliance() es nuloo devuelve false
+		// si this alliance() es nulo devuelve false
 		if (is_null($this->alliance())){
 			return False;
 		}
