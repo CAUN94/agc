@@ -101,6 +101,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::resource('mesActual', 'App\Http\Controllers\mesActualController')->middleware(['intranet']);
     Route::resource('mesVencido', 'App\Http\Controllers\mesVencidoController')->middleware(['intranet']);
     Route::resource('historial', 'App\Http\Controllers\historialController')->middleware(['intranet']);
+    Route::resource('convenios', 'App\Http\Controllers\ConveniosController')->middleware(['intranet']);
 
     Route::get('/apim/professionals', [ApiMedilinkController::class, 'professionals']);
     Route::get('/apim/professionals/{rut}', [ApiMedilinkController::class, 'professional']);
