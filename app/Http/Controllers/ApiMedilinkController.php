@@ -97,6 +97,20 @@ class ApiMedilinkController extends Controller
 
     }
 
+    public function alianza($id){
+      $client = new \GuzzleHttp\Client();
+      $id_empresa = $id;
+      $url = 'https://api.medilink.healthatom.com/api/v1/empresas/'.$id_empresa;
+      
+      $response = $client->request('GET', $url, [
+          'headers'  => [
+              'Authorization' => 'Token ' . $this->token
+          ]
+      ]);
+      
+      echo $response->getBody();
+    }
+
     public function allAtentions()
     {
         $client = new \GuzzleHttp\Client();
