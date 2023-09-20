@@ -9,7 +9,7 @@ class Alliance extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','desc','alliance_name','contact_name','contact_phone_1','contact_phone_2','city','state','email'];
+    protected $fillable = ['name','desc','alliance_name','contact_name','contact_phone_1','contact_phone_2','city','state','email','medilink_desc'];
 
     public function setContactPhone1Attribute($value)
     {
