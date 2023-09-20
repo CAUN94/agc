@@ -101,6 +101,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::resource('mesActual', 'App\Http\Controllers\mesActualController')->middleware(['intranet']);
     Route::resource('mesVencido', 'App\Http\Controllers\mesVencidoController')->middleware(['intranet']);
     Route::resource('historial', 'App\Http\Controllers\historialController')->middleware(['intranet']);
+    Route::resource('convenios', 'App\Http\Controllers\ConveniosController')->middleware(['intranet']);
 
     Route::get('/apim/professionals', [ApiMedilinkController::class, 'professionals']);
     Route::get('/apim/professionals/{rut}', [ApiMedilinkController::class, 'professional']);
@@ -116,6 +117,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/apim/sillones', [ApiMedilinkController::class, 'sillones'])->middleware(['intranet']);
     Route::get('/apim/estados', [ApiMedilinkController::class, 'estados'])->middleware(['intranet']);
     Route::get('/apim/alianzas', [ApiMedilinkController::class, 'alianzas'])->middleware(['intranet']);
+    Route::get('/apim/alianzas/{id}', [ApiMedilinkController::class, 'alianza'])->middleware(['intranet']);
     Route::get('/apim/actions', [ApiMedilinkController::class, 'allactions'])->middleware(['intranet']);
     Route::get('/apim/cajas', [ApiMedilinkController::class, 'cajas']);
     Route::get('/apim/pagos', [ApiMedilinkController::class, 'pagos']);
@@ -307,6 +309,10 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/teachable/courses', 'TeachableController@getCourses');
 
     Route::get('/streamlit', 'App\Http\Controllers\StreamlitController@index');
+
+    Route::get('/datauser','App\Http\Controllers\ClinicDataController@index')->middleware(['auth']);
+    Route::get('/datauser/show/{id}','App\Http\Controllers\ClinicDataController@show')->middleware(['auth']);
+    Route::get('/datauser/evolution/{id}','App\Http\Controllers\ClinicDataController@evolution')->middleware(['auth']);
 });
 
 

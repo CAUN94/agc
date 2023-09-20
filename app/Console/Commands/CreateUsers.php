@@ -140,7 +140,7 @@ class CreateUsers extends Command
             }
             $id_paciente    = $user->id;
             $user = User::where('rut',$user->rut)->first();
-            if($user->hasAlliance()){
+            if( $user->hasAlliance()){
                 continue;
             }
 
