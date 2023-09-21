@@ -16,8 +16,8 @@ class AddMedilinkData extends Migration
         Schema::table('alliances', function (Blueprint $table) {
             $table->string('alliance_name')->nullable()->after('desc');
             $table->string('contact_name')->nullable()->after('alliance_name');
-            $table->integer('contact_phone_1')->nullable()->after('contact_name');
-            $table->integer('contact_phone_2')->nullable()->after('contact_phone_1');
+            $table->string('contact_phone_1')->nullable()->after('contact_name');
+            $table->string('contact_phone_2')->nullable()->after('contact_phone_1');
             $table->string('city')->nullable()->after('contact_phone_2');
             $table->string('state')->nullable()->after('city');
             $table->string('email')->nullable()->after('state');

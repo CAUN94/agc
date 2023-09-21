@@ -80,7 +80,7 @@ class UpdateAllianceInfo extends Command
         // update or create alliance use name as unique
 
         $alliance = \App\Models\Alliance::updateOrCreate(
-            ['name' => $allianceInfo->data->nombre],
+            ['name' => $alliance->nombre],
             [
                 'name' => $alliance->nombre,
                 'desc' => 10,
