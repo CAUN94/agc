@@ -14,16 +14,13 @@ class Alliance extends Model
     public function setContactPhone1Attribute($value)
     {
         $this->attributes['contact_phone_1'] = preg_replace('/[^0-9]/', '', $value);
+        
+
     }
 
     public function setContactPhone2Attribute($value)
     {
         $this->attributes['contact_phone_2'] = preg_replace('/[^0-9]/', '', $value);
-    }
-
-    public function getContactPhone2Attribute($value)
-    {
-        return '+569'.$value;
     }
 
 }
