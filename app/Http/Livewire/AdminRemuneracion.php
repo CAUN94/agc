@@ -114,8 +114,6 @@ class AdminRemuneracion extends Component
 
     public function exportToExcel($id)
     {
-        
-
         $Professional = DB::table('professionals')
                           ->where('user_id',$id)
                           ->first();
@@ -184,6 +182,7 @@ class AdminRemuneracion extends Component
                                 ->where('Fecha_Realizacion','<',$this->expiredendOfMonth->format('Y-m-d'))
                                 ->where('Profesional',$this->lista_id)
                                 ->groupBy('Tratamiento_Nr')
+                                ->select('*','Tratamiento_Nr', DB::raw('SUM(Precio_Prestacion) as TP'), DB::raw('SUM(Abono) as TA'))
                                 ->orderby('Fecha_Realizacion', 'DESC')->get(),
 
           'coff' => Professional::where('description',$this->lista_id)->first(['coff']),

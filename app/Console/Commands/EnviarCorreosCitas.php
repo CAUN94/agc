@@ -4,8 +4,8 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\User;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\RecordatorioAtencionMail;
+// use Illuminate\Support\Facades\Mail;
+// use App\Mail\RecordatorioAtencionMail;
 
 class EnviarCorreosCitas extends Command
 {
@@ -43,8 +43,8 @@ class EnviarCorreosCitas extends Command
         $fechaLimite = now()->subMonths(6);
 
         // get 100 random users
-        $users = User::inRandomOrder()->limit(100)->get();
-        // $users = User::all();
+        // $users = User::inRandomOrder()->limit(100)->get();
+        $users = User::all();
 
         $count = 0;
         foreach ($users as $user) {
@@ -61,8 +61,8 @@ class EnviarCorreosCitas extends Command
 
             if ($lastAppointment->Fecha < $fechaLimite) {
                 // muestra el rut,nombre y fecha del usuario usando this info
-                $this->info(
-                    "Rut: $user->rut, Nombre: $user->name, Apellido: $user->lastname,Mail: $user->email,Fecha:  $lastAppointment->Fecha");
+                // $this->info(
+                //     "Rut: $user->rut, Nombre: $user->name, Apellido: $user->lastname,Mail: $user->email,Fecha:  $lastAppointment->Fecha");
                     // format date
                     
                     // $lastAppointment->Fecha
@@ -70,8 +70,11 @@ class EnviarCorreosCitas extends Command
                 $count++;
                 // Aquí puedes enviar el correo al usuario
                 $nombreUsuario = $user->name . ' ' . $user->lastname;
-                Mail::to($user->email)->send(new RecordatorioAtencionMail($nombreUsuario, '10%'));
-                $this->info("Correo enviado a $user->name ($user->email)");
+                // Mail::to($user->email)->send(new RecordatorioAtencionMail($nombreUsuario, '10%'));
+                // $this->info("Correo enviado a $user->name ($user->email)");
+                // csv with name, lastname email and date with this-info
+                $this->info(
+                    "Rut: $user->rut, Nombre: $user->name, Apellido: $user->lastnames,Mail: $user->email,Fecha:  $lastAppointment->Fecha");
             }
 
             // muestra el total de usuarios
