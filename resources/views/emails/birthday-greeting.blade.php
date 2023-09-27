@@ -28,5 +28,5 @@ Esperamos que tengas un cumpleaños increíble, tengas un tremendo día y que se
 
 Con cariño,<br>
 Team You
-<img src="http://justbetter.cl/img/logo.png" alt="" style="max-width: 40%; background-color: #2C2C2C; padding:10px; display: block">
+<img src="http://justbetter.cl/img/logo.png" alt="foto" style="max-width: 40%; background-color: #2C2C2C; padding:10px; display: block">
 @endcomponent

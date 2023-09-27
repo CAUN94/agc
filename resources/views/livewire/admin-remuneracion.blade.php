@@ -138,13 +138,13 @@
                         @endif
                       </td>
                       <td class="text-center">
-                        {{Helper::moneda_chilena($Appointment->Precio_Prestacion)}}
+                        {{Helper::moneda_chilena($Appointment->TP)}}
                       </td>
                       <td class="text-center">
-                        {{Helper::moneda_chilena($Appointment->Abono)}}
+                        {{Helper::moneda_chilena($Appointment->TA)}}
                       </td>
                       <td class="text-center">
-                        {{Helper::moneda_chilena(ceil(($Appointment->Precio_Prestacion*$coff->coff)/100))}}
+                        {{Helper::moneda_chilena(ceil(($Appointment->TP*$coff->coff)/100))}}
                       </td>
                     </tr>
                   @endforeach

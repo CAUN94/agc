@@ -7,6 +7,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\Exportable;
 use App\Models\ActionMl;
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\DB;
 
 class RemunerationExport implements FromCollection, WithHeadings
 {
@@ -50,12 +51,12 @@ class RemunerationExport implements FromCollection, WithHeadings
             ->where('Fecha_Realizacion','<',$this->expiredendOfMonth->format('Y-m-d'))
             ->where('Profesional',$this->id)
             ->groupBy('Tratamiento_Nr')
+            ->select('Tratamiento_Nr','Nombre','Apellido','Estado','Prestacion_nr','Prestacion_Nombre','Fecha_Realizacion',DB::raw('SUM(Precio_Prestacion) as TP'))
             ->orderby('Fecha_Realizacion', 'DESC')->get();
         
         foreach($actions as $action)
         {
-            
-            $action->Precio_Prestacion = Helper::moneda_chilena(ceil(($action->Precio_Prestacion * $this->coff)/100));
+            $action->TP = Helper::moneda_chilena(ceil(($action->TP * $this->coff)/100));
         }
 
         return $actions;
