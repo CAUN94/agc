@@ -110,7 +110,7 @@ class AdminConvenios extends Component
       }
 
         return view('livewire.admin-convenios', [
-            'appointments' => ActionMl::where('Convenio', 'Dr Mario Sandoval ')
+            'appointments' => ActionMl::Where('Convenio', 'LIKE' , '%' . Auth::user()->fullname() . '%')
                                   ->where('Estado', 'Atendido')
                                   ->groupBy('Tratamiento_Nr')
                                   ->orderby('Fecha_Realizacion', 'ASC')
