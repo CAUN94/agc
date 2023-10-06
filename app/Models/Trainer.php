@@ -67,7 +67,7 @@ class Trainer extends Model
                     $usuarioEncontrado = User::whereRaw("CONCAT(name, ' ', lastnames) LIKE ?", ["%$nombreCompleto%"])->first();
                     $idUsuarioEncontrado = $usuarioEncontrado->id;
                     if(User::find($idUsuarioEncontrado)->hasAlliance()){
-                        $allianceDesc = 0.8;
+                        $allianceDesc = 0.9;
                     }
                 } 
                 $sum = $sum + ceil(((($training->price/$training->class))*$allianceDesc)*($this->coff/100));
