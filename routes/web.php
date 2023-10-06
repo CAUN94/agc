@@ -128,6 +128,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/apim/user/pagos', [ApiMedilinkController::class, 'UserPays']);
     Route::get('/apim/documentosTributarios', [ApiMedilinkController::class, 'documentosTributarios']);
     Route::get('/apim/patients/{id}/evolution', [ApiMedilinkController::class, 'patient']);
+    Route::get('/apim/tasaOcupacion', [ApiMedilinkController::class, 'tasaOcupacion']);
 
     Route::get('/googlecalendar', [GoogleCalendarController::class, 'index']);
 
@@ -280,6 +281,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/apimedilink/payments/{id}', [AdminMedilinkController::class, 'payment']);
     Route::get('/apimedilink/payments/{id}/boleta', [AdminMedilinkController::class, 'paymentboleta']);
     Route::get('/apimedilink/payments/{id}', [AdminMedilinkController::class, 'payment']);
+    Route::get('/apimedilink/tasaOcupacion', [AdminMedilinkController::class, 'tasaOcupacion']);
 
 
 

@@ -510,4 +510,7 @@ class AdminMedilinkController extends Controller
         echo $response->getBody();
     }
 
+    public function tasaOcupacion(){
+        $client = new \GuzzleHttp\Client();
+    }
 }

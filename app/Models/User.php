@@ -201,12 +201,13 @@ class User extends Authenticatable {
 		if (is_null($this->alliance())){
 			return False;
 		}
-		if (!is_null($this->alliance())){
-    		return True;
-    	}
 		if($this->alliance()->name == 'Sin Convenio'){
 			return False;
 		}
+		if (!is_null($this->alliance())){
+    		return True;
+    	}
+
         return False;
     }
 
