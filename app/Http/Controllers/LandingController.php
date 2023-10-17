@@ -25,6 +25,10 @@ class LandingController extends Controller
         return view('packverano');
     }
 
+    public function personalize_whatsapp(){
+        return view('personalize_whatsapp');
+    }
+
     public function confirmations()
     {
         return view('confirmation');

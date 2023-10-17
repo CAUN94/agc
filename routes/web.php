@@ -81,6 +81,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/confirmations', [LandingController::class, 'confirmations'])->middleware(['intranet']);
     // Route::get('/confirmation/{id}', [LandingController::class, 'confirmation'])->middleware(['intranet']);
     Route::get('/confirmation/{id}', [LandingController::class, 'sendconfirmation'])->middleware(['intranet']);
+    Route::get('/custommessage', [LandingController::class, 'personalize_whatsapp'])->middleware(['intranet']);
 
     // //lista Espera
     // Route::resource('listaEspera', 'App\Http\Controllers\listaEsperaController')->middleware(['intranet']);
@@ -165,6 +166,8 @@ Route::middleware([UpdatePassword::class,])->group(function () {
 
     Route::get('/professionals', 'App\Http\Controllers\ApiMedilinkController@nextAppointmentsProfessionals')->middleware(['intranet']);
     Route::get('/professionals/{id}', 'App\Http\Controllers\ApiMedilinkController@nextAppointmentsProfessional')->middleware(['intranet']);
+    Route::get('/ocupations/{id}', 'App\Http\Controllers\ApiMedilinkController@ocupations')->middleware(['intranet']);
+    Route::get('/ocupation/{id}', 'App\Http\Controllers\ApiMedilinkController@ocupation')->middleware(['intranet']);
 
 
     // Medilink
