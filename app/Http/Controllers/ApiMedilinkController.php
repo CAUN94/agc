@@ -560,6 +560,86 @@ class ApiMedilinkController extends Controller
       return view('professionalsml.show',compact('professional','appointments'));
     }
 
+    public function ocupations($id){
+      // get all professionals
+      $summary = [];
+      $professional = Professional::find($id);
+      
+      for($i=1; $i<=9; $i++){
+        $summary[$professional->description." ".$i] = $professional->monthOcupation($i)[2];
+      }
+      
+
+      return $summary;
+    }
+
+    public function ocupation($id){
+      $professional = Professional::find($id);
+
+      $client = new \GuzzleHttp\Client();
+      $url = 'https://api.medilink.healthatom.com/api/v1/profesionales/?q={"rut":{"eq":"'.$professional->user->rut.'"}}';
+      
+      $response = $client->request('GET', $url, [
+          'headers'  => [
+              'Authorization' => 'Token ' . $this->token
+          ]
+      ]);
+      
+      $professional = json_decode($response->getBody())->data[0];
+      $id_profesional = $professional->id;
+      $id_sucursal    = 1;
+      $url            = 'https://api.medilink.healthatom.com/api/v1/sucursales/'.$id_sucursal.'/profesionales/'.$id_profesional.'/agendas';
+        
+      // Carbon first day of specific month from januray
+      $start = Carbon::now()->month(1)->day(21)->format('Y-m-d');
+      $end = Carbon::now()->month(1)->day(31)->format('Y-m-d');
+      // Carbon first day of specific month from february
+      
+      $params         =   [
+                              'fecha_inicio'      => ['eq' => $start],
+                              'fecha_fin'         => ['eq' => $end],
+                              'mostrar_detalles'  => ['eq' => 1]
+              ];
+
+      $response = $client->request('GET', $url, [
+          'query'     => "q=".json_encode($params),
+              'headers'   => [
+              'Authorization' => 'Token ' . $this->token
+          ]
+      ]);
+      
+      $appointments = json_decode($response->getBody())->data->fechas;
+      $appointments = (array)$appointments;
+      // map all appointments and check if is empty if is not empty map all values in horas and count only where sillones-> 1 is true use a for loop
+      $availableHours = [];
+      foreach($appointments as $key1 => $appointment){
+        if(!empty($appointment->horas)){
+          $hours = $appointment->horas;
+          foreach($hours as $key2 => $hour){
+              // sillones has a key name 1
+              $hour = (array)$hour;
+              $sillones = $hour['sillones'];
+              // $sillones = (array)$sillones;
+              // stdClass to array $sillones
+              $sillones = (array)$sillones;
+              $sillones = (array)$sillones[1];
+              // check if isset key tipo
+              if(isset($sillones['tipo'])){
+                if($sillones['tipo'] != 'Bloqueo')
+                $availableHours[$key1." ".$key2] = $sillones;
+              } else {
+                $availableHours[$key1." ".$key2] = $sillones;
+              }
+
+            }
+          }
+        }
+      if(count($availableHours)){
+        return 0;
+      }
+      return count($availableHours);
+    }
+
     public function cajas(){
       $client = new \GuzzleHttp\Client();
 
