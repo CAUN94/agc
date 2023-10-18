@@ -69,7 +69,11 @@
                   {{Helper::moneda_chilena(ceil(($Appointment->Precio_Prestacion)))}}
                 </td>
                 <td>
+                  @if($rut == '20663772-2')
+                    {{Helper::moneda_chilena(10000)}}
+                  @else
                   {{Helper::moneda_chilena(ceil(($Appointment->Precio_Prestacion*$coff->coff)/100))}}
+                  @endif
                 </td>
               </tr>
               @endforeach
