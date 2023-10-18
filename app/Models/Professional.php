@@ -58,7 +58,9 @@ class Professional extends Model
 
     public static function remuneracion($first,$last,$user){
       $coef = Professional::where('description' ,'=',  $user)->first(['coeff']);
-
+      if(Professional::where('description' ,'=',  $user)->first()->description == 'Nicolás Muñoz Demian '){
+        return Helper::moneda_chilena(Professional::monthAppointments($first,$last,$user)*10000);
+      }
       return Helper::moneda_chilena(ceil(ActionMl::where('Fecha_Realizacion','>',$first)
                           ->where('Fecha_Realizacion','<', $last)
                           ->Where('Profesional', 'LIKE' , '%' . $user . '%')
