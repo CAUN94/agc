@@ -124,6 +124,7 @@ class AdminMesVencido extends Component
                                   ->get(),
 
             'coff' => Professional::where('user_id',Auth::user()->id)->first(['coff']),
+            'rut' => Auth::user()->rut,
         ]);
     }
 }

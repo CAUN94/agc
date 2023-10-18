@@ -112,7 +112,11 @@
                   {{$Appointment->Categoria_Nombre}}
                 </td>
                 <td>
-                  {{Helper::moneda_chilena(ceil(($Appointment->Precio_Prestacion*$coff->coff)/100))}}
+                  @if($rut == '20663772-2')
+                    {{Helper::moneda_chilena(10000)}}
+                  @else
+                    {{Helper::moneda_chilena(ceil(($Appointment->Precio_Prestacion*$coff->coff)/100))}}
+                  @endif
                 </td>
               </tr>
               @endforeach
@@ -185,7 +189,8 @@
                             </dt>
                             <dd class="train-class-resume-text">
                                 <li class="list-none">{{Helper::moneda_chilena(App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Precio_Prestacion'))*$coeff}}</li>
-                            </dd>
+
+                              </dd>
                           </div>
                         </dl>
                     </div>

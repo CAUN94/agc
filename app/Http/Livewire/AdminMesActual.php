@@ -133,6 +133,7 @@ class AdminMesActual extends Component
                                   ->orderby('Fecha_Realizacion', 'ASC')
                                   ->get(),
             'coff' => Professional::where('user_id',Auth::user()->id)->first(['coff']),
+            'rut' => Auth::user()->rut,
         ]);
     }
 }
