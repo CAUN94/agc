@@ -70,7 +70,7 @@
             Atendidos
           </div>
           <div class="rounded-b-lg h-full p-3">
-            <table id="table">
+            <table class="table-data">
               <thead>
                 <tr>
                   <th>Fecha</th>

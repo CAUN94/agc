@@ -93,7 +93,7 @@
   <script src="/vendor/livewire-charts/app.js"></script>
   <script>
     $(document).ready(function() {
-      $('#table').DataTable();
+      $('.table-data').DataTable();
   } );
   </script>
   @livewireScripts
