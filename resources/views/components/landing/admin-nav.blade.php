@@ -11,6 +11,12 @@
     </x-nav-dropdown>
 
     <x-nav-dropdown>
+      <x-slot name="name"><i class="fas fa-user text-xs mr-1"></i> Alianzas</x-slot>
+      <x-slot name="trigger">Alianzas</x-slot>
+      <a class="py-1" href="/aliance_whatsapp">Whatsapp</a>
+    </x-nav-dropdown>
+
+    <x-nav-dropdown>
       <x-slot name="name"><i class="fas fa-calendar-alt mr-1"></i> Entrenamiento</x-slot>
       <x-slot name="trigger">Clases</x-slot>
       <a class="py-1" href="/adminclass">Programas</a>
