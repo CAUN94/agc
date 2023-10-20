@@ -82,6 +82,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     // Route::get('/confirmation/{id}', [LandingController::class, 'confirmation'])->middleware(['intranet']);
     Route::get('/confirmation/{id}', [LandingController::class, 'sendconfirmation'])->middleware(['intranet']);
     Route::get('/custommessage', [LandingController::class, 'personalize_whatsapp'])->middleware(['intranet']);
+    Route::get('/aliance_whatsapp', [LandingController::class, 'aliance_whatsapp'])->middleware(['intranet']);
 
     // //lista Espera
     // Route::resource('listaEspera', 'App\Http\Controllers\listaEsperaController')->middleware(['intranet']);

@@ -29,6 +29,11 @@ class LandingController extends Controller
         return view('personalize_whatsapp');
     }
 
+    public function aliance_whatsapp(){
+        return 'aliance_whatsapp';
+        // return view('aliance_whatsapp');
+    }
+
     public function confirmations()
     {
         return view('confirmation');
