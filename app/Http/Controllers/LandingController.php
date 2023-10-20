@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Helpers\Helper;
+use App\Models\Alliance;
 use Carbon\Carbon;
 use Session as FlashSession;
 
@@ -30,8 +31,9 @@ class LandingController extends Controller
     }
 
     public function aliance_whatsapp(){
-        return 'aliance_whatsapp';
-        // return view('aliance_whatsapp');
+        // All Alliance where contavt_phone_1 is not null and contact_phone_1 has more than 7 characters
+        $alliances = Alliance::all();
+        return view('aliance_whatsapp',compact('alliances'));
     }
 
     public function confirmations()
