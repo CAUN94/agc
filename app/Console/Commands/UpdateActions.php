@@ -153,13 +153,16 @@ class UpdateActions extends Command
 
                 }
                 if(count($pay->data) == 0){
-                    $total += 23990;
-                    $pay = ['pagado' => 0, 'total' => 23990];
+                    if(User::where('rut',))
+                    $total += ;
+                    $pay = ['pagado' => 0, 'total' => ];
                     $pay = (object)$pay;
                     $pay = [$pay];
                 } else {
                     $pay = $pay->data;
                 }
+
+                $pay = $pay->data;
 
                 $total_final += $total;
                 $pays[] = [$data, $pay,$total];

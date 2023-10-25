@@ -263,7 +263,7 @@ class ApiMedilinkController extends Controller
     {
         $client = new \GuzzleHttp\Client();
 
-        $query_string   = '?q={"fecha":{"gt":"2022-09-01"}}';
+        $query_string   = '?q={"fecha":{"gt":"2023-09-21"}}';
         $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/';
         $url = $url."".$query_string;
 
@@ -292,27 +292,27 @@ class ApiMedilinkController extends Controller
           $nombre = strtok($action->nombre_paciente,  ' ');
           $apellido = substr($action->nombre_paciente, strpos($action->nombre_paciente, " ") + 1);
 
-            $new_row = actionMl::create([
-              'id'=> $action->id,
-              'Sucursal'=> $action->nombre_sucursal,
-              'Nombre'=>$nombre,
-              'Apellido'=>$apellido,
-              'Categoria_Nr' => $action->id_tipo,
-              'Categoria_Nombre'=> $action->nombre_tipo,
-              'Tratamiento_Nr'=> $action->id,
-              'Profesional'=> $action->nombre_profesional,
-              'Estado'=> $estado,
-              'Convenio'=> $action->nombre_convenio,
-              'Prestacion_Nr'=> $action->id,
-              'Prestacion_Nombre'=> $action->nombre_tipo,
-              'Fecha_Realizacion'=> $action->fecha,
-              'Precio_Prestacion'=> $action->total,
-              'Abono'=> $action->abonado,
-              'Total'=> $action->total_realizado,
-              'created_at'=> Carbon::Now(),
-              'updated_at'=> Carbon::Now()
-            ]);
-          $new_row->save();
+          //   $new_row = actionMl::create([
+          //     'id'=> $action->id,
+          //     'Sucursal'=> $action->nombre_sucursal,
+          //     'Nombre'=>$nombre,
+          //     'Apellido'=>$apellido,
+          //     'Categoria_Nr' => $action->id_tipo,
+          //     'Categoria_Nombre'=> $action->nombre_tipo,
+          //     'Tratamiento_Nr'=> $action->id,
+          //     'Profesional'=> $action->nombre_profesional,
+          //     'Estado'=> $estado,
+          //     'Convenio'=> $action->nombre_convenio,
+          //     'Prestacion_Nr'=> $action->id,
+          //     'Prestacion_Nombre'=> $action->nombre_tipo,
+          //     'Fecha_Realizacion'=> $action->fecha,
+          //     'Precio_Prestacion'=> $action->total,
+          //     'Abono'=> $action->abonado,
+          //     'Total'=> $action->total_realizado,
+          //     'created_at'=> Carbon::Now(),
+          //     'updated_at'=> Carbon::Now()
+          //   ]);
+          // $new_row->save();
         }
 
         while(isset($actions->links->next)){
