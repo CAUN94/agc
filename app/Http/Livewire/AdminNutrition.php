@@ -34,22 +34,7 @@ class AdminNutrition extends Component
     public $deporteMeso;
     public $deporteEcto;
     public $deporteSumatoria;
-
-    public $M_adiposa_kg;
-    public $M_adiposa_porc;
-    public $M_muscular_kg;
-    public $M_muscular_porc;
-    public $M_osea_kg;
-    public $M_osea_porc;
-    public $indice_M_O;
-    public $indice_A_M;
-    public $indice_masa_corporal;
-    public $somatotipo_Endo;
-    public $somatotipo_Meso;
-    public $somatotipo_Ecto;
-    public $sumatoria_6_plieges;
-    public $diferencia_PE_PB;
-    public $diferencia_porc;
+    public $section = 0;
 
     public $fecha;
     public $edad;
@@ -88,6 +73,7 @@ class AdminNutrition extends Component
     public $showAntropometria = false;
     public $nutritionID;
     public $viewsNutrition;
+    public $nutrition;
 
     public function selectUser($id)
     {
@@ -150,16 +136,16 @@ class AdminNutrition extends Component
           $const_AS = 73.074;
         }
 
-        $this->indice_masa_corporal = round($this->peso/pow(($this->talla_parado/100), 2), 2);
+        $Indice_masa_corporal = round($this->peso/pow(($this->talla_parado/100), 2), 2);
 
         $Area_superficial = ($const_AS*(pow($this->peso, 0.425))*(pow($this->talla_parado, 0.725)))/10000;
         $Masa_Piel = ($Area_superficial*$grosor_piel*1.05);
 
 
         //Masa Adiposa
-        $this->sumatoria_6_plieges = $this->triceps + $this->subescapular + $this->supraespinal + $this->abdominal + $this->muslo_medial +  $this->pierna_mm;
-        $Score_Z_adiposa = ($this->sumatoria_6_plieges*(170.18/$this->talla_parado)-116.41)/34.79;
-        $this->M_adiposa_kg = (($Score_Z_adiposa*5.85)+25.6)/pow((170.18/$this->talla_parado), 3);
+        $sumatoria_6_plieges = $this->triceps + $this->subescapular + $this->supraespinal + $this->abdominal + $this->muslo_medial +  $this->pierna_mm;
+        $Score_Z_adiposa = ($sumatoria_6_plieges*(170.18/$this->talla_parado)-116.41)/34.79;
+        $M_adiposa_kg = (($Score_Z_adiposa*5.85)+25.6)/pow((170.18/$this->talla_parado), 3);
 
 
         //Masa Muscular
@@ -171,7 +157,7 @@ class AdminNutrition extends Component
 
         $Suma_perímetros_corregidos = $per_Brazo_corregido + $per_Antebrazo + $per_Muslo_corregido + $per_Pantorrilla_corregido + $per_Tórax_corregido;
         $Score_Z_muscular = (($Suma_perímetros_corregidos*(170.18/$this->talla_parado)-207.21)/13.74);
-        $this->M_muscular_kg = (($Score_Z_muscular*5.4)+24.5)/pow((170.18/$this->talla_parado), 3);
+        $M_muscular_kg = (($Score_Z_muscular*5.4)+24.5)/pow((170.18/$this->talla_parado), 3);
 
 
         //Masa_Residual
@@ -189,50 +175,46 @@ class AdminNutrition extends Component
         $Score_Z_osea_cuerpo = (($Suma_de_Diámetros*(170.18/$this->talla_parado))-98.88)/5.33;
         $Masa_Osea_Cuerpo = (($Score_Z_osea_cuerpo*1.34)+6.7)/pow((170.18/$this->talla_parado), 3);
 
-        $this->M_osea_kg = $Masa_osea_Cabeza + $Masa_Osea_Cuerpo;
+        $M_osea_kg = $Masa_osea_Cabeza + $Masa_Osea_Cuerpo;
 
         //Peso Estructurado y Porcentual
-        $Peso_estructurado = $Masa_Piel + $this->M_adiposa_kg + $this->M_muscular_kg + $Masa_Residual + $this->M_osea_kg;
-        $this->diferencia_PE_PB = ($Peso_estructurado) - ($this->peso);
-        $this->diferencia_porc = $this->diferencia_PE_PB/$this->peso;
+        $Peso_estructurado = $Masa_Piel + $M_adiposa_kg + $M_muscular_kg + $Masa_Residual + $M_osea_kg;
+        $diferencia_PE_PB = ($Peso_estructurado) - ($this->peso);
+        $diferencia_porc = $diferencia_PE_PB/$this->peso;
 
-        $this->M_adiposa_porc = ($this->M_adiposa_kg/$Peso_estructurado);
-        $this->M_muscular_porc = ($this->M_muscular_kg/$Peso_estructurado);
-        $this->M_osea_porc = ($this->M_osea_kg/$Peso_estructurado);
+        $M_adiposa_porc = ($M_adiposa_kg/$Peso_estructurado);
+        $M_muscular_porc = ($M_muscular_kg/$Peso_estructurado);
+        $M_osea_porc = ($M_osea_kg/$Peso_estructurado);
 
-        $Masa_osea_reajustada = ($this->M_osea_kg - ($this->M_osea_porc*$this->diferencia_PE_PB));
-        $Masa_muscular_reajustada = ($this->M_muscular_kg - ($this->M_muscular_porc*$this->diferencia_PE_PB));
-        $Masa_adiposa_reajustada = ($this->M_adiposa_kg - ($this->M_adiposa_porc*$this->diferencia_PE_PB));
-        $Masa_piel_reajustada = ($Masa_Piel - (($Masa_Piel/$Peso_estructurado)*$this->diferencia_PE_PB));
-        $masa_residual_reajustada = ($Masa_Residual - (($Masa_Residual/$Peso_estructurado)*$this->diferencia_PE_PB));
+        $Masa_osea_reajustada = ($M_osea_kg - ($M_osea_porc*$diferencia_PE_PB));
+        $Masa_muscular_reajustada = ($M_muscular_kg - ($M_muscular_porc*$diferencia_PE_PB));
+        $Masa_adiposa_reajustada = ($M_adiposa_kg - ($M_adiposa_porc*$diferencia_PE_PB));
+        $Masa_piel_reajustada = ($Masa_Piel - (($Masa_Piel/$Peso_estructurado)*$diferencia_PE_PB));
+        $masa_residual_reajustada = ($Masa_Residual - (($Masa_Residual/$Peso_estructurado)*$diferencia_PE_PB));
 
         $Peso_estructurado_reajustado = $Masa_adiposa_reajustada + $Masa_osea_reajustada + $Masa_muscular_reajustada + $Masa_piel_reajustada + $masa_residual_reajustada;
-        $this->M_adiposa_porc = ($Masa_adiposa_reajustada/$Peso_estructurado_reajustado)*100;
-        $this->M_muscular_porc = ($Masa_muscular_reajustada/$Peso_estructurado_reajustado)*100;
-        $this->M_osea_porc = ($Masa_osea_reajustada/$Peso_estructurado_reajustado)*100;
+        $M_adiposa_porc = ($Masa_adiposa_reajustada/$Peso_estructurado_reajustado)*100;
+        $M_muscular_porc = ($Masa_muscular_reajustada/$Peso_estructurado_reajustado)*100;
+        $M_osea_porc = ($Masa_osea_reajustada/$Peso_estructurado_reajustado)*100;
 
 
         //Somatotipos
         $sum_SF = ($this->triceps + $this->subescapular + $this->supraespinal) * (170.18/$this->talla_parado);
-        $this->somatotipo_Endo = (-0.7182 + (0.1451*$sum_SF) - (0.00068*pow($sum_SF, 2)) + (0.0000014*pow($sum_SF, 3)) );
+        $somatotipo_Endo = (-0.7182 + (0.1451*$sum_SF) - (0.00068*pow($sum_SF, 2)) + (0.0000014*pow($sum_SF, 3)) );
 
-        $this->somatotipo_Meso = (0.858*$this->humeral)+(0.601*$this->femoral)+(0.188*($this->brazo_flexionado-$this->triceps/10))+(0.161*($this->pierna_cm-$this->pierna_mm/10))-($this->talla_parado*0.131)+4.5;
+        $somatotipo_Meso = (0.858*$this->humeral)+(0.601*$this->femoral)+(0.188*($this->brazo_flexionado-$this->triceps/10))+(0.161*($this->pierna_cm-$this->pierna_mm/10))-($this->talla_parado*0.131)+4.5;
 
         $HWR = $this->talla_parado/pow($this->peso, 0.3333);
         if($HWR>=40.75){
-          $this->somatotipo_Ecto = 0.732*$HWR-28.58;
+          $somatotipo_Ecto = 0.732*$HWR-28.58;
         }else{
-          $this->somatotipo_Ecto = 0.463*$HWR-17.63;
+          $somatotipo_Ecto = 0.463*$HWR-17.63;
         }
-
-
-        $this->indice_M_O = $Masa_adiposa_reajustada/$Masa_muscular_reajustada;
-        $this->indice_A_M = $Masa_muscular_reajustada/$Masa_osea_reajustada;
 
         $nutrition = new Nutrition;
 
         $nutrition->fecha = $this->fecha;
-        $nutrition->plan = $this->user->name . $this->user->lastnames;
+        $nutrition->plan = $this->user->name ." ". $this->user->lastnames;
         $nutrition->peso = $this->peso;
         $nutrition->talla_parado = $this->talla_parado;
         $nutrition->talla_sentado = $this->talla_sentado;
@@ -262,21 +244,21 @@ class AdminNutrition extends Component
         $nutrition->biceps = $this->biceps;
         $nutrition->cresta_iliaca = $this->cresta_iliaca;
         $nutrition->masa_adiposa = $Masa_adiposa_reajustada;
-        $nutrition->masa_adiposa_porc = $this->M_adiposa_porc;
+        $nutrition->masa_adiposa_porc = $M_adiposa_porc;
         $nutrition->masa_muscular = $Masa_muscular_reajustada;
-        $nutrition->masa_muscular_porc = $this->M_muscular_porc;
+        $nutrition->masa_muscular_porc = $M_muscular_porc;
         $nutrition->masa_osea = $Masa_osea_reajustada;
-        $nutrition->masa_osea_porc = $this->M_osea_porc;
+        $nutrition->masa_osea_porc = $M_osea_porc;
         $nutrition->masa_piel = $Masa_piel_reajustada;
         $nutrition->masa_residual = $masa_residual_reajustada;
         $nutrition->indice_adiposo = $Masa_adiposa_reajustada/$Masa_muscular_reajustada;
         $nutrition->indice_musculo = $Masa_muscular_reajustada/$Masa_osea_reajustada;
-        $nutrition->indice_corporal = $this->indice_masa_corporal;
+        $nutrition->indice_corporal = $Indice_masa_corporal;
         $nutrition->peso_estructurado = $Peso_estructurado_reajustado;
-        $nutrition->diferencia_peso = $this->diferencia_PE_PB;
-        $nutrition->endo = $this->somatotipo_Endo;
-        $nutrition->meso = $this->somatotipo_Meso;
-        $nutrition->ecto = $this->somatotipo_Ecto;
+        $nutrition->diferencia_peso = $diferencia_PE_PB;
+        $nutrition->endo = $somatotipo_Endo;
+        $nutrition->meso = $somatotipo_Meso;
+        $nutrition->ecto = $somatotipo_Ecto;
         $nutrition->rut = $this->user->rut;
         $nutrition->edad = $this->edad;
         $nutrition->gender = $this->sexo;
@@ -338,29 +320,44 @@ class AdminNutrition extends Component
       $this->M_muscular = null;
     }
 
-    public function pdf(){
-        $nutrition = Nutrition::latest()->first();
+    public function pdf($id){
+        $nutrition = Nutrition::find($id);
         if($nutrition){
           $pdf = pdf::loadView('livewire.pdf', compact('nutrition'));
 
           $pdf->render();
           $nutrucion_pdf = new NutritionDocuments;
-          $nutrucion_pdf->fecha = $nutrition->fecha;
-          $nutrucion_pdf->rut_paciente = $nutrition->rut;
+          $pdfFecha = Carbon::parse($nutrition->fecha)->format('d-m-Y');
           $nutrucion_pdf->pdf = $pdf->output();
           $nutrucion_pdf->save();
 
-          return $pdf->stream('livewire.pdf');
-        }else{
-
+          return $pdf->download($nutrition->plan ."_".$pdfFecha . '.pdf');
         }
-
-
-
     }
 
-    public function pdf_view(){
-        return view('livewire.pdf');
+    public function sesionPrevia($user){
+      $ultimaSesion = Nutrition::where("rut", $user->rut)->latest()->first();
+      if(is_null($ultimaSesion)){
+        $sesionDatos = [
+          "peso" => '-',
+          "altura" => '-',
+          "fecha" =>'Sin Registro',
+          "edad" => Carbon::parse($user->birthday)->diff(\Carbon\Carbon::now())->format('%y años')
+      ];
+
+      }else{
+        $sesionDatos = [
+          "peso" => $ultimaSesion->peso,
+          "altura" => round($ultimaSesion->talla_parado/100, 2),
+          "fecha" => Carbon::parse($ultimaSesion->fecha)->format('d-m-Y'),
+          "edad" => Carbon::parse($user->birthday)->diff(\Carbon\Carbon::now())->format('%y años')
+      ];
+      }
+      return $sesionDatos;
+    }
+
+    public function selectionMenu($menu){
+      return $this->section = $menu;
     }
 
     public function render()
