@@ -11,17 +11,15 @@ class Alliance extends Model
 
     protected $fillable = ['name','desc','alliance_name','contact_name','contact_phone_1','contact_phone_2','city','state','email','medilink_desc'];
 
-    // public function setContactPhone1Attribute($value)
-    // {
-    //     $this->attributes['contact_phone_1'] = preg_replace('/[^0-9]/', '', $value);
-    // }
+    public function setContactPhone1Attribute($value)
+    {
+        $this->attributes['contact_phone_1'] = preg_replace('/[^0-9]/', '', $value);
+    }
 
-    // public function setContactPhone2Attribute($value)
-    // {
-    //     $this->attributes['contact_phone_2'] = preg_replace('/[^0-9]/', '', $value);
-    // }
-
-    // mutate contact_phone_1 to "569".substr(preg_replace('/[^0-9]/', '', $value), -8);
+    public function setContactPhone2Attribute($value)
+    {
+        $this->attributes['contact_phone_2'] = preg_replace('/[^0-9]/', '', $value);
+    }
 
     public function getContactPhone1Attribute($value)
     {
