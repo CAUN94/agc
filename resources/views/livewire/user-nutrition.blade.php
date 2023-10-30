@@ -25,7 +25,7 @@
             </div>
           </div>
 
-<!--
+
           <div class="bg-white flex justify-center">
               <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
@@ -109,7 +109,7 @@
          </script>
          </div>
 
-       -->
+
 
           <div class="border-t border-gray-200">
             <div class="bg-white text-sm px-4 py-5 grid sm:gap-4 sm:px-6">

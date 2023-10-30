@@ -142,8 +142,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
 
     // Admin Haas
     Route::get('/admin/nutrition', [AdminHaasController::class, 'nutrition'])->middleware(['intranet']);
-    Route::get('/admin/nutrition/pdf', ['App\Http\Livewire\AdminNutrition', 'pdf'])->middleware(['intranet'])->name('livewire.admin-nutrition');
-    Route::get('/admin/nutrition/pdf-view', [AdminHaasController::class, 'pdf_view'])->middleware(['intranet']);
+    Route::get('/admin/nutrition/pdf/{id}', ['App\Http\Livewire\AdminNutrition', 'pdf'])->middleware(['intranet'])->name('livewire.admin-nutrition');
 
     // TrainerAdmins
     Route::resource('trainertrainappointment', 'App\Http\Controllers\TrainerTrainController');
@@ -242,6 +241,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/box/msilvaa', 'App\Http\Controllers\RedirectController@msilvaa');
     Route::get('/box/jvalcarcels', 'App\Http\Controllers\RedirectController@jvalcarcels');
     Route::get('/box/mrebolledon', 'App\Http\Controllers\RedirectController@mrebolledon');
+    Route::get('/box/jbustamantet', 'App\Http\Controllers\RedirectController@jbustamantet');
     Route::get('/box/meetyou', 'App\Http\Controllers\RedirectController@meetyou');
 
     Route::get('change-password', 'App\Http\Controllers\ChangePasswordController@index')->withoutMiddleware([UpdatePassword::class]);
