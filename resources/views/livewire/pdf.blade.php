@@ -19,8 +19,8 @@ th{
 </style>
 
 <body style="font-family: Arial, Helvetica, sans-serif;">
-  <img class="logo" src='img/you-completo-nn.png' style="width: 170px; height: 100px; position: absolute; right: 0;">
-  <h1 style= "text-align: center">Evaluación Nutricional</h1>
+  <img class="logo" src='img/you-completo-nn.png' style="width: 180px; height: 100px; position: absolute; right: 10;">
+  <h1 style= "margin-top: 40px; margin-left: 135px;">Evaluación Nutricional</h1>
   <p>
     <span style= "text-align: center">Nombre: {{$nutrition->plan}}</span>
   </p>
@@ -183,75 +183,39 @@ th{
           <tbody>
             <tr>
               <td style="text-align: left;">Masa Adiposa</td>
-              <td style="text-align: center;">{{round(($nutrition->masa_adiposa_porc), 2)}}%</td>
               <td style="text-align: center;">{{$nutrition->masa_adiposa}} kg</td>
+              <td style="text-align: center;">{{round(($nutrition->masa_adiposa_porc), 2)}}%</td>
               <td style="text-align: center;">
                 @if($nutrition->gender == 'f')
                   @if($nutrition->habito == 'D')
-                    @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 21)
-                      Excelente
-                    @endif
-                    @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 21.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 24)
-                      Bueno
-                    @endif
-                    @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 24.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 29)
-                      Aceptable
-                    @endif
-                    @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 29.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 34)
-                      Elevado
-                    @endif
-                    @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 > 34)
-                      Muy Elevado
+                    @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 21)Excelente  
+                      @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 21.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 24)Bueno
+                      @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 24.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 29)Aceptable
+                      @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 29.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 34)Elevado
+                      @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 > 34)Muy Elevado
                     @endif
                   @else
-                    @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 26)
-                      Excelente
-                    @endif
-                    @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 26.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 28)
-                      Bueno
-                    @endif
-                    @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 28.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 30)
-                      Aceptable
-                    @endif
-                    @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 30.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 36)
-                      Elevado
-                    @endif
-                    @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 > 36)
-                      Muy Elevado
+                    @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 26)Excelente
+                      @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 26.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 28)Bueno
+                      @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 28.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 30)Aceptable
+                      @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 30.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 36)Elevado
+                      @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 > 36)Muy Elevado
                     @endif
                   @endif
                 @else
                   @if($nutrition->habito == 'D')
-                    @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 16.5)
-                      Excelente
-                    @endif
-                    @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 16.6  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 20)
-                      Bueno
-                    @endif
-                    @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 20.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 26)
-                      Aceptable
-                    @endif
-                    @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 26.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 30.6)
-                      Elevado
-                    @endif
-                    @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 > 30.6)
-                      Muy Elevado
+                    @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 16.5)Excelente
+                      @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 16.6  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 20)Bueno
+                      @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 20.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 26)Aceptable
+                      @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 26.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 30.6)Elevado
+                      @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 > 30.6)Muy Elevado
                     @endif
                   @else
-                    @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 18.9)
-                      Excelente
-                    @endif
-                    @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 19.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 23.1)
-                      Bueno
-                    @endif
-                    @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 23.2  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 27.5)
-                      Aceptable
-                    @endif
-                    @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 27.6  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 33)
-                      Elevado
-                    @endif
-                    @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 > 33)
-                      Muy Elevado
+                    @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 18.9)Excelente
+                      @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 19.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 23.1)Bueno
+                      @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 23.2  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 27.5)Aceptable
+                      @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 27.6  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 33)Elevado
+                      @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 > 33)Muy Elevado
                     @endif
                   @endif
                 @endif
@@ -260,75 +224,39 @@ th{
 
             <tr>
               <td style="text-align: left;">Masa Muscular</td>
-              <td style="text-align: center;">{{round(($nutrition->masa_muscular_porc), 2)}}%</td>
               <td style="text-align: center;">{{$nutrition->masa_muscular}} kg</td>
+              <td style="text-align: center;">{{round(($nutrition->masa_muscular_porc), 2)}}%</td>
               <td style="text-align: center;">
                 @if($nutrition->gender == 'f')
                   @if($nutrition->habito == 'D')
-                    @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 > 47.5)
-                      Excelente
-                    @endif
-                    @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 43.9  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 <= 47.5)
-                      Bueno
-                    @endif
-                    @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 36.4  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 43.9)
-                      Aceptable
-                    @endif
-                    @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 32.7  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 36.4)
-                      Bajo
-                    @endif
-                    @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 32.7)
-                      Muy Bajo
+                    @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 > 47.5)Excelente
+                    @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 43.9  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 <= 47.5)Bueno
+                    @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 36.4  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 43.9)Aceptable
+                    @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 32.7  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 36.4)Bajo
+                    @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 32.7)Muy Bajo
                     @endif
                   @else
-                    @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 > 45.2)
-                      Excelente
-                    @endif
-                    @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 41  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 <= 45.2)
-                      Bueno
-                    @endif
-                    @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 32.3  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 41)
-                      Aceptable
-                    @endif
-                    @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 28  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 32.3)
-                      Bajo
-                    @endif
-                    @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 28)
-                      Muy Bajo
+                    @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 > 45.2)Excelente
+                      @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 41  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 <= 45.2)Bueno
+                      @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 32.3  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 41)Aceptable
+                      @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 28  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 32.3)Bajo
+                      @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 28)Muy Bajo
                     @endif
                   @endif
                 @else
                   @if($nutrition->habito == 'D')
-                    @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 > 54.2)
-                      Excelente
-                    @endif
-                    @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 50.8  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 <= 54.2)
-                      Bueno
-                    @endif
-                    @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 44  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 50.8)
-                      Aceptable
-                    @endif
-                    @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 40.6  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 44)
-                      Bajo
-                    @endif
-                    @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 40.6)
-                      Muy Bajo
+                    @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 > 54.2)Excelente
+                      @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 50.8  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 <= 54.2)Bueno
+                      @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 44  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 50.8)Aceptable
+                      @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 40.6  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 44)Bajo
+                      @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 40.6)Muy Bajo
                     @endif
                   @else
-                    @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 > 50.7)
-                      Excelente
-                    @endif
-                    @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 47.4  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 <= 50.7)
-                      Bueno
-                    @endif
-                    @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 40.5  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 47.3)
-                      Aceptable
-                    @endif
-                    @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 37.1  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 40.5)
-                      Bajo
-                    @endif
-                    @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 37.1)
-                      Muy Bajo
+                    @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 > 50.7)Excelente
+                      @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 47.4  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 <= 50.7)Bueno
+                      @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 40.5  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 47.3)Aceptable
+                      @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 37.1  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 40.5)Bajo
+                      @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 37.1)Muy Bajo
                     @endif
                   @endif
                 @endif
@@ -337,8 +265,8 @@ th{
 
             <tr>
               <td style="text-align: left;">Masa Osea</td>
-              <td style="text-align: center;">{{round(($nutrition->masa_osea_porc), 2)}}%</td>
               <td style="text-align: center;">{{$nutrition->masa_osea}} kg</td>
+              <td style="text-align: center;">{{round(($nutrition->masa_osea_porc), 2)}}%</td>
               <td style="text-align: center;">---</td>
             </tr>
 
@@ -348,36 +276,18 @@ th{
               <td style="text-align: center;">-</td>
               <td style="text-align: center;">
                 @if($nutrition->gender == 'f')
-                  @if($nutrition->indice_musculo > 4.3)
-                    Excelente
-                  @endif
-                  @if($nutrition->indice_musculo >= 3.91  && $nutrition->indice_musculo <= 4.3)
-                    Bueno
-                  @endif
-                  @if($nutrition->indice_musculo >= 3.51  && $nutrition->indice_musculo < 3.91)
-                    Aceptable
-                  @endif
-                  @if($nutrition->indice_musculo >= 3.1  && $nutrition->indice_musculo < 3.51)
-                    Bajo
-                  @endif
-                  @if($nutrition->indice_musculo < 3.1)
-                    Muy Bajo
+                  @if($nutrition->indice_musculo > 4.3)Excelente
+                    @elseif($nutrition->indice_musculo >= 3.91  && $nutrition->indice_musculo <= 4.3)Bueno
+                    @elseif($nutrition->indice_musculo >= 3.51  && $nutrition->indice_musculo < 3.91)Aceptable
+                    @elseif($nutrition->indice_musculo >= 3.1  && $nutrition->indice_musculo < 3.51)Bajo
+                    @elseif($nutrition->indice_musculo < 3.1)Muy Bajo
                   @endif
                 @else
-                  @if($nutrition->indice_musculo > 4.6)
-                    Excelente
-                  @endif
-                  @if($nutrition->indice_musculo >= 4.21  && $nutrition->indice_musculo <= 4.6)
-                    Bueno
-                  @endif
-                  @if($nutrition->indice_musculo >= 3.81  && $nutrition->indice_musculo < 4.21)
-                    Aceptable
-                  @endif
-                  @if($nutrition->indice_musculo >= 3.5  && $nutrition->indice_musculo < 3.81)
-                    Bajo
-                  @endif
-                  @if($nutrition->indice_musculo < 3.5)
-                    Muy Bajo
+                  @if($nutrition->indice_musculo > 4.6)Excelente
+                    @elseif($nutrition->indice_musculo >= 4.21  && $nutrition->indice_musculo <= 4.6)Bueno
+                    @elseif($nutrition->indice_musculo >= 3.81  && $nutrition->indice_musculo < 4.21)Aceptable
+                    @elseif($nutrition->indice_musculo >= 3.5  && $nutrition->indice_musculo < 3.81)Bajo
+                    @elseif($nutrition->indice_musculo < 3.5)Muy Bajo
                   @endif
                 @endif
               </td>
@@ -389,36 +299,18 @@ th{
               <td style="text-align: center;">-</td>
               <td style="text-align: center;">
                 @if($nutrition->gender == 'f')
-                  @if($nutrition->indice_adiposo < 0.55)
-                    Excelente
-                  @endif
-                  @if($nutrition->indice_adiposo >= 0.55  && $nutrition->indice_adiposo < 0.7)
-                    Bueno
-                  @endif
-                  @if($nutrition->indice_adiposo >= 0.7  && $nutrition->indice_adiposo < 0.88)
-                    Aceptable
-                  @endif
-                  @if($nutrition->indice_adiposo >= 0.88  && $nutrition->indice_adiposo < 1.06)
-                    Elevado
-                  @endif
-                  @if($nutrition->indice_adiposo >= 1.06)
-                    Muy Elevado
+                  @if($nutrition->indice_adiposo < 0.55)Excelente
+                    @elseif($nutrition->indice_adiposo >= 0.55  && $nutrition->indice_adiposo < 0.7)Bueno
+                    @elseif($nutrition->indice_adiposo >= 0.7  && $nutrition->indice_adiposo < 0.88)Aceptable
+                    @elseif($nutrition->indice_adiposo >= 0.88  && $nutrition->indice_adiposo < 1.06)Elevado
+                    @elseif($nutrition->indice_adiposo >= 1.06)Muy Elevado
                   @endif
                 @else
-                  @if($nutrition->indice_adiposo < 0.36)
-                    Excelente
-                  @endif
-                  @if($nutrition->indice_adiposo >= 0.36  && $nutrition->indice_adiposo < 0.41)
-                    Bueno
-                  @endif
-                  @if($nutrition->indice_adiposo >= 0.42  && $nutrition->indice_adiposo < 0.54)
-                    Aceptable
-                  @endif
-                  @if($nutrition->indice_adiposo >= 0.54  && $nutrition->indice_adiposo < 0.65)
-                    Elevado
-                  @endif
-                  @if($nutrition->indice_adiposo >= 0.65)
-                    Muy Elevado
+                  @if($nutrition->indice_adiposo < 0.36)Excelente
+                    @elseif($nutrition->indice_adiposo >= 0.36  && $nutrition->indice_adiposo < 0.41)Bueno
+                    @elseif($nutrition->indice_adiposo >= 0.42  && $nutrition->indice_adiposo < 0.54)Aceptable
+                    @elseif($nutrition->indice_adiposo >= 0.54  && $nutrition->indice_adiposo < 0.65)Elevado
+                    @elseif($nutrition->indice_adiposo >= 0.65)Muy Elevado
                   @endif
                 @endif
               </td>
@@ -444,12 +336,9 @@ th{
               <td style="text-align: center;">{{round($nutrition->endo, 1)}} {{round($nutrition->meso, 1)}} {{round($nutrition->ecto, 1)}}</td>
               <td style="text-align: center;">-</td>
               <td style="text-align: center;">
-                @if((round($nutrition->endo, 1) >= round($nutrition->meso, 1)) && (round($nutrition->endo, 1) >= round($nutrition->ecto, 1)))
-                  Endomorfo
-                @elseif((round($nutrition->meso, 1) >= round($nutrition->endo, 1)) && (round($nutrition->meso, 1) >= round($nutrition->ecto, 1)))
-                  Mesomorfo
-                @else
-                  Ectomorfo
+                @if((round($nutrition->endo, 1) >= round($nutrition->meso, 1)) && (round($nutrition->endo, 1) >= round($nutrition->ecto, 1)))Endomorfo
+                  @elseif((round($nutrition->meso, 1) >= round($nutrition->endo, 1)) && (round($nutrition->meso, 1) >= round($nutrition->ecto, 1)))Mesomorfo
+                  @else Ectomorfo
                 @endif
               </td>
             </tr>
@@ -459,10 +348,8 @@ th{
               <td class="text-center">{{($nutrition->tricep + $nutrition->subescapular + $nutrition->supraespinal + $nutrition->abdominal + $nutrition->muslo_medial +  $nutrition->pierna_mm)}} mm</td>
               <td style="text-align: center;">-</td>
               <td style="text-align: center;">
-                @if (($nutrition->tricep + $nutrition->subescapular + $nutrition->supraespinal + $nutrition->abdominal + $nutrition->muslo_medial +  $nutrition->pierna_mm) > App\Models\NutritionSport::where('descripcion','=',$nutrition->deporte)->value('sumatoria_6_plieges'))
-                  Alto
-                @else
-                  Bien
+                @if (($nutrition->tricep + $nutrition->subescapular + $nutrition->supraespinal + $nutrition->abdominal + $nutrition->muslo_medial +  $nutrition->pierna_mm) > App\Models\NutritionSport::where('descripcion','=',$nutrition->deporte)->value('sumatoria_6_plieges'))Alto
+                  @else Bien
                 @endif
               </td>
             </tr>
@@ -484,32 +371,16 @@ th{
             <td style="text-align: left;">Masa Adiposa</td>
             <td style="text-align: center;">
               @if($nutrition->gender == 'f')
-                @if($nutrition->habito == 'D')
-                  24.1 - 29 %
-                @else
-                  28.1 - 30 %
-                @endif
+                @if($nutrition->habito == 'D')24.1 - 29 % @else 28.1 - 30 % @endif
               @else
-                @if($nutrition->habito == 'D')
-                  20.1 - 26 %
-                @else
-                  23.2 - 27.5 %
-                @endif
+                @if($nutrition->habito == 'D')20.1 - 26 % @else 23.2 - 27.5 % @endif
               @endif
             </td>
             <td style="text-align: center;">
               @if($nutrition->gender == 'f')
-                @if($nutrition->habito == 'D')
-                  21.1 - 24 %
-                @else
-                  26.1 - 28 %
-                @endif
+                @if($nutrition->habito == 'D')21.1 - 24 % @else 26.1 - 28 % @endif
               @else
-                @if($nutrition->habito == 'D')
-                  16.6 - 20 %
-                @else
-                  19 - 23.1 %
-                @endif
+                @if($nutrition->habito == 'D')16.6 - 20 % @else 19 - 23.1 % @endif
               @endif
             </td>
           </tr>
@@ -517,67 +388,35 @@ th{
             <td style="text-align: left;">Masa Muscular</td>
             <td style="text-align: center;">
               @if($nutrition->gender == 'f')
-                @if($nutrition->habito == 'D')
-                  36.4 - 43.8 %
-                @else
-                  32.3 - 40.9 %
-                @endif
+                @if($nutrition->habito == 'D')36.4 - 43.8 % @else 32.3 - 40.9 % @endif
               @else
-                @if($nutrition->habito == 'D')
-                  44 - 50.7 %
-                @else
-                  40.5 - 47.3 %
-                @endif
+                @if($nutrition->habito == 'D')44 - 50.7 % @else 40.5 - 47.3 % @endif
               @endif
             </td>
             <td style="text-align: center;">
               @if($nutrition->gender == 'f')
-                @if($nutrition->habito == 'D')
-                  42.9 - 47.5 %
-                @else
-                  41 - 45.2 %
-                @endif
+                @if($nutrition->habito == 'D')42.9 - 47.5 % @else 41 - 45.2 % @endif
               @else
-                @if($nutrition->habito == 'D')
-                  50.8 - 54.2 %
-                @else
-                  47.4 - 50.7 %
-                @endif
+                @if($nutrition->habito == 'D')50.8 - 54.2 % @else 47.4 - 50.7 % @endif
               @endif
             </td>
           </tr>
           <tr>
             <td style="text-align: left;">Indice músculo/óseo</td>
             <td style="text-align: center;">
-              @if($nutrition->gender == 'f')
-                3.51 - 3.9
-              @else
-                3.81 - 4.2
-              @endif
+              @if($nutrition->gender == 'f')3.51 - 3.9 @else 3.81 - 4.2 @endif
             </td>
             <td style="text-align: center;">
-              @if($nutrition->gender == 'f')
-                3.91 - 4.3
-              @else
-                4.21 - 4.6
-              @endif
+              @if($nutrition->gender == 'f')3.91 - 4.3 @else 4.21 - 4.6 @endif
             </td>
           </tr>
           <tr>
             <td style="text-align: left;">Indice adiposo/musc</td>
             <td style="text-align: center;">
-              @if($nutrition->gender == 'f')
-                0.71 - 0.88
-              @else
-                0.42 - 0.54
-              @endif
+              @if($nutrition->gender == 'f')0.71 - 0.88 @else 0.42 - 0.54 @endif
             </td>
             <td style="text-align: center;">
-              @if($nutrition->gender == 'f')
-                0.54 -  0.7
-              @else
-                0.36 - 0.41
-              @endif
+              @if($nutrition->gender == 'f')0.54 -  0.7 @else 0.36 - 0.41 @endif
             </td>
           </tr>
           <tr>
@@ -610,7 +449,7 @@ th{
             <td style="text-align: center;">{{round(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100, 0)}}%</td>
           </tr>
           <tr>
-            <td style="text-align: left;">Masa Múscular</td>
+            <td style="text-align: left;">Masa Muscular</td>
             <td style="text-align: center;">{{round(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100, 0)}}%</td>
           </tr>
           <tr>
@@ -632,175 +471,85 @@ th{
       <p>La masa adiposa está en
         @if($nutrition->gender == 'f')
           @if($nutrition->habito == 'D')
-            @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 21)
-              rangos excelentes
-            @endif
-            @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 21.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 24)
-              buenos rangos
-            @endif
-            @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 24.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 29)
-              rangos aceptables
-            @endif
-            @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 29.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 34)
-              rangos elevados
-            @endif
-            @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 > 34)
-              rangos muy elevados
+            @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 21)rangos excelentes
+              @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 21.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 24)buenos rangos
+              @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 24.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 29)rangos aceptables
+              @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 29.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 34)rangos elevados
+              @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 > 34)rangos muy elevados
             @endif
           @else
-            @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 26)
-              rangos excelentes
-            @endif
-            @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 26.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 28)
-              buenos rangos
-            @endif
-            @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 28.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 30)
-              rangos aceptables
-            @endif
-            @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 30.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 36)
-              rangos elevados
-            @endif
-            @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 > 36)
-              rangos muy elevados
+            @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 26)rangos excelentes
+              @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 26.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 28)buenos rangos
+              @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 28.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 30)rangos aceptables
+              @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 30.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 36)rangos elevados
+              @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 > 36)rangos muy elevados
             @endif
           @endif
         @else
           @if($nutrition->habito == 'D')
-            @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 16.5)
-              rangos excelentes
-            @endif
-            @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 16.6  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 20)
-              buenos rangos
-            @endif
-            @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 20.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 26)
-              rangos aceptables
-            @endif
-            @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 26.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 30.6)
-              rangos elevados
-            @endif
-            @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 > 30.6)
-              rangos muy elevados
+            @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 16.5)rangos excelentes
+              @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 16.6  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 20)buenos rangos
+              @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 20.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 26)rangos aceptables
+              @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 26.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 30.6)rangos elevados
+              @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 > 30.6)rangos muy elevados
             @endif
           @else
-            @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 18.9)
-              rangos excelentes
-            @endif
-            @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 19.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 23.1)
-              buenos rangos
-            @endif
-            @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 23.2  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 27.5)
-              rangos aceptables
-            @endif
-            @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 27.6  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 33)
-              rangos elevados
-            @endif
-            @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 > 33)
-              rangos muy elevados
+            @if(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 18.9)rangos excelentes
+              @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 19.1  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 23.1)buenos rangos
+              @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 23.2  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 27.5)rangos aceptables
+              @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 >= 27.6  && ($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 <= 33)rangos elevados
+              @elseif(($nutrition->masa_adiposa/$nutrition->peso_estructurado)*100 > 33)rangos muy elevados
             @endif
           @endif
         @endif según porcentaje.</p>
       <p>La masa muscular se encuentra en @if($nutrition->gender == 'f')
         @if($nutrition->habito == 'D')
-          @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 > 47.5)
-            rangos excelentes
-          @endif
-          @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 43.9  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 <= 47.5)
-            buenos rangos
-          @endif
-          @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 36.4  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 43.9)
-            rangos aceptables
-          @endif
-          @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 32.7  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 36.4)
-            rangos bajos
-          @endif
-          @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 32.7)
-            rangos muy bajos
+          @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 > 47.5)rangos excelentes
+            @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 43.9  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 <= 47.5)buenos rangos
+            @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 36.4  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 43.9)rangos aceptables
+            @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 32.7  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 36.4)rangos bajos
+            @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 32.7)rangos muy bajos
           @endif
         @else
-          @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 > 45.2)
-            rangos excelentes
-          @endif
-          @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 41  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 <= 45.2)
-            buenos rangos
-          @endif
-          @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 32.3  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 41)
-            rangos aceptables
-          @endif
-          @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 28  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 32.3)
-            rangos bajos
-          @endif
-          @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 28)
-            rangos muy bajos
+          @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 > 45.2)rangos excelentes
+            @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 41  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 <= 45.2)buenos rangos
+            @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 32.3  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 41)rangos aceptables
+            @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 28  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 32.3)rangos bajos
+            @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 28)rangos muy bajos
           @endif
         @endif
       @else
         @if($nutrition->habito == 'D')
-          @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 > 54.2)
-            rangos excelentes
-          @endif
-          @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 50.8  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 <= 54.2)
-            buenos rangos
-          @endif
-          @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 44  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 50.8)
-            rangos aceptables
-          @endif
-          @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 40.6  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 44)
-            rangos bajos
-          @endif
-          @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 40.6)
-            rangos muy bajos
+          @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 > 54.2)rangos excelentes
+            @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 50.8  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 <= 54.2)buenos rangos
+            @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 44  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 50.8)rangos aceptables
+            @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 40.6  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 44)rangos bajos
+            @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 40.6)rangos muy bajos
           @endif
         @else
-          @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 > 50.7)
-            rangos excelentes
-          @endif
-          @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 47.4  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 <= 50.7)
-            buenos rangos
-          @endif
-          @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 40.5  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 47.3)
-            rangos aceptables
-          @endif
-          @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 37.1  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 40.5)
-            rangos bajos
-          @endif
-          @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 37.1)
-            rangos muy bajos
+          @if(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 > 50.7)rangos excelentes
+            @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 47.4  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 <= 50.7)buenos rangos
+            @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 40.5  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 47.3)rangos aceptables
+            @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 >= 37.1  && ($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 40.5)rangos bajos
+            @elseif(($nutrition->masa_muscular/$nutrition->peso_estructurado)*100 < 37.1)rangos muy bajos
           @endif
         @endif
       @endif.</p>
     </div>
 
     <p>Según su índice músculo/óseo este se encuentra @if($nutrition->gender == 'f')
-      @if($nutrition->indice_musculo > 4.3)
-        excelente
-      @endif
-      @if($nutrition->indice_musculo >= 3.91  && $nutrition->indice_musculo <= 4.3)
-        bueno
-      @endif
-      @if($nutrition->indice_musculo >= 3.51  && $nutrition->indice_musculo < 3.91)
-        aceptable
-      @endif
-      @if($nutrition->indice_musculo >= 3.1  && $nutrition->indice_musculo < 3.51)
-        bajo
-      @endif
-      @if($nutrition->indice_musculo < 3.1)
-        muy bajo
+      @if($nutrition->indice_musculo > 4.3)excelente
+        @elseif($nutrition->indice_musculo >= 3.91  && $nutrition->indice_musculo <= 4.3)bueno
+        @elseif($nutrition->indice_musculo >= 3.51  && $nutrition->indice_musculo < 3.91)aceptable
+        @elseif($nutrition->indice_musculo >= 3.1  && $nutrition->indice_musculo < 3.51)bajo
+        @elseif($nutrition->indice_musculo < 3.1)muy bajo
       @endif
     @else
-      @if($nutrition->indice_musculo > 4.6)
-        excelente
-      @endif
-      @if($nutrition->indice_musculo >= 4.21  && $nutrition->indice_musculo <= 4.6)
-        bueno
-      @endif
-      @if($nutrition->indice_musculo >= 3.81  && $nutrition->indice_musculo < 4.21)
-        aceptable
-      @endif
-      @if($nutrition->indice_musculo >= 3.5  && $nutrition->indice_musculo < 3.81)
-        bajo
-      @endif
-      @if($nutrition->indice_musculo < 3.5)
-        muy bajo
+      @if($nutrition->indice_musculo > 4.6)excelente
+        @elseif($nutrition->indice_musculo >= 4.21  && $nutrition->indice_musculo <= 4.6)bueno
+        @elseif($nutrition->indice_musculo >= 3.81  && $nutrition->indice_musculo < 4.21)aceptable
+        @elseif($nutrition->indice_musculo >= 3.5  && $nutrition->indice_musculo < 3.81)bajo
+        @elseif($nutrition->indice_musculo < 3.5)muy bajo
       @endif
     @endif. Este índice expresa la relación entre
     los kg de músculo que tiene una persona y sus kg de masa ósea. Un valor óptimo máximo es
@@ -808,36 +557,18 @@ th{
     nivel de salud y de rendimiento deportivo.</p>
 
     <p>El índice adiposo/muscular se encuentra @if($nutrition->gender == 'f')
-      @if($nutrition->indice_adiposo < 0.55)
-        excelente
-      @endif
-      @if($nutrition->indice_adiposo >= 0.55  && $nutrition->indice_adiposo < 0.7)
-        bueno
-      @endif
-      @if($nutrition->indice_adiposo >= 0.7  && $nutrition->indice_adiposo < 0.88)
-        aceptable
-      @endif
-      @if($nutrition->indice_adiposo >= 0.88  && $nutrition->indice_adiposo < 1.06)
-        elevado
-      @endif
-      @if($nutrition->indice_adiposo >= 1.06)
-        muy elevado
+      @if($nutrition->indice_adiposo < 0.55)excelente
+        @elseif($nutrition->indice_adiposo >= 0.55  && $nutrition->indice_adiposo < 0.7)bueno
+        @elseif($nutrition->indice_adiposo >= 0.7  && $nutrition->indice_adiposo < 0.88)aceptable
+        @elseif($nutrition->indice_adiposo >= 0.88  && $nutrition->indice_adiposo < 1.06)elevado
+        @elseif($nutrition->indice_adiposo >= 1.06)muy elevado
       @endif
     @else
-      @if($nutrition->indice_adiposo < 0.36)
-        excelente
-      @endif
-      @if($nutrition->indice_adiposo >= 0.36  && $nutrition->indice_adiposo < 0.41)
-        bueno
-      @endif
-      @if($nutrition->indice_adiposo >= 0.42  && $nutrition->indice_adiposo < 0.54)
-        aceptable
-      @endif
-      @if($nutrition->indice_adiposo >= 0.54  && $nutrition->indice_adiposo < 0.65)
-        elevado
-      @endif
-      @if($nutrition->indice_adiposo >= 0.65)
-        muy elevado
+      @if($nutrition->indice_adiposo < 0.36)excelente
+        @elseif($nutrition->indice_adiposo >= 0.36  && $nutrition->indice_adiposo < 0.41)bueno
+        @elseif($nutrition->indice_adiposo >= 0.42  && $nutrition->indice_adiposo < 0.54)aceptable
+        @elseif($nutrition->indice_adiposo >= 0.54  && $nutrition->indice_adiposo < 0.65)elevado
+        @elseif($nutrition->indice_adiposo >= 0.65)muy elevado
       @endif
     @endif. Este índice expresa cuantos kg de masa
     adiposa tiene que transportar cada kg de masa muscular. Mientras más bajo es este valor más
@@ -848,12 +579,9 @@ th{
     </p>
 
     <p>El índice de masa corporal (IMC) es la relación del peso con la estatura, encontrándose
-      @if($nutrition->indice_corporal < 18.5)
-        bajo
-      @elseif(24.9 < $nutrition->indice_corporal)
-        alto
-      @else
-        normal
+      @if($nutrition->indice_corporal < 18.5)bajo
+        @elseif(24.9 < $nutrition->indice_corporal)alto
+        @else normal
       @endif. El IMC no refleja la composición corporal, por tanto no es representativo en el
     diagnóstico nutricional.
     </p>
@@ -865,18 +593,10 @@ th{
     @else
       ectomorfo
     @endif.
-      @if($nutrition->endo >= 7.5)
-        Extremadamente alta adiposidad relativa; muy abundante grasa subcutánea y grandes cantidades de grasa abdominen el tronco; concentración proximal de grasa en extremidades.
-      @else
-        @if($nutrition->endo >= 5.5)
-          Alta adiposidad relativa; grasa subcutánea abundante; redondez en tronco y extremidades; mayor acumulación de grasa en el abdomen.
-        @else
-          @if($nutrition->endo >= 3)
-            Moderada adiposidad relativa; la grasa subcutánea cubre los contornos musculares y óseos; apariencia más blanda.
-          @else
-            Baja adiposidad relativa; poca grasa subcutánea; contornos musculares y óseos visibles.
-          @endif
-        @endif
+      @if($nutrition->endo >= 7.5)Extremadamente alta adiposidad relativa; muy abundante grasa subcutánea y grandes cantidades de grasa abdominen el tronco; concentración proximal de grasa en extremidades.
+        @elseif($nutrition->endo >= 5.5)Alta adiposidad relativa; grasa subcutánea abundante; redondez en tronco y extremidades; mayor acumulación de grasa en el abdomen.
+        @elseif($nutrition->endo >= 3)Moderada adiposidad relativa; la grasa subcutánea cubre los contornos musculares y óseos; apariencia más blanda.
+        @else Baja adiposidad relativa; poca grasa subcutánea; contornos musculares y óseos visibles.
       @endif El somatotipo
     provee una descripción general de la forma corporal, no tienen relación en la composición
     corporal, por tanto no indica la cantidad precisa de grasa, músculo y hueso.

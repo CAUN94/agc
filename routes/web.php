@@ -142,8 +142,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
 
     // Admin Haas
     Route::get('/admin/nutrition', [AdminHaasController::class, 'nutrition'])->middleware(['intranet']);
-    Route::get('/admin/nutrition/pdf', ['App\Http\Livewire\AdminNutrition', 'pdf'])->middleware(['intranet'])->name('livewire.admin-nutrition');
-    Route::get('/admin/nutrition/pdf-view', [AdminHaasController::class, 'pdf_view'])->middleware(['intranet']);
+    Route::get('/admin/nutrition/pdf/{id}', ['App\Http\Livewire\AdminNutrition', 'pdf'])->middleware(['intranet'])->name('livewire.admin-nutrition');
 
     // TrainerAdmins
     Route::resource('trainertrainappointment', 'App\Http\Controllers\TrainerTrainController');
