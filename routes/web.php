@@ -242,6 +242,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/box/msilvaa', 'App\Http\Controllers\RedirectController@msilvaa');
     Route::get('/box/jvalcarcels', 'App\Http\Controllers\RedirectController@jvalcarcels');
     Route::get('/box/mrebolledon', 'App\Http\Controllers\RedirectController@mrebolledon');
+    Route::get('/box/jbustamantet', 'App\Http\Controllers\RedirectController@jbustamantet');
     Route::get('/box/meetyou', 'App\Http\Controllers\RedirectController@meetyou');
 
     Route::get('change-password', 'App\Http\Controllers\ChangePasswordController@index')->withoutMiddleware([UpdatePassword::class]);
