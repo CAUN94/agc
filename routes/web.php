@@ -221,6 +221,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/test-runners', 'App\Http\Controllers\RedirectController@test_runners');
     Route::get('/isak', 'App\Http\Controllers\RedirectController@isak');
     Route::get('/isak_sin_kit', 'App\Http\Controllers\RedirectController@isak_sin_kit');
+    Route::get('/alonso', 'App\Http\Controllers\RedirectController@alonso');
 
 
     Route::get('/box/dcontrerasb', 'App\Http\Controllers\RedirectController@contreras');
