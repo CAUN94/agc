@@ -25,7 +25,7 @@ class AdminNuboxController extends Controller
     public function index(){
       
       $professionals = Professional::with('user')->orderby('description')->get();
-      $packs = Pack::orderby('name')->get();
+      $packs = Pack::orderby('name')->groupBy('pack_code')->get();
       $client = new \GuzzleHttp\Client();
       $url = 'https://api.medilink.healthatom.com/api/v1/pacientes/';
 
@@ -94,7 +94,8 @@ class AdminNuboxController extends Controller
     }
 
     public function emit(Request $request){
-      $pack = Pack::find($request->pack);
+      $pack_choise = Pack::find($request->pack);
+      $packs = Pack::where('pack_code',$pack_choise->pack_code)->get();
       $professional = Professional::where('id',$request->professional)->with('user')->first();
       $client = new \GuzzleHttp\Client();
       $url = 'https://api.medilink.healthatom.com/api/v1/pacientes/'.$request->patient;
@@ -108,99 +109,107 @@ class AdminNuboxController extends Controller
       $patient = json_decode($response->getBody());
 
 
-      if($request->alliance == 'true'){
-        $price = $pack->alliance_price;
-      } else {
-        $price = $pack->price;
-      }
-      for($i=0; $i<1; $i++){
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => "https://api.nubox.com/".config('app.nubox_env')."/factura/documento/76914578-8/1/rutFuncionario/1/emitir/ventaExtendido?rutFuncionario=18018579-8&emitir=".getenv('NUBOX_EMIT'),
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => '',
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 0,
-          CURLOPT_FOLLOWLOCATION => true,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => 'POST',
-          CURLOPT_POSTFIELDS =>'{
-            "productos": [
-              {
-                "rutContraparte": "'.$patient->data->rut.'",
-                "razonSocialContraparte": "'.$patient->data->nombre.' '.$patient->data->apellidos.'",
-                "giroContraparte": "Paciente",
-                "tipo": 41,
-                "folio": 478,
-                "secuencia": 1,
-                "fecha": "'.Carbon::now()->format("Y-m-d").'",
-                "afecto": "NO",
-                "producto": "ATENCION KINESIOLOGICA INTEGRAL",
-                "descripcion": "RUT PROFESIONAL: '.$professional->user->rut.' '.$professional->user->name.' '.$professional->user->lastnames.'",
-                "cantidad": "'.$pack->count.'",
-                "comunaContraparte": "Las Condes",
-                "direccionContraparte": "San Pascual 736",
-                "precio": "'.$price.'",
-                "valor": "'.$price.'",
-                "ponderacionDescuento": 0,
-                "emailContraparte": "",
-                "tipoDeServicio": "3",
-                "fechaPeriodoDesde": "",
-                "fechaPeriodoHasta": "",
-                "fechaVencimiento": "",
-                "codigoSucursal": "1",
-                "vendedor": "",
-                "codigoItem": "",
-                "unidadMedida": "",
-                "codigoIMP": "",
-                "montoIMP": 0,
-                "indicadorDeTraslado": "1",
-                "formaDePago": "",
-                "medioDePago": "",
-                "terminosDePagoDias": "",
-                "terminosDePagoCodigo": "",
-                "comunaDestino": "",
-                "rutSolicitanteFactura": "",
-                "productoCambioSujeto": "",
-                "cantidadMontoCambioSujeto": 0,
-                "tipoGlobalAfecto": "",
-                "valorGlobalAfecto": 0,
-                "tipoGlobalExento": "",
-                "valorGlobalExento": 0,
-                "precioCambioSujeto": 0,
-                "descuentoMonto": 0,
-                "rutTransportista": "",
-                "rutChofer": "",
-                "patente": "",
-                "nombreChofer": "",
-                "direccionDestino": "",
-                "ciudadDestino": "",
-                "tipoDeDespacho": "",
-                "nombreDeContacto": "",
-                "observacion": ""
-              }
-            ],
-            "documentoReferenciado": {
-              "tipo": 0,
-              "folio": 478,
-              "secuencia": 0,
-              "tipoDocumentoReferenciado": 0,
-              "folioDocumentoReferenciado": 34,
-              "fechaDocumentoReferenciado":  "'.Carbon::now().'",
-              "motivoReferencia": 0,
-              "glosa": "Glosa"
-            }
-          }',
-          CURLOPT_HTTPHEADER => array(
-            'token: '.$this->auth()['Token'],
-            'Content-Type: application/json',
-            'Cookie: '.$this->auth()['Set-Cookie'],
-          ),
-        ));
-        $response = curl_exec($curl);
+      
 
-        curl_close($curl);
-      }
+      $products = [];
+      foreach ($packs as $pack) {
+        if($request->alliance == 'true'){
+          $price = $pack->alliance_price;
+        } else {
+          $price = $pack->price;
+        }
+        $product = [
+          "rutContraparte" => $patient->data->rut,
+          "razonSocialContraparte" => $patient->data->nombre.' '.$patient->data->apellidos,
+          "giroContraparte" => "Paciente",
+          "tipo" => 41,
+          "folio" => 478,
+          "secuencia" => 1,
+          "fecha" => Carbon::now()->format('Y-m-d'),
+          "afecto" => "NO",
+          "producto" => $pack->producto,
+          "descripcion" => "RUT PROFESIONAL: ".$professional->user->rut." ".$professional->user->name." ".$professional->user->lastnames,
+          "cantidad" => $pack->count,
+          "comunaContraparte" => "Las Condes",
+          "direccionContraparte" => "San Pascual 736",
+          "precio" => $price,
+          "valor" => $price,
+          "ponderacionDescuento" => 0,
+          "emailContraparte" => "",
+          "tipoDeServicio" => "3",
+          "fechaPeriodoDesde" => "",
+          "fechaPeriodoHasta" => "",
+          "fechaVencimiento" => "",
+          "codigoSucursal" => "1",
+          "vendedor" => "",
+          "codigoItem" => "",
+          "unidadMedida" => "",
+          "codigoIMP" => "",
+          "montoIMP" => 0,
+          "indicadorDeTraslado" => "1",
+          "formaDePago" => "",
+          "medioDePago" => "",
+          "terminosDePagoDias" => "",
+          "terminosDePagoCodigo" => "",
+          "comunaDestino" => "",
+          "rutSolicitanteFactura" => "",
+          "productoCambioSujeto" => "",
+          "cantidadMontoCambioSujeto" => 0,
+          "tipoGlobalAfecto" => "",
+          "valorGlobalAfecto" => 0,
+          "tipoGlobalExento" => "",
+          "valorGlobalExento" => 0,
+          "precioCambioSujeto" => 0,
+          "descuentoMonto" => 0,
+          "rutTransportista" => "",
+          "rutChofer" => "",
+          "patente" => "",
+          "nombreChofer" => "",
+          "direccionDestino" => "",
+          "ciudadDestino" => "",
+          "tipoDeDespacho" => "",
+          "nombreDeContacto" => "",
+          "observacion" => ""
+          
+        ];
+    
+        $products[] = $product;
+    }
+
+    $jsonProductos = json_encode($products, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+
+      $curl = curl_init();
+      curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://api.nubox.com/".config('app.nubox_env')."/factura/documento/76914578-8/1/rutFuncionario/1/emitir/ventaExtendido?rutFuncionario=18018579-8&emitir=".getenv('NUBOX_EMIT'),
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS =>'{
+          "productos": '.$jsonProductos.',
+          "documentoReferenciado": {
+            "tipo": 0,
+            "folio": 478,
+            "secuencia": 0,
+            "tipoDocumentoReferenciado": 0,
+            "folioDocumentoReferenciado": 34,
+            "fechaDocumentoReferenciado":  "'.Carbon::now().'",
+            "motivoReferencia": 0,
+            "glosa": "Glosa"
+          }
+        }',
+        CURLOPT_HTTPHEADER => array(
+          'token: '.$this->auth()['Token'],
+          'Content-Type: application/json',
+          'Cookie: '.$this->auth()['Set-Cookie'],
+        ),
+      ));
+      $response = curl_exec($curl);
+
+      curl_close($curl);
       $emit = json_decode($response, true);
 
       $selled_pack = new SelledPack;
@@ -209,7 +218,7 @@ class AdminNuboxController extends Controller
       $selled_pack->professional_id = $request->professional;
       $selled_pack->professional_name = $professional->user->name.' '.$professional->user->lastnames;
       $selled_pack->pack_id = $request->pack;
-      $selled_pack->pack_name = $pack->name;
+      $selled_pack->pack_name = $pack_choise->name;
       $selled_pack->save();
 
       // return $patient->data->email;

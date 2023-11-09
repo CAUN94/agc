@@ -6,5 +6,6 @@
         @else
             <p>Se creo borrador de la boleta, consultar a Cris para verla</p>
         @endif
+        <p><a href="/nubox">Hacer Otra boleta</a></p>
     </div>
 </x-admin.layout>
