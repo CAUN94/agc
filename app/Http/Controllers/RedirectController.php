@@ -297,4 +297,9 @@ class RedirectController extends Controller {
 		$url = "https://mpago.la/2hEqr8Q";
 		return Redirect::away($url);
 	}
+
+	public function alonso(){
+		$url = "https://meetings.hubspot.com/alonso-niklitschek-sanhueza";
+		return Redirect::away($url);
+	}
 }
