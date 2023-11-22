@@ -132,15 +132,14 @@ class CreateUsers extends Command
 
         $i = 0;
 
-        
-
         foreach($allclients as $user){
             if($user->rut == null or $user == '' or $user->rut == '00000000' or $user->rut == '111111111') {
                 continue;
             }
             $id_paciente    = $user->id;
             $user = User::where('rut',$user->rut)->first();
-            if( $user->hasAlliance()){
+            if($user->hasAlliance()){
+                $this->info($user->rut." - Ya tiene alianza");
                 continue;
             }
 
@@ -157,7 +156,7 @@ class CreateUsers extends Command
             // check if user has alliances
 
             if($i % 80 == 0){
-                sleep(60);
+                sleep(15);
             }
 
             $alliance_data = json_decode($response->getBody())->data;
