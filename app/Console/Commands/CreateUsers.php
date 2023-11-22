@@ -139,7 +139,6 @@ class CreateUsers extends Command
             $id_paciente    = $user->id;
             $user = User::where('rut',$user->rut)->first();
             if($user->hasAlliance()){
-                $this->info($user->rut." - Ya tiene alianza");
                 continue;
             }
 
@@ -172,6 +171,7 @@ class CreateUsers extends Command
                     'user_id' => $user->id,
                     'alliance_id' => 142
                 ]);
+                $this
                 continue;
             }
 
