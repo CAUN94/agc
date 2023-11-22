@@ -189,6 +189,15 @@ class UpdateActions extends Command
                     $action->subtotal = $action->total;
                 }
                 $this->info(isset($action->nombre_prestacion));
+                // First action where tratamiento_nr and prestacion_nr or continue
+                $checkAction = ActionMl::where('Tratamiento_Nr',$pay[0]->id_atencion)->where('Prestacion_Nr',$action->id_prestacion)->first();
+                if(isset($checkAction)) {
+                    if($checkAction->Precio_Prestacion == 0){
+                        // No se modifico la action
+                        $this->info('No se modifico la action '.$checkAction->id);
+                        continue;
+                    }
+                }
                 $new_row = actionMl::updateOrCreate([
                     'Tratamiento_Nr'=> $pay[0]->id_atencion,
                     'Prestacion_Nr'=> $action->id_prestacion,
