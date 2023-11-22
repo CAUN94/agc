@@ -188,7 +188,7 @@ class UpdateActions extends Command
                 }
                 // First action where tratamiento_nr and prestacion_nr or continue
                 $checkAction = ActionMl::where('Tratamiento_Nr',$pay[0]->id_atencion)->first();
-                $this->info("Valor de ",isset($checkAction));
+                $this->info("Valor de ",!is_null($checkAction));
                 if(!is_null($checkAction)) {
                     if($checkAction->Precio_Prestacion == 0){
                         // No se modifico la action
