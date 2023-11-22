@@ -181,22 +181,24 @@ class UpdateActions extends Command
 
         foreach($pays as $pay){
             $this->info($pay[0]->nombre_paciente);
-            foreach($pay[1] as $action){
-                $this->info(isset($action->id_prestacion));
-                if(!isset($action->id_prestacion)){
+            foreach($pay[1] as $action){                if(!isset($action->id_prestacion)){
                     $action->id_prestacion = $pay[0]->nombre_atencion;
                     $action->nombre_prestacion = $pay[0]->nombre_atencion;
                     $action->subtotal = $action->total;
                 }
-                $this->info(isset($action->nombre_prestacion));
                 // First action where tratamiento_nr and prestacion_nr or continue
                 $checkAction = ActionMl::where('Tratamiento_Nr',$pay[0]->id_atencion)->where('Prestacion_Nr',$action->id_prestacion)->first();
+                $this->info("Valor de ",isset($checkAction));
                 if(isset($checkAction)) {
                     if($checkAction->Precio_Prestacion == 0){
                         // No se modifico la action
                         $this->info('No se modifico la action '.$checkAction->id);
                         continue;
                     }
+                } else {
+                    // No existe la action
+                    $this->info('No existe la action');
+                    
                 }
                 $new_row = actionMl::updateOrCreate([
                     'Tratamiento_Nr'=> $pay[0]->id_atencion,
