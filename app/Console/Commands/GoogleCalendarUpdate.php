@@ -54,6 +54,8 @@ class GoogleCalendarUpdate extends Command
             $this->info($professional->description.' '.$professional->user->email);
             $this->listCalendar($professional->google_id);
             $this->addcalendar($professional->id);
+            $this->info('Esperando 3 minutos'); 
+            sleep(180);
         }        
     }
 

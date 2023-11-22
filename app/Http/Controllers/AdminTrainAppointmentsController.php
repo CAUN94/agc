@@ -85,4 +85,8 @@ class AdminTrainAppointmentsController extends Controller
     {
         //
     }
+
+    public function confirmTrainAppointment(){
+        return view('admin.trainAppointments.confirm');
+    }
 }
