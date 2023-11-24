@@ -163,6 +163,12 @@ class LandingController extends Controller
         return redirect('/pdf/tyc_you.pdf');
     }
 
+    public function aranceles()
+    {
+        return redirect('/pdf/aranceles.pdf');
+    }
+
+
     public function team()
     {
         $team = [
