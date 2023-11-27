@@ -25,8 +25,8 @@
                 </select>
                             
             </div>
-            <div class="flex flex-col">
 
+            <div class="flex flex-col">
                 <label for="pack" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pack</label>
                 <select id="pack" name="pack" class="border border-gray-300 rounded-lg" required>
                     <!-- foreach all packs  -->
@@ -38,8 +38,10 @@
                         </option>
                     @endforeach
                 </select>
-                            
             </div>
+
+            
+            <!-- When id=pack is selected take de value from selected option and using ass id to $resultadoAgrupado using the  -->
 
             <div class="flex flex-col">
                 <label for="patient" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Paciente</label>
@@ -70,6 +72,18 @@
                 </div>
 
 
+            </div>
+
+            <!-- Checkbox "Quieres Desea Cambiar valores de prestación -->
+            <div class="flex flex-col">
+                <!-- checbokx label -->
+                <label for="change" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cambiar Prestaciones</label>
+                <!-- Tailwind radio button -->
+
+                <div class="flex items-center mb-4">
+                    <input id="default-radio-1" type="checkbox" class="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" value="true" name="change">
+                    <label for="default-radio-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Si</label>
+                </div>
             </div>
             
             <!-- submit button right side margin top 2 auto heigt right side from div  -->
