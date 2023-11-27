@@ -25,7 +25,31 @@ class AdminNuboxController extends Controller
     public function index(){
       
       $professionals = Professional::with('user')->orderby('description')->get();
+      $packs = Pack::orderby('name')->get();
+
+      // Array para almacenar el resultado agrupado
+      $resultadoAgrupado = [];
+
+      // Iterar sobre la lista de packs
+      foreach ($packs as $pack) {
+        // Obtener el pack_code
+        $packCode = $pack->pack_code;
+
+        // Verificar si ya existe el pack_code en el resultado
+        if (!isset($resultadoAgrupado[$packCode])) {
+            // Si no existe, inicializar un array vacío para ese pack_code
+            $resultadoAgrupado[$packCode] = [
+                'producto' => [],
+                'price' => [],
+            ];
+        }
+
+        // Agregar los valores de producto y price al array correspondiente
+        $resultadoAgrupado[$packCode]['producto'][] = $pack->producto;
+        $resultadoAgrupado[$packCode]['price'][] = $pack->price;
+      }
       $packs = Pack::orderby('name')->groupBy('pack_code')->get();
+
       $client = new \GuzzleHttp\Client();
       $url = 'https://api.medilink.healthatom.com/api/v1/pacientes/';
 
@@ -50,8 +74,9 @@ class AdminNuboxController extends Controller
 
       }
       $patients = array_merge(...$alPatients);
+      $selectedPack = false;
       array_multisort( array_column($patients, "nombre"), SORT_ASC, $patients );
-      return view('admin.nubox.index',compact('professionals','packs','patients'));
+      return view('admin.nubox.index',compact('professionals','packs','patients','resultadoAgrupado','selectedPack'));
     }
 
     public function auth(){
@@ -108,15 +133,22 @@ class AdminNuboxController extends Controller
 
       $patient = json_decode($response->getBody());
 
-
-      
+      if(isset($request->change)){
+        $alliance = $request->alliance;
+        return view('admin.nubox.change',compact('request','pack_choise','patient','professional','alliance','packs'));
+      }
 
       $products = [];
       foreach ($packs as $pack) {
-        if($request->alliance == 'true'){
-          $price = $pack->alliance_price;
-        } else {
-          $price = $pack->price;
+        if(isset($request->values)){
+          $price = $request->values[$pack->id];
+        }
+        else {
+          if($request->alliance == 'true'){
+            $price = $pack->alliance_price;
+          } else {
+            $price = $pack->price;
+          }
         }
         $product = [
           "rutContraparte" => $patient->data->rut,
@@ -175,6 +207,7 @@ class AdminNuboxController extends Controller
     
         $products[] = $product;
     }
+
 
     $jsonProductos = json_encode($products, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
