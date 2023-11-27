@@ -67,7 +67,7 @@
               <x-admin.input class="col-span-1 sm:col-span-1" type="number" name="deporteEndo" readonly="edit" value="{{ old('deporteEndo') }}">Endomorfo</x-admin.input>
               <x-admin.input class="col-span-1 sm:col-span-1" type="number" name="deporteMeso" readonly="edit" value="{{ old('deporteMeso') }}">Mesomorfo</x-admin.input>
               <x-admin.input class="col-span-1 sm:col-span-1" type="number" name="deporteEcto" readonly="edit" value="{{ old('deporteEcto') }}">Ectomorfo</x-admin.input>
-              <x-admin.input class="col-span-1 sm:col-span-1" type="number" name="deporteSumatoria" readonly="edit" value="{{ old('deporteSumatoria') }}">Sum. Plieges</x-admin.input>
+              <x-admin.input class="col-span-1 sm:col-span-1" type="number" name="deporteSumatoria" readonly="edit" value="{{ old('deporteSumatoria') }}">Sum. Plieges (mm)</x-admin.input>
               <div class="col-span-1 sm:col-span-1">
                 <x-label for="Depo/Recrea (D/R)" :value="__('Deporte/Recreacional')" />
                   <input type="radio" wire:model= 'habito' name="habito" value ='D'>D
@@ -154,143 +154,143 @@
     
                 <div class="grid grid-cols-6 gap-6">
                 @if(!is_null($viewsNutrition))
-                <div class="ml-5 md:col-span-2 w-5/6">
+                <div class="ml-5 md:col-span-2 w-4/6">
                   <table class="table-fixed w-full overflow-hidden rounded-lg shadow-lg p-6">
                     <thead class="cabecera">
                       <tr class="bg-primary-100 text-sm font-semibold tracking-wide text-left">
-                        <th class="text-center py-2 min-w-4/8 w-6/12">Básicos</th>
-                        <th class="text-center py-2 min-w-4/8 w-6/12 ">Datos</th>
+                        <th class="text-center text-center py-2 min-w-4/8 w-4/12 text-sm">Básicos</th>
+                        <th class="text-center text-center py-2 min-w-4/8 w-2/12 text-sm">Datos</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td class="text-center">Peso (kg)</td>
-                        <td class="text-center">{{$viewsNutrition->peso}}</td>
+                        <td class="text-right text-sm">Peso (kg)</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->peso}}</td>
                       </tr>
                       <tr>
-                        <td class="text-center">Talla (cm)</td>
-                        <td class="text-center">{{$viewsNutrition->talla_parado}}</td>
+                        <td class="text-right text-sm">Talla (cm)</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->talla_parado}}</td>
                       </tr>
                       <tr>
-                        <td class="text-center">Talla sentado (cm)</td>
-                        <td class="text-center">{{$viewsNutrition->talla_sentado}}</td>
+                        <td class="text-right text-sm">Talla sentado (cm)</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->talla_sentado}}</td>
                       </tr>
                       <tr>
-                        <td class= "bg-primary-100" style=" text-align: center; font-weight: bold;">Diametros</td>
+                        <td class= "bg-primary-100 py-1 text-sm" style=" text-align: center; font-weight: bold;">Diametros (cm)</td>
                         <td class= "bg-primary-100"></td>
                       </tr>
                       <tr>
-                        <td class="text-center">Biacromial</td>
-                        <td class="text-center">{{$viewsNutrition->biacromial}}</td>
+                        <td class="text-right text-sm">Biacromial</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->biacromial}}</td>
                       </tr>
                       <tr>
-                        <td class="text-center">Tórax Transverso</td>
-                        <td class="text-center">{{$viewsNutrition->torax_t}}</td>
+                        <td class="text-right text-sm">Tórax Transverso</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->torax_t}}</td>
                       </tr>
                       <tr>
-                        <td class="text-center">Tórax Anteropost</td>
-                        <td class="text-center">{{$viewsNutrition->torax_ap}}</td>
+                        <td class="text-right text-sm">Tórax Anteropost</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->torax_ap}}</td>
                       </tr>
                       <tr>
-                        <td class="text-center">Bi-iliocrestídeo</td>
-                        <td class="text-center">{{$viewsNutrition->iliocrestideo}}</td>
+                        <td class="text-right text-sm">Bi-iliocrestídeo</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->iliocrestideo}}</td>
                       </tr>
                       <tr>
-                        <td class="text-center">Humeral</td>
-                        <td class="text-center">{{$viewsNutrition->humeral}}</td>
+                        <td class="text-right text-sm">Humeral</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->humeral}}</td>
                       </tr>
                       <tr>
-                        <td class="text-center">Femoral</td>
-                        <td class="text-center">{{$viewsNutrition->femoral}}</td>
+                        <td class="text-right text-sm">Femoral</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->femoral}}</td>
                       </tr>
     
                       <tr>
-                        <td class= "bg-primary-100" style=" text-align: center; font-weight: bold;">Perimetros (cm)</td>
+                        <td class= "bg-primary-100 py-1 text-sm" style=" text-align: center; font-weight: bold;">Perimetros (cm)</td>
                         <td class= "bg-primary-100"></td>
                       </tr>
                       <tr>
-                        <td class="text-center">Cabeza</td>
-                        <td class="text-center">{{$viewsNutrition->cabeza}}</td>
+                        <td class="text-right text-sm">Cabeza</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->cabeza}}</td>
                       </tr>
                       <tr>
-                        <td class="text-center">Brazo relajado</td>
-                        <td class="text-center">{{$viewsNutrition->brazo_r}}</td>
+                        <td class="text-right text-sm">Brazo relajado</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->brazo_r}}</td>
                       </tr>
                       <tr>
-                        <td class="text-center">Brazo flexionado</td>
-                        <td class="text-center">{{$viewsNutrition->brazo_flex}}</td>
+                        <td class="text-right text-sm">Brazo flexionado</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->brazo_flex}}</td>
                       </tr>
                       <tr>
-                        <td class="text-center">Antebrazo máximo</td>
-                        <td class="text-center">{{$viewsNutrition->antebrazo_max}}</td>
+                        <td class="text-right text-sm">Antebrazo máximo</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->antebrazo_max}}</td>
                       </tr>
                       <tr>
-                        <td class="text-center">Tórax</td>
-                        <td class="text-center">{{$viewsNutrition->torax_meso}}</td>
+                        <td class="text-right text-sm">Tórax</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->torax_meso}}</td>
                       </tr>
                       <tr>
-                        <td class="text-center">Cintura</td>
-                        <td class="text-center">{{$viewsNutrition->cintura}}</td>
+                        <td class="text-right text-sm">Cintura</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->cintura}}</td>
                       </tr>
                       <tr>
-                        <td class="text-center">Cadera máximo</td>
-                        <td class="text-center">{{$viewsNutrition->cadera}}</td>
+                        <td class="text-right text-sm">Cadera máximo</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->cadera}}</td>
                       </tr>
                       <tr>
-                        <td class="text-center">Muslo máximo</td>
-                        <td class="text-center">{{$viewsNutrition->muslo_max}}</td>
+                        <td class="text-right text-sm">Muslo máximo</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->muslo_max}}</td>
                       </tr>
                       <tr>
-                        <td class="text-center">Muslo medio</td>
-                        <td class="text-center">{{$viewsNutrition->muslo_medio}}</td>
+                        <td class="text-right text-sm">Muslo medio</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->muslo_medio}}</td>
                       </tr>
                       <tr>
-                        <td class="text-center">Pierna</td>
-                        <td class="text-center">{{$viewsNutrition->pierna_cm}}</td>
+                        <td class="text-right text-sm">Pierna</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->pierna_cm}}</td>
                       </tr>
     
                       <tr>
-                        <td class= "bg-primary-100" style=" text-align: center; font-weight: bold;">Pliegues (mm)</td>
+                        <td class= "bg-primary-100 py-1 text-sm" style=" text-align: center; font-weight: bold;">Pliegues (mm)</td>
                         <td class= "bg-primary-100"></td>
                       </tr>
                       <tr>
-                        <td class="text-center">Tríceps</td>
-                        <td class="text-center">{{$viewsNutrition->tricep}}</td>
+                        <td class="text-right text-sm">Tríceps</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->tricep}}</td>
                       </tr>
     
                       <tr>
-                        <td class="text-center">Subescapular</td>
-                        <td class="text-center">{{$viewsNutrition->subescapular}}</td>
+                        <td class="text-right text-sm">Subescapular</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->subescapular}}</td>
                       </tr>
     
                       <tr>
-                        <td class="text-center">Bíceps</td>
-                        <td class="text-center">{{$viewsNutrition->biceps}}</td>
+                        <td class="text-right text-sm">Bíceps</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->biceps}}</td>
                       </tr>
     
                       <tr>
-                        <td class="text-center">Cresta iliaca</td>
-                        <td class="text-center">{{$viewsNutrition->cresta_iliaca}}</td>
+                        <td class="text-right text-sm">Cresta iliaca</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->cresta_iliaca}}</td>
                       </tr>
     
                       <tr>
-                        <td class="text-center">Supraespinal</td>
-                        <td class="text-center">{{$viewsNutrition->supraespinal}}</td>
+                        <td class="text-right text-sm">Supraespinal</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->supraespinal}}</td>
                       </tr>
     
                       <tr>
-                        <td class="text-center">Abdominal</td>
-                        <td class="text-center">{{$viewsNutrition->abdominal}}</td>
+                        <td class="text-right text-sm">Abdominal</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->abdominal}}</td>
                       </tr>
     
                       <tr>
-                        <td class="text-center">Muslo medial</td>
-                        <td class="text-center">{{$viewsNutrition->muslo_medial}}</td>
+                        <td class="text-right text-sm">Muslo medial</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->muslo_medial}}</td>
                       </tr>
     
                       <tr>
-                        <td class="text-center">Pierna</td>
-                        <td class="text-center">{{$viewsNutrition->pierna_mm}}</td>
+                        <td class="text-right text-sm">Pierna</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->pierna_mm}}</td>
                       </tr>
     
                     </tbody>
@@ -307,21 +307,21 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td class="text-center">Adiposa</td>
-                        <td class="text-center">{{round($viewsNutrition->masa_adiposa, 2)}} kg</td>
-                        <td class="text-center">{{round(($viewsNutrition->masa_adiposa_porc), 2)}}%  </td>
+                        <td class="text-center text-sm">Adiposa</td>
+                        <td class="text-center text-sm">{{round($viewsNutrition->masa_adiposa, 2)}} kg</td>
+                        <td class="text-center text-sm">{{round(($viewsNutrition->masa_adiposa_porc), 2)}}%  </td>
                       </tr>
     
                       <tr>
-                        <td class="text-center">Muscular</td>
-                        <td class="text-center">{{round($viewsNutrition->masa_muscular, 2)}} kg</td>
-                        <td class="text-center">{{round(($viewsNutrition->masa_muscular_porc), 2)}}%</td>
+                        <td class="text-center text-sm">Muscular</td>
+                        <td class="text-center text-sm">{{round($viewsNutrition->masa_muscular, 2)}} kg</td>
+                        <td class="text-center text-sm">{{round(($viewsNutrition->masa_muscular_porc), 2)}}%</td>
                       </tr>
     
                       <tr>
-                        <td class="text-center">Osea</td>
-                        <td class="text-center">{{round($viewsNutrition->masa_osea, 2)}} kg</td>
-                        <td class="text-center">{{round(($viewsNutrition->masa_osea_porc), 2)}}%</td>
+                        <td class="text-center text-sm">Osea</td>
+                        <td class="text-center text-sm">{{round($viewsNutrition->masa_osea, 2)}} kg</td>
+                        <td class="text-center text-sm">{{round(($viewsNutrition->masa_osea_porc), 2)}}%</td>
                       </tr>
                     </tbody>
                   </table>
@@ -334,18 +334,18 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td class="text-center">Músculo/Óseo:</td>
-                        <td class="text-center">{{round($viewsNutrition->indice_musculo, 2)}}</td>
+                        <td class="text-center text-sm">Músculo/Óseo</td>
+                        <td class="text-center text-sm">{{round($viewsNutrition->indice_musculo, 2)}}</td>
                       </tr>
     
                       <tr>
-                        <td class="text-center">Adiposo/Muscular</td>
-                        <td class="text-center">{{round($viewsNutrition->indice_adiposo, 2)}}</td>
+                        <td class="text-center text-sm">Adiposo/Muscular</td>
+                        <td class="text-center text-sm">{{round($viewsNutrition->indice_adiposo, 2)}}</td>
                       </tr>
     
                       <tr>
-                        <td class="text-center">Masa corporal</td>
-                        <td class="text-center">{{round($viewsNutrition->indice_corporal, 2)}} Kg/m2</td>
+                        <td class="text-center text-sm">Masa corporal</td>
+                        <td class="text-center text-sm">{{round($viewsNutrition->indice_corporal, 2)}} Kg/m2</td>
                       </tr>
                     </tbody>
                   </table>
@@ -358,18 +358,18 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td class="text-center">Endomorfo</td>
-                        <td class="text-center">{{round($viewsNutrition->endo, 1)}}</td>
+                        <td class="text-center text-sm">Endomorfo</td>
+                        <td class="text-center text-sm">{{round($viewsNutrition->endo, 1)}}</td>
                       </tr>
     
                       <tr>
-                        <td class="text-center">Mesomorfo</td>
-                        <td class="text-center">{{round($viewsNutrition->meso, 1)}}</td>
+                        <td class="text-center text-sm">Mesomorfo</td>
+                        <td class="text-center text-sm">{{round($viewsNutrition->meso, 1)}}</td>
                       </tr>
     
                       <tr>
-                        <td class="text-center">Ectomorfo</td>
-                        <td class="text-center">{{round($viewsNutrition->ecto, 1)}}</td>
+                        <td class="text-center text-sm">Ectomorfo</td>
+                        <td class="text-center text-sm">{{round($viewsNutrition->ecto, 1)}}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -382,8 +382,8 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td class="text-center">Sumatoria 6 plieges</td>
-                        <td class="text-center">{{($viewsNutrition->tricep + $viewsNutrition->subescapular + $viewsNutrition->supraespinal + $viewsNutrition->abdominal + $viewsNutrition->muslo_medial +  $viewsNutrition->pierna_mm)}} mm</td>
+                        <td class="text-center text-sm">Sumatoria 6 plieges</td>
+                        <td class="text-center text-sm">{{($viewsNutrition->tricep + $viewsNutrition->subescapular + $viewsNutrition->supraespinal + $viewsNutrition->abdominal + $viewsNutrition->muslo_medial +  $viewsNutrition->pierna_mm)}} mm</td>
                       </tr>
                     </tbody>
                   </table>
@@ -396,14 +396,14 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td class="text-center">Diferencia PE/PB</td>
-                        <td class="text-center">{{$viewsNutrition->diferencia_peso}}</td>
-                        <td class="text-center">{{round(($viewsNutrition->peso_estructurado - $viewsNutrition->peso)/$viewsNutrition->peso*100, 2)}}%</td>
+                        <td class="text-center text-sm">Diferencia PE/PB</td>
+                        <td class="text-center text-sm">{{$viewsNutrition->diferencia_peso}}</td>
+                        <td class="text-center text-sm">{{round(($viewsNutrition->peso_estructurado - $viewsNutrition->peso)/$viewsNutrition->peso*100, 2)}}%</td>
                       </tr>
                       <tr>
-                        <td class="text-center">Masa Osea Referencial</td>
-                        <td class="text-center">{{App\Models\Nutrition::where('rut',$user->rut)->oldest()->value('masa_osea')}}</td>
-                        <td class="text-center">{{round(($viewsNutrition->masa_osea)/$viewsNutrition->peso*100, 2)}}%</td>
+                        <td class="text-center text-sm">Masa Osea Referencial</td>
+                        <td class="text-center text-sm">{{App\Models\Nutrition::where('rut',$user->rut)->oldest()->value('masa_osea')}}</td>
+                        <td class="text-center text-sm">{{round(($viewsNutrition->masa_osea)/$viewsNutrition->peso*100, 2)}}%</td>
                       </tr>
                     </tbody>
                   </table>
@@ -456,44 +456,44 @@
                       </thead>
                       <tbody class="border-collapse border border-black">
                         <tr>
-                          <td class="border-collapse border border-black text-right">Peso (kg)</td>
-                          <td class="border-collapse border border-black text-center w-1/2">{{$viewsNutrition->peso}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Peso (kg)</td>
+                          <td class="border-collapse border border-black text-center w-1/2 text-sm">{{$viewsNutrition->peso}}</td>
                         </tr>
                         <tr>
-                          <td class="border-collapse border border-black text-right">Talla (cm)</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->talla_parado}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Talla (cm)</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->talla_parado}}</td>
                         </tr>
                         <tr>
-                          <td class="border-collapse border border-black text-right">Talla sentado (cm)</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->talla_sentado}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Talla sentado (cm)</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->talla_sentado}}</td>
                         </tr>
                         <tr>
-                          <td class="border-collapse border border-black bg-primary-100 text-center font-bold">Diametros</td>
+                          <td class="border-collapse border border-black bg-primary-100 text-center font-bold">Diametros (cm)</td>
                           <td class="border-collapse border border-black bg-primary-100"></td>
                         </tr>
                         <tr>
-                          <td class="border-collapse border border-black text-right">Biacromial</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->biacromial}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Biacromial</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->biacromial}}</td>
                         </tr>
                         <tr>
-                          <td class="border-collapse border border-black text-right">Tórax Transverso</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->torax_t}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Tórax Transverso</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->torax_t}}</td>
                         </tr>
                         <tr>
-                          <td class="border-collapse border border-black text-right">Tórax Anteropost</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->torax_ap}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Tórax Anteropost</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->torax_ap}}</td>
                         </tr>
                         <tr>
-                          <td class="border-collapse border border-black text-right">Bi-iliocrestídeo</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->iliocrestideo}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Bi-iliocrestídeo</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->iliocrestideo}}</td>
                         </tr>
                         <tr>
-                          <td class="border-collapse border border-black text-right">Humeral</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->humeral}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Humeral</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->humeral}}</td>
                         </tr>
                         <tr>
-                          <td class="border-collapse border border-black text-right">Femoral</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->femoral}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Femoral</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->femoral}}</td>
                         </tr>
               
                         <tr>
@@ -501,44 +501,44 @@
                           <td class="border-collapse border border-black bg-primary-100"></td>
                         </tr>
                         <tr>
-                          <td class="border-collapse border border-black text-right">Cabeza</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->cabeza}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Cabeza</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->cabeza}}</td>
                         </tr>
                         <tr>
-                          <td class="border-collapse border border-black text-right">Brazo relajado</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->brazo_r}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Brazo relajado</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->brazo_r}}</td>
                         </tr>
                         <tr>
-                          <td class="border-collapse border border-black text-right">Brazo flexionado</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->brazo_flex}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Brazo flexionado</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->brazo_flex}}</td>
                         </tr>
                         <tr>
-                          <td class="border-collapse border border-black text-right">Antebrazo máximo</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->antebrazo_max}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Antebrazo máximo</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->antebrazo_max}}</td>
                         </tr>
                         <tr>
-                          <td class="border-collapse border border-black text-right">Tórax</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->torax_meso}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Tórax</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->torax_meso}}</td>
                         </tr>
                         <tr>
-                          <td class="border-collapse border border-black text-right">Cintura</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->cintura}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Cintura</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->cintura}}</td>
                         </tr>
                         <tr>
-                          <td class="border-collapse border border-black text-right">Cadera máximo</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->cadera}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Cadera máximo</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->cadera}}</td>
                         </tr>
                         <tr>
-                          <td class="border-collapse border border-black text-right">Muslo máximo</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->muslo_max}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Muslo máximo</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->muslo_max}}</td>
                         </tr>
                         <tr>
-                          <td class="border-collapse border border-black text-right">Muslo medio</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->muslo_medio}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Muslo medio</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->muslo_medio}}</td>
                         </tr>
                         <tr>
-                          <td class="border-collapse border border-black text-right">Pierna</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->pierna_cm}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Pierna</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->pierna_cm}}</td>
                         </tr>
               
                         <tr>
@@ -546,43 +546,43 @@
                           <td class="border-collapse border border-black bg-primary-100"></td>
                         </tr>
                         <tr>
-                          <td class="border-collapse border border-black text-right">Tríceps</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->tricep}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Tríceps</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->tricep}}</td>
                         </tr>
               
                         <tr>
-                          <td class="border-collapse border border-black text-right">Subescapular</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->subescapular}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Subescapular</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->subescapular}}</td>
                         </tr>
               
                         <tr>
-                          <td class="border-collapse border border-black text-right">Bíceps</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->biceps}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Bíceps</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->biceps}}</td>
                         </tr>
               
                         <tr>
-                          <td class="border-collapse border border-black text-right">Cresta iliaca</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->cresta_iliaca}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Cresta iliaca</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->cresta_iliaca}}</td>
                         </tr>
               
                         <tr>
-                          <td class="border-collapse border border-black text-right">Supraespinal</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->supraespinal}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Supraespinal</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->supraespinal}}</td>
                         </tr>
               
                         <tr>
-                          <td class="border-collapse border border-black text-right">Abdominal</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->abdominal}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Abdominal</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->abdominal}}</td>
                         </tr>
               
                         <tr>
-                          <td class="border-collapse border border-black text-right">Muslo medial</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->muslo_medial}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Muslo medial</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->muslo_medial}}</td>
                         </tr>
               
                         <tr>
-                          <td class="border-collapse border border-black text-right">Pierna</td>
-                          <td class="border-collapse border border-black text-center">{{$viewsNutrition->pierna_mm}}</td>
+                          <td class="border-collapse border border-black text-right text-sm">Pierna</td>
+                          <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->pierna_mm}}</td>
                         </tr>
                       </tbody>
                     </table>
@@ -599,10 +599,10 @@
                         </thead>
                         <tbody>
                           <tr>
-                            <td class="border-collapse border border-black text-left">Masa Adiposa</td>
-                            <td class="border-collapse border border-black text-center border-black">{{round(($viewsNutrition->masa_adiposa_porc), 2)}}%</td>
-                            <td class="border-collapse border border-black text-center">{{$viewsNutrition->masa_adiposa}} kg</td>
-                            <td class="border-collapse border border-black text-center">
+                            <td class="border-collapse border border-black text-left text-sm">Masa Adiposa</td>
+                            <td class="border-collapse border border-black text-center border-black text-sm">{{round(($viewsNutrition->masa_adiposa_porc), 2)}}%</td>
+                            <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->masa_adiposa}} kg</td>
+                            <td class="border-collapse border border-black text-center text-sm">
                               @if($viewsNutrition->gender == 'f')
                                 @if($viewsNutrition->habito == 'D')
                                   @if(($viewsNutrition->masa_adiposa/$viewsNutrition->peso_estructurado)*100 <= 21)Excelente  
@@ -640,10 +640,10 @@
                           </tr>
               
                           <tr>
-                            <td class="border-collapse border border-black text-left">Masa Muscular</td>
-                            <td class="border-collapse border border-black text-center">{{round(($viewsNutrition->masa_muscular_porc), 2)}}%</td>
-                            <td class="border-collapse border border-black text-center">{{$viewsNutrition->masa_muscular}} kg</td>
-                            <td class="border-collapse border border-black text-center">
+                            <td class="border-collapse border border-black text-left text-sm">Masa Muscular</td>
+                            <td class="border-collapse border border-black text-center text-sm">{{round(($viewsNutrition->masa_muscular_porc), 2)}}%</td>
+                            <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->masa_muscular}} kg</td>
+                            <td class="border-collapse border border-black text-center text-sm">
                               @if($viewsNutrition->gender == 'f')
                                 @if($viewsNutrition->habito == 'D')
                                   @if(($viewsNutrition->masa_muscular/$viewsNutrition->peso_estructurado)*100 > 47.5)Excelente
@@ -681,17 +681,17 @@
                           </tr>
               
                           <tr>
-                            <td class="border-collapse border border-black text-left">Masa Osea</td>
-                            <td class="border-collapse border border-black text-center">{{round(($viewsNutrition->masa_osea_porc), 2)}}%</td>
-                            <td class="border-collapse border border-black text-center">{{$viewsNutrition->masa_osea}} kg</td>
-                            <td class="border-collapse border border-black text-center">---</td>
+                            <td class="border-collapse border border-black text-left text-sm">Masa Osea</td>
+                            <td class="border-collapse border border-black text-center text-sm">{{round(($viewsNutrition->masa_osea_porc), 2)}}%</td>
+                            <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->masa_osea}} kg</td>
+                            <td class="border-collapse border border-black text-center text-sm">---</td>
                           </tr>
               
                           <tr>
-                            <td class="border-collapse border border-black text-left">Indice músculo/óseo:</td>
-                            <td class="border-collapse border border-black text-center">{{$viewsNutrition->indice_musculo}}</td>
-                            <td class="border-collapse border border-black text-center">-</td>
-                            <td class="border-collapse border border-black text-center">
+                            <td class="border-collapse border border-black text-left text-sm">Indice músculo/óseo</td>
+                            <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->indice_musculo}}</td>
+                            <td class="border-collapse border border-black text-center text-sm">-</td>
+                            <td class="border-collapse border border-black text-center text-sm">
                               @if($viewsNutrition->gender == 'f')
                                 @if($viewsNutrition->indice_musculo > 4.3)Excelente
                                   @elseif($viewsNutrition->indice_musculo >= 3.91  && $viewsNutrition->indice_musculo <= 4.3)Bueno
@@ -711,10 +711,10 @@
                           </tr>
               
                           <tr>
-                            <td class="border-collapse border border-black text-left">Indice adiposo/muscular</td>
-                            <td class="border-collapse border border-black text-center">{{$viewsNutrition->indice_adiposo}}</td>
-                            <td class="border-collapse border border-black text-center">-</td>
-                            <td class="border-collapse border border-black text-center">
+                            <td class="border-collapse border border-black text-left text-sm">Indice adiposo/muscular</td>
+                            <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->indice_adiposo}}</td>
+                            <td class="border-collapse border border-black text-center text-sm">-</td>
+                            <td class="border-collapse border border-black text-center text-sm">
                               @if($viewsNutrition->gender == 'f')
                                 @if($viewsNutrition->indice_adiposo < 0.55)Excelente
                                   @elseif($viewsNutrition->indice_adiposo >= 0.55  && $viewsNutrition->indice_adiposo < 0.7)Bueno
@@ -734,10 +734,10 @@
                           </tr>
               
                           <tr>
-                            <td class="border-collapse border border-black text-left">Indice masa corporal</td>
-                            <td class="border-collapse border border-black text-center">{{$viewsNutrition->indice_corporal}} Kg/m2</td>
-                            <td class="border-collapse border border-black text-center">-</td>
-                            <td class="border-collapse border border-black text-center">
+                            <td class="border-collapse border border-black text-left text-sm">Indice masa corporal</td>
+                            <td class="border-collapse border border-black text-center text-sm">{{$viewsNutrition->indice_corporal}} Kg/m2</td>
+                            <td class="border-collapse border border-black text-center text-sm">-</td>
+                            <td class="border-collapse border border-black text-center text-sm">
                               @if($viewsNutrition->indice_corporal < 18.5)
                                 Bajo
                               @elseif(24.9 < $viewsNutrition->indice_corporal)
@@ -749,10 +749,10 @@
                           </tr>
               
                           <tr>
-                            <td class="border-collapse border border-black text-left">Somatotipo</td>
-                            <td class="border-collapse border border-black text-center">{{round($viewsNutrition->endo, 1)}} {{round($viewsNutrition->meso, 1)}} {{round($viewsNutrition->ecto, 1)}}</td>
-                            <td class="border-collapse border border-black text-center">-</td>
-                            <td class="border-collapse border border-black text-center">
+                            <td class="border-collapse border border-black text-left text-sm">Somatotipo</td>
+                            <td class="border-collapse border border-black text-center text-sm">{{round($viewsNutrition->endo, 1)}} {{round($viewsNutrition->meso, 1)}} {{round($viewsNutrition->ecto, 1)}}</td>
+                            <td class="border-collapse border border-black text-center text-sm">-</td>
+                            <td class="border-collapse border border-black text-center text-sm">
                               @if((round($viewsNutrition->endo, 1) >= round($viewsNutrition->meso, 1)) && (round($viewsNutrition->endo, 1) >= round($viewsNutrition->ecto, 1)))Endomorfo
                                 @elseif((round($viewsNutrition->meso, 1) >= round($viewsNutrition->endo, 1)) && (round($viewsNutrition->meso, 1) >= round($viewsNutrition->ecto, 1)))Mesomorfo
                                 @else Ectomorfo
@@ -761,12 +761,12 @@
                           </tr>
               
                           <tr>
-                            <td class="border-collapse border border-black text-left">Sumatoria 6 plieges</td>
-                            <td class="border-collapse border border-black text-center">{{($viewsNutrition->tricep + $viewsNutrition->subescapular + $viewsNutrition->supraespinal + $viewsNutrition->abdominal + $viewsNutrition->muslo_medial +  $viewsNutrition->pierna_mm)}} mm</td>
-                            <td class="border-collapse border border-black text-center">-</td>
-                            <td class="border-collapse border border-black text-center">
-                              @if (($viewsNutrition->tricep + $viewsNutrition->subescapular + $viewsNutrition->supraespinal + $viewsNutrition->abdominal + $viewsNutrition->muslo_medial +  $viewsNutrition->pierna_mm) > App\Models\NutritionSport::where('descripcion','=',$viewsNutrition->deporte)->value('sumatoria_6_plieges'))Alto
-                                @else Bien
+                            <td class="border-collapse border border-black text-left text-sm">Sumatoria 6 plieges</td>
+                            <td class="border-collapse border border-black text-center text-sm">{{($viewsNutrition->tricep + $viewsNutrition->subescapular + $viewsNutrition->supraespinal + $viewsNutrition->abdominal + $viewsNutrition->muslo_medial +  $viewsNutrition->pierna_mm)}} mm</td>
+                            <td class="border-collapse border border-black text-center text-sm">-</td>
+                            <td class="border-collapse border border-black text-center text-sm">
+                              @if (($viewsNutrition->tricep + $viewsNutrition->subescapular + $viewsNutrition->supraespinal + $viewsNutrition->abdominal + $viewsNutrition->muslo_medial +  $viewsNutrition->pierna_mm) > $viewsNutrition->oseo_referencial) >
+                                @else <
                               @endif
                             </td>
                           </tr>
@@ -785,15 +785,15 @@
                         </thead>
                         <tbody>
                           <tr>
-                            <td class="border-collapse border border-black text-center text-left">Masa Adiposa</td>
-                            <td class="border-collapse border border-black text-center text-center">
+                            <td class="border-collapse border border-black text-center text-left text-sm">Masa Adiposa</td>
+                            <td class="border-collapse border border-black text-center text-center text-sm">
                               @if($viewsNutrition->gender == 'f')
                                 @if($viewsNutrition->habito == 'D')24.1 - 29 % @else 28.1 - 30 % @endif
                               @else
                                 @if($viewsNutrition->habito == 'D')20.1 - 26 % @else 23.2 - 27.5 % @endif
                               @endif
                             </td>
-                            <td class="border-collapse border border-black text-center text-center">
+                            <td class="border-collapse border border-black text-center text-center text-sm">
                               @if($viewsNutrition->gender == 'f')
                                 @if($viewsNutrition->habito == 'D')21.1 - 24 % @else 26.1 - 28 % @endif
                               @else
@@ -802,15 +802,15 @@
                             </td>
                           </tr>
                           <tr>
-                            <td class="border-collapse border border-black text-center text-left">Masa Muscular</td>
-                            <td class="border-collapse border border-black text-center text-center">
+                            <td class="border-collapse border border-black text-center text-left text-sm">Masa Muscular</td>
+                            <td class="border-collapse border border-black text-center text-center text-sm">
                               @if($viewsNutrition->gender == 'f')
                                 @if($viewsNutrition->habito == 'D')36.4 - 43.8 % @else 32.3 - 40.9 % @endif
                               @else
                                 @if($viewsNutrition->habito == 'D')44 - 50.7 % @else 40.5 - 47.3 % @endif
                               @endif
                             </td>
-                            <td class="border-collapse border border-black text-center text-center">
+                            <td class="border-collapse border border-black text-center text-center text-sm">
                               @if($viewsNutrition->gender == 'f')
                                 @if($viewsNutrition->habito == 'D')42.9 - 47.5 % @else 41 - 45.2 % @endif
                               @else
@@ -819,32 +819,32 @@
                             </td>
                           </tr>
                           <tr>
-                            <td class="border-collapse border border-black text-center text-left">Indice músculo/óseo</td>
-                            <td class="border-collapse border border-black text-center text-center">
+                            <td class="border-collapse border border-black text-center text-left text-sm">Indice músculo/óseo</td>
+                            <td class="border-collapse border border-black text-center text-center text-sm">
                               @if($viewsNutrition->gender == 'f')3.51 - 3.9 @else 3.81 - 4.2 @endif
                             </td>
-                            <td class="border-collapse border border-black text-center text-center">
+                            <td class="border-collapse border border-black text-center text-center text-sm">
                               @if($viewsNutrition->gender == 'f')3.91 - 4.3 @else 4.21 - 4.6 @endif
                             </td>
                           </tr>
                           <tr>
-                            <td class="border-collapse border border-black text-center text-left">Indice adiposo/musc</td>
-                            <td class="border-collapse border border-black text-center text-center">
+                            <td class="border-collapse border border-black text-center text-left text-sm">Indice adiposo/musc</td>
+                            <td class="border-collapse border border-black text-center text-center text-sm">
                               @if($viewsNutrition->gender == 'f')0.71 - 0.88 @else 0.42 - 0.54 @endif
                             </td>
-                            <td class="border-collapse border border-black text-center text-center">
+                            <td class="border-collapse border border-black text-center text-center text-sm">
                               @if($viewsNutrition->gender == 'f')0.54 -  0.7 @else 0.36 - 0.41 @endif
                             </td>
                           </tr>
                           <tr>
-                            <td class="border-collapse border border-black text-center text-left">Indice masa corporal</td>
-                            <td class="border-collapse border border-black text-center text-center">18.5 - 24.9 Kg/m2</td>
-                            <td class="border-collapse border border-black text-center text-center">---</td>
+                            <td class="border-collapse border border-black text-center text-left text-sm">Indice masa corporal</td>
+                            <td class="border-collapse border border-black text-center text-center text-sm">18.5 - 24.9 Kg/m2</td>
+                            <td class="border-collapse border border-black text-center text-center text-sm">---</td>
                           </tr>
                           <tr>
-                            <td class="border-collapse border border-black text-center text-left">Sumatoria 6 pliegues</td>
-                            <td class="border-collapse border border-black text-center text-center"> {{App\Models\NutritionSport::where('descripcion','=',$viewsNutrition->deporte)->value('sumatoria_6_plieges')}}</td>
-                            <td class="border-collapse border border-black text-center text-center">-</td>
+                            <td class="border-collapse border border-black text-center text-left text-sm">Sumatoria 6 pliegues</td>
+                            <td class="border-collapse border border-black text-center text-center text-sm">{{$viewsNutrition->oseo_referencial}} mm</td>
+                            <td class="border-collapse border border-black text-center text-center text-sm">-</td>
                           </tr>
                         </tbody>
                       </table>
@@ -858,24 +858,24 @@
                         </thead>
                         <tbody>
                           <tr>
-                            <td class="border-collapse border border-black text-center text-left">Masa Adiposa</td>
-                            <td class="border-collapse border border-black text-center text-center">{{round(($viewsNutrition->masa_adiposa/$viewsNutrition->peso_estructurado)*100, 0)}}%</td>
+                            <td class="border-collapse border border-black text-center text-left text-sm">Masa Adiposa</td>
+                            <td class="border-collapse border border-black text-center text-center text-sm">{{round(($viewsNutrition->masa_adiposa/$viewsNutrition->peso_estructurado)*100, 0)}}%</td>
                           </tr>
                           <tr>
-                            <td class="border-collapse border border-black text-center text-left">Masa Muscular</td>
-                            <td class="border-collapse border border-black text-center text-center">{{round(($viewsNutrition->masa_muscular/$viewsNutrition->peso_estructurado)*100, 0)}}%</td>
+                            <td class="border-collapse border border-black text-center text-left text-sm">Masa Muscular</td>
+                            <td class="border-collapse border border-black text-center text-center text-sm">{{round(($viewsNutrition->masa_muscular/$viewsNutrition->peso_estructurado)*100, 0)}}%</td>
                           </tr>
                           <tr>
-                            <td class="border-collapse border border-black text-center text-left">Masa Ósea</td>
-                            <td class="border-collapse border border-black text-center text-center">{{round(($viewsNutrition->masa_osea/$viewsNutrition->peso_estructurado)*100, 0)}}%</td>
+                            <td class="border-collapse border border-black text-center text-left text-sm">Masa Ósea</td>
+                            <td class="border-collapse border border-black text-center text-center text-sm">{{round(($viewsNutrition->masa_osea/$viewsNutrition->peso_estructurado)*100, 0)}}%</td>
                           </tr>
                           <tr>
-                            <td class="border-collapse border border-black text-center text-left">Masa Residual</td>
-                            <td class="border-collapse border border-black text-center text-center">{{round(($viewsNutrition->masa_residual/$viewsNutrition->peso_estructurado)*100, 0)}}%</td>
+                            <td class="border-collapse border border-black text-center text-left text-sm">Masa Residual</td>
+                            <td class="border-collapse border border-black text-center text-center text-sm">{{round(($viewsNutrition->masa_residual/$viewsNutrition->peso_estructurado)*100, 0)}}%</td>
                           </tr>
                           <tr>
-                            <td class="border-collapse border border-black text-center text-left">Masa Piel</td>
-                            <td class="border-collapse border border-black text-center text-center">{{round(($viewsNutrition->masa_piel/$viewsNutrition->peso_estructurado)*100, 0)}}%</td>
+                            <td class="border-collapse border border-black text-center text-left text-sm">Masa Piel</td>
+                            <td class="border-collapse border border-black text-center text-center text-sm">{{round(($viewsNutrition->masa_piel/$viewsNutrition->peso_estructurado)*100, 0)}}%</td>
                           </tr>
                         </tbody>
                       </table>
@@ -1020,13 +1020,12 @@
                       </p>
                   
                       <h3 class="mb-3 text-xl font-bold">DIAGNÓSTICO NUTRICIONAL:</h3>
+                      <p class="mb-3">Cambios de composición corporal respecto al último control: @if(empty($viewsNutrition->comment))
+                        @else
+                        {{$viewsNutrition->comment}}
+                        @endif</p>
                       <p class="mb-3">Masa adiposa elevada y masa muscular normal.</p>
-                  
-                      <p class="mb-5">@if(empty($viewsNutrition->comment))
-                          @else
-                          {{$viewsNutrition->comment}}
-                          @endif
-                      </p>
+
                       <div class="mb-3" style="font-size: 20px; color: purple; text-align: right;">
                         <p class="mb-2" style="font-weight: bold;">Melissa Ross Guerra</p>
                         <p class="mb-8">Nutricionista Deportiva</p>

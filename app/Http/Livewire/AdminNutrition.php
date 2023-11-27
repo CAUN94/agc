@@ -74,18 +74,89 @@ class AdminNutrition extends Component
     public $nutritionID;
     public $viewsNutrition;
     public $nutrition;
+    public $sesionPrevia;
 
     public function selectUser($id)
     {
         $this->searchTerm = null;
         $this->user = User::find($id);
         $this->edad = Carbon::parse($this->user->birthday)->age;
+        $this->sexo = $this->user->gender;
         $this->rut = $this->user->rut;
+        $sesionPrevia = Nutrition::where("rut", $this->user->rut)->latest()->first();
+        if($sesionPrevia){
+        $this->deporte = $sesionPrevia->deporte;
+        $this->deporteSumatoria = $sesionPrevia->oseo_referencial;
+        $this->peso = $sesionPrevia->peso;
+        $this->talla_parado = $sesionPrevia->talla_parado;
+        $this->talla_sentado = $sesionPrevia->talla_sentado;
+        $this->biacromial = $sesionPrevia->biacromial;
+        $this->t_transverso = $sesionPrevia->torax_t;
+        $this->t_antero_posterior = $sesionPrevia->torax_ap ;
+        $this->bi_iliocrestideo = $sesionPrevia->iliocrestideo;
+        $this->humeral = $sesionPrevia->humeral;
+        $this->femoral = $sesionPrevia->femoral;
+        $this->cabeza = $sesionPrevia->cabeza;
+        $this->brazo_relajado = $sesionPrevia->brazo_r;
+        $this->brazo_flexionado = $sesionPrevia->brazo_flex;
+        $this->antebrazo_maximo = $sesionPrevia->antebrazo_max;
+        $this->t_mesoesternal = $sesionPrevia->torax_meso;
+        $this->cintura = $sesionPrevia->cintura;
+        $this->cadera = $sesionPrevia->cadera;
+        $this->muslo_maximo = $sesionPrevia->muslo_max;
+        $this->muslo_medio = $sesionPrevia->muslo_medio;
+        $this->pierna_cm = $sesionPrevia->pierna_cm;
+        $this->triceps = $sesionPrevia->tricep;
+        $this->subescapular = $sesionPrevia->subescapular;
+        $this->biceps = $sesionPrevia->biceps;
+        $this->cresta_iliaca = $sesionPrevia->cresta_iliaca;
+        $this->supraespinal = $sesionPrevia->supraespinal;
+        $this->abdominal = $sesionPrevia->abdominal;
+        $this->muslo_medial = $sesionPrevia->muslo_medial;
+        $this->pierna_mm = $sesionPrevia->pierna_mm;
+        }else{
+          $this->deporte = null;
+          $this->deporteSumatoria = null;
+          $this->peso = null;
+          $this->talla_parado = null;
+          $this->talla_sentado = null;
+          $this->biacromial = null;
+          $this->t_transverso = null;
+          $this->t_antero_posterior = null;
+          $this->bi_iliocrestideo = null;
+          $this->humeral = null;
+          $this->femoral = null;
+          $this->cabeza = null;
+          $this->brazo_relajado = null;
+          $this->brazo_flexionado = null;
+          $this->antebrazo_maximo = null;
+          $this->t_mesoesternal = null;
+          $this->cintura = null;
+          $this->cadera = null;
+          $this->muslo_maximo = null;
+          $this->muslo_medio = null;
+          $this->pierna_cm = null;
+          $this->triceps = null;
+          $this->subescapular = null;
+          $this->biceps = null;
+          $this->cresta_iliaca = null;
+          $this->supraespinal = null;
+          $this->abdominal = null;
+          $this->muslo_medial = null;
+          $this->pierna_mm = null;
+          $this->commentary = null;
+        }
     }
 
     public function updatedNutritionId()
     {
         $this->viewsNutrition = Nutrition::find($this->nutritionID);
+        $this->commentary = null;
+        if(!is_null($this->viewsNutrition)){
+          if($this->viewsNutrition->comment){
+            $this->commentary = $this->viewsNutrition->comment;
+          }
+        }
     }
 
     public function nutrionCreate(){
@@ -97,6 +168,7 @@ class AdminNutrition extends Component
             'sexo' => ['required'],
             'habito' => ['required'],
             'deporte' => ['required'],
+            'deporteSumatoria' => ['required'],
             'talla_parado' => ['required'],
             'talla_sentado' => ['required'],
             'biacromial' => ['required'],
@@ -259,6 +331,7 @@ class AdminNutrition extends Component
         $nutrition->endo = $somatotipo_Endo;
         $nutrition->meso = $somatotipo_Meso;
         $nutrition->ecto = $somatotipo_Ecto;
+        $nutrition->oseo_referencial = $this->deporteSumatoria;
         $nutrition->rut = $this->user->rut;
         $nutrition->edad = $this->edad;
         $nutrition->gender = $this->sexo;
