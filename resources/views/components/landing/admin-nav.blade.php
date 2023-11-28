@@ -22,6 +22,7 @@
       <a class="py-1" href="/adminclass">Programas</a>
       <a class="my-1 py-1" href="/admintrainappointment">Calendario</a>
       <a class="my-1 py-1" href="/adminbookappointment">Clases Reservadas</a>
+      <a class="my-1 py-1" href="/appointmentConfirm">Registrar</a>
     </x-nav-dropdown>
 
     <!-- <a class="mt-3 py-1" href="/adminalliance">Alianzas</a> -->
