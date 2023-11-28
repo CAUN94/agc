@@ -91,11 +91,7 @@
   </div>
   <script src="{{ asset('/vendor/ckeditor/ckeditor.js') }}"></script>
   <script src="/vendor/livewire-charts/app.js"></script>
-  <script>
-    $(document).ready(function() {
-      $('.table-data').DataTable();
-  } );
-  </script>
+
   @livewireScripts
 
   <x-flash-message></x-flash-message>
