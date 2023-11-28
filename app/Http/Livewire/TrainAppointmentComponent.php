@@ -83,8 +83,9 @@ class TrainAppointmentComponent extends Component
             $ids = User::search($this->searchTermStudent)->get()->pluck('id');
             $this->students = User::join('students', 'users.id', '=', 'students.user_id')->selectRaw('CONCAT(name, " ", lastnames, " ", rut) as full_name, users.id')->whereIn('users.id', $ids)->groupby('users.id')->get();
         }
-        
-        $this->trainAppointments = TrainAppointment::join('train_appointments_pivot', 'train_appointments.id', '=', 'train_appointments_pivot.train_appointment_id')->join('trainings', 'train_appointments_pivot.training_id', '=', 'trainings.id')->where('type', 'Group')->whereDate('date', '2023-11-27')->groupby('train_appointments.id')
+        $now = Carbon::now();
+        $this->trainAppointments = TrainAppointment::join('train_appointments_pivot', 'train_appointments.id', '=', 'train_appointments_pivot.train_appointment_id')->join('trainings', 'train_appointments_pivot.training_id', '=', 'trainings.id')->where('type', 'Group')->where('date', '>=', $now->startOfWeek()->format('Y-m-d'))->where('date', '<=', $now->endOfWeek()->format('Y-m-d'))
+        ->groupby('train_appointments.id')
         ->orderBy('date', 'asc')->orderBy('hour', 'asc')
         ->get();
         return view('livewire.train-appointment-component');
