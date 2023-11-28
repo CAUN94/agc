@@ -8,4 +8,8 @@
 		<!-- TrainAppointmentComponent livewire -->
         <livewire:train-appointment-component />
 	</div>
+
+<!-- Block other scripts -->
+
+
 </x-admin.layout>

@@ -63,11 +63,11 @@
                       {{$trainBook->user->rut}}
                       <!-- Div Flex col with two span with wireclicks Asistio/No Asistio and spann with Borrar -->
                       @if($trainBook->status == 0)
-                      <span class="text-primary-500" wire:click="status({{$trainBook->id}})">Asistio</span>
+                      <span class="text-primary-500" wire:model="status({{$trainBook->id}})">Asistio</span>
                       @else
-                      <span class="text-red-500" wire:click="status({{$trainBook->id}})">No Asistio</span>
+                      <span class="text-red-500" wire:model="status({{$trainBook->id}})">No Asistio</span>
                       @endif
-                      <span class="text-yellow-500" wire:click="delete({{$trainBook->id}})">Borrar</span>
+                      <span class="text-yellow-500" wire:model="delete({{$trainBook->id}})">Borrar</span>
                     </li>
                   @endforeach
                   </ul>
