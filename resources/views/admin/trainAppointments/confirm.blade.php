@@ -9,12 +9,7 @@
         <livewire:train-appointment-component />
 	</div>
 
-<!-- block this specific script -->
-<!-- <script>
-    $(document).ready(function() {
-      $('.table-data').DataTable();
-  } );
-  </script> -->
+<!-- Block other scripts -->
 
 
 </x-admin.layout>
