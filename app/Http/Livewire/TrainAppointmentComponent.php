@@ -49,6 +49,7 @@ class TrainAppointmentComponent extends Component
     }
 
     public function selectTrainAppointment($id){
+        // transform in integer $id
         $this->train = $id;
         $this->trainBooks = TrainAppointment::find($id)->Bookings;
     }
