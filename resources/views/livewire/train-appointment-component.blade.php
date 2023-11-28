@@ -9,12 +9,15 @@
                     <dd class="text-sm font-medium text-gray-500 py-1 sm:py-0">
                         <div class="col-span-4 sm:col-span-4">
                             <!-- select with live wire on select with $this->trainAppointments foreach -->
-                            <select wire:model="trainAppointment" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm">
+                            <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" wire:change.prevent="selectTrainAppointment($event.target.value)">
                                 <option value="">Seleccionar Clase</option>
                                 @foreach($this->trainAppointments as $trainAppointment)
-                                <option wire:click="selectTrainAppointment({{$trainAppointment->train_appointment_id}})" wire:change="selectTrainAppointment({{$trainAppointment->train_appointment_id}})">{{$trainAppointment->name}} - {{$trainAppointment->date}} - {{$trainAppointment->hour}}</option>
+                                <option  wire.key="{{$trainAppointment->train_appointment_id}}" value="{{$trainAppointment->train_appointment_id}}"
+                                >{{$trainAppointment->name}} - {{$trainAppointment->date}} - {{$trainAppointment->hour}}</option>
                                 @endforeach
                             </select>
+                           
+                          
                         </div>
                     </dd>
                   </div>
