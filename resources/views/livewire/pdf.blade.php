@@ -50,7 +50,7 @@ th{
             <td>{{$nutrition->talla_sentado}}</td>
           </tr>
           <tr>
-            <td style="background-color: lightsalmon; text-align: center; font-weight: bold;">Diametros</td>
+            <td style="background-color: lightsalmon; text-align: center; font-weight: bold;">Diametros (cm)</td>
             <td style="background-color: lightsalmon;"></td>
           </tr>
           <tr>
@@ -271,7 +271,7 @@ th{
             </tr>
 
             <tr>
-              <td style="text-align: left;">Indice músculo/óseo:</td>
+              <td style="text-align: left;">Indice músculo/óseo</td>
               <td style="text-align: center;">{{$nutrition->indice_musculo}}</td>
               <td style="text-align: center;">-</td>
               <td style="text-align: center;">
@@ -345,13 +345,9 @@ th{
 
             <tr>
               <td style="text-align: left;">Sumatoria 6 plieges</td>
-              <td class="text-center">{{($nutrition->tricep + $nutrition->subescapular + $nutrition->supraespinal + $nutrition->abdominal + $nutrition->muslo_medial +  $nutrition->pierna_mm)}} mm</td>
+              <td class="text-align: center;">{{($nutrition->tricep + $nutrition->subescapular + $nutrition->supraespinal + $nutrition->abdominal + $nutrition->muslo_medial +  $nutrition->pierna_mm)}} mm</td>
               <td style="text-align: center;">-</td>
-              <td style="text-align: center;">
-                @if (($nutrition->tricep + $nutrition->subescapular + $nutrition->supraespinal + $nutrition->abdominal + $nutrition->muslo_medial +  $nutrition->pierna_mm) > App\Models\NutritionSport::where('descripcion','=',$nutrition->deporte)->value('sumatoria_6_plieges'))Alto
-                  @else Bien
-                @endif
-              </td>
+              <td style="text-align: center;">@if(($nutrition->tricep + $nutrition->subescapular + $nutrition->supraespinal + $nutrition->abdominal + $nutrition->muslo_medial +  $nutrition->pierna_mm) > ($nutrition->oseo_referencial)) Mayor @else Menor @endif</td>
             </tr>
 
           </tbody>
@@ -426,7 +422,7 @@ th{
           </tr>
           <tr>
             <td style="text-align: left;">Sumatoria 6 pliegues</td>
-            <td style="text-align: center;"> {{App\Models\NutritionSport::where('descripcion','=',$nutrition->deporte)->value('sumatoria_6_plieges')}}</td>
+            <td style="text-align: center;">{{$nutrition->oseo_referencial}} mm</td>
             <td style="text-align: center;">-</td>
           </tr>
         </tbody>
@@ -603,13 +599,13 @@ th{
     </p>
 
     <h3>DIAGNÓSTICO NUTRICIONAL:</h3>
+    <p>Cambios de composición corporal respecto al último control: @if(empty($nutrition->comment))
+      @else
+      {{$nutrition->comment}}
+      @endif</p>
     <p>Masa adiposa elevada y masa muscular normal.</p>
 
-    <p>@if(empty($nutrition->comment))
-        @else
-        {{$nutrition->comment}}
-        @endif
-    </p>
+    
   </div>
 
   <div style="font-size: 20px; color: purple; text-align: right;">
