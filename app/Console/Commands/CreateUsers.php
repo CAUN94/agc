@@ -171,7 +171,6 @@ class CreateUsers extends Command
                     'user_id' => $user->id,
                     'alliance_id' => 142
                 ]);
-                $this->info("Alliance added: ".$user->rut." - ".$id_paciente." - ".$alliance_data[0]->nombre);
                 continue;
             }
 

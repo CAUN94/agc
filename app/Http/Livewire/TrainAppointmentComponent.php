@@ -13,27 +13,37 @@ class TrainAppointmentComponent extends Component
 {
     public $trainAppointments;
     public $users;
+    public $searchTermUser;
     public $selectedUserId;
     public $currentWeekTrainAppointments;
 
     public function mount()
     {
-        // Obtener la lista de usuarios
-        $this->users = User::all();
+        // All users raw db concat user name and rut
+        $this->users = User::selectRaw('CONCAT(name, " ", lastnames, " ", rut) as full_name, id')->get();
         
         // Obtener las clases de la actual semana
         $now = Carbon::now();
         $this->currentWeekTrainAppointments = TrainAppointment::whereBetween('date', [$now->startOfWeek(), $now->endOfWeek()])->get();
     }
 
+    public function selectUser($id){
+        $this->user = User::find($id);
+    }
+
     public function render()
     {
-        $this->trainAppointments = TrainAppointment::join('train_appointments_pivot as tap', 'train_appointments.id', '=', 'tap.train_appointment_id')
-            ->join('trainings as t', 'tap.training_id', '=', 't.id')
-            ->where('type', 'alone')
-            ->select('train_appointments.*', 't.*')
-            ->get();
-
+        if (empty($this->searchTermUser)) {
+            $this->users = '';
+        }
+        else {
+            $ids = User::search($this->searchTermUser)->get()->pluck('id');
+            $this->users = User::selectRaw('CONCAT(name, " ", lastnames, " ", rut) as full_name, id')->whereIn('id', $ids)->get();
+        }
+        // All train appointments from this week
+        $this->trainAppointments = TrainAppointment::join('train_appointments_pivot', 'train_appointments.id', '=', 'train_appointments_pivot.train_appointment_id')->join('trainings', 'train_appointments_pivot.training_id', '=', 'trainings.id')->where('type', 'Group')->whereDate('date', '2023-11-27')->groupby('train_appointments.id')->get();
+    
+            
         return view('livewire.train-appointment-component');
     }
 
