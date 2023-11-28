@@ -12,7 +12,7 @@
                             <select wire:model="trainAppointment" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm">
                                 <option value="">Seleccionar Clase</option>
                                 @foreach($this->trainAppointments as $trainAppointment)
-                                <option wire:click="selectTrainAppointment({{$trainAppointment->train_appointment_id}})">{{$trainAppointment->name}} - {{$trainAppointment->date}} - {{$trainAppointment->hour}}</option>
+                                <option wire:click="selectTrainAppointment({{$trainAppointment->train_appointment_id}})" wire:change="selectTrainAppointment({{$trainAppointment->train_appointment_id}})">{{$trainAppointment->name}} - {{$trainAppointment->date}} - {{$trainAppointment->hour}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -63,11 +63,11 @@
                       {{$trainBook->user->rut}}
                       <!-- Div Flex col with two span with wireclicks Asistio/No Asistio and spann with Borrar -->
                       @if($trainBook->status == 0)
-                      <span class="text-primary-500" wire:model="status({{$trainBook->id}})">Asistio</span>
+                      <span class="text-primary-500" wire:click="status({{$trainBook->id}})">Asistio</span>
                       @else
-                      <span class="text-red-500" wire:model="status({{$trainBook->id}})">No Asistio</span>
+                      <span class="text-red-500" wire:click="status({{$trainBook->id}})">No Asistio</span>
                       @endif
-                      <span class="text-yellow-500" wire:model="delete({{$trainBook->id}})">Borrar</span>
+                      <span class="text-yellow-500" wire:click="delete({{$trainBook->id}})">Borrar</span>
                     </li>
                   @endforeach
                   </ul>
