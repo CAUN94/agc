@@ -10,7 +10,7 @@
     <div class="w-full overflow-x-auto box-white p-3">
       <div>
         @foreach(App\Models\Professional::where('user_id','>',0)->orderBy('description')->get() as $professional)
- 
+          
         @endforeach
       </div>
 
@@ -39,6 +39,7 @@
             </button>
         </div>
       </div>
+      
       @if($classShow)
         <div>
           @foreach(App\Models\Professional::where('user_id','>',0)->orderBy('description')->get() as $professional)
@@ -78,10 +79,10 @@
               </li>
             </ul>
             <div>
-              <button class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer bg-gray-100 hover:bg-gray-400 p-1.5 items-center mt-0.5 mb-1"
+              <button class="border border-black leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer bg-gray-100 hover:bg-gray-400 p-1.5 items-center mt-0.5 mb-1"
                       wire:click="show({{$professional->user->id}})">Mostrar lista
               </button>
-              <button class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer bg-gray-100 hover:bg-gray-400 p-1.5 items-center mt-0.5 mb-1"
+              <button class="border border-black leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer bg-gray-100 hover:bg-gray-400 p-1.5 items-center mt-0.5 mb-1"
                     wire:click="exportToExcel({{$professional->user->id}})">Descargar Excel
               </button>
             </div>
@@ -91,17 +92,17 @@
       @endif
     </div>
     @if(!$classShow and !is_null($lista_id))
-      <button class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer bg-white hover:bg-gray-400 p-1.5 items-center mt-2"
+      <button class="border border-black leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer bg-white hover:bg-gray-400 p-1.5 items-center mt-2"
               wire:click="close()">Ocultar Lista
       </button>
-      <button class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer bg-white hover:bg-gray-400 p-1.5 items-center mt-2"
+      <button class="border border-black leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer bg-white hover:bg-gray-400 p-1.5 items-center mt-2"
               wire:click="exportToExcel({{$this->professionalid}})">Descargar Excel
       </button>
       <div class="flex flex-col lg:flex-row gap-3">
         <div class="w-full lg:w-3/4 flex flex-col overflow-x-auto gap-y-2">
           <div class="w-full overflow-x-auto gap-y-2 box-white p-3 mt-3">
             <div class="w-full font-medium flex justify-between ml-3">
-              Atendidos
+              Atendidos de {{App\Models\Professional::where('user_id',$this->professionalid)->value('Description')}} (Coef {{App\Models\Professional::where('user_id',$this->professionalid)->value('coeff')}})
             </div>
             <div class="rounded-b-lg h-full p-3">
               <table class="table-fixed w-full overflow-hidden rounded-lg shadow-lg p-6" id="myTable">
@@ -114,21 +115,22 @@
                     <th class="text-center py-2 min-w-1/8 w-2/12">Prestación</th>
                     <th class="text-center py-2 min-w-1/8 w-1/12">Abono</th>
                     <th class="text-center py-2 min-w-1/8 w-2/12">Remuneración</th>
+                    <th class="text-center py-2 min-w-1/8 w-2/12"></th>
                   </tr>
                 </thead>
                 <tbody>
                   @foreach($appointments as $Appointment)
-                    <tr>
-                      <td class="text-center">
+                    <tr class="">
+                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-red-300 @endif">
                           {{$Appointment->id}}
                       </td>
-                      <td class="text-center">
+                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-red-300 @endif">
                           {{Carbon\Carbon::parse($Appointment->Fecha_Realizacion)->format('d-m-Y')}}
                       </td>
-                      <td class="text-left">
+                      <td class="text-left @if(is_null($Appointment->Evolution)) bg-red-300 @endif">
                           {{$Appointment->Nombre}} {{$Appointment->Apellido}}
                       </td>
-                      <td class="text-center">
+                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-red-300 @endif">
                         @if (!empty($Appointment->appointments()->first()) )
                           @if(!is_null($Appointment->appointments()->first()->user->alliance()))
                           {{$Appointment->appointments()->first()->user->alliance()->name}}
@@ -137,14 +139,17 @@
                           Sin Convenio
                         @endif
                       </td>
-                      <td class="text-center">
+                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-red-300 @endif">
                         {{Helper::moneda_chilena($Appointment->TP)}}
                       </td>
-                      <td class="text-center">
+                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-red-300 @endif">
                         {{Helper::moneda_chilena($Appointment->TA)}}
                       </td>
-                      <td class="text-center">
+                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-red-300 @endif">
                         {{Helper::moneda_chilena(ceil(($Appointment->TP*$coff->coff)/100))}}
+                      </td>
+                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-red-300 @endif">
+                        <p class="border border-black shadow-sm text-sm font-medium rounded-md text-center bg-red-300 hover:bg-red-400 focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 cursor-pointer" wire:click='report({{$Appointment->id}})'>Report</p>
                       </td>
                     </tr>
                   @endforeach

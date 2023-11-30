@@ -146,6 +146,12 @@ class AdminRemuneracion extends Component
         $this->professionalid = null;
     }
 
+    public function report($id){
+        $atencion = ActionMl::find($id);
+        $atencion->report = 1;
+        $atencion->save();
+    }
+
 
     public function render()
     {
