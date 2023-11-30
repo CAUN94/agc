@@ -32,7 +32,7 @@
         </div>
         <div x-show="pay">
             @foreach(App\Models\Trainer::all() as $trainer)
-                <ul class="grid grid-cols-4 gap-1">
+                <ul class="grid grid-cols-5 gap-1">
                     <li>
                         <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
                             {{$trainer->user->fullname()}}
@@ -50,6 +50,13 @@
                             <i class="fa fa-calendar" aria-hidden="true"></i>
                             <span class="flex-1 ml-3 whitespace-nowrap">Clases del Mes</span>
                             <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$trainer->trainAppointmentsMonth([$startOfMonth,$endOfMonth])->get()->count()}}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                            <i class="fa fa-money" aria-hidden="true"></i>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Abono</span>
+                            <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">{{$trainer->trainerAbono([$startOfMonth,$endOfMonth])}}</span>
                         </a>
                     </li>
                     <li>
