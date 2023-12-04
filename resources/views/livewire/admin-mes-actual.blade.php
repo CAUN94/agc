@@ -94,29 +94,33 @@
                   <th>Alianza</th>
                   <th>Prestación</th>
                   <th>Remuneración</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
               @foreach($appointments as $Appointment)
               <tr>
-                <td>
+                <td class="@if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                     {{Carbon\Carbon::parse($Appointment->Fecha_Realizacion)->format('d-m-Y')}}
                 </td>
-                <td>
+                <td class="@if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                    {{$Appointment->Nombre}} {{$Appointment->Apellido}}
                 </td>
-                <td>
+                <td class="@if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                   {{$Appointment->Convenio}}
                 </td>
-                <td>
+                <td class="@if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                   {{$Appointment->Categoria_Nombre}}
                 </td>
-                <td>
+                <td class="@if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                   @if($rut == '20663772-2')
                     {{Helper::moneda_chilena(10000)}}
                   @else
                     {{Helper::moneda_chilena(ceil(($Appointment->Precio_Prestacion*$coff->coff)/100))}}
                   @endif
+                </td>
+                <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
+                  <p class="border border-black shadow-sm text-sm font-medium rounded-md text-center bg-red-300 hover:bg-red-400 focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 cursor-pointer" wire:click='report({{$Appointment->Tratamiento_Nr}})'>Report</p>
                 </td>
               </tr>
               @endforeach

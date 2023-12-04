@@ -121,16 +121,16 @@
                 <tbody>
                   @foreach($appointments as $Appointment)
                     <tr class="">
-                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-red-300 @endif">
+                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                           {{$Appointment->id}}
                       </td>
-                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-red-300 @endif">
+                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                           {{Carbon\Carbon::parse($Appointment->Fecha_Realizacion)->format('d-m-Y')}}
                       </td>
-                      <td class="text-left @if(is_null($Appointment->Evolution)) bg-red-300 @endif">
+                      <td class="text-left @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                           {{$Appointment->Nombre}} {{$Appointment->Apellido}}
                       </td>
-                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-red-300 @endif">
+                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                         @if (!empty($Appointment->appointments()->first()) )
                           @if(!is_null($Appointment->appointments()->first()->user->alliance()))
                           {{$Appointment->appointments()->first()->user->alliance()->name}}
@@ -139,16 +139,16 @@
                           Sin Convenio
                         @endif
                       </td>
-                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-red-300 @endif">
+                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                         {{Helper::moneda_chilena($Appointment->TP)}}
                       </td>
-                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-red-300 @endif">
+                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                         {{Helper::moneda_chilena($Appointment->TA)}}
                       </td>
-                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-red-300 @endif">
+                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                         {{Helper::moneda_chilena(ceil(($Appointment->TP*$coff->coff)/100))}}
                       </td>
-                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-red-300 @endif">
+                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                         <p class="border border-black shadow-sm text-sm font-medium rounded-md text-center bg-red-300 hover:bg-red-400 focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 cursor-pointer" wire:click='report({{$Appointment->id}})'>Report</p>
                       </td>
                     </tr>
@@ -337,5 +337,108 @@
         </div>
       </div>
       @endif
+  @endif
+  @if($classShow)
+  <div class="w-full lg:w-3/4 flex flex-col overflow-x-auto gap-y-2">
+    <div class="w-full overflow-x-auto gap-y-2 box-white p-3 mt-3">
+      <div class="w-full font-medium flex justify-between ml-3">
+        Tabla No Evolicionados
+      </div>
+  <div class="rounded-b-lg h-full p-3">
+    <table class="table-fixed w-full overflow-hidden rounded-lg shadow-lg p-6" id="myTable">
+      <thead>
+        <tr class="bg-gray-300 text-sm font-semibold tracking-wide text-left">
+          <th class="text-center py-2 min-w-1/8 w-1/12">id</th>
+          <th class="text-center py-2 min-w-1/8 w-2/12">Fecha</th>
+          <th class="py-2 min-w-1/8 w-3/12 ">Paciente</th>
+          <th class="text-center py-2 min-w-1/8 w-2/12">Nombre</th>
+          <th class="text-center py-2 min-w-1/8 w-2/12">Profesional</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach(App\Models\ActionMl::where('Evolution',null)->where('Fecha_Realizacion','>',$this->expiredstartOfMonth->format('Y-m-d'))
+        ->where('Fecha_Realizacion','<',$this->expiredendOfMonth->format('Y-m-d'))->groupBy('Tratamiento_Nr')
+                                ->select('*','Tratamiento_Nr', DB::raw('SUM(Precio_Prestacion) as TP'), DB::raw('SUM(Abono) as TA'))
+                                ->orderby('Fecha_Realizacion', 'DESC')->get() as $Appointment)
+          <tr class="">
+            <td class="text-left">
+                {{$Appointment->id}}
+            </td>
+            <td class="text-left">
+                {{Carbon\Carbon::parse($Appointment->Fecha_Realizacion)->format('d-m-Y')}}
+            </td>
+            <td class="text-left">
+                {{$Appointment->Nombre}} {{$Appointment->Apellido}}
+            </td>
+            <td class="text-left">
+              {{$Appointment->Categoria_Nombre}}
+          </td>
+          <td class="text-left">
+            {{$Appointment->Profesional}}
+        </td>
+          </tr>
+        @endforeach
+      </tbody>
+    </table>
+    <script>
+      $(document).ready( function () {
+          $('#myTable').DataTable();
+
+      } );
+    </script>
+  </div>
+  </div>
+  </div>
+
+  <div class="w-full lg:w-3/4 flex flex-col overflow-x-auto gap-y-2">
+    <div class="w-full overflow-x-auto gap-y-2 box-white p-3 mt-3">
+      <div class="w-full font-medium flex justify-between ml-3">
+        Tabla de Atenciones Reportadas
+      </div>
+  <div class="rounded-b-lg h-full p-3">
+    <table class="table-fixed w-full overflow-hidden rounded-lg shadow-lg p-6" id="myTable">
+      <thead>
+        <tr class="bg-gray-300 text-sm font-semibold tracking-wide text-left">
+          <th class="text-center py-2 min-w-1/8 w-1/12">id</th>
+          <th class="text-center py-2 min-w-1/8 w-2/12">Fecha</th>
+          <th class="py-2 min-w-1/8 w-3/12 ">Paciente</th>
+          <th class="text-center py-2 min-w-1/8 w-2/12">Nombre</th>
+          <th class="text-center py-2 min-w-1/8 w-2/12">Profesional</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach(App\Models\ActionMl::where('Report',1)->where('Fecha_Realizacion','>',$this->expiredstartOfMonth->format('Y-m-d'))
+        ->where('Fecha_Realizacion','<',$this->expiredendOfMonth->format('Y-m-d'))->groupBy('Tratamiento_Nr')
+                                ->select('*','Tratamiento_Nr', DB::raw('SUM(Precio_Prestacion) as TP'), DB::raw('SUM(Abono) as TA'))
+                                ->orderby('Fecha_Realizacion', 'DESC')->get() as $Appointment)
+          <tr class="">
+            <td class="text-left">
+                {{$Appointment->id}}
+            </td>
+            <td class="text-left">
+                {{Carbon\Carbon::parse($Appointment->Fecha_Realizacion)->format('d-m-Y')}}
+            </td>
+            <td class="text-left">
+                {{$Appointment->Nombre}} {{$Appointment->Apellido}}
+            </td>
+            <td class="text-left">
+              {{$Appointment->Categoria_Nombre}}
+          </td>
+          <td class="text-left">
+            {{$Appointment->Profesional}}
+        </td>
+          </tr>
+        @endforeach
+      </tbody>
+    </table>
+    <script>
+      $(document).ready( function () {
+          $('#myTable').DataTable();
+
+      } );
+    </script>
+  </div>
+  </div>
+  </div>
   @endif
 </div>

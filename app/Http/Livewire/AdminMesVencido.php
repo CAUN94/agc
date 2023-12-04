@@ -92,6 +92,12 @@ class AdminMesVencido extends Component
         $this->convenio = $this->treatment->Convenio;
     }
 
+    public function report($id){
+        $atencion = ActionMl::where('Tratamiento_Nr',$id)->first();
+        $atencion->report = 1;
+        $atencion->save();
+    }
+
     public function render()
     {
       $periodnodays = CarbonPeriod::create($this->now->copy()->subMonth()->endOfMonth()->startOfWeek(), $this->now->copy()->subMonth()->endOfMonth());
