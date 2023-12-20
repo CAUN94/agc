@@ -110,6 +110,22 @@
             </dd>
           </div>
         </dl>
+        @if($selectedTraining->type == "group")
+        <dl>
+          <div class="pl-1 py-2 sm:grid sm:grid-cols-3">
+            <dt class="text-sm font-medium text-gray-500">
+              Horarios
+            </dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              <li class="list-none">Lunes: 7:30 y 19:30</li>
+              <li class="list-none">Martes: 19:30</li>
+              <li class="list-none">Miércoles: 7:30 y 19:30</li>
+              <li class="list-none">Jueves: 19:30</li>
+              <li class="list-none">Viernes: 7:30 y 19:30</li>
+            </dd>
+          </div>
+        </dl>
+        @endif
         <dl>
           <div class="pl-1 py-2 grid grid-cols-3">
             <dt class="text-sm font-medium text-gray-500">

@@ -79,10 +79,11 @@
               </li>
             </ul>
             <div>
-              <button class="border border-black leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer bg-gray-100 hover:bg-gray-400 p-1.5 items-center mt-0.5 mb-1"
+              
+              <button class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer bg-gray-100 hover:bg-gray-400 p-1.5 items-center mt-0.5 mb-1"
                       wire:click="show({{$professional->user->id}})">Mostrar lista
               </button>
-              <button class="border border-black leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer bg-gray-100 hover:bg-gray-400 p-1.5 items-center mt-0.5 mb-1"
+              <button class="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer bg-gray-100 hover:bg-gray-400 p-1.5 items-center mt-0.5 mb-1"
                     wire:click="exportToExcel({{$professional->user->id}})">Descargar Excel
               </button>
             </div>
@@ -115,7 +116,7 @@
                     <th class="text-center py-2 min-w-1/8 w-2/12">Prestación</th>
                     <th class="text-center py-2 min-w-1/8 w-1/12">Abono</th>
                     <th class="text-center py-2 min-w-1/8 w-2/12">Remuneración</th>
-                    <th class="text-center py-2 min-w-1/8 w-2/12"></th>
+                    <!-- <th class="text-center py-2 min-w-1/8 w-2/12"></th> -->
                   </tr>
                 </thead>
                 <tbody>
@@ -148,9 +149,9 @@
                       <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                         {{Helper::moneda_chilena(ceil(($Appointment->TP*$coff->coff)/100))}}
                       </td>
-                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
+                      <!-- <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                         <p class="border border-black shadow-sm text-sm font-medium rounded-md text-center bg-red-300 hover:bg-red-400 focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 cursor-pointer" wire:click='report({{$Appointment->id}})'>Report</p>
-                      </td>
+                      </td> -->
                     </tr>
                   @endforeach
                 </tbody>
@@ -342,7 +343,7 @@
   <div class="w-full lg:w-3/4 flex flex-col overflow-x-auto gap-y-2">
     <div class="w-full overflow-x-auto gap-y-2 box-white p-3 mt-3">
       <div class="w-full font-medium flex justify-between ml-3">
-        Tabla No Evolicionados
+        Tabla No Evolucionados
       </div>
   <div class="rounded-b-lg h-full p-3">
     <table class="table-fixed w-full overflow-hidden rounded-lg shadow-lg p-6" id="myTable">
@@ -434,7 +435,6 @@
     <script>
       $(document).ready( function () {
           $('#myTable').DataTable();
-
       } );
     </script>
   </div>

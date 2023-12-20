@@ -61,7 +61,6 @@ class GoogleCalendarUpdate extends Command
     }
 
     public function addcalendar($id){
-      
         $professional = Professional::find($id);
         $calendarId = $professional->google_id;
         $email = $professional->user->email;
@@ -109,7 +108,6 @@ class GoogleCalendarUpdate extends Command
       }
   
       $allprofessional_date = array_merge(...$allprofessional_date);
-  
       $client = $this->getClient();
       foreach($allprofessional_date as $appointment){
         if(in_array($appointment->estado_cita, ['Cambio de fecha','Anulado vía validación','No asiste','Anulado'])){

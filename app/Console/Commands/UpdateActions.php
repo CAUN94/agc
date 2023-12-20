@@ -93,6 +93,7 @@ class UpdateActions extends Command
         }
         $coff = User::where('rut',$rut)->first()->professional->coeff;
 
+        $this->info(User::where('rut',$rut)->first()->professional->description);
         $client = new \GuzzleHttp\Client();
 
 

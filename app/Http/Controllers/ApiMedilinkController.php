@@ -565,7 +565,7 @@ class ApiMedilinkController extends Controller
       $summary = [];
       $professional = Professional::find($id);
       
-      for($i=1; $i<=9; $i++){
+      for($i=1; $i<=11; $i++){
         $summary[$professional->description." ".$i] = $professional->monthOcupation($i)[2];
       }
       
@@ -587,6 +587,7 @@ class ApiMedilinkController extends Controller
       
       $professional = json_decode($response->getBody())->data[0];
       $id_profesional = $professional->id;
+    
       $id_sucursal    = 1;
       $url            = 'https://api.medilink.healthatom.com/api/v1/sucursales/'.$id_sucursal.'/profesionales/'.$id_profesional.'/agendas';
         
@@ -634,9 +635,6 @@ class ApiMedilinkController extends Controller
             }
           }
         }
-      if(count($availableHours)){
-        return 0;
-      }
       return count($availableHours);
     }
 
