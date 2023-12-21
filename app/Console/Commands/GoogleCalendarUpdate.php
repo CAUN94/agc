@@ -54,13 +54,13 @@ class GoogleCalendarUpdate extends Command
             $this->info($professional->description.' '.$professional->user->email);
             $this->listCalendar($professional->google_id);
             $this->addcalendar($professional->id);
+            $this->info($professional->google_id);
             $this->info('Esperando 3 minutos'); 
-            sleep(180);
+            sleep(60);
         }        
     }
 
     public function addcalendar($id){
-      
         $professional = Professional::find($id);
         $calendarId = $professional->google_id;
         $email = $professional->user->email;
@@ -108,7 +108,6 @@ class GoogleCalendarUpdate extends Command
       }
   
       $allprofessional_date = array_merge(...$allprofessional_date);
-  
       $client = $this->getClient();
       foreach($allprofessional_date as $appointment){
         if(in_array($appointment->estado_cita, ['Cambio de fecha','Anulado vía validación','No asiste','Anulado'])){

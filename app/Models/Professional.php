@@ -150,18 +150,18 @@ class Professional extends Model
       $url            = 'https://api.medilink.healthatom.com/api/v1/sucursales/'.$id_sucursal.'/profesionales/'.$id_profesional.'/agendas';
       
       // get month by specific number
-      $start1 = Carbon::now()->month($month)->day(21)->format('Y-m-d');
-      $end2 = Carbon::now()->month($month)->day(31)->format('Y-m-d');
+      $start1 = Carbon::now()->month($month)->day(1)->format('Y-m-d');
+      $end2 = Carbon::now()->month($month)->day(10)->format('Y-m-d');
       
       $countOcupation = $this->ocupationBeetween($id_profesional,$start1,$end2);
 
-      $start2 = Carbon::now()->month($month)->addMonth()->day(1)->format('Y-m-d');
-      $end2 = Carbon::now()->month($month)->addMonth()->day(10)->format('Y-m-d');
+      $start2 = Carbon::now()->month($month)->day(11)->format('Y-m-d');
+      $end2 = Carbon::now()->month($month)->day(20)->format('Y-m-d');
       
       $countOcupation += $this->ocupationBeetween($id_profesional,$start2,$end2);
 
-      $start3 = Carbon::now()->month($month)->addMonth()->day(11)->format('Y-m-d');
-      $end3 = Carbon::now()->month($month)->addMonth()->day(20)->format('Y-m-d');
+      $start3 = Carbon::now()->month($month)->day(21)->format('Y-m-d');
+      $end3 = Carbon::now()->month($month)->day(30)->format('Y-m-d');
       
       $countOcupation += $this->ocupationBeetween($id_profesional,$start3,$end3);
 

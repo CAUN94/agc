@@ -94,30 +94,34 @@
                   <th>Alianza</th>
                   <th>Prestación</th>
                   <th>Remuneración</th>
+                  <!-- <th></th> -->
                 </tr>
               </thead>
               <tbody>
               @foreach($appointments as $Appointment)
               <tr>
-                <td>
+                <td class="@if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                     {{Carbon\Carbon::parse($Appointment->Fecha_Realizacion)->format('d-m-Y')}}
                 </td>
-                <td>
+                <td class="@if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                    {{$Appointment->Nombre}} {{$Appointment->Apellido}}
                 </td>
-                <td>
+                <td class="@if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                   {{$Appointment->Convenio}}
                 </td>
-                <td>
+                <td class="@if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                   {{$Appointment->Categoria_Nombre}}
                 </td>
-                <td>
+                <td class="@if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                   @if($rut == '20663772-2')
                     {{Helper::moneda_chilena(10000)}}
                   @else
                     {{Helper::moneda_chilena(ceil(($Appointment->Precio_Prestacion*$coff->coff)/100))}}
                   @endif
                 </td>
+                <!-- <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
+                  <p class="border border-black shadow-sm text-sm font-medium rounded-md text-center bg-red-300 hover:bg-red-400 focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 cursor-pointer" wire:click='report({{$Appointment->Tratamiento_Nr}})'>Report</p>
+                </td> -->
               </tr>
               @endforeach
               </tbody>
@@ -135,69 +139,7 @@
     </div>
 
     <div class="flex flex-col lg:flex-row gap-2 mt-2">
-        <div class="w-full lg:w-1/3 flex flex-col overflow-x-auto gap-y-2">
-            <div class="align-middle inline-block min-w-full" x-data="{ classShow: false, createShow: true }">
-                <div class="box-white p-3">
-                    <div class="flex justify-between">
-                        <span class="block">Selecciona una cita.</span>
-                        <div class="modal-close cursor-pointer z-50" wire:click="close">
-                            <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                              <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
-                            </svg>
-                        </div>
-                    </div>
-                    @if(!is_null($treatment))
-                    <div x-show="$wire.classShow" x-cloak>
-                        <dl>
-                          <div class="train-class-resume">
-                            <dt class="text-sm font-medium text-gray-500">
-                              Paciente
-                            </dt>
-                            <dd class="train-class-resume-text">
-                                <li class="list-none">{{$treatment->Nombre_paciente . " " . $this->treatment->Apellidos_paciente}}</li>
-                            </dd>
-                          </div>
-                        </dl>
-                        <dl>
-                          <div class="train-class-resume">
-                            <dt class="text-sm font-medium text-gray-500">
-                              Convenio
-                            </dt>
-                            <dd class="train-class-resume-text">
-                                @if(!empty($treatment->Convenio))
-                                <li class="list-none">{{$treatment->Convenio}}</li>
-                                @else
-                                <li class="list-none">Sin Convenio</li>
-                                @endif
-                            </dd>
-                          </div>
-                        </dl>
-                        <dl>
-                          <div class="train-class-resume">
-                            <dt class="text-sm font-medium text-gray-500">
-                              Prestación
-                            </dt>
-                            <dd class="train-class-resume-text">
-                                <li class="list-none">{{App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Categoria_Nombre')}}</li>
-                            </dd>
-                          </div>
-                        </dl>
-                        <dl>
-                          <div class="train-class-resume">
-                            <dt class="text-sm font-medium text-gray-500">
-                              Remuneración
-                            </dt>
-                            <dd class="train-class-resume-text">
-                                <li class="list-none">{{Helper::moneda_chilena(App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Precio_Prestacion'))*$coeff}}</li>
-
-                              </dd>
-                          </div>
-                        </dl>
-                    </div>
-                    @endif
-                </div>
-            </div>
-        </div>
+        
 
         <div class="w-full flex flex-col overflow-x-auto gap-1">
           <div class="align-middle inline-block min-w-full">
@@ -272,7 +214,6 @@
                                                   <div style="height: {{$heightbox}};" class="overflow-y-auto mt-1">
                                                       @foreach(App\Models\Professional::join('appointment_mls', 'professionals.description', '=', 'appointment_mls.Profesional')->where('professionals.user_id',Auth::user()->id)->where('Estado','Atendido')->whereBetween('Fecha',[$startOfMonth, $endOfMonth])->where('Fecha',$date->format('Y-m-d'))->orderby('Hora_inicio', 'ASC')->get() as $professionalAppointment)
                                                           <div
-                                                              wire:click="show({{$professionalAppointment->id}})"
                                                               @if($professionalAppointment->Estado=='Atendido')
                                                                   @php $color = 'green'; @endphp
                                                               @endif
@@ -294,6 +235,69 @@
               </div>
             </div>
           </div>
-        <x-flash-message></x-flash-message>
+          <div class="w-full lg:w-1/3 flex flex-col overflow-x-auto gap-y-2">
+            <div class="align-middle inline-block min-w-full" x-data="{ classShow: false, createShow: true }">
+                <div class="box-white p-3">
+                    <div class="flex justify-between">
+                        <span class="block">Selecciona una cita.</span>
+                        <div class="modal-close cursor-pointer z-50" wire:click="close">
+                            <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                              <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    @if(!is_null($treatment))
+                    <div x-show="$wire.classShow" x-cloak>
+                        <dl>
+                          <div class="train-class-resume">
+                            <dt class="text-sm font-medium text-gray-500">
+                              Paciente
+                            </dt>
+                            <dd class="train-class-resume-text">
+                                <li class="list-none">{{$treatment->Nombre_paciente . " " . $this->treatment->Apellidos_paciente}}</li>
+                            </dd>
+                          </div>
+                        </dl>
+                        <dl>
+                          <div class="train-class-resume">
+                            <dt class="text-sm font-medium text-gray-500">
+                              Convenio
+                            </dt>
+                            <dd class="train-class-resume-text">
+                                @if(!empty($treatment->Convenio))
+                                <li class="list-none">{{$treatment->Convenio}}</li>
+                                @else
+                                <li class="list-none">Sin Convenio</li>
+                                @endif
+                            </dd>
+                          </div>
+                        </dl>
+                        <dl>
+                          <div class="train-class-resume">
+                            <dt class="text-sm font-medium text-gray-500">
+                              Prestación
+                            </dt>
+                            <dd class="train-class-resume-text">
+                                <li class="list-none">{{App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Categoria_Nombre')}}</li>
+                            </dd>
+                          </div>
+                        </dl>
+                        <dl>
+                          <div class="train-class-resume">
+                            <dt class="text-sm font-medium text-gray-500">
+                              Remuneración
+                            </dt>
+                            <dd class="train-class-resume-text">
+                                <li class="list-none">{{Helper::moneda_chilena(App\Models\ActionMl::where('Tratamiento_Nr',$treatment->Tratamiento_Nr)->value('Precio_Prestacion'))*$coeff}}</li>
+
+                              </dd>
+                          </div>
+                        </dl>
+                    </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+          <x-flash-message></x-flash-message>
     </div>
 </div>

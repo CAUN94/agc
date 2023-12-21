@@ -94,6 +94,12 @@ class AdminMesActual extends Component
 
     }
 
+    public function report($id){
+        $atencion = ActionMl::where('Tratamiento_Nr',$id)->first();
+        $atencion->report = 1;
+        $atencion->save();
+    }
+
     public function render()
     {
       if($this->weekly)

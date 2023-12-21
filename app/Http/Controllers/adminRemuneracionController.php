@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\AdminRemuneracion;
 use Illuminate\Http\Request;
-
+use App\Models\ActionMl;
+use App\Models\Professional;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 class adminRemuneracionController extends Controller
 {
     public function __construct() {
@@ -79,5 +82,44 @@ class adminRemuneracionController extends Controller
     public function destroy(adminRemuneracion $adminRemuneracion)
     {
         //
+    }
+
+    public function allAcions(){
+        $now = Carbon::Now();
+        if (Carbon::now()->format('d') < 21 ){
+            $startOfMonth = Carbon::createFromDate($now->format('Y'),$now->format('m')-1,20)->startOfDay();
+            $actualstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')-1,20)->startOfDay();
+            $expiredstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')-1,20)->startOfDay()->subMonth();
+            $endOfMonth = Carbon::createFromDate($now->format('Y'),$now->format('m'),20)->endOfDay();
+            $expiredendOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m'),21)->startOfDay()->subMonth();
+
+            $startOfWeek = Carbon::createFromDate($now->format('Y'),$now->startOfWeek()->format('m'),$now->startOfWeek()->format('d'))->startOfDay();
+            $endOfWeek = Carbon::createFromDate($now->format('Y'),$now->endOfWeek()->format('m'),$now->endOfWeek()->format('d'))->startOfDay();
+        } else {
+
+            $startOfMonth = Carbon::createFromDate($now->format('Y'),$now->format('m'),20)->startOfDay();
+            $actualstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m'),20)->startOfDay();
+            $expiredstartOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m'),20)->startOfDay()->subMonth();
+            $endOfMonth = Carbon::createFromDate($now->format('Y'),$now->format('m')+1,21)->endOfDay();
+            $expiredendOfMonth = Carbon::createFromDate(Carbon::Now()->format('Y'),Carbon::Now()->format('m')+1,21)->startOfDay()->subMonth();
+
+            $startOfWeek = Carbon::createFromDate($now->format('Y'),$now->startOfWeek()->format('m'),$now->startOfWeek()->format('d'))->startOfDay();
+            $endOfWeek = Carbon::createFromDate($now->format('Y'),$now->endOfWeek()->format('m'),$now->endOfWeek()->format('d'))->startOfDay();
+        }
+        $now = Carbon::Now()->subMonth();
+
+        $newAppointment = 0;
+        $coach = 0;
+
+        $appointments = ActionMl::where('Estado','Atendido')
+                                ->where('Fecha_Realizacion','>',$expiredstartOfMonth->format('Y-m-d'))
+                                ->where('Fecha_Realizacion','<',$expiredendOfMonth->format('Y-m-d'))
+                                ->groupBy('Tratamiento_Nr')
+                                ->select('*','Tratamiento_Nr', DB::raw('SUM(Precio_Prestacion) as TP'), DB::raw('SUM(Abono) as TA'))
+                                ->orderby('Fecha_Realizacion', 'DESC')->get();
+
+        $coff = Professional::all();
+
+        return view('admin.adminRemuneracion.all',compact('appointments','coff'));
     }
 }
