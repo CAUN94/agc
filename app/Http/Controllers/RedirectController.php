@@ -55,7 +55,7 @@ class RedirectController extends Controller {
 	}
 
 	public function arancel() {
-		$url = "https://docs.google.com/spreadsheets/d/1GeEQi1_4sWTI81nUj4z73SeKPBAh5VrFovGMASiLTMQ/edit?usp=sharing";
+		$url = "https://docs.google.com/spreadsheets/d/1OmCf38zbT7OzCkENgM4Gn0Vi2I7OcndzYzymVQotosc/edit?usp=sharing";
 		return Redirect::away($url);
 	}
 
