@@ -322,6 +322,9 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/datauser','App\Http\Controllers\ClinicDataController@index')->middleware(['auth']);
     Route::get('/datauser/show/{id}','App\Http\Controllers\ClinicDataController@show')->middleware(['auth']);
     Route::get('/datauser/evolution/{id}','App\Http\Controllers\ClinicDataController@evolution')->middleware(['auth']);
+
+    // get with MedicinaDeporteController index
+    Route::get('/medicinadeporte', 'App\Http\Controllers\MedicinaDeporteController@index')->middleware(['auth']);
 });
 
 
