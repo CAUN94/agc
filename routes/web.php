@@ -224,6 +224,8 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/isak', 'App\Http\Controllers\RedirectController@isak');
     Route::get('/isak_sin_kit', 'App\Http\Controllers\RedirectController@isak_sin_kit');
     Route::get('/alonso', 'App\Http\Controllers\RedirectController@alonso');
+    Route::get('/ironman', 'App\Http\Controllers\RedirectController@pucon');
+    Route::get('/ironman_alianza', 'App\Http\Controllers\RedirectController@pucon_alianza');
 
 
     Route::get('/box/dcontrerasb', 'App\Http\Controllers\RedirectController@contreras');
@@ -325,6 +327,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
 
     // get with MedicinaDeporteController index
     Route::get('/medicinadeporte', 'App\Http\Controllers\MedicinaDeporteController@index')->middleware(['auth']);
+    Route::post('/medicinadeporte/pdf', 'App\Http\Controllers\MedicinaDeporteController@pdf')->middleware(['auth']);
 });
 
 

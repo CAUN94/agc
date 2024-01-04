@@ -8,6 +8,7 @@
         "php": "^7.3|^8.0",
         "algolia/algoliasearch-client-php": "^3.3",
         "asantibanez/livewire-charts": "^2.4",
+        "barryvdh/laravel-dompdf": "^2.0",
         "codetoad/strava": "^1.0",
         "doctrine/dbal": "^3.3",
         "dymantic/laravel-instagram-feed": "^2.6",
