@@ -302,4 +302,14 @@ class RedirectController extends Controller {
 		$url = "https://meetings.hubspot.com/alonso-niklitschek-sanhueza";
 		return Redirect::away($url);
 	}
+
+	public function pucon(){
+		$url = "https://mpago.la/1hKbPev";
+		return Redirect::away($url);
+	}
+
+	public function pucon_alianza(){
+		$url = "https://mpago.la/2MCMcMd";
+		return Redirect::away($url);
+	}
 }
