@@ -59,7 +59,7 @@
                     Reservar Clase
                   </a>
                   <a class="nav-menu-link {{ Request::is('trainings') ? 'selected' : '' }}" href="/trainings">Entrenamiento</a>
-                  <a class="nav-menu-link {{ Request::is('school') ? 'selected' : '' }}" href="https://you-just-better-programs.teachable.com/courses" target="_blank">Cursos</a>
+                  <a class="nav-menu-link selected bg-primary-500" href="https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento" target="_blank">Agéndate</a>
                   <x-landing.auth-dropdown></x-landing.auth-dropdown>
                   <x-landing.guest-dropdown></x-landing.guest-dropdown>
                 </nav>

@@ -41,7 +41,7 @@ class AdminConfirmation extends Component
         $this->token = config('app.medilink');
         $date = $this->newdate;
         $client = new \GuzzleHttp\Client();
-        $url = 'https://api.medilink.healthatom.com/api/v1/citas?q={"fecha":{"eq":"2024-01-24"}}';
+        $url = 'https://api.medilink.healthatom.com/api/v1/citas?q={"fecha":{"eq":"'.$date.'"}}';
         $response = $client->request('GET', $url, [
             'headers'  => [
                 'Authorization' => 'Token ' . $this->token
