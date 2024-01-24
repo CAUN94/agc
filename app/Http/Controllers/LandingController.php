@@ -134,22 +134,9 @@ class LandingController extends Controller
             'Friday' => 'Viernes',
             'Saturday' => 'Sabado'
         );
-        if($appointment->comentarios == 'Grupal'){
-            // "¡Hola XXX! ¿Cómo estás?
-
-            // Sabemos que estás motivado para continuar entrenando con nosotros. Te
-            // invitamos a renovar tu plan de entrenamiento con un valor de $ XXX.
-            // Puedes realizar el pago fácilmente a través de http://yjb.cl/pago.
-
-            // Si tienes alguna duda o pregunta, no dudes en comentarnos. Saludos! "
-
-            // toma ese mensaje y lo enviamos por whatsapp, cambia los valors de Hola por el nombre y de valor por Helper::moneda_chilena($atention->total), no olvides considerar los saltos de linea.
-
-            // los saltos de linea se cambian usando un %0A%0A
-
+        if(strtolower($appointment->comentarios) == 'grupal'){
             $text = '¡Hola '.$patient->nombre.'! ¿Cómo estás?%0A%0ASabemos que estás motivado para continuar entrenando con nosotros. Te invitamos a renovar tu plan de entrenamiento con un valor de '.Helper::moneda_chilena($atention->total).'. Puedes realizar el pago fácilmente a través de http://yjb.cl/pago.%0A%0ASi tienes alguna duda o pregunta, no dudes en comentarnos. Saludos!';
-
-
+            
         } else {
             $text = 'Hola '.$patient->nombre.'! Te recordamos que tienes atención el '.$days[$day->format('l')].' '.$day->format('d').' con '.$atention->nombre_profesional.' a las '.$hora.' hrs.';
             $text .= '--*Para confirmar tu asistencia haz click en el siguiente link o confirma con un mensaje*: http://yjb.cl/confirmacion/'.$id;
@@ -159,8 +146,8 @@ class LandingController extends Controller
             }  
 
             
-            if ($atention->nombre_profesional == "Melissa Ross Guerra"){
-                if($appointment->comentarios == 'evaluacion'){
+            if ($atention->nombre_profesional == "Melissa Ross Guerra"){                
+                if(strtolower($appointment->comentarios) == 'evaluacion'){
                     $text .= '--Además, necesitamos que previo a tu evaluación inicial contestes la siguiente encuesta que será utilizada durante la sesión '.url('/sesion_nutricional').'.';
                 }
                 $text .= '--Traer short y/o peto';

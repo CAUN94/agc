@@ -1,9 +1,9 @@
 <x-landing.layout>
-        <a href="/youphone" target="_blank">
+        <a href="https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento" target="_blank">
             <div class="relative">
                 <img src="{{ asset('img/fotos/banner.png')}}" style="max-width: 100%;height: auto;">
                 <div class="flex flex-col items-center">
-                    <button class="absolute text-2xl top-3/4 bg-primary-500 text-white p-2 rounded hover:bg-primary-900">Consulta Aquí</button>
+                    <button class="absolute text-3xl top-2/3 bg-primary-500 text-white py-3 px-6 rounded hover:bg-primary-900">AGÉNDATE</button>
                 </div>
             </div>
         </a> 
@@ -47,7 +47,7 @@
             </x-slot>
         </x-landing.team> -->
 
-        <div id="embajadores"></div>
+        <!-- <div id="embajadores"></div>
         <x-landing.alliance>
             <x-slot name="img">
                 cesar.jpg|cotie.jpg|javi.jpg|katherine.jpg|sofi.jpg
@@ -65,7 +65,7 @@
             <x-slot name="insta">
                 https://instagram.com/cesardiazhz?igshid=YmMyMTA2M2Y=|https://instagram.com/gringaperochilena?igshid=YmMyMTA2M2Y=|https://instagram.com/javi.errazurizs?igshid=YmMyMTA2M2Y=|https://instagram.com/pausaphier?igshid=YmMyMTA2M2Y=
             </x-slot>
-        </x-landing.alliance>
+        </x-landing.alliance> -->
 
         <div id="testimonios"></div>
         <x-landing.reviews>
