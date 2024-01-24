@@ -3,7 +3,7 @@
             <div class="relative">
                 <img src="{{ asset('img/fotos/banner.png')}}" style="max-width: 100%;height: auto;">
                 <div class="flex flex-col items-center">
-                    <button class="absolute text-3xl top-2/3 bg-primary-500 text-white py-3 px-6 rounded hover:bg-primary-900">AGÉNDATE</button>
+                    <button class="absolute text-base sm:text-3xl top-2/3 bg-primary-500 text-white py-2 sm:py-3 px-4 sm:px-6 rounded hover:bg-primary-900">AGÉNDATE</button>
                 </div>
             </div>
         </a> 
@@ -11,6 +11,10 @@
         <x-landing.header>
 
         </x-landing.header>
+
+        <div id="testimonios"></div>
+        <x-landing.reviews>
+        </x-landing.reviews>
 
 
         <x-landing.call>
@@ -20,6 +24,9 @@
         <x-landing.service>
         </x-landing.service>
 
+        <div id="equipo"></div>
+        <x-landing.team>
+        </x-landing.team>
 
         <x-landing.why-us>
         </x-landing.why-us>
@@ -30,10 +37,6 @@
             </x-slot>
         </x-landing.contact>
 
-        <div id="equipo"></div>
-        <x-landing.team>
-
-        </x-landing.team>
 
         <!-- <x-landing.team>
             <x-slot name="img">
@@ -67,12 +70,7 @@
             </x-slot>
         </x-landing.alliance> -->
 
-        <div id="testimonios"></div>
-        <x-landing.reviews>
-        </x-landing.reviews>
-
-{{--         <x-landing.instagram>
-        </x-landing.instagram> --}}
+        {{--<x-landing.instagram></x-landing.instagram>--}}
 
         <x-slot name="script">
             <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
