@@ -134,25 +134,34 @@ class LandingController extends Controller
             'Friday' => 'Viernes',
             'Saturday' => 'Sabado'
         );
-        $text = 'Hola '.$patient->nombre.'! Te recordamos que tienes atención el '.$days[$day->format('l')].' '.$day->format('d').' con '.$atention->nombre_profesional.' a las '.$hora.' hrs.';
-        $text .= '--*Para confirmar tu asistencia haz click en el siguiente link o confirma con un mensaje*: http://yjb.cl/confirmacion/'.$id;
-        if($atention->total != $atention->abonado){
-            $text .= '--También puedes pagar tu atención de '.Helper::moneda_chilena($atention->total).' en el mismo link.';
-            // ddd('Pago');
-        }  
+        if(strtolower($appointment->comentarios) == 'grupal'){
+            $text = '¡Hola '.$patient->nombre.'! ¿Cómo estás?%0A%0ASabemos que estás motivado para continuar entrenando con nosotros. Te invitamos a renovar tu plan de entrenamiento con un valor de '.Helper::moneda_chilena($atention->total).'. Puedes realizar el pago fácilmente a través de http://yjb.cl/pago.%0A%0ASi tienes alguna duda o pregunta, no dudes en comentarnos. Saludos!';
+            
+        } else {
+            $text = 'Hola '.$patient->nombre.'! Te recordamos que tienes atención el '.$days[$day->format('l')].' '.$day->format('d').' con '.$atention->nombre_profesional.' a las '.$hora.' hrs.';
+            $text .= '--*Para confirmar tu asistencia haz click en el siguiente link o confirma con un mensaje*: http://yjb.cl/confirmacion/'.$id;
+            if($atention->total != $atention->abonado){
+                $text .= '--También puedes pagar tu atención de '.Helper::moneda_chilena($atention->total).' en el mismo link.';
+                // ddd('Pago');
+            }  
 
-        
-        if ($atention->nombre_profesional == "Melissa Ross Guerra"){
-            $text .= '--Traer short y/o peto';
+            
+            if ($atention->nombre_profesional == "Melissa Ross Guerra"){                
+                if(strtolower($appointment->comentarios) == 'evaluacion'){
+                    $text .= '--Además, necesitamos que previo a tu evaluación inicial contestes la siguiente encuesta que será utilizada durante la sesión '.url('/sesion_nutricional').'.';
+                }
+                $text .= '--Traer short y/o peto';
+            }
+            else {
+                $text .= '--Trae ropa cómoda';
+            }
+            
+
+            $text .= ', estamos en San pascual 736, Las Condes. Contamos con estacionamiento afuera del local.';
+            $text .= '--Puedes revisar nuestros terminos y condiciones de agendamiento en www.yjb.cl/terms';
+
+            $text = str_replace('--','%0A%0A',$text);
         }
-        else {
-            $text .= '--Trae ropa cómoda';
-        }
-
-        $text .= ', estamos en San pascual 736, Las Condes. Contamos con estacionamiento afuera del local.';
-        $text .= '--Puedes revisar nuestros terminos y condiciones de agendamiento en www.yjb.cl/terms';
-
-        $text = str_replace('--','%0A%0A',$text);
         $whatsapp = "https://web.whatsapp.com/send?phone=".$phone."&text=".$text;
 
         return \Redirect::away($whatsapp);
