@@ -5,16 +5,39 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\AppointmentMl;
+// mercadopago
+use MercadoPago\SDK;
+use MercadoPago;
+
 class MercadoPagoController extends Controller
 {
+    // public function index(){
+    //     $token = config('services.mercadopago.public_token');
+
+    //     $response = Http::withToken($token)->get("https://api.mercadopago.com/preapproval/search/", [
+    //         'results.payer_email '=> '%%'
+    //     ]);
+    //     return $response;
+    // }
+
     public function index(){
         $token = config('services.mercadopago.public_token');
+        SDK::setAccessToken($token);
 
-        $response = Http::withToken($token)->get("https://api.mercadopago.com/preapproval/search/", [
-            'results.payer_email '=> 'pcarram@gmail.com'
-        ]);
-        return $response;
+        $filters = [
+            'range' => 'date_created',
+            'begin_date' => 'NOW-1MONTH', // Ajusta el rango según tus necesidades
+            'end_date' => 'NOW',
+            'status' => 'approved',
+            // Puedes añadir más filtros según lo necesites
+        ];
+
+        $paymentResult = MercadoPago\Payment::search($filters);
+
+        ddd($paymentResult);
+        
     }
+
 
     public function pay($id){
         $token = config('app.medilink');

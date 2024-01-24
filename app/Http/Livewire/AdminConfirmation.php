@@ -41,7 +41,7 @@ class AdminConfirmation extends Component
         $this->token = config('app.medilink');
         $date = $this->newdate;
         $client = new \GuzzleHttp\Client();
-        $url = 'https://api.medilink.healthatom.com/api/v1/citas?q={"fecha":{"eq":"'.$date.'"}}';
+        $url = 'https://api.medilink.healthatom.com/api/v1/citas?q={"fecha":{"eq":"2024-01-24"}}';
         $response = $client->request('GET', $url, [
             'headers'  => [
                 'Authorization' => 'Token ' . $this->token
@@ -52,6 +52,7 @@ class AdminConfirmation extends Component
         $this->appointments = array_filter($this->appointments, function ($var) {
             return in_array($var->estado_cita,['No confirmado','Agenda Online','Lista de espera']);
         });
+        // ddd($this->appointments);
         return view('livewire.admin-confirmation');
     }
 }

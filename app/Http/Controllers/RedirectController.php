@@ -312,4 +312,9 @@ class RedirectController extends Controller {
 		$url = "https://mpago.la/2MCMcMd";
 		return Redirect::away($url);
 	}
+
+	public function sesion_nutricional(){
+		$url = "https://docs.google.com/forms/d/e/1FAIpQLSdVR_kL7v55usI5_-RqVgR1fbtVT_hTChwHK65RvYgj0b66lg/viewform?vc=0&c=0&w=1&flr=0";
+		return Redirect::away($url);
+	}
 }
