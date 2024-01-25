@@ -87,7 +87,7 @@
         shuffle($files);
     @endphp
 
-<div class="bg-primary-500 py-8 ">
+<div class="bg-primary-500 py-8 px-4">
     <h2 class="text-3xl text-center font-bold text-white">¿Quiénes somos?</h2>
     <div class="mt-12 flex mx-auto items-center relative "> 
         <div x-data="carousel()" x-init="init()" class="relative overflow-hidden group">
