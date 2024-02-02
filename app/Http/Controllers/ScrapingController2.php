@@ -13,29 +13,17 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpClient\HttpClient;
 use Session as FlashSession;
 
-class ScrapingController extends Controller
+class ScrapingController2 extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+
 
     public function create_client($url, $filter = False){
-        $client = new Client();
-        $crawler = $client->request('GET', 'https://youjustbetter.softwaremedilink.com/reportesdinamicos');
-        $form = $crawler->selectButton('Ingresar')->form();
-        
-        $crawler = $client->submit($form);
-        if($filter){
-            $first = strval(Carbon::now()->subMonth()->subMonth()->format('Y-m-d'));
-            $last = strval(Carbon::now()->addmonth()->format('Y-m-d'));
-            $url = $url."%5Bfecha_inicio%5D%5Bstatus%5D=activated&filters%5Bfecha_inicio%5D%5Bvalue%5D=".$first."&filters%5Bfecha_fin%5D%5Bstatus%5D=activated&filters%5Bfecha_fin%5D%5Bvalue%5D=".$last."";
-        }
-        $crawler = $client->request('GET', $url);
-        $array = $crawler->text();
-        $array = substr($array,2,-2);
-        $split = explode('},{', $array);
-        return $split;
+        // $array = str_replace("\n", '', $array);
+        // $array = str_replace("              ", '', $array);
+        // $array = str_replace("            ", '', $array);
+        // $array = substr($array,1,-1);
+        // $split = explode('},{', $array);
+        // return $split;
     }
 
 
@@ -161,7 +149,8 @@ class ScrapingController extends Controller
     public function actionMl(){
         $actions = self::create_client("https://youjustbetter.softwaremedilink.com/reportesdinamicos/reporte/listado_acciones?filters%5Bsucursal%5D%5Bstatus%5D=activated&filters%5Bsucursal%5D%5Bvalue%5D=1&filters",true);
         foreach($actions as $action){
-            $value = json_decode("{".$action."}",true);
+            $value = json_decode($action,true);
+            
             $limit = Carbon::now()->subMonth();
             $now = Carbon::parse($value['Fecha Realizacion']);
             if($now<$limit){
