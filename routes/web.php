@@ -47,6 +47,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/terms', [LandingController::class, 'terms']);
     Route::get('/precios', [LandingController::class, 'aranceles']);
     Route::get('/renew', [LandingController::class, 'renew'])->middleware(['auth']);
+    
     Route::resource('users', 'App\Http\Controllers\UsersController')->middleware(['auth']);
     // Revisar
     // Route::get('/calendar', [LandingController::class, 'calendar'])->middleware(['auth']);
@@ -82,6 +83,10 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/confirmations', [LandingController::class, 'confirmations'])->middleware(['intranet']);
     // Route::get('/confirmation/{id}', [LandingController::class, 'confirmation'])->middleware(['intranet']);
     Route::get('/confirmation/{id}', [LandingController::class, 'sendconfirmation'])->middleware(['intranet']);
+    Route::get('/youwsp', [LandingController::class, 'youwsp'])->middleware(['intranet']);
+    Route::get('/excelread', [ExcelMedilinkController::class, 'excelread_actions'])->middleware(['intranet']);
+    Route::post('/excelprocess_actions', [ExcelMedilinkController::class, 'excelprocess_actions'])->middleware(['intranet']);
+    Route::post('/excelprocess_appointments', [ExcelMedilinkController::class, 'excelprocess_appointments'])->middleware(['intranet']);
     Route::get('/custommessage', [LandingController::class, 'personalize_whatsapp'])->middleware(['intranet']);
     Route::get('/aliance_whatsapp', [LandingController::class, 'aliance_whatsapp'])->middleware(['intranet']);
 
@@ -152,12 +157,12 @@ Route::middleware([UpdatePassword::class,])->group(function () {
 
     // Scrap
 
-    Route::get('/scraping-userml', 'App\Http\Controllers\ScrapingController@userMl')->name('scraping-userml');
-    Route::get('/scraping-actionml', 'App\Http\Controllers\ScrapingController@actionMl')->name('scraping-actionml');
-    Route::get('/scraping-appointmentml', 'App\Http\Controllers\ScrapingController@appointmentMl')->name('scraping-appointmentml');
-    Route::get('/scraping-treatmentsml', 'App\Http\Controllers\ScrapingController@treatmentsMl')->name('scraping-treatmentsml');
+    Route::get('/scraping-userml', 'App\Http\Controllers\ScrapingController2@userMl')->name('scraping-userml');
+    Route::get('/scraping-actionml', 'App\Http\Controllers\ScrapingController2@actionMl')->name('scraping-actionml');
+    Route::get('/scraping-appointmentml', 'App\Http\Controllers\ScrapingController2@appointmentMl')->name('scraping-appointmentml');
+    Route::get('/scraping-treatmentsml', 'App\Http\Controllers\ScrapingController2@treatmentsMl')->name('scraping-treatmentsml');
 
-    Route::get('/ficha', 'App\Http\Controllers\ScrapingController@ficha')->name('ficha');
+    Route::get('/ficha', 'App\Http\Controllers\ScrapingController2@ficha')->name('ficha');
 
     Route::get('/scraping-paymentsml', 'App\Http\Controllers\ScrapingController@paymentsMl')->name('scraping-paymentsml');
 

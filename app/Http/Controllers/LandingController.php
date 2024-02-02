@@ -232,5 +232,9 @@ class LandingController extends Controller
         return view('users.renew');
     }
 
+    public function youwsp(){
+        return view('admin.youwsp');
+    }
+
 
 }
