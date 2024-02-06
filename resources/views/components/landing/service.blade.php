@@ -150,10 +150,10 @@
             Su finalidad es rehabilitar y/o realizar un reintegro deportivo correcto y eficiente para quienes hayan sufrido alguna lesión, tengan molestia o dolor y deseen volver a sus actividades normales o rendir en el más alto nivel.  Realizamos una evaluación completa, analizando la historia del paciente junto con la examinación física exhaustiva para llegar a un diagnóstico funcional, que permita educar y potenciar a la persona como alguien capaz de llevar su propia rehabilitación.
 
             <x-slot name="price">
-                  Desde $35,000* por hora
+                  Desde $37,000* por hora
             </x-slot>
             <x-slot name="info">
-                  *Cubierto por Isapre con licencia médica
+                  *Cubierto por Isapre con licencia médica, consulta por Bono Fonasa.
             </x-slot>
 
             <x-slot name="button">
@@ -176,6 +176,9 @@
             Evaluación médica completa del paciente, realizando una entrevista exhaustiva, examen físico general y dirigido al motivo de consulta, contemplando solicitud de exámenes complementarios e imágenes en caso de ser necesario. Se realiza un diagnóstico y se indica un tratamiento dirigido al motivo de la consulta, donde se entregan recomendaciones personalizadas para atenuar los factores de riesgo de lesiones del paciente.
             <x-slot name="price">
                   Desde $50,000* p/consulta
+            </x-slot>
+            <x-slot name="info">
+                  *Cubierto por Isapre con licencia médica, consulta por Bono Fonasa.
             </x-slot>
 
             <x-slot name="button">
@@ -225,7 +228,7 @@
             Se basa en educar a la persona para que se transformes en un experto en su mundo, donde sea capaz de reconocer sus necesidades y aplicar los hábitos alimenticios que le permitan su estado óptimo de bienestar de acuerdo a sus objetivos personales y deportivos. Entregamos balance energético según objetivo, distribución de macro y micronutrientes para llegar a su objetivo.
 
             <x-slot name="price">
-                  Desde $45,000* p/consulta
+                  Desde $47,000* p/consulta
             </x-slot>
 
             <x-slot name="button">
@@ -342,7 +345,7 @@
                   <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                   <div class="flex flex-col">
                   <a href="/trainings" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary-500 text-base font-medium text-white hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm">
-                        Desde $49.990
+                        Desde $52.000
                   </a>
                   </div>
                   <button x-on:click="openTrain = ! openTrain" type="button" class="mt-3 self-start w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
