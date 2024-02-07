@@ -240,5 +240,9 @@ class LandingController extends Controller
         return view('precios');
     }
 
+    public function contactanos(){
+        return view('contactanos');
+    }
+
 
 }
