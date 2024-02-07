@@ -236,5 +236,9 @@ class LandingController extends Controller
         return view('admin.youwsp');
     }
 
+    public function precios(){
+        return view('precios');
+    }
+
 
 }

@@ -45,7 +45,8 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/', [LandingController::class, 'welcome']);
     Route::get('/kinesiología', [LandingController::class, 'about']);
     Route::get('/terms', [LandingController::class, 'terms']);
-    Route::get('/precios', [LandingController::class, 'aranceles']);
+    // Route::get('/precios', [LandingController::class, 'aranceles']);
+    Route::get('/precios', [LandingController::class, 'precios']);
     Route::get('/renew', [LandingController::class, 'renew'])->middleware(['auth']);
     
     Route::resource('users', 'App\Http\Controllers\UsersController')->middleware(['auth']);
