@@ -83,7 +83,7 @@
                                 <td class="p-1 text-lg sm:text-2xl font-bold text-primary-500 hidden sm:block">55 minutos</td>
                                 <td class="p-1 text-lg sm:text-2xl font-bold text-primary-500">$65.000</td>
                             </tr>
-                            <tr class="bg-gray-100">
+                            <!-- <tr class="bg-gray-100">
                                 <td class="p-1 text-lg sm:text-2xl font-bold text-primary-500">Masoterapia</td>
                                 <td class="p-1 text-lg sm:text-2xl font-bold text-primary-500 hidden sm:block"></td>
                                 <td class="p-1 text-lg sm:text-2xl font-bold text-primary-500"></td>
@@ -92,7 +92,7 @@
                                 <td class="p-1 text-lg sm:text-2xl font-bold text-primary-500">Masajes</td>
                                 <td class="p-1 text-lg sm:text-2xl font-bold text-primary-500 hidden sm:block">40 minutos</td>
                                 <td class="p-1 text-lg sm:text-2xl font-bold text-primary-500">$26.500</td>
-                            </tr>
+                            </tr> -->
                             <tr class="bg-gray-100">
                                 <td class="p-1 text-lg sm:text-2xl font-bold text-primary-500">Medicina</td>
                                 <td class="p-1 text-lg sm:text-2xl font-bold text-primary-500 hidden sm:block"></td>
