@@ -6,7 +6,7 @@
         </a> 
         <a href="https://api.whatsapp.com/send?phone=56933809726&text=Hola!" target="_blank">
             <div class="flex items-center justify-around mt-5">
-                <button class="text-base sm:text-3xl top-2/3 bg-green-500 text-white py-2 sm:py-3 px-4 sm:px-6 rounded hover:bg-green-700 w-full sm:w-2/3">Consulta por convenio alianza o bono fonasa <i class="fab fa-whatsapp hidden sm:block"></i></button>
+                <button class="text-base sm:text-3xl top-2/3 bg-green-500 text-white py-2 sm:py-3 px-4 sm:px-6 rounded hover:bg-green-700 w-full sm:w-2/3">Consulta por convenio alianza o bono fonasa <i class="fab fa-whatsapp hidden sm:inline"></i></button>
             </div>
         </a> 
         <!-- table with tailwind adjust at the middle with a simple desgifn using the class created for wthis website with the headers "Servicios","Duración" and "Precio Lista -->
