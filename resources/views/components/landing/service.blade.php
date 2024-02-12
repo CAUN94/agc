@@ -177,7 +177,7 @@
             <x-slot name="price">
                   Desde $50,000* p/consulta
             </x-slot>
-            <x-slot name="info">
+             <x-slot name="info">
                   *Cubierto por Isapre con orden médica, consulta por Bono Fonasa.
             </x-slot>
 
