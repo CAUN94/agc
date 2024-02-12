@@ -153,7 +153,7 @@
                   Desde $37,000* por hora
             </x-slot>
             <x-slot name="info">
-                  *Cubierto por Isapre con licencia médica, consulta por Bono Fonasa.
+                  *Cubierto por Isapre con orden médica, consulta por Bono Fonasa.
             </x-slot>
 
             <x-slot name="button">
@@ -178,7 +178,7 @@
                   Desde $50,000* p/consulta
             </x-slot>
             <x-slot name="info">
-                  *Cubierto por Isapre con licencia médica, consulta por Bono Fonasa.
+                  *Cubierto por Isapre con orden médica, consulta por Bono Fonasa.
             </x-slot>
 
             <x-slot name="button">
