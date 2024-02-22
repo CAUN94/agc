@@ -61,7 +61,7 @@ class UpdateActions extends Command
         $this->info($date2);
         $this->info($date3);
 
-        $ids = [61,60,59,58,55,56,36,49,10,19,48,26,37,44,54,34,47];
+        $ids = [2,61,60,59,58,55,56,36,49,10,19,48,26,37,44,54,34,47];
         foreach($ids as $id){
             $this->allActions($id);
             sleep(5);
@@ -163,7 +163,7 @@ class UpdateActions extends Command
                 }
 
                 $total_final += $total;
-                $pays[] = [$data, $pay,$total];
+                $pays[] = [$data, $pay,$total,$id_atencion];
                 // $pays[] = [$data, $pay->data];
 
             }
@@ -213,7 +213,7 @@ class UpdateActions extends Command
                     'Tratamiento_Nr'=> $pay[0]->id_atencion,
                     'Profesional'=> $pay[0]->nombre_profesional,
                     'Estado'=> $pay[0]->estado_cita,
-                    'Convenio'=> '',
+                    'Convenio'=> $pay[3],
                     'Prestacion_Nr'=> $action->id_prestacion,
                     'Prestacion_Nombre'=> $action->nombre_prestacion,
                     'Fecha_Realizacion'=> $pay[0]->fecha,
