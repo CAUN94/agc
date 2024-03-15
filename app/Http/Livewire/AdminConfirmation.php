@@ -41,18 +41,33 @@ class AdminConfirmation extends Component
         $this->token = config('app.medilink');
         $date = $this->newdate;
         $client = new \GuzzleHttp\Client();
-        $url = 'https://api.medilink.healthatom.com/api/v1/citas?q={"fecha":{"eq":"'.$date.'"}}';
+        $url = 'https://api.medilink.healthatom.com/api/v1/citas?q={"fecha":{"eq":"'.$this->newdate.'"}}';
         $response = $client->request('GET', $url, [
             'headers'  => [
                 'Authorization' => 'Token ' . $this->token
             ]
         ]);
-        $this->appointments = json_decode($response->getBody())->data;
+        $allAppointments = [];
+        $appointments = json_decode($response->getBody());       
+        $allAppointments[] = $appointments->data;
+
+        while(isset($appointments->links->next)){
+            $response = $client->request('GET', $appointments->links->next, [
+                'headers'  => [
+                    'Authorization' => 'Token ' . $this->token
+                ]
+            ]);
+            $appointments = json_decode($response->getBody());
+            $allAppointments[] = $appointments->data;
+        }
+        
+        $this->appointments = array_merge(...$allAppointments);
+
         usort($this->appointments, fn($a, $b) => $a->hora_inicio <=> $b->hora_inicio);
         $this->appointments = array_filter($this->appointments, function ($var) {
-            return in_array($var->estado_cita,['No confirmado','Agenda Online','Lista de espera']);
+            return in_array($var->estado_cita,['No confirmado','No confirmado ','Agenda Online','Lista de espera']);
         });
-        // ddd($this->appointments);
+        // var_dump($this->appointments);
         return view('livewire.admin-confirmation');
     }
 }
