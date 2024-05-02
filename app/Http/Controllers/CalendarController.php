@@ -99,7 +99,7 @@ class CalendarController extends Controller
             $end = \Carbon\Carbon::parse($appointment->Fecha)->format('Y-m-d')."T".$appointment->Hora_termino;
             $event = new Google_Service_Calendar_Event(array(
               'summary' => 'Atención a '.$appointment->Nombre_paciente,
-              'location' => 'San Pascual 736',
+              'location' => 'San Pascual 309',
               'description' => $appointment->Nombre_paciente." ".$appointment->Apellidos_paciente."\n Estado: ".$appointment->Estado."\n Con: ".$appointment->Profesional,
               'start' => array(
                 'dateTime' => $start,

@@ -911,7 +911,7 @@ class ApiMedilinkController extends Controller
       $end = \Carbon\Carbon::parse($appointment->fecha)->format('Y-m-d')."T".$appointment->hora_fin;
       $event = new Google_Service_Calendar_Event(array(
         'summary' => 'Atención a '.$appointment->nombre_paciente,
-        'location' => 'San Pascual 736',
+        'location' => 'San Pascual 309',
         'description' => "Paciente: ".$appointment->nombre_paciente."\nCon: ".$appointment->nombre_profesional,
         'start' => array(
           'dateTime' => $start,

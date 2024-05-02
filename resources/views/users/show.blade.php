@@ -174,7 +174,7 @@
                     $date = $fecha->format('d') . ' de ' . $mes . ' a las ' . $hora;
                     @endphp
                     {{$date}}
-                    {{-- en San Pascual 736 --}}
+                    {{-- en San Pascual 309 --}}
                     {{-- <span class="text-xs text-primary-500">
 
                     </span> --}}
