@@ -157,7 +157,7 @@ class LandingController extends Controller
             }
             
 
-            $text .= ', estamos en San pascual 736, Las Condes. Contamos con estacionamiento afuera del local.';
+            $text .= ', estamos en San pascual 309, Las Condes. Contamos con estacionamiento afuera del local.';
             $text .= '--Puedes revisar nuestros terminos y condiciones de agendamiento en www.yjb.cl/terms';
 
             $text = str_replace('--','%0A%0A',$text);
