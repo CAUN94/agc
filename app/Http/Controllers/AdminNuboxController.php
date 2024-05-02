@@ -457,7 +457,7 @@ class AdminNuboxController extends Controller
           "RazonSocial": "Franciscos Sepulveda Vejar",
           "Giro": "Paciente",
           "Acteco": "",
-          "DireccionLegal": "San Pascual 736",
+          "DireccionLegal": "San Pascual 309",
           "ComunaLegalNombre": "Las Condes",
           "Contacto": "You Just Better",
           "Email": "cristobalugarte6@gmail.com",

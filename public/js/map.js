@@ -6,5 +6,5 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 L.marker([-33.417642958010035, -70.57758338876975]).addTo(map)
-    .bindPopup('You Just Better<br>San Pascual 736, Las Condes')
+    .bindPopup('You Just Better<br>San Pascual 309, Las Condes')
     .openPopup();
