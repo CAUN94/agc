@@ -233,8 +233,12 @@ class RedirectController extends Controller {
 	}
 
 	public function agendate(){
+		return redirect('/youagendate');
+	}
+
+	public function youagendate(){
 		$url = "https://f8f6bc91ed06a41fb6527cdbb7dd65b9638c84fd.agenda.softwaremedilink.com/agendas/agendamiento";
-		return Redirect::away($url);
+		return 1;
 	}
 
 	public function masterclass(){
