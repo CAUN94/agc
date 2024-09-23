@@ -14,8 +14,8 @@ class AddTwoColumnToProfessionals extends Migration
     public function up()
     {
         Schema::table('professionals', function (Blueprint $table) {
-            $table->float('coeff')->after('class');
-            $table->integer('Horas_disponible')->after('coeff');
+            $table->float('coeff');
+            $table->integer('Horas_disponible');
         });
     }
 
