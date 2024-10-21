@@ -141,10 +141,40 @@
                         @endif
                       </td>
                       <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
-                        {{Helper::moneda_chilena($Appointment->TP)}}
+                        <div x-data="{ editing: false, newTP: '{{ $Appointment->TP }}' }">
+                          <div x-data="{ editing: false, newTP: '{{ $Appointment->TP }}' }">
+                            <span x-show="!editing" @click="editing = true" class="cursor-pointer">
+                                {{ $Appointment->TP }}
+                            </span>
+                            
+                            <input 
+                                x-show="editing"
+                                x-model="newTP"
+                                @blur="editing = false; $wire.updateTP({{ $Appointment->id }}, newTP)"
+                                @keydown.enter="editing = false; $wire.updateTP({{ $Appointment->id }}, newTP)"
+                                class="border border-gray-300 rounded px-1"
+                                type="text"
+                                style="width: 60px;"
+                            />
+                        </div>
+                      </div>
                       </td>
                       <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
-                        {{Helper::moneda_chilena($Appointment->TA)}}
+                        <div x-data="{ editing: false, newTA: '{{ $Appointment->TA }}' }">
+                          <span x-show="!editing" @click="editing = true" class="cursor-pointer">
+                              {{ $Appointment->TA }}
+                          </span>
+                          
+                          <input 
+                              x-show="editing"
+                              x-model="newTA"
+                              @blur="editing = false; $wire.updateTA({{ $Appointment->id }}, newTA)"
+                              @keydown.enter="editing = false; $wire.updateTA({{ $Appointment->id }}, newTA)"
+                              class="border border-gray-300 rounded px-1"
+                              type="text"
+                              style="width: 60px;"
+                          />
+                      </div>
                       </td>
                       <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                         {{Helper::moneda_chilena(ceil(($Appointment->TP*$coff->coff)/100))}}
