@@ -34,26 +34,40 @@ class RemunerationExport implements FromCollection, WithHeadings
     {
         // Define las columnas que deseas incluir en el encabezado
         return [
-            'Tratamiento_Nr',
             'Nombre',
             'Apellido',
-            'Estado',
-            'Prestanción Nr',
-            'Prestación Nombre',
+            'Prestación_Nombre',
             'Fecha_Realizacion',
+            'Precio_Prestacion',
+            'Coeficiente',
             'Remuneración'
         ];
     }
 
     public function collection()
     {
-        $actions = ActionMl::select('Tratamiento_Nr','Nombre','Apellido','Estado','Prestacion_nr','Prestacion_Nombre','Fecha_Realizacion','Precio_Prestacion')->where('Estado','Atendido')->where('Fecha_Realizacion','>',$this->expiredstartOfMonth->format('Y-m-d'))
+        $actions = ActionMl::select('Nombre',
+        'Apellido',
+        'Prestación_Nombre',
+        'Fecha_Realizacion',
+        'Precio_Prestacion',
+        'Coff',
+        'Remuneración')->where('Estado','Atendido')->where('Fecha_Realizacion','>',$this->expiredstartOfMonth->format('Y-m-d'))
             ->where('Fecha_Realizacion','<',$this->expiredendOfMonth->format('Y-m-d'))
             ->where('Profesional',$this->id)
             ->groupBy('Tratamiento_Nr')
-            ->select('Tratamiento_Nr','Nombre','Apellido','Estado','Prestacion_nr','Prestacion_Nombre','Fecha_Realizacion',DB::raw('SUM(Precio_Prestacion) as TP'))
+            ->select('Nombre',
+            'Apellido',
+            'Prestacion_Nombre',
+            'Fecha_Realizacion',
+            DB::raw('SUM(Precio_Prestacion) as PP'),
+            DB::raw($this->coff),
+            DB::raw('SUM(Precio_Prestacion) as TP'))
             ->orderby('Fecha_Realizacion', 'DESC')->get();
-        
+        foreach($actions as $action)
+        {
+            $action->PP = Helper::moneda_chilena($action->PP);
+        }
         foreach($actions as $action)
         {
             $action->TP = Helper::moneda_chilena(ceil(($action->TP * $this->coff)/100));
