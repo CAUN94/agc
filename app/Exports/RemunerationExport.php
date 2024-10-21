@@ -35,7 +35,6 @@ class RemunerationExport implements FromCollection, WithHeadings
         // Define las columnas que deseas incluir en el encabezado
         return [
             'Nombre',
-            'Apellido',
             'Prestación_Nombre',
             'Fecha_Realizacion',
             'Precio_Prestacion',
@@ -47,7 +46,6 @@ class RemunerationExport implements FromCollection, WithHeadings
     public function collection()
     {
         $actions = ActionMl::select('Nombre',
-        'Apellido',
         'Prestación_Nombre',
         'Fecha_Realizacion',
         'Precio_Prestacion',
@@ -57,7 +55,6 @@ class RemunerationExport implements FromCollection, WithHeadings
             ->where('Profesional',$this->id)
             ->groupBy('Tratamiento_Nr')
             ->select('Nombre',
-            'Apellido',
             'Prestacion_Nombre',
             'Fecha_Realizacion',
             DB::raw('SUM(Precio_Prestacion) as PP'),
