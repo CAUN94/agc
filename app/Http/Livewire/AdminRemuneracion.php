@@ -123,6 +123,29 @@ class AdminRemuneracion extends Component
         return Excel::download($export, $this->lista_id.'_'.$this->expiredstartOfMonth->format('Y-m-d').'_'.$this->expiredendOfMonth->format('Y-m-d').'.xlsx');
     }
 
+    public function updateTP($id, $newTP)
+    {
+        $appointment = ActionMl::find($id);
+        if ($appointment) {
+            $appointment->Precio_Prestacion = $newTP;
+            $appointment->save();
+            $this->emit('refreshComponent'); // Actualiza la lista en la vista si es necesario
+            session()->flash('message', 'Valor TP actualizado con éxito.');
+        }
+    }
+
+    public function updateTA($id, $newTA)
+    {
+        $appointment = ActionMl::find($id);
+        if ($appointment) {
+            $appointment->Abono = $newTA;
+            $appointment->save();
+            $this->emit('refreshComponent'); // Actualiza la lista en la vista si es necesario
+            session()->flash('message', 'Valor TA actualizado con éxito.');
+        }
+    }
+
+
     public function show($id){
         $Professional = DB::table('professionals')
                           ->where('user_id',$id)
@@ -190,7 +213,9 @@ class AdminRemuneracion extends Component
                                 ->where('Profesional',$this->lista_id)
                                 ->groupBy('Tratamiento_Nr')
                                 ->select('*','Tratamiento_Nr', DB::raw('SUM(Precio_Prestacion) as TP'), DB::raw('SUM(Abono) as TA'))
-                                ->orderby('Fecha_Realizacion', 'DESC')->get(),
+                                ->orderby('Precio_Prestacion', 'ASC')
+                                ->orderby('Fecha_Realizacion', 'ASC')
+                                ->get(),
 
           'coff' => Professional::where('description',$this->lista_id)->first(['coff']),
       ]);
