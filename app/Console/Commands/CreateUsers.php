@@ -159,7 +159,7 @@ class CreateUsers extends Command
             // check if user has alliances
 
             if($i % 80 == 0){
-                sleep(120);
+                sleep(15);
             }
 
             $alliance_data = json_decode($response->getBody())->data;
