@@ -133,7 +133,7 @@
                       </td>
                       <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                         @if (!empty($Appointment->appointments()->first()) )
-                          {{ $Appointment->appointments()->first()->user }}
+                          {{ $Appointment->appointments()->first()->user->alliance() }}
                           {{-- @if(!is_null($Appointment->appointments()->first()->user->alliance()))
                           {{$Appointment->appointments()->first()->user->alliance()->name}}
                           @endif --}}
