@@ -139,6 +139,7 @@
                         @else
                           Sin Convenio
                         @endif --}}
+                            ---
                       </td>
                       <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                         <div x-data="{ editing: false, newTP: '{{ $Appointment->TP }}' }">
