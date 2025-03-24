@@ -6,6 +6,7 @@
       color: white;
     }
   </style>
+  {{-- Alpine js show on click --}}
   @if(Auth::user()->isAdmin())
     <div class="w-full overflow-x-auto box-white p-3">
       <div>
@@ -140,11 +141,36 @@
                           Sin Convenio
                         @endif
                       </td>
+                      <td class="text-center">
+                        <div x-data="{ editing: false, newTP: '{{ $appointment->TP }}' }">
+                          <span x-show="!editing" @click="editing = true" class="cursor-pointer">
+                              {{ number_format($appointment->TP, 0, ',', '.') }}
+                          </span>
+                          <input
+                              x-show="editing"
+                              x-model="newTP"
+                              @keydown.enter="editing = false; $wire.updateTP({{ $appointment->id }}, newTP)"
+                              @keydown.escape="editing = false"
+                              @click.away="editing = false"
+                              type="number"
+                              class="w-full border rounded px-2 py-1"
+                          />
+                      </div>
+                    </td>
                       <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
-                        {{Helper::moneda_chilena($Appointment->TP)}}
-                      </td>
-                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
-                        {{Helper::moneda_chilena($Appointment->TA)}}
+                        <div x-data="{ editing: false }">
+                          <span x-show="!editing" @click="editing = true">
+                              {{ number_format($appointment->TA, 0, ',', '.') }}
+                          </span>
+                          <input
+                              x-show="editing"
+                              x-model="newTA"
+                              @keydown.enter="editing = false; $wire.updateTA({{ $appointment->id }}, newTA)"
+                              @click.away="editing = false"
+                              type="number"
+                              class="w-full"
+                          />
+                      </div>
                       </td>
                       <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                         {{Helper::moneda_chilena(ceil(($Appointment->TP*$coff->coff)/100))}}
@@ -442,3 +468,4 @@
   </div>
   @endif
 </div>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
