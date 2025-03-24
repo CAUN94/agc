@@ -6,6 +6,7 @@
       color: white;
     }
   </style>
+  {{-- Alpine js show on click --}}
   @if(Auth::user()->isAdmin())
     <div class="w-full overflow-x-auto box-white p-3">
       <div>
@@ -133,47 +134,41 @@
                       </td>
                       <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
                         @if (!empty($Appointment->appointments()->first()) )
-                          Alianza
-                          {{-- @if(!is_null($Appointment->appointments()->first()->user->alliance()))
+                          @if(!is_null($Appointment->appointments()->first()->user->alliance()))
                           {{$Appointment->appointments()->first()->user->alliance()->name}}
-                          @endif --}}
+                          @endif
                         @else
                           Sin Convenio
                         @endif
                       </td>
-                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
-                        <div x-data="{ editing: false, newTP: '{{ $Appointment->TP }}' }">
-                          <div x-data="{ editing: false, newTP: '{{ $Appointment->TP }}' }">
-                            <span x-show="!editing" @click="editing = true" class="cursor-pointer">
-                                {{ $Appointment->TP }}
-                            </span>
-                            
-                            <input 
-                                x-show="editing"
-                                x-model="newTP"
-                                @blur="editing = false; $wire.updateTP({{ $Appointment->id }}, newTP)"
-                                @keydown.enter="editing = false; $wire.updateTP({{ $Appointment->id }}, newTP)"
-                                class="border border-gray-300 rounded px-1"
-                                type="text"
-                                style="width: 60px;"
-                            />
-                        </div>
-                      </div>
-                      </td>
-                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
-                        <div x-data="{ editing: false, newTA: '{{ $Appointment->TA }}' }">
+                      <td class="text-center">
+                        <div x-data="{ editing: false, newTP: '{{ $appointment->TP }}' }">
                           <span x-show="!editing" @click="editing = true" class="cursor-pointer">
-                              {{ $Appointment->TA }}
+                              {{ number_format($appointment->TP, 0, ',', '.') }}
                           </span>
-                          
-                          <input 
+                          <input
+                              x-show="editing"
+                              x-model="newTP"
+                              @keydown.enter="editing = false; $wire.updateTP({{ $appointment->id }}, newTP)"
+                              @keydown.escape="editing = false"
+                              @click.away="editing = false"
+                              type="number"
+                              class="w-full border rounded px-2 py-1"
+                          />
+                      </div>
+                    </td>
+                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
+                        <div x-data="{ editing: false }">
+                          <span x-show="!editing" @click="editing = true">
+                              {{ number_format($appointment->TA, 0, ',', '.') }}
+                          </span>
+                          <input
                               x-show="editing"
                               x-model="newTA"
-                              @blur="editing = false; $wire.updateTA({{ $Appointment->id }}, newTA)"
-                              @keydown.enter="editing = false; $wire.updateTA({{ $Appointment->id }}, newTA)"
-                              class="border border-gray-300 rounded px-1"
-                              type="text"
-                              style="width: 60px;"
+                              @keydown.enter="editing = false; $wire.updateTA({{ $appointment->id }}, newTA)"
+                              @click.away="editing = false"
+                              type="number"
+                              class="w-full"
                           />
                       </div>
                       </td>
@@ -473,3 +468,4 @@
   </div>
   @endif
 </div>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
