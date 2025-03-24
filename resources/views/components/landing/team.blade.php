@@ -97,7 +97,7 @@
                 <div
                 class="ml-4 flex-auto flex-grow-0 flex-shrink-0 w-96 rounded-lg bg-gray-100 items-center justify-center snap-center overflow-hidden shadow-md">
                     <div>
-                      <img class="w-full h-64 object-cover" src="{{ asset('img/equipo/'.$team->photo)}}">
+                      <img class="w-full h-64 object-cover" src="{{ asset('img/equipo/'.$team->photo)}}" alt="{{ $team->name }}">
                     </div>
                     <div class="flex">
                         <div class="flex-1 p-4">

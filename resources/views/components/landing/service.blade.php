@@ -114,7 +114,7 @@
                   </div>
             </a> -->
 
-            <div class="bg-light-grey mx-auto rounded-md py-2 px-4 w-full h-auto lg:w-full cursor-pointer hover:text-primary-900 border-2 border-primary-500 hover:border-primary-900"  x-on:click="openBio = ! openBio">
+            {{-- <div class="bg-light-grey mx-auto rounded-md py-2 px-4 w-full h-auto lg:w-full cursor-pointer hover:text-primary-900 border-2 border-primary-500 hover:border-primary-900"  x-on:click="openBio = ! openBio">
                   <h2 class="text-xl">Biomecánica</h2>
                   <div class="mt-4 flex justify-between items-center">
                         <div class="w-4/5 mr-4">
@@ -127,7 +127,7 @@
                         </div>
                   </div>
 
-            </div>
+            </div> --}}
 
             
 
@@ -295,7 +295,7 @@
       </x-landing.modal-service>
 
       {{--    Biomecánica   --}}
-      <x-landing.modal-service>
+      {{-- <x-landing.modal-service>
             <x-slot name="xshow">
                   openBio
             </x-slot>
@@ -314,7 +314,7 @@
             <x-slot name="button">
                   Cerrar
             </x-slot>
-      </x-landing.modal-service>
+      </x-landing.modal-service> --}}
       {{--    Entrenamiento   --}}
       <div  x-show="openTrain" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true" x-cloak>
             <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">

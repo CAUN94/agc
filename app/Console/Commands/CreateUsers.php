@@ -138,6 +138,10 @@ class CreateUsers extends Command
             }
             $id_paciente    = $user->id;
             $user = User::where('rut',$user->rut)->first();
+            // if not issert $user continue
+            if (!$user) {
+                continue;
+            }
             if($user->hasAlliance()){
                 continue;
             }

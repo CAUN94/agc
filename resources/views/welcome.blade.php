@@ -24,9 +24,9 @@
         <x-landing.service>
         </x-landing.service>
 
-        <div id="equipo"></div>
+        {{-- <div id="equipo"></div>
         <x-landing.team>
-        </x-landing.team>
+        </x-landing.team> --}}
 
         <x-landing.why-us>
         </x-landing.why-us>
