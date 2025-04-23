@@ -98,9 +98,9 @@ class UpdateDatabase extends Command
                     'Authorization' => 'Token ' . $this->token
                 ]
             ]);
-            if($count%100 == 0 and $count != 0){
+            if($count%50 == 0 and $count != 0){
                 $this->info("Count:".$count);
-                sleep(30);
+                sleep(60);
             }
             $patient = json_decode($response->getBody())->data;
 
