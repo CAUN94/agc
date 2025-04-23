@@ -263,7 +263,7 @@ class ApiMedilinkController extends Controller
     {
         $client = new \GuzzleHttp\Client();
 
-        $query_string   = '?q={"fecha":{"gt":"2023-09-21"}}';
+        $query_string   = '?q={"fecha":{"gt":"2024-10-22","lt":"2024-10-24"}}';
         $url = 'https://api.medilink.healthatom.com/api/v1/atenciones/';
         $url = $url."".$query_string;
 
