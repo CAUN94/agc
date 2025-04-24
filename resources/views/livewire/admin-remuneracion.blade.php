@@ -121,21 +121,21 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($appointments as $Appointment)
+                  @foreach($appointments as $appointment)
                     <tr class="">
-                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
-                          {{$Appointment->id}}
+                      <td class="text-center @if(is_null($appointment->Evolution)) bg-yellow-100 @elseif($appointment->Report == 1) bg-red-300 @endif">
+                          {{$appointment->id}}
                       </td>
-                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
-                          {{Carbon\Carbon::parse($Appointment->Fecha_Realizacion)->format('d-m-Y')}}
+                      <td class="text-center @if(is_null($appointment->Evolution)) bg-yellow-100 @elseif($appointment->Report == 1) bg-red-300 @endif">
+                          {{Carbon\Carbon::parse($appointment->Fecha_Realizacion)->format('d-m-Y')}}
                       </td>
-                      <td class="text-left @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
-                          {{$Appointment->Nombre}} {{$Appointment->Apellido}}
+                      <td class="text-left @if(is_null($appointment->Evolution)) bg-yellow-100 @elseif($appointment->Report == 1) bg-red-300 @endif">
+                          {{$appointment->Nombre}} {{$appointment->Apellido}}
                       </td>
-                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
-                        @if (!empty($Appointment->appointments()->first()) )
-                          @if(!is_null($Appointment->appointments()->first()->user->alliance()))
-                          {{$Appointment->appointments()->first()->user->alliance()->name}}
+                      <td class="text-center @if(is_null($appointment->Evolution)) bg-yellow-100 @elseif($appointment->Report == 1) bg-red-300 @endif">
+                        @if (!empty($appointment->appointments()->first()) )
+                          @if(!is_null($appointment->appointments()->first()->user->alliance()))
+                          {{$appointment->appointments()->first()->user->alliance()->name}}
                           @endif
                         @else
                           Sin Convenio
@@ -157,7 +157,7 @@
                           />
                       </div>
                     </td>
-                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
+                      <td class="text-center @if(is_null($appointment->Evolution)) bg-yellow-100 @elseif($appointment->Report == 1) bg-red-300 @endif">
                         <div x-data="{ editing: false }">
                           <span x-show="!editing" @click="editing = true">
                               {{ number_format($appointment->TA, 0, ',', '.') }}
@@ -172,11 +172,11 @@
                           />
                       </div>
                       </td>
-                      <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
-                        {{Helper::moneda_chilena(ceil(($Appointment->TP*$coff->coff)/100))}}
+                      <td class="text-center @if(is_null($appointment->Evolution)) bg-yellow-100 @elseif($appointment->Report == 1) bg-red-300 @endif">
+                        {{Helper::moneda_chilena(ceil(($appointment->TP*$coff->coff)/100))}}
                       </td>
-                      <!-- <td class="text-center @if(is_null($Appointment->Evolution)) bg-yellow-100 @elseif($Appointment->Report == 1) bg-red-300 @endif">
-                        <p class="border border-black shadow-sm text-sm font-medium rounded-md text-center bg-red-300 hover:bg-red-400 focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 cursor-pointer" wire:click='report({{$Appointment->id}})'>Report</p>
+                      <!-- <td class="text-center @if(is_null($appointment->Evolution)) bg-yellow-100 @elseif($appointment->Report == 1) bg-red-300 @endif">
+                        <p class="border border-black shadow-sm text-sm font-medium rounded-md text-center bg-red-300 hover:bg-red-400 focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 cursor-pointer" wire:click='report({{$appointment->id}})'>Report</p>
                       </td> -->
                     </tr>
                   @endforeach
@@ -329,8 +329,8 @@
                               Convenio
                             </dt>
                             <dd class="train-class-resume-text">
-                              @if(is_null(App\Models\User::where('rut',App\Models\AppointmentMl::where('Tratamiento_Nr',$Appointment->Tratamiento_Nr)->first()->Rut_Paciente)->first()))
-                                {{App\Models\User::where('rut',App\Models\AppointmentMl::where('Tratamiento_Nr',$Appointment->Tratamiento_Nr)->first()->Rut_Paciente)->first()->alliance()->name}}
+                              @if(is_null(App\Models\User::where('rut',App\Models\AppointmentMl::where('Tratamiento_Nr',$appointment->Tratamiento_Nr)->first()->Rut_Paciente)->first()))
+                                {{App\Models\User::where('rut',App\Models\AppointmentMl::where('Tratamiento_Nr',$appointment->Tratamiento_Nr)->first()->Rut_Paciente)->first()->alliance()->name}}
                               @else
                                 Sin Convenio2
                               @endif
@@ -386,22 +386,22 @@
         @foreach(App\Models\ActionMl::where('Evolution',null)->where('Fecha_Realizacion','>',$this->expiredstartOfMonth->format('Y-m-d'))
         ->where('Fecha_Realizacion','<',$this->expiredendOfMonth->format('Y-m-d'))->groupBy('Tratamiento_Nr')
                                 ->select('*','Tratamiento_Nr', DB::raw('SUM(Precio_Prestacion) as TP'), DB::raw('SUM(Abono) as TA'))
-                                ->orderby('Fecha_Realizacion', 'DESC')->get() as $Appointment)
+                                ->orderby('Fecha_Realizacion', 'DESC')->get() as $appointment)
           <tr class="">
             <td class="text-left">
-                {{$Appointment->id}}
+                {{$appointment->id}}
             </td>
             <td class="text-left">
-                {{Carbon\Carbon::parse($Appointment->Fecha_Realizacion)->format('d-m-Y')}}
+                {{Carbon\Carbon::parse($appointment->Fecha_Realizacion)->format('d-m-Y')}}
             </td>
             <td class="text-left">
-                {{$Appointment->Nombre}} {{$Appointment->Apellido}}
+                {{$appointment->Nombre}} {{$appointment->Apellido}}
             </td>
             <td class="text-left">
-              {{$Appointment->Categoria_Nombre}}
+              {{$appointment->Categoria_Nombre}}
           </td>
           <td class="text-left">
-            {{$Appointment->Profesional}}
+            {{$appointment->Profesional}}
         </td>
           </tr>
         @endforeach
@@ -437,22 +437,22 @@
         @foreach(App\Models\ActionMl::where('Report',1)->where('Fecha_Realizacion','>',$this->expiredstartOfMonth->format('Y-m-d'))
         ->where('Fecha_Realizacion','<',$this->expiredendOfMonth->format('Y-m-d'))->groupBy('Tratamiento_Nr')
                                 ->select('*','Tratamiento_Nr', DB::raw('SUM(Precio_Prestacion) as TP'), DB::raw('SUM(Abono) as TA'))
-                                ->orderby('Fecha_Realizacion', 'DESC')->get() as $Appointment)
+                                ->orderby('Fecha_Realizacion', 'DESC')->get() as $appointment)
           <tr class="">
             <td class="text-left">
-                {{$Appointment->id}}
+                {{$appointment->id}}
             </td>
             <td class="text-left">
-                {{Carbon\Carbon::parse($Appointment->Fecha_Realizacion)->format('d-m-Y')}}
+                {{Carbon\Carbon::parse($appointment->Fecha_Realizacion)->format('d-m-Y')}}
             </td>
             <td class="text-left">
-                {{$Appointment->Nombre}} {{$Appointment->Apellido}}
+                {{$appointment->Nombre}} {{$appointment->Apellido}}
             </td>
             <td class="text-left">
-              {{$Appointment->Categoria_Nombre}}
+              {{$appointment->Categoria_Nombre}}
           </td>
           <td class="text-left">
-            {{$Appointment->Profesional}}
+            {{$appointment->Profesional}}
         </td>
           </tr>
         @endforeach
