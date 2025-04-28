@@ -176,7 +176,7 @@
                 <span class="underline">Importante</span>
               </dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                <span>La coordinación de horarios será a través del siguiente <a class="underline" href="https://api.whatsapp.com/send?phone=56988148857&text=Hola%2C%0A%0AMe%20quiero%20inscribir%20en%20entrenamiento%20personalizado%2C%20los%20horarios%20que%20me%20acomoda%20son%3A">link</a></span>
+                <span>La coordinación de horarios será a través del siguiente <a class="underline" href="https://api.whatsapp.com/send?phone=56933809726&text=Hola%2C%0A%0AMe%20quiero%20inscribir%20en%20entrenamiento%20personalizado%2C%20los%20horarios%20que%20me%20acomoda%20son%3A">link</a></span>
               </dd>
             </div>
           </dl>
