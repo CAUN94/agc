@@ -117,11 +117,12 @@
               Horarios
             </dt>
             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              <li class="list-none">Lunes: 7:30 y 19:30</li>
-              <li class="list-none">Martes: 19:30</li>
-              <li class="list-none">Miércoles: 7:30 y 19:30</li>
-              <li class="list-none">Jueves: 19:30</li>
-              <li class="list-none">Viernes: 7:30 y 19:30</li>
+              <li class="list-none">Lunes: 7:30, 18:00, 19:00 y 20:00</li>
+              <li class="list-none">Martes: 19:00 y 20:00</li>
+              <li class="list-none">Miércoles: 7:30, 18:00, 19:00 y 20:00</li>
+              <li class="list-none">Jueves: 19:00 y 20:00</li>
+              <li class="list-none">Viernes: 7:30, 13:00, 18:00 y 19:00</li>
+              <li class="list-none">Sábado: 10:00</li>
             </dd>
           </div>
         </dl>
