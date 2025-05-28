@@ -46,7 +46,7 @@ Route::middleware([UpdatePassword::class,])->group(function () {
     Route::get('/kinesiología', [LandingController::class, 'about']);
     Route::get('/terms', [LandingController::class, 'terms']);
     // Route::get('/precios', [LandingController::class, 'aranceles']);
-    Route::get('/precios', [LandingController::class, 'precios']);
+    // Route::get('/precios', [LandingController::class, 'precios']);
     Route::get('/contactanos', [LandingController::class, 'contactanos']);
     Route::get('/renew', [LandingController::class, 'renew'])->middleware(['auth']);
     
